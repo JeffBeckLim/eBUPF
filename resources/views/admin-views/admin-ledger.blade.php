@@ -12,10 +12,10 @@
                 <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #0092D1; font-size: 12px;">Primary</span>
                 
                 <div class="dropdown ms-2">
-                    <button  class="btn  fw-bold bu-orange text-white rounded-pill " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button  class="btn ps-4  fw-bold bu-orange text-white rounded-pill " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span style="font-size: 12px;">Multi-Purpose Loan 3 <img class="ms-3"  src="{{asset('icons/caret-down-white.svg')}}" style="width: 10px;" ></span>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: 14px">
                         <a class="dropdown-item" href="#">Multi-Purpose 2</a>
                         <a class="dropdown-item" href="#">Housing loan 1</a>
                         <a class="dropdown-item" href="#">Multi-Purpose 1</a>
@@ -26,7 +26,7 @@
     </div>
     <div class="pl-details mt-2">
         <div class="row">
-            <div class="col-md-3 ">
+            <div class="col-lg-3 ">
                 <div class="row">
                     <div class="col-8">
                         <p class="pl-text-size "><span class="fw-bold">Principal: </span></p>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <div class="row">
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Loan Grant: </span></p>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3">
                 <div class="row">
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Principal Paid: </span></p>
@@ -110,12 +110,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="row">
+            <div class="col-lg-3">
+                <div class="row ">
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Principal Bal.: </span></p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 ">
                         <p class="pl-text-size">196,666.67</p>
                     </div>
                     <div class="col-8">
