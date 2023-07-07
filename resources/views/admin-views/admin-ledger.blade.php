@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <div class="table-container">
+    <div class="table-container border rounded-3">
         <table class="table fixed-width-table pl-table">
             <thead>
                 <tr class="pl-tr">
