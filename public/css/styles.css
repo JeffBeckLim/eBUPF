@@ -67,11 +67,11 @@ body {
 /* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
 
 .bu-orange {
-    background-color: #FF6F19;
+    background-color: #FF6F19 !important;
 }
 
 .bu-orange:hover {
-    background-color: #ed600e;
+    background-color: #ed600e !important;
 }
 
 .bu-text-light-blue {
@@ -734,9 +734,9 @@ input.invalid {
 /* Personal Ledger Admin side */
 
 .pl-newloan {
-    background-color: #0092D1;
+    background-color: #54b7e1;
     border-radius: 20px;
-    padding: 5px 20px;
+    padding: 6.5px 15px;
     color: white;
     font-size: 0.9rem;
     font-weight: 600;

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Sidebar 04</title>
+  	<title>eBUPFs</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,9 +23,30 @@
     <title>eBUPF - admin</title>
     
   </head>
-  <body class="overflow-x-hidden">
+
+
+  {{-- HIDE NAV BAR WHEN SCROLLING UP --}}
+  <style>
+
+    #fixedTopElement {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #f5f5f5;
+      padding: 10px;
+      transition: transform 0.3s;
+      z-index: 999;
+    }
+
+    .hide {
+      transform: translateY(-100%);
+    }
+  </style>
+  {{-- HIDE NAV BAR WHEN SCROLLING UP --}}
+  <body>
     
-    <div class=" row  py-3 bg-white ">
+    <div id="fixedTopElement" class=" row  py-3 bg-white vw-100 fixed-top ">
       <span>
         <button type="button" id="sidebarCollapse" class="btn ms-3" style="background-color: #EEF6F8;">
           <img src="../icons/bars.svg" alt="menu" style="width: 1rem">
@@ -38,7 +59,7 @@
       </span>
     </div>
 
-		<div class="wrapper d-flex align-items-stretch">
+		<div class="wrapper d-flex align-items-stretch " style="margin-top: 60px ">
 			<nav id="sidebar">
 				
         <ul class="list-unstyled components mb-5 " style="scale: 0.95;">
@@ -122,16 +143,32 @@
     	</nav>
 
         <!-- Page Content  -->
-      <div id="content" class="p-4 p-md-5 pt-5">
-        <h2 class="mb-4">eBUPF</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div id="content" class=" pt-2">
+        @yield('content')
       </div>
     
 
         </div>
 
-      
+      {{-- HIDE ON SCROLL EVENT --}}
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("fixedTopElement").classList.remove("hide");
+});
+
+var lastScrollTop = 0;
+window.addEventListener("scroll", function(){
+  var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+  if (currentScroll > lastScrollTop){
+    document.getElementById("fixedTopElement").classList.add("hide");
+  } else {
+    document.getElementById("fixedTopElement").classList.remove("hide");
+  }
+  lastScrollTop = currentScroll;
+});
+
+    </script>
+      {{-- HIDE ON SCROLL EVENT --}}
 
     <script src="js/jquery.min.js"></script>
     <!-- <script src="js/popper.js"></script> -->

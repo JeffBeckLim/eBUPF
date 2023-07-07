@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Show Admin Ledger
 Route::get('/admin-ledger', function (){
-    return view('admin-components.admin-layout');
+    return view('admin-views.admin-ledger');
 });
