@@ -475,7 +475,7 @@ input.invalid {
 
 #core-feature {
     height: 17rem;
-    background-image: url("assets/core-feature-bg.png");
+    background-image: url("../assets/core-feature-bg.png");
     width: 100%;
 }
 

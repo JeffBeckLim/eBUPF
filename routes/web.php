@@ -13,11 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Show Home or Landing Page
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Show Admin Ledger
 Route::get('/admin-ledger', function (){
     return view('admin-views.admin-ledger');
+});
+
+
+Route::get('/header', function (){
+    return view('home-components.home-layout');
 });
