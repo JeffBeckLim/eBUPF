@@ -108,7 +108,7 @@ body {
 /* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
 
 .grow-on-hover {
-    transition: transform 0.3s ease;
+    transition: transform 0.1s ease;
 }
 
 .bg-success-bu {
@@ -407,11 +407,16 @@ input.invalid {
 
 .login-button {
     background-color: #0082BA;
-    border: none;
+    color: white !important;
+    /* border: none;
     color: white;
     border-radius: 20px;
     margin-top: 7px;
-    padding-bottom: 2px;
+    padding-bottom: 2px; */
+}
+.login-button:hover {
+    background-color: #026792;
+   
 }
 
 .navbar-toggler-icon-custom {

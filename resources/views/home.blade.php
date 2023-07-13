@@ -28,7 +28,7 @@
 
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <a class="button grow-on-hover" href="#" type="button">Login</a>
+                            <a class="button grow-on-hover" href="/register" type="button">Sign Up</a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             <div class="mb-5">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-lg-5 card-border pb-4" style="border: 2px solid #0082BA">
-                        <img class="orange-tag" src="assets/blue-tag.png" alt="tag" width="40px" height="45px">
+                        {{-- <img class="orange-tag" src="assets/blue-tag.png" alt="tag" width="40px" height="45px"> --}}
                         <p class="mt-4 ml-2 text10-design">Housing Loan</p>
                         <p class="ml-3 mr-1 text9-design">Proin semper nisi vel ante lacinia, vel molestie elit ornare. Nam quis sapien vel massa commodo consectetur vel nec urna.</p>
                         <div class="row">
@@ -112,7 +112,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 card-border card-border2 pb-4" style="border: 2px solid #FF6F19">
-                        <img class="orange-tag" src="assets/orange-tag.png" alt="tag" width="40px" height="45px">
+                        {{-- <img class="orange-tag" src="assets/orange-tag.png" alt="tag" width="40px" height="45px"> --}}
                         <p class="mt-4 ml-2 text10-design">Multi-Purpose Loan</p>
                         <p class="ml-3 mr-1 text9-design">Proin semper nisi vel ante lacinia, vel molestie elit ornare. Nam quis sapien vel massa commodo consectetur vel nec urna.</p>
                         <div class="row">
@@ -152,7 +152,7 @@
             </div>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,15 @@ Route::get('/admin-ledger', function (){
     return view('admin-views.admin-ledger');
 });
 
+// Show login Form
+Route::get('/login', [UserController::class, 'login']); 
 
-Route::get('/header', function (){
-    return view('home-components.home-layout');
+// Show Register Form
+Route::get('/register', [UserController::class, 'create']); 
+
+// Store Registered User
+Route::post('/users', [UserController::class, 'store']); 
+
+Route::get('/new-member', function(){
+    return view('member-views.non-member');
 });
