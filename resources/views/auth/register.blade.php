@@ -1,6 +1,6 @@
 @extends('home-components.login-register-card')
-@section('form')                
-  <form method="POST" action="/users">
+@section('form')
+  <form method="POST" action="{{ route('register') }}">
       @csrf
         <div class="row">
           <div class="col-6 ">
@@ -19,14 +19,17 @@
           @enderror
           <div class="col-12">
             <label for="email" class="form-label text-dark">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email')}}" required>
-          </div>
-          @error('email')
-          <p class="text-danger mt-1">{{$message}}</p>
-          @enderror
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+        </div>
+
           <div class="col-12">
             <label for="password" class="form-label text-dark">Password</label>
-            <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" required> 
+            <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" required>
           </div>
           @error('password')
           <p class="text-danger mt-1">{{$message}}</p>
@@ -39,11 +42,11 @@
           <p class="text-danger mt-1">{{$message}}</p>
           @enderror
           <div class="col-12 d-flex justify-content-center mt-4">
-            
+
             <div class="row  d-block">
               <div class="form-check ">
                 <input class="form-check-input" style="color: black" type="checkbox" value="1" id="flexCheckDefault" name="agree_to_terms" @if(old('agree_to_terms')==1) checked @endif >
-                
+
                 <label class="form-check-label" for="flexCheckDefault">
                   <span> Agree to <a class="text-decoration-none fw-bold bu-text-light-blue" href="#">Terms and Conditions</a>  of BUPF </span>
                 </label>
@@ -52,7 +55,7 @@
                 @enderror
               </div>
             </div>
-            
+
           </div>
           <div class="col-12 borders d-flex justify-content-center pt-3">
             <button type="submit" class="btn btn-outline-bu rounded-pill w-100 fw-bold  grow-on-hover">Sign Up</button>
