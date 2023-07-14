@@ -44,6 +44,18 @@
             </div>
             <div class="col" style="padding: 3rem;">
 
+              @if(request()->route()->getName() === 'login')
+
+              <div class="col-12  mb-5 pt-md-2">
+                <h4 class="fw-bolder ">
+                  Sign In to <span class="bu-text-orange">e</span>BUPF!
+                </h4>
+                <p style="font-size: small">
+                  or create an account to access our Membership forms and learn more about BUPF
+                </p>
+              </div>
+
+              @else
               <div class="col-12  mb-5 pt-md-2">
                 <h4 class="fw-bolder ">
                   Sign Up for <span class="bu-text-orange">e</span>BUPF!
@@ -52,6 +64,7 @@
                   Create an account to access our Membership forms and learn more about BUPF
                 </p>
               </div>
+              @endif
 
               <div class="col-12  ">
                 @yield('form')
