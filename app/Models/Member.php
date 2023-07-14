@@ -55,5 +55,19 @@ class Member extends Model
     {
         return $this->belongsTo(Campus::class);
     }
+    //can be a witness many times
+    public function witness()
+    {
+        return $this->hasMany(Witness::class);
+    }
+    //can be a coBorrwer many times
+    public function co_borrower()
+    {
+        return $this->hasMany(CoBorrower::class);
+    }
+    public function loans()
+    {
+        return $this->hasMany(Loans::class);
+    }
 
 }
