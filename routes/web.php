@@ -27,12 +27,6 @@ Route::get('/admin-ledger', function (){
     return view('admin-views.admin-ledger');
 });
 
-// Show login Form
-Route::get('/login', [UserController::class, 'login'])->name('login');
-
-// Show Register Form
-Route::get('/register', [UserController::class, 'create'])->name('register');
-
 // Store Registered User
 Route::post('/users', [UserController::class, 'store']);
 
