@@ -26,14 +26,23 @@ Route::get('/admin-ledger', function (){
 });
 
 // Show login Form
-Route::get('/login', [UserController::class, 'login'])->name('login'); 
+Route::get('/login', [UserController::class, 'login'])->name('login');
 
 // Show Register Form
-Route::get('/register', [UserController::class, 'create'])->name('register'); 
+Route::get('/register', [UserController::class, 'create'])->name('register');
 
 // Store Registered User
-Route::post('/users', [UserController::class, 'store']); 
+Route::post('/users', [UserController::class, 'store']);
 
 Route::get('/new-member', function(){
     return view('member-views.non-member');
 });
+
+Route::get('/logout', function(){
+    Auth::logout();
+    return Redirect::to('/');
+ });
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
