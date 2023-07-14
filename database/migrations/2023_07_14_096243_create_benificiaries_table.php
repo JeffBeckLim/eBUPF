@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('benificiaries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained();
             $table->timestamps();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->integer('agree_to_terms');
-            
-            // $table->string('middle_initial');
-            // this table is still incomplete
+
+            $table->foreignId('members_id')->constrained('members');
+            $table->string('benificiary_name')->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('relationship')->nullable();
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('benificiaries');
     }
 };
