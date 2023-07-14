@@ -1,4 +1,4 @@
-**Project COnfiguration**
+**Project Configuration**
 
 Install composer to the project
 ```
