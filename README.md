@@ -1,3 +1,30 @@
+**Project COnfiguration**
+
+Install composer to the project
+```
+composer i
+```
+
+Install NPM to the project
+```
+npm i
+```
+
+Create .env
+```
+copy .env.example .env
+```
+
+Generate new app key
+```
+php artisan key:generate
+```
+
+Run the migration
+```
+php artisan migrate:fresh --seed
+```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
