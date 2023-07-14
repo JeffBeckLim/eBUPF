@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    
+
     // Show log in page
     public function login(){
         return view('login');
@@ -33,7 +33,7 @@ class UserController extends Controller
         ]);
         // hash password first
         $validatedData['password'] = Hash::make($validatedData['password']);
-        
+
         // create user email password only
         $user = User::create([
             'email' => $validatedData['email'],
@@ -47,9 +47,9 @@ class UserController extends Controller
             'lastname' => $validatedData['lastname'],
             'agree_to_terms' => $validatedData['agree_to_terms'],
         ]);
-    
+
         return redirect('/login')->with('message', 'Account Registered! Please Login');
     }
-    
-    
+
+
 }
