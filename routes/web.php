@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +43,7 @@ Route::get('/new-member', function(){
 Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('/');
- });
+});
 
 Auth::routes(['verify' => true]);
 

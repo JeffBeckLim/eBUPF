@@ -14,12 +14,12 @@ class UserController extends Controller
 
     // Show log in page
     public function login(){
-        return view('login');
+        return view('auth.login');
     }
 
     // Show register page
     public function create(){
-        return view('register');
+        return view('auth.register');
     }
 
      // Create New User
