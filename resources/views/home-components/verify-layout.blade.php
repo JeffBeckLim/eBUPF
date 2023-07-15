@@ -52,10 +52,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    @php
-                                        $user = Auth::user();
-                                    @endphp
-                                    <span class="pe-1">{{$user->member->firstname}}</span>{{$user->member->lastname}}
+                                    {{ Auth::user()->member->firstname }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
