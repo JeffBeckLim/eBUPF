@@ -8,7 +8,7 @@
                 <div class="d-flex justify-content-center align-items-center m-2">
                     <img src="{{asset('icons/reset-password.svg')}}" alt="logo" width="65px">
                 </div>
-                <div class="card-head text-center fw-bold fs-5 pt-2 pb-2">Reset Password</div>
+                <div class="card-header border-0 bg-white text-center fw-bold fs-5 pt-2 pb-2">{{ __('Reset Password') }}</div>
                 <span class="fs-7 text-secondary mb-2">{{ __('To reset your password, please provide your email address to receive a password reset link.') }}</span>
 
                 @if (session('status'))
