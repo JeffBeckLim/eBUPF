@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('members_id')->constrained('members');
-            // $table->foreignId('loans_id')->constrained('loans');
+            $table->foreignId('loans_id')->constrained('loans');
 
             $table->integer('accept_request')->nullable();
         });

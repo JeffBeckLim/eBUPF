@@ -30,10 +30,12 @@ Route::get('/admin-ledger', function (){
 // Store Registered User
 Route::post('/users', [UserController::class, 'store']);
 
+// show view for non member 
 Route::get('/new-member', function(){
     return view('member-views.non-member');
 });
 
+//auth logout flush
 Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('/');
@@ -41,4 +43,10 @@ Route::get('/logout', function(){
 
 Auth::routes(['verify' => true]);
 
+// Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Test route show verify Page
+// Route::get('/verify-test', function(){
+//     return view('auth.verify');
+// });

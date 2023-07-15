@@ -3,11 +3,27 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+        <div class="col-md-7 col-sm-10">
+            <div class="card rounded-0 shadow-sm">
+                <div class="row p-5 g-0 d-flex justify-content-center ">
+                    <img src="{{asset('assets/undraw_mail_sent.svg')}}" style="width: 8rem;">
 
-                <div class="card-body">
+                    
+                </div>
+                
+                <div class="card-header fw-bold bg-white border-0 text-center fs-5">
+                    {{ __('Verify Your Email Address') }}
+                </div>
+                <div class="row border g-0 mx-4 ">
+                    
+                        <a  href="https://mail.google.com/" target="blank" class="btn btn-light rounded-0">
+                            
+                                <i class="fab fa-google" style="color: #eb4132;"></i> 
+                                <span class="ps-2">Open Gmail</span>
+                            
+                        </a>
+                </div>
+                <div class="card-body border m-4">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
@@ -18,7 +34,7 @@
                     {{ __('If you did not receive the email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline fw-bold">{{ __('click here to request another') }}</button>.
                     </form>
                 </div>
             </div>
