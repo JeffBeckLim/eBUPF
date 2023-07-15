@@ -48,6 +48,6 @@ class User extends Authenticatable implements MustVerifyEmail
     // Relationship 1 - 1  member
     public function member()
     {
-        return $this->hasOne(Member::class);
+        return $this->hasOne(Member::class, 'users_id', 'id');
     }
 }
