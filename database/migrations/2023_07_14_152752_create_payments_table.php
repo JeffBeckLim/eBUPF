@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('members_id')->constrained('members');
-            $table->foreignId('loans_id')->constrained('loans');
+            $table->foreignId('member_id')->constrained('members');
+            $table->foreignId('loan_id')->constrained('loans');
 
             $table->integer('or_number');
-            $table->decimal('principal', 10, 2);
-            $table->decimal('interest', 10, 2);
+            $table->decimal('principal', 20, 2);
+            $table->decimal('interest', 20, 2);
             $table->date('payment_date');
         
         });

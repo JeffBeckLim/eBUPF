@@ -13,7 +13,7 @@ class Member extends Model
     protected $table = "members";
 
     protected $fillable = [
-        'users_id',
+        'user_id',
         'firstname',
         'lastname',
         'agree_to_terms',
@@ -31,8 +31,8 @@ class Member extends Model
         'bu_appointment_date',
     ];
     // has one user account
-    public function users(){
-        return $this->belongsTo(User::class, 'users_id');
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     // has many user benifactors

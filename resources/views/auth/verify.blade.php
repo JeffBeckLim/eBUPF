@@ -26,6 +26,7 @@
                 <div class="card-body border m-4">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
+                            <i class="fas fa-check" style="color: #207a1a;"></i>
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif

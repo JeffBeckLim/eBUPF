@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('co_borrowers', function (Blueprint $table) {
+        Schema::create('loan_application_states', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('member_id')->constrained('members');
-            $table->foreignId('loan_id')->constrained('loans');
-
-            $table->integer('accept_request')->nullable();
+            $table->string('state_name');
+            $table->string('state_description');
+            $table->string('asset_path');
+            $table->integer('flag');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('co_borrowers');
+        Schema::dropIfExists('loan_application_states');
     }
 };

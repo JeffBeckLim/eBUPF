@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('members_id')->constrained('members');
-            // $table->foreignId('loan_types_id')->constrained('loan_types');
-            // $table->foreignId('amortizations_id')->constrained('amortizations');
-            // $table->foreignId('adjustments_id')->constrained('adjustments');
-            // $table->foreignId('loan_categories_id')->constrained('loan_categories');
+            $table->foreignId('member_id')->constrained('members');
+            $table->foreignId('loan_type_id')->constrained('loan_types');
+            $table->foreignId('amortization_id')->constrained('amortizations');
+            $table->foreignId('adjustment_id')->constrained('adjustments');
+            $table->foreignId('loan_category_id')->constrained('loan_categories');
 
             $table->decimal('principal_amount', 20, 2);
             $table->decimal('interest', 20, 2);

@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('membership_applications', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('members_id')->constrained('members');
+            
+            $table->foreignId('member_id')->constrained('members');
+
             $table->string('ref_number')->nullable();
             $table->integer('status')->nullable();
         });

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('members_id')->constrained('members');
+            $table->foreignId('member_id')->constrained('members');
+            
             $table->string('benificiary_name')->nullable();
             $table->date('birthday')->nullable();
             $table->string('relationship')->nullable();
