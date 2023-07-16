@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('members_id')->constrained('members');
-            $table->foreignId('loans_id')->constrained('loans');
+            $table->foreignId('member_id')->constrained('members');
+            $table->foreignId('loan_id')->constrained('loans');
         });
     }
 

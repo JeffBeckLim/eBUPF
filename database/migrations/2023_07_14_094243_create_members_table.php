@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('campuses_id')->nullable()->constrained('campuses', 'id'); //none
-            $table->foreignId('units_id')->nullable()->constrained('units', 'id'); //none
+            $table->foreignId('campus_id')->nullable()->constrained('campuses', 'id'); //none
+            $table->foreignId('unit_id')->nullable()->constrained('units', 'id'); //none
 
-            $table->foreignId('users_id')->constrained('users', 'id');
+            $table->foreignId('user_id')->constrained('users', 'id');
         
             $table->string('firstname');
             $table->string('lastname');

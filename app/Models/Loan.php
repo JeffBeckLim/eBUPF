@@ -33,4 +33,30 @@ class Loan extends Model
         return $this->hasMany(Payment::class);
     }
 
+    // has one amortization
+     public function amortization()
+     {
+         return $this->hasOne(Amortization::class, 'amortization_id', 'id');
+     } 
+
+    //  has one adjustment table
+     public function adjustment()
+     {
+        return $this->hasOne(Adjustment::class);
+     }
+
+    //  belongs to category of a loan
+     public function LoanCategory(){
+        return $this->belongsTo(LoanCategory::class);
+    }
+
+    // belongs to a type of a loan
+    public function LoanType(){
+        return $this->belongsTo(LoanType::class);
+    }
+
+    public function loanApplicationStatus(){
+        return $this->hasMany(LoanApplicationStatus::class);
+    }
+
 }

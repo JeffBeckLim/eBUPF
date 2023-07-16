@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             
-            $table->foreignId('units_id')->constrained('units');
+            $table->foreignId('unit_id')->constrained('units');
 
             $table->string('campus_code')->nullable();
             $table->string('campus_address')->nullable();

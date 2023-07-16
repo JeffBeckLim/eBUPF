@@ -25,12 +25,14 @@
                             <p class="text6-design pb-2"> Proin semper nisi vel ante lacinia, vel molestie elit ornare. Nam quis sapien vel massa commodo consectetur vel nec urna. Duis non diam non diam consequat ultrices.</p>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col d-flex justify-content-end">
-                            <a class="button grow-on-hover" href="/register" type="button">Sign Up</a>
+                    @if(!Auth::user())
+                    <div class="row  g-0">
+                        <div class="col d-flex  justify-content-end">
+                            <a class="button grow-on-hover my-auto mx-0 me-3" href="/register" type="button">Sign Up</a>
                         </div>
                     </div>
+                    @endif
+                    
                 </div>
             </div>
             <div class="col-lg-6 col-12 d-flex justify-content-center align-items-center pt-2 pb-5" style=" margin-top: 35px;">

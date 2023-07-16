@@ -75,7 +75,7 @@ class RegisterController extends Controller
         ]);
         
         Member::create([
-            'users_id'=>$user->id,
+            'user_id'=>$user->id,
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'agree_to_terms' =>$data['agree_to_terms'],
