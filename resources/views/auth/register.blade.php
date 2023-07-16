@@ -5,7 +5,7 @@
             <div class="row">
 
                 <div class="col-6 ">
-                    <label for="firstname" class="form-label text-dark">First name</label>
+                    <label for="firstname" class="form-label text-dark">First Name</label>
                     <input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname')}}" required>
                 </div>
                 @error('firstname')
@@ -13,7 +13,7 @@
                 @enderror
 
                 <div class="col-6 ">
-                    <label for="lastname" class="form-label text-dark">Lastname</label>
+                    <label for="lastname" class="form-label text-dark">Last Name</label>
                     <input type="text" class="form-control" id="lastname" name="lastname" value="{{ old('lastname')}}" required>
                 </div>
                 @error('lastname')
