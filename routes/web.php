@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
-// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
-Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access');
 
 
 // show admin sidebar TEST ONLY
@@ -26,11 +24,14 @@ Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('
 //     return view('admin-components.admin-layout');
 // })->middleware('auth','admin.access');
 
+// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
+Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('verified.access');
 
 // Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
 Route::get('/ledger', function (){
@@ -42,7 +43,7 @@ Route::get('/ledger', function (){
 // show view for non member 
 Route::get('/member', function(){
     return view('member-views.member-dashboard');
-})->middleware('auth','member.access');
+})->middleware('auth','member.access')->name('member-dashboard');
 // ->middleware('auth')
 
 
@@ -55,7 +56,7 @@ Route::get('/logout', function(){
 Auth::routes(['verify' => true]);
 
 // Show Home Page
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
 
 // Test route show verify Page
 // Route::get('/verify-test', function(){
