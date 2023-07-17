@@ -22,9 +22,9 @@ Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('
 
 
 // show admin sidebar TEST ONLY
-Route::get('/test/test-sidebar', function () {
-    return view('admin-components.admin-layout');
-})->middleware('auth','admin.access');
+// Route::get('/test/test-sidebar', function () {
+//     return view('admin-components.admin-layout');
+// })->middleware('auth','admin.access');
 
 
 // Show Home or Landing Page
