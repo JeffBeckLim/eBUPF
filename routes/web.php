@@ -16,24 +16,34 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+// show admin sidebar TEST ONLY
+// Route::get('/test-sidebar', function () {
+//     return view('admin-components.admin-layout');
+// })->middleware('auth','admin.access');
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
     return view('home');
 });
 
-// Show Admin Ledger
-Route::get('/admin-ledger', function (){
+// Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
+Route::get('/admin/ledger', function (){
     return view('admin-views.admin-ledger');
-});
+})->middleware('auth','admin.access');
 
-// Store Registered User
-Route::post('/users', [UserController::class, 'store']);
+// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
+Route::get('/admin/dashboard', function (){
+    return view('admin-views.admin-dashboard');
+})->middleware('auth','admin.access');
+
 
 // show view for non member 
-Route::get('/new-member', function(){
-    return view('member-views.non-member');
-});
+Route::get('/member', function(){
+    return view('member-views.member-dashboard');
+})->middleware('auth','member.access');
+// ->middleware('auth')
+
 
 //auth logout flush
 Route::get('/logout', function(){

@@ -64,5 +64,9 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        // CUSTOME MIDDLEWARE - eBUPF - 2023
+        'admin.access' => \App\Http\Middleware\AdminAccess::class,
+        'member.access' => \App\Http\Middleware\MemberAccess::class,
     ];
 }
