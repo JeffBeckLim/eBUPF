@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -16,24 +17,34 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
+Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access');
+
+
+// show admin sidebar TEST ONLY
+// Route::get('/test/test-sidebar', function () {
+//     return view('admin-components.admin-layout');
+// })->middleware('auth','admin.access');
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
     return view('home');
 });
 
-// Show Admin Ledger
-Route::get('/admin-ledger', function (){
+// Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
+Route::get('/ledger', function (){
     return view('admin-views.admin-ledger');
-});
+})->middleware('auth','admin.access');
 
-// Store Registered User
-Route::post('/users', [UserController::class, 'store']);
+
 
 // show view for non member 
-Route::get('/new-member', function(){
-    return view('member-views.non-member');
-});
+Route::get('/member', function(){
+    return view('member-views.member-dashboard');
+})->middleware('auth','member.access');
+// ->middleware('auth')
+
 
 //auth logout flush
 Route::get('/logout', function(){
