@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -16,10 +17,14 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
+Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access');
+
+
 // show admin sidebar TEST ONLY
-// Route::get('/test-sidebar', function () {
-//     return view('admin-components.admin-layout');
-// })->middleware('auth','admin.access');
+Route::get('/test/test-sidebar', function () {
+    return view('admin-components.admin-layout');
+})->middleware('auth','admin.access');
 
 
 // Show Home or Landing Page
@@ -28,14 +33,10 @@ Route::get('/', function () {
 });
 
 // Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
-Route::get('/admin/ledger', function (){
+Route::get('/ledger', function (){
     return view('admin-views.admin-ledger');
 })->middleware('auth','admin.access');
 
-// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
-Route::get('/admin/dashboard', function (){
-    return view('admin-views.admin-dashboard');
-})->middleware('auth','admin.access');
 
 
 // show view for non member 
