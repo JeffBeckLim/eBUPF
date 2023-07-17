@@ -2,8 +2,19 @@
 
 @section('content')
     <section class="container" id="home">
+
+
         <div class="row pt-lg-5 mb-5 ">
-            <div class="col-lg-6 d-flex justify-content-center align-items-center pt-2 pb-5" style=" margin-top: 35px;">
+
+            {{-- MEMBERSHIP CARD --}}
+            @if (Auth::user() && Auth::user()->user_type === 'non-member')
+            <div class="col-12 ">
+                @include('home-components.membership-card')
+            </div>                
+            @endif
+            {{-- MEMBERSHIP CARD --}}
+
+            <div class=" col-lg-6 d-flex justify-content-start align-items-center pt-2 pb-5" style=" margin-top: 15px;">
                 <div id="bluebox-content" style="height: 100%; width: 550px; background-color: #0082BA; border-radius: 10px;position: relative;">
                     <h4 class="text5-design" style="font-size: clamp(1.25rem, 1.0357rem + 0.7619vw, 1.75rem);">Bicol University</h4>
                     <h1 class="text5-design" style="margin-top: -10px; font-size: clamp(1.875rem, 1.7143rem + 0.5714vw, 2.25rem);">Provident Fund Inc.</h1>
