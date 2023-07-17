@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         // CUSTOME MIDDLEWARE - eBUPF - 2023
         'admin.access' => \App\Http\Middleware\AdminAccess::class,
         'member.access' => \App\Http\Middleware\MemberAccess::class,
+        'verified.access'=>\App\Http\Middleware\VerifiedAccess::class,
     ];
 }
