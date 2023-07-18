@@ -142,7 +142,7 @@
     	</nav>
 
         <!-- Page Content  -->
-      <div id="content" class=" pt-2">
+      <div id="content" class="overflow-x-hidden pt-2">
         @yield('content')
       </div>
     
