@@ -4,6 +4,11 @@ use Illuminate\Support\Str;
 
 return [
 
+
+       'lifetime' => env('SESSION_LIFETIME', 120), // Session lifetime in minutes
+       'expire_on_close' => true, // Session expires when the browser is closed
+
+
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
