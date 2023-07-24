@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Models\User;
+use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,17 +18,8 @@ use Illuminate\Support\Facades\Redirect;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
-
-// show admin sidebar TEST ONLY
-// Route::get('/test/test-sidebar', function () {
-//     return view('admin-components.admin-layout');
-// })->middleware('auth','admin.access');
-
 // Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
-
 
 // Show Home or Landing Page
 Route::get('/', function () {
@@ -38,20 +31,27 @@ Route::get('/ledger', function (){
     return view('admin-views.admin-ledger');
 })->middleware('auth','admin.access');
 
-
-
 // show view for non member 
 Route::get('/member', function(){
     return view('member-views.member-dashboard');
 })->middleware('auth','member.access')->name('member-dashboard');
 // ->middleware('auth')
 
-
 //auth logout flush
 Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('/');
 });
+
+//Show All Accounts View
+Route::get('/admin/dashboard/', [AdminController::class, 'allUsers']);
+// Route::get('/admin/all-accounts', function(){
+//     $users = User::with('member')->get();
+//     return view('admin-views.admin-all-accounts', compact('users'));
+// });
+
+
+
 
 Auth::routes(['verify' => true]);
 
@@ -65,7 +65,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 
 // routes/web.php or routes/api.php
 
-Route::get('/test-session', function () {
-    session(['test_key' => 'test_value']); // Set a value in the session for testing
-    return 'Session test route';
-});
+// Route::get('/test-session', function () {
+//     session(['test_key' => 'test_value']); // Set a value in the session for testing
+//     return 'Session test route';
+// });
