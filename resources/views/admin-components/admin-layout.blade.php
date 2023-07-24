@@ -58,14 +58,15 @@
       </span>
     </div>
 
-		<div class="wrapper d-flex align-items-stretch" style="margin-top: 60px ">
-			<nav id="sidebar">
+		<div class="wrapper d-flex align-items-stretch" style="margin-top: 60px">
+			<nav id="sidebar" >
 				
         <ul class="list-unstyled components mb-5 " style="scale: 0.95;">
           <li >
             
             <a href="#"><img src="../icons/profile-holder.png" class="rounded-5 me-2" style="width: 1.5rem;">
-              Mary Jane Selo</a>
+              {{ Auth::user()->member->firstname }}
+              {{ Auth::user()->member->lastname }}</a>
             
           </li>
           <li class="active">
@@ -135,6 +136,9 @@
           </li>
           <li>
             <a href="#"><img src="../icons/admin-icons/receivables.svg" style="width: 1rem;"  class="me-2"> Receivables</a>
+          </li>
+          <li class="mt-5 grow-on-hover text-start border rounded ">
+            <a class="btn text-start" href="/logout">Log out</a>
           </li>
 
         </ul>

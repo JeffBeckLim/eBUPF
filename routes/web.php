@@ -62,3 +62,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 // Route::get('/verify-test', function(){
 //     return view('auth.verify');
 // });
+
+// routes/web.php or routes/api.php
+
+Route::get('/test-session', function () {
+    session(['test_key' => 'test_value']); // Set a value in the session for testing
+    return 'Session test route';
+});
