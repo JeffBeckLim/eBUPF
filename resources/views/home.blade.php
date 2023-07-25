@@ -57,7 +57,7 @@
         </div>
     </section>
 
-    <section id="core-feature" class="mb-5 pt-lg-5 border ">
+    <section id="core-feature" class="mb-5 pt-lg-5 border " style="background-image: url({{asset('assets/core-feature-bg.png')}})">
         <div id="core-feature-container" class="container justify-content-center border-top border-light">
             <h6 class="text-center text-light mt-1">Core Features</h6>
             <div class="row mt-4 mb-sm-5 d-flex justify-content-center align-items-center">

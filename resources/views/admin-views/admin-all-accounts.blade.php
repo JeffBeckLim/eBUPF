@@ -55,27 +55,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                             
+                                @foreach ($users as $user)
                                 <tr>
-                                    <td>102030</td>
-                                    <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">STATIC TEST</a></td>
-                                    <td>STATIC TEST</td>
-                                    <td>STATIC TEST</td>
-                                
-                                    <td>STATIC TEST</td>
-                                    <td><a href="">STATIC TEST</a></td>
-                                    <td class="text-center">
-                                        <a href="#" class="fs-6 text-dark">
-                                            <select class="form-select border-0" aria-label="Default select example" style="background-color: rgba(255, 255, 255, 0);">
-                                                <option selected>User</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                              </select>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    @foreach ($users as $user)
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->member->firstname}} {{$user->member->lastname}}</td>
                                         <td>{{$user->member->membership_id}}</td>
@@ -85,15 +67,34 @@
                                               verfied: {{$user->email_verified_at}}
                                             </label>
                                         </td>
-                                        <td>{{$user->user_type}}</td>
-                                        <td><a href="">Edit User </a></td>
-                                        <td><a href="">Change Account Credential</a></td>
-                                        
-                                    @endforeach
+                                        <td>
+                                            @if ($user->user_type == 'restricted')
+                                                <span class="text-danger">{{$user->user_type}}</span>
+                                                
+                                            @else
+                                            {{$user->user_type}}    
+                                            
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-link" href=""><i class="bi bi-pencil"></i> Edit</a></td>
+                                        <td>
+                                            <!-- Button trigger modal -->
+                                            <button style="font-size: 12px" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#{{$user->id}}">
+                                                Change User Type
+                                            </button>
+                                        </td>
                                 </tr>
                                 
+                                 <!-- Modal in views/admin-compinents/admin-modalAllUsers -->
+                                @include('admin-components.admin-modalAllUsers')
+                                
+                            @endforeach
                             </tbody>
                         </table>
+
+                        
+
                     </div>
                 </div>
             </div>

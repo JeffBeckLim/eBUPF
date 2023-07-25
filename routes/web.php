@@ -18,18 +18,26 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Show Admin Dashboard - NOTE MAKE OWN CONTROLLER 
+// Show Admin Dashboard 
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
 
-// Show Home or Landing Page
-Route::get('/', function () {
-    return view('home');
-})->middleware('verified.access');
+//Show All Accounts View
+Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');
 
 // Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
 Route::get('/ledger', function (){
     return view('admin-views.admin-ledger');
 })->middleware('auth','admin.access');
+
+
+
+Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
+
+
+// Show Home or Landing Page
+Route::get('/', function () {
+    return view('home');
+})->middleware('verified.access');
 
 // show view for non member 
 Route::get('/member', function(){
@@ -42,16 +50,6 @@ Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('/');
 });
-
-//Show All Accounts View
-Route::get('/admin/dashboard/', [AdminController::class, 'allUsers']);
-// Route::get('/admin/all-accounts', function(){
-//     $users = User::with('member')->get();
-//     return view('admin-views.admin-all-accounts', compact('users'));
-// });
-
-
-
 
 Auth::routes(['verify' => true]);
 

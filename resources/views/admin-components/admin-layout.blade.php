@@ -76,7 +76,35 @@
             <a style="color: #868686" href="#"><img src="../icons/admin-icons/dashboard.svg" style="width: 1rem;"  class="me-2"> Dashboard</a>
           </li>
           <li>
-              <a href="#"><img src="../icons/admin-icons/members.svg" style="width: 1.2rem;"  class="me-2">Members</a>
+
+            <div class="accordion accordion-flush" id="accordionFlushExample" >
+              
+              <div class="accordion-item">
+                <p class="accordion-header fw-7">
+                  <button class="accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
+                    
+                    <img src="../icons/admin-icons/members.svg" style="width: 1.1rem; margin-left: 10px;">
+                    
+                      <p class="fw-7 my-auto ms-2">Members</p>
+                  </button>
+                </p>
+                <div id="flush-collapseMember" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                  <ul class="list-unstyled components ms-4">
+                    <li>
+                      <a href="/admin/all-users" class="fs-7">All Users</a>
+                    </li>
+                    <li>
+                      <a href=""  class="fs-7">Members</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+            </div>
+
+
+
+              {{-- <a href="#"><img src="../icons/admin-icons/members.svg" style="width: 1.2rem;"  class="me-2">Members</a> --}}
           </li>
           <li>
             <a href="#"><img src="../icons/admin-icons/ledgers.svg" style="width: 1rem;"  class="me-2"> Ledgers</a>
