@@ -12,9 +12,16 @@ class AdminController extends Controller
         
     }
     public function allUsers(){
-
-
+        
         $users = User::with('member')->get();
         return view('admin-views.admin-all-accounts', compact('users'));
+
+        
     }
+    public function memberLedger(){
+        
+        return view('admin-views.admin-ledger');
+    }
+    
 }
+
