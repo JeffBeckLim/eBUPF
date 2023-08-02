@@ -29,6 +29,15 @@ class Member extends Model
         'disabled_at',
         'employee_num',
         'bu_appointment_date',
+
+        'place_of_birth',
+        'civil_status',
+        'spouse',
+        'sex',
+        'monthly_salary',  
+        'monthly_contribution',  
+        'apppointment_status', 
+        'profile_picture',
     ];
     // has one user account
     public function user(){
@@ -36,8 +45,11 @@ class Member extends Model
     }
 
     // has many user benifactors
-    public function benificiaries(){
-        return $this->hasMany(Benificiary::class);
+    // public function benificiaries(){
+    //     return $this->hasMany(Benificiary::class);
+    // }
+    public function beneficiaries(){
+        return $this->hasMany(Beneficiary::class);
     }
 
     // has one Membership Application

@@ -22,7 +22,7 @@ use App\Http\Controllers\AdminController;
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
 
 //Show All Accounts View
-Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');
+Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');   
 
 // Show Admin Ledger - NOTE MAKE OWN CONTROLLER 
 Route::get('/ledger', function (){
