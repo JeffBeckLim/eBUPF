@@ -39,6 +39,18 @@ return new class extends Migration
             
             $table->string('employee_num')->nullable();
             $table->date('bu_appointment_date')->nullable();
+
+            //added 
+            $table->string('place_of_birth')->nullable();
+            $table->string('civil_status')->nullable();
+            $table->string('spouse')->nullable();
+            $table->string('sex')->nullable();
+            $table->decimal('monthly_salary', 20, 2)->nullable(); 
+            $table->decimal('monthly_contribution', 20, 2)->nullable(); 
+            $table->string('apppointment_status')->nullable(); 
+            $table->string('profile_picture')->nullable();
+
+            
         });
     }
 
