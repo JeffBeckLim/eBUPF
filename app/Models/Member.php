@@ -14,13 +14,15 @@ class Member extends Model
 
     protected $fillable = [
         'user_id',
+        'campus_id',
+        'unit_id',
         'firstname',
         'lastname',
         'agree_to_terms',
-        'middle_initials',
+        'middle_initial',
         'contact_num',
         'address',
-        'birthday',
+        'date_of_birth',
         'tin_num',
         'position',
         // 'created_at'
@@ -36,8 +38,11 @@ class Member extends Model
         'sex',
         'monthly_salary',  
         'monthly_contribution',  
-        'apppointment_status', 
+        'appointment_status', 
         'profile_picture',
+
+        'agree_to_certify',
+        'agree_to_authorize',
     ];
     // has one user account
     public function user(){

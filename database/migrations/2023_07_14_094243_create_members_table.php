@@ -22,13 +22,14 @@ return new class extends Migration
         
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('agree_to_terms');
-            
+
+            $table->integer('agree_to_terms')->nullable();
+                   
             // Membership form data
-            $table->string('middle_initials')->nullable();
+            $table->string('middle_initial')->nullable();
             $table->string('contact_num')->nullable();
             $table->string('address')->nullable();
-            $table->date('birthday')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('tin_num')->nullable();
             $table->string('position')->nullable();
 
@@ -47,8 +48,11 @@ return new class extends Migration
             $table->string('sex')->nullable();
             $table->decimal('monthly_salary', 20, 2)->nullable(); 
             $table->decimal('monthly_contribution', 20, 2)->nullable(); 
-            $table->string('apppointment_status')->nullable(); 
+            $table->string('appointment_status')->nullable(); 
             $table->string('profile_picture')->nullable();
+
+            $table->integer('agree_to_certify')->nullable();
+            $table->integer('agree_to_authorize')->nullable();
 
             
         });

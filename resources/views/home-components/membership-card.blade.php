@@ -11,7 +11,7 @@
                     </p>
                 </div>
                 <div class="col-lg-5  d-flex align-items-center">
-                    <a style="padding-right: 100px" class="grow-on-hover btn bu-orange rounded-pill text-light fw-bold d-flex align-items-center" href=""><i class="fa fa-arrow-circle-right fa-lg pe-4" style="color: #b94703;"></i>See Membership Form</a>
+                    <a style="padding-right: 100px" class="grow-on-hover btn bu-orange rounded-pill text-light fw-bold d-flex align-items-center" href="/member/membership-form"><i class="fa fa-arrow-circle-right fa-lg pe-4" style="color: #b94703;"></i>See Membership Form</a>
 
                 </div>
                 <div class="col-lg-7  d-flex align-items-center">
