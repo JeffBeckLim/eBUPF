@@ -5,13 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Models\MembershipApplication;
 
 class MemberController extends Controller
 {
-    public function membershipForm(){
-        return view('member-views.membership_form');
+    public function checkMembershipApplication($member_id){
+        // dd($member_id);
+         $member = MembershipApplication::find($member_id);
+         if(!$member){
+            return redirect('/member/membership-form');
+         }
+         else{
+            return redirect('/member/membership-form/edit');
+         }
     }
 
+
+    public function membershipForm(){
+        return view('member-views.membership-form.membership_form');
+    }
+    //return form view for editing membership
+    public function membershipFormEdit(){
+        return view('member-views.membership-form-edit.membership_form');
+    }
     public function createMembership(Request $request, Member $member){
 
         //Ensure that user is logged in

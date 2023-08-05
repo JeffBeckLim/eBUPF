@@ -34,10 +34,22 @@ Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'
 
 // **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
 
+
+
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
 //Show Membership Form
 Route::get('/member/membership-form', [MemberController::class,'membershipForm']);
+
+//Check Membership Application
+Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
+
+
+//Show Membership Form for Editing
+Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
+
+
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
