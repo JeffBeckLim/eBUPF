@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MembershipApplication extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'member_id',
+        'ref_nummber',
+        'status',
+    ];
 
     public function member(){
         return $this->belongsTo(Member::class);

@@ -9,7 +9,7 @@
             </div>
         @endif
 
-        <div class="row pt-lg-5 mb-5 ">
+        <div class="row pt-lg-2 mb-5 ">
 
             {{-- MEMBERSHIP CARD --}}
             @if (Auth::user() && Auth::user()->user_type === 'non-member')

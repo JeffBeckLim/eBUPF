@@ -3,20 +3,24 @@
                 <div class="col-12">
                     <p class="fw-bold m-0">Department</p>
                 </div>
-                <div class="col-6 mb-3">
-                    <label  for="">College / Unit</label>
-                    <select name="units_id" class="form-select form-control validate" > 
+                <div class="col-12 mb-3">
+                    <label  for="">College / Unit AND Campus</label>
+                    <select name="unit_id" class="form-select form-control validate" > 
                         <option value="">...</option>
-                        <option value="1">Option 1</option>
+                        
+                        @foreach ($units as $unit)
+                            <option value="{{$unit->id}}">{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
+                        @endforeach
+                        {{-- <option value="1">Option 1</option> --}}
 
                         
                     </select>
                     
                 </div>
-                @error('units_id')
+                @error('unit_id')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
-                <div class="col-6">
+                {{-- <div class="col-6">
                     <label  for="">Campus</label>
                     <select name="campus_id" class="form-select form-control validate" >
                         <option value="casual" selected disabled >....</option>
@@ -26,7 +30,7 @@
                 </div>
                 @error('campus_id')
                     <p class="text-danger mt-1">{{$message}}</p>
-                @enderror
+                @enderror --}}
     </div>
     <div class="row g-1  mb-3  mt-2">
         <div class="col-12">
@@ -37,7 +41,9 @@
             <label   for="">Position</label>
             <select name="position" class="form-select form-control validate" >
                 <option value="">...</option>
-                <option value="option1">Option 1</option>
+                <option value="faculty">faculty</option>
+                <option value="dept. head">dept. head</option>
+                <option value="chairman">chairman</option>
                 
             </select>
         </div>
@@ -79,7 +85,7 @@
         <div class="col-6">
             <label for="salary">Date of Appointment in BU.</label>
             <input class="form-control validate" type="date" name="bu_appointment_date" value="{{old('bu_appointment_date')}}">
-        </div>
+        </div>   
         @error('bu_appointment_date')
             <p class="text-danger mt-1">{{$message}}</p>
         @enderror

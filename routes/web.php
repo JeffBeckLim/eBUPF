@@ -19,6 +19,7 @@ use App\Http\Controllers\MemberController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 // **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
 // Show Admin Dashboard 
@@ -44,9 +45,10 @@ Route::get('/member/membership-form', [MemberController::class,'membershipForm']
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
 
-
 //Show Membership Form for Editing
 Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
+
+
 
 
 
@@ -61,6 +63,10 @@ Route::get('/member', function(){
     return view('member-views.member-dashboard');
 })->middleware('auth','member.access')->name('member-dashboard');
 // ->middleware('auth')
+
+
+
+
 
 //auth logout flush
 Route::get('/logout', function(){

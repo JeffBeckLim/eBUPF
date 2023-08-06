@@ -66,12 +66,12 @@ class Member extends Model
     // has one Unit
     public function units()
     {
-        return $this->belongsTo(Unit::class);
+        return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
     // has one Campus
     public function campus()
     {
-        return $this->belongsTo(Campus::class);
+        return $this->belongsTo(Campus::class, 'campus_id', 'id');
     }
     //can be a witness many times
     public function witness()

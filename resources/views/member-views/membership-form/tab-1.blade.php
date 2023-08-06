@@ -20,7 +20,7 @@
                     <div class="col-2 ">
                         <div  class="d-none d-md-block"><label for="middle_initial">Mid int.</label></div>
                         <div class="d-block d-md-none"><label for="middle_initial" >M.I</label></div>
-                        <input class="form-control w-100 validate" name="middle_initial" value="{{old('middle_initial')}}">
+                        <input class="form-control w-100 validate " name="middle_initial" value="{{old('middle_initial')}}" pattern="[A-Z a-z]{1,3}" maxlength="3">
                     </div>
                     @error('middle_initial')
                         <p class="text-danger mt-1">{{$message}}</p>
@@ -45,7 +45,7 @@
                 @enderror
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
-                    <input class="form-control validate" name="place_of_birth" value="{{Auth::user()->member->place_of_birth}}">
+                    <input class="form-control validate" name="place_of_birth" value="{{old('place_of_birth')}}">
                 </div>
                 @error('place_of_birth')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -86,9 +86,9 @@
                     @else
                         <option selected disabled>...</option>
                     @endif
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="not specified">Prefer not to specify..</option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                        <option value="not specified">prefer not to specify</option>
                     </select>
                 </div>
                 @error('sex')
