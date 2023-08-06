@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('campuses', function (Blueprint $table) {
+        Schema::create('beneficiary_relationships', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            
-            $table->foreignId('unit_id')->constrained('units');
-
-            $table->string('campus_code')->nullable();
-            $table->string('campus_address')->nullable();
+            $table->string('relationship_type');
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('campuses');
+        Schema::dropIfExists('beneficiary_relationships');
     }
 };

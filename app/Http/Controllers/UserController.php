@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Member;
+use App\Models\Unit;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -11,6 +12,20 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function testRoute($id){
+        $member_unit = Unit::with('campuses')->findOrFail($id);
+
+        // load the member
+        $member = Member::with('beneficiaries')->findOrFail($id);
+
+        // access all the benefactor related to member
+        $beneficiaries = $member->beneficiaries;
+        
+        
+        return view('test', compact('member_unit', 'beneficiaries'));
+    }
+
+
 
     // Show log in page
     public function login(){

@@ -9,8 +9,14 @@ class Beneficiary extends Model
 {
     use HasFactory;
 
-    
+    protected $fillable = [
+        'member_id',
+        'beneficiary_name',
+        'birthday' ,
+        'relationship',
+    ];
+
     public function member(){
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 }

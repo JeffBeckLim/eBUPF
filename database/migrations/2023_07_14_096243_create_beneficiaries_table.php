@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('benificiaries', function (Blueprint $table) {
+        Schema::create('beneficiaries', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
             $table->foreignId('member_id')->constrained('members');
             
-            $table->string('benificiary_name')->nullable();
+            $table->string('beneficiary_name')->nullable();
             $table->date('birthday')->nullable();
             $table->string('relationship')->nullable();
         });
