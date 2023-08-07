@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +24,14 @@ use App\Http\Controllers\MemberController;
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 // **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
-// Show Admin Dashboard 
+// Show Admin Dashboard
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
 
 //Show All Accounts View
-Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');   
+Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');
 
 // Show Admin Ledger
-Route::get('/ledger', [AdminController::class, 'memberLedger'])->middleware('auth','admin.access'); 
+Route::get('/ledger', [AdminController::class, 'memberLedger'])->middleware('auth','admin.access');
 
 Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
@@ -45,10 +47,9 @@ Route::get('/member/membership-form', [MemberController::class,'membershipForm']
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
 
+
 //Show Membership Form for Editing
 Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
-
-
 
 
 
@@ -58,15 +59,11 @@ Route::get('/', function () {
     return view('home');
 })->middleware('verified.access');
 
-// show view for member 
+// show view for member
 Route::get('/member', function(){
     return view('member-views.member-dashboard');
 })->middleware('auth','member.access')->name('member-dashboard');
 // ->middleware('auth')
-
-
-
-
 
 //auth logout flush
 Route::get('/logout', function(){
@@ -78,3 +75,5 @@ Auth::routes(['verify' => true]);
 
 // Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
+
+Route::get('/generateMembershipForm',[PDFController::class,'generateMembershipForm'])->name('generateMembershipForm');
