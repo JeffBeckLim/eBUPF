@@ -50,17 +50,20 @@ function validateForm() {
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
         // If a field is empty...
-        if (y[i].value == "") {
-            // // Add an "invalid" class to the field:
-            // y[i].className += " invalid";
-            // // And set the current valid status to false
-            // valid = false;
+        if (y[i].type === "checkbox" && !y[i].checked) {
+            // For checkboxes, check if it's not checked
+            y[i].classList.add("invalid"); // Add "invalid" class
+            valid = false;
+        } else if (y[i].value == "") {
+            // For other input fields, if empty...
+            y[i].classList.add("invalid"); // Add "invalid" class
+            valid = false;
 
-            // // Add the "shake" class to the invalid input
-            // y[i].classList.add("shake");
-            // setTimeout(function() {
-            //     y[i].classList.remove("shake");
-            // }, 500);
+            // Add the "shake" class to the invalid input
+            y[i].classList.add("shake");
+            setTimeout(function() {
+                y[i].classList.remove("shake");
+            }, 500);
         } else {
             // Remove the "invalid" class and shake animation if the field has a value
             y[i].classList.remove("invalid");
@@ -71,10 +74,14 @@ function validateForm() {
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
         document.getElementsByClassName("step")[currentTab].className += " finish";
+    } else {
+        window.scrollTo(0, 0); // Scroll to the top of the page
     }
 
     return valid; // return the valid status
 }
+
+
 
 
 function fixStepIndicator(n) {
@@ -94,9 +101,11 @@ function enableSpouseInput() {
 
     if (maritalStatus.value === "married") {
         spouseInput.disabled = false;
+        spouseInput.classList.add("validate"); // Add "validate" class
     } else {
         spouseInput.disabled = true;
         spouseInput.value = ""; // Clear the input value when disabled
+        spouseInput.classList.remove("validate"); // Remove "validate" class
     }
 }
 

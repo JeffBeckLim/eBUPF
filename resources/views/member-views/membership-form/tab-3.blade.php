@@ -20,7 +20,7 @@
                     <select name="beneficiary_relationship0" class="form-select form-control validate" aria-label="Default select example">
                         <option value="" disabled selected>Select Relationship</option>\
                         @foreach ($relationship_types as $type)
-                            <option value="{{$type->relationship_type}}">{{$type->relationship_type}}</option>    
+                            <option value="{{$type->relationship_type}}"  {{ old('beneficiary_relationship0') ==$type->relationship_type ? 'selected' : '' }}>{{$type->relationship_type}}</option>    
                         @endforeach
                     </select>
                 </div>

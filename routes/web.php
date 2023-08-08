@@ -23,6 +23,9 @@ use App\Http\Controllers\PDFController;
 */
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
+
+
+
 // **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
 // Show Admin Dashboard
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
@@ -39,17 +42,24 @@ Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'
 
 
 
+
+//show membership create form
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
 //Show Membership Form
 Route::get('/member/membership-form', [MemberController::class,'membershipForm']);
 
+//Show Membership Download or Edit
+Route::get('/member/membership-form/edit-download', [MemberController::class,'membershipFormEditDownload']);
+
+//Show Membership Form for Editing
+Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
+
+
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
 
 
-//Show Membership Form for Editing
-Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
 
 
 

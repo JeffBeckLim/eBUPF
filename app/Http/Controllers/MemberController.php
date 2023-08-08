@@ -14,6 +14,10 @@ use App\Models\BeneficiaryRelationship;
 
 class MemberController extends Controller
 {
+    public function membershipFormEditDownload(){
+        return view('member-views.membership-form.membership-download-edit');
+    }   
+
     public function checkMembershipApplication($member_id){
         // dd($member_id);
          $member = MembershipApplication::find($member_id);
@@ -21,7 +25,7 @@ class MemberController extends Controller
             return redirect('/member/membership-form');
          }
          else{
-            return redirect('/member/membership-form/edit');
+            return redirect('/member/membership-form/edit-download');
          }
     }
 
@@ -41,7 +45,7 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form');
     }
     public function createMembership(Request $request, Member $member){
-        // dd($request);
+      
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -52,7 +56,9 @@ class MemberController extends Controller
             'unit_id'=> 'required', // naka comment out muna - - need pa seederss
             'firstname'=> 'required',
             'lastname'=> 'required',
-            'agree_to_terms'=> 'required',
+
+            'agree_to_terms'=> 'nullable',
+
             'middle_initial'=> 'required',
 
             'contact_num'=> 'nullable',
@@ -74,7 +80,8 @@ class MemberController extends Controller
             'monthly_salary'=> 'required',
             'monthly_contribution'=> 'required',
             'appointment_status'=> 'required',
-            // 'profile_picture'=> 'required',
+
+            'profile_picture'=> 'nullable|image|mimes:jpeg,png|max:2048',
 
             'agree_to_certify'=> 'required',
             'agree_to_authorize'=> 'required',
@@ -84,9 +91,10 @@ class MemberController extends Controller
             'beneficiary_relationship0'=> 'required',
         ]);
 
-        // for profile pic - basehan ng code
-        // if($request->hasFile('logo')) {
-        //     $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        // for profile pic validation
+        if($request->hasFile('profile_picture')) {
+            $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
+        }
 
         MembershipApplication::create([
             'member_id' => $member->id,

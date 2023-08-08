@@ -13,17 +13,6 @@ class CampusesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // $table->id();
-        // $table->timestamps();
-        
-        // // $table->foreignId('unit_id')->constrained('units');
-
-        // $table->string('campus_code')->nullable();
-        // $table->string('campus_address')->nullable();
-        
-        // [Main : East : Daraga : Tabaco : Guinobatan :   
-        // Polangui : Gubat ]
-
         Campus::create([
             'campus_code' => 'Main',
             'campus_address' => 'Legazpi'
