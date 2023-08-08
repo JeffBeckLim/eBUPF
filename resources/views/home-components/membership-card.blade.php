@@ -18,9 +18,6 @@
                     <a style="color: #0092D1" class="btn btn-link text-start" href="">Please review the requirements and the instructions</a>
                 </div>
             </div>
-            <div class="row">
-                <a class="grow-on-hover btn bu-orange rounded-pill text-light fw-bold mt-3 w-auto" href="{{ route('generateMembershipForm') }}"><i class="fa fa-arrow-circle-right fa-lg pe-4" style="color: #b94703;"></i>Download sample pdf</a>
-            </div>
 
 
         </div>

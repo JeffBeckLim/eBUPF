@@ -86,4 +86,4 @@ Auth::routes(['verify' => true]);
 // Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
 
-Route::get('/generateMembershipForm',[PDFController::class,'generateMembershipForm'])->name('generateMembershipForm');
+Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
