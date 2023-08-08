@@ -1,6 +1,8 @@
 <html>
     <h1><strong>MEMBER DETAILS</strong></h1>
     <br>
+    <img src="{{ Auth::user()->member->profile_picture ? asset('storage/' . Auth::user()->member->profile_picture) : '' }}" alt="">
+
     Member id:{{Auth::user()->member->id}}<br>
     User_id:{{Auth::user()->id}}<br>
     {{$member_unit->unit_code}}<br>

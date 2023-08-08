@@ -38,7 +38,7 @@
                 
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="birthday">Date of Birth</label>
-                    <input class="form-control " type="date" name="date_of_birth" value="{{old('date_of_birth')}}">
+                    <input class="form-control  validate" type="date" name="date_of_birth" value="{{old('date_of_birth')}}">
                 </div>
                 @error('date_of_birth')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -55,8 +55,6 @@
                     <select class="form-select form-control validate" aria-label="Default select example"  id="civilStatus" name="civil_status" onchange="enableSpouseInput()">
                         @if (Auth::user()->member->civil_status)
                             <option selected disabled>{{Auth::user()->member->civil_status}}</option>
-                        @else
-                            <option selected disabled>...</option>
                         @endif
                         <option value="single">single</option>
                         <option value="married">married</option>
@@ -73,7 +71,7 @@
                 </div>
                 <div class="col-6 pe-1">
                     <label class="fw-bold" for="contact_num">Contact Number</label>
-                    <input type="number" class="form-control validate" name="contact_num" value="{{old('contact_num')}}">
+                    <input type="number" placeholder="ex. 09150012457" class="form-control validate" name="contact_num" value="{{old('contact_num')}}">
                 </div>
                 {{-- @error('firstname')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -83,12 +81,10 @@
                     <select class="form-select form-control validate" aria-label="Default select example" name="sex">
                     @if (Auth::user()->member->sex)
                         <option selected disabled>{{Auth::user()->member->sex}}</option>
-                    @else
-                        <option selected disabled>...</option>
                     @endif
-                        <option value="male">male</option>
-                        <option value="female">female</option>
-                        <option value="not specified">prefer not to specify</option>
+                        <option value="not specified" {{ old('sex') == 'not specified' ? 'selected' : '' }}>prefer not to specify</option>
+                        <option value="male"  {{ old('sex') == 'male' ? 'selected' : '' }}>male</option>
+                        <option value="female"  {{ old('sex') == 'female' ? 'selected' : '' }}>female</option>
                     </select>
                 </div>
                 @error('sex')
