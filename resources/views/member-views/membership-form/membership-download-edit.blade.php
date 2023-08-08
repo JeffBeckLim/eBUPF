@@ -10,7 +10,7 @@
 <main class="container mt-2 ">
     <div class="row d-flex justify-content-center mb-5">
         <div class="col-lg-5 col-sm-12 col-md-8 card shadow-sm p-4 ">
-            
+
 
             <div class="row justify-content-center pt-3 pb-4 ">
                 <div class="col-lg-7 col-md-9 col-sm-9 ">
@@ -25,9 +25,9 @@
                     <p class="fw-bolder fs-5">Thank You!</p>
                 </div>
                 <div class="col-12">
-                    <p class="text-center mx-4">Congratulations! Your membership application has been 
-                        successfully created. You are now one step closer 
-                        to enjoying the benefits of being a official member of 
+                    <p class="text-center mx-4">Congratulations! Your membership application has been
+                        successfully created. You are now one step closer
+                        to enjoying the benefits of being a official member of
                         Bicol University Provident Fund.</p>
                 </div>
             </div>
@@ -38,14 +38,14 @@
                     {{-- <button class="btn btn-outline-bu fw-bold rounded">Edit Submission</button> --}}
                 </div>
                 <div class="col-12 d-grid">
-                    <a class="btn btn-block  bu-orange text-white grow-on-hover" href="{{ route('generateMembershipForm') }}">Download File</a>
+                    <a class="btn btn-block  bu-orange text-white grow-on-hover" href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}">Download File</a>
                 </div>
             </div>
 
-                
-            
+
+
         </div>
-    </div>    
+    </div>
 </main>
 
 @endsection

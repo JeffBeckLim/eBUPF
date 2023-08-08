@@ -264,13 +264,13 @@
         </div>
         <div class="row2">
             <div class="logo">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/BU-logo.png'))) }}" alt="logo" style="width: 100px; height: 100px">
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/BU-logo.png'))) }}" alt="logo" style="width: 100px; height: 100px;">
             </div>
             <div class="center-text">
                 BU PROVIDENT FUND, INC. <br>MEMBERSHIP FORM
             </div>
             <div class="right-corner">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/hooman.png'))) }}" alt="default picture" style="width: 100%; height: 160px">
+                <img src="{{ $profile_picture }}" alt="default picture" style="transform: rotate(0deg); width: 100%; height: 160px;">
             </div>
         </div>
     </div>
@@ -278,53 +278,53 @@
     <div class="ted" style="line-height: 1.8">
         <div style="width: 45%; float: right;">
             <div class="text-column">
-                <span class="toBold">TIN:</span> <span>10203040</span>
+                <span class="toBold">TIN:</span> <span>{{$tin_num}}</span>
             </div>
             <div class="text-column">
-                <span class="toBold">EMPLOYEE NO.:</span> <span>10203040</span>
+                <span class="toBold">EMPLOYEE NO.:</span> <span>{{$employee_num}}</span>
             </div>
             <div class="text-column">
-                <span class="toBold">DATE of Membership:</span> <span>August 06, 2023</span>
+                <span class="toBold">DATE of Membership:</span> <span>{{$currentdate}}</span>
             </div>
         </div>
     </div>
 
     <div class="clear-float" style="line-height: 1.8">
         <div class="name">
-            <span class="toBold">NAME:</span> <span>Labini Aaron B.</span>
+            <span class="toBold">NAME:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
         </div>
         <div class="sex">
-            <span class="toBold">SEX:</span> <span>Male</span>
+            <span class="toBold">SEX:</span> <span>{{$sex}}</span>
         </div>
     </div>
 
     <div class="adp" style="line-height: 1.8">
         <div class="age">
-            <span class="toBold">AGE:</span> <span>21</span>
+            <span class="toBold">AGE:</span> <span>{{$age}}</span>
         </div>
         <div class="dob">
-            <span class="toBold">DATE OF BIRTH:</span> <span>November 27, 2001</span>
+            <span class="toBold">DATE OF BIRTH:</span> <span>{{$date_of_birth}}</span>
         </div>
         <div class="pob">
-            <span class="toBold">PLACE OF BIRTH:</span> <span>Punta Batsan, Cawayan, Masbate</span>
+            <span class="toBold">PLACE OF BIRTH:</span> <span>{{$place_of_birth}}</span>
         </div>
     </div>
 
     <div class="unit-campus" style="line-height: 1.8">
         <div class="unit">
-            <span class="toBold">COLLEGE/UNIT: </span> <span>Main Campus</span>
+            <span class="toBold">COLLEGE/UNIT: </span> <span>{{$unit}}</span>
         </div>
         <div class="campus">
-            <span class="toBold">CAMPUS:</span> <span>BUCS</span>
+            <span class="toBold">CAMPUS:</span> <span>{{$campus}}</span>
         </div>
     </div>
 
     <div class="pos-sal" style="line-height: 1.8">
         <div class="position">
-            <span class="toBold">POSITION: </span> <span>Landlord</span>
+            <span class="toBold">POSITION: </span> <span>{{$position}}</span>
         </div>
         <div class="salary">
-            <span class="toBold">MONTHLY SALARY:</span> <span>60,000</span>
+            <span class="toBold">MONTHLY SALARY:</span> <span>{{$monthly_salary}}</span>
         </div>
     </div>
 
@@ -333,7 +333,7 @@
             <span></span>
         </div>
         <div class="contribution">
-            <span class="toBold">FIXED MONTHLY CONTRIBUTION:</span> <span>300</span>
+            <span class="toBold">FIXED MONTHLY CONTRIBUTION:</span> <span>{{$monthly_contribution}}</span>
         </div>
     </div>
 
@@ -348,28 +348,28 @@
 
     <div class="appoints" style="line-height: 1.8">
         <div class="status-of-appoint">
-            <span class="toBold">STATUS OF APPOINTMENT: </span> <span>PERMANENT</span>
+            <span class="toBold">STATUS OF APPOINTMENT: </span> <span>{{$appointment_status}}</span>
         </div>
         <div class="date-of-appoint">
-            <span class="toBold">DATE OF ORIGINAL APPOINT W/ BU:</span> <span>January 01, 2020</span>
+            <span class="toBold">DATE OF ORIGINAL APPOINT W/ BU:</span> <span>{{$bu_appointment_date}}</span>
         </div>
     </div>
 
     <div class="appoints" style="line-height: 1.8">
         <div class="status-of-appoint">
-            <span class="toBold">ADDRESS: </span> <span>West Washington, Legazpi, Albay</span>
+            <span class="toBold">ADDRESS: </span> <span>{{$address}}</span>
         </div>
         <div class="date-of-appoint">
-            <span class="toBold">TEL./CP NO.:</span> <span>09318924911</span>
+            <span class="toBold">TEL./CP NO.:</span> <span>{{$contact_num}}</span>
         </div>
     </div>
 
     <div class="appoints" style="line-height: 1.8">
         <div class="status-of-appoint">
-            <span class="toBold">CIVIL STATUS: </span> <span>Married</span>
+            <span class="toBold">CIVIL STATUS: </span> <span>{{$civil_status}}</span>
         </div>
         <div class="date-of-appoint">
-            <span class="toBold">If Married, Name of Spouse:</span> <span>Ambot kang kinsa</span>
+            <span class="toBold">If Married, Name of Spouse:</span> <span>{{$spouse}}</span>
         </div>
     </div>
 
@@ -385,28 +385,19 @@
         </div>
     </div>
     {{-- Insert loop here --}}
+    @foreach ($beneficiaries as $beneficiary)
     <div class="listofbeneficiary">
         <div class="benefeciaryname">
-            <span>Rain Nie Season</span>
+            <span>{{$beneficiary->beneficiary_name}}</span>
         </div>
         <div class="dateofbirth">
-            <span>January 01, 2022</span>
+            <span>{{$beneficiary->birthday}}</span>
         </div>
         <div class="relationship">
-            <span>Bestfriend</span>
+            <span>{{$beneficiary->relationship}}</span>
         </div>
     </div>
-    <div class="listofbeneficiary">
-        <div class="benefeciaryname">
-            <span>Rain Nie Season</span>
-        </div>
-        <div class="dateofbirth">
-            <span>January 01, 2022</span>
-        </div>
-        <div class="relationship">
-            <span>Bestfriend</span>
-        </div>
-    </div>
+    @endforeach
 
     <p class="agreement" style="margin-top: 15px; margin-bottom: 10px;">I hereby certify that all the information given above are true and correct.</p>
     <p class="agreement">Further, I hereby authorize the Administrative/Payroll Section to deduct from my salaries <br> my monthly contribution as member to the BU Provident Fund, Inc.</p>
@@ -419,7 +410,7 @@
         </div>
     </div>
 
-    <p>*********************************************************************************************************************</p>
+    <p>********************************************************************************************************************</p>
     <div style="width: 100%; font-weight: bold; text-align: center;">
         CERTIFICATION OF APPROVAL BY FUND MANAGER
     </div>
