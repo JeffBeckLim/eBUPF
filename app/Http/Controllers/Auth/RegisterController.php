@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users', new EmailDomain('bicol-u.edu.ph')],
             'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+            'agree_to_terms' => ['required'],
         ]);
     }
 
@@ -67,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+    
         $user=User::create([
             // 'firstname' => $data['firstname'],
             // 'lastname' => $data['lastname'],
