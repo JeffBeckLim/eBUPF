@@ -29,7 +29,11 @@
             <div class="text-center pb-4" style="font-size: small">
                 Let's get you started on your journey to becoming a member!
             </div>
-
+            @error('profile_picture')
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-danger mt-1"><i style="color: rgb(226, 78, 78)" class="bi bi-exclamation-circle"></i>  {{$message}}</p>
+                </div>
+            @enderror
             <form method="POST" action="/member/application/{{Auth::user()->member->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
