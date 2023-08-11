@@ -24,6 +24,7 @@ use App\Http\Controllers\PDFController;
 //TESTING -----------------------------------------------------------
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
+Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership']);
 
 //TESTING -----------------------------------------------------------
 
@@ -45,9 +46,7 @@ Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'
 //ADMIN-----------------------------------------------------------------------------------------------
 
 
-
-
-//show membership create form
+//create membership create form
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
 //Show Membership Form

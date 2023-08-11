@@ -11,34 +11,50 @@
         <div class="col-lg-5 col-sm-12 col-md-8 card px-4 pt-3 pb-1 mt-2 mb-5" >
 
             <!-- CAPSULE -->
-            <div class="row  bu-low-gradient-x d-flex justify-content-center p-3 rounded-2">
+            {{-- <div class="row  bu-low-gradient-x d-flex justify-content-center p-3 rounded-2">
                 <div class="col-9" style="width: 15rem;">
                     <div class="row d-flex ">
                         <img src="{{asset('assets/BU-pill.svg')}}" alt="Bicol University" oncontextmenu="return false;">
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- CAPSULE -->
 
             <div class="row justify-content-center pb-1 pt-3">
-                <div class="col-lg-10 col-md-9 col-sm-9">
-                    <h5 class="text-center fw-bold ">Provident Fund, Inc. Membership Form</h5>
+                <div class="col-lg-10 col-md-9 col-sm-9 ">
+                    <div class="row ">
+                        <div class="col-2 ">
+                            <img src="{{asset('icons/pencil.svg')}}" alt="" style="width: 3rem;">
+                        </div>
+                        <div class="col">
+                            <h5 class="text-start fw-bold "> Edit Provident Fund, Inc. Membership Form</h5>
+                        </div>
+                    </div>
                 </div>
 
             </div>
             <div class="text-center pb-4" style="font-size: small">
-                Let's get you started on your journey to becoming a member!
+                Please check and ensure that all the inputs are accurate.
             </div>
-
-            <form method="POST" action="/member/application/{{Auth::user()->member->id}}" enctype="multipart/form-data">
+            @error('profile_picture')
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-danger mt-1"><i style="color: rgb(226, 78, 78)" class="bi bi-exclamation-circle"></i>  {{$message}}</p>
+                </div>
+            @enderror
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-danger mt-1"><i style="color: rgb(226, 78, 78)" class="bi bi-exclamation-circle"></i> {{ session('error') }}</p>
+                </div>
+            @endif
+            <form method="POST" action="/member/application/edit/{{Auth::user()->member->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row g-0">
                     <!-- One "tab" for each step in the form: -->
-                    @include('member-views.membership-form.tab-1')
-                    @include('member-views.membership-form.tab-2')
-                    @include('member-views.membership-form.tab-3')
-                    @include('member-views.membership-form.tab-4')
+                    @include('member-views.membership-form-edit.tab-1-edit')
+                    @include('member-views.membership-form-edit.tab-2-edit')
+                    @include('member-views.membership-form-edit.tab-3-edit')
+                    @include('member-views.membership-form-edit.tab-4-edit')
                 </div>
                     <div class=" d-flex justify-content-end my-3">
 
