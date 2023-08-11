@@ -21,12 +21,17 @@ use App\Http\Controllers\PDFController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//TESTING -----------------------------------------------------------
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
+Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership']);
+
+//TESTING -----------------------------------------------------------
 
 
 
-// **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
+//ADMIN-----------------------------------------------------------------------------------------------
+
 // Show Admin Dashboard
 Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
 
@@ -38,12 +43,10 @@ Route::get('/ledger', [AdminController::class, 'memberLedger'])->middleware('aut
 
 Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
-// **ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN ADMIN **
+//ADMIN-----------------------------------------------------------------------------------------------
 
 
-
-
-//show membership create form
+//create membership create form
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
 //Show Membership Form
@@ -58,10 +61,6 @@ Route::get('/member/membership-form/edit', [MemberController::class,'membershipF
 
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
-
-
-
-
 
 
 // Show Home or Landing Page

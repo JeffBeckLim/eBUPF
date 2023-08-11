@@ -34,8 +34,7 @@
 
             <div class="row mx-5 mt-5">
                 <div class="col-12 d-grid mb-3">
-                    <a class="btn btn-block  btn-outline-bu fw-bold grow-on-hover" href="#">Edit Submission</a>
-                    {{-- <button class="btn btn-outline-bu fw-bold rounded">Edit Submission</button> --}}
+                    <a class="btn btn-block  btn-outline-bu fw-bold grow-on-hover" href="/member/membership-form/edit">Edit Submission</a>
                 </div>
                 <div class="col-12 d-grid">
                     <a class="btn btn-block  bu-orange text-white grow-on-hover" href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}">Download File</a>
