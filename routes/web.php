@@ -65,6 +65,9 @@ Route::put('/member/application/edit/{member}', [MemberController::class, 'updat
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
 
+//Generate Membership Application Form
+Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
@@ -88,4 +91,3 @@ Auth::routes(['verify' => true]);
 // Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
 
-Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
