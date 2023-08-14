@@ -265,7 +265,7 @@
             <span class="toBold">NAME:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
         </div>
         <div class="sex">
-            <span class="toBold">SEX:</span> <span>{{$sex}}</span>
+            <span class="toBold">SEX:</span> <span>{{ucfirst($sex)}}</span>
         </div>
     </div>
 
@@ -292,7 +292,7 @@
 
     <div class="pos-sal">
         <div class="position">
-            <span class="toBold">POSITION: </span> <span>{{$position}}</span>
+            <span class="toBold">POSITION: </span> <span>{{ ucfirst($position) }}</span>
         </div>
         <div class="salary">
             <span class="toBold">MONTHLY SALARY:</span> <span>{{$monthly_salary}}</span>
@@ -319,7 +319,7 @@
 
     <div class="appoints">
         <div class="status-of-appoint">
-            <span class="toBold">STATUS OF APPOINTMENT: </span> <span>{{$appointment_status}}</span>
+            <span class="toBold">STATUS OF APPOINTMENT: </span> <span> {{ ucfirst($appointment_status) }}</span>
         </div>
         <div class="date-of-appoint">
             <span class="toBold">DATE OF ORIGINAL APPOINT W/ BU:</span> <span>{{$bu_appointment_date}}</span>
@@ -337,7 +337,7 @@
 
     <div class="appoints">
         <div class="status-of-appoint">
-            <span class="toBold">CIVIL STATUS: </span> <span>{{$civil_status}}</span>
+            <span class="toBold">CIVIL STATUS: </span> <span> {{ ucfirst($civil_status) }}</span>
         </div>
         <div class="date-of-appoint">
             <span class="toBold">If Married, Name of Spouse:</span> <span>{{$spouse}}</span>
