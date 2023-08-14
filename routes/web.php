@@ -4,11 +4,12 @@ use App\Models\User;
 use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\PDFController;
+use App\Http\Controllers\LoanApplicationController;
 
 
 /*
@@ -24,7 +25,7 @@ use App\Http\Controllers\PDFController;
 //TESTING -----------------------------------------------------------
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership']);
+Route::get('/member/loan-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only 
 
 //TESTING -----------------------------------------------------------
 
@@ -58,6 +59,8 @@ Route::get('/member/membership-form/edit-download', [MemberController::class,'me
 //Show Membership Form for Editing
 Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
 
+//Update Membership Form
+Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership']);
 
 //Check Membership Application
 Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
