@@ -53,9 +53,10 @@ class PDFController extends controller{
                 'unit' => $member_unit->unit_code,
                 'campus' => $member_unit->campuses->campus_code,
                 'beneficiaries' => $beneficiaries,
-
             ];
+
             $pdf = PDF::loadView('member-views.generate-membership-form', $data)->setPaper('letter', 'portrait');
+
             return $pdf->download('Membership Application Form.pdf');
 
         } else {
