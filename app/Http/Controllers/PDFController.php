@@ -65,8 +65,43 @@ class PDFController extends controller{
 
     }
 
-    public function hslapplication()
+    public function generateMPL()
     {
+        $data = [
+            'lastname' => 'Labini',
+            'firstname' => 'Aaron',
+            'middle_initial' => 'B',
+            'date_of_birth' => '2021-11-27',
+            'age' => '21',
+            'tin' => '4561324',
+            'address' => 'Punta Batsan, Cawayan, Masbate',
+            'unit' => 'CS',
+            'contact_number' => '8456132652',
+            'office' => 'Comfort Room',
+            'monthly_net_pay' => '60000',
+            'amount_requested' => '200000',
+
+            'lastname' => 'Labini',
+            'firstname' => 'Aaron',
+            'middle_initial' => 'B',
+            'date_of_birth' => '2021-11-27',
+            'age' => '21',
+            'tin' => '4561324',
+            'address' => 'Punta Batsan, Cawayan, Masbate',
+            'unit' => 'CS',
+            'contact_number' => '8456132652',
+            'office' => 'Comfort Room',
+            'monthly_net_pay' => '60000',
+            'amount_requested' => '200000',
+
+        ];
+
+        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('letter', 'portrait');
+
+        return $pdf->download('MPL Loan Application Form.pdf');
+    }
+
+    public function generateHSL(){
 
     }
 
