@@ -68,6 +68,8 @@ Route::get('/member/membership-application/check/{member_id}', [MemberController
 //Generate Membership Application Form
 Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
 
+Route::get('/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
+
 
 // Show Home or Landing Page
 Route::get('/', function () {
