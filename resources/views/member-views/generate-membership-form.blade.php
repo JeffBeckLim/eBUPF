@@ -164,36 +164,7 @@
             width: 55%;
         }
 
-        .benefeciaries {
-            margin-top: 18px;
-            font-size: 12px;
-            display: table;
-            width: 100%;
-        }
 
-        .benefeciaryname {
-            text-align: center;
-            display: table-cell;
-            width: 35%;
-        }
-
-        .dateofbirth {
-            text-align: center;
-            display: table-cell;
-            width: 25%;
-        }
-
-        .relationship {
-            text-align: center;
-            display: table-cell;
-            width: 40%;
-        }
-
-        .listofbeneficiary {
-            font-size: 12px;
-            display: table;
-            width: 100%;
-        }
 
         .agreement {
             margin-left: 30px;
@@ -264,7 +235,7 @@
         </div>
         <div class="row2">
             <div class="logo">
-                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/BU-logo.png'))) }}" alt="logo" style="width: 100px; height: 100px;">
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/BU-logo.png'))) }}" alt="logo" style="width:80px; height: 80px;">
             </div>
             <div class="center-text">
                 BU PROVIDENT FUND, INC. <br>MEMBERSHIP FORM
@@ -275,7 +246,7 @@
         </div>
     </div>
 
-    <div class="ted" style="line-height: 1.8">
+    <div class="ted">
         <div style="width: 45%; float: right;">
             <div class="text-column">
                 <span class="toBold">TIN:</span> <span>{{$tin_num}}</span>
@@ -289,16 +260,16 @@
         </div>
     </div>
 
-    <div class="clear-float" style="line-height: 1.8">
+    <div class="clear-float">
         <div class="name">
             <span class="toBold">NAME:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
         </div>
         <div class="sex">
-            <span class="toBold">SEX:</span> <span>{{$sex}}</span>
+            <span class="toBold">SEX:</span> <span>{{ucfirst($sex)}}</span>
         </div>
     </div>
 
-    <div class="adp" style="line-height: 1.8">
+    <div class="adp">
         <div class="age">
             <span class="toBold">AGE:</span> <span>{{$age}}</span>
         </div>
@@ -310,7 +281,7 @@
         </div>
     </div>
 
-    <div class="unit-campus" style="line-height: 1.8">
+    <div class="unit-campus">
         <div class="unit">
             <span class="toBold">COLLEGE/UNIT: </span> <span>{{$unit}}</span>
         </div>
@@ -319,16 +290,16 @@
         </div>
     </div>
 
-    <div class="pos-sal" style="line-height: 1.8">
+    <div class="pos-sal">
         <div class="position">
-            <span class="toBold">POSITION: </span> <span>{{$position}}</span>
+            <span class="toBold">POSITION: </span> <span>{{ ucfirst($position) }}</span>
         </div>
         <div class="salary">
             <span class="toBold">MONTHLY SALARY:</span> <span>{{$monthly_salary}}</span>
         </div>
     </div>
 
-    <div class="black-contri" style="line-height: 1.8">
+    <div class="black-contri">
         <div class="blank">
             <span></span>
         </div>
@@ -337,7 +308,7 @@
         </div>
     </div>
 
-    <div class="black-contri" style="line-height: 1.8">
+    <div class="black-contri">
         <div class="blank">
             <span></span>
         </div>
@@ -346,16 +317,16 @@
         </div>
     </div>
 
-    <div class="appoints" style="line-height: 1.8">
+    <div class="appoints">
         <div class="status-of-appoint">
-            <span class="toBold">STATUS OF APPOINTMENT: </span> <span>{{$appointment_status}}</span>
+            <span class="toBold">STATUS OF APPOINTMENT: </span> <span> {{ ucfirst($appointment_status) }}</span>
         </div>
         <div class="date-of-appoint">
             <span class="toBold">DATE OF ORIGINAL APPOINT W/ BU:</span> <span>{{$bu_appointment_date}}</span>
         </div>
     </div>
 
-    <div class="appoints" style="line-height: 1.8">
+    <div class="appoints">
         <div class="status-of-appoint">
             <span class="toBold">ADDRESS: </span> <span>{{$address}}</span>
         </div>
@@ -364,40 +335,34 @@
         </div>
     </div>
 
-    <div class="appoints" style="line-height: 1.8">
+    <div class="appoints">
         <div class="status-of-appoint">
-            <span class="toBold">CIVIL STATUS: </span> <span>{{$civil_status}}</span>
+            <span class="toBold">CIVIL STATUS: </span> <span> {{ ucfirst($civil_status) }}</span>
         </div>
         <div class="date-of-appoint">
             <span class="toBold">If Married, Name of Spouse:</span> <span>{{$spouse}}</span>
         </div>
     </div>
 
-    <div class="benefeciaries">
-        <div class="benefeciaryname">
-            <span class="toBold">Name of Benefeciaries</span>
-        </div>
-        <div class="dateofbirth">
-            <span class="toBold">Date of Birth</span>
-        </div>
-        <div class="relationship">
-            <span class="toBold">Relationship to Applicant</span>
-        </div>
-    </div>
-    {{-- Insert loop here --}}
-    @foreach ($beneficiaries as $beneficiary)
-    <div class="listofbeneficiary">
-        <div class="benefeciaryname">
-            <span>{{$beneficiary->beneficiary_name}}</span>
-        </div>
-        <div class="dateofbirth">
-            <span>{{$beneficiary->birthday}}</span>
-        </div>
-        <div class="relationship">
-            <span>{{$beneficiary->relationship}}</span>
-        </div>
-    </div>
-    @endforeach
+    <table class="benefeciaries" style="width: 100%; margin-top: 10px;">
+        <thead>
+            <tr>
+                <th class="benefeciaryname" style="width: 35%;text-align: center;font-size:12px;">Name of beneficiaries</th>
+                <th class="dateofbirth" style="width: 25%;text-align: center;font-size:12px;">Date of Birth</th>
+                <th class="relationship" style="width: 40%;text-align: center;font-size:12px;">Relationship to Applicant</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($beneficiaries as $beneficiary)
+            <tr class="listofbeneficiary">
+                <td class="benefeciaryname" style="text-align: center;font-size:12px;">{{$beneficiary->beneficiary_name}}</td>
+                <td class="dateofbirth" style="text-align: center;font-size:12px;">{{$beneficiary->birthday}}</td>
+                <td class="relationship" style="text-align: center;font-size:12px;">{{$beneficiary->relationship}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+
 
     <p class="agreement" style="margin-top: 15px; margin-bottom: 10px;">I hereby certify that all the information given above are true and correct.</p>
     <p class="agreement">Further, I hereby authorize the Administrative/Payroll Section to deduct from my salaries <br> my monthly contribution as member to the BU Provident Fund, Inc.</p>
@@ -411,7 +376,7 @@
     </div>
 
     <p>********************************************************************************************************************</p>
-    <div style="width: 100%; font-weight: bold; text-align: center;">
+    <div style="width: 100%; font-weight: bold; text-align: center; margin-top: -28px;">
         CERTIFICATION OF APPROVAL BY FUND MANAGER
     </div>
     <div style="width: 100%; margin-top: 10px; font-size: 12px;">
