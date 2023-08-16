@@ -19,6 +19,7 @@
 
 <body class="p-0 m-0 border-0 overflow-x-hidden">
 
+    
     {{--------------------------------------- 
         MAke sure that this two components have identical links and assets being used.
      -------------------------------------}}
