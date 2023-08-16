@@ -25,7 +25,11 @@ use App\Http\Controllers\LoanApplicationController;
 //TESTING -----------------------------------------------------------
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-Route::get('/member/loan-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only 
+//show mpl applicaiton
+Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only 
+
+//create mpl application and Co-Borrower request
+Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
 //TESTING -----------------------------------------------------------
 
