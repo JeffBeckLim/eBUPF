@@ -3,6 +3,11 @@
 @section('content')
 
 <div class="row m-3 mx-2 d-flex justify-content-center">
+    @if (session('message'))
+        <div class="alert alert-primary">
+            <i class="bi bi-hand-thumbs-up-fill"></i> {{ session('message') }}
+        </div>
+    @endif
   <div class="card border p-4" style="width: 35rem">
     <div class="row d-flex">
         <div class="col-8">
@@ -22,7 +27,11 @@
         </script>
          <!-- Tooltip -->
 
-
+         @if (session('email_error'))
+            <div class="alert alert-danger">
+                <i class="bi bi-exclamation-circle"></i> {{ session('email_error') }}
+            </div>
+        @endif
         <form action="/member/mpl-application/" method="POST" >
             @csrf
             <div id="loanForm">
@@ -30,7 +39,7 @@
 
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>
-                    <input type="number" class="form-control" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
+                    <input type="number" class="form-control {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
                     {{-- min="50000" max="200000" --}}
                     @error('principal_amount')
                         <h6 class="text-danger">{{$message}}</h6>
@@ -41,40 +50,44 @@
                     {{-- 
                     <input type="number" class="form-control" id="loanTerm" name="term_years" > --}}
                     <label for="loanTerm" class="text2-design">Years to Pay</label>
-                    <select class="form-control form-select mt-2" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
-                        <option selected disabled>Choose loan term: 1-5 years</option>
+                    <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
+                        <option value="" selected disabled>Choose loan term: 1-5 years</option>
                         @for ($years = 1; $years < 6; $years++)
-                            @if ($years == 1 )
-                                <option value="{{$years}}">{{$years}} year</option>
+                            @if ($years == 1)
+                                <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} year</option>
                             @else 
-                                <option value="{{$years}}">{{$years}} years</option>
+                                <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} years</option>
                             @endif
                         @endfor
                     
                       </select>
+                      @error('term_years')
+                        <h6 class="text-danger">{{$message}}</h6>
+                      @enderror
                     {{--  min="1" max="5" --}}
                 </div>
 
                 <p class="text1-design pt-4">Co-Borrower</p>
 
                 <div class="form-group">
-                    <label for="myCoBorrower" class="text2-design">Choose Your Co-Borrower</label>
-                    <input type="text" class="form-control" id="myCoBorrower" name="coBorrower_id" value="{{old('coBorrower_id')}}">
-                    @error('coBorrower_id')
-                        <h6 class="text-danger">Please choose a co-borrower</h6>
+                    <label for="myCoBorrower" class="text2-design">Enter BU email of your Co-Borrower</label>
+                    <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. Juanjose.delacruz@bicol-u.edu.ph">
+                    @error('email_co_borrower')
+                        <h6 class="text-danger">{{$message}}</h6>
                     @enderror
                 </div>
 
                 <p class="text1-design pt-4">Witnesses</p>
 
+
                 <div class="form-group">
-                    <input type="text" class="form-control" id="myWitness1" name="wittness_1" placeholder="Select your first witness" value="{{old('wittness_1')}}">
-                    @error('wittness_1')
-                        <h6 class="text-danger">Please choose a two witnesses</h6>
+                    <input type="text" class="form-control {{ $errors->has('email_witness_1') ? 'invalid' : '' }}" id="myWitness1" name="email_witness_1" placeholder="ex. jeffbeckmendaza.lim@bicol-u.edu.ph" value="{{old('email_witness_1')}}">
+                    @error('email_witness_1')
+                        <h6 class="text-danger">{{$message}}</h6>
                     @enderror
-                    <input type="text" class="form-control mt-2" id="myWitness2" name="wittness_2" placeholder="Select your second witness" >
-                    @error('wittness_2')
-                        <h6 class="text-danger">Please choose a two witnesses</h6>
+                    <input type="text" class="form-control mt-2 {{ $errors->has('email_witness_2') ? 'invalid' : '' }}" id="myWitness2" name="email_witness_2" placeholder="ex. aaronbarlas.labini@bicol-u.edu.ph" value="{{old('email_witness_2')}}">
+                    @error('email_witness_2')
+                        <h6 class="text-danger">{{$message}}</h6>
                     @enderror
                 </div>
 
@@ -83,7 +96,9 @@
                 </div>
                 <button type="button" class="btn bu-orange text-light fw-bold w-100" onclick="validateForm()">Proceed</button>
                 
+
             </div>
+            
             
         {{--------------------------------------------------------- 
             this includes the next tab which has the details of the loan application for members to review and send request to co-borrower. 
@@ -96,6 +111,10 @@
             <button type="button" class="btn btn-outline-secondary fw-bold w-100 mt-2" onclick="goBack()">Go back</button>
         </div>    
          --}}
+         
+
+      
+
 
         </form>
         

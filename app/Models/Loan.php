@@ -9,16 +9,28 @@ class Loan extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'member_id',
+        'loan_type_id',
+        'amortization_id',
+        'adjustment_id',
+        'loan_category_id',
+        'principal_amount',
+        'interest', 
+        'term_years',
+        'is_visible',
+        'is_approved',
+    ];
     //belongs to one member
     public function member()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(Member::class, 'member_id', 'id');
     }
 
     //has many co Borrower but only one is required 
     public function co_borrower()
     {
-        return $this->hasMany(CoBorrower::class);
+        return $this->hasMany(CoBorrower::class, 'loan_id' , 'id');
     }
 
     //has many witness 

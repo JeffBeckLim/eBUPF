@@ -8,6 +8,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
 
@@ -22,7 +23,9 @@ use App\Http\Controllers\LoanApplicationController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//TESTING -----------------------------------------------------------
+
+
+//TESTING ===================================================================================================
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 //show mpl applicaiton
@@ -31,7 +34,11 @@ Route::get('/member/mpl-application-form/', [LoanApplicationController::class, '
 //create mpl application and Co-Borrower request
 Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
-//TESTING -----------------------------------------------------------
+
+//show requests for co-borrer
+Route::get('/member/coBorrwer/requests', [CoBorrowerController::class, 'show']);
+
+//TESTING ===================================================================================================
 
 
 
