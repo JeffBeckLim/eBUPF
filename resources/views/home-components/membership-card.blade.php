@@ -18,6 +18,10 @@
                     <a style="color: #0092D1" class="btn btn-link text-start" href="">Please review the requirements and the instructions</a>
                 </div>
             </div>
+            <div>
+                <a class="btn btn-block  bu-orange text-white grow-on-hover" href="{{ route('generateMulti-PurposeLoanApplicationForm', ['id' => Auth::user()->member->id]) }}">Download File</a>
+
+            </div>
 
 
         </div>

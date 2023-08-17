@@ -186,6 +186,9 @@
             background-color: #ffffff;
             margin: auto;
         }
+        .page_break {
+            page-break-before: always;
+        }
     </style>
 </head>
 <body>
@@ -390,7 +393,7 @@
         </div>
     </div>
 
-    <div style="display: table; width: 100%; margin-top: 30px;">
+    <div style="display: table; width: 100%; margin-top: 40px;">
         <div style="display:table-cell; width: 30%; font-size: 14px; font-weight: bold;border-bottom: 1px solid black; text-align: center;">
             MARY JANE A. VICUÑA
         </div>
@@ -406,8 +409,520 @@
 
         </div>
     </div>
-    <div style="font-size: 12px;font-weight: bold; text-align: center; width: 100%; margin-top: 30px;">
+    <div style="font-size: 12px;font-weight: bold; text-align: center; width: 100%; margin-top: 30px;position: absolute;
+    bottom: 0;">
         Page 1
+    </div>
+
+    <div class="page_break"></div>
+
+    <div class="toBold" style="text-align: center; font-size: 14px; margin-top: 15px; margin-bottom: 10px;">
+        COMPUTATION
+    </div>
+
+    <div style="font-size: 14px;" class="toBold">
+        LOANABLE AMOUNT
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+            Monthly Pay (Inclusive of ACA/PERA)
+        </div>
+        <div style="display: table-cell; width: 20%; font-weight: bold;">
+            ------------------------
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell;text-align: center; width: 40%; font-size: 14px; font-weight: bold;">
+        X3
+        </div>
+        <div style="display: table-cell; width: 20%; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+            Loanable Amount
+        </div>
+        <div style="display: table-cell; width: 20%; font-weight: bold;">
+            ------------------------
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+    </div>
+
+    <div style="font-size: 14px; margin-top: 15px;" class="toBold">
+        AMOUNT LOAN GRANTED
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+        Amount of Loan Granted
+        </div>
+        <div style="display: table-cell; width: 20%; font-weight: bold;">
+            ------------------------
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+    </div>
+
+    <div style="font-size: 14px;margin-top: 15px;" class="toBold">
+        LOAN PROCEEDS
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+        Princiapl Loan Granted
+        </div>
+        <div style="display: table-cell; width: 20%; font-weight: bold;">
+            ------------------------
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 15px;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+        Less:
+        </div>
+        <div style="display: table-cell; width: 15%; font-weight: bold; font-size: 14px;">
+            Interest
+        </div>
+        <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 15%; font-weight: bold; font-size: 14px;">
+            MRI
+        </div>
+        <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 15%; font-weight: bold; font-size: 14px;">
+            Loan Balance
+        </div>
+        <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 15%; font-weight: bold; font-size: 14px;">
+            Service fee
+        </div>
+        <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 15%; font-weight: bold; font-size: 14px;">
+            Others
+        </div>
+        <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 15px;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 20%; font-size: 14px; font-weight: bold;">
+        NET PROCEEDS
+        </div>
+        <div style="display: table-cell; width: 40%; font-weight: bold;">
+            ------------------------------------------------
+        </div>
+        <div style="display: table-cell; width: 30%; font-weight: bold;">
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 20px;">
+        <div style="display: table-cell; width: 50%; font-size: 14px; font-weight: bold;">
+            MONTHLY AMORTIZATION:
+        </div>
+        <div style="display: table-cell; width: 50%; font-size: 14px; font-weight: bold;">
+            AMORTIZATION/COLLECTION PERIOD:
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 5px;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-weight: bold; font-size: 14px;">
+            Start <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-weight: bold; font-size: 14px;">
+            End <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 35%; font-weight: bold; font-size: 14px;">
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 20px;">
+        <div style="display: table-cell; width: 50%; font-size: 14px; font-weight: bold;">
+            COMPUTATION OF INTEREST PER ANNUM:
+        </div>
+        <div style="display: table-cell; width: 50%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+           First Year
+        </div>
+        <div style="display: table-cell; width: 50%; font-weight: bold; font-size: 14px;">
+            Second Year
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 10px;">
+        <div style="display: table-cell; width: 10%;">
+
+        </div>
+        <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
+           Third Year
+        </div>
+        <div style="display: table-cell; width: 50%; font-weight: bold; font-size: 14px;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="border-bottom: 2px solid black; margin-top: 30px;"></div>
+
+    <div style="display: table; width: 100%; margin-top: 15px;">
+        <div style="display: table-cell; width: 25%; font-weight: bold; font-size: 14px;">
+            Processed by:
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            <div style="border-bottom: 1px solid black;height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Date <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 25%; font-weight: bold; font-size: 14px;">
+        </div>
+        <div style="display: table-cell; width: 30%; text-align: center; font-size: 14px; font-weight: bold;">
+            Account Analyst
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 25px;">
+        <div style="display: table-cell; width: 25%; font-weight: bold; font-size: 14px;">
+            Approved by:
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            <div style="border-bottom: 1px solid black;height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+            Date <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%;">
+        <div style="display: table-cell; width: 25%; font-weight: bold; font-size: 14px;">
+        </div>
+        <div style="display: table-cell; width: 30%; text-align: center; font-size: 14px; font-weight: bold;">
+            Executive Director
+        </div>
+        <div style="display: table-cell; width: 10%; font-weight: bold;">
+
+        </div>
+        <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
+        </div>
+        <div style="display: table-cell; width: 10%; font-size: 14px; font-weight: bold;">
+        </div>
+    </div>
+
+        <div style="font-size: 12px; font-weight: bold; margin-top: 30px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I acknowledge receipt of a copy of this MULTI-PURPOSE LOAN computation prior to the consummation of loan/credit transaction and that I fully understand and agree to the terms and conditions thereof.
+        </div>
+
+        <div style="tab-size: 8;font-size: 12px; font-weight: bold; margin-top: 15px;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Furthermore, I authorize the BU Provident Fund, Inc. to obtain access of my payroll information from the BU Accounting office to verify my credit worthiness upon application and to review my paying capacity in case of default or failure to pay the monthly amortization of this loan.
+        </div>
+
+        <div style="display: table; width: 100%; margin-top: 35px;">
+            <div style="display: table-cell; width: 5%; font-weight: bold; font-size: 14px;">
+            </div>
+            <div style="display: table-cell; width: 45%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
+
+            </div>
+            <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
+            </div>
+            <div style="display: table-cell; width: 40%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
+
+            </div>
+            <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
+            </div>
+        </div>
+
+        <div style="display: table; width: 100%;">
+            <div style="display: table-cell; width: 5%; font-weight: bold; font-size: 14px;">
+            </div>
+            <div style="display: table-cell; width: 45%; font-weight: bold; text-align: center; font-size: 12px;">
+                Signature over printed name of Principal Borrower
+            </div>
+            <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
+            </div>
+            <div style="display: table-cell; width: 40%; font-weight: bold;text-align: center;  font-size: 12px;">
+                Signature over printed name of Co-Borrower
+            </div>
+            <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
+            </div>
+        </div>
+
+        <div style="font-size: 12px;font-weight: bold; text-align: center; width: 100%; margin-top: 30px;position: absolute;
+    bottom: 0;">
+        Page 2
     </div>
 </body>
 </html>
