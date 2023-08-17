@@ -25,7 +25,6 @@ class Member extends Model
         'date_of_birth',
         'tin_num',
         'position',
-        // 'created_at'
         'verified_at',
         'updated_at',
         'disabled_at',
@@ -81,11 +80,11 @@ class Member extends Model
     //can be a coBorrwer many times
     public function co_borrower()
     {
-        return $this->hasMany(CoBorrower::class);
+        return $this->hasMany(CoBorrower::class, 'member_id' , 'id');
     }
     public function loans()
     {
-        return $this->hasMany(Loans::class);
+        return $this->hasMany(Loans::class, 'member_id', 'id');
     }
 
 }

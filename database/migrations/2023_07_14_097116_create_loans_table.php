@@ -16,16 +16,22 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('member_id')->constrained('members');
-            $table->foreignId('loan_type_id')->constrained('loan_types');
-            $table->foreignId('amortization_id')->constrained('amortizations');
-            $table->foreignId('adjustment_id')->constrained('adjustments');
-            $table->foreignId('loan_category_id')->constrained('loan_categories');
+
+            //nullable for now but this has to be filled
+            $table->foreignId('loan_type_id')->nullable()->constrained('loan_types');
+
+            $table->foreignId('amortization_id')->nullable()->constrained('amortizations');
+            $table->foreignId('adjustment_id')->nullable()->constrained('adjustments');
+            $table->foreignId('loan_category_id')->nullable()->constrained('loan_categories');
 
             $table->decimal('principal_amount', 20, 2);
-            $table->decimal('interest', 20, 2);
+
+            $table->decimal('interest', 20, 2)->nullable();
+
             $table->integer('term_years');
-            $table->integer('is_visible');
-            $table->integer('is_approved');
+
+            $table->integer('is_visible')->nullable();
+            $table->integer('is_approved')->nullable();
             // campus_id_index not added 
             // units_id_index not added 
         });
