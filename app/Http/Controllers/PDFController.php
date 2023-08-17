@@ -96,7 +96,7 @@ class PDFController extends controller{
 
         ];
 
-        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('letter', 'portrait');
+        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
 
         return $pdf->download('MPL Loan Application Form.pdf');
     }
