@@ -20,7 +20,7 @@
 <div class="row d-block d-md-none p-3 border-bottom" style="background-color: #ffffff;">
     <div class="nav">
         <div class="col">
-            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
+            <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
                 <img src="{{asset('icons/bars.svg')}}" alt="">
               </button>
 
