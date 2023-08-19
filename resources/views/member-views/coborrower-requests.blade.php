@@ -41,11 +41,14 @@
                 </div>
                 {{-- CHECK IF THEIR ARE CB REQUEST --}}
                 @if ($loans)
-                    <table class="table mt-4 border" style=" background-color: white;">
+                    <table class="table table-hover mt-4 border" style=" background-color: white;">
                         <thead>
                             <tr>
-                                <th  scope="col">Loan</th>
-                                <th  scope="col">Principal Borrower</th>
+                                <th class="text-center"  scope="col">Loan</th>
+                                {{-- THIS WILL SHOW ONLY ON SMALL SCREENS  --}}
+                                <th class="text-center d-md-none"  style="font-size: small" scope="col">Principal Borrower</th>
+                                {{-- THIS WILL SHOW ONLY ON MEDIUM TO LARGE SCREENS  --}}
+                                <th class="text-center d-none d-md-block"  scope="col">Principal Borrower</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -63,6 +66,7 @@
                                         </td>
                                         <td>
                                             <div class="row">
+
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
                                                     <img src="{{asset('assets/hooman.png')}}" alt="default picture" width="40px" class="img-fluid rounded-circle">
                                                 </div>
@@ -85,11 +89,11 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                        <td style="width: 4rem;" class="text-center">
+                                            <a href="/member/loan-application-details/{{$loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                         </td>
+                                        
                                     </tr>     
-
                             @endforeach     
                         </tbody>
                     </table>

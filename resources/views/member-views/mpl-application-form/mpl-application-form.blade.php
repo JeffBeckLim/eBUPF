@@ -39,12 +39,16 @@
 
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>
-                    <input type="number" class="form-control {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
+                    
+                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
+
+                    
                     {{-- min="50000" max="200000" --}}
                     @error('principal_amount')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
                 </div>
+
 
                 <div class="form-group">
                     {{-- 
