@@ -29,7 +29,7 @@ use App\Http\Controllers\LoanApplicationController;
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 //show mpl applicaiton
-Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only 
+Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only
 
 //create mpl application and Co-Borrower request
 Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
@@ -79,7 +79,11 @@ Route::get('/member/membership-application/check/{member_id}', [MemberController
 //Generate Membership Application Form
 Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
 
+//Generate MPL Application Form
 Route::get('/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
+
+//Generate HSL Application Form
+Route::get('/generateHousingLoanApplicationForm',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
 
 
 // Show Home or Landing Page
