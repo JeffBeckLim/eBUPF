@@ -103,6 +103,7 @@ class PDFController extends controller{
 
     public function generateHSL(){
         $data = [
+            'currentdate' => date('Y-m-d'),
             'lastname' => 'Labini',
             'firstname' => 'Aaron',
             'middle_initial' => 'B',
@@ -132,7 +133,7 @@ class PDFController extends controller{
 
         ];
 
-        $pdf = PDF::loadView('member-views.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
+        $pdf = PDF::loadView('member-views.hsl-second-page', $data)->setPaper('legal', 'portrait');
 
         return $pdf->download('HSL Application Form.pdf');
     }
