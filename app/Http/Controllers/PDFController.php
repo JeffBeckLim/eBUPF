@@ -81,6 +81,28 @@ class PDFController extends controller{
             'monthly_net_pay' => '60000',
             'amount_requested' => '200000',
 
+            'co_lastname' => 'Labini',
+            'co_firstname' => 'Aaron',
+            'co_middle_initial' => 'B',
+            'co_date_of_birth' => '2021-11-27',
+            'co_age' => '21',
+            'co_tin' => '4561324',
+            'co_address' => 'Punta Batsan, Cawayan, Masbate',
+            'co_unit' => 'CS',
+            'co_contact_number' => '8456132652',
+            'co_office' => 'Comfort Room',
+            'co_monthly_net_pay' => '60000',
+            'co_amount_requested' => '200000',
+
+        ];
+
+        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
+
+        return $pdf->download('MPL Application Form.pdf');
+    }
+
+    public function generateHSL(){
+        $data = [
             'lastname' => 'Labini',
             'firstname' => 'Aaron',
             'middle_initial' => 'B',
@@ -93,16 +115,26 @@ class PDFController extends controller{
             'office' => 'Comfort Room',
             'monthly_net_pay' => '60000',
             'amount_requested' => '200000',
+            'payment_period' => '12',
+
+            'co_lastname' => 'Labini',
+            'co_firstname' => 'Aaron',
+            'co_middle_initial' => 'B',
+            'co_date_of_birth' => '2021-11-27',
+            'co_age' => '21',
+            'co_tin' => '4561324',
+            'co_address' => 'Punta Batsan, Cawayan, Masbate',
+            'co_unit' => 'CS',
+            'co_contact_number' => '8456132652',
+            'co_office' => 'Comfort Room',
+            'co_monthly_net_pay' => '60000',
+            'co_amount_requested' => '200000',
 
         ];
 
-        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
+        $pdf = PDF::loadView('member-views.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
 
-        return $pdf->download('MPL Loan Application Form.pdf');
-    }
-
-    public function generateHSL(){
-
+        return $pdf->download('HSL Application Form.pdf');
     }
 
     // Add more methods for generating additional PDFs if needed

@@ -240,8 +240,8 @@
             <div class="center-text">
                 BU PROVIDENT FUND, INC. <br>MEMBERSHIP FORM
             </div>
-            <div class="right-corner">
-                <img src="{{ $profile_picture }}" alt="default picture" style="transform: rotate(0deg); width: 100%; height: 160px;">
+            <div class="right-corner" style="aposition: relative; text-align: right;">
+                <img src="{{ $profile_picture }}" alt="default picture" style="transform: rotate(0deg); width: 85%; height: 150px;">
             </div>
         </div>
     </div>
