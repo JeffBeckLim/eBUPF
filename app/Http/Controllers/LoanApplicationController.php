@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CoBorrower;
 use App\Models\Loan;
 use App\Models\User;
+use App\Models\Witness;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,9 @@ class LoanApplicationController extends Controller
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
+            if($request->email_witness_1 == $request->email_witness_2){
+                return back()->with('email_error', 'Make sure witness emails are unique');
+            }
 
 
         $formFields = $request->validate([
@@ -35,12 +39,13 @@ class LoanApplicationController extends Controller
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
             
-            'email_witness_1'=> 'required',
-            'email_witness_2'=> 'required',
+            'email_witness_1'=> 'required|email|exists:users,email',
+            'email_witness_2'=> 'required|email|exists:users,email',
         ]);
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
         // dd($co_borrower);
-
+        $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
+        $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
 
         $loan = Loan::create([
             'member_id'=>Auth::user()->id,
@@ -53,13 +58,25 @@ class LoanApplicationController extends Controller
             'member_id'=>$co_borrower->member->id,
             'loan_id'=>$loan->id,
         ]);
+
+        Witness::create([
+            'member_id'=>$witness_1->member->id,
+            'loan_id'=>$loan->id,
+        ]);
+
+        Witness::create([
+            'member_id'=>$witness_2->member->id,
+            'loan_id'=>$loan->id,
+        ]);
+
+
         return back()->with('message', 'Loan Application Request Sent!');
         // dd($formFields);
 
         // COBORROWER TABLE -----------
         // 'member_id',
         // 'loan_id',
-        // 'accept_request',
+        // 'accept_request',s
 
 
         // LOANS TABLE ----------------

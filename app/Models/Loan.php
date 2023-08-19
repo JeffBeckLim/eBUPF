@@ -36,7 +36,7 @@ class Loan extends Model
     //has many witness 
     public function witness()
     {
-        return $this->hasMany(Witness::class);
+        return $this->hasMany(Witness::class, 'loan_id', 'id');
     }
 
     // loan has many payments
