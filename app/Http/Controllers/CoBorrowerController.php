@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Campus;
 use App\Models\Loan;
 use App\Models\CoBorrower;
 use App\Models\Member;
+use App\Models\Witness;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,5 +45,18 @@ class CoBorrowerController extends Controller
 
       
         return view('member-views.coborrower-requests', compact('loans'));
+    }
+
+    public function showLoan($id){
+
+        $loan = Loan::with(['Member', 'Member.units.campuses'])->find($id);
+        $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
+        $witnesses=Witness::with('member')->where('loan_id', $id)->get();
+
+
+
+        // dd($witnesses[0]->member->firstname);
+
+        return view('member-views.loan-application-details', compact('loan', 'co_borrower', 'witnesses'));
     }
 }

@@ -36,7 +36,11 @@ Route::post('/member/mpl-application/', [LoanApplicationController::class, 'stor
 
 
 //show requests for co-borrer
-Route::get('/member/coBorrwer/requests', [CoBorrowerController::class, 'show']);
+Route::get('/member/coBorrwer/requests/', [CoBorrowerController::class, 'show']);
+
+
+Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
+
 
 //TESTING ===================================================================================================
 

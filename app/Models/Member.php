@@ -75,7 +75,7 @@ class Member extends Model
     //can be a witness many times
     public function witness()
     {
-        return $this->hasMany(Witness::class);
+        return $this->hasMany(Witness::class, 'member_id', 'id');
     }
     //can be a coBorrwer many times
     public function co_borrower()
