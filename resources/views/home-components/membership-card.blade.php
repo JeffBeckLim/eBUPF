@@ -18,10 +18,6 @@
                     <a style="color: #0092D1" class="btn btn-link text-start" href="">Please review the requirements and the instructions</a>
                 </div>
             </div>
-            <div>
-                <a href="{{ route('generateHousingLoanApplicationForm') }}">Here</a>
-            </div>
-
 
         </div>
         <div class="col-3 d-none d-md-block text-end  ">
