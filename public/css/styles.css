@@ -68,10 +68,12 @@ body {
 
 .bu-orange {
     background-color: #FF6F19 !important;
+    outline: 2px solid #FF6F19;
 }
 
 .bu-orange:hover {
     background-color: #ed600e !important;
+    outline: 2px solid #ed600e;
 }
 
 .bu-text-light-blue {
@@ -1065,7 +1067,7 @@ tbody tr:nth-child(odd) td {
     margin-bottom: 5px;
 }
 
-.modal {
+/* .modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -1075,7 +1077,7 @@ tbody tr:nth-child(odd) td {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
-}
+} btn-outline-bu2
 
 .modal-content {
     background-color: #fefefe;
@@ -1085,7 +1087,7 @@ tbody tr:nth-child(odd) td {
     transform: translate(-50%, -50%);
     width: 300px;
     height: 420px;
-}
+} */
 
 .admin-custom-select {
     background-color: #D9E4E9;

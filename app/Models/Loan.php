@@ -64,7 +64,7 @@ class Loan extends Model
 
     // belongs to a type of a loan
     public function LoanType(){
-        return $this->belongsTo(LoanType::class);
+        return $this->belongsTo(LoanType::class, 'loan_type_id', 'id');
     }
 
     public function loanApplicationStatus(){

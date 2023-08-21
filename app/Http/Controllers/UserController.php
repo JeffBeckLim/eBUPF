@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // TEST ROUTE ONLY----------------------------------------------------------------
     public function testRoute($id){
         $member_unit = Unit::with('campuses')->findOrFail($id);
 
@@ -24,7 +25,13 @@ class UserController extends Controller
         
         return view('test', compact('member_unit', 'beneficiaries'));
     }
+    
 
+    
+    public function testModal(){
+        return view('testModal');
+    }
+    // TEST ROUTE ONLY----------------------------------------------------------------
 
 
     // Show log in page
