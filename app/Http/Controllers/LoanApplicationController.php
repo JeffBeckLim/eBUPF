@@ -49,7 +49,7 @@ class LoanApplicationController extends Controller
 
         $loan = Loan::create([
             'member_id'=>Auth::user()->id,
-            // 'loan_type_id'=>1,
+            'loan_type_id'=>1,
             'principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
         ]);

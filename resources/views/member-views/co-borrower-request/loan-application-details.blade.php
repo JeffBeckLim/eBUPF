@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-6">
                             {{$loan->member->firstname}} 
-                            {{$loan->member->lastnames}}
+                            {{$loan->member->lastname}}
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                             <p class="appdetails-text">Amount Requested</p>
                         </div>
                         <div class="col-6">
-                            {{$loan->principal_amount}}
+                            <i>Php </i>{{number_format($loan->principal_amount, 2, '.',',')}}
                         </div>
                     </div>
                 </div>
@@ -106,8 +106,12 @@
                             <p class="appdetails-text">Witness 1</p>
                         </div>
                         <div class="col-6">
-                            {{$witnesses[0]->member->firstname}}
-                            {{$witnesses[0]->member->lastname}}
+                            @if (!empty($witnesses[0]))
+                                {{$witnesses[0]->member->firstname}}
+                                {{$witnesses[0]->member->lastname}} 
+                            @else
+                                <i>No Witness Included</i>   
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -117,8 +121,12 @@
                             <p class="appdetails-text">Witness 2</p>
                         </div>
                         <div class="col-6">
-                            {{$witnesses[1]->member->firstname}}
-                            {{$witnesses[1]->member->lastname}}
+                            @if (!empty($witnesses[1]))
+                                {{$witnesses[1]->member->firstname}}
+                                {{$witnesses[1]->member->lastname}}
+                            @else
+                                <i>No Witness Included</i>    
+                            @endif
                         </div>
                     </div>
                 </div>
