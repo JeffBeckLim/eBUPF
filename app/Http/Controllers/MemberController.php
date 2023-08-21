@@ -65,7 +65,7 @@ class MemberController extends Controller
         if($request->hasFile('profile_picture')) {
             $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
         }
-        
+
        for ($i = 0; $i < 5; $i++) {
         if (isset($beneficiaries[$i])) {
             $beneficiary = $beneficiaries[$i];
@@ -88,7 +88,7 @@ class MemberController extends Controller
         $member->update($formFields);
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Updated');
     }
-    
+
 
         //previous code-------------------------------------------------------------
         // if($beneficiaries[0]){
@@ -102,7 +102,7 @@ class MemberController extends Controller
         //     $beneficiaries[1]->birthday = $request->beneficiary_birthday1;
         //     $beneficiaries[1]->relationship = $request->beneficiary_relationship1;
         //     $beneficiaries[1]->save();
-        // }elseif($request->beneficiary1){ 
+        // }elseif($request->beneficiary1){
         //     Beneficiary::create([
         //         'member_id' => $member->id,
         //         'beneficiary_name' => $request['beneficiary1'],
@@ -117,7 +117,7 @@ class MemberController extends Controller
 
     public function membershipFormEditDownload(){
         return view('member-views.membership-form.membership-download-edit');
-    }   
+    }
 
     public function checkMembershipApplication($member_id){
         // dd($member_id);
@@ -151,7 +151,7 @@ class MemberController extends Controller
 
         //return view with units variable.
         $relationship_types = BeneficiaryRelationship::all();
-        
+
         $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
@@ -258,5 +258,9 @@ class MemberController extends Controller
 
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Created');
 
+    }
+
+    public function viewProfile(){
+        return view('member-views.profile');
     }
 }

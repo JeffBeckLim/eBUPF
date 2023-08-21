@@ -63,6 +63,9 @@ Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'
 //ADMIN-----------------------------------------------------------------------------------------------
 
 
+//Show Member Profile
+Route::get('/member/profile', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
+
 //create membership create form
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
@@ -85,11 +88,10 @@ Route::get('/member/membership-application/check/{member_id}', [MemberController
 Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
 
 //Generate MPL Application Form
-Route::get('/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
+Route::get('/member/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
 
 //Generate HSL Application Form
-Route::get('/generateHousingLoanApplicationForm',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
-
+Route::get('/member/generateHousingLoanApplicationForm',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
 
 // Show Home or Landing Page
 Route::get('/', function () {

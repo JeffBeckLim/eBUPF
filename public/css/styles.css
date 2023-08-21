@@ -158,20 +158,22 @@ label {
 
 input.invalid {
     background-color: #ffdddd;
-       
 }
+
+
 /* Apply styles to the checkbox when it's invalid */
+
 .checkbox-input.invalid {
     background-color: #ffdddd;
 }
 
+
 /* Darken the checkmark color when checkbox is invalid */
+
 .checkbox-input.invalid:checked {
     outline: 1.1px solid #ffffff !important;
-   background-color: #0d6efd !important;
-  
+    background-color: #0d6efd !important;
 }
-
 
 
 /* Hide all steps by default: */
@@ -428,13 +430,15 @@ input.invalid {
     margin-top: 7px;
     padding-bottom: 2px; */
 }
-.login-button:hover{
+
+.login-button:hover {
     background-color: #016793;
     border: none;
     color: white;
     /* border-radius: 20px;
     /* margin-top: 7px;
-    padding-bottom: 2px; */ */
+    padding-bottom: 2px; */
+    */
 }
 
 .navbar-toggler-icon-custom {
@@ -1112,4 +1116,84 @@ tbody tr:nth-child(odd) td {
     font-size: 1.1rem;
     color: #00638D;
     font-weight: 600;
+}
+
+
+/* User Profile */
+
+.profile-note {
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: #E6F9FF;
+    font-size: 12px;
+}
+
+.profile-tag {
+    margin-top: 20px;
+}
+
+.profile-tag img {
+    border-radius: 20px;
+}
+
+.profile-tag {
+    position: relative;
+}
+
+.profile-picture {
+    position: absolute;
+    top: 50%;
+    left: 13%;
+    width: 120px;
+    transform: translate(-50%, -50%);
+}
+
+.profile-tag-details img {
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 4px solid #ffffff;
+}
+
+.profile-name {
+    position: absolute;
+    top: 28%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: auto;
+    left: 21%;
+}
+
+.profile-edit-button {
+    position: absolute;
+    top: 24%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: auto;
+    left: 38%;
+}
+
+.profile-position {
+    position: absolute;
+    top: 48%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: auto;
+    left: 21%;
+}
+
+.profile-college {
+    position: absolute;
+    top: 60%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: auto;
+    left: 21%;
 }
