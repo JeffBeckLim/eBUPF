@@ -135,6 +135,9 @@ class MemberController extends Controller
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
+        $units = collect($units)->sortBy('unit_code')->values()->all();
+
+
         //return view with units variable.
         $relationship_types = BeneficiaryRelationship::all();
 

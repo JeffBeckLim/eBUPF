@@ -35,16 +35,16 @@ class CoBorrowerController extends Controller
 
             $loanIds = $requests->pluck('loan.id')->toArray();
 
-            $loans = Loan::with(['Member', 'Member.units'])
+            $loans = Loan::with(['Member', 'Member.units', 'LoanType'])
                 ->whereIn('id', $loanIds)
                 ->get();
             
         }
-
-        // $requests = CoBorrower::with('Loan', 'member')->where('member_id', Auth::user()->member->id)->get();
-
+        // dd($loans[0]->loanType);
+        // SORT LOANS FROM THE LATEST TO THE OLDEST
+        $loans = collect($loans)->sortByDesc('created_at')->values()->all();
       
-        return view('member-views.coborrower-requests', compact('loans'));
+        return view('member-views.co-borrower-request.coborrower-requests', compact('loans'));
     }
 
     public function showLoan($id){
@@ -52,11 +52,8 @@ class CoBorrowerController extends Controller
         $loan = Loan::with(['Member', 'Member.units.campuses'])->find($id);
         $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
         $witnesses=Witness::with('member')->where('loan_id', $id)->get();
+        
 
-
-
-        // dd($witnesses[0]->member->firstname);
-
-        return view('member-views.loan-application-details', compact('loan', 'co_borrower', 'witnesses'));
+        return view('member-views.co-borrower-request.loan-application-details', compact('loan', 'co_borrower', 'witnesses'));
     }
 }

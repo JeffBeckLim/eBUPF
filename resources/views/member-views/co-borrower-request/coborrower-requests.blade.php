@@ -59,7 +59,10 @@
                                         <td> 
                                             <div class="">
                                                 {{-- Di pa nagagawan ang Loan Type --}}
-                                                <p class="fs-7 fw-bold mb-0">Multi-Purpose Loan</p>
+                                                <p class="fs-7 fw-bold mb-0">{{$loan->loanType->loan_type_name}} 
+                                                
+                                                <span class="fw-light"> {{$loan->loanType->loan_type_description}}</span>
+                                                </p>
                                                 <p class="fs-7 mb-0">Php {{number_format($loan->principal_amount, 2, '.',',')}}</p>
                                                 <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($loan->created_at))}}</p>
                                             </div>
@@ -82,11 +85,17 @@
                                         <td>
                                             <div class=" g-0 row d-flex justify-content-center align-items-center">
                                                 <div class="p-1 col-lg-6 col-md-12  col-sm-12" >
-                                                    <a href="#" type="button" class=" btn bn-block bu-orange w-100 fs-7 text-light fw-bold" style="border-radius: 10px;">Accept</a>
+                                                    <a href="#" type="button" class=" btn bu-orange w-100 fs-7 text-light fw-bold" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModal{{$loan->id}}">Accept</a>
                                                 </div>
+                                                {{-- MODAL CONFIRMATION ACCEPT --}}
+                                                @include('member-views.co-borrower-request.modal-accept')
+
                                                 <div class="p-1 col-lg-6 col-md-12 col-sm-12 ">
-                                                    <a href="#" type="button" class="btn btn-block btn-outline-bu2 w-100 fs-7 fw-bold" style="border-radius: 10px;">Deny</a>
+                                                    <a href="#" type="button" class="btn btn-outline-bu2 w-100 fs-7 fw-bold" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModalDecline{{$loan->id}}">Decline</a>
                                                 </div>
+                                                {{-- MODAL CONFIRMATION ACCEPT --}}
+                                                @include('member-views.co-borrower-request.modal-decline')
+                                                
                                             </div>
                                         </td>
                                         <td style="width: 4rem;" class="text-center">
@@ -94,6 +103,8 @@
                                         </td>
                                         
                                     </tr>     
+
+                                         
                             @endforeach     
                         </tbody>
                     </table>
