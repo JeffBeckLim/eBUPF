@@ -2,6 +2,7 @@
     <div class="modal-dialog  border-0 ">
       <div class="modal-content">
         <div class="modal-header  border-0 p-3">
+            <p class="text-secondary" style="font-size: small">Reference ID: {{$loan->id}}</p>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body border-0 px-5 pt-0 text-center">
@@ -16,7 +17,7 @@
                     <button type="button" class="btn w-100 btn-outline-bu2" data-bs-dismiss="modal">Close, go back</button>
                 </div>
                 <div class="col-6  p-1">
-                    <a href="#"><button type="button" class="btn  w-100 bu-orange text-light">Yes, accept request</button></a>
+                    <a href="/member/coBorrower/accept/{{$loan->id}}"><button type="button" class="btn  w-100 bu-orange text-light">Yes, accept request</button></a>
                 </div>
             </div> 
         

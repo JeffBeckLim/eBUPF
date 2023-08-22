@@ -22,25 +22,25 @@ class CoBorrowerController extends Controller
         // intialize the array, this will store the loan associated with the Principal Borrowers data
         $loans=[];
         if(count($requests) != 0){   
-            // foreach($requests as $request){
+            $loanIds = $requests->pluck('loan.id')->toArray();   
+            $loans = CoBorrower::with(['Member', 'Member.units.campuses', 'Loan.LoanType', 'Loan.Member.units.campuses',])
+                ->whereIn('id', $loanIds)->get();
 
-            //     // get the loans of the Co-borrower and the Principal Borrowers Details
-            //     $temp = Loan::with('Member')->where('id', $request->loan->id)->get();
+                   // $loans = Loan::with(['Member', 'Member.units', 'LoanType'])
+                    //     ->whereIn('id', $loanIds)
+                    //     ->get();
 
-            //     // Eager loading units  
-            //     $temp[0]->Member->load('units');
-                
-            //     array_push($loans, $temp);
-            // }
+                        // foreach($requests as $request){
 
-            $loanIds = $requests->pluck('loan.id')->toArray();
+                    //     // get the loans of the Co-borrower and the Principal Borrowers Details
+                    //     $temp = Loan::with('Member')->where('id', $request->loan->id)->get();
 
-            $loans = Loan::with(['Member', 'Member.units', 'LoanType'])
-                ->whereIn('id', $loanIds)
-                ->get();
-            
+                    //     // Eager loading units  
+                    //     $temp[0]->Member->load('units');
+                        
+                    //     array_push($loans, $temp);
+                    // }
         }
-        // dd($loans[0]->loanType);
         // SORT LOANS FROM THE LATEST TO THE OLDEST
         $loans = collect($loans)->sortByDesc('created_at')->values()->all();
       
@@ -49,11 +49,40 @@ class CoBorrowerController extends Controller
 
     public function showLoan($id){
 
-        $loan = Loan::with(['Member', 'Member.units.campuses'])->find($id);
+        $loan = Loan::with(['Member', 'Member.units.campuses','LoanType'])->find($id);
         $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
         $witnesses=Witness::with('member')->where('loan_id', $id)->get();
-        
 
         return view('member-views.co-borrower-request.loan-application-details', compact('loan', 'co_borrower', 'witnesses'));
+    }
+
+    public function requestAccept($id){
+        
+        $coBorrower=CoBorrower::findorfail($id);
+        if($coBorrower->accept_request == '1'){
+            return redirect('/member/coBorrwer/requests/')->with('message', 'You have already accepted this request');    
+        }
+        else{
+            $coBorrower->update(['accept_request' => '1']);
+        
+            return redirect('/member/coBorrwer/requests/')->with('message', 'Request accepted! The form is now available for the borrower ready for printing and signing');
+        }
+        // dd($coBorrower);
+
+    }
+    public function requestDecline($id){
+        // $coBorrower=CoBorrower::findorfail($id);
+        // $coBorrower->update(['accept_request' => '0']);
+        // dd($coBorrower);
+
+        $coBorrower=CoBorrower::findorfail($id);
+        if($coBorrower->accept_request == '0'){
+            return redirect('/member/coBorrwer/requests/')->with('message', 'You have already declined this request');    
+        }
+        else{
+            $coBorrower->update(['accept_request' => '0']);
+        
+            return redirect('/member/coBorrwer/requests/')->with('message', 'Request Declined');
+        }
     }
 }

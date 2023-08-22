@@ -16,7 +16,7 @@
                     <button type="button" class="btn w-100 btn-outline-bu2" data-bs-dismiss="modal">Close, go back</button>
                 </div>
                 <div class="col-6  p-1">
-                    <a href="#"><button type="button" class="btn  w-100 btn-danger">Yes, deny request</button></a>
+                    <a href="/member/coBorrower/decline/{{$loan->id}}"><button type="button" class="btn  w-100 btn-danger">Yes, deny request</button></a>
                 </div>
             </div> 
         
