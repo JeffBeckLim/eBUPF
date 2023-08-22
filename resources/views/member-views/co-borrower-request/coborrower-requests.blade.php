@@ -5,9 +5,15 @@
 <main>
     
         <div class=" ms-4 mt-2 d-flex justify-content-center">
-            <div class="bg-white border rounded p-4 col-lg-9">
+            <div class="bg-white p-4 col-lg-9">
                 <div class="row">
                     <div class="col-12">
+                        @if(session('message'))
+                        <div style="background-color: rgb(255, 231, 200) " class="alert border alert-dismissible fade show" role="alert">
+                            {{session('message')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
                         <p class="fs-4 fw-bold pt-2">Incoming Requests</p>
                         <div class="accordion mb-3" id="accordionExample">
                             <div class="accordion-item border-0">
@@ -41,7 +47,7 @@
                 </div>
                 {{-- CHECK IF THEIR ARE CB REQUEST --}}
                 @if ($loans)
-                    <table class="table table-hover mt-4 border" style=" background-color: white;">
+                    <table class="table table-hover mt-4" style=" background-color: white;">
                         <thead>
                             <tr>
                                 <th class="text-center"  scope="col">Loan</th>
@@ -59,39 +65,39 @@
                                         <td> 
                                             <div class="">
                                                 {{-- Di pa nagagawan ang Loan Type --}}
-                                                <p class="fs-7 fw-bold mb-0">{{$loan->loanType->loan_type_name}} 
+                                                <p class="fs-7 fw-bold mb-0">{{$loan->loan->loanType->loan_type_name}} 
                                                 
-                                                <span class="fw-light"> {{$loan->loanType->loan_type_description}}</span>
+                                                <span class="fw-light"> {{$loan->loan->loanType->loan_type_description}}</span>
                                                 </p>
-                                                <p class="fs-7 mb-0">Php {{number_format($loan->principal_amount, 2, '.',',')}}</p>
-                                                <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($loan->created_at))}}</p>
+                                                <p class="fs-7 mb-0">Php {{number_format($loan->loan->principal_amount, 2, '.',',')}}</p>
+                                                <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="row">
 
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
-                                                    <img src="{{asset('assets/hooman.png')}}" alt="default picture" width="40px" class="img-fluid rounded-circle">
+                                                    <img src="{{asset($loan->loan->member->profile_picutre)}}" alt="null" width="40px" class="img-fluid rounded-circle">
                                                 </div>
                                                 <div class="col">
-                                                    <p class="mb-0 fs-7 fw-bold">{{$loan->member->firstname}} {{$loan->member->lastname}}</p>
-                                                    <p class="mb-0 fs-7">{{($loan->member->units->unit_code)}}</p>
-                                                    <p class="fs-7">ID: {{$loan->id}}</p>
+                                                    <p class="mb-0 fs-7 fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>
+                                                    <p class="mb-0 fs-7">{{($loan->loan->member->units->unit_code)}}</p>
+                                                    <p class="fs-7">ID: {{$loan->loan->id}}</p>
                                                 </div>
                                             
                                             </div>
             
                                         </td>
-                                        <td>
+                                        <td class="border border-danger">
                                             <div class=" g-0 row d-flex justify-content-center align-items-center">
                                                 <div class="p-1 col-lg-6 col-md-12  col-sm-12" >
-                                                    <a href="#" type="button" class=" btn bu-orange w-100 fs-7 text-light fw-bold" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModal{{$loan->id}}">Accept</a>
+                                                    <a href="#" type="button" class=" btn bu-orange w-100 fs-7 text-light fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModal{{$loan->loan->id}}">Accept</a>
                                                 </div>
                                                 {{-- MODAL CONFIRMATION ACCEPT --}}
                                                 @include('member-views.co-borrower-request.modal-accept')
 
                                                 <div class="p-1 col-lg-6 col-md-12 col-sm-12 ">
-                                                    <a href="#" type="button" class="btn btn-outline-bu2 w-100 fs-7 fw-bold" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModalDecline{{$loan->id}}">Decline</a>
+                                                    <a href="#" type="button" class="btn btn-outline-bu2 w-100 fs-7 fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModalDecline{{$loan->loan->id}}">Decline</a>
                                                 </div>
                                                 {{-- MODAL CONFIRMATION ACCEPT --}}
                                                 @include('member-views.co-borrower-request.modal-decline')
@@ -99,7 +105,7 @@
                                             </div>
                                         </td>
                                         <td style="width: 4rem;" class="text-center">
-                                            <a href="/member/loan-application-details/{{$loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                            <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                         </td>
                                         
                                     </tr>     

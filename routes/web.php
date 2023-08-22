@@ -29,18 +29,22 @@ use App\Http\Controllers\LoanApplicationController;
 Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 Route::get('/test-modal', [UserController::class, 'testModal']);
 
+
+
 //show mpl applicaiton
 Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only
-
 //create mpl application and Co-Borrower request
 Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
 
 //show requests for co-borrer
 Route::get('/member/coBorrwer/requests/', [CoBorrowerController::class, 'show']);
-
 // show loan application details of the principal borrower
 Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
+//update accept request coborrower
+Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept']);
+//update decline request coborrower
+Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
 
 
 //TESTING ===================================================================================================
