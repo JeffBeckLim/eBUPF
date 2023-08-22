@@ -14,10 +14,10 @@
             <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" height="190px" width="100%">
 
             <div class="profile-tag-details">
-                <img src="{{ asset('assets/hooman.png') }}" alt="profile picture" class="profile-picture">
-                <p class="profile-name"><span>Maxima Minima </span><a href=""><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a></p>
-                <p class="profile-position"><i class="bi bi-person-fill"></i> &nbsp;Faculty</p>
-                <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;Bicol University College of Science</p>
+                <img src="{{ asset('storage/' . $member->profile_picture) }}" alt="profile picture" class="profile-picture" width="100" height="120">
+                <p class="profile-name"><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}&nbsp;</span><a href=""><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a></p>
+                <p class="profile-position"><i class="bi bi-person-fill"></i> &nbsp;{{ ucfirst($member->position) }}</p>
+                <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>
         </div>
 
@@ -29,13 +29,19 @@
                 </div>
 
                 <div style="margin: 15px 10px; ">
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Campus :</span> Main</p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Unit :</span> BUCS</p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Position :</span> Faculty</p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Employee No. :</span> 7845-5648-5648</p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Date Appointed at BU :</span> 2020-12-21</p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Member Status :</span> <span class="fw-bold" style="color: #00954D;">Active</span></p>
-                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Approved Date :</span> <span class="fw-bold" style="color: #00145B;">2020-12-21</span></p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Campus :</span> {{$campus->campus_code}}&nbsp;Campus</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Unit :</span> BU{{$unit->unit_code}}</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Position :</span> {{ ucfirst($member->position) }}</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Employee No. :</span> {{ $member->employee_num }}</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Date Appointed at BU :</span> {{ \Carbon\Carbon::createFromFormat('Y-m-d', $member->bu_appointment_date)->format('F j, Y') }}</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Member Status :</span> <span class="fw-bold"  style="color: {{ $member->disabled_at ? 'red' : 'green' }}">{{ $member->disabled_at ? 'Inactive' : 'Active' }}</span></p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Approved Date :</span> <span class="fw-bold" style="color: #00145B;">
+                        @if ($member->verified_at)
+                        {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $member->verified_at)->startOfDay()->format('F j, Y') }}
+                        @else
+                        Not verified
+                    @endif
+                    </span></p>
 
                     <div class="d-flex justify-content-center align-items-center">
                         <button style="background-color: #FF6F19; border-radius: 10px; padding: 4px 7px; border: 1px solid white; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);">
@@ -55,44 +61,44 @@
                         <p><span class="fw-bold">Name :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>Maxima X. Minima</span></p>
+                        <p><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}</span></p>
                     </div>
 
                     <div class="col-5">
                         <p><span class="fw-bold">Email :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>m****************a@bicol-u.edu.ph</span></p>
+                        <p><span>{{ substr($user->email, 0, 1) . str_repeat('*', strpos($user->email, '@') - 2) . substr($user->email, strpos($user->email, '@') - 1) }}</span></p>
                     </div>
                     <div class="col-5">
                         <p><span class="fw-bold">Address :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>Punta Batsan, cawayan, Masbate</span></p>
+                        <p><span>{{ $member->address }}</span></p>
                     </div>
                     <div class="col-5">
                         <p><span class="fw-bold">Contact Number :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>*********911</span></p>
+                        <p><span>{{ str_repeat('*', strlen($member->contact_num) - 3) . substr($member->contact_num, -3) }}</span></p>
                     </div>
                     <div class="col-5">
                         <p><span class="fw-bold">Sex :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>Male</span></p>
+                        <p><span>{{ $member->sex }}</span></p>
                     </div>
                     <div class="col-5">
                         <p><span class="fw-bold">Tin :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>784598568455</span></p>
+                        <p><span>{{ $member->tin_num }}</span></p>
                     </div>
                     <div class="col-5">
                         <p><span class="fw-bold">Birthdate :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>2021-11-27</span></p>
+                        <p><span>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $member->date_of_birth)->format('F j, Y') }}</span></p>
                     </div>
                 </div>
             </div>

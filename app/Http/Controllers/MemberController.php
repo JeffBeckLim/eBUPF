@@ -260,7 +260,17 @@ class MemberController extends Controller
 
     }
 
-    public function viewProfile(){
-        return view('member-views.profile');
+    public function viewProfile($id){
+        $user = User::find($id);
+        $member = Member::where('user_id', $id)->first();
+        $unit = Unit::where('id', $member->unit_id)->first();
+        $campus = Campus::where('id', $unit->campus_id)->first();
+
+        return view('member-views.profile', [
+            'user' => $user,
+            'member' => $member,
+            'unit'  => $unit,
+            'campus' => $campus,
+        ]);
     }
 }
