@@ -11,14 +11,23 @@ use Illuminate\Support\Facades\Auth;
 
 class LoanApplicationController extends Controller
 {
-    //
+    //SHOW MPL APPLICATION FORM
     public function show(){
-
-        $users = User::with('member')->get();
-
-        return view('member-views.mpl-application-form.mpl-application-form', compact('users'));
+        return view('member-views.mpl-application-form.mpl-application-form');
     }
+
+    // VALIDATE AND STORE LOAN APPLICATION
     public function storeRequest(Request $request){
+
+        $formFields = $request->validate([
+            'email_co_borrower' => 'required|email|exists:users,email',
+            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+            'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
+            
+            'email_witness_1'=> 'required|email|exists:users,email',
+            'email_witness_2'=> 'required|email|exists:users,email',
+        ]);
+        
         // check if the email inputs are the same with the User's logged in email
         // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY 
         // -- WITH THE LOGGED IN EMAIL
@@ -29,23 +38,21 @@ class LoanApplicationController extends Controller
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
-            if($request->email_witness_1 == $request->email_witness_2){
-                return back()->with('email_error', 'Make sure witness emails are unique');
-            }
+        if($request->email_witness_1 == $request->email_witness_2){
+            return back()->with('email_error', 'Make sure witness emails are unique');
+        }
 
-
-        $formFields = $request->validate([
-            'email_co_borrower' => 'required|email|exists:users,email',
-            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
-            'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-            
-            'email_witness_1'=> 'required|email|exists:users,email',
-            'email_witness_2'=> 'required|email|exists:users,email',
-        ]);
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
-        // dd($co_borrower);
         $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
         $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
+
+        if(
+            !$co_borrower->member->verified_at
+            || !$witness_1->member->verified_at
+            || !$witness_2->member->verified_at
+        ){
+            return back()->with('email_error', 'Make sure that all emails are from verified eBUPF members');
+        }
 
         $loan = Loan::create([
             'member_id'=>Auth::user()->id,

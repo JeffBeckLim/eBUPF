@@ -32,6 +32,8 @@ return new class extends Migration
 
             $table->integer('is_visible')->nullable();
             $table->integer('is_approved')->nullable();
+
+            $table->timestamp('is_viewed')->nullable();
             // campus_id_index not added 
             // units_id_index not added 
         });

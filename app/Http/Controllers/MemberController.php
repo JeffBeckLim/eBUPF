@@ -119,16 +119,6 @@ class MemberController extends Controller
         return view('member-views.membership-form.membership-download-edit');
     }
 
-    public function checkMembershipApplication($member_id){
-        // dd($member_id);
-         $member = MembershipApplication::find($member_id);
-         if(!$member){
-            return redirect('/member/membership-form');
-         }
-         else{
-            return redirect('/member/membership-form/edit-download');
-         }
-    }
 
     //show membership form
     public function membershipForm(){
@@ -273,4 +263,15 @@ class MemberController extends Controller
             'campus' => $campus,
         ]);
     }
+
+    public function checkMembershipApplication($member_id){
+         $member = MembershipApplication::where('member_id', $member_id);
+         if(!$member){
+            return redirect('/member/membership-form');
+         }
+         else{
+            return redirect('/member/membership-form/edit-download');
+         }
+    }
+
 }

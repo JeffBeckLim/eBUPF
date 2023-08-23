@@ -23,6 +23,7 @@ class CoBorrowerController extends Controller
         $loans=[];
         if(count($requests) != 0){   
             $loanIds = $requests->pluck('loan.id')->toArray();   
+            // Hindi man ata to nagagamit na Member, and Member.units.campuses data
             $loans = CoBorrower::with(['Member', 'Member.units.campuses', 'Loan.LoanType', 'Loan.Member.units.campuses',])
                 ->whereIn('id', $loanIds)->get();
 
