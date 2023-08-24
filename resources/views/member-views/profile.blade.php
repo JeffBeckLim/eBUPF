@@ -45,7 +45,7 @@
 
                     <div class="d-flex justify-content-center align-items-center">
                         <button class="download-membership-pdf-profile">
-                            <a href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}" class="pdf-membership-download-link fw-bold fs-7">Download Membership Form</a>
+                            <a href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}" class="pdf-membership-download-link fw-bold fs-7 text-white">Download Membership Form</a>
                         </button>
                     </div>
                 </div>
@@ -108,10 +108,47 @@
 
     <div id="profileMyModal" class="profile-modal">
         <div class="profile-modal-content">
-          <span class="profile-close">&times;</span>
-          <p>Update Profile</p>
-          <p>ashuja</p>
-          <p>aohsjakms </p>
+            <span class="profile-close">&times;</span>
+            <p class="modal-profile-text">Update Profile</p>
+            <form action="" id="profile-update-form" method="POST">
+                @csrf
+                <div>
+                    <img src="" alt="">
+                </div>
+                <div class="form-group">
+                    <label for="campus-unit">Campus & Unit</label>
+                    <select name="unit_id" class="form-select form-control validate" >
+                        <option class="text-secondary" value="" selected disabled>{{$unit->unit_code}} : {{$campus->campus_code}}</option>
+
+                        @foreach ($units as $unit)
+                            <option value="{{$unit->id}}"  {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+
+                  <div class="form-group">
+                    <label for="position">Position</label>
+                    <input type="text" class="form-control" id="position" value="{{ $member->position }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="position">Email</label>
+                    <input type="email" class="form-control" id="email" value="{{ $user->email }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-number">Contact Number</label>
+                    <input type="text" class="form-control" id="contact-number" value="{{ $member->position }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" value="{{ $member->position }}">
+                  </div>
+
+                  <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
+                        <button type="" id="modal-profile-close-button" class="btn modal-profile-close">Close</button>
+                        <button type="submit" class="btn modal-profile-submit">Update Profile</button>
+                  </div>
+            </form>
         </div>
       </div>
 </main>

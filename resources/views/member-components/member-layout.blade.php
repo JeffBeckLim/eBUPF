@@ -45,8 +45,12 @@
     };
 
     var closeBtn = document.getElementsByClassName("profile-close")[0];
+    var modalCloseBtn = document.getElementsByClassName("modal-profile-close")[0];
 
     closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+    modalCloseBtn.onclick = function () {
         modal.style.display = "none";
     };
 
@@ -55,6 +59,7 @@
             modal.style.display = "none";
         }
     };
+
 </script>
 </body>
 

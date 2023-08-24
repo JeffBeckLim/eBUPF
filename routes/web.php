@@ -68,7 +68,9 @@ Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'
 
 
 //Show Member Profile
-Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
+Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access')->name('member.profile');
+//Update Profile
+Route::post('/member/profile/edit/{id}', [MemberController::class, 'profileUpdate'])->middleware('auth','member.access')->name('member.profile.edit');
 
 //create membership create form
 Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
