@@ -20,6 +20,7 @@ class Loan extends Model
         'term_years',
         'is_visible',
         'is_approved',
+        'is_viewed',
     ];
     //belongs to one member
     public function member()

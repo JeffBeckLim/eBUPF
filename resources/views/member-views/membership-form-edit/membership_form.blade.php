@@ -7,7 +7,7 @@
     }
 </style>
 <main class="container">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center ">
         <div class="col-lg-5 col-sm-12 col-md-8 card px-4 pt-3 pb-1 mt-2 mb-5" >
 
             <!-- CAPSULE -->
@@ -20,7 +20,7 @@
             </div> --}}
             <!-- CAPSULE -->
 
-            <div class="row justify-content-center pb-1 pt-3">
+            <div class="row justify-content-center pb-1 pt-3 " >
                 <div class="col-lg-10 col-md-9 col-sm-9 ">
                     <div class="row ">
                         <div class="col-2 ">

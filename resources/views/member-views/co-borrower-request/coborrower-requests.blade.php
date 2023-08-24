@@ -63,8 +63,11 @@
                             @foreach ($loans as $loan)
                                     <tr class="align-middle">
                                         <td> 
-                                            <div class="">
-                                                {{-- Di pa nagagawan ang Loan Type --}}
+                                            <div>
+                                                @if (is_null($loan->loan->is_viewed))
+                                                    <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>    
+                                                @endif
+                                                
                                                 <p class="fs-7 fw-bold mb-0">{{$loan->loan->loanType->loan_type_name}} 
                                                 
                                                 <span class="fw-light"> {{$loan->loan->loanType->loan_type_description}}</span>
@@ -74,10 +77,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="row">
+                                            <div class="row  g-0">
 
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
-                                                    <img src="{{asset($loan->loan->member->profile_picutre)}}" alt="null" width="40px" class="img-fluid rounded-circle">
+                                                    <img src="{{asset('storage/'.$loan->loan->member->profile_picture)}}" alt="null" style="width: 3rem; height: 3rem; object-fit: cover;" class="img-fluid rounded-circle">
                                                 </div>
                                                 <div class="col">
                                                     <p class="mb-0 fs-7 fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>

@@ -27,8 +27,6 @@
                     </div>
                 </div>
             </li>
-
-
             <li class="nav-item  py-3 grow-on-hover">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
@@ -62,7 +60,7 @@
                 </div>
             </li>
 
-
+            {{-- <a class="text-decoration-none" href="/member/coBorrwer/requests/"> --}}
             <li class="nav-item  py-3 grow-on-hover">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
@@ -73,6 +71,7 @@
                     </div>
                 </div>
             </li>
+            {{-- </a> --}}
 
             <li class="nav-item  py-3 grow-on-hover">
                 <div class="row g-0">

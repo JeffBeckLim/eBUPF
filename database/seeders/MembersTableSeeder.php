@@ -64,6 +64,7 @@ class MembersTableSeeder extends Seeder
             'contact_num'=> '',
 
             'address'=> 'New York',
+            'verified_at'=>now(),
         ]);
         Member::create([
             'user_id' => $user2->id,
@@ -76,6 +77,7 @@ class MembersTableSeeder extends Seeder
             'middle_initial'=> 'M',
 
             'address'=> 'Liverpool England',
+            'verified_at'=>now(),
         ]);
 
         Member::create([
@@ -89,6 +91,7 @@ class MembersTableSeeder extends Seeder
             'middle_initial'=> 'L',
 
             'address'=> 'Huston Texas',
+            'verified_at'=>now(),
         ]);
 
         Member::create([
@@ -102,6 +105,7 @@ class MembersTableSeeder extends Seeder
             'middle_initial'=> 'F',
 
             'address'=> 'Mars',
+            'verified_at'=>now(),
         ]);
         Member::create([
             'user_id' => $user5->id,
@@ -114,6 +118,7 @@ class MembersTableSeeder extends Seeder
             'middle_initial'=> 'S',
 
             'address'=> 'Yellow Brick Road',
+            'verified_at'=>now(),
         ]);
     }
 }
