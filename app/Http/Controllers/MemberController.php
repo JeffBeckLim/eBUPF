@@ -265,8 +265,8 @@ class MemberController extends Controller
     }
 
     public function checkMembershipApplication($member_id){
-         $member = MembershipApplication::where('member_id', $member_id);
-         if(!$member){
+         $member = MembershipApplication::where('member_id', $member_id)->get();
+         if(count($member)===0){
             return redirect('/member/membership-form');
          }
          else{
