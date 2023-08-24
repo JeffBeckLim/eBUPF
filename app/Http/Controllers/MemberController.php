@@ -89,7 +89,8 @@ class MemberController extends Controller
         }
 
         $member->update($formFields);
-        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Updated');
+
+        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Saved');
     }
 
 
@@ -114,7 +115,7 @@ class MemberController extends Controller
         return view('member-views.membership-form.membership_form', compact('units', 'relationship_types'));
     }
 
-    //return form view for editing membership
+    //SHOW form view for editing membership
     public function membershipFormEdit(){
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
@@ -226,7 +227,7 @@ class MemberController extends Controller
         }
 
 
-        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Created');
+        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Form Updated');
 
     }
 

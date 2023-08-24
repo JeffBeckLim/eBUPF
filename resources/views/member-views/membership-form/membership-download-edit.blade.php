@@ -10,8 +10,12 @@
 <main class="container mt-2 ">
     <div class="row d-flex justify-content-center mb-5">
         <div class="col-lg-5 col-sm-12 col-md-8 card shadow-sm p-4 ">
-
-
+            @if(session('message'))
+                <div class="alert alert-primary border-0 alert-dismissible fade show" role="alert">
+                    <i class="bi bi-box-arrow-down"></i> {{session('message')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
             <div class="row justify-content-center pt-3 pb-4 ">
                 <div class="col-lg-7 col-md-9 col-sm-9 ">
                     <h5 class="text-center fw-bold fs-5">Provident  Fund, Inc. Membership Form</h5>
