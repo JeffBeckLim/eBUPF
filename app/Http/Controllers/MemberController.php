@@ -66,13 +66,15 @@ class MemberController extends Controller
             $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
         }
 
+    
        for ($i = 0; $i < 5; $i++) {
         if (isset($beneficiaries[$i])) {
             $beneficiary = $beneficiaries[$i];
         } else if ($request->filled("beneficiary{$i}")) {
             $beneficiary = new Beneficiary();
             $beneficiary->member_id = $member->id;
-        } else {
+        } 
+        else {
             continue; // Skip iteration if no beneficiary data present
         }
         if($request->input("beneficiary{$i}")){
@@ -84,32 +86,11 @@ class MemberController extends Controller
         else{
             return redirect()->back()->with('error', 'Please provide names for all beneficiaries. If not, the other fields will be cleared.');
         }
+        }
 
         $member->update($formFields);
-        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Updated');
-    }
 
-
-        //previous code-------------------------------------------------------------
-        // if($beneficiaries[0]){
-        //     $beneficiaries[0]->beneficiary_name = $request->beneficiary0;
-        //     $beneficiaries[0]->birthday = $request->beneficiary_birthday0;
-        //     $beneficiaries[0]->relationship = $request->beneficiary_relationship0;
-        //     $beneficiaries[0]->save();
-        // }
-        // if(isset($beneficiaries[1])){
-        //     $beneficiaries[1]->beneficiary_name = $request->beneficiary1;
-        //     $beneficiaries[1]->birthday = $request->beneficiary_birthday1;
-        //     $beneficiaries[1]->relationship = $request->beneficiary_relationship1;
-        //     $beneficiaries[1]->save();
-        // }elseif($request->beneficiary1){
-        //     Beneficiary::create([
-        //         'member_id' => $member->id,
-        //         'beneficiary_name' => $request['beneficiary1'],
-        //         'birthday' => $request['beneficiary_birthday1'],
-        //         'relationship' => $request['beneficiary_relationship1'],
-        //     ]);
-        // }
+        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Saved');
     }
 
 
@@ -134,7 +115,7 @@ class MemberController extends Controller
         return view('member-views.membership-form.membership_form', compact('units', 'relationship_types'));
     }
 
-    //return form view for editing membership
+    //SHOW form view for editing membership
     public function membershipFormEdit(){
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
@@ -246,7 +227,7 @@ class MemberController extends Controller
         }
 
 
-        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Created');
+        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Form Updated');
 
     }
 
@@ -265,8 +246,8 @@ class MemberController extends Controller
     }
 
     public function checkMembershipApplication($member_id){
-         $member = MembershipApplication::where('member_id', $member_id);
-         if(!$member){
+         $member = MembershipApplication::where('member_id', $member_id)->get();
+         if(count($member)===0){
             return redirect('/member/membership-form');
          }
          else{
