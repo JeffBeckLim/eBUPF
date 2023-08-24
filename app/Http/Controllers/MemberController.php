@@ -71,14 +71,8 @@ class MemberController extends Controller
         if (isset($beneficiaries[$i])) {
             $beneficiary = $beneficiaries[$i];
         } else if ($request->filled("beneficiary{$i}")) {
-            // $beneficiary = new Beneficiary();
-            // $beneficiary->member_id = $member->id;
-            Beneficiary::create([
-                'member_id' => $member->id,
-                'beneficiary_name' => $request["beneficiary{$i}"],
-                'birthday' => $request["beneficiary_birthday{$i}"],
-                'relationship' => $request["beneficiary_relationship{$i}"],
-            ]);
+            $beneficiary = new Beneficiary();
+            $beneficiary->member_id = $member->id;
         } 
         else {
             continue; // Skip iteration if no beneficiary data present
