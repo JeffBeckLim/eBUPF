@@ -43,8 +43,31 @@
 
     </div>
 
+<script>
+    var modal = document.getElementById("profileMyModal");
+    var link = document.getElementById("profileOpenModalLink");
 
+    link.onclick = function () {
+        modal.style.display = "block";
+    };
 
+    var closeBtn = document.getElementsByClassName("profile-close")[0];
+    var modalCloseBtn = document.getElementsByClassName("modal-profile-close")[0];
+
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+    modalCloseBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+</script>
 </body>
 
 </html>

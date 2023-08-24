@@ -1,7 +1,7 @@
 <div class="row">
 
     <!-- Placeholder to prevent overlapping -->
-    <div class="d-none d-md-block" style="width: 20%;"> 
+    <div class="d-none d-md-block" style="width: 20%;">
         <span class="placeholder"></span>
     </div>
     <!-- Placeholder to prevent overlapping -->
