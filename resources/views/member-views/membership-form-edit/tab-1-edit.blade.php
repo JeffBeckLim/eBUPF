@@ -80,7 +80,7 @@
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="sex">Sex</label>
                     <select class="form-select form-control validate" aria-label="Default select example" name="sex">
-                        <option value="not specified" {{ Auth::user()->member->sex == 'not specified' ? 'selected' : '' }}>prefer not to specify</option>
+                        {{-- <option value="not specified" {{ Auth::user()->member->sex == 'not specified' ? 'selected' : '' }}>prefer not to specify</option> --}}
                         <option value="male"  {{ Auth::user()->member->sex == 'male' ? 'selected' : '' }}>male</option>
                         <option value="female"  {{ Auth::user()->member->sex == 'female' ? 'selected' : '' }}>female</option>
                     </select>

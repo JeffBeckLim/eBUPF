@@ -82,7 +82,7 @@
                     @if (Auth::user()->member->sex)
                         <option selected disabled>{{Auth::user()->member->sex}}</option>
                     @endif
-                        <option value="not specified" {{ old('sex') == 'not specified' ? 'selected' : '' }}>prefer not to specify</option>
+                        {{-- <option value="not specified" {{ old('sex') == 'not specified' ? 'selected' : '' }}>prefer not to specify</option> --}}
                         <option value="male"  {{ old('sex') == 'male' ? 'selected' : '' }}>male</option>
                         <option value="female"  {{ old('sex') == 'female' ? 'selected' : '' }}>female</option>
                     </select>
