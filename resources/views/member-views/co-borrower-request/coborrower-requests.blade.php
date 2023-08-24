@@ -64,7 +64,10 @@
                                     <tr class="align-middle">
                                         <td> 
                                             <div>
-                                                <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>
+                                                @if (is_null($loan->loan->is_viewed))
+                                                    <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>    
+                                                @endif
+                                                
                                                 <p class="fs-7 fw-bold mb-0">{{$loan->loan->loanType->loan_type_name}} 
                                                 
                                                 <span class="fw-light"> {{$loan->loan->loanType->loan_type_description}}</span>

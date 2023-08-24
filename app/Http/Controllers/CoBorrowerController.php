@@ -51,6 +51,11 @@ class CoBorrowerController extends Controller
     public function showLoan($id){
 
         $loan = Loan::with(['Member', 'Member.units.campuses','LoanType'])->find($id);
+        
+        if(is_null($loan->is_viewed)){
+            $loan->is_viewed = now();
+            $loan->save();
+        }
         $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
         $witnesses=Witness::with('member')->where('loan_id', $id)->get();
 
