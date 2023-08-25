@@ -34,7 +34,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-12 d-flex">
                         <div class="col-lg-1 col-md-2 p-1 d-flex align-items-center">
