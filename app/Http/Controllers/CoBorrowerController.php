@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CoBorrowerController extends Controller
 {
+    public function showYourRequest(){
+        return view('member-views.your-request.your-request');
+    }   
+
     //
     public function show(){
 

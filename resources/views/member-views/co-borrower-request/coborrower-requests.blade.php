@@ -62,7 +62,7 @@
                         <tbody>
                             @foreach ($loans as $loan)
                                     <tr class="align-middle">
-                                        <td> 
+                                        <td > 
                                             <div>
                                                 @if (is_null($loan->loan->is_viewed))
                                                     <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>    

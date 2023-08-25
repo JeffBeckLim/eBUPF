@@ -34,9 +34,13 @@ use App\Http\Controllers\LoanApplicationController;
     //create mpl application and Co-Borrower request
     Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
-
+    // -------------------------------------------------------------------------------
     //show requests for co-borrer
     Route::get('/member/coBorrwer/requests/', [CoBorrowerController::class, 'show']);
+     //Show auth users request
+     Route::get('/member/Your/coBorrwer/requests/', [CoBorrowerController::class, 'showYourRequest']);
+    // -----------------------------------------------------------------------------------
+
     // show loan application details of the principal borrower
     Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
     //update accept request coborrower
@@ -44,7 +48,7 @@ use App\Http\Controllers\LoanApplicationController;
     //update decline request coborrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
 
-    //Show auth users request
+   
 //TESTING ===================================================================================================
 
 
