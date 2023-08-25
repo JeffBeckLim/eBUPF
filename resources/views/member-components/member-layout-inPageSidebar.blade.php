@@ -38,7 +38,7 @@
                 </div>
             </li>
 
-            <li class="nav-item  py-3 grow-on-hover">
+            {{-- <li class="nav-item  py-3 grow-on-hover">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
                         <i class="ps-1 fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
@@ -47,7 +47,43 @@
                         <span class="fw-bold fs-7  text-secondary">Loans</span>
                     </div>
                 </div>
+            </li> --}}
+
+            <li class="nav-item grow-on-hover">
+                <div class="accordion rounded" id="accordionRequests">
+                    <div class="accordion-item border-0">
+                      <h5 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                            <div class="row g-0">
+                                <div class="col-3 text-center ps-1">
+                                    <i class="ps-1 fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
+                                </div>
+                                <div class="col-9 ps-2">
+                                    <span class="fw-bold fs-7 text-secondary ps-3">Loans</span>
+                                </div>
+                            </div>
+                        </button>
+                      </h5>
+                      <div id="collapseLoans" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row ms-3 rounded">
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-dark" href="">Multi Purpose</a>
+                                </div>
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-dark" href="">Housing</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
             </li>
+
+
 
             <li class="nav-item  py-3 grow-on-hover">
                 <div class="row g-0">
@@ -102,12 +138,15 @@
                       <div id="collapseRequests" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
-                                <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="">Incoming Requests</a>
-                                </div>
+                                
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-dark" href="">Your Requests</a>
                                 </div>
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-dark" href="">Incoming Requests</a>
+                                </div>
+                                
                             </div>
                         </div>
                       </div>

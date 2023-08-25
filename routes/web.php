@@ -43,6 +43,8 @@ use App\Http\Controllers\LoanApplicationController;
     Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept']);
     //update decline request coborrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
+
+    //Show auth users request
 //TESTING ===================================================================================================
 
 
