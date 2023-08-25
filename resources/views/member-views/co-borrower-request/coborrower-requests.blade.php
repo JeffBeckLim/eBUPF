@@ -34,7 +34,7 @@
                                 </div>
                               </div>
                             </div>
-                          </div>
+                        </div>
                     </div>
                     <div class="col-12 d-flex">
                         <div class="col-lg-1 col-md-2 p-1 d-flex align-items-center">
@@ -62,7 +62,7 @@
                         <tbody>
                             @foreach ($loans as $loan)
                                     <tr class="align-middle">
-                                        <td> 
+                                        <td > 
                                             <div>
                                                 @if (is_null($loan->loan->is_viewed))
                                                     <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>    
