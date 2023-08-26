@@ -68,11 +68,11 @@ use App\Http\Controllers\LoanApplicationController;
 
     //create membership create form
     Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
-
-//Show Member Profile
+// Show Member Profile
 Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access')->name('member.profile');
-//Update Profile
-Route::post('/member/profile/edit/{id}', [MemberController::class, 'profileUpdate'])->middleware('auth','member.access')->name('member.profile.edit');
+
+// Update Profile
+Route::post('/member/profile/update/{id}', [MemberController::class, 'profileUpdate'])->middleware('auth','member.access')->name('member.profile.update');
 
     //Show Membership Form
     Route::get('/member/membership-form', [MemberController::class,'membershipForm']);

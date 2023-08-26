@@ -10,6 +10,7 @@
             Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes. <br>We value the security of your data and want to ensure the accuracy of the information associated with your account.
         </div>
 
+
         <div class="profile-tag">
             <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" height="190px" width="100%">
 
@@ -20,7 +21,11 @@
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>
         </div>
-
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
         <div class="row gap-4" style="margin:20px 58px;">
             <div class="col-lg-4" style="height: auto; background-color: white; border-radius: 10px;">
                 <div style="border-bottom: 1px solid #E8E8E8; display: flex;">
@@ -110,47 +115,52 @@
         <div class="profile-modal-content">
             <span class="profile-close">&times;</span>
             <p class="modal-profile-text">Update Profile</p>
-            <form action="" id="profile-update-form" method="POST">
+            <div class="profile-note" style="margin: 10px 0">
+                Note that you will only be allowed to update your profile once.s
+            </div>
+            <form action="{{ route('member.profile.update', ['id' => Auth::user()->member->id]) }}" id="profile-update-form" method="POST">
                 @csrf
-                <div>
-                    <img src="" alt="">
-                </div>
                 <div class="form-group">
-                    <label for="campus-unit">Campus & Unit</label>
+                    <label for="campus-unit" class="fw-bold fs-7" style="color:#595959;">Campus & Unit</label>
                     <select name="unit_id" class="form-select form-control validate" >
                         <option class="text-secondary" value="" selected disabled>{{$unit->unit_code}} : {{$campus->campus_code}}</option>
 
                         @foreach ($units as $unit)
-                            <option value="{{$unit->id}}"  {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
+                            <option name="unit_id" value="{{$unit->id}}"  {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
                         @endforeach
 
                     </select>
                 </div>
 
                   <div class="form-group">
-                    <label for="position">Position</label>
-                    <input type="text" class="form-control" id="position" value="{{ $member->position }}">
+                    <label for="position" class="fw-bold fs-7" style="color:#595959;">Position</label>
+                    <select name="position" class="form-select form-control validate" >
+                        <option value="faculty" {{ old('positon') == 'faculty' ? 'selected' : '' }}>faculty</option>
+                        <option value="dept. head" {{ old('sex') == 'dept. head' ? 'selected' : '' }}>dept. head</option>
+                        <option value="chairman" {{ old('sex') == 'chairman' ? 'selected' : '' }}>chairman</option>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="position">Email</label>
-                    <input type="email" class="form-control" id="email" value="{{ $user->email }}">
+                    <label for="email" class="fw-bold fs-7" style="color:#595959;">Email</label>
+                    <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
                   </div>
                   <div class="form-group">
-                    <label for="contact-number">Contact Number</label>
-                    <input type="text" class="form-control" id="contact-number" value="{{ $member->position }}">
+                    <label for="contact_num" class="fw-bold fs-7" style="color:#595959;">Contact Number</label>
+                    <input type="text" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
                   </div>
                   <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" value="{{ $member->position }}">
+                    <label for="address" class="fw-bold fs-7" style="color:#595959;">Address</label>
+                    <input type="text" name="address" class="form-control" id="address" value="{{ $member->address }}">
                   </div>
 
                   <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
-                        <button type="" id="modal-profile-close-button" class="btn modal-profile-close">Close</button>
+                        <button type="button" id="modal-profile-close-button" class="btn modal-profile-close">Close</button>
                         <button type="submit" class="btn modal-profile-submit">Update Profile</button>
                   </div>
             </form>
         </div>
       </div>
+
 </main>
 
 @endsection

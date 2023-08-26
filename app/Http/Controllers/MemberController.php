@@ -66,14 +66,14 @@ class MemberController extends Controller
             $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
         }
 
-    
+
        for ($i = 0; $i < 5; $i++) {
         if (isset($beneficiaries[$i])) {
             $beneficiary = $beneficiaries[$i];
         } else if ($request->filled("beneficiary{$i}")) {
             $beneficiary = new Beneficiary();
             $beneficiary->member_id = $member->id;
-        } 
+        }
         else {
             continue; // Skip iteration if no beneficiary data present
         }
@@ -247,6 +247,49 @@ class MemberController extends Controller
             'units' => $units,
             'campuses' => $campuses,
         ]);
+    }
+
+    public function profileUpdate(Request $request, $id){
+        // Validate the form data
+        //dd($request -> all());
+
+        $this->validate($request, [
+            'email' => ['required', 'string', 'max:255', 'unique:users'],
+            'unit_id' => 'required',
+            'position' => 'required',
+            'contact-number' => 'required',
+            'address' => 'required',
+        ]);
+        // Find the user and member records
+        $user = User::find($id);
+        $member = Member::where('user_id', $id)->first();
+        $unit = Unit::where('id', $member->unit_id)->first();
+        $campus = Campus::where('id', $unit->campus_id)->first();
+        $units = Unit::all();
+        $campuses = Campus::all();
+
+        // Update user and member data based on form input
+       // Update user email only if the email input is provided
+    if ($request->has('email')) {
+        $user->email = $request->input('email');
+        $user->save();
+    }
+    $user->save();
+
+
+
+        $member->update($this);
+
+        // Redirect back to the profile view with a success message
+        return view('member-views.profile',
+        ['id' => $id,
+        'user' => $user,
+        'member' => $member,
+        'unit'  => $unit,
+        'campus' => $campus,
+        'units' => $units,
+        'campuses' => $campuses,
+        ])->with('success', 'Profile updated successfully');
     }
 
     public function checkMembershipApplication($member_id){

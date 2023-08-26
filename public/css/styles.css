@@ -1237,7 +1237,7 @@ tbody tr:nth-child(odd) td {
 .profile-modal-content {
     background-color: #fefefe;
     padding: 20px;
-    margin: 10% auto;
+    margin: 5% auto;
     border-radius: 10px;
     border: 1px solid #888;
     width: 35%;
