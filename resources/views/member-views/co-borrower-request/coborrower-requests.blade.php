@@ -4,8 +4,8 @@
 
 <main>
     
-        <div class=" ms-4 mt-2 d-flex justify-content-center">
-            <div class="bg-white p-4 col-lg-9">
+        <div class=" mx-1 mt-2 d-flex justify-content-center">
+            <div class="bg-white p-4 col-lg-9 rounded border">
                 <div class="row">
                     <div class="col-12">
                         @if(session('message'))
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 {{-- CHECK IF THEIR ARE CB REQUEST --}}
-                @if ($loans)
+                @if (count($loans) != 0)
                     <table class="table table-hover mt-4" style=" background-color: white;">
                         <thead>
                             <tr>
@@ -80,7 +80,8 @@
                                             <div class="row  g-0">
 
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
-                                                    <img src="{{asset('storage/'.$loan->loan->member->profile_picture)}}" alt="null" style="width: 3rem; height: 3rem; object-fit: cover;" class="img-fluid rounded-circle">
+                                                    <img src="{{ asset(($loan->loan->member->profile_picture ? 'storage/'.$loan->loan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle">
+
                                                 </div>
                                                 <div class="col">
                                                     <p class="mb-0 fs-7 fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>
