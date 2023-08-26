@@ -48,6 +48,9 @@ use App\Http\Controllers\LoanApplicationController;
     //update decline request coborrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
 
+    Route::get('/verify/email', function(){
+        return view('auth.verify');
+    });
 
 //TESTING ===================================================================================================
 
@@ -70,7 +73,7 @@ use App\Http\Controllers\LoanApplicationController;
 
 //MEMBER ======================================================================================================
     //Show Member Profile
-    Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
+    // Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
 
     //create membership create form
     Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
