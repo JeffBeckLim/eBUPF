@@ -123,10 +123,10 @@
                 <div class="form-group">
                     <label for="campus-unit" class="fw-bold fs-7" style="color:#595959;">Campus & Unit</label>
                     <select name="unit_id" class="form-select form-control validate" >
-                        <option class="text-secondary" value="" selected disabled>{{$unit->unit_code}} : {{$campus->campus_code}}</option>
+                        <option class="text-secondary" value="{{ (int)$member->unit_id }}" selected disabled>{{$unit->unit_code}} : {{$campus->campus_code}}</option>
 
                         @foreach ($units as $unit)
-                            <option name="unit_id" value="{{$unit->id}}"  {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
+                            <option value="{{$unit->id}}" >{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
                         @endforeach
 
                     </select>

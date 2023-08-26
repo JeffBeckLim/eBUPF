@@ -250,35 +250,26 @@ class MemberController extends Controller
     }
 
     public function profileUpdate(Request $request, $id){
-        // Validate the form data
-        //dd($request -> all());
 
-        $this->validate($request, [
-            'email' => ['required', 'string', 'max:255', 'unique:users'],
-            'unit_id' => 'required',
-            'position' => 'required',
-            'contact-number' => 'required',
-            'address' => 'required',
-        ]);
-        // Find the user and member records
         $user = User::find($id);
         $member = Member::where('user_id', $id)->first();
+
+        if ($request->has('email')) {
+            $user->email = $request->input('email');
+            $user->save();
+        }
+        $user->save();
         $unit = Unit::where('id', $member->unit_id)->first();
         $campus = Campus::where('id', $unit->campus_id)->first();
         $units = Unit::all();
         $campuses = Campus::all();
 
-        // Update user and member data based on form input
-       // Update user email only if the email input is provided
-    if ($request->has('email')) {
-        $user->email = $request->input('email');
-        $user->save();
-    }
-    $user->save();
 
-
-
-        $member->update($this);
+        $member->unit_id = $request->input('unit_id');
+        $member->position = $request->input('position');
+        $member->contact_num = $request->input('contact_num');
+        $member->address = $request->input('address');
+        $member->save();
 
         // Redirect back to the profile view with a success message
         return view('member-views.profile',
