@@ -6,12 +6,15 @@ use App\Models\Unit;
 use App\Models\User;
 use App\Models\Campus;
 use App\Models\Member;
+use App\Rules\EmailDomain;
 use App\Models\Beneficiary;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\Models\MembershipApplication;
 use App\Models\BeneficiaryRelationship;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
@@ -234,12 +237,14 @@ class MemberController extends Controller
     public function viewProfile($id){
         $user = User::find($id);
         $member = Member::where('user_id', $id)->first();
+        // dd($member);
         $unit = Unit::where('id', $member->unit_id)->first();
+        
         $campus = Campus::where('id', $unit->campus_id)->first();
         $units = Unit::all();
         $campuses = Campus::all();
 
-        return view('member-views.profile', [
+        return view('member-views.member-profile.profile', [
             'user' => $user,
             'member' => $member,
             'unit'  => $unit,
@@ -250,47 +255,46 @@ class MemberController extends Controller
     }
 
     public function profileUpdate(Request $request, $id){
-
-        $user = User::find($id);
-        $member = Member::where('user_id', $id)->first();
-
-        if ($request->has('email')) {
-            $user->email = $request->input('email');
-            $user->save();
+    
+        $validator = Validator::make($request->all(), [
+            'unit_id' => 'required',
+            'position' => 'required',
+            // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER 
+            'email' => [
+                'required',
+                'string',
+                'email:rfc,dns',
+                'max:255',
+                Rule::unique('users')->ignore(Auth::user()->id),
+                new EmailDomain('bicol-u.edu.ph')
+            ], 
+            'contact_num' => ['required', 'numeric'],
+            'address' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $errors = $validator->errors()->all();
+            return redirect('/member/profile/'.Auth::user()->id)->withErrors($errors);
         }
+
+        $user = User::with('member')->find($id);
+        
+        if ($user->email != $request->email) {
+            $user->email = $request->input('email');
+            // Reset Email to verify it again
+            $user->email_verified_at = null;
+            $user->sendEmailVerificationNotification();
+        }
+        
         $user->save();
-        $unit = Unit::where('id', $member->unit_id)->first();
-        $campus = Campus::where('id', $unit->campus_id)->first();
-        $units = Unit::all();
-        $campuses = Campus::all();
-
-
-        $member->unit_id = $request->input('unit_id');
-        $member->position = $request->input('position');
-        $member->contact_num = $request->input('contact_num');
-        $member->address = $request->input('address');
-        $member->save();
-
-        // Redirect back to the profile view with a success message
-        return view('member-views.profile',
-        ['id' => $id,
-        'user' => $user,
-        'member' => $member,
-        'unit'  => $unit,
-        'campus' => $campus,
-        'units' => $units,
-        'campuses' => $campuses,
-        ])->with('success', 'Profile updated successfully');
-    }
-
-    public function checkMembershipApplication($member_id){
-         $member = MembershipApplication::where('member_id', $member_id)->get();
-         if(count($member)===0){
-            return redirect('/member/membership-form');
-         }
-         else{
-            return redirect('/member/membership-form/edit-download');
-         }
+        
+        $user->member->unit_id = $request->unit_id;
+        $user->member->position = $request->position;
+        $user->member->contact_num = $request->contact_num;
+        $user->member->address = $request->address;
+        
+        $user->member->save();
+        
+        return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
     }
 
 }
