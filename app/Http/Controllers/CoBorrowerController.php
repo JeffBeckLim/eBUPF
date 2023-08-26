@@ -12,6 +12,20 @@ use Illuminate\Support\Facades\Auth;
 
 class CoBorrowerController extends Controller
 {
+    public function showYourRequest(){
+
+        // $load=CoBorrower::with('Loan.Member')->where('Loan.Member.id', Auth::user()->member->id)->get();
+        $cb_withLoans = CoBorrower::with('member.units.campuses','loan.member.units.campuses', 'loan.loanType')
+            ->whereHas('loan.member', function ($query) {
+                $query->where('id', Auth::user()->member->id);
+            })
+            ->get();
+        
+        $cb_withLoans = collect($cb_withLoans)->sortByDesc('created_at')->values()->all();    
+        return view('member-views.your-request.your-request', compact('cb_withLoans'));
+
+    }   
+
     //
     public function show(){
 
@@ -49,15 +63,24 @@ class CoBorrowerController extends Controller
     }
 
     public function showLoan($id){
+        $loan = Loan::with(['Member', 'Member.units.campuses','LoanType'])->findOrFail($id);
+        $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
 
-        $loan = Loan::with(['Member', 'Member.units.campuses','LoanType'])->find($id);
-        
+        // check if the loan detail being accessed is associated with the Auth User as
+        // the co borrower
+        if(Auth::user()->member->id != $co_borrower->member->id){
+            abort(404);
+        }
+
+        $witnesses=Witness::with('member')->where('loan_id', $id)->get();
+       
+        // viewed indicator (in the page a 'NEW' icon is displayed when 'is_viewed' field is null 
+        // when a user views it, then this code si triggred to set date when it was viewed now() ) 
         if(is_null($loan->is_viewed)){
             $loan->is_viewed = now();
             $loan->save();
         }
-        $co_borrower=CoBorrower::with('member')->where('loan_id', $id)->first();
-        $witnesses=Witness::with('member')->where('loan_id', $id)->get();
+        
 
         return view('member-views.co-borrower-request.loan-application-details', compact('loan', 'co_borrower', 'witnesses'));
     }
@@ -73,13 +96,9 @@ class CoBorrowerController extends Controller
         
             return redirect('/member/coBorrwer/requests/')->with('message', 'Request accepted! The form is now available for the borrower ready for printing and signing');
         }
-        // dd($coBorrower);
 
     }
     public function requestDecline($id){
-        // $coBorrower=CoBorrower::findorfail($id);
-        // $coBorrower->update(['accept_request' => '0']);
-        // dd($coBorrower);
 
         $coBorrower=CoBorrower::findorfail($id);
         if($coBorrower->accept_request == '0'){
