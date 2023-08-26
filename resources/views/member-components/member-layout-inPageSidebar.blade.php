@@ -9,7 +9,7 @@
     <!-- NAVBAR -->
     <div class="   d-none  d-md-block  position-fixed h-100 " style="background-color: #ffffff; width: 20%;">
         <div class="row d-flex   py-3">
-            <a href="#">
+            <a href="{{route('home')}}">
                 <img class="img-fluid ps-2 pt-2" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 14rem;">
             </a>
         </div>
@@ -22,8 +22,8 @@
                     <div class="col-3 text-center ">
                         <img class="icon" src="{{asset('icons/profile-holder.png')}}" alt="">
                     </div>
-                    <div class="col  d-flex align-items-center">
-                        <span class="fw-bold fs-7 text-secondary">Profile</span>
+                    <div class="col  d-flex align-items-center" style="">
+                        <a href="{{ route('member.profile', ['id' => Auth::user()->member->id]) }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">Profile</span></a>
                     </div>
                 </div>
             </li>

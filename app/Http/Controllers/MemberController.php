@@ -66,14 +66,14 @@ class MemberController extends Controller
             $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
         }
 
-    
+
        for ($i = 0; $i < 5; $i++) {
         if (isset($beneficiaries[$i])) {
             $beneficiary = $beneficiaries[$i];
         } else if ($request->filled("beneficiary{$i}")) {
             $beneficiary = new Beneficiary();
             $beneficiary->member_id = $member->id;
-        } 
+        }
         else {
             continue; // Skip iteration if no beneficiary data present
         }
@@ -247,6 +247,40 @@ class MemberController extends Controller
             'units' => $units,
             'campuses' => $campuses,
         ]);
+    }
+
+    public function profileUpdate(Request $request, $id){
+
+        $user = User::find($id);
+        $member = Member::where('user_id', $id)->first();
+
+        if ($request->has('email')) {
+            $user->email = $request->input('email');
+            $user->save();
+        }
+        $user->save();
+        $unit = Unit::where('id', $member->unit_id)->first();
+        $campus = Campus::where('id', $unit->campus_id)->first();
+        $units = Unit::all();
+        $campuses = Campus::all();
+
+
+        $member->unit_id = $request->input('unit_id');
+        $member->position = $request->input('position');
+        $member->contact_num = $request->input('contact_num');
+        $member->address = $request->input('address');
+        $member->save();
+
+        // Redirect back to the profile view with a success message
+        return view('member-views.profile',
+        ['id' => $id,
+        'user' => $user,
+        'member' => $member,
+        'unit'  => $unit,
+        'campus' => $campus,
+        'units' => $units,
+        'campuses' => $campuses,
+        ])->with('success', 'Profile updated successfully');
     }
 
     public function checkMembershipApplication($member_id){
