@@ -21,11 +21,6 @@
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>
         </div>
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
         <div class="row gap-4" style="margin:20px 58px;">
             <div class="col-lg-4" style="height: auto; background-color: white; border-radius: 10px;">
                 <div style="border-bottom: 1px solid #E8E8E8; display: flex;">
