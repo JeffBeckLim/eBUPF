@@ -239,7 +239,7 @@ class MemberController extends Controller
         $member = Member::where('user_id', $id)->first();
         // dd($member);
         $unit = Unit::where('id', $member->unit_id)->first();
-        
+
         $campus = Campus::where('id', $unit->campus_id)->first();
         $units = Unit::all();
         $campuses = Campus::all();
@@ -255,11 +255,11 @@ class MemberController extends Controller
     }
 
     public function profileUpdate(Request $request, $id){
-    
+
         $validator = Validator::make($request->all(), [
             'unit_id' => 'required',
             'position' => 'required',
-            // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER 
+            // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER
             'email' => [
                 'required',
                 'string',
@@ -267,8 +267,8 @@ class MemberController extends Controller
                 'max:255',
                 Rule::unique('users')->ignore(Auth::user()->id),
                 new EmailDomain('bicol-u.edu.ph')
-            ], 
-            'contact_num' => ['required', 'numeric'],
+            ],
+            'contact_num' => 'required',
             'address' => 'required',
         ]);
         if ($validator->fails()) {
@@ -277,23 +277,23 @@ class MemberController extends Controller
         }
 
         $user = User::with('member')->find($id);
-        
+
         if ($user->email != $request->email) {
             $user->email = $request->input('email');
             // Reset Email to verify it again
             $user->email_verified_at = null;
             $user->sendEmailVerificationNotification();
         }
-        
+
         $user->save();
-        
+
         $user->member->unit_id = $request->unit_id;
         $user->member->position = $request->position;
         $user->member->contact_num = $request->contact_num;
         $user->member->address = $request->address;
-        
+
         $user->member->save();
-        
+
         return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
     }
 

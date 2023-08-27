@@ -55,7 +55,7 @@ class PDFController extends controller{
                 'beneficiaries' => $beneficiaries,
             ];
 
-            $pdf = PDF::loadView('member-views.generate-membership-form', $data)->setPaper('letter', 'portrait');
+            $pdf = PDF::loadView('member-views.generate-pdf-files.generate-membership-form', $data)->setPaper('letter', 'portrait');
 
             return $pdf->download('Membership Application Form.pdf');
 
@@ -96,7 +96,7 @@ class PDFController extends controller{
 
         ];
 
-        $pdf = PDF::loadView('member-views.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
+        $pdf = PDF::loadView('member-views.generate-pdf-files.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
 
         return $pdf->download('MPL Application Form.pdf');
     }
@@ -133,7 +133,7 @@ class PDFController extends controller{
 
         ];
 
-        $pdf = PDF::loadView('member-views.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
+        $pdf = PDF::loadView('member-views.generate-pdf-files.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
 
         return $pdf->download('HSL Application Form.pdf');
     }

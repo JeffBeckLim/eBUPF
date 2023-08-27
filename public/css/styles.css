@@ -17,8 +17,9 @@
 }
 
 .icon {
-    width: 2rem;
-    border-radius: 9999px;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
 }
 
 .rounded-pill-top-start {
@@ -547,9 +548,6 @@ input.invalid {
 @media screen and (min-width: 992px) {
     .card-border2 {
         margin-left: 100px;
-    }
-    .transactions {
-        width: 20rem;
     }
     .text11-move {
         padding-left: 66px;
@@ -1148,7 +1146,6 @@ tbody tr:nth-child(odd) td {
     left: 13%;
     width: 120px;
     transform: translate(-50%, -50%);
-
 }
 
 .profile-tag-details img {
