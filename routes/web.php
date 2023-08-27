@@ -48,6 +48,7 @@ use App\Http\Controllers\LoanApplicationController;
     //update decline request coborrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
 
+    // Verify email
     Route::get('/verify/email', function(){
         return view('auth.verify');
     });
