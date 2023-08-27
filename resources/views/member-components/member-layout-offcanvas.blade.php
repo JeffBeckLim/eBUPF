@@ -159,11 +159,11 @@
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="/member/Your/coBorrwer/requests/">Your Requests</a>
+                                    <a class="text-decoration-none text-dark" href="/member/Your/coBorrower/requests/">Your Requests</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="/member/coBorrwer/requests/">Incoming Requests</a>
+                                    <a class="text-decoration-none text-dark" href="/member/coBorrower/requests/">Incoming Requests</a>
                                 </div>
                                 
                             </div>
