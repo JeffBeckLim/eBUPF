@@ -15,7 +15,12 @@ class LoanApplicationController extends Controller
     public function show(){
         return view('member-views.mpl-application-form.mpl-application-form');
     }
-
+    public function showHsl(){
+        return view('member-views.hsl-application-form.hsl-application-form');
+    }
+    public function storeRequestHsl(Request $request){
+        dd($request);
+    }
     // VALIDATE AND STORE LOAN APPLICATION
     public function storeRequest(Request $request){
 

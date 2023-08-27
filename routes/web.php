@@ -34,12 +34,20 @@ use App\Http\Controllers\LoanApplicationController;
     //create mpl application and Co-Borrower request
     Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
+    //Show hsl form
+    Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth');//add middleware for verified members only
+    //create hsl application and Co-Borrower request
+    Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl']);
+
+
     // -------------------------------------------------------------------------------
     //show requests for co-borrower
     Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show']);
      //Show auth users request
      Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest']);
     // -----------------------------------------------------------------------------------
+
+
 
     // show loan application details of the principal borrower
     Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
