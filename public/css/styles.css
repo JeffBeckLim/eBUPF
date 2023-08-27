@@ -17,8 +17,9 @@
 }
 
 .icon {
-    width: 2rem;
-    border-radius: 9999px;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
 }
 
 .rounded-pill-top-start {
@@ -1145,7 +1146,6 @@ tbody tr:nth-child(odd) td {
     left: 13%;
     width: 120px;
     transform: translate(-50%, -50%);
-
 }
 
 .profile-tag-details img {

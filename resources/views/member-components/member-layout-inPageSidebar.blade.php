@@ -20,10 +20,10 @@
             <li class="nav-items py-3 grow-on-hover ">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
-                        <img class="icon" src="{{asset('icons/profile-holder.png')}}" alt="">
+                        <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">
                     </div>
-                    <div class="col  d-flex align-items-center" style="">
-                        <a href="{{ route('member.profile', ['id' => Auth::user()->member->id]) }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">Profile</span></a>
+                    <div class="col  d-flex align-items-center">
+                        <a href="{{ route('member.profile', ['id' => Auth::user()->member->id]) }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">{{ Auth::user()->member->firstname }} {{ Auth::user()->member->lastname }}</span></a>
                     </div>
                 </div>
             </li>
@@ -32,8 +32,8 @@
                     <div class="col-3 text-center ">
                         <img src="{{asset('icons/home.svg')}}" alt="">
                     </div>
-                    <div class="col ">
-                        <span class="fw-bold fs-7 text-secondary">Home</span>
+                    <div class="col d-flex">
+                        <a href="{{ route('home') }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">Home</span></a>
                     </div>
                 </div>
             </li>
@@ -75,7 +75,7 @@
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-dark" href="">Housing</a>
                                 </div>
-                                
+
                             </div>
                         </div>
                       </div>
@@ -138,7 +138,7 @@
                       <div id="collapseRequests" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
-                                
+
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-dark" href="/member/Your/coBorrwer/requests/">Your Requests</a>
                                 </div>
@@ -146,7 +146,7 @@
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-dark" href="/member/coBorrwer/requests/">Incoming Requests</a>
                                 </div>
-                                
+
                             </div>
                         </div>
                       </div>
