@@ -9,8 +9,26 @@
         <div class="profile-note">
             Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes. <br>We value the security of your data and want to ensure the accuracy of the information associated with your account.
         </div>
-
-
+        @if(session('message'))
+            <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">
+                {{session('message')}}        
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if(count($errors) != 0)
+         
+            @foreach ($errors->all() as $error )
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{$error}}        
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endforeach
+        @endif
+        @if (Auth::user()->email_verified_at == null)
+            <div class="alert alert-warning mt-3" style="font-size: small">
+                Your Email <strong>{{Auth::user()->email}}</strong> is not yet verified. Go to <a href="/verify/email">Verify Email</a>
+            </div>
+        @endif
         <div class="profile-tag">
             <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" height="190px" width="100%">
 
@@ -105,56 +123,8 @@
         </div>
 
     </div>
-
-    <div id="profileMyModal" class="profile-modal">
-        <div class="profile-modal-content">
-            <span class="profile-close">&times;</span>
-            <p class="modal-profile-text">Update Profile</p>
-            <div class="profile-note" style="margin: 10px 0">
-                Note that you will only be allowed to update your profile once.s
-            </div>
-            <form action="{{ route('member.profile.update', ['id' => Auth::user()->member->id]) }}" id="profile-update-form" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="campus-unit" class="fw-bold fs-7" style="color:#595959;">Campus & Unit</label>
-                    <select name="unit_id" class="form-select form-control validate" >
-                        <option class="text-secondary" value="{{ (int)$member->unit_id }}" selected disabled>{{$unit->unit_code}} : {{$campus->campus_code}}</option>
-
-                        @foreach ($units as $unit)
-                            <option value="{{$unit->id}}" >{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
-                        @endforeach
-
-                    </select>
-                </div>
-
-                  <div class="form-group">
-                    <label for="position" class="fw-bold fs-7" style="color:#595959;">Position</label>
-                    <select name="position" class="form-select form-control validate" >
-                        <option value="faculty" {{ old('positon') == 'faculty' ? 'selected' : '' }}>faculty</option>
-                        <option value="dept. head" {{ old('sex') == 'dept. head' ? 'selected' : '' }}>dept. head</option>
-                        <option value="chairman" {{ old('sex') == 'chairman' ? 'selected' : '' }}>chairman</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="fw-bold fs-7" style="color:#595959;">Email</label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
-                  </div>
-                  <div class="form-group">
-                    <label for="contact_num" class="fw-bold fs-7" style="color:#595959;">Contact Number</label>
-                    <input type="text" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
-                  </div>
-                  <div class="form-group">
-                    <label for="address" class="fw-bold fs-7" style="color:#595959;">Address</label>
-                    <input type="text" name="address" class="form-control" id="address" value="{{ $member->address }}">
-                  </div>
-
-                  <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
-                        <button type="button" id="modal-profile-close-button" class="btn modal-profile-close">Close</button>
-                        <button type="submit" class="btn modal-profile-submit">Update Profile</button>
-                  </div>
-            </form>
-        </div>
-      </div>
+    {{-- Contains the Modal for editing the Profile --}}
+    @include('member-views.member-profile.profile-updateModal')
 
 </main>
 

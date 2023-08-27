@@ -1139,11 +1139,13 @@ tbody tr:nth-child(odd) td {
 }
 
 .profile-picture {
+    object-fit: cover;
     position: absolute;
     top: 50%;
     left: 13%;
     width: 120px;
     transform: translate(-50%, -50%);
+
 }
 
 .profile-tag-details img {
