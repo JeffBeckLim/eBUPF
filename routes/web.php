@@ -29,23 +29,23 @@ use App\Http\Controllers\LoanApplicationController;
     Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 
-    //show mpl applicaiton
+    //show mpl application
     Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only
     //create mpl application and Co-Borrower request
     Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
     // -------------------------------------------------------------------------------
-    //show requests for co-borrer
-    Route::get('/member/coBorrwer/requests/', [CoBorrowerController::class, 'show']);
+    //show requests for co-borrower
+    Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show']);
      //Show auth users request
-     Route::get('/member/Your/coBorrwer/requests/', [CoBorrowerController::class, 'showYourRequest']);
+     Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest']);
     // -----------------------------------------------------------------------------------
 
     // show loan application details of the principal borrower
     Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
-    //update accept request coborrower
+    //update accept request co-borrower
     Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept']);
-    //update decline request coborrower
+    //update decline request co-borrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
 
     // Verify email
