@@ -50,6 +50,7 @@
         .right-corner img {
             display: table-cell;
             width: 25%;
+            object-fit: cover;
         }
 
         .ted {

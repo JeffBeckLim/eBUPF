@@ -297,4 +297,14 @@ class MemberController extends Controller
         return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
     }
 
+    public function checkMembershipApplication($member_id){
+        $member = MembershipApplication::where('member_id', $member_id)->get();
+        if(count($member)===0){
+           return redirect('/member/membership-form');
+        }
+        else{
+           return redirect('/member/membership-form/edit-download');
+        }
+   }
+
 }
