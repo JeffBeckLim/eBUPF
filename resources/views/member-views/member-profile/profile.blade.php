@@ -6,20 +6,20 @@
 
     <div style="background-color: #f5f5f5; border-radius: 10px; padding-bottom: 10px;">
 
-        <div class="profile-note">
+        <div class="profile-note" style="text-align: justify;">
             Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes. <br>We value the security of your data and want to ensure the accuracy of the information associated with your account.
         </div>
         @if(session('message'))
             <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">
-                {{session('message')}}        
+                {{session('message')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if(count($errors) != 0)
-         
+
             @foreach ($errors->all() as $error )
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{$error}}        
+                {{$error}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endforeach
@@ -30,7 +30,7 @@
             </div>
         @endif
         <div class="profile-tag">
-            <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" height="190px" width="100%">
+            <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" width="100%" style="height: 190px;">
 
             <div class="profile-tag-details">
                 <img src="{{ asset('storage/' . $member->profile_picture) }}" alt="profile picture" class="profile-picture" width="100" height="120">
@@ -39,7 +39,10 @@
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>
         </div>
-        <div class="row gap-4" style="margin:20px 58px;">
+        <div class="row gap-4 profile-row" style="display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;">
             <div class="col-lg-4" style="height: auto; background-color: white; border-radius: 10px;">
                 <div style="border-bottom: 1px solid #E8E8E8; display: flex;">
                     <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/manager.png" alt="employee" style="margin: 15px 10px; color: #393939;"/>
@@ -115,7 +118,7 @@
                     <div class="col-5">
                         <p><span class="fw-bold">Birthdate :</span></p>
                     </div>
-                    <div class="col-7">
+                    <div class="col-7" style="margin-bottom: 37px">
                         <p><span>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $member->date_of_birth)->format('F j, Y') }}</span></p>
                     </div>
                 </div>
