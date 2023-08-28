@@ -111,6 +111,9 @@ use App\Http\Controllers\LoanApplicationController;
     //Generate Membership Application Form
     Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
 
+    //Show available loans
+    Route::get('/member/apply/loan/{id}', [MemberController::class, 'applyLoan'])->middleware('auth','member.access')->name('displayAvailableLoans');
+
     //Generate MPL Application Form
     Route::get('/member/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
 

@@ -1299,3 +1299,61 @@ tbody tr:nth-child(odd) td {
     color: rgb(239, 239, 239);
     box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
 }
+
+
+/* Available Loan Applications */
+
+.apply-loan-border {
+    border-radius: 10px;
+    border: 1px solid #A9A9A9;
+    background: #FFF;
+    height: auto;
+}
+
+.loans-to-apply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.apply-loan-border {
+    padding: 12px 15px;
+}
+
+.apply-loan-btn {
+    border-radius: 20px;
+    background: #0092D1;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 15px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.apply-loan-btn:hover {
+    border-radius: 20px;
+    background: #006590;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 15px;
+    margin: 20px 0;
+}
+
+@media (min-width: 575px) {
+    .apply-loan-border {
+        min-width: 260px;
+    }
+    .loan-apps-container {
+        height: 100vh;
+    }
+}
+
+@media (max-width: 575px) {
+    .loan-apps-container {
+        margin-top: 40px;
+        padding: 50px;
+    }
+}
