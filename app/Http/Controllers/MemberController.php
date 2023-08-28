@@ -307,4 +307,8 @@ class MemberController extends Controller
         }
    }
 
+   public function applyLoan($member_id){
+
+       return view('/member-views/apply-loan');
+    }
 }
