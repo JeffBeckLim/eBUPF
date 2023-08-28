@@ -66,7 +66,7 @@
                                         <a href="#" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                        <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

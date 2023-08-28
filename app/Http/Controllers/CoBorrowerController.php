@@ -68,9 +68,11 @@ class CoBorrowerController extends Controller
 
         // check if the loan detail being accessed is associated with the Auth User as
         // the co borrower
-        if(Auth::user()->member->id != $co_borrower->member->id){
-            abort(404);
-        }
+    if(Auth::user()->member->id != $co_borrower->member->id
+        && $loan->member_id != Auth::user()->member->id
+    ){
+        abort(404);
+    }
 
         $witnesses=Witness::with('member')->where('loan_id', $id)->get();
        
@@ -89,12 +91,12 @@ class CoBorrowerController extends Controller
         
         $coBorrower=CoBorrower::findorfail($id);
         if($coBorrower->accept_request == '1'){
-            return redirect('/member/coBorrwer/requests/')->with('message', 'You have already accepted this request');    
+            return redirect('/member/coBorrower/requests/')->with('message', 'You have already accepted this request');    
         }
         else{
             $coBorrower->update(['accept_request' => '1']);
         
-            return redirect('/member/coBorrwer/requests/')->with('message', 'Request accepted! The form is now available for the borrower ready for printing and signing');
+            return redirect('/member/coBorrower/requests/')->with('message', 'Request accepted! The form is now available for the borrower ready for printing and signing');
         }
 
     }
@@ -102,12 +104,12 @@ class CoBorrowerController extends Controller
 
         $coBorrower=CoBorrower::findorfail($id);
         if($coBorrower->accept_request == '0'){
-            return redirect('/member/coBorrwer/requests/')->with('message', 'You have already declined this request');    
+            return redirect('/member/coBorrower/requests/')->with('message', 'You have already declined this request');    
         }
         else{
             $coBorrower->update(['accept_request' => '0']);
         
-            return redirect('/member/coBorrwer/requests/')->with('message', 'Request Declined');
+            return redirect('/member/coBorrower/requests/')->with('message', 'Request <strong>Declined</strong>');
         }
     }
 }

@@ -44,7 +44,7 @@ use App\Http\Controllers\LoanApplicationController;
     //show requests for co-borrower
     Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show']);
      //Show auth users request
-     Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest']);
+    Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest']);
     // -----------------------------------------------------------------------------------
 
 
