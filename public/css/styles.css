@@ -1140,11 +1140,15 @@ tbody tr:nth-child(odd) td {
     position: relative;
 }
 
+:root {
+    --initial-left: 13%;
+}
+
 .profile-picture {
     object-fit: cover;
     position: absolute;
     top: 50%;
-    left: 13%;
+    left: var(--initial-left);
     width: 120px;
     transform: translate(-50%, -50%);
 }
@@ -1219,6 +1223,61 @@ tbody tr:nth-child(odd) td {
     color: white;
 }
 
+.profile-row {
+    margin: 20px 30px;
+}
+
+@media screen and (max-width: 991px) {
+     :root {
+        --initial-left: 16%;
+        /* Adjust this value to your preference */
+    }
+    .profile-name {
+        left: 30%;
+    }
+    .profile-college {
+        left: 30%;
+    }
+    .profile-position {
+        left: 30%;
+    }
+    .profile-picture {
+        object-fit: cover;
+        position: absolute;
+        top: 50%;
+        left: var(--initial-left);
+        width: 100px;
+        height: 100px;
+        transform: translate(-50%, -50%);
+    }
+    .profile-row {
+        margin: 20px 10px;
+    }
+}
+
+@media (max-width: 575px) {
+     :root {
+        --initial-left: 22%;
+        /* Adjust this value to your preference */
+    }
+    .profile-name {
+        left: 40%;
+        font-size: 1rem;
+    }
+    .profile-college {
+        left: 40%;
+        font-size: 0.6rem;
+    }
+    .profile-position {
+        left: 40%;
+        font-size: 0.6rem;
+    }
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+}
+
 
 /* The Modal */
 
@@ -1241,6 +1300,12 @@ tbody tr:nth-child(odd) td {
     border-radius: 10px;
     border: 1px solid #888;
     width: 35%;
+}
+
+@media screen and (max-width: 991px) {
+    .profile-modal-content {
+        width: 90%;
+    }
 }
 
 .profile-close {
