@@ -4,7 +4,19 @@
 
 <main>
     <div class="container mt-5">
-        <a href="/member/coBorrwer/requests/" class="text-decoration-none text-secondary fw-bold">Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Application Details</span>
+        {{-- this is the navigation --}}
+
+        {{-- THIS CODE CHECKS IF THE LOAN belongs to the User then it is checking the Outgoing Request --}}
+        @if($loan->member_id == Auth::user()->member->id)
+            <a href="/member/Your/coBorrower/requests/" class="text-decoration-none text-secondary fw-bold">Your Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Your Application Details</span>
+
+        {{-- Else then it is shown as the co-borrower --}}    
+        @else 
+            <a href="/member/coBorrwer/requests/" class="text-decoration-none text-secondary fw-bold">Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Application Details</span>
+        @endif
+        
+
+
         <div class="border bg-white rounded-4 p-4 mt-2 " >
             <p class="text-center m-0 mt-4 fw-bold fs-5">{{$loan->LoanType->loan_type_description}} Application</p>
             <p class="text-center pb-4 mb-5 fw-bold fs-7" style="border-bottom: 1px solid #DBDBDB; color: #00638D">Application Details</p>

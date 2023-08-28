@@ -65,10 +65,10 @@
                                         <td > 
                                             <div>
                                                 @if (is_null($loan->loan->is_viewed))
-                                                    <p style="font-size: small" class=" text-danger"><i class="bi bi-circle-fill"></i> NEW</p>    
+                                                    <span style="font-size: small" class=" text-danger fw-bold fade-in"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
-                                                <p class="fs-7 fw-bold mb-0">{{$loan->loan->loanType->loan_type_name}} 
+                                                <p class="fs-7 fw-bold mb-0 mt-1">{{$loan->loan->loanType->loan_type_name}} 
                                                 
                                                 <span class="fw-light"> {{$loan->loan->loanType->loan_type_description}}</span>
                                                 </p>
