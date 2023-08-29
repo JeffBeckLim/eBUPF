@@ -43,11 +43,15 @@
                     </div>
                     @if(!Auth::user())
                     <div class="row  g-0">
-                        <div class="col d-flex  justify-content-end">
-                            <a class="button grow-on-hover my-auto mx-0 me-3" href="/register" type="button">Sign Up</a>
+                        <div class="col-12 d-flex">
+                            <a class="btn bu-orange text-light grow-on-hover w-100 p-3 mx-5 mb-2" href="/register" style="font-size: large; font-weight:bold;" type="button">Sign Up</a>
                         </div>
+                        <div class="col-12 d-flex">
+                            <a class="btn btn-outline-light grow-on-hover w-100 p-2 mx-5 mb-3" href="/login" style="font-size: large; font-weight:bold;" type="button">Log In</a>
+                        </div>                          
                     </div>
                     @endif
+                   
                     
                 </div>
             </div>
