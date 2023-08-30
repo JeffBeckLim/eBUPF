@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
 {
+    public function showMemberDash(){
+        return view('member-views.member-dashboard');
+    }
+
     public function updateMembership(Request $request, Member $member){
        $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
