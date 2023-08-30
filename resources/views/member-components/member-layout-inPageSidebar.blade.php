@@ -16,7 +16,7 @@
 
 
         <ul class="nav flex-column" style=" scale: 0.9;" >  
-            <li class="nav-items py-3 grow-on-hover ">
+            <li class="nav-items py-3 grow-on-hover rounded-4 {{ Route::is('member.profile') ? 'bg-selected':' '}}  ">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
                         <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">

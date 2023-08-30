@@ -1278,7 +1278,9 @@ tbody tr:nth-child(odd) td {
     }
 }
 
-
+.bg-selected{
+    background-color: #e3eefc;
+}
 /* The Modal */
 
 .profile-modal {
