@@ -17,7 +17,7 @@
 </script>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
 {{-- OFFCANVAS --}}
-<div class="row d-block d-md-none p-3 border-bottom" style="background-color: #ffffff;">
+<div class="row d-block d-lg-none p-3 border-bottom" style="background-color: #ffffff;">
     <div class="nav">
         <div class="col">
             <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
@@ -30,7 +30,7 @@
         
     </div>
 </div>
-<div class="offcanvas offcanvas-start d-block d-md-none" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
+<div class="offcanvas offcanvas-start d-block d-lg-none" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title text-secondary" id="offcanvasWithBackdropLabel">eBUPF</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

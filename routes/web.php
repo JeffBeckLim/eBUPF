@@ -88,7 +88,7 @@ use App\Http\Controllers\LoanApplicationController;
     Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
 
     // Show Member Profile
-    Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access')->name('member.profile');
+    Route::get('/member/profile', [MemberController::class, 'viewProfile'])->middleware('auth','member.access')->name('member.profile');
 
     // Update Profile
     Route::post('/member/profile/update/{id}', [MemberController::class, 'profileUpdate'])->middleware('auth','member.access')->name('member.profile.update');
@@ -129,9 +129,7 @@ Route::get('/', function () {
 })->middleware('verified.access');
 
 // show view for member
-Route::get('/member', function(){
-    return view('member-views.member-dashboard');
-})->middleware('auth','member.access')->name('member-dashboard');
+Route::get('/member', [MemberController::class, 'showMemberDash'])->middleware('auth','member.access')->name('member-dashboard');
 // ->middleware('auth')
 
 //auth logout flush
