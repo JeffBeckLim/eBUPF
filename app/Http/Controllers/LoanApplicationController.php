@@ -20,8 +20,10 @@ class LoanApplicationController extends Controller
     }
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
-    public function storeRequest(Request $request){
-
+    public function storeRequest(Request $request, $loanTypeId){
+        if($loanTypeId > 3){
+            abort(404);
+        }
         $formFields = $request->validate([
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
@@ -59,7 +61,7 @@ class LoanApplicationController extends Controller
 
         $loan = Loan::create([
             'member_id'=>Auth::user()->id,
-            'loan_type_id'=>1,
+            'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
         ]);
@@ -164,7 +166,7 @@ class LoanApplicationController extends Controller
         ]);
 
 
-        return view('member-views.hsl-application-form.confirmation');
+        return back()->with('message', 'Loan Application Request Sent!');
         // dd($request);
     }
 } // THIS IS THE LAST TAG
