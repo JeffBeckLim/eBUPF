@@ -115,20 +115,13 @@
             <button type="button" class="btn btn-outline-secondary fw-bold w-100 mt-2" onclick="goBack()">Go back</button>
         </div>    
          --}}
-         
-
-      
-
 
         </form>
-        
-        
-       
 
     </div>
   </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{{-- 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
 
 @endsection

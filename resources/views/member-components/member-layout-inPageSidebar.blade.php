@@ -16,7 +16,7 @@
 
 
         <ul class="nav flex-column" style=" scale: 0.9;" >  
-            <li class="nav-items py-3 grow-on-hover rounded-4 {{ Route::is('member.profile') ? 'bg-selected':' '}}  ">
+            <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected  rounded-4':' '}}  ">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
                         <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item  py-3 grow-on-hover">
+            <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected  rounded-4':' '}} ">
                 <div class="row g-0">
                     <div class="col-3 text-center ">
                         <img src="{{asset('icons/home.svg')}}" alt="">
@@ -37,11 +37,11 @@
                 </div>
             </li>
 
-            <li class="nav-item grow-on-hover ">
+            <li class="nav-item grow-on-hover">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
                     
-                        <button style="padding: 12px 0 !important" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                        <button style="padding-left: 8px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans') ? 'bg-selected  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0  w-100">
                                 <div class="col-3 text-center ">
                                     <i class="fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
@@ -56,15 +56,15 @@
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="/member/apply/loan/{{Auth::user()->member->id}}">Apply Loan</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('displayAvailableLoans', 'mpl.application', 'hsl.application') ? 'fw-bold' : ''}}" href="/member/apply/loan">Apply Loan</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="">Multi Purpose</a>
+                                    <a class="text-decoration-none text-secondary" href="">Multi Purpose</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="">Housing</a>
+                                    <a class="text-decoration-none text-secondary" href="">Housing</a>
                                 </div>
 
                             </div>
@@ -103,7 +103,7 @@
                 <div  class="accordion rounded" id="accordionRequests">
                     <div class="accordion-item border-0">
                     
-                        <button style="padding: 12px 0 !important" class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
+                        <button style="padding-left: 5px !important" class="accordion-button collapsed {{Route::is('incoming.request','outgoing.request') ? 'bg-selected' : ''}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
                             <div class="row g-0  w-100">
                                 <div class="col-3 text-center">
                                     <img src="{{asset('icons/envelope.svg')}}" alt="">
@@ -119,11 +119,11 @@
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="/member/Your/coBorrower/requests/">Your Requests</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('outgoing.request')? 'fw-bold': ''}}" href="/member/Your/coBorrower/requests/">Your Requests</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-dark" href="/member/coBorrower/requests/">Incoming Requests</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('incoming.request')? 'fw-bold': ''}}" href="/member/coBorrower/requests/">Incoming Requests</a>
                                 </div>
 
                             </div>
