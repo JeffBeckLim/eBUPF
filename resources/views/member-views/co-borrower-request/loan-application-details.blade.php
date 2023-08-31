@@ -10,11 +10,11 @@
         @if($loan->member_id == Auth::user()->member->id)
             <a href="/member/Your/coBorrower/requests/" class="text-decoration-none text-secondary fw-bold">Your Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Your Application Details</span>
 
-        {{-- Else then it is shown as the co-borrower --}}    
-        @else 
+        {{-- Else then it is shown as the co-borrower --}}
+        @else
             <a href="/member/coBorrwer/requests/" class="text-decoration-none text-secondary fw-bold">Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Application Details</span>
         @endif
-        
+
 
 
         <div class="border bg-white rounded-4 p-4 mt-2 " >
@@ -27,7 +27,7 @@
                             <p class="appdetails-text">Principal Borrower</p>
                         </div>
                         <div class="col-6">
-                            {{$loan->member->firstname}} 
+                            {{$loan->member->firstname}}
                             {{$loan->member->lastname}}
                         </div>
                     </div>
@@ -120,9 +120,9 @@
                         <div class="col-6">
                             @if (!empty($witnesses[0]))
                                 {{$witnesses[0]->member->firstname}}
-                                {{$witnesses[0]->member->lastname}} 
+                                {{$witnesses[0]->member->lastname}}
                             @else
-                                <i>No Witness Included</i>   
+                                <i>No Witness Included</i>
                             @endif
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                                 {{$witnesses[1]->member->firstname}}
                                 {{$witnesses[1]->member->lastname}}
                             @else
-                                <i>No Witness Included</i>    
+                                <i>No Witness Included</i>
                             @endif
                         </div>
                     </div>
@@ -147,7 +147,7 @@
         </div>
 
     </div>
-    
+
 </main>
 
 @endsection

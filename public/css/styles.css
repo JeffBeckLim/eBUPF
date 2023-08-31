@@ -569,9 +569,6 @@ input.invalid {
         margin-left: 190px;
         margin-top: -15px;
     }
-    .confirmation-card {
-        margin-left: 190px;
-    }
 }
 
 @media screen and (max-width: 991px) {

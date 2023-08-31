@@ -26,16 +26,16 @@ class LoanApplicationController extends Controller
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-            
+
             'email_witness_1'=> 'required|email|exists:users,email',
             'email_witness_2'=> 'required|email|exists:users,email',
         ]);
-        
+
         // check if the email inputs are the same with the User's logged in email
-        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY 
+        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY
         // -- WITH THE LOGGED IN EMAIL
         // if(
-        //     $request->email_co_borrower == Auth::user()->email || 
+        //     $request->email_co_borrower == Auth::user()->email ||
         //     $request->email_witness_1 == Auth::user()->email ||
         //     $request->email_witness_2 == Auth::user()->email)
         // {
@@ -80,7 +80,8 @@ class LoanApplicationController extends Controller
         ]);
 
 
-        return back()->with('message', 'Loan Application Request Sent!');
+        //return back()->with('message', 'Loan Application Request Sent!');
+        return view('member-views.mpl-application-form.confirmation');
         // dd($formFields);
 
         // COBORROWER TABLE -----------
@@ -96,7 +97,7 @@ class LoanApplicationController extends Controller
         // 'adjustment_id',
         // 'loan_category_id',
         // 'principal_amount',\\
-        // 'interest', 
+        // 'interest',
         // 'term_years',\\s
         // 'is_visible',
         //  'is_approved',
@@ -104,21 +105,21 @@ class LoanApplicationController extends Controller
 
     // ======================VALIDATE AND STORE HOUSING LOAN APPLICATION====================================
     public function storeRequestHsl(Request $request){
-        
+
         $formFields = $request->validate([
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-            
+
             'email_witness_1'=> 'required|email|exists:users,email',
             'email_witness_2'=> 'required|email|exists:users,email',
         ]);
-        
+
         // check if the email inputs are the same with the User's logged in email
-        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY 
+        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY
         // -- WITH THE LOGGED IN EMAIL
         // if(
-        //     $request->email_co_borrower == Auth::user()->email || 
+        //     $request->email_co_borrower == Auth::user()->email ||
         //     $request->email_witness_1 == Auth::user()->email ||
         //     $request->email_witness_2 == Auth::user()->email)
         // {
@@ -163,7 +164,7 @@ class LoanApplicationController extends Controller
         ]);
 
 
-        return back()->with('message', 'Loan Application Request Sent!');
+        return view('member-views.hsl-application-form.confirmation');
         // dd($request);
     }
 } // THIS IS THE LAST TAG
