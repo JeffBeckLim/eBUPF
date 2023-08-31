@@ -31,13 +31,15 @@ use App\Http\Controllers\LoanApplicationController;
 
     //show mpl application
     Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth')->name('mpl.application');//add middleware for verified members only
-    //create mpl application and Co-Borrower request
-    Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
+    
+    
+    //create MPL and HSL application and Co-Borrower request
+    Route::post('/member/loan-application/{loanTypeId}', [LoanApplicationController::class, 'storeRequest']);
 
     //Show hsl form
-    Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth');//add middleware for verified members only
+    Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth')->name('hsl.application');//add middleware for verified members only
     //create hsl application and Co-Borrower request
-    Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl'])->name('hsl.application');
+    // Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl'])->name('hsl.application');
 
 
     // -------------------------------------------------------------------------------
