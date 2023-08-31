@@ -238,7 +238,8 @@ class MemberController extends Controller
 
     }
 
-    public function viewProfile($id){
+    public function viewProfile(){
+        $id = Auth::user()->member->id;
         $user = User::find($id);
         $member = Member::where('user_id', $id)->first();
         // dd($member);
@@ -311,7 +312,8 @@ class MemberController extends Controller
         }
    }
 
-   public function applyLoan(){
+   public function applyLoan($member_id){
+
        return view('/member-views/apply-loan');
     }
 }

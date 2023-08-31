@@ -19,12 +19,12 @@
 
         <div class="col-6">
             <p class="fw-bold text3-design mt-3">Co-Borrower</p>
-            <div class="row">
-                <div class="col-3">
+            <div class="row border">
+                {{-- <div class="col-3">
                     <img class="co-borrower-dp" src="{{asset('assets/hooman.png')}}" alt="Man">
-                </div>
+                </div> --}}
                 <div class="col-9">
-                    <span class="text4-design" id="displayCoBorrower"></span>
+                    <span class="text4-design fw-bold" id="displayCoBorrower"></span>
                 </div>
             </div>
 

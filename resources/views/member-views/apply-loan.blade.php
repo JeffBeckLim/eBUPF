@@ -2,8 +2,7 @@
 
 @section('content')
 
-<main>
-
+<main >      
     <div class="container loan-apps-container">
         <div class="row loans-to-apply gap-2">
             <div class="col-sm-4 apply-loan-border">

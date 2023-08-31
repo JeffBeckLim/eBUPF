@@ -30,21 +30,21 @@ use App\Http\Controllers\LoanApplicationController;
 
 
     //show mpl application
-    Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth');//add middleware for verified members only
+    Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth')->name('mpl.application');//add middleware for verified members only
     //create mpl application and Co-Borrower request
     Route::post('/member/mpl-application/', [LoanApplicationController::class, 'storeRequest']);
 
     //Show hsl form
     Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth');//add middleware for verified members only
     //create hsl application and Co-Borrower request
-    Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl']);
+    Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl'])->name('hsl.application');
 
 
     // -------------------------------------------------------------------------------
     //show requests for co-borrower
-    Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show']);
+    Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request');
      //Show auth users request
-    Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest']);
+    Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest'])->name('outgoing.request');
     // -----------------------------------------------------------------------------------
 
 
