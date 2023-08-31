@@ -22,22 +22,22 @@ class LoanApplicationController extends Controller
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
     public function storeRequest(Request $request, $loanTypeId){
         if($loanTypeId > 3){
-            abort(404); 
+            abort(404);
         }
         $formFields = $request->validate([
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-            
+
             'email_witness_1'=> 'required|email|exists:users,email',
             'email_witness_2'=> 'required|email|exists:users,email',
         ]);
-        
+
         // check if the email inputs are the same with the User's logged in email
-        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY 
+        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY
         // -- WITH THE LOGGED IN EMAIL
         // if(
-        //     $request->email_co_borrower == Auth::user()->email || 
+        //     $request->email_co_borrower == Auth::user()->email ||
         //     $request->email_witness_1 == Auth::user()->email ||
         //     $request->email_witness_2 == Auth::user()->email)
         // {
@@ -82,7 +82,8 @@ class LoanApplicationController extends Controller
         ]);
 
 
-        return back()->with('message', 'Loan Application Request Sent!');
+        //return back()->with('message', 'Loan Application Request Sent!');
+        return view('member-views.mpl-application-form.confirmation');
         // dd($formFields);
 
         // COBORROWER TABLE -----------
@@ -98,9 +99,74 @@ class LoanApplicationController extends Controller
         // 'adjustment_id',
         // 'loan_category_id',
         // 'principal_amount',\\
-        // 'interest', 
+        // 'interest',
         // 'term_years',\\s
         // 'is_visible',
         //  'is_approved',
+    }
+
+    // ======================VALIDATE AND STORE HOUSING LOAN APPLICATION====================================
+    public function storeRequestHsl(Request $request){
+
+        $formFields = $request->validate([
+            'email_co_borrower' => 'required|email|exists:users,email',
+            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+            'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
+
+            'email_witness_1'=> 'required|email|exists:users,email',
+            'email_witness_2'=> 'required|email|exists:users,email',
+        ]);
+
+        // check if the email inputs are the same with the User's logged in email
+        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY
+        // -- WITH THE LOGGED IN EMAIL
+        // if(
+        //     $request->email_co_borrower == Auth::user()->email ||
+        //     $request->email_witness_1 == Auth::user()->email ||
+        //     $request->email_witness_2 == Auth::user()->email)
+        // {
+        //     return back()->with('email_error', 'You cannot enter your own email');
+        // }
+        if($request->email_witness_1 == $request->email_witness_2){
+            return back()->with('email_error', 'Make sure witness emails are unique');
+        }
+
+        $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
+        $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
+        $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
+
+        if(
+            !$co_borrower->member->verified_at
+            || !$witness_1->member->verified_at
+            || !$witness_2->member->verified_at
+        ){
+            return back()->with('email_error', 'Make sure that all emails are from verified eBUPF members');
+        }
+
+        $loan = Loan::create([
+            'member_id'=>Auth::user()->id,
+            'loan_type_id'=>2, //id '2' for HSL
+            'principal_amount'=>$formFields['principal_amount'],
+            'term_years'=>$formFields['term_years'],
+        ]);
+
+        CoBorrower::create([
+            'member_id'=>$co_borrower->member->id,
+            'loan_id'=>$loan->id,
+        ]);
+
+        Witness::create([
+            'member_id'=>$witness_1->member->id,
+            'loan_id'=>$loan->id,
+        ]);
+
+        Witness::create([
+            'member_id'=>$witness_2->member->id,
+            'loan_id'=>$loan->id,
+        ]);
+
+
+        return view('member-views.mpl-application-form.confirmation');
+        // dd($request);
     }
 } // THIS IS THE LAST TAG
