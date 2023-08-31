@@ -1278,9 +1278,11 @@ tbody tr:nth-child(odd) td {
     }
 }
 
-.bg-selected{
+.bg-selected {
     background-color: #e3eefc;
 }
+
+
 /* The Modal */
 
 .profile-modal {
@@ -1375,7 +1377,7 @@ tbody tr:nth-child(odd) td {
     border: 1px solid #A9A9A9;
     background: #FFF;
     height: auto;
-
+    padding: 15px;
 }
 
 .loans-to-apply {
@@ -1385,10 +1387,6 @@ tbody tr:nth-child(odd) td {
     height: 100%;
 }
 
-.apply-loan-border {
-    padding: 30px;
-}
-
 .apply-loan-btn {
     border-radius: 20px;
     background: #0092D1;
@@ -1396,9 +1394,8 @@ tbody tr:nth-child(odd) td {
     font-weight: bold;
     font-size: 15px;
     padding: 0 15px;
-    margin: 20px 0;
+    margin: 20px 0 5px 0;
     cursor: pointer;
-
 }
 
 .apply-loan-btn:hover {
@@ -1408,7 +1405,6 @@ tbody tr:nth-child(odd) td {
     font-weight: bold;
     font-size: 15px;
     padding: 0 15px;
-    margin: 20px 0;
 }
 
 @media (min-width: 575px) {

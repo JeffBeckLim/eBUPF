@@ -5,11 +5,11 @@
 <main>
 
     <div class="container loan-apps-container">
-        <div class="row loans-to-apply gap-3">
+        <div class="row loans-to-apply gap-2">
             <div class="col-sm-4 apply-loan-border">
                 <div class="row mb-3">
                     <div class="col-9">
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-12">
                                 <div class="fs-7">Apply for</div>
                             </div>
@@ -31,7 +31,7 @@
             <div class="col-sm-4 apply-loan-border">
                 <div class="row mb-3">
                     <div class="col-9">
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col-12">
                                 <div class="fs-7">Apply for</div>
                             </div>
@@ -48,7 +48,7 @@
                 <div class="d-flex justify-content-end">
                     <a href="/member/hsl-application-form/" type="button" class="btn apply-loan-btn">Apply</a>
                 </div>
-            </div>      
+            </div>
         </div>
     </div>
 
