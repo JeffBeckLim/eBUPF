@@ -166,7 +166,7 @@ class LoanApplicationController extends Controller
         ]);
 
 
-        return back()->with('message', 'Loan Application Request Sent!');
+        return view('member-views.mpl-application-form.confirmation');
         // dd($request);
     }
 } // THIS IS THE LAST TAG
