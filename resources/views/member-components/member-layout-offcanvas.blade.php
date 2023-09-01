@@ -30,10 +30,15 @@
         
     </div>
 </div>
-<div class="offcanvas offcanvas-start d-block d-lg-none" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
+<div class="offcanvas offcanvas-start d-block d-lg-none rounded-end-4" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title text-secondary" id="offcanvasWithBackdropLabel">eBUPF</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <a href="{{route('home')}}">
+            <img class="img-fluid" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 12rem;">
+        </a>
+        {{-- <h5 class="offcanvas-title text-secondary" id="offcanvasWithBackdropLabel">eBUPF</h5> --}}
+        {{-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> --}}
+        <button type="button" class=" btn text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+            <h3><i class="bi bi-x"></i></h3> </button>
     </div>
     <div class="offcanvas-body">
         <ul class="nav flex-column" style="margin-bottom: 0;">
