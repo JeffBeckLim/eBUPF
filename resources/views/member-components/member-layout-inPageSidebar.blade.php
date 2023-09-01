@@ -15,38 +15,46 @@
         </div>
 
 
-        <ul class="nav flex-column" style=" scale: 0.9;" >  
-            <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected  rounded-4':' '}}  ">
-                <div class="row g-0">
-                    <div class="col-3 text-center ">
-                        <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">
+        <ul class="nav flex-column" style=" scale: .9" >  
+
+            <a class="text-decoration-none" href="{{ route('member.profile') }}">
+                <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected fade-in  rounded-4':' '}}  ">
+                    <div class="row g-0">
+                        <div class="col-3 text-center ">
+                            <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">
+                        </div>
+                        <div class="col d-flex align-items-center text-secondary">
+                            <span class="fw-bold fs-7">{{ Auth::user()->member->firstname }} {{ Auth::user()->member->lastname }}</span>
+                        </div>
                     </div>
-                    <div class="col  d-flex align-items-center">
-                        <a href="{{ route('member.profile', ['id' => Auth::user()->member->id]) }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">{{ Auth::user()->member->firstname }} {{ Auth::user()->member->lastname }}</span></a>
+                </li>
+            </a>   
+
+
+            <a class="text-decoration-none" href="{{ route('home') }}">
+                <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected fade-in  rounded-4':' '}} ">
+                    <div class="row g-0">
+                        <div class="col-3 text-center ">
+                            <img src="{{asset('icons/home.svg')}}" alt="">
+                        </div>
+                        <div class="col-9">
+                            <span class="fw-bold fs-7 text-secondary">Home</span>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected  rounded-4':' '}} ">
-                <div class="row g-0">
-                    <div class="col-3 text-center ">
-                        <img src="{{asset('icons/home.svg')}}" alt="">
-                    </div>
-                    <div class="col d-flex">
-                        <a href="{{ route('home') }}" style="text-decoration: none; width: 100%;" class="text-secondary"><span class="fw-bold fs-7">Home</span></a>
-                    </div>
-                </div>
-            </li>
+                </li>
+            </a>
+                
 
             <li class="nav-item grow-on-hover">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
                     
-                        <button style="padding-left: 8px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans') ? 'bg-selected  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
-                            <div class="row g-0  w-100">
-                                <div class="col-3 text-center ">
+                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                            <div class="row g-0 w-100">
+                                <div class="col-3 text-center pe-2">
                                     <i class="fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-9 ">
                                     <span class="fw-bold fs-7 text-secondary">Loans</span>
                                 </div>
                             </div>
@@ -76,39 +84,43 @@
 
 
 
-            <li class="nav-item  py-3 grow-on-hover">
-                <div class="row g-0">
-                    <div class="col-3 text-center ">
-                        <img class="mb-1 " src="{{asset('icons/calculator.svg')}}" alt="">
+            <a class="text-decoration-none" href="{{route('calculator')}}">
+                <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
+                    <div class="row g-0">
+                        <div class="col-3 text-center  ">
+                            <img src="{{asset('icons/calculator.svg')}}" alt="">
+                        </div>
+                        <div class="col-9  ">
+                            <span class=" fw-bold fs-7 text-secondary">Calculator</span>
+                        </div>
                     </div>
-                    <div class="col-9  ">
-                        <span class=" fw-bold fs-7 text-secondary">Calculator</span>
-                    </div>
-                </div>
-            </li>
+                </li>
+            </a>
 
-            <li class="nav-item  py-3 grow-on-hover">
-                <div class="row g-0">
-                    <div class="col-3 text-center ">
-                        <img class="mb-1" src="{{asset('icons/receipt.svg')}}" alt="">
-                    </div>
-                    <div class="col-9  ">
-                        <span class="fw-bold fs-7  text-secondary">Transactions</span>
-                    </div>
-                </div>
-            </li>
 
+            <a class="text-decoration-none" href="{{route('member.transactions')}}">
+                <li class="nav-item  py-3 grow-on-hover {{Route::is('member.transactions') ? 'bg-selected fade-in rounded-4' : '' }}">
+                    <div class="row g-0">
+                        <div class="col-3 text-center ">
+                            <img class="mb-1" src="{{asset('icons/receipt.svg')}}" alt="">
+                        </div>
+                        <div class="col-9  ">
+                            <span class="fw-bold fs-7  text-secondary">Transactions</span>
+                        </div>
+                    </div>
+                </li>
+            </a>
 
             <li class="nav-item grow-on-hover">
                 <div  class="accordion rounded" id="accordionRequests">
                     <div class="accordion-item border-0">
                     
-                        <button style="padding-left: 5px !important" class="accordion-button collapsed {{Route::is('incoming.request','outgoing.request') ? 'bg-selected' : ''}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
+                        <button style="padding-left: 5px !important" class="accordion-button collapsed {{Route::is('incoming.request','outgoing.request') ? 'bg-selected fade-in rounded-4' : ''}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
                             <div class="row g-0  w-100">
                                 <div class="col-3 text-center">
                                     <img src="{{asset('icons/envelope.svg')}}" alt="">
                                 </div>
-                                <div class="col-9 ">
+                                <div class="col-9 ps-1">
                                     <span class="fw-bold fs-7 text-secondary">Requests</span>
                                 </div>
                             </div>
@@ -134,5 +146,21 @@
             </li>
 
         </ul>
+
+        <div class="ms-3 d-flex align-items-end mt-1">
+            <div class="row g-0  w-100">
+                <div class="col-12 border-top">
+                    {{--  <i class="bi bi-list pe-4" style="color: #1030DA"></i> --}}
+                    <div class="dropdown">
+                    <a class="btn dropdown w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-list pe-4" style="color: #1030DA"></i>More
+                    </a>
+                    
+                    <ul class="dropdown-menu border p-2" style="width: 110%">
+                        <li><a class="dropdown-item rounded" href="/logout">Log out</a></li>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
