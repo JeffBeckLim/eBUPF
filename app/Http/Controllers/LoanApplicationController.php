@@ -21,7 +21,7 @@ class LoanApplicationController extends Controller
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
     public function storeRequest(Request $request, $loanTypeId){
-        if($loanTypeId > 3){
+        if($loanTypeId > 2){
             abort(404);
         }
         $formFields = $request->validate([
