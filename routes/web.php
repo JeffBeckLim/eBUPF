@@ -8,10 +8,11 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
-
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,16 @@ use App\Http\Controllers\LoanApplicationController;
 */
 
 
-//TESTING ===================================================================================================
+//🛠️TESTING ===================================================================================================
     Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
 
+    Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
+    Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
+//TESTING ===================================================================================================
+
+
+// 💸======================== ** LOAN APPLICATION MPL and HSL **  ==================================
     //show mpl application
     Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth')->name('mpl.application');//add middleware for verified members only
 
@@ -38,19 +45,17 @@ use App\Http\Controllers\LoanApplicationController;
 
     //Show hsl form
     Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth')->name('hsl.application');//add middleware for verified members only
-    //create hsl application and Co-Borrower request
-    // Route::post('/member/hsl-application/', [LoanApplicationController::class, 'storeRequestHsl'])->name('hsl.application');
 
-
-    // -------------------------------------------------------------------------------
+// ======================== ** LOAN APPLICATION MPL and HSL **  ==================================  
+// 
+// 
+// 
+// 📬======================== ** LOAN APPLICATION REQUESTS **  ==================================== 
     //show requests for co-borrower
     Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request');
      //Show auth users request
     Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest'])->name('outgoing.request');
     // -----------------------------------------------------------------------------------
-
-
-
     // show loan application details of the principal borrower
     Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
     //update accept request co-borrower
@@ -62,12 +67,11 @@ use App\Http\Controllers\LoanApplicationController;
     Route::get('/verify/email', function(){
         return view('auth.verify');
     });
-
-//TESTING ===================================================================================================
-
-
-
-//ADMIN =====================================================================================================
+// ======================== ** LOAN APPLICATION REQUESTS **  ====================================
+// 
+// 
+// 
+//🔴ADMIN ==================================================================================================
 
     // Show Admin Dashboard
     Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
@@ -82,7 +86,7 @@ use App\Http\Controllers\LoanApplicationController;
 
 //ADMIN ======================================================================================================
 
-//MEMBER ======================================================================================================
+//🟩MEMBER =================================================================================================
     //Show Member Profile
     // Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
 
