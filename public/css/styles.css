@@ -1164,7 +1164,7 @@ tbody tr:nth-child(odd) td {
     font-weight: bold;
     font-size: 1.3rem;
     width: auto;
-    left: 21%;
+    left: 23%;
 }
 
 .profile-edit-button {
@@ -1186,7 +1186,7 @@ tbody tr:nth-child(odd) td {
     font-weight: bold;
     font-size: 0.8rem;
     width: auto;
-    left: 21%;
+    left: 23%;
 }
 
 .profile-college {
@@ -1197,7 +1197,7 @@ tbody tr:nth-child(odd) td {
     font-weight: bold;
     font-size: 0.8rem;
     width: auto;
-    left: 21%;
+    left: 23%;
 }
 
 .download-membership-pdf-profile {

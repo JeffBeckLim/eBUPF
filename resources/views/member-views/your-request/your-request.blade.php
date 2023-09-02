@@ -15,7 +15,7 @@
                             <input id="search" type="text" class="search-box" placeholder="Enter your search query">
                         </div>
                         @if (count($cb_withLoans) != 0)
-                        
+
                         <table class="table caption-top" style="margin-top: 20px; background-color: white;">
                             <thead>
                                 <tr>
@@ -40,7 +40,7 @@
                                         <div class="d-flex align-items-center">
                                             <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle">
 
-                                            
+
                                             <div class="ms-3">
                                                 <p class="mb-0 fs-7">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
                                                 <p class="mb-0 fs-7">{{$cb_withLoan->member->units->unit_code}}</p>
@@ -50,20 +50,24 @@
                                     </td>
                                     <td class="align-middle">
                                         @if ($cb_withLoan->accept_request == '1')
-                                            <p style="color: #00B733;" class="fs-7 fw-bold">Accepted</p> 
+                                            <p style="color: #00B733;" class="fs-7 fw-bold">Accepted</p>
                                         @elseif($cb_withLoan->accept_request == '0')
                                             <p style="color: #FF0000;" class="fs-7 fw-bold">Rejected</p>
                                         @else
-                                            <p class="text-muted fs-7 fw-bold">Pending</p>    
+                                            <p class="text-muted fs-7 fw-bold">Pending</p>
                                         @endif
                                         {{-- =============================================================== --}}
                                         @if ($cb_withLoan->loan->is_viewed != null)
-                                        <p class="text-secondary m-0" style="font-size: small"><i class="bi bi-eye"></i> {{$cb_withLoan->loan->is_viewed}}</p> 
+                                        <p class="text-secondary m-0" style="font-size: small"><i class="bi bi-eye"></i> {{$cb_withLoan->loan->is_viewed}}</p>
                                         @endif
-                                                                                    
+
                                     </td>
                                     <td class="align-middle  text-center">
-                                        <a href="#" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
+                                        @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
+                                            <a href="{{route('generateMulti-PurposeLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
+                                        @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
+                                            <a href="{{route('generateHousingLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
+                                        @endif
                                     </td>
                                     <td class="align-middle text-center">
                                         <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
@@ -71,16 +75,14 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                       
-                        
                         </table>
-                      
-                        @else 
+
+                        @else
                         <div class="border text-center p-5 mt-3 m-3 text-secondary">
                             No Requests Found.
                        </div>
                         @endif
-                       
+
                     </div>
                 </div>
             </div>
