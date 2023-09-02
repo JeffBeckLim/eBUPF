@@ -554,7 +554,8 @@ input.invalid {
         padding-left: 66px;
     }
     .request-to-coborrower {
-        width: 80%;
+        /* width: 70%;
+        margin: 20px; */
     }
     .loan-application-box {
         margin-left: -80px;

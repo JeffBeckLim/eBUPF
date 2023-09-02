@@ -4,22 +4,23 @@
 
 <main>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col mt-3">
-                <div class="container d-flex flex-column align-items-center justify-content-center ">
-                    <div class="request-to-coborrower">
-                        <p class="fs-4 fw-bold p-4">Outgoing Requests</p>
-                        <div class="container d-flex align-items-center " style="padding-left: 20px;">
-                            {{-- <p class="">Search</p> --}}
-                            <label for="search" class="pe-2">Search</label>
-                            <input id="search" type="text" class="search-box" placeholder="Enter your search query">
-                        </div>
+        <div class="row  d-flex justify-content-center">
+            <div class="col-lg-8 col-md-10 ">
+                <div class="bg-white rounded border mx-1 mt-2">
+                    <div class="row  g-0 p-3">
+                        <p class="fs-4 fw-bold">Outgoing Requests</p>
+                    </div>
+                    <div class=" d-flex align-items-center mx-2">
+                        <label for="search" class="pe-2">Search</label>
+                        <input id="search" type="text" class="search-box" placeholder="Enter your search query">
+                    </div>
+                    <div class="row g-0">
                         @if (count($cb_withLoans) != 0)
 
-                        <table class="table caption-top" style="margin-top: 20px; background-color: white;">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" style="padding-left: 20px;">Loan</th>
+                                    <th scope="col">Loan</th>
                                     <th scope="col">Co-Borrower</th>
                                     <th scope="col">Status</th>
                                     <th></th>
@@ -29,26 +30,37 @@
                             <tbody>
                                 @foreach ($cb_withLoans as $cb_withLoan )
                                 <tr>
-                                    <td class="align-middle " >
-                                        <div class="ps-3">
+                                    <td class="align-middle" style="width: 20%">
+                                        <div class="p-1">
                                             <p class="fs-7 fw-bold mb-0">{{$cb_withLoan->loan->loanType->loan_type_description}}</p>
                                             <p class="fs-7 mb-0"> Php {{number_format($cb_withLoan->loan->principal_amount, 2, '.',',')}}</p>
-                                            <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($cb_withLoan->loan->created_at))}}</p>
+                                            @php
+                                            
+                                            $time = \Carbon\Carbon::parse($cb_withLoan->loan->created_at);
+                                            $now = \Carbon\Carbon::now();
+                                            $diff = $now->shortAbsoluteDiffForHumans($time); 
+                                                                                        
+                                            @endphp
+                                            <p class="fs-7 fw-bold" style="color: #00638D">{{$diff}} ago</p>
+                                            {{-- <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($cb_withLoan->loan->created_at))}}</p> --}}
                                         </div>
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="width: 30%">
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle">
-
-
-                                            <div class="ms-3">
-                                                <p class="mb-0 fs-7">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
-                                                <p class="mb-0 fs-7">{{$cb_withLoan->member->units->unit_code}}</p>
-                                                <p class="fs-7">ID: {{$cb_withLoan->member->id}}</p>
+                                            <div class="row  w-100 m-0 p-0">
+                                                <div class="col-lg-3  m-0 p-0 text-center">
+                                                    <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle img-fluid"> 
+                                                </div>
+                                                <div class="col-lg-9 ps-lg-2  m-0 p-0">
+                                                    <p class="mb-0 fs-7">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
+                                                    <p class="mb-0 fs-7">{{$cb_withLoan->member->units->unit_code}} | {{$cb_withLoan->member->units->campuses->campus_code}}</p>
+                                                    {{-- <p class="fs-7">ID: {{$cb_withLoan->member->id}}</p> --}}
+                                                </div>
                                             </div>
+                                            
                                         </div>
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle" style="width: 15%">
                                         @if ($cb_withLoan->accept_request == '1')
                                             <p style="color: #00B733;" class="fs-7 fw-bold">Accepted</p>
                                         @elseif($cb_withLoan->accept_request == '0')
@@ -62,14 +74,14 @@
                                         @endif
 
                                     </td>
-                                    <td class="align-middle  text-center">
+                                    <td class="align-middle  text-center" style="width: 20%">
                                         @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
                                             <a href="{{route('generateMulti-PurposeLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
                                         @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
                                             <a href="{{route('generateHousingLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
                                         @endif
                                     </td>
-                                    <td class="align-middle text-center">
+                                    <td class="align-middle text-center" style="width: 15%">
                                         <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                     </td>
                                 </tr>
@@ -87,8 +99,52 @@
                 </div>
             </div>
         </div>
+       
     </div>
+    
+    {{-- <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script> --}}
 
 </main>
+{{-- <style>
+    #myTable{
+        width: ;
+    }
+    .dataTables_length{
+        display: none !important; 
+    }
+    .dataTables_filter{
+        display: flex !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        display: flex;
+        border: 1px solid green;
+        padding: 1rem;
+        
+    }
+    .dataTables_filter input{
+        width: auto !important;
+    }
+    th.sorting{
+        pointer-events: none !important;
+    }
+    /* th.sorting.sorting_asc::before{
+        display: none !important;
+       
+    }
+    th.sorting.sorting_asc::after{
+        display: none !important;
 
+    } */
+    th.sorting::before{
+        display: none !important;
+    }
+    th.sorting::after{
+        display: none !important;
+    }
+
+</style> --}}
 @endsection
