@@ -66,7 +66,9 @@
                                         @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
                                             <a href="{{route('generateMulti-PurposeLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
                                         @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
-                                            <a href="{{route('generateHousingLoanApplicationForm')}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
+                                            <a href="{{ route('generateHousingLoanApplicationForm', ['id' => $cb_withLoan->loan->id]) }}" type="button" class="btn w-100 bu-orange fs-6 text-light rounded-1 {{ $cb_withLoan->accept_request != '1' ? 'disabled' : '' }}">
+                                                <i class="bi bi-printer-fill"></i> Print
+                                            </a>
                                         @endif
                                     </td>
                                     <td class="align-middle text-center">

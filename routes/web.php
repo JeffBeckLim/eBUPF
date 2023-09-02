@@ -46,11 +46,11 @@ use App\Http\Controllers\TransactionController;
     //Show hsl form
     Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth')->name('hsl.application');//add middleware for verified members only
 
-// ======================== ** LOAN APPLICATION MPL and HSL **  ==================================  
-// 
-// 
-// 
-// 📬======================== ** LOAN APPLICATION REQUESTS **  ==================================== 
+// ======================== ** LOAN APPLICATION MPL and HSL **  ==================================
+//
+//
+//
+// 📬======================== ** LOAN APPLICATION REQUESTS **  ====================================
     //show requests for co-borrower
     Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request');
      //Show auth users request
@@ -68,9 +68,9 @@ use App\Http\Controllers\TransactionController;
         return view('auth.verify');
     });
 // ======================== ** LOAN APPLICATION REQUESTS **  ====================================
-// 
-// 
-// 
+//
+//
+//
 //🔴ADMIN ==================================================================================================
 
     // Show Admin Dashboard
@@ -124,7 +124,7 @@ use App\Http\Controllers\TransactionController;
     Route::get('/member/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
 
     //Generate HSL Application Form
-    Route::get('/member/generateHousingLoanApplicationForm',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
+    Route::get('/member/generateHousingLoanApplicationForm/{id}',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
 
 //MEMBER ======================================================================================================
 

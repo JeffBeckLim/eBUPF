@@ -144,44 +144,44 @@
     <div class="new-roman" style="font-size: 15px; font-weight: bold; margin-bottom: 18px; border-top: 2px solid black; margin-top: 12px;">CO-BORROWER</div>
 
     <div style="width: 100%; font-size: 15px; line-height: ">
-        <span class="toBold">Name: </span> {{$lastname}}, {{$firstname}} {{$middle_initial}}.
+        <span class="toBold">Name: </span> {{$co_lastname}}, {{$co_firstname}} {{$co_middle_initial}}.
     </div>
 
     <div style="display: table; width: 100%; font-size: 15px;margin-bottom: 12px;margin-top: 8px;">
         <div style="display: table-cell; width: 40%;">
-            <span class="toBold">Date of Birth: </span> {{ $date_of_birth }}
+            <span class="toBold">Date of Birth: </span> {{ $co_date_of_birth }}
         </div>
         <div style="display: table-cell; width: 20%;">
-            <span class="toBold">Age: </span> {{$age}}
+            <span class="toBold">Age: </span> {{$co_age}}
         </div>
         <div style="display: table-cell; width: 40%;">
-            <span class="toBold">TIN: </span> {{$tin}}
+            <span class="toBold">TIN: </span> {{$co_tin}}
         </div>
     </div>
 
     <div style="width: 100%; font-size: 15px; margin-bottom: 12px;">
-        <span class="toBold">Permanent Address: </span> {{$address}}
+        <span class="toBold">Permanent Address: </span> {{$co_address}}
     </div>
 
     <div style="width: 100%; font-size: 15px; margin-bottom: 12px;">
-        <span class="toBold">Paying Campus/Unit: </span> {{$unit}}
+        <span class="toBold">Paying Campus/Unit: </span> {{$co_unit}}
     </div>
 
     <div style="display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
         <div style="display: table-cell; width: 60%;">
-            <span class="toBold">Telephone No./Cell phone No.: </span> {{ $contact_number }}
+            <span class="toBold">Telephone No./Cell phone No.: </span> {{ $co_contact_number }}
         </div>
         <div style="display: table-cell; width: 40%;">
-            <span class="toBold">Office: </span> {{$office}}
+            <span class="toBold">Office: </span> {{$co_office}}
         </div>
     </div>
 
     <div style="display: table; width: 100%; font-size: 15px; ">
         <div style="display: table-cell; width: 60%;">
-            <span class="toBold">Net Take Home Pay: </span> {{ $monthly_net_pay }} <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
+            <span class="toBold">Net Take Home Pay: </span> {{ $co_monthly_net_pay }} <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
         </div>
         <div style="display: table-cell; width: 40%; 8px;">
-            <span class="toBold">Amount Requested: </span> {{$amount_requested}}
+            <span class="toBold">Amount Requested: </span> {{$co_amount_requested}}
         </div>
     </div>
 
@@ -190,7 +190,7 @@
             <span class="toBold" style="padding-left: 12px; font-size: 12px; "> </span>
         </div>
         <div style="display: table-cell; width: 40%;font-size: 15px;">
-            <span class="toBold">Preferred payment period: </span> {{$payment_period}}
+            <span class="toBold">Preferred payment period: </span> {{$co_payment_period}}
         </div>
     </div>
 
