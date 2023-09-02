@@ -38,8 +38,8 @@ use App\Http\Controllers\TransactionController;
 // 💸======================== ** LOAN APPLICATION MPL and HSL **  ==================================
     //show mpl application
     Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth')->name('mpl.application');//add middleware for verified members only
-    
-    
+
+
     //create MPL and HSL application and Co-Borrower request
     Route::post('/member/loan-application/{loanTypeId}', [LoanApplicationController::class, 'storeRequest']);
 
