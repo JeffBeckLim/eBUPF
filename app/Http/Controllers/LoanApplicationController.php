@@ -43,8 +43,11 @@ class LoanApplicationController extends Controller
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
-        if($request->email_witness_1 == $request->email_witness_2){
-            return back()->with('email_error', 'Make sure witness emails are unique');
+        if($request->email_witness_1 == $request->email_witness_2 ||
+            $request->email_witness_1 == $request->email_co_borrower ||
+            $request->email_witness_2 == $request->email_co_borrower   
+        ){
+            return back()->with('email_error', 'Make sure all emails are unique');
         }
 
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();

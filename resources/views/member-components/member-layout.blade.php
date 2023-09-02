@@ -23,6 +23,13 @@
     <link rel="shortcut icon" href="{{ asset('assets/BU-logo.png') }}" type="image/x-icon">
 
 
+    {{-- DATA TABLE .NET --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />  
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+
+
 </head>
 
 <body class="p-0 m-0 border-0 overflow-x-hidden">
