@@ -121,7 +121,7 @@ use App\Http\Controllers\TransactionController;
     Route::get('/member/apply/loan', [MemberController::class, 'applyLoan'])->middleware('auth','member.access')->name('displayAvailableLoans');
 
     //Generate MPL Application Form
-    Route::get('/member/generateMulti-PurposeLoanApplicationForm',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
+    Route::get('/member/generateMulti-PurposeLoanApplicationForm/{id}',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
 
     //Generate HSL Application Form
     Route::get('/member/generateHousingLoanApplicationForm/{id}',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
