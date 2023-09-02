@@ -268,44 +268,44 @@
         CO-BORROWER
     </div>
     <div class="solo">
-        <span class="toBold">Name:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
+        <span class="toBold">Name:</span> <span>{{$co_lastname}}, {{$co_firstname}} {{$co_middle_initial}}.</span>
     </div>
 
     <div class="trio">
         <div class="trio-one">
-            <span class="toBold">Date of Birth:</span> <span>{{$date_of_birth}}</span>
+            <span class="toBold">Date of Birth:</span> <span>{{$co_date_of_birth}}</span>
         </div>
         <div class="trio-two">
-            <span class="toBold">Age:</span> <span>{{$age}}</span>
+            <span class="toBold">Age:</span> <span>{{$co_age}}</span>
         </div>
         <div class="trio-three">
-            <span class="toBold">Tin:</span> <span>{{$tin}}</span>
+            <span class="toBold">Tin:</span> <span>{{$co_tin}}</span>
         </div>
     </div>
 
     <div class="solo">
-        <span class="toBold">Permanent Address:</span> <span>{{$address}}</span>
+        <span class="toBold">Permanent Address:</span> <span>{{$co_address}}</span>
     </div>
 
     <div class="solo">
-        <span class="toBold">Unit:</span> <span>{{$unit}}</span>
+        <span class="toBold">Unit:</span> <span>{{$co_unit}}</span>
     </div>
 
     <div class="duo">
         <div class="duo-one">
-            <span class="toBold">Telephone/Cell phone No.:</span> <span>{{$contact_number}}</span>
+            <span class="toBold">Telephone/Cell phone No.:</span> <span>{{$co_contact_number}}</span>
         </div>
         <div class="duo-two">
-            <span class="toBold">Office:</span> <span>{{$office}}</span>
+            <span class="toBold">Office:</span> <span>{{$co_office}}</span>
         </div>
     </div>
 
     <div class="duo">
         <div class="duo-one">
-            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>{{$monthly_net_pay}}</span>
+            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>{{$co_monthly_net_pay}}</span>
         </div>
         <div class="duo-two">
-            <span class="toBold">Amount Requested:</span> <span>{{$amount_requested}}</span>
+            <span class="toBold">Amount Requested:</span> <span>{{$co_amount_requested}}</span>
         </div>
     </div>
 
