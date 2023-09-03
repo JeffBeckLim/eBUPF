@@ -553,13 +553,13 @@ input.invalid {
     .text11-move {
         padding-left: 66px;
     }
-    .request-to-coborrower {
-        /* width: 70%;
-        margin: 20px; */
-    }
-    .loan-application-box {
+    /* .request-to-coborrower {
+        width: 70%;
+        margin: 20px;
+    } */
+    /* .loan-application-box {
         margin-left: -80px;
-    }
+    } */
     .app-status-box {
         width: 50%;
     }
@@ -697,35 +697,32 @@ input.invalid {
 }
 
 .status-btn {
-    background-color: #FF6F19;
     color: white;
     font-weight: 600;
     font-size: 0.8rem;
     border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
-    margin-top: 20px;
-    margin-right: 20px;
     cursor: pointer;
 }
 
-.status-btn:hover {
+/* .status-btn:hover {
     background-color: #aa3e00;
     color: white;
-}
+} */
 
 
 /* Requests to Co-Borrower */
 
-.search-container {
+/* .search-container {
     margin-top: 30px;
     width: 90%;
-    height: 30px;
-}
+    height: 20px;
+} */
 
 .search-box {
     width: 100%;
-    padding: 10px;
+    padding: 7px;
     border: 1px solid #a7a7a7;
     border-radius: 5px;
     font-size: 16px;
@@ -860,7 +857,8 @@ thead tr:first-child th:first-child {
 }
 
 tbody tr:nth-child(odd) td {
-    background-color: #E6EEF1;
+    /* background-color: #E6EEF1; */
+    background-color: #f0f6fa;
 }
 
 .pl-table tbody td:not(:first-child) {

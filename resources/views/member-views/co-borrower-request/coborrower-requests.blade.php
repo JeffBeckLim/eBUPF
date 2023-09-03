@@ -5,7 +5,7 @@
 <main>
     
         <div class=" mx-1 mt-2 d-flex justify-content-center">
-            <div class="bg-white p-4 col-lg-9 rounded border">
+            <div class="bg-white p-2 col-lg-9 rounded border">
                 <div class="row">
                     <div class="col-12">
                         @if(session('message'))
@@ -14,7 +14,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
-                        <p class="fs-4 fw-bold pt-2">Incoming Requests</p>
+                        <p class="fs-5 fw-bold my-3 p-3">Incoming Requests</p>
                         <div class="accordion mb-3" id="accordionExample">
                             <div class="accordion-item border-0">
                               <h5 class="accordion-header">
@@ -65,7 +65,7 @@
                                         <td > 
                                             <div>
                                                 @if (is_null($loan->loan->is_viewed))
-                                                    <span style="font-size: small" class=" text-danger fw-bold fade-in"><i class="bi bi-circle-fill"></i> NEW</span>    
+                                                    <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
                                                 <p class="fs-7 fw-bold mb-0 mt-1">{{$loan->loan->loanType->loan_type_name}} 

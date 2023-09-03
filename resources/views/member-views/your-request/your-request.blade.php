@@ -6,9 +6,31 @@
     <div class="container-fluid">
         <div class="row  d-flex justify-content-center">
             <div class="col-lg-8 col-md-10 ">
-                <div class="bg-white rounded border mx-1 mt-2">
-                    <div class="row  g-0 p-3">
-                        <p class="fs-4 fw-bold">Outgoing Requests</p>
+                <div class="bg-white rounded border mx-1 mt-2 p-2">
+                    <div class="row my-3 g-0 p-3">
+                        <p class="fs-5 fw-bold">Outgoing Requests</p>
+                    </div>
+                    <div class="mx-2">
+                        <div class="accordion mb-3" id="accordionExample">
+                            <div class="accordion-item border-0">
+                              <h5 class="accordion-header">
+                                <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <p style="font-size: small" class="my-auto text-secondary">
+                                        <i class="bi bi-lightbulb"></i> This is where you can see the loan application form you have sent to your co-borrower
+                                    </p>
+                                </button>
+                              </h5>
+                              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body text-secondary" style="font-size: small">
+                                    <ul>
+                                        <li><strong>If co-borrower accepts</strong>: You will be able to print the loan application form with the co-borrowers detail ready for them to sign</li>
+                                        <li><strong>If co-borrower denies</strong>: You cannot print the form</li>
+                                    </ul>
+                                    <p>Your decision ensures transparency and consent in the loan application process.</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
                     <div class=" d-flex align-items-center mx-2">
                         <label for="search" class="pe-2">Search</label>
@@ -41,7 +63,7 @@
                                             $diff = $now->shortAbsoluteDiffForHumans($time); 
                                                                                         
                                             @endphp
-                                            <p class="fs-7 fw-bold" style="color: #00638D">{{$diff}} ago</p>
+                                            <p class="fw-bold" style="color: #00638D; font-size: 12px;">{{$diff}} ago</p>
                                             {{-- <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($cb_withLoan->loan->created_at))}}</p> --}}
                                         </div>
                                     </td>
