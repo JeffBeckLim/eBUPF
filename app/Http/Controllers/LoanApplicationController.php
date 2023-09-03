@@ -19,6 +19,9 @@ class LoanApplicationController extends Controller
         return view('member-views.hsl-application-form.hsl-application-form');
     }
 
+    public function showLoanApplications(){
+        return view('member-views.loan-applications.loan-applications');
+    }
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
     public function storeRequest(Request $request, $loanTypeId){
         if($loanTypeId > 2){
@@ -84,28 +87,7 @@ class LoanApplicationController extends Controller
             'loan_id'=>$loan->id,
         ]);
 
-
-        //return back()->with('message', 'Loan Application Request Sent!');
         return view('member-views.mpl-application-form.confirmation');
-        // dd($formFields);
-
-        // COBORROWER TABLE -----------
-        // 'member_id',
-        // 'loan_id',
-        // 'accept_request',s
-
-
-        // LOANS TABLE ----------------
-        // 'member_id', \\
-        // 'loan_type_id',\\
-        // 'amortization_id',
-        // 'adjustment_id',
-        // 'loan_category_id',
-        // 'principal_amount',\\
-        // 'interest',
-        // 'term_years',\\s
-        // 'is_visible',
-        //  'is_approved',
     }
 
     // ======================VALIDATE AND STORE HOUSING LOAN APPLICATION====================================
@@ -167,9 +149,7 @@ class LoanApplicationController extends Controller
             'member_id'=>$witness_2->member->id,
             'loan_id'=>$loan->id,
         ]);
-
-
         return view('member-views.mpl-application-form.confirmation');
-        // dd($request);
+        
     }
 } // THIS IS THE LAST TAG

@@ -12,6 +12,7 @@ use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -29,7 +30,8 @@ use App\Http\Controllers\TransactionController;
 //🛠️TESTING ===================================================================================================
     Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-
+    Route::get('member/loan/your-loans', [LoanController::class, 'show'])->name('member.loans');
+    Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
 //TESTING ===================================================================================================
