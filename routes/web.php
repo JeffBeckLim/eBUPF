@@ -76,13 +76,16 @@ use App\Http\Controllers\TransactionController;
 //🔴ADMIN ==================================================================================================
 
     // Show Admin Dashboard
-    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
+    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
 
-    //Show All Accounts View
-    Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');
+
+        //Show All Accounts View
+        Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
+        Route::get('/admin/members', [AdminController::class, 'showMembers']);
+
 
     // Show Admin Ledger
-    Route::get('/ledger', [AdminController::class, 'memberLedger'])->middleware('auth','admin.access');
+    Route::get('/ledger', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 

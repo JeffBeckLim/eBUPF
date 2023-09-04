@@ -83,8 +83,7 @@
                 <p class="accordion-header fw-7">
                   <button class="accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
                     
-                    <img src="../icons/admin-icons/members.svg" style="width: 1.1rem; margin-left: 10px;">
-                    
+                    <img src="{{asset('icons/admin-icons/members.svg')}}" style="width: 1.1rem; margin-left: 10px;">
                       <p class="fw-7 my-auto ms-2">Members</p>
                   </button>
                 </p>
@@ -94,7 +93,7 @@
                       <a href="/admin/all-users" class="fs-7">All Users</a>
                     </li>
                     <li>
-                      <a href=""  class="fs-7">Members</a>
+                      <a href="/admin/members"  class="fs-7">Members</a>
                     </li>
                   </ul>
                 </div>
