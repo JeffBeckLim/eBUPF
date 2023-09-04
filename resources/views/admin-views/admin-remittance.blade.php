@@ -45,30 +45,30 @@
             <div class="row g-0 mt-3" style="margin-left: 1px;">
                 <div class="col-md-2 pe-1">
                     <label for="ornumber" class="fw-bold">OR Number</label>
-                    <input class="form-control" name="ornumber" value="" style="background: #D9E4E9;border-radius: 10px;">
+                    <input class="form-control" name="ornumber" value="" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);">
                 </div>
 
                 <div class="col-md-2 pe-1 pb-3">
                     <label for="date" class="fw-bold">Date</label>
-                    <input id="myForm" class="form-control" name="date" value="" style="background: #D9E4E9;border-radius: 10px;">
+                    <input id="myForm" class="form-control" name="date" type="date" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                 </div>
 
                 <div class="col-md-2 pe-1">
-                    <label for="loan" class="fw-bold">Loan</label>
-                    <input class="form-control" name="loan" value="" style="background: #D9E4E9;border-radius: 10px;">
+                    <label for="loan" class="fw-bold">Loan ID</label>
+                    <input class="form-control" name="loan" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                 </div>
 
                 <div class="col-md-2 pe-1">
                     <label for="principal" class="fw-bold">Principal</label>
-                    <input id="myForm" class="form-control" name="principal" value="" style="background: #D9E4E9;border-radius: 10px;">
+                    <input id="myForm" class="form-control" name="principal" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                 </div>
 
                 <div class="col-md-2 pe-1">
                     <label for="interest" class="fw-bold">Interest</label>
-                    <input class="form-control w-100" name="interest" value="" style="background: #D9E4E9;border-radius: 10px;">
+                    <input class="form-control w-100" name="interest" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                 </div>
 
-                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">
                     <button id="remit-btn" class="btn btn-primary" style="">Add Payment</button>
                 </div>
             </div>
