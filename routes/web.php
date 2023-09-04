@@ -84,6 +84,8 @@ use App\Http\Controllers\TransactionController;
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
+    Route::get('/admin/remittance/view', [AdminController::class, 'showRemittance'])->middleware('auth','admin.access')->name('admin.remittance');
+
 //ADMIN ======================================================================================================
 
 //🟩MEMBER =================================================================================================

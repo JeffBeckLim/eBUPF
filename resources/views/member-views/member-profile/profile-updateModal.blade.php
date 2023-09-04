@@ -15,7 +15,7 @@
                         @if($unit->id == $units_item->id)
                             <option value="{{$units_item->id}}" selected>{{$units_item->unit_code}} : {{$units_item->campuses->campus_code}}</option>
                         @else
-                            <option value="{{$units_item->id}}" >{{$units_item->unit_code}} : {{$units_item->campuses->campus_code}}</option>    
+                            <option value="{{$units_item->id}}" >{{$units_item->unit_code}} : {{$units_item->campuses->campus_code}}</option>
                         @endif
                     @endforeach
 
