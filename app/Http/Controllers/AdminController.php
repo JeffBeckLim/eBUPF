@@ -9,23 +9,26 @@ class AdminController extends Controller
 {
     public function index(){
         return view('admin-views.admin-dashboard');
+
     }
 
     public function allUsers(){
-        $users = User::with('member.membershipApplication')->get();
-        // dd($users[5]->member->membershipApplication->created_at);
-        return view('admin-views.admin-all-accounts', compact('users'));
-    }
 
-    public function showMembers(){
-        $memberUsers = User::with('member.units.campuses')->where('user_type', 'member')->get();
-        return view('admin-views.admin-members', compact('memberUsers'));
+        $users = User::with('member')->get();
+        return view('admin-views.admin-all-accounts', compact('users'));
+
+
     }
 
 
     public function memberLedger(){
+
         return view('admin-views.admin-ledger');
     }
-    
+
+    public function showRemittance(){
+        return view('admin-views.admin-remittance');
+    }
+
 }
 

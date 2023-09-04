@@ -706,6 +706,7 @@ input.invalid {
     cursor: pointer;
 }
 
+
 /* .status-btn:hover {
     background-color: #aa3e00;
     color: white;
@@ -713,6 +714,7 @@ input.invalid {
 
 
 /* Requests to Co-Borrower */
+
 
 /* .search-container {
     margin-top: 30px;
@@ -1275,10 +1277,8 @@ tbody tr:nth-child(odd) td {
 }
 
 .bg-selected {
-
     background-color: #e3eefc;
 }
-
 
 
 /* The Modal */
@@ -1419,4 +1419,40 @@ tbody tr:nth-child(odd) td {
         margin-top: 40px;
         padding: 50px;
     }
+}
+
+
+/* for remittance */
+
+#remit-btn {
+    border-radius: 20px;
+}
+
+.text-add-payment {
+    color: #868686;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0 0 15px;
+}
+
+.apply-changes-btn {
+    border-radius: 10px;
+    background: #FF6F19;
+    padding: 5px 10px;
+    color: #FFF !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.apply-changes-btn:hover {
+    background: #be4f0f;
+    color: white;
+}
+
+.text-remit-table-head {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: bold;
 }
