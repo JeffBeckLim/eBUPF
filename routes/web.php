@@ -12,6 +12,7 @@ use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -29,7 +30,8 @@ use App\Http\Controllers\TransactionController;
 //🛠️TESTING ===================================================================================================
     Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-
+    Route::get('member/loan/your-loans', [LoanController::class, 'show'])->name('member.loans');
+    Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
 //TESTING ===================================================================================================
@@ -74,13 +76,16 @@ use App\Http\Controllers\TransactionController;
 //🔴ADMIN ==================================================================================================
 
     // Show Admin Dashboard
-    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->middleware('auth','admin.access')->name('admin-dashboard');
+    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
 
-    //Show All Accounts View
-    Route::get('/admin/all-users/', [AdminController::class, 'allUsers'])->middleware('auth','admin.access');
+
+        //Show All Accounts View
+        Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
+        Route::get('/admin/members', [AdminController::class, 'showMembers']);
+
 
     // Show Admin Ledger
-    Route::get('/ledger', [AdminController::class, 'memberLedger'])->middleware('auth','admin.access');
+    Route::get('/ledger', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 

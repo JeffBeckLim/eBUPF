@@ -10,7 +10,7 @@ class MembershipApplication extends Model
     use HasFactory;
     protected $fillable = [
         'member_id',
-        'ref_nummber',
+        'ref_number',
         'status',
     ];
 

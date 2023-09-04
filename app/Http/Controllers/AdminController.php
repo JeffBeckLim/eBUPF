@@ -11,6 +11,7 @@ class AdminController extends Controller
         return view('admin-views.admin-dashboard');
 
     }
+
     public function allUsers(){
 
         $users = User::with('member')->get();
@@ -18,6 +19,8 @@ class AdminController extends Controller
 
 
     }
+
+
     public function memberLedger(){
 
         return view('admin-views.admin-ledger');

@@ -49,7 +49,7 @@
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
                     
-                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans', 'loan.applications', 'member.loans') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
                                     <i class="fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
@@ -63,17 +63,21 @@
                       <div id="collapseLoans" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
-                                <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('displayAvailableLoans', 'mpl.application', 'hsl.application') ? 'fw-bold' : ''}}" href="/member/apply/loan">Apply Loan</a>
+
+                                <div class="co-12 p-2">
+                                    <a class="text-decoration-none text-secondary {{Route::is('member.loans') ? 'fw-bold' : ''}}" href="{{route('member.loans')}}">Your Loans</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary" href="">Multi Purpose</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('displayAvailableLoans', 'mpl.application', 'hsl.application', ) ? 'fw-bold' : ''}}" href="/member/apply/loan"> Create Form</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary" href="">Housing</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
                                 </div>
+
+
+
 
                             </div>
                         </div>

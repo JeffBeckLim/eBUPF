@@ -92,7 +92,7 @@
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
                                             <div class="col-6 d-flex justify-content-end">
-                                                <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Apply Loan</a>
+                                                <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Create Form</a>
                                             </div>
                                         </div>
                                         <div style="padding-left: 10px; background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px; padding-bottom: 15px;">
