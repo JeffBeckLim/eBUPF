@@ -706,6 +706,7 @@ input.invalid {
     cursor: pointer;
 }
 
+
 /* .status-btn:hover {
     background-color: #aa3e00;
     color: white;
@@ -713,6 +714,7 @@ input.invalid {
 
 
 /* Requests to Co-Borrower */
+
 
 /* .search-container {
     margin-top: 30px;
@@ -1436,7 +1438,8 @@ tbody tr:nth-child(odd) td {
 .apply-changes-btn {
     border-radius: 10px;
     background: #FF6F19;
-    color: #FFF;
+    padding: 5px 10px;
+    color: #FFF !important;
     font-size: 12px;
     font-weight: 700;
 }

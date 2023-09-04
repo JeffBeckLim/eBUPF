@@ -81,7 +81,7 @@
                     <input type="text" class="membership-application-search-input">
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-center">
-                    <button class="btn apply-changes-btn">Apply Changes</button>
+                    <a class="apply-changes-btn">Apply Changes</a>
                 </div>
             </div>
             <div class="text-remit-table-head">Loan Payments</div>
