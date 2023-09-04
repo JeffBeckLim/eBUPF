@@ -60,7 +60,11 @@
                                 <tr>
                                         <td>{{$user->id}}</td>
                                         <td>{{$user->member->firstname}} {{$user->member->lastname}}</td>
-                                        <td>{{$user->member->membership_id}}</td>
+                                        <td>
+                                            @if($user->member->membershipApplication)
+                                            {{$user->member->membershipApplication->created_at}}
+                                            @endif
+                                        </td>
                                         <td>
                                             {{$user->email}}
                                             <label class="text-info">
