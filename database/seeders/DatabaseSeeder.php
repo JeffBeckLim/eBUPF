@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\LoanApplicationState;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BeneficiaryRelationshipTableSeeder::class);
         $this->call(MembersTableSeeder::class);
         $this->call(LoanTypesTableSeeder::class);
+        $this->call(LoanApplicationStatesSeeder::class);
     }
 }
