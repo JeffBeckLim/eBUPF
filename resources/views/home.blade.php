@@ -19,12 +19,12 @@
             @endif
             {{-- MEMBERSHIP CARD --}}
 
-            <div class=" col-lg-6 d-flex justify-content-start align-items-center pt-2 pb-5" style=" margin-top: 15px;">
+            <div class=" col-lg-6 d-flex justify-content-start align-items-center pt-2" style=" margin-top: 15px;">
                 <div id="bluebox-content" style="height: 100%; width: 550px; background-color: #0082BA; border-radius: 10px;position: relative;">
                     <h4 class="text5-design" style="font-size: clamp(1.25rem, 1.0357rem + 0.7619vw, 1.75rem);">Bicol University</h4>
                     <h1 class="text5-design" style="margin-top: -10px; font-size: clamp(1.875rem, 1.7143rem + 0.5714vw, 2.25rem);">Provident Fund Inc.</h1>
-                    <img class="orange-tag" src="assets/orange-tag.png" alt="tag" width="60px">
-                    <div class="row pt-4">
+                    <img class="orange-tag" style="pointer-events: none;" src="assets/orange-tag.png" alt="tag" width="60px">
+                    <div class="row pt-3">
                         <div class="col-2">
                             <i class="bi bi-cash-stack icon1"></i>
                         </div>
@@ -44,10 +44,10 @@
                     @if(!Auth::user())
                     <div class="row  g-0">
                         <div class="col-12 d-flex">
-                            <a class="btn bu-orange text-light grow-on-hover w-100 p-3 mx-5 mb-2" href="/register" style="font-size: large; font-weight:bold;" type="button">Sign Up</a>
+                            <a class="btn bu-orange text-light grow-on-hover w-100 mx-5 mb-2" href="/register" style="font-size: large; font-weight:bold;" type="button">Sign Up</a>
                         </div>
                         <div class="col-12 d-flex">
-                            <a class="btn btn-outline-light grow-on-hover w-100 p-2 mx-5 mb-3" href="/login" style="font-size: large; font-weight:bold;" type="button">Log In</a>
+                            <a class="btn btn-outline-light grow-on-hover w-100 mx-5 mb-3" href="/login" style="font-size: large; font-weight:bold;" type="button">Log In</a>
                         </div>                          
                     </div>
                     @endif
@@ -66,7 +66,7 @@
         </div>
     </section>
 
-    <section id="core-feature" class="mb-5 pt-lg-5 border " style="background-image: url({{asset('assets/core-feature-bg.png')}})">
+    <section id="core-feature" class="mb-5 pt-lg-3 border " style="background-image: url({{asset('assets/core-feature-bg.png')}})">
         <div id="core-feature-container" class="container justify-content-center border-top border-light">
             <h6 class="text-center text-light mt-1">Core Features</h6>
             <div class="row mt-4 mb-sm-5 d-flex justify-content-center align-items-center">
@@ -92,7 +92,7 @@
 
 
     <section id="offer">
-        <div class="container">
+        <div class="container border px-3">
             <p class="text-center fw-bold fs-5">Apply a loan</p>
             <div class="mb-5">
                 <div class="row d-flex justify-content-center align-items-center">
