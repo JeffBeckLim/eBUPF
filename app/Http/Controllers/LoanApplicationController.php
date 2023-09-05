@@ -10,15 +10,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoanApplicationController extends Controller
-{
+{   
+    public function showLoanStatus(){
+        return view('member-views.loan-applications.loan-application-status');
+    }
+
     //SHOW MPL APPLICATION FORM
     public function show(){
         return view('member-views.mpl-application-form.mpl-application-form');
     }
+
+    // SHOW HSL APPLICATION FORM
     public function showHsl(){
         return view('member-views.hsl-application-form.hsl-application-form');
     }
 
+    // SHOW LIST OF LOAN APPLICATIONS
     public function showLoanApplications(){
         return view('member-views.loan-applications.loan-applications');
     }

@@ -38,7 +38,7 @@
                     </div>
                     <div class="row g-0">
                         @if (count($cb_withLoans) != 0)
-
+                        
                         <table class="table">
                             <thead>
                                 <tr>
@@ -112,6 +112,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        
 
                         @else
                         <div class="border text-center p-5 mt-3 m-3 text-secondary">
