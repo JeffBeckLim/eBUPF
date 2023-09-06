@@ -1,0 +1,99 @@
+@extends('admin-components.admin-layout')
+
+@section('content')
+
+<div class="container-fluid" >
+    <div class="adminbox mt-2">
+        <div class="d-flex">
+            <div class="d-flex membership-app-header1 text-dark">
+                <img src="{{asset('admin-icons/membership-application-icon.svg')}}" alt="" width="50px">
+                <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Membership</span> <span class="fw-bold fs-7">Applications</span></p>
+            </div>
+
+            <div class="membership-app-header2">
+                <div class="lh-1" style="padding: 15px 0 0 15px;">
+                    <p class="fw-bold">{{$pending}} Pending</p>
+                    <div class="d-flex">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;" class="text-success">{{$approved}} Approved</p>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-danger" style="font-size: 0.7rem; width: 100%">{{$denied}} Denied</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="table-responsive">
+            <div class="custom-table-for-admin">
+                
+                <table class="table admin-table table-striped " id="myTable">
+                    <thead style="border-bottom: 2px solid black">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Date Created</th>
+                            <th>Unit</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (count($memberApplications) > 0)
+                            @foreach ($memberApplications as $memberApplication)
+                                    
+                                <tr>
+                                    <td>{{$memberApplication->member->id}}</td>
+                                    <td>
+                                        <img src="{{asset('storage/'.$memberApplication->member->profile_picture)}}" alt="" style="height: 30px; width: 30px; object-fit: cover;" class="border rounded-circle">
+                                        <a href="#" class="fw-bold text-dark" style="text-decoration: none;">
+                                            {{$memberApplication->member->firstname}}
+                                            {{$memberApplication->member->lastname}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{ date('F d, Y', strtotime($memberApplication->created_at)) }}
+                                    </td>
+                                    <td>{{$memberApplication->member->units->unit_code}}</td>
+                                    <td>{{$memberApplication->member->address}}</td>
+                                    <td>{{$memberApplication->member->contact_num}}</td>
+                                    <td class="text-secondary">
+                                        @if ($memberApplication->member->status == 0)
+                                            Pending
+                                        @elseif($memberApplication->member->address==1)
+                                            <span class="text-success">Approved</span>
+                                        @elseif($memberApplication->member->address==2)
+                                            <span class="text-danger">Denied</span> 
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <a href="#" style="color: #00D186" class=" me-3"><i class="bi bi-check-circle-fill"></i></a>
+                                        
+                                            <a href="#" style="color: #FF0000"><i class="bi bi-x-circle-fill"></i></a>
+                                        </h5>
+                                    </td>
+                                    <td><a href="#" class="fs-6 text-dark"><i class="bi bi-three-dots"></i></a></td>
+                                </tr>   
+                            
+                            @endforeach
+                        @else
+                            
+                        @endif
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@include('admin-components.admin-dataTables')
+@endsection

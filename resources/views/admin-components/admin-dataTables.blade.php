@@ -3,12 +3,9 @@
     VIEWS REQUIRING DATA TABLES
 --}}
 <style>
-    :root {
-        --p200: 30px;
-    }
     .dataTables_length, .dataTables_filter{
         /*margin: 20px;*/
-        padding: var(--p200);
+        padding: 30px;
     }
     
     .dataTables_filter  input{
@@ -18,7 +15,7 @@
         padding-left: 0;
     }
     .dataTables_filter  label{
-        font-weight: 800;
+        font-weight: 400;
     }
     .dataTables_paginate  span a{
         background-color: rgb(255, 255, 255) !important;
@@ -39,6 +36,13 @@
         border: 0 !important;
         background: #8ba7c0 !important;
         
+    }
+
+    .dataTables_info{
+        padding-left: 10px !important; 
+    }
+    .dataTables_paginate{
+        padding-right: 10px !important; 
     }
 
 </style>
