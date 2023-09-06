@@ -13,11 +13,14 @@ class AdminController extends Controller
     }
 
     public function allUsers(){
-
         $users = User::with('member')->get();
         return view('admin-views.admin-all-accounts', compact('users'));
+    }
 
 
+    public function showMembers(){
+        $memberUsers = User::with('member.units.campuses')->where('user_type', 'member')->get();
+        return view('admin-views.admin-members', compact('memberUsers'));
     }
 
 

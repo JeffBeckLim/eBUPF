@@ -13,6 +13,7 @@ use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\MembershipApplicationController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -84,7 +85,10 @@ use App\Http\Controllers\TransactionController;
 
         //Show All Accounts View
         Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
+        //Show all members 
         Route::get('/admin/members', [AdminController::class, 'showMembers']);
+        //Show membership Applications
+        Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
 
 
     // Show Admin Ledger

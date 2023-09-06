@@ -91,8 +91,13 @@
                 <div id="flush-collapseMember" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                   <ul class="list-unstyled components ms-4">
                     <li>
+                      <a href="/admin/membership-applications"  class="fs-7">Membership Applications</a>
+                    </li>
+                    {{-- show list od all USERS regardless of user type --}}
+                    <li>
                       <a href="/admin/all-users" class="fs-7">All Users</a>
                     </li>
+                    {{-- show list of all MEMBERS --}}
                     <li>
                       <a href="/admin/members"  class="fs-7">Members</a>
                     </li>

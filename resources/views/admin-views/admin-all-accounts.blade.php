@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="container-fluid px-2" >
-    <div class="row">
+    <div class="row mt-2">
         <div class="container-fluid">
-            <div class="adminbox m-4">
-                <div class=" d-flex">
+            <div class="adminbox">
+                <div class=" d-flex text-dark">
                         <div >
                             <img src="{{asset('admin-icons/magnifying-glass.svg')}}" alt="" width="50px" height="58px">
                         </div>
@@ -38,7 +38,7 @@
     
 
                 <div class="table-responsive ">
-                    <div class="custom-table-for-admin p-3">
+                    <div class="custom-table-for-admin">
     
                         <table class="table table-striped border-top" id="myTable">
                             
