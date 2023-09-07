@@ -65,20 +65,25 @@
                                     <td>{{$memberApplication->member->address}}</td>
                                     <td>{{$memberApplication->member->contact_num}}</td>
                                     <td class="text-secondary">
-                                        @if ($memberApplication->member->status == 0)
+                                        @if ($memberApplication->status == 0)
                                             Pending
-                                        @elseif($memberApplication->member->address==1)
+                                        @elseif($memberApplication->status==1)
                                             <span class="text-success">Approved</span>
-                                        @elseif($memberApplication->member->address==2)
+                                        @elseif($memberApplication->status==2)
                                             <span class="text-danger">Denied</span> 
                                         @endif
                                     </td>
                                     <td>
                                         <h5>
-                                            <a href="#" style="color: #00D186" class=" me-3"><i class="bi bi-check-circle-fill"></i></a>
+                                            <a href="#" style="color: #00D186" class="me-3"><i class="bi bi-check-circle-fill" data-bs-toggle="modal" data-bs-target="#approveModal{{$memberApplication->member->id}}"></i></a>
                                         
-                                            <a href="#" style="color: #FF0000"><i class="bi bi-x-circle-fill"></i></a>
+                                            <a href="#" style="color: #FF0000" data-bs-toggle="modal" data-bs-target="#denyModal{{$memberApplication->member->id}}"><i class="bi bi-x-circle-fill"></i></a>
                                         </h5>
+
+                                        @include('admin-views.admin-membership-applications.accept-deny-modal')
+                                        
+
+                                        
                                     </td>
                                     <td><a href="#" class="fs-6 text-dark"><i class="bi bi-three-dots"></i></a></td>
                                 </tr>   

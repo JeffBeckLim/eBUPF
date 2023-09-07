@@ -9,7 +9,7 @@ class MembershipApplicationController extends Controller
 {
     public function show(){
 
-        $memberApplications = MembershipApplication::with('member.units.campuses')->get();
+        $memberApplications = MembershipApplication::with('member.units.campuses')->orderBy('created_at', 'desc')->get();
         
         $pending = count(MembershipApplication::where('status', 0)->get());
         $approved = count(MembershipApplication::where('status', 1)->get());
@@ -20,4 +20,16 @@ class MembershipApplicationController extends Controller
             compact('memberApplications', 'approved', 'denied', 'pending')
         );
     }
+
+
+    public function acceptMembership($id){
+        dd($id);
+    }
+
+    public function rejectMembership($id){
+        dd($id);
+    }
+
+
+
 }

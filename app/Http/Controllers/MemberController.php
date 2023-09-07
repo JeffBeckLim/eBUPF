@@ -234,7 +234,7 @@ class MemberController extends Controller
         }
 
 
-        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Form Updated');
+        return redirect('/member/membership-form/edit-download')->with('message', 'Membership Form Created');
 
     }
 
