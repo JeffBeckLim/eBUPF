@@ -82,14 +82,17 @@ use App\Http\Controllers\TransactionController;
     // Show Admin Dashboard
     Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
 
+    //Show All Accounts View
+    Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
+    //Show all members 
+    Route::get('/admin/members', [AdminController::class, 'showMembers']);
+    //Show membership Applications
+    Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
 
-        //Show All Accounts View
-        Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
-        //Show all members 
-        Route::get('/admin/members', [AdminController::class, 'showMembers']);
-        //Show membership Applications
-        Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
-
+        //Accept membership application
+        Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept');
+        //Reject membership application
+        Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject');
 
     // Show Admin Ledger
     Route::get('/ledger', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
