@@ -36,13 +36,12 @@
                                             </div>
                                         </div>
                                         <div class="row mt-2 mb-2">
-                                            <div class="col-sm-6 ">
+                                            <div class="col-sm-7 ">
                                                 <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
-                                            <div class="col-sm-3">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months left</span>
+
+                                            <div class="col-sm-4">
+                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months to pay</span>
                                             </div>
                                         </div>
 
@@ -69,13 +68,12 @@
                                             </div>
                                         </div>
                                         <div class="row mt-2 mb-2">
-                                            <div class="col-sm-6 ">
+                                            <div class="col-sm-7 ">
                                                 <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
-                                            <div class="col-sm-3">
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months left</span>
+
+                                            <div class="col-sm-5">
+                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months to pay</span>
                                             </div>
                                         </div>
                                     </div>
