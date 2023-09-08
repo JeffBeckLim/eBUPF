@@ -4,12 +4,32 @@
 
 <div class="container-fluid">
     <div class="adminbox mt-2">
+
+        
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {!! session('success') !!}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>    
         @endif
+
+        
+        @if (session('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {!! session('warning') !!}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+        @endif
+         
+        @if (session('reject'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {!! session('reject') !!}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+        @endif
+    
+
+
         <div class="d-flex">
             <div class="d-flex membership-app-header1 text-dark">
                 <img src="{{asset('admin-icons/membership-application-icon.svg')}}" alt="" width="50px">

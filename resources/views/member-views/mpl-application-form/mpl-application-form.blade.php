@@ -1,9 +1,7 @@
 @extends('member-components.member-layout')
 
 @section('content')
-<div class="m-3 col-12">
-    <a href="/member/apply/loan" class="text-decoration-none text-secondary fw-bold">Apply Loan <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">{{Route::is('mpl.application')? 'MPL ' : ''}}Application</span>
-</div>
+
 <div class="row m-3 mx-2 d-flex justify-content-center">
     @if (session('message'))
         <div class="alert alert-primary">

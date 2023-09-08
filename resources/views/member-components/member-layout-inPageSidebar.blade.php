@@ -67,13 +67,17 @@
                                 <div class="co-12 p-2">
                                     <a class="text-decoration-none text-secondary {{Route::is('member.loans') ? 'fw-bold' : ''}}" href="{{route('member.loans')}}">Your Loans</a>
                                 </div>
-
+                                
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('displayAvailableLoans', 'mpl.application', 'hsl.application', ) ? 'fw-bold' : ''}}" href="/member/apply/loan"> Create Form</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is( 'mpl.application') ? 'fw-bold' : ''}}" href="{{route('mpl.application')}}">Apply for MPL</a>
+                                </div>
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-secondary {{Route::is( 'hsl.application') ? 'fw-bold' : ''}}" href="{{route('hsl.application')}}">Apply for HSL</a>
                                 </div>
 
 

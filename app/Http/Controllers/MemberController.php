@@ -311,9 +311,7 @@ class MemberController extends Controller
            return redirect('/member/membership-form/edit-download');
         }
    }
-
-   public function applyLoan(){
-
-       return view('/member-views/apply-loan');
-    }
+//    public function applyLoan(){
+//        return view('/member-views/apply-loan');
+//     }
 }
