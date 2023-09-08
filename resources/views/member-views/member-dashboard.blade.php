@@ -90,8 +90,8 @@
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
                                             <div class="col-md-8 gap-1 d-flex justify-content-end">
-                                                <a href="" type="button" class="btn btn-apply-mpl">Apply Multi-Purpose Loan</a>
-                                                <a href="" type="button" class="btn btn-apply-hsl">Apply Housing Loan</a>
+                                                <a href="/member/mpl-application-form/" type="button" class="btn btn-apply-mpl">Apply Multi-Purpose Loan</a>
+                                                <a href="/member/hsl-application-form/" type="button" class="btn btn-apply-hsl">Apply Housing Loan</a>
 
 {{--                                                 <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Create Form</a>
  --}}                                            </div>
