@@ -2,8 +2,14 @@
 
 @section('content')
 
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="adminbox mt-2">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!! session('success') !!}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>    
+        @endif
         <div class="d-flex">
             <div class="d-flex membership-app-header1 text-dark">
                 <img src="{{asset('admin-icons/membership-application-icon.svg')}}" alt="" width="50px">
