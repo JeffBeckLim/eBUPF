@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="row mt-2 mb-2">
                                             <div class="col-sm-6 ">
-                                                <span class="text11-design text11-move fw-bold">Monthly Payable </span> <span class="text12-design">Php 4,416.00</span>
+                                                <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
                                             <div class="col-sm-3">
                                             </div>
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="row mt-2 mb-2">
                                             <div class="col-sm-6 ">
-                                                <span class="text11-design text11-move fw-bold">Monthly Payable </span> <span class="text12-design">Php 4,416.00</span>
+                                                <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
                                             <div class="col-sm-3">
                                             </div>

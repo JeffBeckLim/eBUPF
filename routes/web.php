@@ -101,6 +101,8 @@ use App\Http\Controllers\TransactionController;
 
     Route::get('/admin/remittance/view', [AdminController::class, 'showRemittance'])->middleware('auth','admin.access')->name('admin.remittance');
 
+    Route::post('/admin/remittance/view/payment/add', [AdminController::class, 'addPaymentRemittance'])->middleware('auth','admin.access')->name('add.payment.remittance');
+
 //ADMIN ======================================================================================================
 
 //🟩MEMBER =================================================================================================
