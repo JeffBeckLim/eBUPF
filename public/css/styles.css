@@ -1421,6 +1421,42 @@ tbody tr:nth-child(odd) td {
     }
 }
 
+.btn-apply-mpl {
+    background-color: #0092D1;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-hsl {
+    background-color: #FF6F19;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-mpl:hover {
+    background-color: #0072a3;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-hsl:hover {
+    background-color: #af4b11;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
 
 /* for remittance */
 

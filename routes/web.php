@@ -34,7 +34,7 @@ use App\Http\Controllers\TransactionController;
     Route::get('member/loan/your-loans', [LoanController::class, 'show'])->name('member.loans');
     Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
 
-    Route::get('member/loan/loan-applications/status', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status'); 
+    Route::get('member/loan/loan-applications/status', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
 
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
@@ -84,7 +84,7 @@ use App\Http\Controllers\TransactionController;
 
     //Show All Accounts View
     Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
-    //Show all members 
+    //Show all members
     Route::get('/admin/members', [AdminController::class, 'showMembers']);
     //Show membership Applications
     Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
@@ -135,7 +135,7 @@ use App\Http\Controllers\TransactionController;
     Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
 
     //Show available loans
-    Route::get('/member/apply/loan', [MemberController::class, 'applyLoan'])->middleware('auth','member.access')->name('displayAvailableLoans');
+    //Route::get('/member/apply/loan', [MemberController::class, 'applyLoan'])->middleware('auth','member.access')->name('displayAvailableLoans');
 
     //Generate MPL Application Form
     Route::get('/member/generateMulti-PurposeLoanApplicationForm/{id}',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');

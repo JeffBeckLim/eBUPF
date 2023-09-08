@@ -40,7 +40,6 @@
                                                 <span class="text11-design text11-move fw-bold">Monthly Payable </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
                                             <div class="col-sm-3">
-                                                <span class="text12-design fw-bold">Due</span> <span class="text11-design">May 1, 2023</span>
                                             </div>
                                             <div class="col-sm-3">
                                                 <span class="text11-design fw-bold">30</span> <span class="text12-design">months left</span>
@@ -74,7 +73,6 @@
                                                 <span class="text11-design text11-move fw-bold">Monthly Payable </span> <span class="text12-design">Php 4,416.00</span>
                                             </div>
                                             <div class="col-sm-3">
-                                                <span class="text12-design fw-bold">Due</span> <span class="text11-design">May 1, 2023</span>
                                             </div>
                                             <div class="col-sm-3">
                                                 <span class="text11-design fw-bold">30</span> <span class="text12-design">months left</span>
@@ -88,12 +86,15 @@
                                 <div style="background: white; border-radius: 10px; border: 0.50px #ACACAC solid;">
                                     <div class="container">
                                         <div class="row my-2">
-                                            <div class="col-6">
+                                            <div class="col-md-4">
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
-                                            <div class="col-6 d-flex justify-content-end">
-                                                <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Create Form</a>
-                                            </div>
+                                            <div class="col-md-8 gap-1 d-flex justify-content-end">
+                                                <a href="/member/mpl-application-form/" type="button" class="btn btn-apply-mpl">Apply Multi-Purpose Loan</a>
+                                                <a href="/member/hsl-application-form/" type="button" class="btn btn-apply-hsl">Apply Housing Loan</a>
+
+{{--                                                 <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Create Form</a>
+ --}}                                            </div>
                                         </div>
                                         <div style="padding-left: 10px; background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px; padding-bottom: 15px;">
                                             <div class="row mt-2 g-0">
