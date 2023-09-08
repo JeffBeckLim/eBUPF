@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MembershipApplication;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class AdminController extends Controller
     }
 
     public function allUsers(){
-        $users = User::with('member')->get();
+        $users = User::with('member.membershipApplication')->get();
         return view('admin-views.admin-all-accounts', compact('users'));
     }
 
