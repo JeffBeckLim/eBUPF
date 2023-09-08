@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MembershipApplication;
 use App\Models\User;
+use App\Models\Loan;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -31,7 +33,29 @@ class AdminController extends Controller
     }
 
     public function showRemittance(){
-        return view('admin-views.admin-remittance');
+        $payments = Payment::all();
+        return view('admin-views.admin-remittance',['payments' => $payments]);
+    }
+
+    public function addPaymentRemittance(Request $request){
+        $data = $request->validate([
+            'or_number' => 'required',
+            'payment_date' => 'required|date',
+            'loan_id' => 'required',
+            'principal' => 'required|numeric',
+            'interest' => 'required|numeric',
+        ]);
+
+        $loan = Loan::find($data['loan_id']);
+        if (!$loan) {
+            return redirect()->back()->with('error', 'Loan not found.');
+        }
+
+        $memberId = $loan->member_id;
+        $data['member_id'] = $memberId;
+        Payment::create($data);
+
+        return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }
 
 }

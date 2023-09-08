@@ -42,36 +42,51 @@
             <div class="text-add-payment">
                 Add New Payment
             </div>
-            <div class="row g-0 mt-3" style="margin-left: 1px;">
-                <div class="col-md-2 pe-1">
-                    <label for="ornumber" class="fw-bold">OR Number</label>
-                    <input class="form-control" name="ornumber" value="" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);">
-                </div>
+            <form method="POST" action="{{route('add.payment.remittance')}}">
+                @csrf
+                <div class="row g-0 mt-3" style="margin-left: 1px;">
+                    <div class="col-md-2 pe-1">
+                        <label for="or_number" class="fw-bold">OR Number</label>
+                        <input class="form-control" name="or_number" type="number" value="{{ old('or_number') }}" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);">
+                    </div>
 
-                <div class="col-md-2 pe-1 pb-3">
-                    <label for="date" class="fw-bold">Date</label>
-                    <input id="myForm" class="form-control" name="date" type="date" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
-                </div>
+                    <div class="col-md-2 pe-1 pb-3">
+                        <label for="payment_date" class="fw-bold">Date</label>
+                        <input id="myForm" class="form-control" name="payment_date" type="date" value="{{ old('payment_date') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                    </div>
 
-                <div class="col-md-2 pe-1">
-                    <label for="loan" class="fw-bold">Loan ID</label>
-                    <input class="form-control" name="loan" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
-                </div>
+                    <div class="col-md-2 pe-1">
+                        <label for="loan_id" class="fw-bold">Loan ID</label>
+                        <input class="form-control" name="loan_id" type="number" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                    </div>
 
-                <div class="col-md-2 pe-1">
-                    <label for="principal" class="fw-bold">Principal</label>
-                    <input id="myForm" class="form-control" name="principal" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
-                </div>
+                    <div class="col-md-2 pe-1">
+                        <label for="principal" class="fw-bold">Principal</label>
+                        <input id="myForm" class="form-control" name="principal" type="number" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                    </div>
 
-                <div class="col-md-2 pe-1">
-                    <label for="interest" class="fw-bold">Interest</label>
-                    <input class="form-control w-100" name="interest" value="" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
-                </div>
+                    <div class="col-md-2 pe-1">
+                        <label for="interest" class="fw-bold">Interest</label>
+                        <input class="form-control w-100" name="interest" type="number" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                    </div>
 
-                <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">
-                    <button id="remit-btn" class="btn btn-primary" style="">Add Payment</button>
+                    <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">
+                        <button id="remit-btn" class="btn btn-primary" type="submit">Add Payment</button>
+                    </div>
                 </div>
-            </div>
+            </form>
+
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
         </div>
 
         <div class="adminbox" style="margin:10px 20px;">
@@ -90,7 +105,7 @@
                     <table class="table admin-table table-striped ">
                         <thead style="border-bottom: 2px solid black">
                             <tr>
-                                <th>Loan ID</th>
+                                <th>Payment ID</th>
                                 <th>Principal Borrower</th>
                                 <th>Unit</th>
                                 <th>Date</th>
@@ -102,29 +117,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($payments as $payment)
                             <tr class="table-row" data-status="">
-                                <td>102030</td>
-                                <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                                <td>BUCS</td>
-                                <td>04-23-2023</td>
-                                <td>5555.00</td>
-                                <td>666.66</td>
+                                <td>{{ $payment->id }}</td>
+                                <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">{{ $payment->member->firstname }} {{ $payment->member->middle_initial }}. {{ $payment->member->lastname }}</a></td>
+                                <td>BU{{ $payment->member->units->unit_code }}</td>
+                                <td>{{ $payment->payment_date }}</td>
+                                <td>{{ $payment->principal }}</td>
+                                <td>{{ $payment->interest }}</td>
                                 <td></td>
-                                <td>65252.00</td>
-                                <td style="border-left: 1px solid rgb(143, 143, 143)"></td>
+                                <td>{{ $payment->principal + $payment->interest }}</td>
+                                <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
                             </tr>
-
-                            <tr class="table-row" data-status="">
-                                <td>102030</td>
-                                <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                                <td>BUCS</td>
-                                <td>04-23-2023</td>
-                                <td>5555.00</td>
-                                <td>666.66</td>
-                                <td></td>
-                                <td>65252.00</td>
-                                <td style="border-left: 1px solid rgb(143, 143, 143)"></td>
-                            </tr>
+                        @endforeach
 
                         </tbody>
                     </table>
