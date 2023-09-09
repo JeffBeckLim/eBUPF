@@ -3,9 +3,9 @@
 @section('content')
 
 <main>
-    <div class="container mt-5">
+    <div class="container mt-lg-5 mt-3 ms-lg-0 ms-1">
             <!-- This is where you can put your main content -->
-                <div class="row">
+                <div class="row ms-1">
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-12">
@@ -87,12 +87,28 @@
                                             <div class="col-md-4">
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
-                                            <div class="col-md-8 gap-1 d-flex justify-content-end">
-                                                <a href="/member/mpl-application-form/" type="button" class="btn btn-apply-mpl">Apply Multi-Purpose Loan</a>
-                                                <a href="/member/hsl-application-form/" type="button" class="btn btn-apply-hsl">Apply Housing Loan</a>
+                                            <div class="col-md-8 gap-2 d-flex justify-content-end">
 
-{{--                                                 <a href="{{ route('displayAvailableLoans') }}" type="button" class="btn apply-btn">Create Form</a>
- --}}                                            </div>
+
+                                                <a href="/member/mpl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover">
+                                                    <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="30px">
+                                                    <div class="ps-2">
+                                                        <h6 style="font-size: small">Apply</h6>
+                                                    <strong>Multi-Purpose Loan</strong>
+                                                    </div>
+                                                </a>  
+
+                                                <a href="/member/hsl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover">
+                                                    <img class="img-fluid" src="icons/HSL-mini.svg" alt="mpl mini" width="30px">
+                                                    <div class="ps-2">
+                                                        <h6 style="font-size: small">Apply</h6>
+                                                    <strong>Housing Loan</strong>
+                                                    </div>
+                                                </a>  
+
+                                                {{-- css class - btn-apply-mpl --}}
+                                                {{-- css class -  btn-apply-hsl --}}
+                                           </div>
                                         </div>
                                         <div style="padding-left: 10px; background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px; padding-bottom: 15px;">
                                             <div class="row mt-2 g-0">

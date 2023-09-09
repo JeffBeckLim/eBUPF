@@ -10,7 +10,7 @@
                     <div class="col-12">
                         @if(session('message'))
                         <div style="background-color: rgb(255, 231, 200) " class="alert border alert-dismissible fade show" role="alert">
-                            {{session('message')}}
+                            {!!session('message')!!}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
@@ -92,24 +92,57 @@
                                             </div>
             
                                         </td>
-                                        <td class="border border-danger">
-                                            <div class=" g-0 row d-flex justify-content-center align-items-center">
-                                                <div class="p-1 col-lg-6 col-md-12  col-sm-12" >
-                                                    <a href="#" type="button" class=" btn bu-orange w-100 fs-7 text-light fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModal{{$loan->loan->id}}">Accept</a>
-                                                </div>
-                                                {{-- MODAL CONFIRMATION ACCEPT --}}
-                                                @include('member-views.co-borrower-request.modal-accept')
+                                        <td class="text-center">
 
-                                                <div class="p-1 col-lg-6 col-md-12 col-sm-12 ">
-                                                    <a href="#" type="button" class="btn btn-outline-bu2 w-100 fs-7 fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModalDecline{{$loan->loan->id}}">Decline</a>
-                                                </div>
-                                                {{-- MODAL CONFIRMATION ACCEPT --}}
-                                                @include('member-views.co-borrower-request.modal-decline')
+                                            @php
+                                                $try = App\Models\CoBorrower::findorfail($loan->loan->id)
+                                            @endphp
+                                            @if ($try->accept_request == '0')
+                                                <h6>You <strong>Declined</strong></h6>
+                                                    @php
                                                 
-                                            </div>
+                                                    $time = \Carbon\Carbon::parse($try->updated_at);
+                                                    $now = \Carbon\Carbon::now();
+                                                    $diff = $now->shortAbsoluteDiffForHumans($time); 
+                                                                                                
+                                                    @endphp
+                                                {{$diff}} ago
+
+                                            @elseif ($try->accept_request == '1')
+                                                    <h6 class="text-success">You <strong>Accepted</strong></h6>
+                                                    @php
+                                                    
+                                                    $time = \Carbon\Carbon::parse($try->updated_at);
+                                                    $now = \Carbon\Carbon::now();
+                                                    $diff = $now->shortAbsoluteDiffForHumans($time); 
+                                                                                                
+                                                    @endphp
+                                                {{$diff}} ago                                                
+                                            @else
+
+                                                <div class=" g-0 row d-flex justify-content-center align-items-center">
+                                                    <div class="p-1 col-lg-6 col-md-12  col-sm-12" >
+                                                        <a href="#" type="button" class=" btn bu-orange w-100 fs-7 text-light fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModal{{$loan->loan->id}}">Accept</a>
+                                                    </div>
+                                                    {{-- MODAL CONFIRMATION ACCEPT --}}
+                                                    @include('member-views.co-borrower-request.modal-accept')
+
+                                                    <div class="p-1 col-lg-6 col-md-12 col-sm-12 ">
+                                                        <a href="#" type="button" class="btn btn-outline-bu2 w-100 fs-7 fw-bold p-2 rounded-4" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#myModalDecline{{$loan->loan->id}}">Decline</a>
+                                                    </div>
+                                                    {{-- MODAL CONFIRMATION ACCEPT --}}
+                                                    @include('member-views.co-borrower-request.modal-decline')
+                                                    
+                                                </div>
+
+                                            @endif  
+
                                         </td>
+                        
                                         <td style="width: 4rem;" class="text-center">
-                                            <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                            @if ($try->accept_request != '0')
+                                                <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                            @endif
                                         </td>
                                         
                                     </tr>     
