@@ -154,10 +154,10 @@
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                   <ul class="list-unstyled components ms-4">
                     <li>
-                      <a href="" class="fs-7">Multi-purpose Loans</a>
+                      <a href="{{route('admin.mpl.applications')}}" class="fs-7">Multi-purpose Loans</a>
                     </li>
                     <li>
-                      <a href=""  class="fs-7">Housing Loans</a>
+                      <a href="{{route('admin.hsl.applications')}}"  class="fs-7">Housing Loans</a>
                     </li>
                   </ul>
                 </div>

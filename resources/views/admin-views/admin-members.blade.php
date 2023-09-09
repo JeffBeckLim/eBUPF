@@ -30,25 +30,9 @@
                     </div>
                     <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
                 </div>
-    
-                <div>
-                    <div class="row mt-4 ">
-                        <div class="col-md-6 d-flex">
-                            <span class="show-entries d-flex "> Show 
-                                <div class="input-container">
-                                    <input class="show-entries-application" type="text">
-                                </div> 
-                              entries</span>
-                        </div>
-                        <div class="col-md-6 d-flex justify-content-end ma-search">
-                            <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
-                            <input type="text" class="membership-application-search-input">
-                        </div>
-                    </div>
-                </div>
                 <div class="table-responsive">
                     <div class="custom-table-for-admin">
-                        <table class="table admin-table table-striped ">
+                        <table class="table admin-table table-striped " id="myTable">
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
                                     <th>ID <i class="fw-light">member</i> </th>
@@ -106,7 +90,7 @@
             </div>
         </div>
     
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
         <script>
             $(document).ready(function() {
                 $("#applyFilterBtn").click(function() {
@@ -130,4 +114,5 @@
        
     </div>
 </div>
+@include('admin-components.admin-dataTables')
 @endsection

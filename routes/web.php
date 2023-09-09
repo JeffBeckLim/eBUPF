@@ -8,6 +8,8 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminLoanApplicationController;
+use App\Http\Controllers\AdminLoanApplicationControlller;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
@@ -79,6 +81,13 @@ use App\Http\Controllers\TransactionController;
 //
 //🔴ADMIN ==================================================================================================
 
+        // { TESTING PA TO}-----------------------------------------------------------
+        Route::get('/admin/loan-applications/mpl', [AdminLoanApplicationController::class, 'showMplApplications'])->name('admin.mpl.applications');
+
+        Route::get('/admin/loan-applications/hsl', [AdminLoanApplicationController::class, 'showHslApplications'] )->name('admin.hsl.applications');
+        // { TESTING PA TO}-----------------------------------------------------------
+
+
     // Show Admin Dashboard
     Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
 
@@ -89,17 +98,18 @@ use App\Http\Controllers\TransactionController;
     //Show membership Applications
     Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
 
-        //Accept membership application
-        Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept');
-        //Reject membership application
-        Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject');
+    //Accept membership application
+    Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept');
+    //Reject membership application
+    Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject');
 
     // Show Admin Ledger
     Route::get('/ledger', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
-    Route::get('/admin/remittance/view', [AdminController::class, 'showRemittance'])->middleware('auth','admin.access')->name('admin.remittance');
+    Route::get('/admin/remittance/view', [AdminController::class, 'showRemittance'])->name('admin.remittance');
+    // ->middleware('auth','admin.access')
 
     Route::post('/admin/remittance/view/payment/add', [AdminController::class, 'addPaymentRemittance'])->middleware('auth','admin.access')->name('add.payment.remittance');
 

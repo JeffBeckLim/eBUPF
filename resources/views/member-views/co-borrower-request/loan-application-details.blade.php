@@ -12,7 +12,7 @@
 
         {{-- Else then it is shown as the co-borrower --}}
         @else
-            <a href="/member/coBorrwer/requests/" class="text-decoration-none text-secondary fw-bold">Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Application Details</span>
+            <a href="/member/coBorrower/requests/" class="text-decoration-none text-secondary fw-bold">Requests <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">Application Details</span>
         @endif
 
 
