@@ -6,7 +6,7 @@
     <div class="adminbox p-0">
         <div class="d-flex px-3 pt-4">
             <div class="d-flex membership-app-header1-mpl text-dark">
-                <img src="{{asset('icons/MPL-mini.svg')}}" alt="" width="50px">
+                <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 50px;">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
 
@@ -68,7 +68,7 @@
         </div>
         
 
-        <div class="table-responsive pb-5">
+        <div class="table-responsive border m-3 rounded">
             {{-- <div class="custom-table-for-admin"> --}}
 
                 <table class="table admin-table table-striped" id="myTable">
@@ -94,16 +94,61 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($loans as $loan)
+                            
+                        
                         <tr class="table-row" data-status="approved">
-                            <td>102030</td>
-                            <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                            <td>BUCS</td>
-                            <td>04-23-2023</td>
-                            <td>200,000</td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
+                            <td>{{$loan->loan->id}}</td>
+
+                            <td>
+                                <a href="#" class="fw-bold text-dark text-decoration-none">
+                                    {{$loan->loan->member->firstname}}
+                                    {{$loan->loan->member->lastname}}
+                                </a>
+                            </td>
+
+                            <td>{{$loan->loan->member->units->unit_code}}</td>
+
+                            <td>{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</td>
+
+                            <td>{{
+                            number_format($loan->loan->principal_amount, 2, '.',',')                            
+                            }}
+                            
+                            
+                            </td>
+                            <td class="text-center">
+                                @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                    @if ($status->loan_application_state_id == 1)
+                                        <i class="bi bi-circle-fill text-primary"></i>
+                                        @break
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td class="text-center">
+                                @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                @if ($status->loan_application_state_id == 2)
+                                    <i class="bi bi-circle-fill text-primary"></i>
+                                    @break
+                                @endif
+                            @endforeach
+                            
+                            </td>
+                            <td class="text-center">
+                                @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                @if ($status->loan_application_state_id == 3)
+                                    <i class="bi bi-circle-fill text-primary"></i>
+                                    @break
+                                @endif
+                            @endforeach
+                            </td>
+                            <td class="text-center">
+                                @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                    @if ($status->loan_application_state_id == 4)
+                                        <i class="bi bi-circle-fill text-primary"></i>
+                                        @break
+                                    @endif
+                                @endforeach
                             <td>
                                 {{-- <span class="final-approved">Approved</span> --}}
                                 <span class="final-denied">Denied</span>
@@ -125,6 +170,8 @@
                                 </div>
                             </td>
                         </tr>
+
+                        @endforeach
                    
                     </tbody>
                 </table>

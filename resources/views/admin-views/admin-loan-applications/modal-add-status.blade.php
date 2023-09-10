@@ -28,11 +28,10 @@
           <div class="mb-3">
             <label for="statusDropdown" class="col-form-label">Select Satatus</label>
             <select id="statusDropdown" class="form-select form-control">
-              <option value="" disabled selected>Status</option>
-              <option value="Staff">Staff</option>
-              <option value="LoanAnalyst">Loan Analyst</option>
-              <option value="ExeDirector">Executive Director</option>
-              <option value="Check">Check</option>
+              <option value="" selected disabled> Select Application Status</option>
+              @foreach ($loan_app_states as $state)
+                <option value="{{$state->id}}"> {{$state->id}} . {{$state->state_name}}</option>    
+              @endforeach
             </select>
           </div>
           <div class="mb-2">
