@@ -5,18 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" href="{{ asset('css/admin-sidebar.css') }}">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    /> --}}
-	<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/admin-styles.css') }}">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
      <!-- Data tables -->
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
@@ -49,10 +46,14 @@
   <body>
 
     <div id="fixedTopElement" class=" row  py-3 bg-white vw-100 fixed-top ">
-      <span>
-        <button type="button" id="sidebarCollapse" class="btn ms-3" style="background-color: #EEF6F8;">
+      <span class="d-flex">
+        <button type="button" id="sidebarCollapse" class="btn ms-3 d-none d-sm-block" style="background-color: #EEF6F8;">
           <img src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
-          <span class="sr-only">Toggle Menu</span>
+        </button>
+
+        {{-- THE OFF CANVAS BUTTON ---- Show only on small screen --}}
+        <button class="btn ms-3 d-block d-sm-none border" style="background-color: #EEF6F8;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+          <img src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
         </button>
 
 
@@ -60,10 +61,14 @@
 
       </span>
     </div>
+    <style>
+      #sidebar a{
+        text-decoration: none !important;
+      }
+    </style>
+		<div class="wrapper d-flex align-items-stretch">
 
-		<div class="wrapper d-flex align-items-stretch" style="margin-top: 60px">
-
-      <nav id="sidebar" >
+      <nav id="sidebar" style="padding-top: 60px" class="d-none d-sm-block">
         <ul class="list-unstyled components mb-5" style="scale: 0.95;">
           <li>
 
@@ -190,13 +195,47 @@
     	</nav>
 
         <!-- Page Content  -->
-      <div id="content" class="overflow-x-hidden pt-2">
+      <div id="content" class="overflow-x-hidden" style="margin-top: 5rem">
         @yield('content')
 
       </div>
 
 
-        </div>
+  </div>
+
+{{-- THE OFF CANVAS --}}
+  <div class="offcanvas offcanvas-start  d-lg-none d-md-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
 
       {{-- HIDE ON SCROLL EVENT --}}
     <script>

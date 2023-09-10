@@ -40,7 +40,7 @@
                 <div class="table-responsive ">
                     <div class="custom-table-for-admin">
     
-                        <table class="table table-striped border-top" id="myTable">
+                        <table class="table admin-table table-striped border-top" id="myTable">
                             
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
@@ -85,7 +85,7 @@
                                         <td>
                                             <!-- Button trigger modal -->
                                             <button style="font-size: 12px" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#{{$user->id}}">
-                                                Change User Type
+                                                Change Role
                                             </button>
                                         </td>
                                 </tr>
