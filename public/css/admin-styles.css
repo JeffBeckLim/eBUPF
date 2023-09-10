@@ -35,7 +35,7 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
   
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 ::-webkit-file-upload-button {
     display: inline;
     border: none;
@@ -43,14 +43,14 @@
     color: #ffffff;
     background-color: #0092D1;
     padding: 2%;
-}
+} */
 
 
 /* mycss */
-body{
+/* body{
   background-color: #F7F9FC !important;
   
-}
+} */
 /* mycss */
   
 *,
@@ -68,7 +68,7 @@ html {
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
@@ -76,7 +76,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color: #fff; } */
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -219,12 +219,12 @@ input,
 button,
 select,
 optgroup,
-textarea {
+/* textarea {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit; }
-
+ */
 button,
 input {
   overflow: visible; }
@@ -1716,8 +1716,8 @@ select.form-control:focus::-ms-value {
 select.form-control[size], select.form-control[multiple] {
   height: auto; }
 
-textarea.form-control {
-  height: auto; }
+/* textarea.form-control {
+  height: auto; } */
 
 .form-group {
   margin-bottom: 1rem; }
@@ -4707,7 +4707,7 @@ a.close.disabled {
 .toast-body {
   padding: 0.75rem; }
 
-.modal-open {
+/* .modal-open {
   overflow: hidden; }
   .modal-open .modal {
     overflow-x: hidden;
@@ -4896,7 +4896,7 @@ a.close.disabled {
 
 @media (min-width: 1200px) {
   .modal-xl {
-    max-width: 1140px; } }
+    max-width: 1140px; } } */
 
 .tooltip {
   position: absolute;
@@ -8329,6 +8329,7 @@ a[data-toggle="collapse"] {
 .footer p {
   color: rgba(255, 255, 255, 0.5); }
 
+
 .form-control {
   height: 40px !important;
   background: #fff;
@@ -8337,7 +8338,8 @@ a[data-toggle="collapse"] {
   border-radius: 4px;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border: transparent; }
+  border: transparent; 
+}
   .form-control:focus, .form-control:active {
     border-color: #000; }
   .form-control::-webkit-input-placeholder {

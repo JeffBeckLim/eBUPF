@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('loan_applicaton_state_id')->constrained('loan_application_states');
+            $table->foreignId('loan_application_state_id')->constrained('loan_application_states');
             $table->foreignId('loan_id')->constrained('loans');
 
             $table->date('date_evaluated');

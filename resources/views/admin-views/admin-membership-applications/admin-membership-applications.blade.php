@@ -30,10 +30,10 @@
     
 
 
-        <div class="d-flex">
+        <div class="d-flex w-100">
             <div class="d-flex membership-app-header1 text-dark">
                 <img src="{{asset('admin-icons/membership-application-icon.svg')}}" alt="" width="50px">
-                <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Membership</span> <span class="fw-bold fs-7">Applications</span></p>
+                <p class="text-break" style="padding-left: 10px; padding-top: 5px d-flex"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Membership</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
 
             <div class="membership-app-header2">

@@ -70,7 +70,7 @@ body {
 
 .bu-orange {
     background-color: #FF6F19 !important;
-    outline: 2px solid #FF6F19;
+    /* outline: 2px solid #FF6F19; */
 }
 
 .bu-orange:hover {
@@ -599,11 +599,7 @@ input.invalid {
     .app-status-box {
         width: 80%;
     }
-    .ma-search {
-        display: flex;
-        justify-content: flex-start !important;
-        margin-top: 10px;
-    }
+   
 }
 
 @media screen and (max-width: 575px) {
@@ -994,16 +990,18 @@ tbody tr:nth-child(odd) td {
 }
 
 .btn-add-status {
-    color: #00638D;
-    font-weight: bold;
-    font-size: 0.6rem;
-    border: 1px solid #00638D;
-    border-radius: 20px;
+    color: #00638D !important;
+    font-weight: bold !important;
+    font-size: x-small !important;
+    border: 2px solid #00638D !important;
+    border-radius: 20px !important;
 }
 
 .btn-add-status:hover {
-    border: 1px solid #004d6e;
-    color: #004d6e;
+    background-color: #00628c;
+    color: #fffff4 !important;
+    /* border: 2px solid #00638D !important;
+    color: #004d6e !important; */
 }
 
 .admin-table td {
@@ -1091,8 +1089,8 @@ tbody tr:nth-child(odd) td {
     height: 420px;
 } */
 
-.admin-custom-select {
-    background-color: #D9E4E9;
+.admin-custom-form {
+    background-color: #D9E4E9 !important;
     border: none;
     outline: none;
     box-shadow: none;
@@ -1100,6 +1098,7 @@ tbody tr:nth-child(odd) td {
     -moz-appearance: none;
     appearance: none;
 }
+
 
 
 /* Application details */

@@ -2,9 +2,9 @@
 
 @section('content')
 
-<div class="container-fluid px-2" >
-    <div class="adminbox m-4">
-        <div class="d-flex">
+<div class="container-fluid mt-2">
+    <div class="adminbox p-0">
+        <div class="d-flex px-3 pt-4">
             <div class="d-flex membership-app-header1-mpl text-dark">
                 <img src="{{asset('icons/MPL-mini.svg')}}" alt="" width="50px">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
@@ -26,43 +26,7 @@
                 </div>
             </div>
         </div>
-        <div id="myModal" class="modal">
-            <div class="modal-content p-4">
-                <span class="text-center fs-6 fw-bold">Add Status</span>
-                <div>
-                    <span class="fs-7">Loan ID</span> <br>
-                    <span style="color: #0092D1" class="fw-bold">102030</span>
-                    <div class="row">
-                        <div class="col-7">
-                            <span class="fw-bold fs-7">Juan Dela Cruz Jr.</span> <br> <span class="fs-7">BUCS</span>
-                        </div>
-                        <div class="col-5 d-flex justify-content-end">
-                            <span class="fs-7">200,000.00</span>
-                        </div>
-                        <span class="fs-7">04-23-2023</span>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <select id="statusDropdown" class="form-select admin-custom-select">
-                        <option value="" disabled selected>Status</option>
-                        <option value="Staff">Staff</option>
-                        <option value="LoanAnalyst">Loan Analyst</option>
-                        <option value="ExeDirector">Executive Director</option>
-                        <option value="Check">Check</option>
-                      </select>
-                </div>
-                <div class="mt-2">
-                    <input type="date" id="dateInput" class="form-control" />
-                </div>
-                <div class="mt-2">
-                    <textarea id="remarksInput" class="form-control" rows="3" placeholder="Remarks"></textarea>
-                </div>
-                <div class="mt-3 d-flex justify-content-end">
-                    <button type="button" class="btn bu-orange p-1 text-white fs-7">Confirm</button>
-                </div>
-            </div>
-        </div>
-        <div class="filter-group gap-2 mt-4">
+        <div class="filter-group px-3 gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
                     <option value="All">Month</option>
@@ -95,19 +59,25 @@
             </div>
             <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
         </div>
-        <div>
-            <div class="row mt-4">
-                <div class="col d-flex justify-content-end ma-search gap-4 pe-4">
-                    <span class="filter-option active" data-filter="all">All Applications</span>
-                    <span class="filter-option" data-filter="approved">Approved</span>
-                    <span class="filter-option" data-filter="denied">Denied</span>
-                </div>
+        <div class="row g-0 mt-2 mx-3">
+            <div class="col d-flex justify-content-end gap-3">
+                <span class="filter-option active" data-filter="all">All Applications</span>
+                <span class="filter-option" data-filter="approved">Approved</span>
+                <span class="filter-option" data-filter="denied">Denied</span>
             </div>
         </div>
-        <div class="table-responsive">
-            <div class="custom-table-for-admin p-2 pt-3">
-                <table id="myTable" class="table admin-table table-striped ">
+        
+
+        <div class="table-responsive pb-5">
+            {{-- <div class="custom-table-for-admin"> --}}
+
+                <table class="table admin-table table-striped" id="myTable">
                     <thead style="border-bottom: 2px solid black">
+                        <style>
+                             th{
+                                font-size: small !important;
+                            }
+                        </style>
                         <tr>
                             <th>Loan ID</th>
                             <th>Principal Borrower</th>
@@ -124,7 +94,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="table-row" data-status="">
+                        <tr class="table-row" data-status="approved">
                             <td>102030</td>
                             <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
                             <td>BUCS</td>
@@ -134,35 +104,16 @@
                             <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
                             <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
                             <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td></td>
                             <td>
-                                <button type="button" class="btn btn-add-status">Add Status</button>
-                            </td>
-                            <td class="text-center">
-                                <div class="three-dots">
-                                    <i class="bi bi-three-dots fs-4 icon"></i>
-                                    <div class="three-dots-buttons">
-                                        <button class="approve-btn">Approve</button>
-                                        <button class="deny-btn">Deny</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="table-row" data-status="denied">
-                            <td>102030</td>
-                            <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                            <td>BUCS</td>
-                            <td>04-23-2023</td>
-                            <td>200,000</td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td>
+                                {{-- <span class="final-approved">Approved</span> --}}
                                 <span class="final-denied">Denied</span>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-add-status">Add Status</button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Add Status
+                                </button>
+                                @include('admin-views.admin-loan-applications.modal-add-status')
                             </td>
                             <td class="text-center">
                                 <div class="three-dots">
@@ -174,61 +125,10 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr class="table-row" data-status="approved">
-                            <td>102030</td>
-                            <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                            <td>BUCS</td>
-                            <td>04-23-2023</td>
-                            <td>200,000</td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td>
-                                <span class="final-approved">Approved</span>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-add-status">Add Status</button>
-                            </td>
-                            <td class="text-center">
-                                <div class="three-dots">
-                                    <i class="bi bi-three-dots fs-4 icon"></i>
-                                    <div class="three-dots-buttons">
-                                        <button class="approve-btn">Approve</button>
-                                        <button class="deny-btn">Deny</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="table-row" data-status="approved">
-                            <td>102030</td>
-                            <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">Juan Dela Cruz Jr.</a></td>
-                            <td>BUCS</td>
-                            <td>04-23-2023</td>
-                            <td>200,000</td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td class="text-center"><i class="bi bi-circle-fill text-primary"></i></td>
-                            <td>
-                                <span class="final-approved">Approved</span>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-add-status">Add Status</button>
-                            </td>
-                            <td class="text-center">
-                                <div class="three-dots">
-                                    <i class="bi bi-three-dots fs-4 icon"></i>
-                                    <div class="three-dots-buttons">
-                                        <button class="approve-btn">Approve</button>
-                                        <button class="deny-btn">Deny</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                   
                     </tbody>
                 </table>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 </div>
@@ -292,26 +192,6 @@
             // Handle deny button click
             console.log('Denied');
             buttons.style.display = 'none';
-        });
-    });
-    // Get all "Add Status" buttons
-    var addStatusButtons = document.querySelectorAll('.btn-add-status');
-
-    // When a button is clicked, display the corresponding modal
-    addStatusButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            var modal = document.getElementById('myModal');
-            modal.style.display = 'block';
-        });
-    });
-
-    // When the user clicks outside a modal, close it
-    window.addEventListener('click', function(event) {
-        addStatusButtons.forEach(function(button) {
-            var modal = document.getElementById('myModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
         });
     });
 </script>
