@@ -85,6 +85,9 @@ use App\Http\Controllers\TransactionController;
         Route::get('/admin/loan-applications/mpl', [AdminLoanApplicationController::class, 'showMplApplications'])->name('admin.mpl.applications');
 
         Route::get('/admin/loan-applications/hsl', [AdminLoanApplicationController::class, 'showHslApplications'] )->name('admin.hsl.applications');
+
+
+        Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');
         // { TESTING PA TO}-----------------------------------------------------------
 
 

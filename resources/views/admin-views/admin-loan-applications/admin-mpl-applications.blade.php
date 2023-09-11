@@ -111,11 +111,8 @@
 
                             <td>{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</td>
 
-                            <td>{{
-                            number_format($loan->loan->principal_amount, 2, '.',',')                            
-                            }}
-                            
-                            
+                            <td>
+                                {{number_format($loan->loan->principal_amount, 2, '.',',')}}    
                             </td>
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
@@ -149,18 +146,44 @@
                                         @break
                                     @endif
                                 @endforeach
-                            <td>
-                                {{-- <span class="final-approved">Approved</span> --}}
-                                <span class="final-denied">Denied</span>
                             </td>
+                            <td class="text-center">
+                                @if ($loan->loan->is_approved == 0)
+                                    <p class="text-secondary">Pending</p>
+                                @elseif($loan->loan->is_approved == '1')
+                                    <span class="final-approved">Approved</span>
+                                @elseif($loan->loan->is_approved == '2')
+                                    <span class="final-denied">Denied</span>
+                                @endif
+                            </td>
+
                             <td>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
                                     Add Status
                                 </button>
                                 @include('admin-views.admin-loan-applications.modal-add-status')
                             </td>
                             <td class="text-center">
+                                
+                                <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-three-dots fs-4 icon"></i>
+                                  </button>
+                                  <ul class="dropdown-menu" style="width: 1rem">
+                                    
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <button class="approve-btn w-100 grow-on-hover">Approve</button>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <button class="deny-btn w-100 grow-on-hover">Deny</button>
+                                        </a>
+                                    </li>
+                                  </ul>
+                            </td>
+                            {{-- <td class="text-center">
                                 <div class="three-dots">
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                     <div class="three-dots-buttons">
@@ -168,7 +191,7 @@
                                         <button class="deny-btn">Deny</button>
                                     </div>
                                 </div>
-                            </td>
+                            </td> --}}
                         </tr>
 
                         @endforeach
