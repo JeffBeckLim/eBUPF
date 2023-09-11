@@ -26,4 +26,9 @@ class AdminLoanApplicationController extends Controller
     public function showHslApplications(){
         return view('admin-views.admin-loan-applications.admin-hsl-applications');
     }
+
+    public function createLoanApplicationStatus(Request $request, $loan_id){
+        dd($loan_id);
+        dd($request);
+    }
 }
