@@ -41,8 +41,8 @@
              <option value="" selected disabled>...</option>
               @foreach ($loan_app_states as $state)
                 <option value="{{$state->id}}">
-                   {{$state->id}} . {{$state->state_name}}  
-                   {!!in_array($state->id, $array)? '*' : ''!!}
+                   {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
+                   
                 </option>    
               @endforeach
             </select>
