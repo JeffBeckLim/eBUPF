@@ -44,40 +44,40 @@
     <div class="row">
         <div class="col-6">
             <p class="fw-bold text3-design mt-2">Name</p>
-            <span class="text4-design">Dela Cruz, Juan M.</span>
+            <span class="text4-design">{{Auth::user()->member->firstname}} {{Auth::user()->member->lastname}}</span>
         </div>
         <div class="col-6">
             <p class="fw-bold text3-design mt-2">Unit</p>
-            <span class="text4-design">BUCS</span>
+            <span class="text4-design">{{Auth::user()->member->units->unit_code}}</span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
             <p class="fw-bold text3-design mt-4">Address</p>
-            <span class="text4-design">Bgy. 8 Bagumbayan, Legazpi City</span>
+            <span class="text4-design">{{Auth::user()->member->address}}</span>
         </div>
         <div class="col-6">
             <p class="fw-bold text3-design mt-4">Office</p>
-            <span class="text4-design">CSIT</span>
+            <span class="text4-design">{{Auth::user()->member->units->campuses->campus_code}}</span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
             <p class="fw-bold text3-design mt-4">Date of Birth</p>
-            <span class="text4-design">March 10, 1990</span>
+            <span class="text4-design">{{Auth::user()->member->date_of_birth}}</span>
         </div>
         <div class="col-6">
             <p class="fw-bold text3-design mt-4">Tin</p>
-            <span class="text4-design">000000</span>
+            <span class="text4-design">{{Auth::user()->member->tin_num}}</span>
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
             <p class="fw-bold text3-design mt-4">Contact Number</p>
-            <span class="text4-design">09318946574</span>
+            <span class="text4-design">{{Auth::user()->member->contact_num}}</span>
         </div>
     </div>
     <div class="v-stack gap-2">

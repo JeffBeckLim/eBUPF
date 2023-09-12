@@ -3,7 +3,33 @@
 @section('content')
 
 <div class="container-fluid mt-2">
-    <div class="adminbox p-0">
+    
+    <div class="adminbox p-0 pb-3 mb-5">
+        <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
+            <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
+
+            @error('loan_application_state_id')
+            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
+                <p style="font-size: 12px" class="m-0">Please select a status, it can't be empty.</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @enderror
+
+            @if (session('status_error'))
+            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('status_error')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('success')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+        </div>
         <div class="d-flex px-3 pt-4">
             <div class="d-flex membership-app-header1-mpl text-dark">
                 <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 50px;">
@@ -26,6 +52,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="filter-group px-3 gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
@@ -67,6 +94,7 @@
             </div>
         </div>
         
+        
 
         <div class="table-responsive border m-3 rounded">
             {{-- <div class="custom-table-for-admin"> --}}
@@ -75,7 +103,7 @@
                     <thead style="border-bottom: 2px solid black">
                         <style>
                              th{
-                                font-size: small !important;
+                                font-size: 12px !important;
                             }
                         </style>
                         <tr>
@@ -117,7 +145,7 @@
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                     @if ($status->loan_application_state_id == 1)
-                                        <i class="bi bi-circle-fill text-primary"></i>
+                                        <i class="bi bi-check-circle-fill text-primary"></i>
                                         @break
                                     @endif
                                 @endforeach
@@ -125,7 +153,7 @@
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                 @if ($status->loan_application_state_id == 2)
-                                    <i class="bi bi-circle-fill text-primary"></i>
+                                <i class="bi bi-check-circle-fill text-primary"></i>
                                     @break
                                 @endif
                             @endforeach
@@ -134,7 +162,7 @@
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                 @if ($status->loan_application_state_id == 3)
-                                    <i class="bi bi-circle-fill text-primary"></i>
+                                    <i class="bi bi-check-circle-fill text-primary"></i>
                                     @break
                                 @endif
                             @endforeach
@@ -142,7 +170,7 @@
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                     @if ($status->loan_application_state_id == 4)
-                                        <i class="bi bi-circle-fill text-primary"></i>
+                                        <i class="bi bi-check-circle-fill text-primary"></i>
                                         @break
                                     @endif
                                 @endforeach
@@ -169,7 +197,7 @@
                                 <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                   </button>
-                                  <ul class="dropdown-menu" style="width: 1rem">
+                                  <ul class="dropdown-menu">
                                     
                                     <li>
                                         <a class="dropdown-item" href="#">

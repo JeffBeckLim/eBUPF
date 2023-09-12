@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('loan_application_state_id')->constrained('loan_application_states');
             $table->foreignId('loan_id')->constrained('loans');
 
-            $table->date('date_evaluated');
-            $table->text('remarks');
+            $table->date('date_evaluated')->nullable();
+            $table->text('remarks')->nullable();
         });
     }
 
