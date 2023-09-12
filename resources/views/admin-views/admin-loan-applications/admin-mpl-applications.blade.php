@@ -5,6 +5,7 @@
 <div class="container-fluid mt-2">
     
     <div class="adminbox p-0 pb-3 mb-5">
+        
         <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
             <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
 
@@ -31,6 +32,7 @@
 
         </div>
         <div class="d-flex px-3 pt-4">
+            
             <div class="d-flex membership-app-header1-mpl text-dark">
                 <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 50px;">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
@@ -227,6 +229,7 @@
                     </tbody>
                 </table>
             {{-- </div> --}}
+            
         </div>
     </div>
 </div>
