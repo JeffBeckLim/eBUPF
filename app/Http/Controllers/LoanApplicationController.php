@@ -97,6 +97,9 @@ class LoanApplicationController extends Controller
         return view('member-views.mpl-application-form.confirmation');
     }
 
+
+
+    
     // ======================VALIDATE AND STORE HOUSING LOAN APPLICATION====================================
     public function storeRequestHsl(Request $request){
 

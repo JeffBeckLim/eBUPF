@@ -9,6 +9,14 @@ class LoanApplicationStatus extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'loan_id',
+        'loan_application_state_id',
+        'date_evaluated',
+        'remarks',
+    ];
+
+
     public function loanApplicationState(){
         return $this->belongsTo(LoanApplicationState::class);
     }

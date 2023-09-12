@@ -37,10 +37,10 @@
           @csrf
           <div class="mb-3">
             <label for="statusDropdown" class="col-form-label">Select Satatus</label>
-            <select name="loan_application_state_id" id="statusDropdown" class="form-select form-control">
+            <select name="loan_application_state_id" id="statusDropdown" class="form-select form-control" required>
              <option value="" selected disabled>...</option>
               @foreach ($loan_app_states as $state)
-                <option value="{{$state->id}}">
+                <option value="{{$state->id}}" {{in_array($state->id, $array)? 'disabled' : ''}}>
                    {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
                    
                 </option>    
