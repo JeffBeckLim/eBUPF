@@ -1,16 +1,23 @@
+@php
+$array = [];
+foreach ($loan->loan->LoanApplicationStatus as $status) {
+    array_push($array, $status->loan_application_state_id);
+}
+// add ID of loan states of the loan for checking
+@endphp
 <div class="modal fade" id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header border-0">
-        <h1 class=" fw-bold fs-5">Add Status</h1>
+        <h1 class=" fw-bold fs-5">Edit Status</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="row g-0 mx-3">
         <div class="col-12" >
-          Loan ID
-          <h4 style="color: #0092D1;" class="fw-bold">{{$loan->loan->id}}</h4>
+          Loan ID 
+          <span style="color: #0092D1;" class="fw-bold fs-4"> {{$loan->loan->id}}</span>
         </div>
-        <div class="col-12">
+        <div class="col-12 mb-3">
           <div class="row  g-0">
             <div class="col-6">
               <h6 class="fw-bold">
@@ -25,8 +32,15 @@
             </div>
           </div>
         </div>
+        @if (in_array(6, $array)) 
+        {{-- if loan is denied --}}
+           <i>This loan is denied. Delete the declined status to add other status.</i>
+        @elseif(in_array(3, $array)) 
+         {{-- check if loan is approced then disable those selected and "Denied " loans--}}
+           <i>This loan is approved. Delete the "approved by executive director" status to enable 'decline' status.</i>
+        @endif
       </div>
-      <div class="accordion accordion-flush mx-3 mt-3" id="accordionFlushExample">
+      <div class="accordion accordion-flush mx-3 mt-3 border-bottom" id="accordionFlushExample">
       
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -51,12 +65,7 @@
           </div>
         </div>
       </div>
-      @php
-            $array = [];
-            foreach ($loan->loan->LoanApplicationStatus as $status) {
-                array_push($array, $status->loan_application_state_id);
-            }
-      @endphp
+  
       <div class="modal-body">
         <form method="POST" action="{{route('create.status',$loan->loan->id)}}" >
           @csrf
@@ -64,12 +73,28 @@
             <label for="statusDropdown" class="col-form-label">Select Satatus</label>
             <select name="loan_application_state_id" id="statusDropdown" class="form-select form-control" required>
              <option value="" selected disabled>...</option>
-              @foreach ($loan_app_states as $state)
-                <option value="{{$state->id}}" {{in_array($state->id, $array)? 'disabled' : ''}}>
-                   {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
-                   
-                </option>    
-              @endforeach
+             @if (in_array(6, $array)) 
+
+             {{-- if loan is denied --}}
+                 <option value="" disabled> This Loan is already been declined</option>
+             @elseif(in_array(3, $array)) 
+
+              {{-- check if loan is approced then disable those selected and "Denied " loans--}}
+                  @foreach ($loan_app_states as $state)
+                  <option value="{{$state->id}}" {{in_array($state->id, $array) || ($state->id == 6)? 'disabled' : ''}}>
+                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
+                      
+                  </option>    
+                  @endforeach   
+             @else
+                  @foreach ($loan_app_states as $state)
+                  <option value="{{$state->id}}" {{in_array($state->id, $array)? 'disabled' : ''}}>
+                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
+                      
+                  </option>    
+                  @endforeach
+             @endif
+             
             </select>
           </div>
           <div class="mb-2">

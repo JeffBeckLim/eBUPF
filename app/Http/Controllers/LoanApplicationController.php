@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoanApplicationController extends Controller
 {   
-    public function showLoanStatus(){
+    public function showLoanStatus($loan_id){
+        dd($loan_id);
         return view('member-views.loan-applications.loan-application-status');
     }
 
