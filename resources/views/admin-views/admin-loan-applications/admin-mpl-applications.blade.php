@@ -118,9 +118,10 @@
                             <th class="text-secondary">Loan Analyst</th>
                             <th class="text-secondary">Exe. Director</th>
                             <th class="text-secondary">Check</th>
+                            <th class="text-secondary">Chk. Picked Up</th>
                             <th>Final</th>
-                            <th>Action</th>
-                            <th>Approval</th>
+                            <th>Edit Status</th>
+                            <th>More..</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -177,22 +178,65 @@
                                     @endif
                                 @endforeach
                             </td>
+
                             <td class="text-center">
-                                @if ($loan->loan->is_approved == 0)
+                                
+                                @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                    @if ($status->loan_application_state_id == 5)
+                                        <i class="bi bi-check-circle-fill text-primary"></i>
+                                        @break
+                                    @endif
+                                @endforeach
+                            </td>
+
+                            <td class="text-center">
+                                @php
+                                $array = [];
+                                foreach ($loan->loan->LoanApplicationStatus as $status) {
+                                    array_push($array, $status->loan_application_state_id);
+                                }
+                                @endphp  
+                                @if(count($array)==0)
+                                    <p class="text-secondary">Pending</p>
+                                @elseif (in_array(6,$array))
+                                    <span class="final-denied">Denied</span>
+                                @elseif(in_array(5,$array))
+                                    <p class="fw-bold text-primary">Picked up</p>  
+                                @elseif(in_array(3,$array))
+                                    <span class="final-approved">Approved</span>
+                                @else
+                                    <p class="">Being Processed</p>
+                                @endif
+                                {{-- @foreach ($loan->loan->LoanApplicationStatus as $status)
+                                    @if ($status->loan_application_state_id == 5)
+                                        <p class="fw-bold text-primary">Picked up</p>                            
+                                    @elseif($status->loan_application_state_id == 3)
+                                        <span class="final-approved">Approved</span>
+                                    @elseif($status->loan_application_state_id == 6)
+                                        <span class="final-denied">Denied</span>     
+                                    @endif
+                                @endforeach --}}
+
+                                {{-- @if ($loan->loan->is_approved == 0)
                                     <p class="text-secondary">Pending</p>
                                 @elseif($loan->loan->is_approved == '1')
                                     <span class="final-approved">Approved</span>
                                 @elseif($loan->loan->is_approved == '2')
                                     <span class="final-denied">Denied</span>
-                                @endif
+                                @endif --}}
                             </td>
 
                             <td>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
-                                    Add Status
+                                <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
+                                    <h5 class="m-0"><i class="bi bi-pencil-square"></i></h5>
                                 </button>
                                 @include('admin-views.admin-loan-applications.modal-add-status')
+
+                                {{-- <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
+                                    Add Status
+                                </button>
+                                @include('admin-views.admin-loan-applications.modal-add-status') --}}
                             </td>
                             <td class="text-center">
                                 

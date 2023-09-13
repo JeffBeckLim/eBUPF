@@ -80,7 +80,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6 d-flex justify-content-end align-items-end">
-                                        <a href="{{route('loan.application.status')}}" type="button" class="btn status-btn bu-orange text-light">View Status</a>
+                                        <a href="{{route('loan.application.status', $loan->loan->id)}}" type="button" class="btn status-btn bu-orange text-light">View Status</a>
                                     </div>
                                 </div>
                             </div>
