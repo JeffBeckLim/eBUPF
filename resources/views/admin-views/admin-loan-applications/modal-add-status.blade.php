@@ -1,5 +1,5 @@
 <div class="modal fade" id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header border-0">
         <h1 class=" fw-bold fs-5">Add Status</h1>
@@ -31,11 +31,23 @@
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              See status
+              See status...
             </button>
           </h2>
           <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample" style="">
-            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+              <div class="row border g-0 p-2">
+                {{-- this sorts from largest id to smallest --}}
+                @foreach ($loan->loan->LoanApplicationStatus->sort(function($a, $b) {
+                  return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
+                    }) as $status)
+                        <div class="col-12 d-flex gap-1 mb-2">
+                            <a class="btn border text-danger grow-on-hover" href="#"><i class="bi bi-trash-fill"></i></a>
+                            <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
+                                {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
+                            </p>
+                        </div>
+                @endforeach
+              </div>
           </div>
         </div>
       </div>
