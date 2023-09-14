@@ -6,7 +6,7 @@
     <div class="container mt-lg-5 mt-3 ms-lg-0 ms-1">
             <!-- This is where you can put your main content -->
                 <div class="row ms-1">
-                    
+
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-12">
@@ -97,7 +97,7 @@
                                                         <h6 style="font-size: small">Apply</h6>
                                                     <strong>Multi-Purpose Loan</strong>
                                                     </div>
-                                                </a>  
+                                                </a>
 
                                                 <a href="/member/hsl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover">
                                                     <img class="img-fluid" src="icons/HSL-mini.svg" alt="mpl mini" width="30px">
@@ -105,7 +105,7 @@
                                                         <h6 style="font-size: small">Apply</h6>
                                                     <strong>Housing Loan</strong>
                                                     </div>
-                                                </a>  
+                                                </a>
 
                                                 {{-- css class - btn-apply-mpl --}}
                                                 {{-- css class -  btn-apply-hsl --}}
