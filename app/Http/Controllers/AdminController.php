@@ -46,6 +46,11 @@ class AdminController extends Controller
             'interest' => 'required|numeric',
         ]);
 
+        $existingPayment = Payment::where('or_number', $data['or_number'])->first();
+        if ($existingPayment) {
+            return redirect()->back()->with('error', 'Duplicate OR Number. Please use a different one.');
+        }
+
         $loan = Loan::find($data['loan_id']);
         if (!$loan) {
             return redirect()->back()->with('error', 'Loan not found.');
