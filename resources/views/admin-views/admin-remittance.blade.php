@@ -105,7 +105,8 @@
                     <table class="table admin-table table-striped ">
                         <thead style="border-bottom: 2px solid black">
                             <tr>
-                                <th>Payment ID</th>
+                                <th>ID</th>
+                                <th>OR Number</th>
                                 <th>Principal Borrower</th>
                                 <th>Unit</th>
                                 <th>Date</th>
@@ -117,9 +118,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payments as $payment)
+                            @php
+                                $sortedPayments = $payments->sortByDesc('created_at');
+                            @endphp
+                            @foreach ($sortedPayments as $payment)
                             <tr class="table-row" data-status="">
                                 <td>{{ $payment->id }}</td>
+                                <td>{{ $payment->or_number }}</td>
                                 <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">{{ $payment->member->firstname }} {{ $payment->member->middle_initial }}. {{ $payment->member->lastname }}</a></td>
                                 <td>BU{{ $payment->member->units->unit_code }}</td>
                                 <td>{{ $payment->payment_date }}</td>
