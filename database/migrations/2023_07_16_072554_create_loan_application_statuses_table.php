@@ -20,6 +20,7 @@ return new class extends Migration
 
             $table->date('date_evaluated')->nullable();
             $table->text('remarks')->nullable();
+            $table->integer('is_deleted')->nullable();
         });
     }
 
