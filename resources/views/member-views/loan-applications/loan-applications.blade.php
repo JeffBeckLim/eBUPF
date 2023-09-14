@@ -23,22 +23,23 @@
                             <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                 <div class="row  mt-2 g-0 ">
                                     <div class="col-4 border rounded ps-3 pt-2">
+                                        @php
+                                            $status_array=[];
+                                            foreach ($loan->loan->loanApplicationStatus as $status) {
+                                                array_push($status_array, $status->loan_application_state_id);
+                                            }
 
-                                        @foreach ($loan->loan->loanApplicationStatus as $status)
-                                            @if ($status->loan_application_state_id == 6)
-                                                     <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
-                                                     @break
-                                                @elseif($status->loan_application_state_id == 5)
-                                                    <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Check Picked Up</span></p>
-                                                    @break
-                                                @elseif($status->loan_application_state_id == 4)
-                                                    <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Ready</span></p>
-                                                    @break
-                                                @else
-                                                    <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: grey"></i><span class="text-muted">Being Processed</span></p>
-                                                    @break
-                                                 @endif
-                                        @endforeach                                       
+                                        @endphp
+                                        @if(in_array(6,$status_array))
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
+                                        @elseif(in_array(5,$status_array))
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
+                                        @elseif(in_array(4,$status_array))
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #ff00d9"></i><span style="color: #a8008e">Check Ready</span></p>
+                                        @elseif(in_array(3,$status_array))
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>
+                                        @endif
+                                                                            
                                         <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>
                                     </div>
                                     <div class="col-2 text-center">
