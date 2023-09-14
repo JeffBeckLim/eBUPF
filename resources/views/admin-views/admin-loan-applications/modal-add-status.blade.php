@@ -55,7 +55,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
                   return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
                     }) as $status)
                         <div class="col-12 d-flex gap-1 mb-2">
-                            <a class="btn border text-danger grow-on-hover" href="#"><i class="bi bi-trash-fill"></i></a>
+                            <a class="btn border text-danger grow-on-hover" href="{{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')"><i class="bi bi-trash-fill"></i></a>
                             <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
                                 {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
                             </p>

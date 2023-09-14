@@ -35,9 +35,11 @@
                                         @elseif(in_array(5,$status_array))
                                             <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
                                         @elseif(in_array(4,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #ff00d9"></i><span style="color: #a8008e">Check Ready</span></p>
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #b700ff"></i><span style="color: #77028f">Check Ready</span></p>
                                         @elseif(in_array(3,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>
+                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>    
+                                        @else
+                                            <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>    
                                         @endif
                                                                             
                                         <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>

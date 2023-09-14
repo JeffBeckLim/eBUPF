@@ -6,22 +6,33 @@ use finfo;
 use App\Models\Loan;
 use App\Models\CoBorrower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
 
 class AdminLoanApplicationController extends Controller
 {
+    public function deleteLoanStatus($id){
+        
+
+        $status = LoanApplicationStatus::findOrFail($id);
+        // $status->is_deleted = 1;
+        $status->delete();
+
+        return redirect('/admin/loan-applications/mpl')->with('deleted_status', 'Status deleted'); 
+        
+    }
+
     // get all MPL loans and only loans that are accepted by CoBorrower
     public function showMplApplications(){
-        $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState') 
-        ->whereHas('loan.member', function ($query) {
-            $query->where('loan_type_id', 1)
-                ->where('accept_request', '1');
-        })->get();
-
-        // dd($loans);
-        // $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus')->get();
+            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
+            ->where('accept_request', 1)
+            ->whereHas('loan', function($query){
+                $query->where('loan_type_id', 1);
+            })->get();
+           
+            
         $loan_app_states = LoanApplicationState::all();
     
         return view('admin-views.admin-loan-applications.admin-mpl-applications', compact('loans', 'loan_app_states'));
