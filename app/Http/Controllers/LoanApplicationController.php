@@ -4,16 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\CoBorrower;
 use App\Models\Loan;
+use App\Models\LoanApplicationState;
+use App\Models\LoanApplicationStatus;
 use App\Models\User;
 use App\Models\Witness;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isNull;
+
 class LoanApplicationController extends Controller
 {   
     public function showLoanStatus($loan_id){
-        dd($loan_id);
-        return view('member-views.loan-applications.loan-application-status');
+        $loan = Loan::with('loanType')->where('id',$loan_id)->first();
+        if($loan==null){
+            abort(404);
+        }elseif ($loan->member_id != Auth::user()->member->id) {
+            abort(404);
+        }
+
+        $loan_status=LoanApplicationStatus::with('LoanApplicationState')
+        ->where('loan_id', $loan_id)
+        ->orderBy('loan_application_state_id', 'desc')
+        ->get();
+        
+        return view('member-views.loan-applications.loan-application-status', compact('loan_status', 'loan'));
     }
 
     //SHOW MPL APPLICATION FORM
