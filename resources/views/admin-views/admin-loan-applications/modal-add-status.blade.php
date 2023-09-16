@@ -35,7 +35,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         @if (in_array(6, $array)) 
         {{-- if loan is denied --}}
            <i>This loan is denied. Delete the declined status to add other status.</i>
-        @elseif(in_array(3, $array)) 
+        @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
          {{-- check if loan is approced then disable those selected and "Denied " loans--}}
            <i>This loan is approved. Delete the "approved by executive director" status to enable 'decline' status.</i>
         @endif
@@ -77,9 +77,8 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
 
              {{-- if loan is denied --}}
                  <option value="" disabled> This Loan is already been declined</option>
-             @elseif(in_array(3, $array)) 
-
-              {{-- check if loan is approced then disable those selected and "Denied " loans--}}
+             @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
+              {{-- check if loan is approved then disable those selected and "Denied " loans--}}
                   @foreach ($loan_app_states as $state)
                   <option value="{{$state->id}}" {{in_array($state->id, $array) || ($state->id == 6)? 'disabled' : ''}}>
                       {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  

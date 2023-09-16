@@ -30,6 +30,13 @@
             </div>
             @endif
 
+            @if (session('deleted_status'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('deleted_status')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
         </div>
         <div class="d-flex px-3 pt-4">
             
@@ -229,7 +236,7 @@
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
-                                    <h5 class="m-0"><i class="bi bi-pencil-square"></i></h5>
+                                    <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
                                 </button>
                                 @include('admin-views.admin-loan-applications.modal-add-status')
 

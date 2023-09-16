@@ -66,12 +66,7 @@ class LoanApplicationController extends Controller
                 $query->where('member_id', Auth::user()->member->id);
             })->has('loan.loanApplicationStatus')
             ->get();
-        //     ->whereHas('loan.loanApplicationStatus', function($query){
-        //         // get loans that are not deleted
-        //         $query->whereNull('is_deleted');
-        //     })
-        //    ->get();
-
+     
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
 
