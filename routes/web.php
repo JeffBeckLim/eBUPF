@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoanApplicationController;
 use App\Http\Controllers\AdminLoanApplicationControlller;
+use App\Http\Controllers\AdminRemittanceController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
@@ -111,10 +112,10 @@ use App\Http\Controllers\TransactionController;
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
-    Route::get('/admin/remittance/view', [AdminController::class, 'showRemittance'])->name('admin.remittance');
+    Route::get('/admin/remittance/view', [AdminRemittanceController::class, 'showRemittance'])->name('admin.remittance');
     // ->middleware('auth','admin.access')
 
-    Route::post('/admin/remittance/view/payment/add', [AdminController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
+    Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
 
 //ADMIN ======================================================================================================
 
