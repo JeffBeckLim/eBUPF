@@ -87,7 +87,7 @@ use App\Http\Controllers\TransactionController;
 
         // { TESTING PA TO}-----------------------------------------------------------
 
-        // Show MPL or HSL Applications 
+        // Show MPL or HSL Applications
         Route::get('/admin/loan-applications/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
 
 
