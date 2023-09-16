@@ -160,10 +160,10 @@
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                   <ul class="list-unstyled components ms-4">
                     <li>
-                      <a href="{{route('admin.mpl.applications')}}" class="fs-7">Multi-purpose Loans</a>
+                      <a href="{{route('admin.loan.applications', 'mpl')}}" class="fs-7">Multi-purpose Loans</a>
                     </li>
                     <li>
-                      <a href="{{route('admin.hsl.applications')}}"  class="fs-7">Housing Loans</a>
+                      <a href="{{route('admin.loan.applications', 'hsl')}}"  class="fs-7">Housing Loans</a>
                     </li>
                   </ul>
                 </div>
@@ -181,7 +181,7 @@
           </li>
           <li class="mt-4">
             <div class="dropup-center dropup">
-              <button class="btn btn-block text-start" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #868686">
+              <button class="btn btn-block text-start w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #868686">
                 <img class=" me-2 ms-3" src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
                 More
               </button>

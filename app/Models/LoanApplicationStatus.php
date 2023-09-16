@@ -14,6 +14,7 @@ class LoanApplicationStatus extends Model
         'loan_application_state_id',
         'date_evaluated',
         'remarks',
+        'deleted_at',
     ];
 
 

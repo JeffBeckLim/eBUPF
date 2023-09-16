@@ -6,34 +6,75 @@ use finfo;
 use App\Models\Loan;
 use App\Models\CoBorrower;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
 
 class AdminLoanApplicationController extends Controller
 {
-    // get all MPL loans and only loans that are accepted by CoBorrower
-    public function showMplApplications(){
-        $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState') 
-        ->whereHas('loan.member', function ($query) {
-            $query->where('loan_type_id', 1)
-                ->where('accept_request', '1');
-        })->get();
+    public function deleteLoanStatus($id){
+        
 
-        // dd($loans);
-        // $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus')->get();
+        $status = LoanApplicationStatus::findOrFail($id);
+        // $status->is_deleted = 1;
+        $status->delete();
+
+        return redirect('/admin/loan-applications/mpl')->with('deleted_status', 'Status deleted'); 
+        
+    }
+
+    // get all MPL or HSL loan applications that are accepted by CoBorrower
+    public function showLoanApplications($loan_type){
+        if($loan_type == 'mpl'){
+
+            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
+            ->where('accept_request', 1)
+            ->whereHas('loan', function($query){
+                $query->where('loan_type_id',  1); //loan type of MPL
+            })->get();
+
+        }elseif($loan_type == 'hsl'){
+
+            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
+            ->where('accept_request', 1)
+            ->whereHas('loan', function($query){
+                $query->where('loan_type_id',  2); //loan type of HSL
+            })->get();
+
+        }else{
+            abort(404);
+        }
+        
         $loan_app_states = LoanApplicationState::all();
-    
-        return view('admin-views.admin-loan-applications.admin-mpl-applications', compact('loans', 'loan_app_states'));
+        
+
+        $approved= 0;
+        $denied = 0;
+        $pending = 0;
+        foreach($loans as $loan){
+            if(count($loan->loan->loanApplicationStatus) < 0){
+                $pending += 1;
+            }
+            foreach($loan->loan->loanApplicationStatus as $state){
+                if($state->loan_application_state_id == 3){
+                    $approved += 1;
+                }
+                elseif($state->loan_application_state_id == 6){
+                    $denied += 1;
+                }
+            }
+        }
+        
+
+        if($loan_type == 'mpl'){
+            return view('admin-views.admin-loan-applications.admin-mpl-applications', compact('loans', 'loan_app_states' ,'approved' , 'denied', 'pending'));
+        }elseif($loan_type == 'hsl'){
+            return view('admin-views.admin-loan-applications.admin-hsl-applications', compact('loans', 'loan_app_states'  ,'approved' , 'denied', 'processing'));            
+        }else{
+            abort(404);
+        }
     }
-
-
-    
-    public function showHslApplications(){
-        return view('admin-views.admin-loan-applications.admin-hsl-applications');
-    }
-
-
 
 
 

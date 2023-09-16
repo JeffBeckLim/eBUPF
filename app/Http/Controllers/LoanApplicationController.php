@@ -8,6 +8,7 @@ use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
 use App\Models\User;
 use App\Models\Witness;
+use GuzzleHttp\Psr7\Query;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,8 @@ use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
 {   
+   
+
     public function showLoanStatus($loan_id){
         $loan = Loan::with('loanType')->where('id',$loan_id)->first();
         if($loan==null){
@@ -25,9 +28,15 @@ class LoanApplicationController extends Controller
 
         $loan_status=LoanApplicationStatus::with('LoanApplicationState')
         ->where('loan_id', $loan_id)
+        ->whereNull('is_deleted') //get status that are not deleted
         ->orderBy('loan_application_state_id', 'desc')
         ->get();
         
+        // if loan has no status abort
+        if(count($loan_status)==null){
+            abort(404);
+        }
+
         return view('member-views.loan-applications.loan-application-status', compact('loan_status', 'loan'));
     }
 
@@ -52,13 +61,12 @@ class LoanApplicationController extends Controller
             'loan.loanApplicationStatus.loanApplicationState',
             'loan.loanType',
             //get loans with status
-            )->has('loan.loanApplicationStatus')->whereHas(
-                'loan', function ($query){
-                // get loans of the member
+            )
+            ->whereHas('loan', function ($query){
                 $query->where('member_id', Auth::user()->member->id);
-            })->get();
-
-            // dd($loans);
+            })->has('loan.loanApplicationStatus')
+            ->get();
+     
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
 

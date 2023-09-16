@@ -30,6 +30,13 @@
             </div>
             @endif
 
+            @if (session('deleted_status'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('deleted_status')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
         </div>
         <div class="d-flex px-3 pt-4">
             
@@ -40,14 +47,17 @@
 
             <div class="membership-app-header2">
                 <div class="lh-1" style="padding: 15px 0 0 15px;">
-                    <p class="fw-bold">1 Pending</p>
+                    <p class="fw-bold">{{$pending}} Pending</p>
                     <div class="d-flex">
                         <div class="row">
                             <div class="col-sm-6">
-                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;" class="text-success">2 Approved</p>
+                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;" class="text-success">{{$approved}} Approved</p>
                             </div>
                             <div class="col-sm-6">
-                                <p class="text-danger" style="font-size: 0.7rem; width: 100%">1 Denied</p>
+                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;" class="text-secondary">{{count($loans)-$pending-$approved-$denied}} Processing</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-danger" style="font-size: 0.7rem; width: 100%">{{$denied}} Denied</p>
                             </div>
                         </div>
                     </div>
@@ -125,7 +135,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($loans as $loan)
+                    @foreach ($loans as $loan)
                             
                         
                         <tr class="table-row" data-status="approved">
@@ -229,7 +239,7 @@
                             <td>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
-                                    <h5 class="m-0"><i class="bi bi-pencil-square"></i></h5>
+                                    <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
                                 </button>
                                 @include('admin-views.admin-loan-applications.modal-add-status')
 
@@ -268,7 +278,7 @@
                             </td> --}}
                         </tr>
 
-                        @endforeach
+                    @endforeach
                    
                     </tbody>
                 </table>

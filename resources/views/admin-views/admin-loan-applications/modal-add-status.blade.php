@@ -35,7 +35,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         @if (in_array(6, $array)) 
         {{-- if loan is denied --}}
            <i>This loan is denied. Delete the declined status to add other status.</i>
-        @elseif(in_array(3, $array)) 
+        @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
          {{-- check if loan is approced then disable those selected and "Denied " loans--}}
            <i>This loan is approved. Delete the "approved by executive director" status to enable 'decline' status.</i>
         @endif
@@ -55,7 +55,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
                   return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
                     }) as $status)
                         <div class="col-12 d-flex gap-1 mb-2">
-                            <a class="btn border text-danger grow-on-hover" href="#"><i class="bi bi-trash-fill"></i></a>
+                            <a class="btn border text-danger grow-on-hover" href="{{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')"><i class="bi bi-trash-fill"></i></a>
                             <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
                                 {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
                             </p>
@@ -77,9 +77,8 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
 
              {{-- if loan is denied --}}
                  <option value="" disabled> This Loan is already been declined</option>
-             @elseif(in_array(3, $array)) 
-
-              {{-- check if loan is approced then disable those selected and "Denied " loans--}}
+             @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
+              {{-- check if loan is approved then disable those selected and "Denied " loans--}}
                   @foreach ($loan_app_states as $state)
                   <option value="{{$state->id}}" {{in_array($state->id, $array) || ($state->id == 6)? 'disabled' : ''}}>
                       {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
