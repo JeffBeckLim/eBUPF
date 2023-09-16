@@ -7,12 +7,18 @@ use App\Models\User;
 use App\Models\Loan;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Form;
 
 class AdminRemittanceController extends Controller
 {
     public function showRemittance(){
         $payments = Payment::all();
-        return view('admin-views.admin-remittance',['payments' => $payments]);
+        $loanIds = Loan::all()->pluck('id')->toArray();
+
+        return view('admin-views.admin-remittance', [
+            'payments' => $payments,
+            'loanIds' => $loanIds, // Pass the loan IDs to the view
+        ]);
     }
 
     public function addPaymentRemittance(Request $request){

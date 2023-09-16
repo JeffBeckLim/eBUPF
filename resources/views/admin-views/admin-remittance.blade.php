@@ -35,7 +35,7 @@
                     </select>
                 </div>
                 <button id="remit-btn" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
-                <button id="remit-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Remove Filter</button>
+                <button id="remit-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
 
             </div>
 
@@ -47,27 +47,32 @@
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
                         <label for="or_number" class="fw-bold">OR Number</label>
-                        <input class="form-control" name="or_number" type="number" value="{{ old('or_number') }}" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);">
+                        <input class="form-control" name="or_number" type="number" value="{{ old('or_number') }}" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 pe-1 pb-3">
                         <label for="payment_date" class="fw-bold">Date</label>
-                        <input id="myForm" class="form-control" name="payment_date" type="date" value="{{ old('payment_date') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input id="myForm" class="form-control" name="payment_date" type="date" value="{{ old('payment_date') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 pe-1">
                         <label for="loan_id" class="fw-bold">Loan ID</label>
-                        <input class="form-control" name="loan_id" type="number" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
+                            <option value="" disabled selected>Select a Loan ID</option>
+                            @foreach ($loanIds as $loanId)
+                                <option value="{{ $loanId }}">{{ $loanId }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>
-                        <input id="myForm" class="form-control" name="principal" type="number" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input id="myForm" class="form-control" name="principal" type="number" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 pe-1">
                         <label for="interest" class="fw-bold">Interest</label>
-                        <input class="form-control w-100" name="interest" type="number" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input class="form-control w-100" name="interest" type="number" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">

@@ -239,6 +239,12 @@
 
 
       {{-- HIDE ON SCROLL EVENT --}}
+      <!-- Include jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+
     <script>
       document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("fixedTopElement").classList.remove("hide");
@@ -253,6 +259,19 @@ window.addEventListener("scroll", function(){
     document.getElementById("fixedTopElement").classList.remove("hide");
   }
   lastScrollTop = currentScroll;
+});
+
+$(document).ready(function() {
+    // Initialize Select2 on the dropdown
+    $('#loan_id').select2({
+        placeholder: 'Select a Loan ID',
+        allowClear: true,
+    });
+    $('.select2-selection--single').css('background-color', '#D9E4E9');
+    $('.select2-selection--single').css('height', '38px');
+    $('.select2-selection--single').css('border-radius', '10px');
+    $('.select2-selection--single').css('border', 'none');
+    $('.select2-selection--single').css('padding-top', '5px');
 });
 
     </script>
