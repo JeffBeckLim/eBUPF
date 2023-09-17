@@ -127,48 +127,60 @@
                                                 {{-- css class -  btn-apply-hsl --}}
                                            </div>
                                         </div>
-                                        <div style="padding-left: 10px; background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px; padding-bottom: 15px;">
-                                            <div class="row mt-2 g-0">
-                                                <div class="col-4">
-                                                    <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: grey"></i>Being Processed</p>
-                                                    <p class="text17-design">Multi-purpose Loan</p>
-                                                </div>
-                                                <div class="col-2">
-                                                    <p class="text16-design">April 1, 2023</p>
-                                                </div>
-
-
-                                                <div class="col-4">
-                                                    <p class=" text15-design m-0">Request</p>
-                                                    <p class=" fw-bold text17-design "><span class="fw-light">Php </span>200,000.00</p>
-                                                </div>
-
-
-                                                <div class="col-2">
-                                                    <p class="text15-design m-0"> Years to Pay</p>
-                                                    <p class="text17-design">1 Year</p>
-                                                </div>
+                                        @if($inActiveLoan == null)
+                                            <div style="background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px;
+                                            padding: 50px 0;" class="d-flex justify-content-center align-items-center">
+                                                You don't have any pending loans.
                                             </div>
-                                            <div class="row g-0">
-                                                <div class="col-6">
-                                                    <p style="font-size:small; margin: 0;">Co-Borrower</p>
-                                                    <div class="row g-0">
-                                                        <div class="col-3 d-flex justify-content-center">
-                                                            <img class="rounded-circle" src="assets/hooman.png" alt="Default Picture" style="height: 2.5rem;">
-                                                        </div>
-                                                        <div class="col-9 myline-height ">
-                                                            <span class="fw-bold fs-7">Elly Buendia</span> <br> <span style="font-size: 14px;">BUCS</span>
-                                                        </div>
+                                        @else
+                                            <div style="padding-left: 10px; background: white; border-radius: 20px; border: 0.50px #DCDCDC solid; margin-bottom: 20px; padding-bottom: 15px;">
+                                                <div class="row mt-2 g-0">
+                                                    <div class="col-3">
+                                                        <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: grey"></i>Being Processed</p>
+                                                        <p class="text17-design">
+                                                            @if($inActiveLoan->loan_type_id == 1)
+                                                                Multi-Purpose Loan
+                                                            @else
+                                                                Housing Loan
+                                                            @endif
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <p class="text16-design">{{$inActiveLoan->created_at->format('F j, Y')}}</p>
+                                                    </div>
+
+
+                                                    <div class="col-4">
+                                                        <p class=" text15-design m-0">Request</p>
+                                                        <p class=" fw-bold text17-design "><span class="fw-light">Php </span>{{ $inActiveLoan->principal_amount }}</p>
+                                                    </div>
+
+
+                                                    <div class="col-2">
+                                                        <p class="text15-design m-0"> Years to Pay</p>
+                                                        <p class="text17-design">{{ $inActiveLoan->term_years }}</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-6 text-end">
-                                                    <a href="#" type="button" class="btn status-btn">View Status</a>
+                                                <div class="row g-0">
+                                                    <div class="col-6">
+                                                        <p style="font-size:small; margin: 0;">Co-Borrower</p>
+                                                        <div class="row g-0">
+                                                            <div class="col-3 d-flex justify-content-center">
+                                                                <img class="rounded-circle" src="{{ asset('storage/' .$inActiveLoan->co_borrower_profile_picture)}}" alt="Co-Borrower Profile Picture" style="height: 2.5rem; width: 2.5rem;">
+                                                            </div>
+                                                            <div class="col-9 myline-height ">
+                                                                <span class="fw-bold fs-7">{{ $inActiveLoan->co_borrower_firstname }} {{ $inActiveLoan->co_borrower_middle_initial }} {{ $inActiveLoan->co_borrower_lastname }} </span> <br> <span style="font-size: 14px;">{{$inActiveLoan->co_borrower_unit_code}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 text-end">
+                                                        <a href="#" type="button" class="btn status-btn">View Status</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                        @endif
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
