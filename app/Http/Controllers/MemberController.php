@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use App\Models\User;
+use App\Models\Loan;
 use App\Models\Campus;
 use App\Models\Member;
 use App\Rules\EmailDomain;
@@ -19,7 +20,28 @@ use Illuminate\Support\Facades\Validator;
 class MemberController extends Controller
 {
     public function showMemberDash(){
-        return view('member-views.member-dashboard');
+        $user = Auth::user();
+        $loans = Loan::where('member_id', $user->member->id)->where('is_approved', 1)->get();
+
+        //If no loans or all loans have been paid, set principal amount to 0.00
+        if ($loans->isEmpty() || $loans->every(fn($loan) => $loan->principal_amount == 0.00)) {
+            $principalAmount = 0.00;
+        } else {
+            $principalAmount = $loans->sum('principal_amount');
+        }
+
+        //get the approved loans, based on the is_approved cell in the Loans table
+        $approvedLoan = Loan::where('member_id', $user->member->id)->where('is_approved', 1)->get();
+
+        $mplLoans = $approvedLoan->where('loan_type_id', 1)->first();
+        $hslLoans = $approvedLoan->where('loan_type_id', 2)->first();
+
+        return view('member-views.member-dashboard', [
+            'principalAmount' => $principalAmount,
+            'mplLoans' => $mplLoans,
+            'hslLoans' => $hslLoans,
+            'loans' => $loans,
+        ]);
     }
 
     public function updateMembership(Request $request, Member $member){
