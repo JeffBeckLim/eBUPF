@@ -13,71 +13,87 @@
                                 <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid">
                                     <div style="position: relative;">
                                         <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
-                                        <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">php <span class="fs-5 fw-bold">106,000.00</span></p>
+                                        <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">php <span class="fs-5 fw-bold">{{ $principalAmount }}
+                                        </span></p>
                                         <p class="text-white" style="position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); font-size: 10px;">Total Outstanding Balance</p>
                                     </div>
-                                    <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
-                                        <div class="row mt-2 g-0">
-                                            <div class="col-8  g-0">
-                                                <div class="row h-100 g-0">
-                                                    <div class="col-3 ps-2 d-flex justify-content-center ">
-                                                        <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
+
+                                    @if ($loans->isEmpty())
+                                        <div class="d-flex justify-content-center align-items-center pt-5 pb-5 mt-5 mb-5">
+                                            You currently don't have active loans. Apply Now!
+                                        </div>
+                                    @else
+
+                                        {{-- Display active Multi-Purpose Loan --}}
+                                        @if ($mplLoans != null)
+                                            <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
+                                                <div class="row mt-2 g-0">
+                                                    <div class="col-8  g-0">
+                                                        <div class="row h-100 g-0">
+                                                            <div class="col-3 ps-2 d-flex justify-content-center ">
+                                                                <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
+                                                            </div>
+                                                            <div class="col-9 ">
+                                                                <p class="myline-height">
+                                                                    <span class="text14-design">Multi-Purpose Loan </span><br> <span class="text13-design">{{$mplLoans->created_at->format('F j, Y')}} - {{$mplLoans->created_at->addYears($mplLoans->term_years)->format('F j, Y')}}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div class="col-9 ">
-                                                        <p class="myline-height">
-                                                            <span class="text14-design">Multi-Purpose Loan </span><br> <span class="text13-design">March 18, 2023 - March 18, 2024</span>
-                                                        </p>
+                                                    <div class="col-4 ">
+                                                        <p class="text13-design m-0">Outstanding Balance</p>
+                                                        <p class="text14-design"><span class="text12-design">Php </span>{{ $mplLoans->principal_amount }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-2 mb-2">
+                                                    <div class="col-sm-7 ">
+                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                    </div>
+
+                                                    <div class="col-sm-4">
+                                                        <span class="text11-design fw-bold">{{$mplLoans->term_years * 12}}</span> <span class="text12-design">months to pay</span>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-4 ">
-                                                <p class="text13-design m-0">Outstanding Balance</p>
-                                                <p class="text14-design"><span class="text12-design">Php </span>53,000.00</p>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-2 mb-2">
-                                            <div class="col-sm-7 ">
-                                                <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
-                                            </div>
+                                        @endif
 
-                                            <div class="col-sm-4">
-                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months to pay</span>
-                                            </div>
-                                        </div>
+                                        @if($hslLoans != null)
 
-                                    </div>
+                                            <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
+                                                <div class="row mt-2 g-0">
+                                                    <div class="col-8  g-0">
+                                                        <div class="row h-100 g-0">
+                                                            <div class="col-3 ps-2 d-flex justify-content-center ">
+                                                                <img class="img-fluid" src="icons/HSL-mini.svg" alt="mpl mini" width="40px">
+                                                            </div>
+                                                            <div class="col-9 ">
+                                                                <p class="myline-height">
+                                                                    <span class="text14-design">Housing Loan </span><br> <span class="text13-design">{{$hslLoans->created_at->format('F j, Y')}} - {{$hslLoans->created_at->addYears($hslLoans->term_years)->format('F j, Y')}}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
 
-                                    <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
-                                        <div class="row mt-2 g-0">
-                                            <div class="col-8  g-0">
-                                                <div class="row h-100 g-0">
-                                                    <div class="col-3 ps-2 d-flex justify-content-center ">
-                                                        <img class="img-fluid" src="icons/HSL-mini.svg" alt="mpl mini" width="40px">
                                                     </div>
-                                                    <div class="col-9 ">
-                                                        <p class="myline-height">
-                                                            <span class="text14-design">Housing Loan </span><br> <span class="text13-design">March 18, 2023 - March 18, 2024</span>
-                                                        </p>
+                                                    <div class="col-4 ">
+                                                        <p class="text13-design m-0">Outstanding Balance</p>
+                                                        <p class="text14-design"><span class="text12-design">Php </span>{{ $hslLoans->principal_amount }}</p>
                                                     </div>
                                                 </div>
+                                                <div class="row mt-2 mb-2">
+                                                    <div class="col-sm-7 ">
+                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                    </div>
 
+                                                    <div class="col-sm-5">
+                                                        <span class="text11-design fw-bold">{{$hslLoans->term_years * 12}}</span> <span class="text12-design">months to pay</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-4 ">
-                                                <p class="text13-design m-0">Outstanding Balance</p>
-                                                <p class="text14-design"><span class="text12-design">Php </span>53,000.00</p>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-2 mb-2">
-                                            <div class="col-sm-7 ">
-                                                <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">Php 4,416.00</span>
-                                            </div>
+                                        @endif
+                                    @endif
 
-                                            <div class="col-sm-5">
-                                                <span class="text11-design fw-bold">30</span> <span class="text12-design">months to pay</span>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
