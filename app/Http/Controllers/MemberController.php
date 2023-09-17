@@ -21,7 +21,7 @@ class MemberController extends Controller
 {
     public function showMemberDash(){
         $user = Auth::user();
-        $loans = Loan::where('member_id', $user->member->id)->where('is_approved', 1)->get();
+        $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
 
         //If no loans or all loans have been paid, set principal amount to 0.00
         if ($loans->isEmpty() || $loans->every(fn($loan) => $loan->principal_amount == 0.00)) {
@@ -30,11 +30,8 @@ class MemberController extends Controller
             $principalAmount = $loans->sum('principal_amount');
         }
 
-        //get the approved loans, based on the is_approved cell in the Loans table
-        $approvedLoan = Loan::where('member_id', $user->member->id)->where('is_approved', 1)->get();
-
-        $mplLoans = $approvedLoan->where('loan_type_id', 1)->first();
-        $hslLoans = $approvedLoan->where('loan_type_id', 2)->first();
+        $mplLoans = $loans->where('loan_type_id', 1)->first();
+        $hslLoans = $loans->where('loan_type_id', 2)->first();
 
         return view('member-views.member-dashboard', [
             'principalAmount' => $principalAmount,
