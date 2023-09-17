@@ -8,13 +8,19 @@
         
         <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
             <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
-
             @error('loan_application_state_id')
             <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
                 <p style="font-size: 12px" class="m-0">Please select a status, it can't be empty.</p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @enderror
+
+            @if (session('state_update'))
+            <div class="alert alert-primary alert-dismissible fade show mt-3 border border-primary" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('state_update')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
 
             @if (session('status_error'))
             <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
@@ -38,11 +44,29 @@
             @endif
 
         </div>
+
+        <div class="row mt-3 g-0 mx-3">
+            <div class="col-6">
+                <a class="btn border rounded-end-0 w-100
+                {{$loan_type == 'mpl' ? 'fw-bold' : ''}} 
+                " href="{{route('admin.loan.applications.tracking', 'mpl')}}">MPL Applications Tracking</a>
+            </div>
+            <div class="col-6">
+                <a 
+                class="btn border rounded-start-0 w-100
+                {{$loan_type == 'hsl' ? 'fw-bold' : ''}}" 
+                href="{{route('admin.loan.applications.tracking', 'hsl')}}">
+                HSL Applications Tracking
+            </a>
+            </div>
+        </div>
+
+
         <div class="d-flex px-3 pt-4">
             
             <div class="d-flex membership-app-header1-mpl text-dark">
                 <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 50px;">
-                <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
+                <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
             </div>
 
             <div class="membership-app-header2">
@@ -119,6 +143,7 @@
                             }
                         </style>
                         <tr>
+                            <th>State</th>
                             <th>Loan ID</th>
                             <th>Principal Borrower</th>
                             <th>Unit</th>
@@ -130,7 +155,7 @@
                             <th class="text-secondary">Check</th>
                             <th class="text-secondary">Chk. Picked Up</th>
                             <th>Final</th>
-                            <th>Edit Status</th>
+                            <th>Edit Standing</th>
                             <th>More..</th>
                         </tr>
                     </thead>
@@ -138,7 +163,16 @@
                     @foreach ($loans as $loan)
                             
                         
-                        <tr class="table-row" data-status="approved">
+                          <tr class="table-row" data-status="approved">
+                            <td>
+                                @if ($loan->loan->is_active == 1)
+                                    <span class="text-primary">Performing</span>
+                                @elseif($loan->loan->is_active == 2)
+                                    <span class="text-dark">Non-performing</span>
+                                @elseif($loan->loan->is_active == null)
+                                    <i>n/a</i>
+                                @endif    
+                            </td>
                             <td>{{$loan->loan->id}}</td>
 
                             <td>
@@ -217,23 +251,7 @@
                                 @else
                                     <p class="">Being Processed</p>
                                 @endif
-                                {{-- @foreach ($loan->loan->LoanApplicationStatus as $status)
-                                    @if ($status->loan_application_state_id == 5)
-                                        <p class="fw-bold text-primary">Picked up</p>                            
-                                    @elseif($status->loan_application_state_id == 3)
-                                        <span class="final-approved">Approved</span>
-                                    @elseif($status->loan_application_state_id == 6)
-                                        <span class="final-denied">Denied</span>     
-                                    @endif
-                                @endforeach --}}
-
-                                {{-- @if ($loan->loan->is_approved == 0)
-                                    <p class="text-secondary">Pending</p>
-                                @elseif($loan->loan->is_approved == '1')
-                                    <span class="final-approved">Approved</span>
-                                @elseif($loan->loan->is_approved == '2')
-                                    <span class="final-denied">Denied</span>
-                                @endif --}}
+                     
                             </td>
 
                             <td>
@@ -241,12 +259,6 @@
                                 <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
                                     <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
                                 </button>
-                                @include('admin-views.admin-loan-applications.modal-add-status')
-
-                                {{-- <button type="button" class="btn btn-add-status" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
-                                    Add Status
-                                </button>
-                                @include('admin-views.admin-loan-applications.modal-add-status') --}}
                             </td>
                             <td class="text-center">
                                 
@@ -256,13 +268,22 @@
                                   <ul class="dropdown-menu">
                                     
                                     <li>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#stateModal{{$loan->loan->id}}" class="dropdown-item">
+                                            Change State
+                                            <p class="" style="font-size: x-small">Make Loan performing or closed.</p>
+                                        </a>
+                                        
+                                    </li>
+                                    <li>
                                         <a class="dropdown-item" href="#">
-                                            <button class="approve-btn w-100 grow-on-hover">Approve</button>
+                                            Add Loan Type
+                                            <p style="font-size: x-small">Add, New or Renew.</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="#">
-                                            <button class="deny-btn w-100 grow-on-hover">Deny</button>
+                                            Edit Loan
+                                            <p style="font-size: x-small">Change contents of the loan.</p>
                                         </a>
                                     </li>
                                   </ul>
@@ -277,7 +298,8 @@
                                 </div>
                             </td> --}}
                         </tr>
-
+                        @include('admin-views.admin-loan-applications-tracking.modal-add-status')
+                        @include('admin-views.admin-loan-applications-tracking.modal-change-state')
                     @endforeach
                    
                     </tbody>

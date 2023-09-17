@@ -31,7 +31,7 @@ return new class extends Migration
             $table->integer('term_years');
 
             $table->integer('is_visible')->nullable();
-            $table->integer('is_approved')->nullable();
+            $table->integer('is_active')->nullable();
 
             $table->timestamp('is_viewed')->nullable();
             // campus_id_index not added 
