@@ -19,7 +19,7 @@ class Loan extends Model
         'interest', 
         'term_years',
         'is_visible',
-        'is_approved',
+        'is_active',
         'is_viewed',
     ];
     //belongs to one member

@@ -13,6 +13,16 @@ use App\Models\LoanApplicationStatus;
 
 class AdminLoanApplicationController extends Controller
 {
+
+    public function createLoanApplicationState(Request $request, $id){
+    
+        $loan = Loan::findOrFail($id);
+        $loan->is_active =$request->is_active;
+        $loan->save();
+
+        return back()->with('state_update', 'Loan State Updated');
+    }
+
     public function deleteLoanStatus($id){
         
 
@@ -25,7 +35,7 @@ class AdminLoanApplicationController extends Controller
     }
 
     // get all MPL or HSL loan applications that are accepted by CoBorrower
-    public function showLoanApplications($loan_type){
+    public function showLoanApplicationsTracking($loan_type){
         if($loan_type == 'mpl'){
 
             $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
@@ -68,9 +78,9 @@ class AdminLoanApplicationController extends Controller
         
 
         if($loan_type == 'mpl'){
-            return view('admin-views.admin-loan-applications.admin-mpl-applications', compact('loans', 'loan_app_states' ,'approved' , 'denied', 'pending'));
+            return view('admin-views.admin-loan-applications-tracking.admin-mpl-applications-tracking', compact('loans', 'loan_app_states' ,'approved' , 'denied', 'pending' ,'loan_type'));
         }elseif($loan_type == 'hsl'){
-            return view('admin-views.admin-loan-applications.admin-hsl-applications', compact('loans', 'loan_app_states'  ,'approved' , 'denied', 'processing'));            
+            return view('admin-views.admin-loan-applications-tracking.admin-hsl-applications-tracking', compact('loans', 'loan_app_states'  ,'approved' , 'denied', 'pending' ,'loan_type'));            
         }else{
             abort(404);
         }
