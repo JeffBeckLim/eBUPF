@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Models\Loan;
 use App\Models\Campus;
 use App\Models\Member;
+use App\Models\CoBorrower;
+use App\Models\LoanApplicationState;
+use App\Models\LoanApplicationStatus;
+use App\Models\Witness;
 use App\Rules\EmailDomain;
 use App\Models\Beneficiary;
 use Illuminate\Support\Str;
@@ -33,26 +37,25 @@ class MemberController extends Controller
         $mplLoans = $loans->where('loan_type_id', 1)->first();
         $hslLoans = $loans->where('loan_type_id', 2)->first();
 
-        // get loans that are inactive, has 0 or null is_active value
-        $inActiveLoan = Loan::where('loans.member_id', $user->member->id)
-        ->where(function ($query) {
-            $query->where('loans.is_active', 0)
-                  ->orWhereNull('loans.is_active');
-        })
-        ->join('co_borrowers', 'loans.id', '=', 'co_borrowers.loan_id')
-        ->where('co_borrowers.accept_request', 1)
-        ->join('members as co_borrower_member', 'co_borrowers.member_id', '=', 'co_borrower_member.id')
-        ->leftJoin('units', 'co_borrower_member.unit_id', '=', 'units.id') // Join the units table
-        ->select('loans.*',
-                 'co_borrower_member.firstname as co_borrower_firstname',
-                 'co_borrower_member.lastname as co_borrower_lastname',
-                 'co_borrower_member.middle_initial as co_borrower_middle_initial',
-                 'co_borrower_member.profile_picture as co_borrower_profile_picture',
-                 'units.unit_code as co_borrower_unit_code') // Select unit_code
-        ->first();
-
-    // Now you can access the co-borrower's data including the profile picture in $inActiveLoan
-
+        $inActiveLoan = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType'
+        )
+        ->where('accept_request', '1') // Get loans accepted by coBorrower
+        ->whereHas('loan', function ($query) {
+            $query->where(function ($query) {
+                $query->where('member_id', Auth::user()->member->id)
+                      ->orWhereNull('member_id')
+                      ->orWhere('member_id', 0);
+            })
+            ->where(function ($query) {
+                $query->where('is_active', 0)
+                      ->orWhereNull('is_active')
+                      ->orWhere('is_active', 0);
+            });
+        })->first();
 
         return view('member-views.member-dashboard', [
             'principalAmount' => $principalAmount,
