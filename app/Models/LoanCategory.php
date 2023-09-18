@@ -9,6 +9,11 @@ class LoanCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'loan_category_name',
+        'loan_category_description',
+    ];
+
     // Loan categories have many loans
 
     public function loans(){

@@ -62,10 +62,12 @@ class LoanApplicationController extends Controller
             'loan.loanType',
             //get loans with status
             )
+            ->where('accept_request', '1') //get loans accepted by coBorrower
             ->whereHas('loan', function ($query){
                 $query->where('member_id', Auth::user()->member->id);
-            })->has('loan.loanApplicationStatus')
-            ->get();
+            })->get();
+            // ->has('loan.loanApplicationStatus')
+            
      
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }

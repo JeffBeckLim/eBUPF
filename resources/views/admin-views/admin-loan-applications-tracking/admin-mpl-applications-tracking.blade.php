@@ -266,7 +266,7 @@
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                   </button>
                                   <ul class="dropdown-menu">
-                                    
+                                    {{-- SEE INCLUDED MODALS BELOW --}}
                                     <li>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#stateModal{{$loan->loan->id}}" class="dropdown-item">
                                             Change State
@@ -275,8 +275,8 @@
                                         
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            Add Loan Type
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#categoryModal{{$loan->loan->id}}" class="dropdown-item">
+                                            Categorize Loan
                                             <p style="font-size: x-small">Add, New or Renew.</p>
                                         </a>
                                     </li>
@@ -298,6 +298,7 @@
                                 </div>
                             </td> --}}
                         </tr>
+                        @include('admin-views.admin-loan-applications-tracking.modal-loan-category')
                         @include('admin-views.admin-loan-applications-tracking.modal-add-status')
                         @include('admin-views.admin-loan-applications-tracking.modal-change-state')
                     @endforeach

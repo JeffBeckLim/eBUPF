@@ -8,7 +8,7 @@
         <div class="modal-body">
         <form action="{{route('create.state',$loan->loan->id)}}" method="POST">
             @csrf
-            <div class="form-check">
+              <div class="form-check">
                 <input class="form-check-input" type="radio" name="is_active" id="is_active1" value=""{{$loan->loan->is_active == '' ? 'checked' : ''}}>
                 <label class="form-check-label" for="is_active1" >
                   No State / None

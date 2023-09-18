@@ -10,6 +10,13 @@
                         <p class=" fs-5 fw-bold">Loan <br> Applications</p>
                     </div>
                     
+                    <div class="border rounded mx-3 mb-3 p-2">
+                        <p class="m-0 text-secondary" style="font-size: small">
+                            <i class="bi bi-lightbulb-fill"></i>
+                            Below, you'll find a list of loan applications that have been accepted by co-borrowers.
+                        </p>
+                    </div>
+
                     <div class="  d-flex align-items-center  mx-lg-3 m-1">
                         <label>Search</label>
                         <input type="text" class="ms-2 search-box" placeholder="Enter your search query">
