@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
-{   
-   
+{
+
 
     public function showLoanStatus($loan_id){
         $loan = Loan::with('loanType')->where('id',$loan_id)->first();
@@ -31,7 +31,7 @@ class LoanApplicationController extends Controller
         ->whereNull('is_deleted') //get status that are not deleted
         ->orderBy('loan_application_state_id', 'desc')
         ->get();
-        
+
         // if loan has no status abort
         if(count($loan_status)==null){
             abort(404);
@@ -56,7 +56,7 @@ class LoanApplicationController extends Controller
     public function showLoanApplications(){
 
         $loans = CoBorrower::with(
-            'member.units.campuses', 
+            'member.units.campuses',
             'loan.member.units.campuses',
             'loan.loanApplicationStatus.loanApplicationState',
             'loan.loanType',
@@ -67,8 +67,8 @@ class LoanApplicationController extends Controller
                 $query->where('member_id', Auth::user()->member->id);
             })->get();
             // ->has('loan.loanApplicationStatus')
-            
-     
+
+
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
 
@@ -99,7 +99,7 @@ class LoanApplicationController extends Controller
         // }
         if($request->email_witness_1 == $request->email_witness_2 ||
             $request->email_witness_1 == $request->email_co_borrower ||
-            $request->email_witness_2 == $request->email_co_borrower   
+            $request->email_witness_2 == $request->email_co_borrower
         ){
             return back()->with('email_error', 'Make sure all emails are unique');
         }
