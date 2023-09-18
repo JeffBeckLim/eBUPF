@@ -70,7 +70,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         <form method="POST" action="{{route('create.status',$loan->loan->id)}}" >
           @csrf
           <div class="mb-3">
-            <label for="statusDropdown" class="col-form-label">Select Satatus</label>
+            <label for="statusDropdown" class="col-form-label">Select Status</label>
             <select name="loan_application_state_id" id="statusDropdown" class="form-select form-control" required>
              <option value="" selected disabled>...</option>
              @if (in_array(6, $array)) 

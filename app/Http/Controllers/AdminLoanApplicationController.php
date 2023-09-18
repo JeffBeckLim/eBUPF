@@ -10,9 +10,15 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
+use App\Models\LoanCategory;
 
 class AdminLoanApplicationController extends Controller
 {
+
+    public function createLoanApplicationCategory(Request $request, $id){
+        dd($request);
+    }
+
 
     public function createLoanApplicationState(Request $request, $id){
     
@@ -57,6 +63,7 @@ class AdminLoanApplicationController extends Controller
         }
         
         $loan_app_states = LoanApplicationState::all();
+        $loan_categories = LoanCategory::all();
         
 
         $approved= 0;
@@ -78,9 +85,9 @@ class AdminLoanApplicationController extends Controller
         
 
         if($loan_type == 'mpl'){
-            return view('admin-views.admin-loan-applications-tracking.admin-mpl-applications-tracking', compact('loans', 'loan_app_states' ,'approved' , 'denied', 'pending' ,'loan_type'));
+            return view('admin-views.admin-loan-applications-tracking.admin-mpl-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));
         }elseif($loan_type == 'hsl'){
-            return view('admin-views.admin-loan-applications-tracking.admin-hsl-applications-tracking', compact('loans', 'loan_app_states'  ,'approved' , 'denied', 'pending' ,'loan_type'));            
+            return view('admin-views.admin-loan-applications-tracking.admin-hsl-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));            
         }else{
             abort(404);
         }
