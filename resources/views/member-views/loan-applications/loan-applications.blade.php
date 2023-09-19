@@ -17,9 +17,15 @@
                         </p>
                     </div>
 
-                    <div class="  d-flex align-items-center  mx-lg-3 m-1">
+                    {{-- <div class="d-flex align-items-center  mx-lg-3 m-1">
                         <label>Search</label>
                         <input type="text" class="ms-2 search-box" placeholder="Enter your search query">
+                    </div> --}}
+                        
+                    <div class="mx-3 mt-2">
+                        <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications')}}">New</a>
+                        <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.evaluated')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.evaluated')}}">Evaluated</a>
+                        <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.all')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.all')}}">All</a>
                     </div>
 
                     <div class="d-flex flex-column align-items-center justify-content-center mt-4 mx-lg-3 m-1">
@@ -30,6 +36,12 @@
                             <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                 <div class="row  mt-2 g-0 ">
                                     <div class="col-4 border rounded ps-3 pt-2">
+
+                                        @if ($loan->loan->is_active == 1)
+                                            <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
+                                        @elseif($loan->loan->is_active == 2)
+                                            <span style="font-size: small;" class="fw-bold">Non-performing</span>
+                                        @endif
                                         @php
                                             $status_array=[];
                                             foreach ($loan->loan->loanApplicationStatus as $status) {
@@ -37,16 +49,20 @@
                                             }
 
                                         @endphp
-                                        @if(in_array(6,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
-                                        @elseif(in_array(5,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
-                                        @elseif(in_array(4,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #b700ff"></i><span style="color: #77028f">Check Ready</span></p>
-                                        @elseif(in_array(3,$status_array))
-                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>
-                                        @else
-                                            <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
+                                        @if ($loan->loan->is_active == null)
+                                            
+                                            @if(in_array(6,$status_array))
+                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
+                                            @elseif(in_array(5,$status_array))
+                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
+                                            @elseif(in_array(4,$status_array))
+                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #b700ff"></i><span style="color: #77028f">Check Ready</span></p>
+                                            @elseif(in_array(3,$status_array))
+                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>
+                                            @else
+                                                <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
+                                            @endif
+                                            
                                         @endif
 
                                         <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>
