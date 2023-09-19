@@ -55,7 +55,37 @@ class LoanApplicationController extends Controller
     // SHOW LIST OF LOAN APPLICATIONS
     public function showLoanApplications(){
 
-        $loans = CoBorrower::with(
+        $raw_loans = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType',
+            //get loans with status
+            )
+            ->where('accept_request', '1') //get loans accepted by coBorrower
+            ->whereHas('loan', function ($query){
+                $query->where('member_id', Auth::user()->member->id)
+                        ->whereNull('is_active');
+            })->orderBy('id','desc')->get();
+
+            // filter loans - get only applications that are not rejected
+            $loans = [];
+            foreach ($raw_loans as $raw_loan){
+                $array = [];
+                foreach($raw_loan->loan->loanApplicationStatus as $status){
+                    array_push($array, $status->loan_application_state_id);
+                }
+                if(!in_array(6,$array)){
+                    array_push($loans, $raw_loan);
+                }  
+            }
+
+
+        return view('member-views.loan-applications.loan-applications', compact('loans'));
+    }
+    // SHOW LOANS DENIED OR EVALUATED
+    public function showLoanApplicationsEvaluated(){
+        $raw_loans = CoBorrower::with(
             'member.units.campuses',
             'loan.member.units.campuses',
             'loan.loanApplicationStatus.loanApplicationState',
@@ -65,12 +95,49 @@ class LoanApplicationController extends Controller
             ->where('accept_request', '1') //get loans accepted by coBorrower
             ->whereHas('loan', function ($query){
                 $query->where('member_id', Auth::user()->member->id);
-            })->get();
-            // ->has('loan.loanApplicationStatus')
+                        // ->whereNotNull('is_active');
+            })->orderBy('id','desc')->get();
+
+            // filter loans - get only applications that are rejected or is_active not nutll
+            // in other words get loans that are evaluated
+            $loans = [];
+            foreach ($raw_loans as $raw_loan){
+                $array = [];
+                foreach($raw_loan->loan->loanApplicationStatus as $status){
+                    array_push($array, $status->loan_application_state_id);
+                }
+                if(in_array(6,$array) || $raw_loan->loan->is_active != null){
+                    array_push($loans, $raw_loan);
+                }  
+            }
+
+         
+        return view('member-views.loan-applications.loan-applications', compact('loans'));
+    }
+
+
+    public function showLoanApplicationsAll(){
+        $loans = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType',
+            //get loans with status
+            )
+            ->where('accept_request', '1') //get loans accepted by coBorrower
+            ->whereHas('loan', function ($query){
+                $query->where('member_id', Auth::user()->member->id);      
+            })->orderBy('id','desc')->get();
 
 
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
+
+
+
+
+
+
 
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
