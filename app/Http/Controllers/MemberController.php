@@ -8,6 +8,7 @@ use App\Models\Loan;
 use App\Models\Campus;
 use App\Models\Member;
 use App\Models\CoBorrower;
+use App\Models\Payment;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
 use App\Models\Witness;
@@ -37,6 +38,7 @@ class MemberController extends Controller
         $mplLoans = $loans->where('loan_type_id', 1)->first();
         $hslLoans = $loans->where('loan_type_id', 2)->first();
 
+        //get pending loan -> accepted by the co-borrower and inactive loan
         $inActiveLoan = CoBorrower::with(
             'member.units.campuses',
             'loan.member.units.campuses',
@@ -57,12 +59,18 @@ class MemberController extends Controller
             });
         })->first();
 
+        //get transactions -> Loan application and payment
+        $payments = Payment::where('member_id', $user->member->id)->get();
+        $hasPayments = !$payments->isEmpty();
+
         return view('member-views.member-dashboard', [
             'principalAmount' => $principalAmount,
             'mplLoans' => $mplLoans,
             'hslLoans' => $hslLoans,
             'loans' => $loans,
             'inActiveLoan' => $inActiveLoan,
+            'payments' => $payments,
+            'hasPayments' => $hasPayments,
         ]);
     }
 
