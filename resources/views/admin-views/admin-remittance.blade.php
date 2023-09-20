@@ -29,9 +29,8 @@
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                     <select id="unitSelect" class="form-control bg-white border-0">
                         <option value="All">All</option>
-                        <option value="BUCS">Medyu All</option>
-                        <option value="CBEM">Parang All</option>
-                        <option value="unit3">Not All</option>
+                        <option value="mpl">MPL</option>
+                        <option value="hsl">HSL</option>
                     </select>
                 </div>
                 <button id="remit-btn" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
@@ -67,12 +66,12 @@
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>
-                        <input id="myForm" class="form-control" name="principal" type="number" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
+                        <input id="myForm" class="form-control" name="principal" type="number" min="0" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 pe-1">
                         <label for="interest" class="fw-bold">Interest</label>
-                        <input class="form-control w-100" name="interest" type="number" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
+                        <input class="form-control w-100" name="interest" type="number" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">
