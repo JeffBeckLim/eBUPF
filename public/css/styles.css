@@ -1490,3 +1490,28 @@ tbody tr:nth-child(odd) td {
     margin-top: 15px;
     font-weight: bold;
 }
+
+
+/* Transaction Scrollbar */
+
+.transaction-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.transaction-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.17);
+    border-radius: 6px;
+}
+
+.transaction-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.transaction-container::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.transaction-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+}

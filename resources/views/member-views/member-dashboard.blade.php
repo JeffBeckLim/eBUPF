@@ -10,7 +10,7 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-12">
-                                <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid">
+                                <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid; min-height: 325px;">
                                     <div style="position: relative;">
                                         <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
                                         <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">php <span class="fs-5 fw-bold">{{ $principalAmount }}
@@ -221,32 +221,53 @@
                             <div class="container">
                                 <div class="mt-3">
                                     <img src="icons/history.svg" alt="history icon" width="35px">
-                                    <span class="fw-bold fs-7">Latest Transactions</span>
+                                    <span class="fw-bold fs-6">Transactions</span>
                                 </div>
 
-                                @if($hasPayments)
-                                    <div class="mt-3">
-                                        @foreach($payments as $payment)
+                                @if($transactions)
+                                    <div class="mt-3 transaction-container" id="transaction-container" style="height:550px;">
+                                        @foreach($transactions as $transaction)
+                                            @if($transaction instanceof \App\Models\Payment)
                                             <div class="col-12 border-bottom border-top">
-                                                <div class="row" style="padding: 0 10px;">
+                                                <div class="row" style="padding: 0 30px 0 10px;">
                                                     <div class="col-8 my-1">
                                                         <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                        <p class="fs-7 m-0">{{ $payment->created_at->format('F d, Y, h:i A') }}</p>
+                                                        <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                     </div>
                                                     <div class="col-3 my-1">
-                                                        <p class="fs-7 fw-bold m-0">{{ number_format($payment->principal + $payment->interest, 2) }}</p>
+                                                        <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                     </div>
                                                     <div class="col-1 my-1">
                                                         <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            @elseif($transaction instanceof \App\Models\Loan)
+                                                <div class="col-12 border-bottom border-top">
+                                                    <div class="row" style="padding: 0 30px 0 10px;">
+                                                        <div class="col-8 my-1">
+                                                            <p class="fs-7 fw-bold m-0">Applied a loan</p>
+                                                            <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                        </div>
+                                                        <div class="col-3 my-1">
+                                                            <p class="fs-7 fw-bold m-0">
+                                                                @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
+                                                                    MPL
+                                                                @elseif($transaction->loanType->loan_type_description == 'Housing Loan')
+                                                                    HSL
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-1 my-1">
+                                                            <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     </div>
                                 @else
                                     <div class="d-flex justify-content-center align-content-center">
-                                        <!-- Put if statement here [if no transaction] -->
                                         <img src="icons/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                                     </div>
                                     <p class="text-center">No transaction</p>

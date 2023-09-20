@@ -60,8 +60,14 @@ class MemberController extends Controller
         })->first();
 
         //get transactions -> Loan application and payment
-        $payments = Payment::where('member_id', $user->member->id)->get();
-        $hasPayments = !$payments->isEmpty();
+        $transactionPayments = Payment::where('member_id', $user->member->id)->get();
+        $transactionLoans = Loan::where('member_id', $user->member->id)->get();
+        //combine transactions
+        $unsortedTransactions = $transactionLoans->concat($transactionPayments);
+        //sort transactions by date
+        $transactions = $unsortedTransactions->sortByDesc('created_at');
+        //check if there are transactions
+
 
         return view('member-views.member-dashboard', [
             'principalAmount' => $principalAmount,
@@ -69,8 +75,9 @@ class MemberController extends Controller
             'hslLoans' => $hslLoans,
             'loans' => $loans,
             'inActiveLoan' => $inActiveLoan,
-            'payments' => $payments,
-            'hasPayments' => $hasPayments,
+            'transactions' => $transactions,
+            'transactionPayments' => $transactionPayments,
+            'transactionLoans' => $transactionLoans,
         ]);
     }
 

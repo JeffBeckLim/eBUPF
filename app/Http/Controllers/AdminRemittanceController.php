@@ -48,6 +48,10 @@ class AdminRemittanceController extends Controller
         //save payment
         Payment::create($data);
 
+        $loan->principal_amount -= $data['principal'];
+        /* $loan->interest -= $data['interest']; */
+        $loan->save();
+
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }
 
