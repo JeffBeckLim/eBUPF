@@ -16,7 +16,11 @@ class AdminLoanApplicationController extends Controller
 {
 
     public function createLoanApplicationCategory(Request $request, $id){
-        dd($request);
+        $loan = Loan::findOrFail($id);
+        $loan->loan_category_id = $request->category;
+        $loan->save();
+        
+        return back()->with('state_update','Loan category added!');
     }
 
 
@@ -44,7 +48,7 @@ class AdminLoanApplicationController extends Controller
     public function showLoanApplicationsTracking($loan_type){
         if($loan_type == 'mpl'){
 
-            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
+            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState', 'loan.loanCategory')
             ->where('accept_request', 1)
             ->whereHas('loan', function($query){
                 $query->where('loan_type_id',  1); //loan type of MPL
@@ -52,7 +56,7 @@ class AdminLoanApplicationController extends Controller
 
         }elseif($loan_type == 'hsl'){
 
-            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState')
+            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState' , 'loan.loanCategory')
             ->where('accept_request', 1)
             ->whereHas('loan', function($query){
                 $query->where('loan_type_id',  2); //loan type of HSL
@@ -62,6 +66,7 @@ class AdminLoanApplicationController extends Controller
             abort(404);
         }
         
+
         $loan_app_states = LoanApplicationState::all();
         $loan_categories = LoanCategory::all();
         
@@ -123,6 +128,13 @@ class AdminLoanApplicationController extends Controller
             'date_evaluated'=>$formFields['date_evaluated'],
             'remarks'=>$formFields['remarks'], 
         ]);
+
+        if($new_loan_status->loan_application_state_id == 5){
+            $loan->is_active = 1;
+            $loan->save();
+
+            return redirect('/admin/loan-applications/mpl')->with('success', 'New status added successfully and set as Performing Loan');
+        }
         
         return redirect('/admin/loan-applications/mpl')->with('success', 'New status added successfully!'); 
     }
