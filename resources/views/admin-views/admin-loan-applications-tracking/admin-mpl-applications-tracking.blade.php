@@ -143,7 +143,7 @@
                             }
                         </style>
                         <tr>
-                            <th>State</th>
+                            <th>State & category</th>
                             <th>Loan ID</th>
                             <th>Principal Borrower</th>
                             <th>Unit</th>
@@ -165,6 +165,16 @@
                         
                           <tr class="table-row" data-status="approved">
                             <td>
+                                @if ($loan->loan->loanCategory)
+                                    @if ($loan->loan->loanCategory->loan_category_name == 'New')
+                                    <span class="fw-bold text-danger">{{$loan->loan->loanCategory->loan_category_name}}</span>
+                                    @elseif ($loan->loan->loanCategory->loan_category_name == 'Renewal')
+                                    <span class="fw-bold text-success">{{$loan->loan->loanCategory->loan_category_name}}</span>
+                                    @elseif ($loan->loan->loanCategory->loan_category_name == 'Additional')
+                                    <span class="fw-bold" style="color: #ca0bad;">{{$loan->loan->loanCategory->loan_category_name}}</span>
+                                    @endif 
+                                @endif
+                                
                                 @if ($loan->loan->is_active == 1)
                                     <span class="text-primary">Performing</span>
                                 @elseif($loan->loan->is_active == 2)
