@@ -224,11 +224,33 @@
                                     <span class="fw-bold fs-7">Latest Transactions</span>
                                 </div>
 
-                                <div class="d-flex justify-content-center align-content-center">
-                                    <!-- Put if statement here [if no transaction] -->
-                                    <img src="icons/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
-                                </div>
-                                <p class="text-center">No transaction</p>
+                                @if($hasPayments)
+                                    <div class="mt-3">
+                                        @foreach($payments as $payment)
+                                            <div class="col-12 border-bottom border-top">
+                                                <div class="row" style="padding: 0 10px;">
+                                                    <div class="col-8 my-1">
+                                                        <p class="fs-7 fw-bold m-0">Loan Payment</p>
+                                                        <p class="fs-7 m-0">{{ $payment->created_at->format('F d, Y, h:i A') }}</p>
+                                                    </div>
+                                                    <div class="col-3 my-1">
+                                                        <p class="fs-7 fw-bold m-0">{{ number_format($payment->principal + $payment->interest, 2) }}</p>
+                                                    </div>
+                                                    <div class="col-1 my-1">
+                                                        <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
+                                    </div>
+                                @else
+                                    <div class="d-flex justify-content-center align-content-center">
+                                        <!-- Put if statement here [if no transaction] -->
+                                        <img src="icons/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                    </div>
+                                    <p class="text-center">No transaction</p>
+                                @endif
                             </div>
                         </div>
                     </div>

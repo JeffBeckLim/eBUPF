@@ -11,7 +11,7 @@
                         <div class="col-12  d-flex justify-content-center">
                             <img src="{{asset('icons/receipt-history.svg')}}" alt="history" style="width: 3rem;">
                             <p class="text-center fw-bolder m-0">
-                                Transacrion
+                                Transaction
                                 <br>
                                 History
                             </p>
@@ -24,7 +24,7 @@
                                 <a href="#" class="px-3 text-decoration-none text-muted fw-bold "><p  class="fs-7">Housing</p></a>
                             </span>
                         </div>
-                        
+
                         <div class="col-12 border-bottom pt-3">
 
                             <div class="row  py-3">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-                
+
         </div>
 
     </div>

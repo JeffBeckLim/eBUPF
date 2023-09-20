@@ -12,16 +12,18 @@ use Illuminate\Support\Facades\Form;
 class AdminRemittanceController extends Controller
 {
     public function showRemittance(){
+
         $payments = Payment::all();
-        $loanIds = Loan::all()->pluck('id')->toArray();
+        $loanIds = Loan::all()->where('is_active', 1)->pluck('id')->toArray();
 
         return view('admin-views.admin-remittance', [
             'payments' => $payments,
-            'loanIds' => $loanIds, // Pass the loan IDs to the view
+            'loanIds' => $loanIds,
         ]);
     }
 
     public function addPaymentRemittance(Request $request){
+
         $data = $request->validate([
             'or_number' => 'required',
             'payment_date' => 'required|date',
@@ -30,6 +32,7 @@ class AdminRemittanceController extends Controller
             'interest' => 'required|numeric',
         ]);
 
+        //The OR Number must be unique
         $existingPayment = Payment::where('or_number', $data['or_number'])->first();
         if ($existingPayment) {
             return redirect()->back()->with('error', 'Duplicate OR Number. Please use a different one.');
@@ -42,6 +45,7 @@ class AdminRemittanceController extends Controller
 
         $memberId = $loan->member_id;
         $data['member_id'] = $memberId;
+        //save payment
         Payment::create($data);
 
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
