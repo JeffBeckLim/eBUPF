@@ -100,11 +100,16 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if ($memberApplication->member->user->user_type == 'member' || $memberApplication->member->user->user_type == 'admin' )
+                                            Already approved
+                                        @else 
                                         <h5>
                                             <a href="#" style="color: #00D186" class="me-3"><i class="bi bi-check-circle-fill" data-bs-toggle="modal" data-bs-target="#approveModal{{$memberApplication->member->id}}"></i></a>
                                         
                                             <a href="#" style="color: #FF0000" data-bs-toggle="modal" data-bs-target="#denyModal{{$memberApplication->member->id}}"><i class="bi bi-x-circle-fill"></i></a>
                                         </h5>
+                                        @endif
+                                        
 
                                         @include('admin-views.admin-membership-applications.accept-deny-modal')
                                         
