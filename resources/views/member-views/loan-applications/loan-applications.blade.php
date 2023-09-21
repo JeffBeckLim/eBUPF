@@ -27,11 +27,30 @@
                         <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.evaluated')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.evaluated')}}">Evaluated</a>
                         <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.all')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.all')}}">All</a>
                     </div>
-
+                    
                     <div class="d-flex flex-column align-items-center justify-content-center mt-4 mx-lg-3 m-1">
+                        
                         @if ($loans)
 
                         @foreach ($loans as $loan)
+                            @php
+                                $status_array=[];
+                                foreach ($loan->loan->loanApplicationStatus as $status) {
+                                    array_push($status_array, $status->loan_application_state_id);
+                                }
+
+                            @endphp
+                            @if(in_array(4,$status_array) && !in_array(5,$status_array) && !in_array(6,$status_array))
+                                <div class="border w-100 rounded mb-2 p-2 row">
+                                    <i class="bi bi-circle-fill my-3" style="color: #b700ff"></i>
+                                    <div class="col-12 " style="font-size: 12px">
+                                        Since your check is now ready for claiming, you can proceed to print the insurance form. This form is one of the necessary documents you'll need when claiming your check
+                                    </div>
+                                    <div class="col-12 pt-3 text-end p-0">
+                                        <a href="#" class="btn text-light fw-bold grow-on-hover" style="background-color: #b700ff; font-size: 14px">Print Insurance Form</a>
+                                    </div>
+                                </div>
+                            @endif
                             {{-- CARD --}}
                             <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                 <div class="row  mt-2 g-0 ">
@@ -42,19 +61,13 @@
                                         @elseif($loan->loan->is_active == 2)
                                             <span style="font-size: small;" class="fw-bold">Non-performing</span>
                                         @endif
-                                        @php
-                                            $status_array=[];
-                                            foreach ($loan->loan->loanApplicationStatus as $status) {
-                                                array_push($status_array, $status->loan_application_state_id);
-                                            }
-
-                                        @endphp
+                                     
                                         @if ($loan->loan->is_active == null)
                                             
                                             @if(in_array(6,$status_array))
                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
                                             @elseif(in_array(5,$status_array))
-                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
+                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #0092D1"></i><span class="text-primary">Check Picked Up</span></p>
                                             @elseif(in_array(4,$status_array))
                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #b700ff"></i><span style="color: #77028f">Check Ready</span></p>
                                             @elseif(in_array(3,$status_array))
