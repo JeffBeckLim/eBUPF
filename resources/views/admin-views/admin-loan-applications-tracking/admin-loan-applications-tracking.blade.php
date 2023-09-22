@@ -14,6 +14,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @enderror
+            @error('principal_amount')
+            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
+                <p style="font-size: 12px" class="m-0">{{$message}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @enderror
 
             @if (session('state_update'))
             <div class="alert alert-primary alert-dismissible fade show mt-3 border border-primary" role="alert">
@@ -152,7 +158,7 @@
         <div class="table-responsive border m-3 rounded">
             {{-- <div class="custom-table-for-admin"> --}}
 
-                <table class="table admin-table table-striped" id="myTable">
+                <table class="table admin-table table-striped table-hover" id="myTable">
                     <thead style="border-bottom: 2px solid black">
                         <style>
                              th{
@@ -227,7 +233,8 @@
 
                             <td>{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</td>
 
-                            <td>
+                            <td class="fw-bold">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"  style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
                                 {{number_format($loan->loan->principal_amount, 2, '.',',')}}    
                             </td>
                             <td class="text-center">
@@ -310,38 +317,30 @@
                                     {{-- SEE INCLUDED MODALS BELOW --}}
                                     <li>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#stateModal{{$loan->loan->id}}" class="dropdown-item">
-                                            Change State
+                                            Edit State
                                             <p class="" style="font-size: x-small">Make Loan performing or closed.</p>
                                         </a>
                                         
                                     </li>
                                     <li>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#categoryModal{{$loan->loan->id}}" class="dropdown-item">
-                                            Categorize Loan
+                                            Edit Loan Type
                                             <p style="font-size: x-small">Add, New or Renew.</p>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            Edit Loan
-                                            <p style="font-size: x-small">Change contents of the loan.</p>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}" class="dropdown-item" href="#">
+                                            Adjust
+                                            <p style="font-size: x-small">Change amount requested</p>
                                         </a>
                                     </li>
                                   </ul>
                             </td>
-                            {{-- <td class="text-center">
-                                <div class="three-dots">
-                                    <i class="bi bi-three-dots fs-4 icon"></i>
-                                    <div class="three-dots-buttons">
-                                        <button class="approve-btn">Approve</button>
-                                        <button class="deny-btn">Deny</button>
-                                    </div>
-                                </div>
-                            </td> --}}
                         </tr>
                         @include('admin-views.admin-loan-applications-tracking.modal-loan-category')
                         @include('admin-views.admin-loan-applications-tracking.modal-add-status')
                         @include('admin-views.admin-loan-applications-tracking.modal-change-state')
+                        @include('admin-views.admin-loan-applications-tracking.modal-adjust')
                     @endforeach
                    
                     </tbody>

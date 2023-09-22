@@ -15,6 +15,17 @@ use App\Models\LoanCategory;
 class AdminLoanApplicationController extends Controller
 {
 
+    public function updateLoanApplicationAmount(Request $request, $id){
+        $request->validate([
+            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+        ]);
+        $loan = Loan::findOrFail($id);
+        $loan->principal_amount = $request->principal_amount;
+        $loan->save();
+        return back();
+    }
+
+
     public function createLoanApplicationCategory(Request $request, $id){
         $loan = Loan::findOrFail($id);
         $loan->loan_category_id = $request->category;
