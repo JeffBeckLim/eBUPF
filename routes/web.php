@@ -104,6 +104,8 @@ use App\Http\Controllers\TransactionController;
         Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationState'])->name('create.state');
 
         Route::post('admin/loan-application/category/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationCategory'])->name('create.category');
+
+        Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
         // { TESTING PA TO}-----------------------------------------------------------
 
 
