@@ -1,1015 +1,1071 @@
-    @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css");
-    /* Import Montserrat font from Google Fonts */
-    
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-    ::-webkit-file-upload-button {
-        display: inline;
-        border: none;
-        border-radius: 5px;
-        color: #ffffff;
-        background-color: #0092D1;
-        padding: 2%;
-    }
-    
-    .bg-default {
-        background-color: #f7f9fc;
-    }
-    
-    .icon {
-        width: 2.3rem;
-        height: 2.3rem;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-    
-    .rounded-pill-top-start {
-        border-radius: 9999px 9999px 0 9999px;
-    }
-    
-    .form-upload {
-        border-radius: 5px;
-        width: 100%;
-        background-color: #D9E4E9;
-    }
-    
-    .btn-outline-bu {
-        color: #0092D1;
-        outline: 3px solid #0092D1;
-    }
-    
-    .btn-outline-bu:hover {
-        color: #ffffff;
-        background-color: #0092D1;
-    }
-    
-    .btn-outline-bu2 {
-        color: #00638D;
-        outline: 2px solid #00638D;
-    }
-    
-    .btn-outline-bu2:hover {
-        color: #ffffff;
-        background-color: rgb(3, 122, 173);
-    }
-    /* Apply Montserrat font to an element */
-    
-    body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #F7F9FC;
-    }
-    
-    .card-hover:hover {
-        background-color: rgb(234, 238, 241) !important;
-    }
-    /* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
-    
-    .bu-orange {
-        background-color: #FF6F19 !important;
-        /* outline: 2px solid #FF6F19; */
-    }
-    
-    .bu-orange:hover {
-        background-color: #ed600e !important;
-        outline: 2px solid #ed600e;
-    }
-    
-    .bu-text-light-blue {
-        color: #0092D1;
-    }
-    
-    .bu-text-orange {
-        color: #FF6F19;
-    }
-    
-    .border-dotted-top {
-        border-top: 1px dotted black;
-    }
-    
-    .bu-gradient {
-        background: rgb(255, 125, 47);
-        background: linear-gradient(0deg, rgba(255, 125, 47, 1) 30%, rgba(0, 158, 226, 1) 100%);
-        position: relative;
-    }
-    
-    .bu-low-gradient {
-        background: rgb(255, 125, 47);
-        background: linear-gradient(0deg, rgb(255, 158, 62) 30%, rgba(0, 158, 226, 1) 100%);
-        position: relative;
-    }
-    
-    .bu-low-gradient-x {
-        background: rgb(255, 125, 47);
-        background: linear-gradient(90deg, rgb(255, 158, 62) 30%, rgba(0, 158, 226, 1) 100%);
-        position: relative;
-    }
-    /* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
-    
-    .grow-on-hover {
-        transition: transform 0.3s ease;
-    }
-    
-    .bg-success-bu {
-        background-color: #73EDC1 !important;
-    }
-    
-    .grow-on-hover:hover {
-        transform: scale(1.03);
-    }
-    
-    .form-control {
-        background-color: #D9E4E9;
-    }
-    
-    .search-input {
-        border-color: #363636;
-        background-color: #ffffff !important;
-    }
-    
-    label {
-        font-size: 90%;
-    }
-    
-    .fw-7 {
-        font-size: 90%;
-    }
-    
-    .fs-7 {
-        font-size: small;
-    }
-    
-    .overlay-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        mix-blend-mode: soft-light;
-        opacity: 40%;
-    }
-    /* Mark input boxes that gets an error on validation: */
-    
-    input.invalid {
-        background-color: #ffdddd;
-    }
-    /* Apply styles to the checkbox when it's invalid */
-    
-    .checkbox-input.invalid {
-        background-color: #ffdddd;
-    }
-    /* Darken the checkmark color when checkbox is invalid */
-    
-    .checkbox-input.invalid:checked {
-        outline: 1.1px solid #ffffff !important;
-        background-color: #0d6efd !important;
-    }
-    /* Hide all steps by default: */
-    
-    .tab {
-        display: none;
-    }
-    /* Make circles that indicate the steps of the form: */
-    
-    .step {
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbbbbb;
-        border: 1px;
-        border-radius: 50%;
-        display: inline-block;
-        opacity: 0.5;
-    }
-    
-    .step.active {
-        opacity: 1;
-    }
-    /* Mark the steps that are finished and valid: */
-    
-    .step.finish {
-        background-color: #009ee2;
-    }
-    
-    .fade-in-left {
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css");
+
+/* Import Montserrat font from Google Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+::-webkit-file-upload-button {
+    display: inline;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #0092D1;
+    padding: 2%;
+}
+
+.bg-default {
+    background-color: #f7f9fc;
+}
+
+.icon {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.rounded-pill-top-start {
+    border-radius: 9999px 9999px 0 9999px;
+}
+
+.form-upload {
+    border-radius: 5px;
+    width: 100%;
+    background-color: #D9E4E9;
+}
+
+.btn-outline-bu {
+    color: #0092D1;
+    outline: 3px solid #0092D1;
+}
+
+.btn-outline-bu:hover {
+    color: #ffffff;
+    background-color: #0092D1;
+}
+
+.btn-outline-bu2 {
+    color: #00638D;
+    outline: 2px solid #00638D;
+}
+
+.btn-outline-bu2:hover {
+    color: #ffffff;
+    background-color: rgb(3, 122, 173);
+}
+
+
+/* Apply Montserrat font to an element */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #F7F9FC;
+}
+
+.card-hover:hover {
+    background-color: rgb(234, 238, 241) !important;
+}
+
+
+/* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
+
+.bu-orange {
+    background-color: #FF6F19 !important;
+    /* outline: 2px solid #FF6F19; */
+}
+
+.bu-orange:hover {
+    background-color: #ed600e !important;
+    outline: 2px solid #ed600e;
+}
+
+.bu-text-light-blue {
+    color: #0092D1;
+}
+
+.bu-text-orange {
+    color: #FF6F19;
+}
+
+.border-dotted-top {
+    border-top: 1px dotted black;
+}
+
+.bu-gradient {
+    background: rgb(255, 125, 47);
+    background: linear-gradient(0deg, rgba(255, 125, 47, 1) 30%, rgba(0, 158, 226, 1) 100%);
+    position: relative;
+}
+
+.bu-low-gradient {
+    background: rgb(255, 125, 47);
+    background: linear-gradient(0deg, rgb(255, 158, 62) 30%, rgba(0, 158, 226, 1) 100%);
+    position: relative;
+}
+
+.bu-low-gradient-x {
+    background: rgb(255, 125, 47);
+    background: linear-gradient(90deg, rgb(255, 158, 62) 30%, rgba(0, 158, 226, 1) 100%);
+    position: relative;
+}
+
+
+/* COLORS COLORS COLORS COLORS COLORS COLORS COLORS */
+
+.grow-on-hover {
+    transition: transform 0.3s ease;
+}
+
+.bg-success-bu {
+    background-color: #73EDC1 !important;
+}
+
+.grow-on-hover:hover {
+    transform: scale(1.03);
+}
+
+.form-control {
+    background-color: #D9E4E9;
+}
+
+.search-input {
+    border-color: #363636;
+    background-color: #ffffff !important;
+}
+
+label {
+    font-size: 90%;
+}
+
+.fw-7 {
+    font-size: 90%;
+}
+
+.fs-7 {
+    font-size: small;
+}
+
+.overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: soft-light;
+    opacity: 40%;
+}
+
+
+/* Mark input boxes that gets an error on validation: */
+
+input.invalid {
+    background-color: #ffdddd;
+}
+
+
+/* Apply styles to the checkbox when it's invalid */
+
+.checkbox-input.invalid {
+    background-color: #ffdddd;
+}
+
+
+/* Darken the checkmark color when checkbox is invalid */
+
+.checkbox-input.invalid:checked {
+    outline: 1.1px solid #ffffff !important;
+    background-color: #0d6efd !important;
+}
+
+
+/* Hide all steps by default: */
+
+.tab {
+    display: none;
+}
+
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: 1px;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+    background-color: #009ee2;
+}
+
+.fade-in-left {
+    opacity: 0;
+    /* Set initial opacity to 0 */
+    transform: translateX(-100%);
+    /* Start from left (outside the viewport) */
+    animation: fade-in-from-left-animation 1s forwards;
+    /* Apply the animation */
+}
+
+@keyframes fade-in-from-left-animation {
+    from {
         opacity: 0;
-        /* Set initial opacity to 0 */
+        /* Start with opacity 0 */
         transform: translateX(-100%);
         /* Start from left (outside the viewport) */
-        animation: fade-in-from-left-animation 1s forwards;
-        /* Apply the animation */
     }
-    
-    @keyframes fade-in-from-left-animation {
-        from {
-            opacity: 0;
-            /* Start with opacity 0 */
-            transform: translateX(-100%);
-            /* Start from left (outside the viewport) */
-        }
-        to {
-            opacity: 1;
-            /* End with opacity 1 */
-            transform: translateX(0);
-            /* End at the original position */
-        }
+    to {
+        opacity: 1;
+        /* End with opacity 1 */
+        transform: translateX(0);
+        /* End at the original position */
     }
-    
-    .fade-in {
+}
+
+.fade-in {
+    opacity: 0;
+    /* Set initial opacity to 0 */
+    animation: fade-in-animation 0.5s forwards;
+    /* Apply the animation */
+}
+
+@keyframes fade-in-animation {
+    from {
         opacity: 0;
-        /* Set initial opacity to 0 */
-        animation: fade-in-animation 0.5s forwards;
-        /* Apply the animation */
+        /* Start with opacity 0 */
     }
-    
-    @keyframes fade-in-animation {
-        from {
-            opacity: 0;
-            /* Start with opacity 0 */
-        }
-        to {
-            opacity: 1;
-            /* End with opacity 1 */
-        }
+    to {
+        opacity: 1;
+        /* End with opacity 1 */
     }
-    /* shake animation for invalid forms */
-    
-    @keyframes shake {
-        0% {
-            transform: translateX(0);
-        }
-        40%,
-        90% {
-            transform: translateX(-5px);
-        }
-        50%,
-        80% {
-            transform: translateX(5px);
-        }
-        60%,
-        50%,
-        70% {
-            transform: translateX(-5px);
-        }
-        50%,
-        60% {
-            transform: translateX(5px);
-        }
-        100% {
-            transform: translateX(0);
-        }
+}
+
+
+/* shake animation for invalid forms */
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
     }
-    /* FORM VALIDATIONS */
-    
-    .shake {
-        animation: shake 0.5s;
+    40%,
+    90% {
+        transform: translateX(-5px);
     }
-    
-    .invalid {
-        outline: 1.1px solid #ff7a7a;
-        background-color: #ffdddd !important;
+    50%,
+    80% {
+        transform: translateX(5px);
     }
-    /* FORM VALIDATIONS */
-    /* MPL loan Application */
-    
-    .info {
-        font-weight: 600;
-        font-size: 11px;
-        margin-left: -8px;
-        padding-top: 16px;
-        color: #0092D1;
+    60%,
+    50%,
+    70% {
+        transform: translateX(-5px);
     }
-    
-    .info-logo {
-        font-size: 15px;
-        color: #0092D1;
-        margin-left: -10px;
+    50%,
+    60% {
+        transform: translateX(5px);
     }
-    
-    .text1-design {
-        font-size: 16px;
-        font-weight: 700;
-        color: #000;
+    100% {
+        transform: translateX(0);
     }
-    
-    .text2-design {
-        font-size: 12px;
-        font-weight: 600;
-        color: #868686;
-    }
-    
-    .text3-design {
-        color: #00638D;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 5px;
-    }
-    
-    .text3-1-design {
-        color: #00638D;
-        font-size: x-small;
-    }
-    
-    .text4-design {
-        font-size: 14px;
-    }
-    
-    .loan-input {
-        font-size: 25px;
-    }
-    
-    .warning {
-        width: 300px;
-        font-size: 10px;
-        margin-top: 25px;
-        text-align: center;
-        color: #868686;
-    }
-    
-    .warning2 {
-        font-size: 12px;
-        text-align: center;
-        width: 100%;
-    }
-    
-    .orga {
-        font-size: 14px;
-        text-align: center;
-        color: #0D3546;
-    }
-    
-    .co-borrower-dp {
-        width: 50px;
-        border-radius: 50%;
-    }
-    
-    .check-mark {
-        margin-top: 20px;
-        width: 70px;
-    }
-    
-    .bhome {
-        color: #00638D;
-    }
-    /* Homepage */
-    /* #home {
+}
+
+
+/* FORM VALIDATIONS */
+
+.shake {
+    animation: shake 0.5s;
+}
+
+.invalid {
+    outline: 1.1px solid #ff7a7a;
+    background-color: #ffdddd !important;
+}
+
+
+/* FORM VALIDATIONS */
+
+
+/* MPL loan Application */
+
+.info {
+    font-weight: 600;
+    font-size: 11px;
+    margin-left: -8px;
+    padding-top: 16px;
+    color: #0092D1;
+}
+
+.info-logo {
+    font-size: 15px;
+    color: #0092D1;
+    margin-left: -10px;
+}
+
+.text1-design {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+}
+
+.text2-design {
+    font-size: 12px;
+    font-weight: 600;
+    color: #868686;
+}
+
+.text3-design {
+    color: #00638D;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.text3-1-design {
+    color: #00638D;
+    font-size: x-small;
+}
+
+.text4-design {
+    font-size: 14px;
+}
+
+.loan-input {
+    font-size: 25px;
+}
+
+.warning {
+    width: 300px;
+    font-size: 10px;
+    margin-top: 25px;
+    text-align: center;
+    color: #868686;
+}
+
+.warning2 {
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+}
+
+.orga {
+    font-size: 14px;
+    text-align: center;
+    color: #0D3546;
+}
+
+.co-borrower-dp {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.check-mark {
+    margin-top: 20px;
+    width: 70px;
+}
+
+.bhome {
+    color: #00638D;
+}
+
+
+/* Homepage */
+
+
+/* #home {
     height: 100vh;
     width: 100%;
 } */
-    
-    .navbar-brand img {
-        height: 50px;
-    }
-    
-    .navbar-nav .nav-link {
-        padding-right: 10px;
-        padding-left: 10px;
-        margin-right: 20px;
-        color: black;
-    }
-    
-    .navbar {
-        background-color: #ffffff;
-        display: flex;
-        align-items: center;
-    }
-    
-    .active a {
-        border-bottom: 2px solid #FF6F19;
-    }
-    
-    .nav-item .nav-button {
-        background-color: #0082BA;
-        width: 100px;
-        display: flex;
-        border-radius: 20px;
-        justify-content: center;
-        align-items: center;
-        color: #fff;
-        transition: all .5s ease;
-        text-decoration: none;
-    }
-    
-    .nav-item .nav-button:hover {
-        background-color: rgb(0, 62, 88);
-    }
-    
-    .login-button {
-        background-color: #0082BA;
-        border: none;
-        color: white;
-        /* border-radius: 20px;
+
+.navbar-brand img {
+    height: 50px;
+}
+
+.navbar-nav .nav-link {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 20px;
+    color: black;
+}
+
+.navbar {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+}
+
+.active a {
+    border-bottom: 2px solid #FF6F19;
+}
+
+.nav-item .nav-button {
+    background-color: #0082BA;
+    width: 100px;
+    display: flex;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    transition: all .5s ease;
+    text-decoration: none;
+}
+
+.nav-item .nav-button:hover {
+    background-color: rgb(0, 62, 88);
+}
+
+.login-button {
+    background-color: #0082BA;
+    border: none;
+    color: white;
+    /* border-radius: 20px;
     margin-top: 7px;
     padding-bottom: 2px; */
-    }
-    
-    .login-button:hover {
-        background-color: #016793;
-        border: none;
-        color: white;
-        /* border-radius: 20px;
+}
+
+.login-button:hover {
+    background-color: #016793;
+    border: none;
+    color: white;
+    /* border-radius: 20px;
     /* margin-top: 7px;
     padding-bottom: 2px; */
-        */
+}
+
+.navbar-toggler-icon-custom {
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='7' y2='7'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='15' y2='15'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='23' y2='23'/%3E%3C/svg%3E");
+    width: 30px;
+    height: 30px;
+}
+
+.text5-design {
+    /* Bicol University Provident Fund Inc. */
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    line-height: 44px;
+    color: #FFFFFF;
+    padding-left: 35px;
+    margin-top: 75px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.278);
+}
+
+.orange-tag {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.icon1 {
+    color: white;
+    font-size: 28px;
+    padding-left: 35px;
+}
+
+.text6-design {
+    color: white;
+    font-size: 0.763rem;
+    margin-right: 38px;
+    font-weight: 300;
+}
+
+.row .col .button {
+    background-color: #FF6F19;
+    border-radius: 20px;
+    margin-right: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 2px;
+    color: white;
+    text-decoration: none;
+}
+
+.text7-design {
+    color: black;
+    text-align: center;
+    font-size: 0.763rem;
+    margin: 10px 20px;
+}
+
+#core-feature {
+    height: 17rem;
+    /* background-image: url("assets/core-feature-bg.png"); */
+    width: 100%;
+}
+
+.line {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.icon2 {
+    font-size: 3rem;
+    color: white;
+}
+
+.text8-design {
+    color: white;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+
+/* offers */
+
+.card-border {
+    border-radius: 10px;
+}
+
+.text9-design {
+    margin-top: -13px;
+}
+
+.text10-design {
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+
+/* Responsiveness */
+
+@media screen and (min-width: 992px) {
+    .card-border2 {
+        margin-left: 100px;
     }
-    
-    .navbar-toggler-icon-custom {
-        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='7' y2='7'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='15' y2='15'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='23' y2='23'/%3E%3C/svg%3E");
-        width: 30px;
-        height: 30px;
+    .text11-move {
+        padding-left: 66px;
     }
-    
-    .text5-design {
-        /* Bicol University Provident Fund Inc. */
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 600;
-        line-height: 44px;
-        color: #FFFFFF;
-        padding-left: 35px;
-        margin-top: 75px;
-        font-weight: 600;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.278);
-    }
-    
-    .orange-tag {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    
-    .icon1 {
-        color: white;
-        font-size: 28px;
-        padding-left: 35px;
-    }
-    
-    .text6-design {
-        color: white;
-        font-size: 0.763rem;
-        margin-right: 38px;
-        font-weight: 300;
-    }
-    
-    .row .col .button {
-        background-color: #FF6F19;
-        border-radius: 20px;
-        margin-right: 40px;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        font-size: 16px;
-        padding-left: 25px;
-        padding-right: 25px;
-        padding-bottom: 2px;
-        color: white;
-        text-decoration: none;
-    }
-    
-    .text7-design {
-        color: black;
-        text-align: center;
-        font-size: 0.763rem;
-        margin: 10px 20px;
-    }
-    
-    #core-feature {
-        height: 17rem;
-        /* background-image: url("assets/core-feature-bg.png"); */
-        width: 100%;
-    }
-    
-    .line {
-        width: 100%;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    
-    .icon2 {
-        font-size: 3rem;
-        color: white;
-    }
-    
-    .text8-design {
-        color: white;
-        font-size: 1rem;
-        margin-top: 15px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-    }
-    /* offers */
-    
-    .card-border {
-        border-radius: 10px;
-    }
-    
-    .text9-design {
-        margin-top: -13px;
-    }
-    
-    .text10-design {
-        letter-spacing: 1px;
-        font-weight: 700;
-    }
-    /* Responsiveness */
-    
-    @media screen and (min-width: 992px) {
-        .card-border2 {
-            margin-left: 100px;
-        }
-        .text11-move {
-            padding-left: 66px;
-        }
-        /* .request-to-coborrower {
+    /* .request-to-coborrower {
         width: 70%;
         margin: 20px;
     } */
-        /* .loan-application-box {
+    /* .loan-application-box {
         margin-left: -80px;
     } */
-        .app-status-box {
-            width: 50%;
-        }
+    .app-status-box {
+        width: 50%;
     }
-    
-    @media screen and (min-width: 768px) {
-        .mpl-card {
-            margin-left: 190px;
-            margin-top: -15px;
-        }
+}
+
+@media screen and (min-width: 768px) {
+    .mpl-card {
+        margin-left: 190px;
+        margin-top: -15px;
     }
-    
-    @media screen and (max-width: 991px) {
-        #core-feature {
-            padding-top: 15px;
-            height: 28vh;
-        }
-        .line {
-            border: 1px solid white;
-        }
-        .transactions {
-            margin-top: 20px;
-        }
+}
+
+@media screen and (max-width: 991px) {
+    #core-feature {
+        padding-top: 15px;
+        height: 28vh;
     }
-    
-    @media screen and (max-width: 767px) {
-        #core-feature {
-            margin-top: auto;
-            height: 43vh;
-        }
-        .text8-design {
-            font-size: 1rem;
-        }
-        .card-border2 {
-            margin-top: 20px;
-        }
-        .app-status-box {
-            width: 80%;
-        }
+    .line {
+        border: 1px solid white;
     }
-    
-    @media screen and (max-width: 575px) {
-        #core-feature {
-            margin-top: -15px;
-            padding-top: 1rem;
-            height: 20rem;
-        }
-        #core-feature-container {
-            scale: 0.9;
-        }
-        .text11-design {
-            padding-left: 15px;
-        }
-        .text12-design {
-            padding-left: 15px;
-        }
-        .row .col .button {
-            margin-bottom: 20px;
-        }
-        .app-status-box {
-            width: 100%;
-        }
+    .transactions {
+        margin-top: 20px;
     }
-    
-    @media (min-width: 575px) {
-        .filter-group {
-            display: flex;
-            gap: 2px;
-            margin-top: 10px;
-            justify-content: flex-start;
-        }
+}
+
+@media screen and (max-width: 767px) {
+    #core-feature {
+        margin-top: auto;
+        height: 43vh;
     }
-    /* Member dashboard */
-    
-    .text11-design {
-        font-size: 0.8rem;
-        color: #0D3546;
-    }
-    
-    .text12-design {
-        font-size: 0.8rem;
-        color: #0D3546;
-    }
-    
-    .text13-design {
-        font-size: 0.659rem;
-        color: #0D3546;
-    }
-    
-    .text14-design {
+    .text8-design {
         font-size: 1rem;
-        color: #0D3546;
-        font-weight: 600;
     }
-    
-    .myline-height {
-        line-height: 1.2;
+    .card-border2 {
+        margin-top: 20px;
     }
-    
-    .apply-btn {
-        background-color: #0092D1;
-        color: white;
-        font-weight: 600;
-        font-size: 0.8rem;
-        border-radius: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-        cursor: pointer;
-        max-height: 31px;
+    .app-status-box {
+        width: 80%;
     }
-    
-    .apply-btn:hover {
-        background-color: #00628c;
-        color: white;
+}
+
+@media screen and (max-width: 575px) {
+    #core-feature {
+        margin-top: -15px;
+        padding-top: 1rem;
+        height: 20rem;
     }
-    
-    .text15-design {
-        font-size: 0.65rem;
+    #core-feature-container {
+        scale: 0.9;
     }
-    
-    .text16-design {
-        font-size: 0.7rem;
+    .text11-design {
+        padding-left: 15px;
     }
-    
-    .text17-design {
-        font-size: 0.8rem;
-        font-weight: 600;
+    .text12-design {
+        padding-left: 15px;
     }
-    
-    .status-btn {
-        color: white;
-        font-weight: 600;
-        font-size: 0.8rem;
-        border-radius: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        cursor: pointer;
+    .row .col .button {
+        margin-bottom: 20px;
     }
-    /* .status-btn:hover {
+    .app-status-box {
+        width: 100%;
+    }
+}
+
+@media (min-width: 575px) {
+    .filter-group {
+        display: flex;
+        gap: 2px;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+}
+
+
+/* Member dashboard */
+
+.text11-design {
+    font-size: 0.8rem;
+    color: #0D3546;
+}
+
+.text12-design {
+    font-size: 0.8rem;
+    color: #0D3546;
+}
+
+.text13-design {
+    font-size: 0.659rem;
+    color: #0D3546;
+}
+
+.text14-design {
+    font-size: 1rem;
+    color: #0D3546;
+    font-weight: 600;
+}
+
+.myline-height {
+    line-height: 1.2;
+}
+
+.apply-btn {
+    background-color: #0092D1;
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    max-height: 31px;
+}
+
+.apply-btn:hover {
+    background-color: #00628c;
+    color: white;
+}
+
+.text15-design {
+    font-size: 0.65rem;
+}
+
+.text16-design {
+    font-size: 0.7rem;
+}
+
+.text17-design {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-btn {
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+
+/* .status-btn:hover {
     background-color: #aa3e00;
     color: white;
 } */
-    /* Requests to Co-Borrower */
-    /* .search-container {
+
+
+/* Requests to Co-Borrower */
+
+
+/* .search-container {
     margin-top: 30px;
     width: 90%;
     height: 20px;
 } */
-    
-    .search-box {
-        width: 100%;
-        padding: 7px;
-        border: 1px solid #a7a7a7;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-    
-    .request-to-coborrower {
-        border-radius: 10px;
-        border: 0.50px #bebebe solid;
-        background-color: white;
-    }
-    /* Application Status */
-    
-    .app-status-box {
-        /* border-radius: 5px; */
-        /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
-        padding: 15px 25px;
-    }
-    
-    .status-box {
-        border-radius: 15px;
-        /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
-    }
-    
-    .status-box-dennied {
-        border-radius: 15px;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-        background-color: #ff6666d2;
-    }
-    /* hidden overflow on x axis */
-    
-    .overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    
-    .bg-bugreen {
-        background-color: #D9FFE4;
-    }
-    /* Personal Ledger Admin side */
-    
-    .pl-newloan {
-        background-color: #0092D1;
-        border-radius: 20px;
-        padding: 5px 20px;
-        color: white;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-    
-    .btn-dpdloan {
-        border-radius: 20px;
-        font-size: 0.9rem;
-        padding: 5px 20px;
-    }
-    
-    .pl-head {
-        font-weight: bold;
-        font-size: 1.7rem;
-    }
-    
-    .pl-50 {
-        font-size: 0.7rem;
-        border: 1px solid #EE3434;
-        border-radius: 20px;
-        background-color: #FEB3B3;
-        padding: 0px 5px;
-        margin-bottom: 25px;
-        color: #000000;
-    }
-    
-    .pl-details {
-        border-radius: 10px;
-        padding: 15px 15px 0px 15px;
-        background-color: white;
-        border: 1px solid #A1A1A1;
-    }
-    
-    .pl-text-size {
-        font-size: 0.8rem;
-    }
-    
-    .pl-table>thead>tr:first-child>th {
-        border-bottom: none;
-        text-align: center;
-    }
-    
-    thead tr:first-child th:first-child {
-        padding-bottom: 10px;
-        margin-bottom: -10px;
-    }
-    
-    .pl-table>thead>tr:last-child>th {
-        vertical-align: middle;
-    }
-    
-    .table-container {
-        margin-top: 20px;
-        width: 100%;
-        overflow-x: auto;
-    }
-    
-    .responsive-table {
-        width: 100%;
-        table-layout: fixed;
-    }
-    
-    @media (max-width: 768px) {
-        .responsive-table th,
-        .responsive-table td {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-    
-    .pl-tr td:first-child {
-        font-weight: 600;
-    }
-    
-    .pl-tr-last {
-        font-weight: 700;
-    }
-    
-    .pl-tr td,
-    .pl-tr th {
-        font-size: 0.8rem;
-    }
-    
-    tbody tr:nth-child(odd) td {
-        /* background-color: #E6EEF1; */
-        background-color: #f0f6fa;
-    }
-    
-    .pl-table tbody td:not(:first-child) {
-        font-size: 0.7rem;
-    }
-    /* Admin membership Applications */
-    
-    .adminbox {
-        background-color: #fff;
-        border: #C0C0C0 1px solid;
-        border-radius: 10px;
-        padding: 15px;
-    }
-    
-    .membership-app-header1 {
-        width: 250px;
-        height: 70px;
-    }
-    
-    .membership-app-header1-mpl {
-        width: 280px;
-        height: 70px;
-    }
-    
-    .membership-app-header2 {
-        border: 1px solid #BDBDBD;
-        width: 200px;
-        max-width: 100%;
-        border-radius: 20px;
-    }
-    
-    .membership-application-search-input {
-        background-color: #fff;
-        border: 1px solid #C0C0C0;
-        padding: 5px;
-        border-radius: 5px;
-        height: 29px;
-    }
-    
-    .input-container .show-entries-application {
-        width: 2.5rem;
-        border: 1px solid #C0C0C0;
-        padding: 5px;
-        height: 29px;
-        border-radius: 5px;
-        margin: 0 5px
-    }
-    
-    .admin-table {
-        width: 100%;
-        min-width: 80%;
-    }
-    
-    .custom-table-for-admin {
-        margin-top: 15px;
-        border-collapse: separate;
-        border-spacing: 0;
-        border: 1px solid #BDBDBD;
-        border-radius: 15px;
+
+.search-box {
+    width: 100%;
+    padding: 7px;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.request-to-coborrower {
+    border-radius: 10px;
+    border: 0.50px #bebebe solid;
+    background-color: white;
+}
+
+
+/* Application Status */
+
+.app-status-box {
+    /* border-radius: 5px; */
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+    padding: 15px 25px;
+}
+
+.status-box {
+    border-radius: 15px;
+    /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; */
+}
+
+.status-box-dennied {
+    border-radius: 15px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    background-color: #ff6666d2;
+}
+
+
+/* hidden overflow on x axis */
+
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
+.bg-bugreen {
+    background-color: #D9FFE4;
+}
+
+
+/* Personal Ledger Admin side */
+
+.pl-newloan {
+    background-color: #0092D1;
+    border-radius: 20px;
+    padding: 5px 20px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.btn-dpdloan {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    padding: 5px 20px;
+}
+
+.pl-head {
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.pl-50 {
+    font-size: 0.7rem;
+    border: 1px solid #EE3434;
+    border-radius: 20px;
+    background-color: #FEB3B3;
+    padding: 0px 5px;
+    margin-bottom: 25px;
+    color: #000000;
+}
+
+.pl-details {
+    border-radius: 10px;
+    padding: 15px 15px 0px 15px;
+    background-color: white;
+    border: 1px solid #A1A1A1;
+}
+
+.pl-text-size {
+    font-size: 0.8rem;
+}
+
+.pl-table>thead>tr:first-child>th {
+    border-bottom: none;
+    text-align: center;
+}
+
+thead tr:first-child th:first-child {
+    padding-bottom: 10px;
+    margin-bottom: -10px;
+}
+
+.pl-table>thead>tr:last-child>th {
+    vertical-align: middle;
+}
+
+.table-container {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.responsive-table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+@media (max-width: 768px) {
+    .responsive-table th,
+    .responsive-table td {
+        white-space: nowrap;
         overflow: hidden;
-        width: 100%;
-        min-width: 900px;
-        height: 500px;
-        overflow-y: auto;
+        text-overflow: ellipsis;
     }
-    /* Admin Members */
-    
-    #applyFilterBtn {
-        height: 38px;
-        background-color: #fff;
-        border: 1px solid #000;
-        font-size: 0.8rem;
-        font-weight: 600;
-        padding: 0 25px;
-        border-radius: 20px;
-        color: black;
-    }
-    
-    .fg-admin::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #000;
-    }
-    
-    .fg-admin {
-        margin-bottom: 5px;
-    }
-    /* HSL and MPL applications */
-    
-    .form-control:focus {
-        outline: none;
-        box-shadow: none;
-    }
-    
-    .filter-option.active {
-        background-color: #FF6F19;
-        color: white;
-        font-weight: 600;
-        padding: 4px 15px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-    }
-    
-    .filter-option {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: grey;
-        padding: 4px 0;
-        cursor: pointer;
-    }
-    
-    .admin-table thead tr th {
-        font-size: 0.9rem;
-    }
-    
-    .admin-table tbody tr td {
-        font-size: 0.8rem;
-    }
-    
-    .btn-add-status {
-        color: #00638D !important;
-        font-weight: bold !important;
-        font-size: x-small !important;
-        border: 2px solid #00638D !important;
-        border-radius: 20px !important;
-    }
-    
-    .btn-add-status:hover {
-        background-color: #00628c;
-        color: #fffff4 !important;
-        /* border: 2px solid #00638D !important;
+}
+
+.pl-tr td:first-child {
+    font-weight: 600;
+}
+
+.pl-tr-last {
+    font-weight: 700;
+}
+
+.pl-tr td,
+.pl-tr th {
+    font-size: 0.8rem;
+}
+
+tbody tr:nth-child(odd) td {
+    /* background-color: #E6EEF1; */
+    background-color: #f0f6fa;
+}
+
+.pl-table tbody td:not(:first-child) {
+    font-size: 0.7rem;
+}
+
+
+/* Admin membership Applications */
+
+.adminbox {
+    background-color: #fff;
+    border: #C0C0C0 1px solid;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.membership-app-header1 {
+    width: 250px;
+    height: 70px;
+}
+
+.membership-app-header1-mpl {
+    width: 280px;
+    height: 70px;
+}
+
+.membership-app-header2 {
+    border: 1px solid #BDBDBD;
+    width: 200px;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
+.membership-application-search-input {
+    background-color: #fff;
+    border: 1px solid #C0C0C0;
+    padding: 5px;
+    border-radius: 5px;
+    height: 29px;
+}
+
+.input-container .show-entries-application {
+    width: 2.5rem;
+    border: 1px solid #C0C0C0;
+    padding: 5px;
+    height: 29px;
+    border-radius: 5px;
+    margin: 0 5px
+}
+
+.admin-table {
+    width: 100%;
+    min-width: 80%;
+}
+
+.custom-table-for-admin {
+    margin-top: 15px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #BDBDBD;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    min-width: 900px;
+    height: 500px;
+    overflow-y: auto;
+}
+
+
+/* Admin Members */
+
+#applyFilterBtn {
+    height: 38px;
+    background-color: #fff;
+    border: 1px solid #000;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0 25px;
+    border-radius: 20px;
+    color: black;
+}
+
+.fg-admin::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+}
+
+.fg-admin {
+    margin-bottom: 5px;
+}
+
+
+/* HSL and MPL applications */
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.filter-option.active {
+    background-color: #FF6F19;
+    color: white;
+    font-weight: 600;
+    padding: 4px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.filter-option {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: grey;
+    padding: 4px 0;
+    cursor: pointer;
+}
+
+.admin-table thead tr th {
+    font-size: 0.9rem;
+}
+
+.admin-table tbody tr td {
+    font-size: 0.8rem;
+}
+
+.btn-add-status {
+    color: #00638D !important;
+    font-weight: bold !important;
+    font-size: x-small !important;
+    border: 2px solid #00638D !important;
+    border-radius: 20px !important;
+}
+
+.btn-add-status:hover {
+    background-color: #00628c;
+    color: #fffff4 !important;
+    /* border: 2px solid #00638D !important;
     color: #004d6e !important; */
-    }
-    
-    .admin-table td {
-        vertical-align: middle;
-    }
-    
-    .final-approved {
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-        background-color: #00D186;
-        padding: 5px 10px;
-        border-radius: 20px;
-    }
-    
-    .final-denied {
-        color: rgb(255, 255, 255);
-        font-weight: bold;
-        background-color: #FF6767;
-        padding: 5px 18px;
-        border-radius: 20px;
-    }
-    
-    .three-dots {
-        position: relative;
-        display: inline-block;
-    }
-    
-    .three-dots-buttons {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white;
-        border: 1px solid gray;
-        border-radius: 10px;
-        padding: 6px;
-        z-index: 1;
-    }
-    
-    .three-dots:hover .three-dots-buttons {
-        display: block;
-    }
-    
-    .approve-btn {
-        background-color: #84FFA7;
-        color: rgb(0, 153, 0);
-        border-radius: 20px;
-        border: none;
-        font-weight: 600;
-        padding: 4px 10px;
-        margin-bottom: 5px;
-    }
-    
-    .deny-btn {
-        background-color: #ff8686;
-        color: red;
-        border-radius: 20px;
-        border: none;
-        font-weight: 600;
-        padding: 4px 20px;
-        margin-bottom: 5px;
-    }
-    /* .modal {
+}
+
+.admin-table td {
+    vertical-align: middle;
+}
+
+.final-approved {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: #00D186;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.final-denied {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: #FF6767;
+    padding: 5px 18px;
+    border-radius: 20px;
+}
+
+.three-dots {
+    position: relative;
+    display: inline-block;
+}
+
+.three-dots-buttons {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 6px;
+    z-index: 1;
+}
+
+.three-dots:hover .three-dots-buttons {
+    display: block;
+}
+
+.approve-btn {
+    background-color: #84FFA7;
+    color: rgb(0, 153, 0);
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    padding: 4px 10px;
+    margin-bottom: 5px;
+}
+
+.deny-btn {
+    background-color: #ff8686;
+    color: red;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    padding: 4px 20px;
+    margin-bottom: 5px;
+}
+
+
+/* .modal {
     display: none;
     position: fixed;
     z-index: 1;
@@ -1030,427 +1086,441 @@
     width: 300px;
     height: 420px;
 } */
-    
-    .admin-custom-form {
-        background-color: #D9E4E9 !important;
-        border: none;
-        outline: none;
-        box-shadow: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
+
+.admin-custom-form {
+    background-color: #D9E4E9 !important;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+/* Application details */
+
+.application-details-box {
+    border: #868686 1px solid;
+    border-radius: 15px;
+    padding: 0 30px;
+}
+
+.appdetails-text {
+    font-size: 1.1rem;
+    color: #00638D;
+    font-weight: 600;
+}
+
+
+/* User Profile */
+
+.profile-note {
+    padding: 5px 20px;
+    border-radius: 10px;
+    background-color: #E6F9FF;
+    font-size: 12px;
+}
+
+.profile-tag {
+    margin-top: 20px;
+}
+
+.profile-tag img {
+    border-radius: 20px;
+}
+
+.profile-tag {
+    position: relative;
+}
+
+:root {
+    --initial-left: 13%;
+}
+
+.profile-picture {
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: var(--initial-left);
+    width: 120px;
+    transform: translate(-50%, -50%);
+}
+
+.profile-tag-details img {
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 4px solid #ffffff;
+}
+
+.profile-name {
+    position: absolute;
+    top: 28%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: auto;
+    left: 23%;
+}
+
+.profile-edit-button {
+    position: absolute;
+    top: 24%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: auto;
+    left: 38%;
+}
+
+.profile-position {
+    position: absolute;
+    top: 48%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: auto;
+    left: 23%;
+}
+
+.profile-college {
+    position: absolute;
+    top: 60%;
+    color: white;
+    text-shadow: 2px 2px 4px #717171;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: auto;
+    left: 23%;
+}
+
+.download-membership-pdf-profile {
+    background-color: #FF6F19;
+    border-radius: 10px;
+    padding: 4px 7px;
+    border: 1px solid white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.download-membership-pdf-profile:hover {
+    background-color: #ff640b;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
+}
+
+.pdf-membership-download-link {
+    text-decoration: none;
+    color: white;
+}
+
+.profile-row {
+    margin: 20px 30px;
+}
+
+@media screen and (max-width: 991px) {
+     :root {
+        --initial-left: 16%;
+        /* Adjust this value to your preference */
     }
-    /* Application details */
-    
-    .application-details-box {
-        border: #868686 1px solid;
-        border-radius: 15px;
-        padding: 0 30px;
+    .profile-name {
+        left: 30%;
     }
-    
-    .appdetails-text {
-        font-size: 1.1rem;
-        color: #00638D;
-        font-weight: 600;
+    .profile-college {
+        left: 30%;
     }
-    /* User Profile */
-    
-    .profile-note {
-        padding: 5px 20px;
-        border-radius: 10px;
-        background-color: #E6F9FF;
-        font-size: 12px;
+    .profile-position {
+        left: 30%;
     }
-    
-    .profile-tag {
-        margin-top: 20px;
-    }
-    
-    .profile-tag img {
-        border-radius: 20px;
-    }
-    
-    .profile-tag {
-        position: relative;
-    }
-    
-    :root {
-        --initial-left: 13%;
-    }
-    
     .profile-picture {
         object-fit: cover;
         position: absolute;
         top: 50%;
         left: var(--initial-left);
-        width: 120px;
+        width: 100px;
+        height: 100px;
         transform: translate(-50%, -50%);
     }
-    
-    .profile-tag-details img {
-        border-radius: 50%;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border: 4px solid #ffffff;
-    }
-    
-    .profile-name {
-        position: absolute;
-        top: 28%;
-        color: white;
-        text-shadow: 2px 2px 4px #717171;
-        font-weight: bold;
-        font-size: 1.3rem;
-        width: auto;
-        left: 23%;
-    }
-    
-    .profile-edit-button {
-        position: absolute;
-        top: 24%;
-        color: white;
-        text-shadow: 2px 2px 4px #717171;
-        font-weight: bold;
-        font-size: 1.3rem;
-        width: auto;
-        left: 38%;
-    }
-    
-    .profile-position {
-        position: absolute;
-        top: 48%;
-        color: white;
-        text-shadow: 2px 2px 4px #717171;
-        font-weight: bold;
-        font-size: 0.8rem;
-        width: auto;
-        left: 23%;
-    }
-    
-    .profile-college {
-        position: absolute;
-        top: 60%;
-        color: white;
-        text-shadow: 2px 2px 4px #717171;
-        font-weight: bold;
-        font-size: 0.8rem;
-        width: auto;
-        left: 23%;
-    }
-    
-    .download-membership-pdf-profile {
-        background-color: #FF6F19;
-        border-radius: 10px;
-        padding: 4px 7px;
-        border: 1px solid white;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    }
-    
-    .download-membership-pdf-profile:hover {
-        background-color: #ff640b;
-        transform: scale(1.05);
-        box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
-    }
-    
-    .pdf-membership-download-link {
-        text-decoration: none;
-        color: white;
-    }
-    
     .profile-row {
-        margin: 20px 30px;
+        margin: 20px 10px;
     }
-    
-    @media screen and (max-width: 991px) {
-         :root {
-            --initial-left: 16%;
-            /* Adjust this value to your preference */
-        }
-        .profile-name {
-            left: 30%;
-        }
-        .profile-college {
-            left: 30%;
-        }
-        .profile-position {
-            left: 30%;
-        }
-        .profile-picture {
-            object-fit: cover;
-            position: absolute;
-            top: 50%;
-            left: var(--initial-left);
-            width: 100px;
-            height: 100px;
-            transform: translate(-50%, -50%);
-        }
-        .profile-row {
-            margin: 20px 10px;
-        }
+}
+
+@media (max-width: 575px) {
+     :root {
+        --initial-left: 22%;
+        /* Adjust this value to your preference */
     }
-    
-    @media (max-width: 575px) {
-         :root {
-            --initial-left: 22%;
-            /* Adjust this value to your preference */
-        }
-        .profile-name {
-            left: 40%;
-            font-size: 1rem;
-        }
-        .profile-college {
-            left: 40%;
-            font-size: 0.6rem;
-        }
-        .profile-position {
-            left: 40%;
-            font-size: 0.6rem;
-        }
-        .profile-picture {
-            width: 100px;
-            height: 100px;
-        }
+    .profile-name {
+        left: 40%;
+        font-size: 1rem;
     }
-    
-    .bg-selected {
-        background-color: #e3eefc;
+    .profile-college {
+        left: 40%;
+        font-size: 0.6rem;
     }
-    /* The Modal */
-    
-    .profile-modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.5);
+    .profile-position {
+        left: 40%;
+        font-size: 0.6rem;
     }
-    
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.bg-selected {
+    background-color: #e3eefc;
+}
+
+
+/* The Modal */
+
+.profile-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profile-modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    margin: 5% auto;
+    border-radius: 10px;
+    border: 1px solid #888;
+    width: 35%;
+}
+
+@media screen and (max-width: 991px) {
     .profile-modal-content {
-        background-color: #fefefe;
-        padding: 20px;
-        margin: 5% auto;
-        border-radius: 10px;
-        border: 1px solid #888;
-        width: 35%;
+        width: 90%;
     }
-    
-    @media screen and (max-width: 991px) {
-        .profile-modal-content {
-            width: 90%;
-        }
-    }
-    
-    .profile-close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-    
-    .profile-close:hover,
-    .profile-close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    .modal-profile-text {
-        color: #595959;
-        font-size: 17px;
-        font-weight: 700;
-        line-height: normal;
-        padding: 15px 0;
-        border-bottom: 1px solid #b0b0b0;
-    }
-    
-    .modal-profile-submit {
-        color: white;
-        border-radius: 10px;
-        font-size: 14px;
-        background: #FF6F19;
-        font-weight: bold;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    }
-    
-    .modal-profile-submit:hover {
-        background-color: #ff640b;
-        transform: scale(1.01);
-        transition: all 0.3s ease-in-out;
-        color: rgb(239, 239, 239);
-        box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
-    }
-    
-    .modal-profile-close {
-        border-radius: 10px;
-        background: #8C8C8C;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        color: #FFF;
-        font-size: 14px;
-        font-weight: 700;
-    }
-    
-    .modal-profile-close:hover {
-        background: #8C8C8C;
-        transform: scale(1.01);
-        transition: all 0.3s ease-in-out;
-        color: rgb(239, 239, 239);
-        box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
-    }
-    /* Available Loan Applications */
-    
+}
+
+.profile-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.profile-close:hover,
+.profile-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-profile-text {
+    color: #595959;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: normal;
+    padding: 15px 0;
+    border-bottom: 1px solid #b0b0b0;
+}
+
+.modal-profile-submit {
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #FF6F19;
+    font-weight: bold;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal-profile-submit:hover {
+    background-color: #ff640b;
+    transform: scale(1.01);
+    transition: all 0.3s ease-in-out;
+    color: rgb(239, 239, 239);
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
+}
+
+.modal-profile-close {
+    border-radius: 10px;
+    background: #8C8C8C;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.modal-profile-close:hover {
+    background: #8C8C8C;
+    transform: scale(1.01);
+    transition: all 0.3s ease-in-out;
+    color: rgb(239, 239, 239);
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
+}
+
+
+/* Available Loan Applications */
+
+.apply-loan-border {
+    border-radius: 10px;
+    border: 1px solid #A9A9A9;
+    background: #FFF;
+    height: auto;
+    padding: 15px;
+}
+
+.loans-to-apply {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.apply-loan-btn {
+    border-radius: 20px;
+    background: #0092D1;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 15px;
+    margin: 20px 0 5px 0;
+    cursor: pointer;
+}
+
+.apply-loan-btn:hover {
+    border-radius: 20px;
+    background: #006590;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0 15px;
+}
+
+@media (min-width: 575px) {
     .apply-loan-border {
-        border-radius: 10px;
-        border: 1px solid #A9A9A9;
-        background: #FFF;
-        height: auto;
-        padding: 15px;
+        min-width: 260px;
     }
-    
-    .loans-to-apply {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
+    .loan-apps-container {
+        height: 100vh;
     }
-    
-    .apply-loan-btn {
-        border-radius: 20px;
-        background: #0092D1;
-        color: #FFF;
-        font-weight: bold;
-        font-size: 15px;
-        padding: 0 15px;
-        margin: 20px 0 5px 0;
-        cursor: pointer;
+}
+
+@media (max-width: 575px) {
+    .loan-apps-container {
+        margin-top: 40px;
+        padding: 50px;
     }
-    
-    .apply-loan-btn:hover {
-        border-radius: 20px;
-        background: #006590;
-        color: #FFF;
-        font-weight: bold;
-        font-size: 15px;
-        padding: 0 15px;
-    }
-    
-    @media (min-width: 575px) {
-        .apply-loan-border {
-            min-width: 260px;
-        }
-        .loan-apps-container {
-            height: 100vh;
-        }
-    }
-    
-    @media (max-width: 575px) {
-        .loan-apps-container {
-            margin-top: 40px;
-            padding: 50px;
-        }
-    }
-    
-    .btn-apply-mpl {
-        background-color: #0092D1;
-        border-radius: 20px;
-        padding: 8px 10px;
-        font-size: 0.9rem;
-        color: white;
-        font-weight: 600;
-    }
-    
-    .btn-apply-hsl {
-        background-color: #FF6F19;
-        border-radius: 20px;
-        padding: 8px 10px;
-        font-size: 0.9rem;
-        color: white;
-        font-weight: 600;
-    }
-    
-    .btn-apply-mpl:hover {
-        background-color: #0072a3;
-        border-radius: 20px;
-        padding: 8px 10px;
-        font-size: 0.9rem;
-        color: white;
-        font-weight: 600;
-    }
-    
-    .btn-apply-hsl:hover {
-        background-color: #af4b11;
-        border-radius: 20px;
-        padding: 8px 10px;
-        font-size: 0.9rem;
-        color: white;
-        font-weight: 600;
-    }
-    /* for remittance */
-    
-    #remit-btn {
-        border-radius: 20px;
-        font-size: 0.9rem;
-    }
-    
-    .text-add-payment {
-        color: #868686;
-        font-size: 16px;
-        font-weight: 700;
-        margin: 10px 0 0 15px;
-    }
-    
-    .apply-changes-btn {
-        border-radius: 10px;
-        background: #FF6F19;
-        padding: 5px 10px;
-        color: #FFF !important;
-        font-size: 12px;
-        font-weight: 700;
-    }
-    
-    .apply-changes-btn:hover {
-        background: #be4f0f;
-        color: white;
-    }
-    
-    .text-remit-table-head {
-        color: #000;
-        text-align: center;
-        font-size: 14px;
-        margin-top: 15px;
-        font-weight: bold;
-    }
-    /* Transaction Scrollbar */
-    
-    .transaction-container::-webkit-scrollbar {
-        width: 5px;
-    }
-    
-    .transaction-container::-webkit-scrollbar-thumb {
-        background-color: rgba(0, 0, 0, 0.17);
-        border-radius: 6px;
-    }
-    
-    .transaction-container::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(0, 0, 0, 0.6);
-    }
-    
-    .transaction-container::-webkit-scrollbar-track {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-    
-    .transaction-container {
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    /* Member Trasactions */
-    
-    [data-filter].transaction-active {
-        color: white !important;
-        border-radius: 20px;
-        background: #FF6F19;
-        padding: 5px 10px;
-    }
+}
+
+.btn-apply-mpl {
+    background-color: #0092D1;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-hsl {
+    background-color: #FF6F19;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-mpl:hover {
+    background-color: #0072a3;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-apply-hsl:hover {
+    background-color: #af4b11;
+    border-radius: 20px;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: 600;
+}
+
+
+/* for remittance */
+
+#remit-btn {
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.text-add-payment {
+    color: #868686;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0 0 15px;
+}
+
+.apply-changes-btn {
+    border-radius: 10px;
+    background: #FF6F19;
+    padding: 5px 10px;
+    color: #FFF !important;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.apply-changes-btn:hover {
+    background: #be4f0f;
+    color: white;
+}
+
+.text-remit-table-head {
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+/* Transaction Scrollbar */
+
+.transaction-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.transaction-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.17);
+    border-radius: 6px;
+}
+
+.transaction-container::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.transaction-container::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.transaction-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* Member Trasactions */
+
+[data-filter].transaction-active {
+    color: white !important;
+    border-radius: 20px;
+    background: #FF6F19;
+    padding: 5px 10px;
+}
