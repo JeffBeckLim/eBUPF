@@ -23,7 +23,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                        @if (count($loan_status) != 0)
+                                
                             {{-- =================================================================== --}}
                             @foreach ($loan_status as $status)
                                 @if ($status->loan_application_state_id == 6)
@@ -56,6 +57,13 @@
                                 </div>
                                 @endif
                             @endforeach
+                        @else
+                        <div class="row border text-center p-5 rounded shadow-sm">
+                            <h1 class="text-center"><i class="bi bi-patch-question"></i></h1>
+                            <p class="fw-bold">No status yet</p>
+                            <p style="font-size: 12px">Submit your loan applictions at eBUPF to move forward your loan in the the application process.</p>
+                        </div>
+                        @endif
                             
 
                         </div>
