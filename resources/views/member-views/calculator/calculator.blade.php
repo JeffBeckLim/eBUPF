@@ -13,7 +13,7 @@
 
         <div class="row gap-md-5 mx-4 mt-3">
             <div class="col-md-4 bg-white rounded-3">
-                <form action="#">
+                <form action="#" method="get">
                     <div class="p-4">
                         <span class="fw-bold fs-6">Loan Category</span> <br>
                         <div style="padding: 5px 0 0 13px;">

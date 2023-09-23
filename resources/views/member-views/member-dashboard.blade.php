@@ -147,17 +147,18 @@
                                                                 }
                                                             @endphp
                                                             @if(in_array(6,$status_array))
-                                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
+                                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
                                                             @elseif(in_array(5,$status_array))
-                                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: blue"></i><span class="text-primary">Check Picked Up</span></p>
+                                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #0092D1"></i><span class="text-primary">Check Picked Up</span></p>
                                                             @elseif(in_array(4,$status_array))
                                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #b700ff"></i><span style="color: #77028f">Check Ready</span></p>
                                                             @elseif(in_array(3,$status_array))
                                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: green"></i><span class="text-success">Approved</span></p>
+                                                            @elseif(count($status_array) == 0)
+                                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: rgb(0, 0, 0)"></i><span class="text-success">Not yet submitted</span></p>
                                                             @else
                                                                 <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
                                                             @endif
-
                                                             <p class="fw-bold text m-0" style="font-size: small">{{$inActiveLoan->loan->loanType->loan_type_description}}</p>
                                                         </div>
                                                         <div class="col-3 text-center">
@@ -224,7 +225,7 @@
                                     <span class="fw-bold fs-6">Transactions</span>
                                 </div>
 
-                                @if($transactions)
+                                @if($transactions->isEmpty() == false)
                                     <div class="mt-3 transaction-container" id="transaction-container" style="height:550px;">
                                         @foreach($transactions as $transaction)
                                             @if($transaction instanceof \App\Models\Payment)
