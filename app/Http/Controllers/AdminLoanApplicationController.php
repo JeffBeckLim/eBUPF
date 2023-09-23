@@ -15,6 +15,17 @@ use App\Models\LoanCategory;
 class AdminLoanApplicationController extends Controller
 {
 
+    public function updateLoanApplicationAmount(Request $request, $id){
+        $request->validate([
+            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+        ]);
+        $loan = Loan::findOrFail($id);
+        $loan->principal_amount = $request->principal_amount;
+        $loan->save();
+        return back();
+    }
+
+
     public function createLoanApplicationCategory(Request $request, $id){
         $loan = Loan::findOrFail($id);
         $loan->loan_category_id = $request->category;
@@ -40,7 +51,7 @@ class AdminLoanApplicationController extends Controller
         // $status->is_deleted = 1;
         $status->delete();
 
-        return redirect('/admin/loan-applications/mpl')->with('deleted_status', 'Status deleted'); 
+        return back()->with('deleted_status', 'Status deleted'); 
         
     }
 
@@ -75,7 +86,7 @@ class AdminLoanApplicationController extends Controller
         $denied = 0;
         $pending = 0;
         foreach($loans as $loan){
-            if(count($loan->loan->loanApplicationStatus) < 0){
+            if(count($loan->loan->loanApplicationStatus) == 0){
                 $pending += 1;
             }
             foreach($loan->loan->loanApplicationStatus as $state){
@@ -87,15 +98,7 @@ class AdminLoanApplicationController extends Controller
                 }
             }
         }
-        
-
-        if($loan_type == 'mpl'){
-            return view('admin-views.admin-loan-applications-tracking.admin-mpl-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));
-        }elseif($loan_type == 'hsl'){
-            return view('admin-views.admin-loan-applications-tracking.admin-hsl-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));            
-        }else{
-            abort(404);
-        }
+        return view('admin-views.admin-loan-applications-tracking.admin-loan-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));
     }
 
 
@@ -119,7 +122,7 @@ class AdminLoanApplicationController extends Controller
 
         // check if the status selected already exist ( BACK UP VALIDATION )
         if(count($status) != 0){
-            return redirect('/admin/loan-applications/mpl')->with('status_error', 'The loan already has that status.');
+            return back()->with('status_error', 'The loan already has that status.');
         }
 
         $new_loan_status = LoanApplicationStatus::create([
@@ -133,9 +136,9 @@ class AdminLoanApplicationController extends Controller
             $loan->is_active = 1;
             $loan->save();
 
-            return redirect('/admin/loan-applications/mpl')->with('success', 'New status added successfully and set as Performing Loan');
+            return back()->with('success', 'New status added successfully and set as Performing Loan');
         }
         
-        return redirect('/admin/loan-applications/mpl')->with('success', 'New status added successfully!'); 
+        return back()->with('success', 'New status added successfully!'); 
     }
 }

@@ -15,8 +15,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
+    {{-- Jquery - used by: datatables, select2 --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <!-- Data tables -->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
      <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
   </head>
@@ -161,7 +162,7 @@
                   <ul class="list-unstyled components ms-4">
                     <li>
                       <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="fs-7">
-                        Loan Application Tracking
+                        Tracking Loan Applications
                       </a>
                     </li>
                     <li>
@@ -231,54 +232,39 @@
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
       {{-- HIDE ON SCROLL EVENT --}}
-      <!-- Include jQuery -->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
       <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 
     <script>
       document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("fixedTopElement").classList.remove("hide");
-});
+          document.getElementById("fixedTopElement").classList.remove("hide");
+        });
 
-var lastScrollTop = 0;
-window.addEventListener("scroll", function(){
-  var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-  if (currentScroll > lastScrollTop){
-    document.getElementById("fixedTopElement").classList.add("hide");
-  } else {
-    document.getElementById("fixedTopElement").classList.remove("hide");
-  }
-  lastScrollTop = currentScroll;
-});
+        var lastScrollTop = 0;
+        window.addEventListener("scroll", function(){
+          var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          if (currentScroll > lastScrollTop){
+            document.getElementById("fixedTopElement").classList.add("hide");
+          } else {
+            document.getElementById("fixedTopElement").classList.remove("hide");
+          }
+          lastScrollTop = currentScroll;
+        });
 
-$(document).ready(function() {
-    // Initialize Select2 on the dropdown
-    $('#loan_id').select2({
-        placeholder: 'Select a Loan ID',
-        allowClear: true,
-    });
-    $('.select2-selection--single').css('background-color', '#D9E4E9');
-    $('.select2-selection--single').css('height', '38px');
-    $('.select2-selection--single').css('border-radius', '10px');
-    $('.select2-selection--single').css('border', 'none');
-    $('.select2-selection--single').css('padding-top', '5px');
-});
-
+        $(document).ready(function() {
+            // Initialize Select2 on the dropdown
+            $('#loan_id').select2({
+                placeholder: 'Select a Loan ID',
+                allowClear: true,
+            });
+            $('.select2-selection--single').css('background-color', '#D9E4E9');
+            $('.select2-selection--single').css('height', '38px');
+            $('.select2-selection--single').css('border-radius', '10px');
+            $('.select2-selection--single').css('border', 'none');
+            $('.select2-selection--single').css('padding-top', '5px');
+        });
     </script>
       {{-- HIDE ON SCROLL EVENT --}}
 
