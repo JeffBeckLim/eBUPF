@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('loan_category_id')->nullable()->constrained('loan_categories');
 
             $table->decimal('principal_amount', 20, 2);
+            $table->decimal('original_principal_amount', 20, 2)->nullable(); //this is the original amount requested for reference and cannot be modified
 
             $table->decimal('interest', 20, 2)->nullable();
 

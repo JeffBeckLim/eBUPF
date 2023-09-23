@@ -71,7 +71,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="row  w-100 m-0 p-0">
                                                 <div class="col-lg-3  m-0 p-0 text-center">
-                                                    <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle img-fluid"> 
+                                                    <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture"  style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle img-fluid"> 
                                                 </div>
                                                 <div class="col-lg-9 ps-lg-2  m-0 p-0">
                                                     <p class="mb-0 fs-7">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>

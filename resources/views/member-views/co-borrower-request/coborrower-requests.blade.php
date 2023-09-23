@@ -80,7 +80,8 @@
                                             <div class="row  g-0">
 
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
-                                                    <img src="{{ asset(($loan->loan->member->profile_picture ? 'storage/'.$loan->loan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" width="50px" class="rounded-circle">
+                                                    <img src="{{ asset(($loan->loan->member->profile_picture ? 'storage/'.$loan->loan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" 
+                                                    style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle">
 
                                                 </div>
                                                 <div class="col">

@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(MembersTableSeeder::class);
         $this->call(LoanTypesTableSeeder::class);
         $this->call(LoanApplicationStatesSeeder::class);
-        $this->call(LoanCategory::class);
+        $this->call(LoanCategorySeeder::class);
     }
 }

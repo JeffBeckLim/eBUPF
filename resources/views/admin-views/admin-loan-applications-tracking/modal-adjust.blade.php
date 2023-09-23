@@ -8,6 +8,8 @@
         <div class="modal-body">
         <div class="row border bg-light rounded mx-1 p-2 mb-2">
             <p class="m-0" style="font-size: 12px">Any changes will be seen by the member (borrower)</p>
+            <p class="m-0 pt-2 ">Php {{$loan->loan->original_principal_amount}}</p>
+            <p class="m-0" style="font-size: 12px">Original amount requested</p>
         </div>
 
         <form action="{{route('update.principalAmount',$loan->loan->id)}}" method="POST">

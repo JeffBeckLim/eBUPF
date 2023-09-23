@@ -25,16 +25,19 @@
         </div>
 
         <div class="col-6">
-            <label   for="">Position</label>
+            <label class="fw-bold" for="position">Position</label>
+            <input class="form-control validate" name="position" value="{{old('position')}}">
+
+            {{-- <label   for="">Position</label>
             <select name="position" class="form-select form-control validate" >
                 <option value="faculty" {{ old('positon') == 'faculty' ? 'selected' : '' }}>faculty</option>
                 <option value="dept. head" {{ old('sex') == 'dept. head' ? 'selected' : '' }}>dept. head</option>
                 <option value="chairman" {{ old('sex') == 'chairman' ? 'selected' : '' }}>chairman</option>
                 
-            </select>
+            </select> --}}
         </div>
         @error('position')
-            <p class="text-danger mt-1">{{$message}}</p>
+            <p class="text-danger mt-1">Position is needed</p>
         @enderror
         <div class="col-6">
             <label  for="salary">Monthly Salary</label>
