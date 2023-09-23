@@ -33,9 +33,10 @@ class LoanApplicationController extends Controller
         ->get();
 
         // if loan has no status abort
-        if(count($loan_status)==null){
-            abort(404);
-        }
+        // if(count($loan_status)==null){
+        //     abort(404);
+        // }
+
 
         return view('member-views.loan-applications.loan-application-status', compact('loan_status', 'loan'));
     }

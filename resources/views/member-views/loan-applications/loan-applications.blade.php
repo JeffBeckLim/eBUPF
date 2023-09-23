@@ -107,7 +107,7 @@
                                         <p class="m-0 ps-2 mt-2" style="font-size:small">Co-Borrower</p>
                                         <div class="row g-0">
                                             <div class="col  mt-1 d-flex">
-                                                <img class="rounded-circle mx-2" src="{{asset('storage/'.$loan->member->profile_picture)}}" alt="Default Picture" style="height: 2.5rem; width: 2.5rem;">
+                                                <img class="rounded-circle mx-2" src="{{asset('storage/'.$loan->member->profile_picture)}}" alt="Default Picture" style="height: 2.5rem; width: 2.5rem; object-fit: cover;">
                                                 <span class="fw-bold fs-7 my-auto">
                                                     {{$loan->member->firstname}}
                                                     {{$loan->member->lastname}}
