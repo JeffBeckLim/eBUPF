@@ -187,6 +187,7 @@ class LoanApplicationController extends Controller
             'member_id'=>Auth::user()->id,
             'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
+            'original_principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
         ]);
 

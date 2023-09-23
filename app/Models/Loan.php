@@ -15,7 +15,10 @@ class Loan extends Model
         'amortization_id',
         'adjustment_id',
         'loan_category_id',
+
         'principal_amount',
+        'original_principal_amount',
+
         'interest', 
         'term_years',
         'is_visible',
