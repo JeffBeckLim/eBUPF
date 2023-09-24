@@ -98,6 +98,7 @@ class PDFController extends controller{
         $co_borrower_campus = Campus::where('id', $co_borrower_unit->campus_id)->first();
 
         $data = [
+            'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
             'firstname' => $member->firstname,
             'middle_initial' => $member->middle_initial,
