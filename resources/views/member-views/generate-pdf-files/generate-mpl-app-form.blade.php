@@ -924,5 +924,298 @@
     bottom: 0;">
         Page 2
     </div>
+
+    <div class="page_break"></div>
+
+    <div style="width: 100%; position:">
+        <div class="new-roman" style="width: 75%; font-weight: bold; font-size: 13px; text-align: center; margin: auto;">
+            NON-NEGOTIABLE PROMISSORY NOTE <br> WITH DEED OF ASSIGNMENT
+        </div>
+    </div>
+
+    <div class="new-roman" style="width: 100%; font-size: 13px; font-weight: bold; margin-top: 10px;">
+        PRINCIPAL BORROWER
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 5px; font-size: 15px">
+        <div style="display: table-cell; width: 35%;">
+            Php: <u>{{$amount_requested}}</u>
+        </div>
+        <div style="display: table-cell; width: 35%;">
+
+        </div>
+        <div style="display: table-cell; width: 30%;">
+            Date: <u>{{$currentdate}}</u>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px; font-size: 13px;text-align: justify; line-height: 1.2; text-indent: 2rem;">
+        For value received, I <u>{{$firstname}} {{$middle_initial}}. {{$lastname}}</u> (the "Principal Borrower"), an employee of Bicol University (the "University") and a member of the BU Provident Fund, Inc. (the "BUPFI"), promise to pay to the BU PFI the sum of the Philippine PESOS: __________________________________ (Php ______________________) in monthly installments of Php ________________ each starting on ____________________ and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of _______% per annum until fully paid, subject to the terms and conditions prescribed by the BU PFI.
+    </div>
+
+    <div style="margin-top: 7px; font-size: 13px;text-align: justify; line-height: 1.2; text-indent: 2rem;">
+        For the payment of all installments and amounts due and demandable under the Promissory Note, I hereby assign and transfer an amount equivalent to the said monthly installment the salaries, wages, allowances and other benefits payable to me by the University.
+    </div>
+
+    <div style="margin-top: 7px; font-size: 13px; text-align: justify; line-height: 1.2; text-indent: 2rem;">
+        I do hereby grant the BUPF, its management assign the full power and authority to deduct, withhold, collect and receive and give acquintance for the same or any part thereof, in may name of otherwise.
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 5px; font-size: 13px; margin-top: 20px;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
+            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px;">
+            CONFORME:
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center; font-weight: bold;">
+            Principal Borrower
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px; padding-left: 50px;">
+            BU PROVIDENT FUND INC.
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; ">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;font-weight: bold;">
+            Signature over printed name
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px; ">
+            By:
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 18px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;">
+
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-size: 13px; padding-left: 50px;">
+            _______________________________
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;">
+
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-size: 13px;text-align: center; padding-left: 50px;font-weight: bold;">
+            Executive Director
+        </div>
+    </div>
+
+    <div style="margin-top: 10px; font-size: 13px; font-weight: bold;" class="new-roman">
+        CO-BORROWER
+    </div>
+
+    <div style="margin-top: 12px; font-size: 13px; line-height: 1.2; text-indent: 2rem;">
+        I, <u>{{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}</u> (the "Principal Borrower"), an employee of Bicol University (the "University"), and a member of the BU provident Fund, Inc. (the "BUPFI"), do hereby promise, in the event of default or none payment by the Principal Borrower abovementioned, to pay the BU PFI, the whole sum remaining unpaid under this Promissory Note, Inclusive of interests, penalties or surcharges, in accordance with the terms and conditions hereof and of the Implementing Guidelines/Rules and Regulations for the Loan.
+    </div>
+
+    <div style="margin-top: 7px; font-size: 13px; line-height: 1.2; text-indent: 2rem;">
+        For purposes of payment, I hereby authorize the BU PFI, upon Notice to set off, apply to the payment of, or otherwise give acquaintance for, the remaining unpaid balance of this Promissory Note, the equivalent amount from any and all salaries, wages, allowances and benefits payable to me.
+    </div>
+
+    <div style="display: table; width: 100%; margin-top: 5px; font-size: 13px; margin-top: 20px;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;  text-align: center;">
+            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px;">
+            CONFORME:
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center; font-weight: bold;">
+            Co-Borrower
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px; padding-left: 50px;">
+            BU PROVIDENT FUND INC.
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; ">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;font-weight: bold;">
+            Signature over Printed Name
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-weight: bold; font-size: 13px; ">
+            By:
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 15px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;">
+
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-size: 13px; padding-left: 50px;">
+            _______________________________
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; text-align: center;">
+
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-size: 13px;text-align: center; padding-left: 50px; font-weight: bold;">
+            Executive Director
+        </div>
+    </div>
+
+    <div style="width: 100%;font-weight: bold; text-align: center; font-size: 13px; margin-top: 5px;">
+        Signed in the Presence of
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 15px;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;">
+
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; width: 45%; font-size: 13px; padding-left: 50px;">
+            _______________________________
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            Witness
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px; padding-left: 50px;">
+            Witness
+        </div>
+    </div>
+    <div style="display: table; width: 100%; font-size: 13px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            Signature over Printed Name
+        </div>
+        <div style="display: table-cell; width: 15%;">
+
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px; padding-left: 50px;">
+            Signature over Printed Name
+        </div>
+    </div>
+
+    <div class="new-roman" style="width: 100%;font-weight: bold; text-align: center; font-size: 14px; margin-top: 5px;">
+        ACKNOWLEDGEMENT
+    </div>
+
+    <div style="font-weight: bold; font-size: 13px; margin-top: 5px; line-height: 1.1;">
+        Republic of the Philippines<br>_______________________s.s <br>X_______________________X
+    </div>
+
+    <div style="font-size: 13px; margin-top: 10px; text-indent: 2rem; line-height: 1.2;">
+        BEFORE ME, a Notary Public, for the city/province of ___________________, Philippines, on this day of ____________________________, _____, personally appeared the following persons with their Community Tax Certificates as hereunder indicated.
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 10px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            Name
+        </div>
+        <div style="display: table-cell; width: 25%; font-size: 13px; font-weight: bold;text-align: center">
+            BU ID No.
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px;">
+            Date/Place Issued
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 5px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            1. _______________________________
+        </div>
+        <div style="display: table-cell; width: 25%; font-size: 13px; font-weight: bold;text-align: center">
+            __________________
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px;">
+            ___________________________
+        </div>
+    </div>
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 5px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            2. _______________________________
+        </div>
+        <div style="display: table-cell; width: 25%; font-size: 13px; font-weight: bold;text-align: center">
+            __________________
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px;">
+            ___________________________
+        </div>
+    </div>
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 5px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold; text-align: center;">
+            3. _______________________________
+        </div>
+        <div style="display: table-cell; width: 25%; font-size: 13px; font-weight: bold;text-align: center">
+            __________________
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px;">
+            ___________________________
+        </div>
+    </div>
+
+    <div style="margin-top: 5px; font-size: 13px;text-align: justify; line-height: 1.2;">
+        Known to me and to me known to be the same persons who executed the foregoing instrument and they acknowledged to me the same in their free and voluntary act and deed and that of the entity represented.
+    </div>
+
+    <div style="margin-top: 10px; font-size: 13px; font-weight: bold;">
+        WITNESS MY HAND AND SEAL on this day __________ day of ___________, ___________ at ___________________.
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 13px; margin-top: 5px;">
+        <div style="display: table-cell; width: 40%; font-size: 13px; font-weight: bold;">
+            Doc. No. ___________________
+        </div>
+        <div style="display: table-cell; width: 25%; font-size: 13px; font-weight: bold;text-align: center">
+            NOTARY PUBLIC
+        </div>
+        <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 13px;">
+
+        </div>
+    </div>
+    <div style="font-weight: bold; font-size: 13px;">
+        Page No. ___________________ <br> Book No. ___________________ <br> Series of ___________________
+    </div>
+
+    <div style="font-size: 12px;font-weight: bold; text-align: center; width: 100%; position: absolute;
+    bottom: 0;">
+        Page 3
+    </div>
 </body>
 </html>

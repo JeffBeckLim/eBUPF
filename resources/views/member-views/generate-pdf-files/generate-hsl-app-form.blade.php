@@ -876,7 +876,7 @@ bottom: 0;">
     </div>
 
     <div class="new-roman" style="width: 100%;font-weight: bold; text-align: center; font-size: 16px; margin-top: 5px;">
-        ACKNOWELEDGEMENT
+        ACKNOWLEDGEMENT
     </div>
 
     <div style="font-weight: bold; font-size: 14px; margin-top: 5px; line-height: 1.1;">
@@ -892,7 +892,7 @@ bottom: 0;">
             Name
         </div>
         <div style="display: table-cell; width: 25%; font-size: 14px; font-weight: bold;text-align: center">
-            CTC No.
+            BU ID No.
         </div>
         <div style="display: table-cell; font-weight: bold; text-align: center;width: 45%; font-size: 14px;">
             Date/Place Issued
