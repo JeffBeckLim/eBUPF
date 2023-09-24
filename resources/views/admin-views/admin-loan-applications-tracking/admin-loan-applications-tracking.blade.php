@@ -161,7 +161,7 @@
                 <table class="table admin-table table-striped table-hover" id="myTable">
                     <thead style="border-bottom: 2px solid black">
                         <style>
-                             th{
+                            th, td{
                                 font-size: 12px !important;
                             }
                         </style>

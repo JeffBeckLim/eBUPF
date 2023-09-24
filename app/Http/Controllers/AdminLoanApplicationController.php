@@ -14,6 +14,24 @@ use App\Models\LoanCategory;
 
 class AdminLoanApplicationController extends Controller
 {
+    public function showLoanApplications(){
+        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory')->has('loanApplicationStatus')
+        ->where('loan_type_id',1)
+        ->get();
+        
+        $loans = [];
+        foreach($raw_loans as $raw_loan){
+            $status_array = [];
+            foreach($raw_loan->loanApplicationStatus as $status){
+                array_push($status_array, $status->loan_application_state_id);
+            }
+            if(in_array(3,$status_array) && !in_array(6,$status_array)){
+                array_push($loans, $raw_loan);
+            }
+        }
+        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans'));
+    }
+
 
     public function updateLoanApplicationAmount(Request $request, $id){
         $request->validate([
