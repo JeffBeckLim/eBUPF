@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAmortizationController;
 use App\Models\User;
 use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
@@ -47,11 +48,14 @@ use App\Http\Controllers\TransactionController;
 
     Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
 
-    Route::get('Admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status');
+    Route::get('admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status');
 
 
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
+
+
+   
 //TESTING ===================================================================================================
 
 
@@ -93,20 +97,32 @@ use App\Http\Controllers\TransactionController;
 //
 //🔴ADMIN ==================================================================================================
 
-        // { TESTING PA TO}-----------------------------------------------------------
+    // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
+    Route::get('/admin/loan-applications', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
 
-        // Show MPL or HSL Applications
-        Route::get('/admin/loan-applications/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
+    Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
+
+    Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
+
+    
+    // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
 
 
-        Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');
+    // Show MPL or HSL Applications
+    Route::get('/admin/loan-applications/tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
 
-        Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationState'])->name('create.state');
+    // add status in regards to the application process
+    Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');
 
-        Route::post('admin/loan-application/category/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationCategory'])->name('create.category');
+    // add a state to a loan of active closed or null
+    Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationState'])->name('create.state');
 
-        Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
-        // { TESTING PA TO}-----------------------------------------------------------
+    // add category to the loan NEW ADD RENEW
+    Route::post('admin/loan-application/category/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationCategory'])->name('create.category');
+
+    // update principal amount by admin
+    Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
+    
 
 
     // Show Admin Dashboard

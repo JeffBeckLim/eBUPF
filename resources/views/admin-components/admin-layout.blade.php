@@ -166,7 +166,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="fs-7">Multi-purpose Loans</a>
+                      <a href="{{route('admin.loan.applications')}}" class="fs-7">Multi-purpose Loans</a>
                     </li>
                     <li>
                       <a href="#"  class="fs-7">Housing Loans</a>
