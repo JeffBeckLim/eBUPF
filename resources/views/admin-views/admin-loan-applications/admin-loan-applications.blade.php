@@ -4,6 +4,40 @@
 
 <div class="container-fluid mt-2">
     <div class="adminbox m-4">
+
+        @if (session('amort_success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('amort_success')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('success')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        
+        @error('principal_amount')
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{$message}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @enderror
+        @error('interest')
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{$message}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @enderror
+        @error('loan_term')
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{$message}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @enderror
+            
+
         <div class="d-flex">
             <div class="d-flex membership-app-header1-mpl">
                 <img src="{{asset('/icons/MPL-mini.svg')}}" alt="" width="50px">
@@ -26,42 +60,7 @@
                 </div>
             </div>
         </div>
-        <div id="myModal" class="modal">
-            <div class="modal-content p-4">
-                <span class="text-center fs-6 fw-bold">Add Status</span>
-                <div>
-                    <span class="fs-7">Loan ID</span> <br>
-                    <span style="color: #0092D1" class="fw-bold">102030</span>
-                    <div class="row">
-                        <div class="col-7">
-                            <span class="fw-bold fs-7">Juan Dela Cruz Jr.</span> <br> <span class="fs-7">BUCS</span>
-                        </div>
-                        <div class="col-5 d-flex justify-content-end">
-                            <span class="fs-7">200,000.00</span>
-                        </div>
-                        <span class="fs-7">04-23-2023</span>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <select id="statusDropdown" class="form-select fomr-con admin-custom-select">
-                        <option value="" disabled selected>Status</option>
-                        <option value="Staff">Staff</option>
-                        <option value="LoanAnalyst">Loan Analyst</option>
-                        <option value="ExeDirector">Executive Director</option>
-                        <option value="Check">Check</option>
-                      </select>
-                </div>
-                <div class="mt-2">
-                    <input type="date" id="dateInput" class="form-control" />
-                </div>
-                <div class="mt-2">
-                    <textarea id="remarksInput" class="form-control" rows="3" placeholder="Remarks"></textarea>
-                </div>
-                <div class="mt-3 d-flex justify-content-end">
-                    <button type="button" class="btn bu-orange p-1 text-white fs-7">Confirm</button>
-                </div>
-            </div>
-        </div>
+       
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
@@ -95,19 +94,7 @@
             </div>
             <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
         </div>
-        {{-- <div>
-            <div class="row mt-4">
-                <div class="col-md-6 d-flex">
-                    <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
-                    <input type="text" class="membership-application-search-input">
-                </div>
-                <div class="col-md-6 d-flex justify-content-end ma-search gap-3">
-                    <span class="filter-option active" data-filter="all">All Applications</span>
-                    <span class="filter-option" data-filter="approved">Approved</span>
-                    <span class="filter-option" data-filter="denied">Denied</span>
-                </div>
-            </div>
-        </div> --}}
+
         <style>
             th, td{
                 font-size: 12px !important;
@@ -128,6 +115,8 @@
                             <th>Interest</th>
                             <th>Total Payable</th>
                             <th>Term</th>
+                            <th class="border-end">...</th>
+
                             <th>Gross Loan</th>
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
@@ -171,8 +160,8 @@
 
                                 {{-- name --}}
                                 <td>
+                                    {{ strtoupper($loan->member->lastname)}},
                                     {{$loan->member->firstname}}
-                                    {{$loan->member->lastname}}
                                 </td>
 
                                 {{-- units --}}
@@ -192,7 +181,7 @@
                                 
                                 {{-- interest --}}
                                 <td>
-                                    {{$loan->member->interest}}
+                                    {{$loan->interest}}
                                 </td>
                             
                                 {{-- total payable --}}
@@ -203,6 +192,14 @@
                                 {{-- loan term --}}
                                 <td>
                                     {{$loan->term_years}}
+                                </td>
+                                {{-- ... --}}
+                                <td class="border-end">
+                                    <h6>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#editLoanModal{{$loan->id}}"  href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </h6>
                                 </td>
                                 
                                 {{-- gross loan -- principal amount lang to --}}
@@ -222,28 +219,47 @@
                                 
                                 {{-- AMORTIZATION --------------- --}}
                                 {{-- prin --}}
-                                <td class=" border-start"></td>
+                                <td class=" border-start">
+                                    @if ($loan->amortization != null)
+                                        {{$loan->amortization->amort_principal}}
+                                    @endif
+                                </td>
                                 {{-- int --}}
-                                <td></td>
+                                <td>
+                                    @if ($loan->amortization != null)
+                                        {{$loan->amortization->amort_interest}}
+                                    @endif
+                                </td>
                                 {{-- monthly --}}
                                 <td></td>
                                 {{-- start --}}
-                                <td>Start</td>
+                                <td>
+                                    @if ($loan->amortization != null)
+                                        {{$loan->amortization->amort_start}}
+                                    @endif
+                                </td>
                                 {{-- end --}}
-                                <td>End</td>
+                                <td>
+                                    @if ($loan->amortization != null)
+                                        {{$loan->amortization->amort_end}}
+                                    @endif
+                                </td>
                                 <td class="border-end">
                                     <h6>
-                                    <a href="#">
+                                    <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     </h6>
                                 </td>
                                 {{-- check --}}
-                                <td>Adjusted Net Pay.</td>
+                                <td>Adjusted Net Pay.</td>s
                                 <td>Check no.</td>
                                 <td>Date</td>
                                 <td>Remarks</td>
                             </tr>
+                            @include('admin-views.admin-loan-applications.modal-amortization')
+                            @include('admin-views.admin-loan-applications.modal-edit-loan')
+
                         @endforeach
                        
                     </tbody>

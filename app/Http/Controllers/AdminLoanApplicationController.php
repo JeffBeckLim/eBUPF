@@ -14,10 +14,26 @@ use App\Models\LoanCategory;
 
 class AdminLoanApplicationController extends Controller
 {
+    public function updateLoan(Request $request , $id){
+        $loan=Loan::findOrFail($id);
+        $request->validate([
+            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+            'interest'=> 'nullable|numeric|min:10000|max:200000',
+            'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
+        ]);
+
+        $loan->principal_amount = $request->principal_amount;
+        $loan->interest = $request->interest;
+        $loan->term_years = $request->term_years;
+        $loan->save();
+
+        return back()->with('success', 'Loan Updated!');
+    }
+
     public function showLoanApplications(){
-        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory')->has('loanApplicationStatus')
+        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization')->has('loanApplicationStatus')
         ->where('loan_type_id',1)
-        ->get();
+        ->get(); 
         
         $loans = [];
         foreach($raw_loans as $raw_loan){
