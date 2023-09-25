@@ -20,7 +20,6 @@ class AdminAmortizationController extends Controller
                 'amort_end' => $request->amort_end, 
             ]);
         }
-
         $loan->amortization_id = $amortization->id;
         $loan->save();
 
