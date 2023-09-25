@@ -15,7 +15,7 @@
             <div class="col-md-4 bg-white rounded-3">
                 <form action="#" method="get">
                     <div class="p-4">
-                        <span class="fw-bold fs-6">Loan Category</span> <br>
+                        <span class="fw-bold fs-6">Loan Categoryspan </span><span class="text-danger fw-bold">*</span> <br>
                         <div style="padding: 5px 0 0 13px;">
                             <div class="row pt-1">
                                 <div class="col-lg-6">
@@ -30,16 +30,16 @@
                         </div>
                         <div class="row mt-2 pt-2">
                             <div class="col-md-9">
-                                <label for="amount" class="fw-bold">Amount</label>
+                                <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
                                 <div class="d-flex align-items-center">
-                                    <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount">
+                                    <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="1" max="200000">
                                     <span style="margin-left: 5px;">
-                                        <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Additional information about the amount"></i>
+                                        <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The principal amount you want to calculate"></i>
                                     </span>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <label for="term" class="fw-bold">Year/s</label>
+                                <label for="term" class="fw-bold">Year/s <span class="text-danger fw-bold">*</span></label>
                                 <select name="term" id="term" class="form-control">
                                     <option value="" disabled selected>0</option>
                                     <option value="1">1</option>
