@@ -57,6 +57,18 @@ class MemberController extends Controller
             return $totalInterest + $totalPrincipal;
         });
 
+        //get remaining months[term] for each loan
+        $loans->each(function ($loan) {
+            $termYears = $loan->term_years;
+            $totalMonths = $termYears * 12;
+            // count all payments for this loan
+            $paymentsMade = Payment::where('loan_id', $loan->id)->count();
+            // Calculate remaining months (ensure it's at least zero)
+            $remainingMonths= max(0, $totalMonths - $paymentsMade);
+            // Assign the calculated value to the loan
+            $loan->remainingMonths = $remainingMonths;
+        });
+
         $inActiveLoan = CoBorrower::with(
             'member.units.campuses',
             'loan.member.units.campuses',
