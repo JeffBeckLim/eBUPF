@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('amort_principal', 20, 2);
             $table->decimal('amort_interest', 20, 2);
 
-            $table->date('amort_start', 20, 2);
-            $table->decimal('amort_end', 20, 2);
+            $table->date('amort_start');
+            $table->date('amort_end');
         });
     }
 

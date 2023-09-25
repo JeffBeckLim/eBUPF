@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAmortizationController;
 use App\Models\User;
 use App\Models\Member;
 use Illuminate\Support\Facades\Auth;
@@ -98,6 +99,10 @@ use App\Http\Controllers\TransactionController;
 
     // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
     Route::get('/admin/loan-applications', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
+
+    Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
+
+    Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
 
     
     // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
