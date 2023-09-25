@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\MembershipApplication;
 use App\Models\BeneficiaryRelationship;
 use Illuminate\Support\Facades\Validator;
@@ -28,17 +29,34 @@ class MemberController extends Controller
         $user = Auth::user();
         $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
 
-        //If no loans or all loans have been paid, set principal amount to 0.00
-        if ($loans->isEmpty() || $loans->every(fn($loan) => $loan->principal_amount == 0.00)) {
-            $principalAmount = 0.00;
-        } else {
-            $principalAmount = $loans->sum('principal_amount');
-        }
+        //get all mpl and hsl loans
+        $mplLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 1)->where('is_active', 1)->get();
+        $hslLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 2)->where('is_active', 1)->get();
 
-        $mplLoans = $loans->where('loan_type_id', 1)->first();
-        $hslLoans = $loans->where('loan_type_id', 2)->first();
+        //get all payments for mpl and hsl loans, grouped by loan_id
+        $mplPayments = Payment::where('member_id', $user->member->id)
+        ->whereIn('loan_id', $mplLoans->pluck('id'))
+        ->get()
+        ->groupBy('loan_id');
 
-        //get pending loan -> accepted by the co-borrower and inactive loan
+        $hslPayments = Payment::where('member_id', $user->member->id)
+        ->whereIn('loan_id', $hslLoans->pluck('id'))
+        ->get()
+        ->groupBy('loan_id');
+
+        //get total payments for mpl and hsl loans, by grouping the payments by loan_id and summing the interest and principal
+        $totalPaymentsMPL = $mplPayments->map(function ($payments) {
+            $totalInterest = $payments->sum('interest');
+            $totalPrincipal = $payments->sum('principal');
+            return $totalInterest + $totalPrincipal;
+        });
+
+        $totalPaymentsHSL = $hslPayments->map(function ($payments) {
+            $totalInterest = $payments->sum('interest');
+            $totalPrincipal = $payments->sum('principal');
+            return $totalInterest + $totalPrincipal;
+        });
+
         $inActiveLoan = CoBorrower::with(
             'member.units.campuses',
             'loan.member.units.campuses',
@@ -66,11 +84,9 @@ class MemberController extends Controller
         $unsortedTransactions = $transactionLoans->concat($transactionPayments);
         //sort transactions by date
         $transactions = $unsortedTransactions->sortByDesc('created_at');
-        //check if there are transactions
 
 
         return view('member-views.member-dashboard', [
-            'principalAmount' => $principalAmount,
             'mplLoans' => $mplLoans,
             'hslLoans' => $hslLoans,
             'loans' => $loans,
@@ -78,6 +94,8 @@ class MemberController extends Controller
             'transactions' => $transactions,
             'transactionPayments' => $transactionPayments,
             'transactionLoans' => $transactionLoans,
+            'totalPaymentMPL' => $totalPaymentsMPL,
+            'totalPaymentHSL' => $totalPaymentsHSL,
         ]);
     }
 
