@@ -52,7 +52,7 @@ class Loan extends Model
     // has one amortization
      public function amortization()
      {
-         return $this->hasOne(Amortization::class, 'amortization_id', 'id');
+         return $this->hasOne(Amortization::class, 'id', 'amortization_id');
      } 
 
     //  has one adjustment table
