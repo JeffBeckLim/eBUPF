@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use finfo;
 use App\Models\Loan;
 use App\Models\CoBorrower;
+use App\Models\Amortization;
+use App\Models\LoanCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
-use App\Models\LoanCategory;
 
 class AdminLoanApplicationController extends Controller
 {
@@ -27,6 +28,34 @@ class AdminLoanApplicationController extends Controller
         $loan->term_years = $request->term_years;
         $loan->save();
 
+        if($loan->amortization_id == null && $request->interest != null){
+            $amort_principal = $request->principal_amount/($loan->term_years * 12);
+            $amort_interest = $request->interest/($loan->term_years * 12);
+            $amortization = Amortization::create([
+                'amort_principal' => $amort_principal, 
+                'amort_interest' => $amort_interest, 
+                // 'amort_start' => $request->amort_start, 
+                // 'amort_end' => $request->amort_end, 
+            ]);
+
+            $loan->amortization_id = $amortization->id;
+            $loan->save();
+
+            return back()->with('success', 'Loan Updated and Amortization Added!');
+        }
+        elseif($loan->amortization_id != null && $request->interest != null){
+            // $amortization = DB::table('amortizations')->where('id', $loan->amortization_id)->get();
+            $amortization = Amortization::where('id', $loan->amortization_id)->first();
+            $amort_principal = $request->principal_amount/($loan->term_years * 12);
+            $amort_interest = $request->interest/($loan->term_years * 12);
+
+
+            $amortization->amort_principal = $amort_principal;
+            $amortization->amort_interest = $amort_interest;
+            $amortization->save();
+
+            return back()->with('success', 'Loan and Amortization Updated!');
+        }
         return back()->with('success', 'Loan Updated!');
     }
 

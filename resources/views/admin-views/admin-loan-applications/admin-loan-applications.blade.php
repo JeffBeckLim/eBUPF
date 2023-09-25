@@ -117,7 +117,8 @@
                             <th>Term</th>
                             <th class="border-end">...</th>
 
-                            <th>Gross Loan</th>
+                            <th class="border-end">Gross Loan</th>
+
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
                             <th>Interest Rebate/Refund</th>
@@ -203,7 +204,7 @@
                                 </td>
                                 
                                 {{-- gross loan -- principal amount lang to --}}
-                                <td>
+                                <td class="border-end">
                                     {{$loan->principal_amount}}
                                 </td>
                                 {{-- MRI --}}
@@ -231,7 +232,11 @@
                                     @endif
                                 </td>
                                 {{-- monthly --}}
-                                <td></td>
+                                <td>
+                                    @if ($loan->amortization != null)
+                                        {{$loan->amortization->amort_principal + $loan->amortization->amort_interest}}
+                                    @endif
+                                </td>
                                 {{-- start --}}
                                 <td>
                                     @if ($loan->amortization != null)
@@ -252,11 +257,12 @@
                                     </h6>
                                 </td>
                                 {{-- check --}}
-                                <td>Adjusted Net Pay.</td>s
+                                <td>Adjusted Net Pay.</td>
                                 <td>Check no.</td>
                                 <td>Date</td>
                                 <td>Remarks</td>
                             </tr>
+                            
                             @include('admin-views.admin-loan-applications.modal-amortization')
                             @include('admin-views.admin-loan-applications.modal-edit-loan')
 

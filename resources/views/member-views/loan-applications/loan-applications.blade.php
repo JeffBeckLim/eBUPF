@@ -83,7 +83,7 @@
                                         <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>
                                     </div>
                                     <div class="col-2 text-center">
-                                        <p class="text16-design">{{$loan->loan->created_at}}</p>
+                                        <p class="text16-design">{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</p>
                                     </div>
 
 
