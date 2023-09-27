@@ -21,7 +21,7 @@
                 <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected fade-in  rounded-4':' '}}  ">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img class="icon" src="{{ asset('storage/' . Auth::user()->member->profile_picture)}}" alt="icon">
+                            <img class="icon" src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="icon">
                         </div>
                         <div class="col d-flex align-items-center text-secondary">
                             <span class="fw-bold fs-7">{{ Auth::user()->member->firstname }} {{ Auth::user()->member->lastname }}</span>
