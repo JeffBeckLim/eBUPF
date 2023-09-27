@@ -4,7 +4,18 @@
 
 <div class="container-fluid mt-2">
     <div class="adminbox m-4">
-
+        @if (session('date_error'))
+            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('date_error')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if (session('dateMatchError'))
+            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('dateMatchError')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         @if (session('amort_success'))
             <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
                 <p style="font-size: 12px" class="m-0">{{session('amort_success')}}</p>
@@ -35,6 +46,24 @@
                 <p style="font-size: 12px" class="m-0">{{$message}}</p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
+        @enderror
+        @error('term_years')
+        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+            <p style="font-size: 12px" class="m-0">{{$message}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('amort_principal')
+        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+            <p style="font-size: 12px" class="m-0">{{$message}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @enderror
+        @error('amort_interest')
+        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+            <p style="font-size: 12px" class="m-0">{{$message}}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @enderror
             
 
@@ -153,10 +182,28 @@
                                 </td>
 
                                 {{-- loan Type --}}
-                                <td>
-                                    @if($loan->LoanCategoy != null)
-                                        {{$loan->LoanCategoy->loan_category_name}}    
+                                @php $color = '' @endphp
+                                @if ($loan->loanCategory)
+                                        @if ($loan->loanCategory->loan_category_name == 'New')
+                                            @php $color = '#ffff60;'@endphp
+                                        @elseif ($loan->loanCategory->loan_category_name == 'Renewal')
+                                            @php $color = '#26de8c;' @endphp
+                                        @elseif ($loan->loanCategory->loan_category_name == 'Additional')
+                                            @php $color = '#ce6bbf;'@endphp
+                                        @endif 
                                     @endif
+                                
+                                <td style="background-color: {{$color}} font-size: 10px;" class="fw-bold">
+                                    @if ($loan->loanCategory)
+                                        @if ($loan->loanCategory->loan_category_name == 'New')
+                                            {{$loan->loanCategory->loan_category_name}}
+                                        @elseif ($loan->loanCategory->loan_category_name == 'Renewal')
+                                            {{$loan->loanCategory->loan_category_name}}
+                                        @elseif ($loan->loanCategory->loan_category_name == 'Additional')
+                                            {{$loan->loanCategory->loan_category_name}}
+                                        @endif 
+                                    @endif
+                                
                                 </td>
 
                                 {{-- name --}}
@@ -240,13 +287,17 @@
                                 {{-- start --}}
                                 <td>
                                     @if ($loan->amortization != null)
-                                        {{$loan->amortization->amort_start}}
+                                        @if ($loan->amortization->amort_start != null)
+                                            {{date("F j, Y", strtotime($loan->amortization->amort_start))}} 
+                                        @endif
                                     @endif
                                 </td>
                                 {{-- end --}}
                                 <td>
                                     @if ($loan->amortization != null)
-                                        {{$loan->amortization->amort_end}}
+                                        @if ($loan->amortization->amort_end != null)
+                                            {{date("F j, Y", strtotime($loan->amortization->amort_end))}} 
+                                        @endif
                                     @endif
                                 </td>
                                 <td class="border-end">
