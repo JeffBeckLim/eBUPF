@@ -33,7 +33,7 @@
             <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" width="100%" style="height: 190px;">
 
             <div class="profile-tag-details">
-                <img src="{{ asset('storage/' . $member->profile_picture) }}" alt="profile picture" class="profile-picture" width="100" height="120">
+                <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="profile-picture" width="100" height="120">
                 <p class="profile-name"><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}&nbsp;</span><a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a></p>
                 <p class="profile-position"><i class="bi bi-person-fill"></i> &nbsp;{{ ucfirst($member->position) }}</p>
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>

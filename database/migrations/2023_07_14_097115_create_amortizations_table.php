@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->date('amort_start')->nullable();
             $table->date('amort_end')->nullable();
+            
         });
     }
 

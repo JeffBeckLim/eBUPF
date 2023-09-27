@@ -19,6 +19,17 @@
             @endif
             {{-- MEMBERSHIP CARD --}}
 
+            <div class="row">
+                <div class="col-12 border border-danger p-3">
+                    <h5 class="text-center text-danger">TEMPORARY DIV - REMOVE AFTER DEVELOPMENT</h5> 
+                    <h6>LOGIN TO DEVELOPER ACCOUNT</h6>
+                    <h6>email: developer@ebupf.com</h6>
+                    <h6>password: qwerty123</h6>
+                    <h5 class="text-center text-danger">TEMPORARY DIV - REMOVE AFTER DEVELOPMENT</h5>
+                </div>
+            </div>
+
+
             <div class=" col-lg-6 d-flex justify-content-start align-items-center pt-2" style=" margin-top: 15px;">
                 <div id="bluebox-content" style="height: 100%; width: 550px; background-color: #0082BA; border-radius: 10px;position: relative;">
                     <h4 class="text5-design" style="font-size: clamp(1.25rem, 1.0357rem + 0.7619vw, 1.75rem);">Bicol University</h4>

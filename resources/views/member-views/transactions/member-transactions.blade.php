@@ -116,7 +116,7 @@
                             </div>
                         @else
                             <div class="d-flex justify-content-center align-content-center">
-                                <img src="icons/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                <img src="{{asset('icons/no-transaction.svg')}}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                             </div>
                             <p class="text-center">No transaction</p>
                         @endif
