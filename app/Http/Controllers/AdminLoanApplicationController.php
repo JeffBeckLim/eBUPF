@@ -16,16 +16,19 @@ use App\Models\LoanApplicationStatus;
 class AdminLoanApplicationController extends Controller
 {
     public function updateLoan(Request $request , $id){
+
         $loan=Loan::findOrFail($id);
         $request->validate([
-            'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
+            'principal_amount'=> 'required|numeric|min:10000|max:200000',
             'interest'=> 'nullable|numeric|min:10000|max:200000',
-            'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
+            'term_years'=> 'required|numeric|min:1|max:5',
+            'category'=> 'nullable|numeric',
         ]);
 
         $loan->principal_amount = $request->principal_amount;
         $loan->interest = $request->interest;
         $loan->term_years = $request->term_years;
+        $loan->loan_category_id = $request->category;
         $loan->save();
 
         if($loan->amortization_id == null && $request->interest != null){
@@ -73,8 +76,12 @@ class AdminLoanApplicationController extends Controller
             if(in_array(3,$status_array) && !in_array(6,$status_array)){
                 array_push($loans, $raw_loan);
             }
-        }
-        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans'));
+        }   
+
+        $loan_categories = LoanCategory::all();
+
+
+        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories'));
     }
 
 
