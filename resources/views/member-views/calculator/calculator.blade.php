@@ -10,16 +10,16 @@
         <div style="margin-left: 100px; margin-top: -15px; font-size: 0.9rem;">
            proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit
         </div>
-
         <div class="row gap-md-5 mx-4 mt-3">
             <div class="col-md-4 bg-white rounded-3 border bg-white px-2 pt-2 pb-2 mb-2 shadow-sm">
-                <form action="#" method="get">
+                <form action="{{route('calculate')}}" method="post">
+                    @csrf
                     <div style="padding: 10px 10px 0 10px;">
-                        <span class="fw-bold fs-6">Loan Categoryspan </span><span class="text-danger fw-bold">*</span> <br>
+                        <span class="fw-bold fs-6">Loan Category </span><span class="text-danger fw-bold">*</span> <br>
                         <div style="padding: 5px 0 0 13px;">
                             <div class="row pt-1">
                                 <div class="col-lg-6">
-                                    <input type="radio" id="mpl" name="loan_category" value="mpl">
+                                    <input type="radio" id="mpl" name="loan_category" value="mpl" required>
                                     <label for="mpl" class="fs-7">Multi-Purpose</label>
                                 </div>
                                 <div class="col-lg-5">
@@ -32,7 +32,7 @@
                             <div class="col-md-8">
                                 <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
                                 <div class="d-flex align-items-center">
-                                    <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="1" max="200000">
+                                    <input type="number"  name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="1" max="200000" required>
                                     <span style="margin-left: 5px;">
                                         <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The principal amount you want to calculate"></i>
                                     </span>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="term" class="fw-bold">Year/s <span class="text-danger fw-bold">*</span></label>
-                                <select name="term" id="term" class="form-control">
+                                <select name="term" id="term" class="form-control" required>
                                     <option value="" disabled selected>0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -73,7 +73,7 @@
                                     Monthly principal
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{ $monthlyPrincipalAmort ?? '0.00' }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -81,7 +81,7 @@
                                     Monthly Interest
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{ $monthlyInterestAmort ?? '0.00'}}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -89,7 +89,7 @@
                                     Monthly Payable
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{ number_format($monthlyAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -97,7 +97,7 @@
                                     Total Interest
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{ number_format($totalInterest ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -105,7 +105,7 @@
                                     Total Amount
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{ number_format($totalAmount ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -113,12 +113,12 @@
                                     Total Months
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    0.00
+                                    {{$totalMonths ?? '0'}}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-5">
-                            Graph
+                            <canvas id="myPieChart" style="max-width: 300px; height: 300px; margin: 0 auto;"></canvas>
                         </div>
                         <div class="pt-2">
                             <a href="" class="btn d-flex justify-content-center align-items-center fs-7 text-white"><span style="border-radius: 10px;background: #0092D1; padding: 8px 15px;">View Amortization Table</span></a>
@@ -151,5 +151,43 @@
             </div>
         </div>
     </div>
+    <script>
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Loan Amount', 'Interest'],
+                datasets: [{
+                    data: [{{ $amount ?? "0"}}, {{ $totalInterest ?? "0" }}],
+                    backgroundColor: ['#FF6F19', '#36A2EB'],
+                }]
+            },
+            options: {
+                plugins: {
+                    datalabels: {
+                        color: '#fff',
+                        formatter: function(value, context) {
+                            var dataset = context.chart.data.datasets[0];
+                            var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+                                return previousValue + currentValue;
+                            });
+                            var percentage = Math.round((value / total) * 100);
+                            return percentage + '%';
+                        },
+                        position: 'right',
+                    },
+                },
+                legend: {
+                    display: false,
+                },
+            },
+        });
+    </script>
+
+
+
+
+
+
 
 @endsection
