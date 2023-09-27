@@ -4,7 +4,7 @@
 
 <main style="margin: 40px;">
 
-    <div style="background-color: #f5f5f5; border-radius: 10px; padding-bottom: 10px;">
+    <div class="bg-white rounded">
 
         <div class="profile-note" style="text-align: justify;">
             Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes. <br>We value the security of your data and want to ensure the accuracy of the information associated with your account.
@@ -43,7 +43,7 @@
         align-items: center;
         justify-content: center;
         height: 100%;">
-            <div class="col-xl-4" style="height: auto; background-color: white; border-radius: 10px;">
+            <div class="col-xl-4 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                 <div style="border-bottom: 1px solid #E8E8E8; display: flex;">
                     <img width="30" height="30" src="https://img.icons8.com/ios-filled/50/manager.png" alt="employee" style="margin: 15px 10px; color: #393939;"/>
                     <p class="mt-3 fw-bold fs-6" style="color: #393939">Employment Information</p>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-7" style="height: auto; background-color: white; border-radius: 10px;">
+            <div class="col-xl-7 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                 <div style="border-bottom: 1px solid #E8E8E8; display: flex;">
                     <i class="bi bi-person-fill-exclamation" style="margin: 8px 10px; color: #393939; font-size: 30px;"></i>
                     <p class="mt-3 fw-bold fs-6" style="color: #393939">Personal Information</p>

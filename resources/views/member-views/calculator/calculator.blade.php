@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div style="border-radius: 20px; background: #F4F4F4; margin-top: 15px;">
+    <div class="bg-white rounded px-3 pt-2 pb-4 m-3 shadow-sm">
         <div class="d-flex align-items-center p-3 gap-3">
             <img src="{{asset('icons/calculator.svg')}}" alt="calculator logo" width="30px" height="50px">
             <span style="font-size: 20px; font-weight: bold; color: #000834;">Loan Calculator</span>
@@ -12,9 +12,9 @@
         </div>
 
         <div class="row gap-md-5 mx-4 mt-3">
-            <div class="col-md-4 bg-white rounded-3">
+            <div class="col-md-4 bg-white rounded-3 border bg-white px-2 pt-2 pb-2 mb-2 shadow-sm">
                 <form action="#" method="get">
-                    <div class="p-4">
+                    <div style="padding: 10px 10px 0 10px;">
                         <span class="fw-bold fs-6">Loan Categoryspan </span><span class="text-danger fw-bold">*</span> <br>
                         <div style="padding: 5px 0 0 13px;">
                             <div class="row pt-1">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="row mt-2 pt-2">
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
                                 <div class="d-flex align-items-center">
                                     <input type="number" name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="1" max="200000">
@@ -38,7 +38,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="term" class="fw-bold">Year/s <span class="text-danger fw-bold">*</span></label>
                                 <select name="term" id="term" class="form-control">
                                     <option value="" disabled selected>0</option>
@@ -61,8 +61,8 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-7 bg-white rounded-3">
-                <div class="p-4">
+            <div class="col-md-7 bg-white rounded-3 border bg-white px-2 pt-2 pb-2 mb-2 shadow-sm">
+                <div style="padding: 10px 10px 0 10px;">
                     <div class="fw-bold fs-6">
                         Result
                     </div>
@@ -120,7 +120,7 @@
                         <div class="col-md-5">
                             Graph
                         </div>
-                        <div>
+                        <div class="pt-2">
                             <a href="" class="btn d-flex justify-content-center align-items-center fs-7 text-white"><span style="border-radius: 10px;background: #0092D1; padding: 8px 15px;">View Amortization Table</span></a>
                         </div>
                     </div>
