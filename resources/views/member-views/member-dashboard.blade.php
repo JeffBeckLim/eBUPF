@@ -12,8 +12,29 @@
                                     <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid;">
                                         <div style="position: relative;" class="mb-2">
                                             <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
-                                        {{--  <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">MPL ₱<span class="fs-6 fw-bold">{{ $mplLoans->principal_amount - $totalPaymentMPL}}</span> <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ $hslLoans->principal_amount - $totalPaymentMPL}}</span>
-                                            </p> --}}
+                                            <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">
+                                                <?php
+                                                    $mplTotal = 0;
+                                                    $hslTotal = 0;
+                                                    foreach ($loans as $loan) {
+                                                        if ($loan->loan_type_id == 1) {
+                                                            $mplTotal += $loan->principal_amount;
+                                                        } elseif ($loan->loan_type_id == 2) {
+                                                            $hslTotal += $loan->principal_amount;
+                                                        }
+                                                    }
+                                                    foreach ($loans as $loan) {
+                                                        if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
+                                                            $mplTotal -= $totalPaymentMPL[$loan->id];
+                                                        }
+                                                        if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
+                                                            $hslTotal -= $totalPaymentHSL[$loan->id];
+                                                        }
+                                                    }
+                                                ?>
+                                                MPL ₱<span class="fs-6 fw-bold">{{ $mplTotal}}</span>
+                                                <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ $hslTotal}}</span>
+                                            </p>
                                             <p class="text-white" style="position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); font-size: 10px;">Total Outstanding Balance</p>
                                         </div>
                                         <div style="min-height: 270px; max-height: 300px; overflow-y: auto;">
@@ -106,7 +127,7 @@
                                                     @endif
                                                 @endforeach
                                             @endif
-                                    </div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="col-12 mt-3">
