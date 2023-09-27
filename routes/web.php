@@ -53,9 +53,11 @@ use App\Http\Controllers\TransactionController;
 
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
+    Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
 
 
-   
+
+
 //TESTING ===================================================================================================
 
 
@@ -104,7 +106,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
 
-    
+
     // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
 
 
@@ -122,7 +124,7 @@ use App\Http\Controllers\TransactionController;
 
     // update principal amount by admin
     Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
-    
+
 
 
     // Show Admin Dashboard
