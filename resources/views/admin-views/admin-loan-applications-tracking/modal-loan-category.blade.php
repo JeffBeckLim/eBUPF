@@ -14,9 +14,10 @@
                     None
                 </label>
               </div>
+            
             @foreach ($loan_categories as $category)
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="category" id="is_active1" value="{{$category->id}}"{{$loan->loan->loan_category_id == $category->id ? 'checked' : ''}}>
+                <input class="form-check-input" type="radio" name="category" id="is_active1" value="{{$category->id}}"{{$loan->loan_category_id == $category->id ? 'checked' : ''}}>
                 <label class="form-check-label" for="is_active1" >
                   {{$category->loan_category_name}}
                 </label>

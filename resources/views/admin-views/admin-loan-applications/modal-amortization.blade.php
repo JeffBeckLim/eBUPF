@@ -9,21 +9,21 @@
         <form action="{{route('create.amortization', $loan->id)}}" method="POST">
             @csrf
             <label for="amort_principal">Principal Amount</label>
-            <input class="form-control" type="number" name="amort_principal" id="amort_principal" value="">
+            <input class="form-control" type="number" name="amort_principal" id="amort_principal" value="{{$loan->amortization != null ? $loan->amortization->amort_principal : ''}}">
 
             <label for="amort_interest">Interest</label>
-            <input class="form-control" type="number" name="amort_interest" id="amort_interest" value="">
+            <input class="form-control" type="number" name="amort_interest" id="amort_interest" value="{{$loan->amortization != null ? $loan->amortization->amort_interest : ''}}">
             <div class="row">
                 <div class="col-12 mt-3">
                     Amortization Period
                 </div>
                 <div class="col-6">
                     <label for="amort_start">Start</label>
-                    <input class="form-control" type="date" name="amort_start" id="amort_start" value="">
+                    <input class="form-control" type="date" name="amort_start" id="amort_start" value="{{$loan->amortization != null ? $loan->amortization->amort_start : ''}}">
                 </div>
                 <div class="col-6">
                     <label for="amort_end">End</label>
-                    <input class="form-control" type="date" name="amort_end" id="amort_end" value="">
+                    <input class="form-control" type="date" name="amort_end" id="amort_end" value="{{$loan->amortization != null ? $loan->amortization->amort_end : ''}}">
                 </div>
             </div>
              
