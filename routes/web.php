@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdjustmentsController;
 use App\Http\Controllers\AdminAmortizationController;
 use App\Models\User;
 use App\Models\Member;
@@ -125,7 +126,8 @@ use App\Http\Controllers\TransactionController;
     // update principal amount by admin
     Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
 
-
+    // create / update adjustments
+    Route::post('admin/loan-application/adjustments/{loan_id}', [AdjustmentsController::class, 'updateLoanAdjustments'])->name('update.adjustments');
 
     // Show Admin Dashboard
     Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');

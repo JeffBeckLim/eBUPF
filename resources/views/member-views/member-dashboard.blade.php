@@ -219,7 +219,11 @@
                                                             <p class="m-0 ps-2 mt-2" style="font-size:small">Co-Borrower</p>
                                                             <div class="row g-0">
                                                                 <div class="col  mt-1 d-flex">
-                                                                    <img class="rounded-circle mx-2" src="{{asset('storage/'.$inActiveLoan->member->profile_picture)}}" alt="Default Picture" style="height: 2.5rem; width: 2.5rem;">
+                                                                    <img class="rounded-circle mx-2" src="{{
+                                                                        
+                                                                        $inActiveLoan->member->profile_picture != null ? 
+                                                                        asset('storage/'.$inActiveLoan->member->profile_picture) : asset('assets/no_profile_picture.jpg')
+                                                                        }}" alt="Default Picture" style="height: 2.5rem; width: 2.5rem;">
                                                                     <span class="fw-bold fs-7 my-auto">
                                                                         {{$inActiveLoan->member->firstname}}
                                                                         {{$inActiveLoan->member->lastname}}

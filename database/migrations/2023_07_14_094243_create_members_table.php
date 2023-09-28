@@ -54,6 +54,8 @@ return new class extends Migration
             $table->integer('agree_to_certify')->nullable();
             $table->integer('agree_to_authorize')->nullable();
 
+            $table->integer('additional_loan')->nullable();
+
             
         });
     }

@@ -41,7 +41,7 @@
                                     <th>Unit</th>
                                     <th>Address</th>
                                     <th>Contact</th>
-                                    <th></th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,8 +66,24 @@
                                     <td>
                                         {{$user->member->contact_num}}
                                     </td>
-                                    <td><a href="#" class="fs-6 text-dark"><i class="bi bi-three-dots"></i></a></td>
-                                </tr>    
+                                    <td class="text-center">
+                                        <div class="dropdown">
+                                            <button class="btn " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="bi bi-three-dots"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                              <li>
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#additionalLoanModal{{$user->member->id}}" class="dropdown-item" href="#">
+                                                    Additional Loan
+                                                    <p style="font-size: x-small">Allow or dont allow for additional loan</p>
+                                                </a>
+                                               </li>
+                                            </ul>
+                                          </div>
+
+                                    </td>
+                                </tr>
+                                @include('admin-views.admin-members.modal-additional-loan')    
                                 @endforeach
                                 
                                 @else
