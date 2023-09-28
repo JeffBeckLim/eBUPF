@@ -129,7 +129,6 @@
                 font-size: 12px !important;
             }
         </style>
-        
         <div class="table-responsive">
                 <table class="table admin-table table-striped border mt-2" id="myTable">
                     <thead style="border-bottom: 2px solid black">
@@ -150,9 +149,14 @@
 
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
-                            <th>Interest Rebate/Refund</th>
+                            <th>
+                                <p class="text-secondary" style="font-size: 10px">Adjustments</p>
+                                Interest Rebate/Refund
+                            </th>
                             <th>Penalty</th>
                             <th>Net Proceeds</th>
+                            <th class="border-end">...</th>
+
 
                             <th class="border-start">Prin</th>
                             <th>Int</th>
@@ -193,7 +197,7 @@
                                         @endif 
                                     @endif
                                 
-                                <td style="background-color: {{$color}} font-size: 10px;" class="fw-bold">
+                                <td style="background-color: {{$color}} font-size: 10px;" class="fw-bold text-center">
                                     @if ($loan->loanCategory)
                                         @if ($loan->loanCategory->loan_category_name == 'New')
                                             {{$loan->loanCategory->loan_category_name}}
@@ -264,6 +268,14 @@
                                 <td></td>
                                 {{-- Net Proceeds --}}
                                 <td></td>
+                                {{-- ... --}}
+                                <td>
+                                    <h6>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#adjustmentsModal{{$loan->id}}"  href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </h6>
+                                </td>
                                 
                                 {{-- AMORTIZATION --------------- --}}
                                 {{-- prin --}}
@@ -313,9 +325,10 @@
                                 <td>Date</td>
                                 <td>Remarks</td>
                             </tr>
-                            
+                            @include('admin-views.admin-loan-applications.modal-adjustments')
                             @include('admin-views.admin-loan-applications.modal-amortization')
                             @include('admin-views.admin-loan-applications.modal-edit-loan')
+                            
 
                         @endforeach
                        

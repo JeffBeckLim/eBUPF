@@ -17,13 +17,13 @@ class AdminController extends Controller
 
     public function allUsers(){
         $users = User::with('member.membershipApplication')->get();
-        return view('admin-views.admin-all-accounts', compact('users'));
+        return view('admin-views.admin-members.admin-all-accounts', compact('users'));
     }
 
 
     public function showMembers(){
         $memberUsers = User::with('member.units.campuses')->where('user_type', 'member')->get();
-        return view('admin-views.admin-members', compact('memberUsers'));
+        return view('admin-views.admin-members.admin-members', compact('memberUsers'));
     }
 
 

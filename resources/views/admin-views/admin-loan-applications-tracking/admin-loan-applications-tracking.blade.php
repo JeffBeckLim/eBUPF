@@ -337,6 +337,7 @@
                                   </ul>
                             </td>
                         </tr>
+                        
                         @include('admin-views.admin-loan-applications-tracking.modal-loan-category')
                         @include('admin-views.admin-loan-applications-tracking.modal-add-status')
                         @include('admin-views.admin-loan-applications-tracking.modal-change-state')

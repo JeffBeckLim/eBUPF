@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->decimal('mri', 20, 2);
-            $table->decimal('interest_rebate', 20, 2);
-            $table->decimal('housing_service_fee', 20, 2);
+            $table->decimal('mri', 20, 2)->nullable() ; 
+            $table->decimal('interest_rebate', 20, 2)->nullable() ;
+            $table->decimal('previous_loan_balance', 20, 2)->nullable() ;
+            $table->decimal('housing_service_fee', 20, 2)->nullable() ;
             
         });
     }
