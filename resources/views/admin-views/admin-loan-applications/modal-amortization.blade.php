@@ -6,6 +6,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+        <div class="border bg-light rounded p-3">
+            Term of the loan: {{$loan->term_years}} years.
+        </div>
         <form action="{{route('create.amortization', $loan->id)}}" method="POST">
             @csrf
             <label for="amort_principal">Principal Amount</label>
@@ -26,8 +29,12 @@
                     <input class="form-control" type="date" name="amort_end" id="amort_end" value="{{$loan->amortization != null ? $loan->amortization->amort_end : ''}}">
                 </div>
             </div>
-             
+            <span id="monthsResult">
+            </span>
+            <span id="yearsResult">
         </div>
+        
+        </span>
             <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn bu-orange text-light">Save changes</button>
