@@ -9,15 +9,18 @@
 
         <form action="{{route('update.adjustments', $loan->id)}}" method="POST">
             @csrf
-         
-            <label for="MRI">MRI</label>
-            <input class="form-control" type="number" name="mri" id="mri" value="">
+
+            <label for="interest_first_yr">Interest (1st YR)</label>
+            <input class="form-control" type="number" name="interest_first_yr" id="interest_first_yr" value="{{ $loan->adjustment != null ? $loan->adjustment->interest_first_yr : '' }}">
+
+            <label for="mri">MRI</label>
+            <input class="form-control" type="number" name="mri" id="mri" value="{{ $loan->adjustment != null ? $loan->adjustment->mri : '' }}">
 
             <label for="previous_loan_balance">Previous Loan Balance / Refund</label>
-            <input class="form-control" type="number" name="previous_loan_balance" id="previous_loan_balance" value="">
+            <input class="form-control" type="number" name="previous_loan_balance" id="previous_loan_balance" value="{{ $loan->adjustment != null ? $loan->adjustment->previous_loan_balance : '' }}">
             
             <label for="interest_rebate">Interest Rebate / Refund</label>
-            <input class="form-control" type="number" name="interest_rebate" id="interest_rebate" value="">
+            <input class="form-control" type="number" name="interest_rebate" id="interest_rebate" value="{{ $loan->adjustment != null ? $loan->adjustment->interest_rebate : '' }}">
             
             
             {{-- placeholder="current term: {{$loan->term_years}} year(s)" --}}

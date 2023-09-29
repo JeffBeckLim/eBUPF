@@ -72,12 +72,12 @@ class AdminAmortizationController extends Controller
 
         if($dateError == 1 && $dateMatchError == 1){
             return back()->with('amort_success', 'Amortization Added!')
-            ->with('date_error', 'ERROR: Amortization period, start date is greater than the end date')
-            ->with('dateMatchError', 'ERROR: The amort period does not match the Loan Term');    
+            ->with('date_error', 'Amortization period, start date is greater than the end date')
+            ->with('dateMatchError', 'The amort period does not match the Loan Term');    
         }elseif($dateError == 1){
-            return back()->with('amort_success', 'Amortization Added!')->with('date_error', 'WARNING: End date is less than the start date');    
+            return back()->with('amort_success', 'Amortization Added!')->with('date_error', 'End date is less than the start date');    
         }elseif($dateMatchError == 1){
-            return back()->with('amort_success', 'Amortization Added!')->with('dateMatchError', 'WARNING: The amort. period does not match the Loan Term');
+            return back()->with('amort_success', 'Amortization Added!')->with('dateMatchError', 'The amort. period does not match the Loan Term');
         }
 
         return back()->with('amort_success', 'Amortization Updated!');

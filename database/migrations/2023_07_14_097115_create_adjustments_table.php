@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('mri', 20, 2)->nullable() ; 
             $table->decimal('interest_rebate', 20, 2)->nullable() ;
             $table->decimal('previous_loan_balance', 20, 2)->nullable() ;
+            $table->decimal('interest_first_yr', 20, 2)->nullable() ;
             $table->decimal('housing_service_fee', 20, 2)->nullable() ;
             
         });

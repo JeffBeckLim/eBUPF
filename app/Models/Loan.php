@@ -58,7 +58,7 @@ class Loan extends Model
     //  has one adjustment table
      public function adjustment()
      {
-        return $this->hasOne(Adjustment::class);
+        return $this->hasOne(Adjustment::class , 'id' , 'adjustment_id');
      }
 
     //  belongs to category of a loan

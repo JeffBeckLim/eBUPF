@@ -9,8 +9,16 @@ class Adjustment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'mri',
+        'interest_rebate',
+        'previous_loan_balance',
+        'interest_first_yr',
+        'housing_service_fee',
+    ];
+
     public function loan(){
-        return $this->belongsTo(Loan::class);
+        return $this->belongsTo(Loan::class, 'adjustment_id' , 'id');
     }
 
     // can have many logs
