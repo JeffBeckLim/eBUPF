@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MembershipApplication;
 use App\Models\User;
 use App\Models\Loan;
+use App\Models\Member;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 
@@ -63,5 +64,31 @@ class AdminController extends Controller
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }
 
-}
+    public function allowAdditional($id){
 
+        $member = Member::findOrFail($id);
+
+        if($member->additional_loan == null){
+            return back()->with('additional_error','This user is already legible to apply for additional loan');
+        }else{
+            $member->additional_loan = null;
+            $member->save();
+            return back()->with('additional_success','Member allowed to apply for additional loan');
+        }
+    }
+
+    public function notAllowAdditional($id){
+        
+        $member = Member::findOrFail($id);
+
+        if($member->additional_loan != null){
+            return back()->with('additional_error','This user is already not allowed to apply for additional loan');
+        }else{
+            $member->additional_loan = 1;
+            $member->save();
+            return back()->with('additional_success','Member is now not legible to apply for additional loan');
+        }
+    }
+
+
+} //LAST TAG
