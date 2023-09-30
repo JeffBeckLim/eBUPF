@@ -50,7 +50,7 @@ class MembersTableSeeder extends Seeder
             'user_type' => 'member',
         ]);
 
-        
+
         Member::create([
             'user_id' => $user1->id,
             'unit_id'=> '1', // naka comment out muna - - need pa seederss

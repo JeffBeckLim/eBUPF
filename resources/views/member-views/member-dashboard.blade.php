@@ -14,26 +14,30 @@
                                             <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
                                             <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">
                                                 <?php
-                                                    $mplTotal = 0;
-                                                    $hslTotal = 0;
+                                                    $mplTotalAmount = 0;
+                                                    $hslTotalAmount = 0;
+
                                                     foreach ($loans as $loan) {
                                                         if ($loan->loan_type_id == 1) {
-                                                            $mplTotal += $loan->principal_amount;
+                                                            $mplTotalAmount += $loan->principal_amount;
                                                         } elseif ($loan->loan_type_id == 2) {
-                                                            $hslTotal += $loan->principal_amount;
+                                                            $hslTotalAmount += $loan->principal_amount;
                                                         }
                                                     }
+                                                    $mplTotalBalance = $mplTotalAmount;
+                                                    $hslTotalBalance = $hslTotalAmount;
                                                     foreach ($loans as $loan) {
                                                         if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
-                                                            $mplTotal -= $totalPaymentMPL[$loan->id];
+                                                            $mplTotalBalance -= $totalPaymentMPL[$loan->id];
                                                         }
                                                         if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
-                                                            $hslTotal -= $totalPaymentHSL[$loan->id];
+                                                            $hslTotalBalance -= $totalPaymentHSL[$loan->id];
                                                         }
                                                     }
                                                 ?>
-                                                MPL ₱<span class="fs-6 fw-bold">{{ $mplTotal}}</span>
-                                                <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ $hslTotal}}</span>
+                                                MPL ₱<span class="fs-6 fw-bold">{{ number_format($mplTotalBalance, 2) }}</span>
+                                                <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ number_format($hslTotalBalance, 2) }}</span>
+
                                             </p>
                                             <p class="text-white" style="position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); font-size: 10px;">Total Outstanding Balance</p>
                                         </div>
@@ -70,9 +74,9 @@
                                                                     <p class="text14-design"><span class="text12-design">Php </span>
                                                                      {{-- Check if theres a loan payment [isset/empty] --}}
                                                                      @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
-                                                                     {{ $loan->principal_amount - $totalPaymentMPL[$loan->id] }}
+                                                                     {{ number_format($loan->principal_amount - $totalPaymentMPL[$loan->id], 2) }}
                                                                  @else
-                                                                     {{ $loan->principal_amount }}
+                                                                     {{ number_format($loan->principal_amount, 2) }}
                                                                  @endif
                                                                     </p>
                                                                 </div>
@@ -108,9 +112,9 @@
                                                                 <p class="text14-design"><span class="text12-design">Php </span>
                                                                     {{-- Check if theres a loan payment [isset/empty] --}}
                                                                     @if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
-                                                                        {{ $loan->principal_amount - $totalPaymentHSL[$loan->id] }}
+                                                                        {{ number_format($loan->principal_amount - $totalPaymentHSL[$loan->id], 2) }}
                                                                     @else
-                                                                        {{ $loan->principal_amount }}
+                                                                        {{ number_format($loan->principal_amount, 2) }}
                                                                     @endif
                                                                 </p>
                                                             </div>
@@ -139,10 +143,11 @@
                                             </div>
                                             <div class="col-md-8 gap-2 d-flex justify-content-end">
                                                 <a href="/member/mpl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover"
-                                                   @if (!empty($inActiveLoan))
+                                                   {{-- disable the button if there is inactive loan, if the total balance is less than or equal to 50% of the principal amount and if the balance is not equal to 0 --}}
+                                                    @if (!empty($inActiveLoan) || ($mplTotalBalance >= (0.5 * $mplTotalAmount) && $mplTotalBalance != 0))
                                                        disabled
                                                        style="pointer-events: none; opacity: 0.6;"
-                                                   @endif
+                                                    @endif
                                                 >
                                                     <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="30px">
                                                     <div class="ps-2">
@@ -152,7 +157,7 @@
                                                 </a>
 
                                                 <a href="/member/hsl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover"
-                                                   @if (!empty($inActiveLoan))
+                                                   @if (!empty($inActiveLoan) || ($hslTotalBalance >= (0.5 * $hslTotalAmount) && $hslTotalBalance != 0))
                                                        disabled
                                                        style="pointer-events: none; opacity: 0.6;"
                                                    @endif
@@ -220,8 +225,8 @@
                                                             <div class="row g-0">
                                                                 <div class="col  mt-1 d-flex">
                                                                     <img class="rounded-circle mx-2" src="{{
-                                                                        
-                                                                        $inActiveLoan->member->profile_picture != null ? 
+
+                                                                        $inActiveLoan->member->profile_picture != null ?
                                                                         asset('storage/'.$inActiveLoan->member->profile_picture) : asset('assets/no_profile_picture.jpg')
                                                                         }}" alt="Default Picture" style="height: 2.5rem; width: 2.5rem;">
                                                                     <span class="fw-bold fs-7 my-auto">
