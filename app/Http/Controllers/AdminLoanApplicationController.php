@@ -116,9 +116,33 @@ class AdminLoanApplicationController extends Controller
 
     public function deleteLoanStatus($id){
         
-
+    
         $status = LoanApplicationStatus::findOrFail($id);
-        // $status->is_deleted = 1;
+        
+
+        $loan = Loan::findOrFail($status->loan_id)->with('loanApplicationStatus')->first();
+
+        $status_array = [];
+        foreach($loan->loanApplicationStatus as $item){
+            array_push($status_array, $item->loan_application_state_id);
+        }
+
+        if($status->loan_application_state_id ==  1 || $status->loan_application_state_id ==  2 && in_array(5 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete status 1 or 2, when "approved" status exists');    
+        }
+
+
+        if($status->loan_application_state_id ==  4 && in_array(5 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete "check" status, when "picked-up" status exists');    
+        }
+        
+        if($status->loan_application_state_id ==  3 && in_array(4 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" status exists');    
+        }
+        elseif($status->loan_application_state_id ==  3 && in_array(5 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" or "picked" status exists');
+        }
+
         $status->delete();
 
         return back()->with('deleted_status', 'Status deleted'); 

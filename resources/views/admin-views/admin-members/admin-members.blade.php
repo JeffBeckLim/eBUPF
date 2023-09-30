@@ -4,6 +4,21 @@
 <div class="container-fluid">
     <div class="row g-0">
         <div class="container-fluid">
+            
+            @if(session('additional_success'))
+                <div class="alert alert-success alert-dismissible fade show text-success" role="alert" style="font-size: small">
+                    {{session('additional_success')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('additional_error'))
+                <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert" style="font-size: small">
+                    {{session('additional_error')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+           
             <div class="adminbox m-2 mb-5">
                 <div class="d-flex">
                     <div class="d-flex membership-app-header1">
@@ -41,6 +56,7 @@
                                     <th>Unit</th>
                                     <th>Address</th>
                                     <th>Contact</th>
+                                    <th>Addtnl. Loan</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -67,6 +83,14 @@
                                         {{$user->member->contact_num}}
                                     </td>
                                     <td class="text-center">
+                                        @if($user->member->additional_loan == null)
+                                        <h5 style="color: #00D186"><i class="bi bi-check-circle-fill"></i></h5>
+                                        @elseif($user->member->additional_loan == null)
+
+                                        @endif
+                                        
+                                    </td>
+                                    <td class="text-center">
                                         <div class="dropdown">
                                             <button class="btn " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bi bi-three-dots"></i>
@@ -90,6 +114,7 @@
                                     <td>
                                         no member found.
                                     </td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
