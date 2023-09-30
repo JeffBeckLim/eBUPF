@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 class CalculatorController extends Controller
 {
     public function show(){
-
-        return view('member-views.calculator.calculator');
+        $totalMonths = 0;
+        return view('member-views.calculator.calculator', [
+            'totalMonths' => $totalMonths,
+        ]);
     }
 
     public function calculate(Request $request){
@@ -58,22 +60,29 @@ class CalculatorController extends Controller
 
         //monthly amortization
         $monthlyAmort = $totalInterestAndPrincipal / ($termYears * 12);
-        //make the monthlyAmort to 2 decimal places
-        $monthlyAmort = number_format((float)$monthlyAmort, 2, '.', '');
 
         //monthly principal amortization without interest
         $monthlyPrincipalAmort = $amount / ($termYears * 12);
-        $monthlyPrincipalAmort = number_format((float)$monthlyPrincipalAmort, 2, '.', '');
 
         //monthly principal Interest amortization
         $monthlyInterestAmort = $totalInterest / $termYears / 12;
-        $monthlyInterestAmort = number_format((float)$monthlyInterestAmort, 2, '.', '');
 
         //total months
         $totalMonths = $termYears * 12;
-        $percentageAmount = ($amount / ($amount + $totalInterest)) * 100;
-        $percentageInterest = ($totalInterest / ($amount + $totalInterest)) * 100;
 
+        //Amortization Table
+        $beginningBalance = [];
+        $endingBalance = [];
+
+        // Set the initial beginning balance to the loan amount
+        $beginningBalance[0] = $totalInterestAndPrincipal;
+        $endingBalance[0] = $beginningBalance[0] - ($monthlyInterestAmort + $monthlyPrincipalAmort);
+
+        // Calculate beginning and ending balances for each month
+        for ($i = 1; $i <= $totalMonths; $i++) {
+            $beginningBalance[$i] = $endingBalance[$i - 1];
+            $endingBalance[$i] = $beginningBalance[$i] - ($monthlyPrincipalAmort + $monthlyInterestAmort);
+        }
         return view('member-views.calculator.calculator')->with([
             'amount' => $amount,
             'yearlyPrincipalBalance' => $yearlyPrincipalBalance,
@@ -85,8 +94,8 @@ class CalculatorController extends Controller
             'monthlyInterestAmort' => $monthlyInterestAmort,
             'totalAmount'=> $totalInterestAndPrincipal,
             'totalMonths' => $totalMonths,
-            'percentageAmount' => $percentageAmount,
-            'percentageInterest' => $percentageInterest,
+            'beginningBalance' => $beginningBalance,
+            'endingBalance' => $endingBalance,
         ]);
     }
 }
