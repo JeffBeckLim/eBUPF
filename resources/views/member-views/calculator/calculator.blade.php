@@ -73,7 +73,7 @@
                                     Monthly principal
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    {{ $monthlyPrincipalAmort ?? '0.00' }}
+                                    {{ number_format($monthlyPrincipalAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -81,7 +81,7 @@
                                     Monthly Interest
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
-                                    {{ $monthlyInterestAmort ?? '0.00'}}
+                                    {{ number_format($monthlyInterestAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -121,12 +121,70 @@
                             <canvas id="myPieChart" style="max-width: 300px; height: 300px; margin: 0 auto;"></canvas>
                         </div>
                         <div class="pt-2">
-                            <a href="" class="btn d-flex justify-content-center align-items-center fs-7 text-white"><span style="border-radius: 10px;background: #0092D1; padding: 8px 15px;">View Amortization Table</span></a>
+                                <a href="#" class="btn d-flex justify-content-center align-items-center fs-7 text-white"
+                                    @if ($totalMonths == 0)
+                                        disabled
+                                        style="pointer-events: none; opacity: 0.6;"
+                                    @else
+                                        onclick="toggleTableVisibility(); return false;"
+                                    @endif
+                                >
+                                    <span style="border-radius: 10px;background: #0092D1; padding: 8px 15px;">View Amortization Table</span>
+                                </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="amortizationTable" style="display: none;">
+            <div class="d-flex justify-content-center mt-3">
+                <div class="bg-white rounded-3 border bg-white px-2 pt-2 pb-2 mb-2 shadow-sm" style="width: 90%;">
+                    <div class="table-container border rounded-3">
+                        <table class="table fixed-width-table pl-table">
+                            <thead>
+                                <tr class="pl-tr" style="border-bottom: 1px solid black">
+                                    <th>Month</th>
+                                    <th>Beginning Balance</th>
+                                    <th>Principal</th>
+                                    <th>Interest</th>
+                                    <th>Ending Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                @if ($totalMonths != 0)
+                                    @for ($i = 0; $i < $totalMonths; $i++)
+                                        <tr class="pl-tr">
+                                            <td>{{ $i + 1 }}</td>
+                                            <td>{{ number_format($beginningBalance[$i] ?? '0.00', 2, '.', ',') }}</td>
+                                            <td>{{ number_format($monthlyPrincipalAmort ?? '0.00', 2, '.', ',') }}</td>
+                                            <td>{{ number_format($monthlyInterestAmort ?? '0.00', 2, '.', ',') }}</td>
+                                            <td>{{ number_format($endingBalance[$i] ?? '0.00', 2, '.', ',') }}</td>
+                                        </tr>
+                                        {{--
+                                        This is to view the yearly balance and interest
+                                         @if (($i + 1) % 12 === 0)
+                                            @php
+                                                $yearly = ($i + 1) / 12;
+                                            @endphp
+                                             <tr class="pl-tr">
+                                                <td>Year {{ $yearly }}</td>
+                                                <td>{{ number_format($yearlyBalances[$yearly-1]['yearlyBalance'] ?? '0.00', 2, '.', ',') }}</td>
+                                                <td>{{ number_format($yearlyBalances[$yearly-1]['yearlyInterest'] ?? '0.00', 2, '.', ',') }}</td>
+                                                <td>N/A</td> <!-- Monthly principal and ending balance not applicable for yearly total -->
+                                                <td>N/A</td>
+                                            </tr>
+                                        @endif
+                                        --}}
+                                    @endfor
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="p-4">
             <div class="fw-bold fs-6">
                 Loan Categories
@@ -151,6 +209,7 @@
             </div>
         </div>
     </div>
+
     <script>
         var ctx = document.getElementById('myPieChart').getContext('2d');
         var myPieChart = new Chart(ctx, {
@@ -182,12 +241,15 @@
                 },
             },
         });
+
+        function toggleTableVisibility() {
+            var table = document.getElementById('amortizationTable');
+            if (table.style.display === 'none') {
+                table.style.display = 'block';
+            } else {
+                table.style.display = 'none';
+            }
+        }
     </script>
-
-
-
-
-
-
 
 @endsection
