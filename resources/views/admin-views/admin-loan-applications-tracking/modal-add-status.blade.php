@@ -5,7 +5,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
 }
 // add ID of loan states of the loan for checking
 @endphp
-<div class="modal fade" id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+<div class="modal fade" id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true" style="scale: 0.9">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header border-0">
@@ -13,14 +13,14 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="row g-0 mx-3">
-        <div class="col-12" >
-          Loan ID 
-          <span style="color: #0092D1;" class="fw-bold fs-4"> {{$loan->loan->id}}</span>
-        </div>
-        <div class="col-12 mb-3">
+        
+        <div class="col-12 mb-3 border px-2 pb-3 rounded bg-light" style="font-size: small">
           <div class="row  g-0">
+            <div class="col-12 pt-1" >
+              <h6 class="fw-bold ">LOAN ID: {{$loan->loan->id}}</h6>
+            </div>
             <div class="col-6">
-              <h6 class="fw-bold">
+              <h6 class="">
                 {{$loan->loan->member->firstname}}
                 {{$loan->loan->member->lastname}}
               </h6>
@@ -32,13 +32,15 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
             </div>
           </div>
         </div>
-        @if (in_array(6, $array)) 
+        <div class="p-1" style="font-size: small">
+        @if (in_array(6, $array))
         {{-- if loan is denied --}}
            <i>This loan is denied. Delete the declined status to add other status.</i>
         @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
          {{-- check if loan is approced then disable those selected and "Denied " loans--}}
            <i>This loan is approved. Delete the "approved by executive director" status to enable 'decline' status.</i>
         @endif
+      </div>
       </div>
       <div class="accordion accordion-flush mx-3 mt-3 border-bottom" id="accordionFlushExample">
       
@@ -55,7 +57,10 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
                   return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
                     }) as $status)
                         <div class="col-12 d-flex gap-1 mb-2">
-                            <a class="btn border text-danger grow-on-hover" href="{{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')"><i class="bi bi-trash-fill"></i></a>
+                            <a class="btn border text-danger grow-on-hover" href="
+                            {{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')">
+                            
+                            <i class="bi bi-trash-fill"></i></a>
                             <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
                                 {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
                             </p>

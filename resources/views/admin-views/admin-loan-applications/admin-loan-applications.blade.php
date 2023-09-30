@@ -4,69 +4,11 @@
 
 <div class="container-fluid mt-2">
     <div class="adminbox m-4">
-        @if (session('date_error'))
-            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
-                <p style="font-size: 12px" class="m-0">{{session('date_error')}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if (session('dateMatchError'))
-            <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
-                <p style="font-size: 12px" class="m-0">{{session('dateMatchError')}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if (session('amort_success'))
-            <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
-                <p style="font-size: 12px" class="m-0">{{session('amort_success')}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
-                <p style="font-size: 12px" class="m-0">{{session('success')}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        
-        @error('principal_amount')
-            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-                <p style="font-size: 12px" class="m-0">{{$message}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @enderror
-        @error('interest')
-            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-                <p style="font-size: 12px" class="m-0">{{$message}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @enderror
-        @error('loan_term')
-            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-                <p style="font-size: 12px" class="m-0">{{$message}}</p>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @enderror
-        @error('term_years')
-        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-            <p style="font-size: 12px" class="m-0">{{$message}}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @enderror
-        @error('amort_principal')
-        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-            <p style="font-size: 12px" class="m-0">{{$message}}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @enderror
-        @error('amort_interest')
-        <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-            <p style="font-size: 12px" class="m-0">{{$message}}</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @enderror
-            
 
+        {{-- ERROR MESSAGES --}}
+        @include('admin-views.admin-loan-applications.error-displays')
+        {{-- ERROR MESSAGES --}}
+        
         <div class="d-flex">
             <div class="d-flex membership-app-header1-mpl">
                 <img src="{{asset('/icons/MPL-mini.svg')}}" alt="" width="50px">
@@ -147,6 +89,7 @@
 
                             <th class="border-end">Gross Loan</th>
 
+                            <th>Interest <h6 style="font-size: small">1st YR</h6></th>
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
                             <th>
@@ -211,7 +154,7 @@
                                 </td>
 
                                 {{-- name --}}
-                                <td>
+                                <td class="fw-bold">
                                     {{ strtoupper($loan->member->lastname)}},
                                     {{$loan->member->firstname}}
                                 </td>
@@ -233,7 +176,8 @@
                                 
                                 {{-- interest --}}
                                 <td>
-                                    {{$loan->interest}}
+                                    {{number_format($loan->interest, 2, '.',',')}}
+                                    
                                 </td>
                             
                                 {{-- total payable --}}
@@ -256,18 +200,42 @@
                                 
                                 {{-- gross loan -- principal amount lang to --}}
                                 <td class="border-end">
-                                    {{$loan->principal_amount}}
+                                    {{number_format($loan->principal_amount, 2, '.',',')}}  
+                                </td>
+
+                        
+                                {{-- interest 1st year --}}
+                                <td>
+                                    @if ($loan->adjustment != null)
+                                        {{number_format($loan->adjustment->interest_first_yr, 2, '.',',')}}
+                                    @endif
                                 </td>
                                 {{-- MRI --}}
-                                <td></td>
+                                <td>
+                                    @if ($loan->adjustment != null)
+                                        {{number_format($loan->adjustment->mri, 2, '.',',')}}
+                                    @endif
+                                </td>
                                 {{-- Previous Loan Balance --}}
-                                <td></td>
+                                <td>
+                                    @if ($loan->adjustment != null)
+                                        {{number_format($loan->adjustment->previous_loan_balance, 2, '.',',')}}
+                                    @endif
+                                </td>
                                 {{-- Interest Rebate/Refund --}}
-                                <td></td>
+                                <td>
+                                    @if ($loan->adjustment != null)
+                                        {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}}
+                                    @endif
+                                </td>
                                 {{-- Penalty --}}
-                                <td></td>
+                                <td>
+                                    {{-- {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}} --}}
+                                </td>
                                 {{-- Net Proceeds --}}
-                                <td></td>
+                                <td>
+                                    {{-- {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}} --}}
+                                </td>
                                 {{-- ... --}}
                                 <td>
                                     <h6>
@@ -281,19 +249,20 @@
                                 {{-- prin --}}
                                 <td class=" border-start">
                                     @if ($loan->amortization != null)
-                                        {{$loan->amortization->amort_principal}}
+                                        {{number_format($loan->amortization->amort_principal, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- int --}}
                                 <td>
                                     @if ($loan->amortization != null)
-                                        {{$loan->amortization->amort_interest}}
+                                        {{number_format($loan->amortization->amort_interest, 2, '.',',')}}
+
                                     @endif
                                 </td>
                                 {{-- monthly --}}
                                 <td>
                                     @if ($loan->amortization != null)
-                                        {{$loan->amortization->amort_principal + $loan->amortization->amort_interest}}
+                                    {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- start --}}
