@@ -28,9 +28,12 @@ class AdminRemittanceController extends Controller
             'or_number' => 'required',
             'payment_date' => 'required|date',
             'loan_id' => 'required',
-            'principal' => 'required|numeric',
-            'interest' => 'required|numeric',
+            'principal' => 'nullable|numeric',
+            'interest' => 'numeric',
         ]);
+
+         // Replace null 'principal' with 0
+        $data['principal'] = $data['principal'] ?? 0;
 
         //The OR Number must be unique
         $existingPayment = Payment::where('or_number', $data['or_number'])->first();
