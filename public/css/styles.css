@@ -1456,11 +1456,6 @@ tbody tr:nth-child(odd) td {
 
 /* for remittance */
 
-#remit-btn {
-    border-radius: 20px;
-    font-size: 0.9rem;
-}
-
 .text-add-payment {
     color: #868686;
     font-size: 16px;
