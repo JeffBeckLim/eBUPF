@@ -75,4 +75,9 @@ class Loan extends Model
         return $this->hasMany(LoanApplicationStatus::class);
     }
 
+    public function check()
+    {
+        return $this->hasMany(Check::class, 'id' , 'loan_id');
+    }
+
 }
