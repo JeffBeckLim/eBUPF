@@ -16,7 +16,7 @@ class AdminRemittanceController extends Controller
         $payments = Payment::all();
         $loanIds = Loan::all()->where('is_active', 1)->pluck('id')->toArray();
 
-        return view('admin-views.admin-remittance', [
+        return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
             'loanIds' => $loanIds,
         ]);
@@ -41,9 +41,26 @@ class AdminRemittanceController extends Controller
             return redirect()->back()->with('error', 'Duplicate OR Number. Please use a different one.');
         }
 
+        // Get the loan based on the loan_id
         $loan = Loan::find($data['loan_id']);
         if (!$loan) {
+            // if Loan not found
             return redirect()->back()->with('error', 'Loan not found.');
+        }
+
+        //Calculate the total loan payment made using the loan_id and the principal and interest
+        $totalLoanPayment = Payment::where('loan_id', $data['loan_id'])->sum('principal') + Payment::where('loan_id', $data['loan_id'])->sum('interest');
+        $loanBalance = ($loan->principal_amount + $loan->interest) - $totalLoanPayment;
+
+        // Check if the payment exceeds the loan balance
+        if($loanBalance - ($data['principal'] + $data['interest']) < 0){
+            return redirect()->back()->with('error', 'Payment exceeds loan balance.');
+        }
+
+        // If the payment is equal to the loan balance, set the loan to non-performing
+        if($loanBalance - ($data['principal'] + $data['interest']) == 0){
+            $loan->is_active = 2;
+            $loan->save();
         }
 
         $memberId = $loan->member_id;

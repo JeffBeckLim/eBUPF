@@ -45,17 +45,16 @@
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
-                        <label for="or_number" class="fw-bold">OR Number</label>
-                        <input class="form-control" name="or_number" type="number" value="{{ old('or_number') }}" style="background: #D9E4E9;border-radius: 10px;color:rgb(77, 77, 77);" required>
-                    </div>
+                        <label for="or_number" class="fw-bold">OR Number <span class="fw-bold text-danger">*</span></label>
+                        <input id="or_number_input" class="form-control" name="or_number" type="number" value="{{ old('or_number') }}" min="1" placeholder="Enter OR No." required>                    </div>
 
                     <div class="col-md-2 pe-1 pb-3">
-                        <label for="payment_date" class="fw-bold">Date</label>
-                        <input id="myForm" class="form-control" name="payment_date" type="date" value="{{ old('payment_date') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
+                        <label for="payment_date" class="fw-bold">Date <span class="fw-bold text-danger">*</span></label>
+                        <input id="payment_date_input" class="form-control" name="payment_date" type="date" value="{{ old('payment_date') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                     </div>
 
                     <div class="col-md-2 pe-1">
-                        <label for="loan_id" class="fw-bold">Loan ID</label>
+                        <label for="loan_id" class="fw-bold">Loan ID <span class="fw-bold text-danger">*</span></label>
                         <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                             <option value="" disabled selected>Select a Loan ID</option>
                             @foreach ($loanIds as $loanId)
@@ -66,19 +65,22 @@
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>
-                        <input id="myForm" class="form-control" name="principal" type="number" min="0" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input id="principal_input" class="form-control" name="principal" type="number" min="0" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                     </div>
 
                     <div class="col-md-2 pe-1">
-                        <label for="interest" class="fw-bold">Interest</label>
-                        <input class="form-control w-100" name="interest" type="number" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <label for="interest" class="fw-bold">Interest <span class="fw-bold text-danger">*</span></label>
+                        <input id="interest_input" class="form-control w-100" name="interest" type="number" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                     </div>
 
-                    <div class="col-md-2 d-flex justify-content-center align-items-center mt-3">
-                        <button id="remit-btn" class="btn btn-primary" type="submit">Add Payment</button>
+                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                        {{-- <button id="remit-btn" class="btn btn-primary" type="submit">Add Payment</button> --}}
+                        <button id="apply-button" type="button" class="btn btn-primary rounded-4 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment">Add Payment</button>
                     </div>
                 </div>
+                @include('admin-views.admin-loan-remittance.modal-add-payment')
             </form>
+
 
             @if (session('success'))
                 <div class="alert alert-success">
@@ -94,14 +96,9 @@
         </div>
 
         <div class="adminbox" style="margin:10px 20px;">
-            <div class="row">
-                <div class="col-6">
-                    <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
-                    <input type="text" class="membership-application-search-input">
-                </div>
-                <div class="col-6 d-flex justify-content-end align-items-center">
-                    <a class="apply-changes-btn">Apply Changes</a>
-                </div>
+            <div>
+                <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
+                <input type="text" class="membership-application-search-input">
             </div>
             <div class="text-remit-table-head">Loan Payments</div>
             <div class="table-responsive">
@@ -145,7 +142,82 @@
                 </div>
             </div>
         </div>
-
-
 </div>
+
+<script>
+   $(document).ready(function() {
+    //get the value of the form field
+    var orNumberInput = $("#or_number_input");
+    var loanIdSelect = $("#loan_id"); // Update the selector
+    var principalInput = $("#principal_input");
+    var interestInput = $("#interest_input");
+    var applyButton = $("#apply-button");
+    var paymentDateInput = $("#payment_date_input");
+
+    //check if all fields are filled or not
+    function areInputsFilled() {
+        return (
+            orNumberInput.val().trim() !== "" &&
+            loanIdSelect.val().trim() !== "" &&
+            interestInput.val().trim() !== "" &&
+            paymentDateInput.val().trim() !== ""
+        );
+    }
+
+    // Function to enable/disable the button based on input values
+    function updateButtonState() {
+        if (areInputsFilled()) {
+            applyButton.prop("disabled", false); // Enable the button
+        } else {
+            applyButton.prop("disabled", true); // Disable the button
+        }
+    }
+
+    // this is to track the changes in the input fields
+    orNumberInput.on("input", updateButtonState);
+    paymentDateInput.on("input", updateButtonState);
+    loanIdSelect.on("change", updateButtonState);
+    interestInput.on("input", updateButtonState);
+
+    // call the function to update the button enable/disable state
+    updateButtonState();
+
+    $("#apply-button").on("click", function() {
+        var or_number = orNumberInput.val();
+        var payment_date = paymentDateInput.val();
+        var loan_id = loanIdSelect.val();
+        var principal = principalInput.val().trim();
+        var interest = interestInput.val();
+
+        // If the principal is empty, set it to 0
+        if (principal === "") {
+            principal = "0";
+        }
+
+        // Parse the payment_date string into a Date object
+        var paymentDateObj = new Date(payment_date);
+
+        // Define an array of month names
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"];
+
+        // Extract the components of the date
+        var year = paymentDateObj.getFullYear();
+        var monthIndex = paymentDateObj.getMonth();
+        var day = paymentDateObj.getDate();
+
+        // Format the date as "Month Day, Year"
+        var formattedPaymentDate = monthNames[monthIndex] + " " + day + ", " + year;
+
+        $("#or_number_modal").text(or_number);
+        $("#payment_date_modal").text(formattedPaymentDate);
+        $("#loan_id_modal").text(loan_id);
+        $("#principal_modal").text(principal);
+        $("#interest_modal").text(interest);
+    });
+});
+
+
+
+</script>
 @endsection
