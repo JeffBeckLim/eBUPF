@@ -8,56 +8,50 @@
         </div>
         <div class="modal-body">
 
-          @if ($user->member->additional_loan == null)
-          
             <div class="border rounded p-3" style="font-size: small">
-              <h5 style="color: #00D186"><i class="bi bi-check-circle-fill"></i> <span class="fw-bold" style="font-size: small">ADDTIONAL LOAN</span></h5>
-              <span class="fw-bold">{{$user->member->firstname}} {{$user->member->lastname}}</span> is currently allowed to request for additional loans.
-            </div>
-
-          @else
-
-            <div class="border rounded p-3" style="font-size: small">
-              <h5 style="color: #838383"><span class="fw-bold" style="font-size: small">NOT LEGIBLE: ADDTIONAL LOAN</span></h5>
-              <span class="fw-bold">{{$user->member->firstname}} {{$user->member->lastname}}</span> is currently not legible to apply for additional loans.
-            </div>
-
-          @endif
-          
-
-          <div class="row pt-3">
-            <span class="m-1" style="font-size: small">Do you want to allow thi user to apply for additional loans?</span>
-            <div class="col d-flex gap-2 mt-3 pb-2">
-              <a class="btn bu-orange text-light w-100" href="{{route('allow.additional.loan' ,$user->member->id)}}">Allow </a>
-              <a class="btn btn-outline-secondary w-100" href="{{route('not.allow.additional.loan' ,$user->member->id)}}">Don't Allow</a>
+              <h5 style="color: #838383"><span class="fw-bold" style="font-size: small">LEGIBLE ADDTIONAL LOAN?</span></h5>
+              <span class="fw-bold">Select what type of additional loans {{$user->member->firstname}} {{$user->member->lastname}}</span> is legible for...
             </div>
             
-          </div>
-        {{-- <form action="" method="POST">
-            @csrf  --}}
-            {{-- <div class="form-check">
-                <input class="form-check-input" type="radio" name="category" id="is_active1" value=""{{$loan->loan->loan_category_id == '' ? 'checked' : ''}}>
-                <label class="form-check-label" for="is_active1" >
-                    None
-                </label>
-              </div>
-            
-            @foreach ($loan_categories as $category)
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="category" id="is_active1" value="{{$category->id}}"{{$loan->loan->loan_category_id == $category->id ? 'checked' : ''}}>
-                <label class="form-check-label" for="is_active1" >
-                  {{$category->loan_category_name}}
-                </label>
-              </div>
-            @endforeach --}}
-
+            <div class="row pt-3 mx-3">
+          
+            <form action="{{route('allow.additional.loan', $user->member->id)}}" method="POST">
+                @csrf  
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="additional_loan" id="additional_loan1" value=" " 
+                    {{$user->member->additional_loan == null ? 'checked' : ''}}>
+                    <label class="form-check-label" for="additional_loan">
+                      Cannot apply for additional loans
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="additional_loan" id="additional_loan" value="1"
+                    {{$user->member->additional_loan == 1 ? 'checked' : ''}}>
+                    <label class="form-check-label" for="additional_loan">
+                      Can apply for additional MPL only
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="additional_loan" id="additional_loan" value="2"
+                    {{$user->member->additional_loan == 2 ? 'checked' : ''}}>
+                    <label class="form-check-label" for="additional_loan">
+                      Can apply for additional HSL only
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="additional_loan" id="additional_loan" value="3"
+                    {{$user->member->additional_loan == 3 ? 'checked' : ''}}>
+                    <label class="form-check-label" for="additional_loan">
+                      Can apply for additional MPL and HSL
+                    </label>
+                  </div>
              
-        </div>
-            {{-- <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button> --}}
-            {{-- <button type="submit" class="btn bu-orange text-light">Save changes</button> --}}
-            {{-- </div> --}}
-        {{-- </form> --}}
+            </div>
+         <div class="modal-footer"> 
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button> 
+            <button type="submit" class="btn bu-orange text-light">Save changes</button>
+            </div>
+        </form>
       </div>
     </div>
 </div>
