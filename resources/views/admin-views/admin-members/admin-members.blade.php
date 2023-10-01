@@ -5,19 +5,19 @@
     <div class="row g-0">
         <div class="container-fluid">
             
-            @if(session('additional_success'))
-                <div class="alert alert-success alert-dismissible fade show text-success" role="alert" style="font-size: small">
-                    {{session('additional_success')}}
+            @if(session('additional_primary'))
+                <div class="alert alert-primary alert-dismissible fade show text-dark" role="alert" style="font-size: small">
+                    {{session('additional_primary')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-
+{{-- 
             @if(session('additional_error'))
                 <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert" style="font-size: small">
                     {{session('additional_error')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @endif
+            @endif --}}
            
             <div class="adminbox m-2 mb-5">
                 <div class="d-flex">
@@ -83,12 +83,32 @@
                                         {{$user->member->contact_num}}
                                     </td>
                                     <td class="text-center">
-                                        @if($user->member->additional_loan == null)
+                                        <h5 class="text-secondary">
+                                        @if ($user->member->additional_loan == 1)
+                                            <a class="text-secondary" data-bs-toggle="tooltip" data-bs-title="MPL Only" >
+                                                <i class="bi bi-cash-stack"></i>
+                                            </a>
+                                        @elseif ($user->member->additional_loan == 2)
+                                            <a class="text-secondary" data-bs-toggle="tooltip" data-bs-title="HSL Only" >
+                                                <i class="bi bi-house"></i>
+                                            </a>
+                                        @elseif ($user->member->additional_loan == 3)
+                                            <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="MPL and HSL" >
+                                                <i class="bi bi-cash-stack"></i>
+                                                <i class="bi bi-house"></i>
+                                            </a>
+                                        @else
+                                            
+                                        @endif
+                                        
+                                        </h5>
+
+                                        {{-- @if($user->member->additional_loan == null)
                                         <h5 style="color: #00D186"><i class="bi bi-check-circle-fill"></i></h5>
                                         @elseif($user->member->additional_loan == null)
 
                                         @endif
-                                        
+                                         --}}
                                     </td>
                                     <td class="text-center">
                                         <div class="dropdown">
@@ -155,5 +175,11 @@
        
     </div>
 </div>
+
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
+
 @include('admin-components.admin-dataTables')
 @endsection
