@@ -21,10 +21,14 @@ return new class extends Migration
             $table->integer('number')->nullable();
             $table->string('voucher_num')->nullable();
             $table->string('payee')->nullable();
-            $table->string('nature_of_payment');
+            $table->string('nature_of_payment')->nullable();
             
             $table->decimal('gross_amount', 20, 2)->nullable();
             $table->decimal('net_amount', 20, 2)->nullable();
+
+            $table->decimal('adjusted_net_pay', 20, 2)->nullable();
+
+            $table->string('remarks')->nullable();
             
         });
     }
