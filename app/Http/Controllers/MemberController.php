@@ -28,6 +28,8 @@ class MemberController extends Controller
     public function showMemberDash(){
         $user = Auth::user();
         $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
+        //get members additional_loan column
+        $additionalLoan = $user->member->additional_loan;
 
         //get all mpl and hsl loans
         $mplLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 1)->where('is_active', 1)->get();
@@ -99,6 +101,7 @@ class MemberController extends Controller
 
 
         return view('member-views.member-dashboard', [
+            'additionalLoan' => $additionalLoan,
             'mplLoans' => $mplLoans,
             'hslLoans' => $hslLoans,
             'loans' => $loans,

@@ -144,7 +144,7 @@
                                             <div class="col-md-8 gap-2 d-flex justify-content-end">
                                                 <a href="/member/mpl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover"
                                                    {{-- disable the button if there is inactive loan, if the total balance is less than or equal to 50% of the principal amount and if the balance is not equal to 0 --}}
-                                                    @if (!empty($inActiveLoan) || ($mplTotalBalance >= (0.5 * $mplTotalAmount) && $mplTotalBalance != 0))
+                                                    @if (!empty($inActiveLoan) || ($mplTotalBalance > (0.5 * $mplTotalAmount) && $mplTotalBalance != 0) && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3))
                                                        disabled
                                                        style="pointer-events: none; opacity: 0.6;"
                                                     @endif
@@ -157,7 +157,7 @@
                                                 </a>
 
                                                 <a href="/member/hsl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover"
-                                                   @if (!empty($inActiveLoan) || ($hslTotalBalance >= (0.5 * $hslTotalAmount) && $hslTotalBalance != 0))
+                                                   @if (!empty($inActiveLoan) || ($hslTotalBalance > (0.5 * $hslTotalAmount) && $hslTotalBalance != 0) && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 1 && $additionalLoan != 3))
                                                        disabled
                                                        style="pointer-events: none; opacity: 0.6;"
                                                    @endif
