@@ -20,6 +20,10 @@ class Check extends Model
         
         'gross_amount',
         'net_amount',
+
+        
+        'adjusted_net_pay', 
+        'remarks',
     ];
 
     public function loan()
