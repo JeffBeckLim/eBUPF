@@ -13,19 +13,6 @@
             </div>
         <form action="{{route('update.loan', $loan->id)}}" method="POST">
             @csrf
-            <div class="border p-3 rounded bg-light">
-              <h6 style="font-size: small">Loan Type</h6>
-              <div class="d-flex gap-3">
-              @foreach ($loan_categories as $category)
-                <div class="form-checkr">
-                  <input class="form-check-input" type="radio" name="category" id="is_active1" value="{{$category->id}}"{{$loan->loan_category_id == $category->id ? 'checked' : ''}}>
-                  <label class="form-check-label me-3" for="is_active1" >
-                    {{$category->loan_category_name}}
-                  </label>
-                </div>
-              @endforeach
-              </div>
-            </div>
 
             <label for="principal_amount">Principal Amount</label>
             <input class="form-control" type="number" name="principal_amount" id="principal_amount" value="{{$loan->principal_amount}}">
