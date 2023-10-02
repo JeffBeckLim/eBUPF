@@ -77,7 +77,7 @@ class Loan extends Model
 
     public function check()
     {
-        return $this->hasMany(Check::class, 'id' , 'loan_id');
+        return $this->hasMany(Check::class, 'loan_id' , 'id');
     }
 
 }

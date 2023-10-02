@@ -29,6 +29,8 @@ return new class extends Migration
             $table->decimal('adjusted_net_pay', 20, 2)->nullable();
 
             $table->string('remarks')->nullable();
+
+            $table->string('check_co')->nullable();
             
         });
     }

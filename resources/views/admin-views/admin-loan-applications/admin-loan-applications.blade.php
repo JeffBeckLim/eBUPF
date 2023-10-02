@@ -112,9 +112,11 @@
                             <th class="border-end">...</th>
 
                             <th>Adjusted Net Pay.</th>
-                            <th>Check no.</th>
+                            <th>Check CO.</th>
                             <th>Date</th>
                             <th>Remarks</th>
+
+                            <th>...</th>
 
                         </tr>
                     </thead>
@@ -283,17 +285,41 @@
                                 </td>
                                 <td class="border-end">
                                     <h6>
-                                    <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
                                     </h6>
                                 </td>
                                 {{-- check --}}
-                                <td>Adjusted Net Pay.</td>
-                                <td>Check no.</td>
-                                <td>Date</td>
-                                <td>Remarks</td>
+                                <td>
+                                    @if (count($loan->check) != 0)
+                                        {{$loan->check[0]->adjusted_net_pay}}    
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (count($loan->check) != 0)
+                                        {{$loan->check[0]->check_co}}    
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (count($loan->check) != 0)
+                                        {{$loan->check[0]->date}}    
+                                @endif
+                                </td>
+                                <td>
+                                    @if (count($loan->check) != 0)
+                                        {{$loan->check[0]->remarks}}    
+                                    @endif
+                                </td>
+                                <td>
+                                    <h6>
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#checkModal{{$loan->id}}"  href="#">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </h6>
+                                </td>
                             </tr>
+                            @include('admin-views.admin-loan-applications.modal-check')
                             @include('admin-views.admin-loan-applications.modal-adjustments')
                             @include('admin-views.admin-loan-applications.modal-amortization')
                             @include('admin-views.admin-loan-applications.modal-edit-loan')

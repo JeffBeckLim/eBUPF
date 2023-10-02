@@ -66,7 +66,7 @@ class AdminLoanApplicationController extends Controller
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check')->has('loanApplicationStatus')
         ->where('loan_type_id',1)
         ->get(); 
-        
+
         $loans = [];
         foreach($raw_loans as $raw_loan){
             $status_array = [];
@@ -77,6 +77,7 @@ class AdminLoanApplicationController extends Controller
                 array_push($loans, $raw_loan);
             }
         }   
+
 
         $loan_categories = LoanCategory::all();
 
