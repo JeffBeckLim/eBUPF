@@ -57,9 +57,8 @@ use App\Http\Controllers\TransactionController;
     Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
 
 
-    Route::get('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan');
+    Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan');
 
-    Route::get('/admin/additional-loans/not-allow/{id},' , [AdminController::class, 'notAllowAdditional'])->name('not.allow.additional.loan');
 
 //TESTING ===================================================================================================
 
