@@ -41,6 +41,21 @@
             <div class="text-add-payment">
                 Add New Payment
             </div>
+            <div id="myAlert">
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
+                    <p style="font-size: 14px" class="m-0">{{session('success')}}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+                @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                    <p style="font-size: 14px" class="m-0">{{session('error')}}</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+            </div>
+
             <form method="POST" action="{{route('add.payment.remittance')}}">
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
@@ -57,8 +72,13 @@
                         <label for="loan_id" class="fw-bold">Loan ID <span class="fw-bold text-danger">*</span></label>
                         <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
                             <option value="" disabled selected>Select a Loan ID</option>
-                            @foreach ($loanIds as $loanId)
-                                <option value="{{ $loanId }}">{{ $loanId }}</option>
+                            @foreach ($loans as $loan)
+                                <option value="{{ $loan->id }}">
+                                    ID: {{$loan->id}} -
+                                    {{$loan->loanType->loan_type_name}} -
+                                    {{ substr($loan->member->firstname, 0, 1) }}. {{ $loan->member->lastname }} -
+                                    {{ $loan->member->units->unit_code }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -80,19 +100,6 @@
                 </div>
                 @include('admin-views.admin-loan-remittance.modal-add-payment')
             </form>
-
-
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-
         </div>
 
         <div class="adminbox" style="margin:10px 20px;">
@@ -116,6 +123,7 @@
                                 <th class="text-danger">MRI Adj</th>
                                 <th>Total</th>
                                 <th>Loan Particular</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,6 +142,11 @@
                                 <td></td>
                                 <td>{{ $payment->principal + $payment->interest }}</td>
                                 <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
+                                <td>
+                                    <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$payment->id}}">
+                                        <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
 
@@ -212,12 +225,18 @@
         $("#or_number_modal").text(or_number);
         $("#payment_date_modal").text(formattedPaymentDate);
         $("#loan_id_modal").text(loan_id);
-        $("#principal_modal").text(principal);
-        $("#interest_modal").text(interest);
+        var total = parseFloat(principal) + parseFloat(interest);
+        $("#principal_modal").text(parseFloat(principal).toFixed(2));
+        $("#interest_modal").text(parseFloat(interest).toFixed(2));
+        $("#total_modal").text(parseFloat(total).toFixed(2));
     });
 });
 
-
+    function hideAlert() {
+        var alert = document.getElementById('myAlert');
+        alert.style.display = 'none';
+    }
+    setTimeout(hideAlert, 7000);
 
 </script>
 @endsection
