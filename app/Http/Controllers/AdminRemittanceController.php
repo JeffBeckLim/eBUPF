@@ -14,11 +14,11 @@ class AdminRemittanceController extends Controller
     public function showRemittance(){
 
         $payments = Payment::all();
-        $loanIds = Loan::all()->where('is_active', 1)->pluck('id')->toArray();
+        $loans = Loan::where('is_active', 1)->get();
 
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
-            'loanIds' => $loanIds,
+            'loans' => $loans,
         ]);
     }
 
