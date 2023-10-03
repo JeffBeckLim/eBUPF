@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminLoanApplicationController;
 use App\Http\Controllers\AdminLoanApplicationControlller;
 use App\Http\Controllers\AdminRemittanceController;
 use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\CheckController;
 use App\Http\Controllers\CoBorrowerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
@@ -59,6 +60,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan');
 
+    Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update');
 
 //TESTING ===================================================================================================
 
