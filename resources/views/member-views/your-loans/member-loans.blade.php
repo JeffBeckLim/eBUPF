@@ -28,36 +28,62 @@
                         </div>
                     </div>
                   
+                    @foreach ($loans as $loan)
+                        
+                    
                     <!-- Status Card -->
                     <a href="#" class="text-decoration-none text-dark">
                         <div class="col-12 pb-3">
                             <div class="card rounded-4 shadow-sm">
                                 <div class="row g-0 p-3">
                                     <div class="col m-0 d-flex justify-content-center">
+                                        @if ($loan->loan_type_id == 1)
                                         <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 40%">
+                                        @elseif ($loan->loan_type_id == 2)    
+                                        <img src="{{asset('icons/HSL-mini.svg')}}" alt="" style="width: 40%">
+                                        @endif
+                                        
                                     </div>
                                     <div class="col-lg-6 col-5 ">
                                         <p style="font-size: 95%;" class="fw-bold m-0">
-                                            Multi-purpose Loan
+                                            {{$loan->LoanType->loan_type_description}}
                                         </p>
                                         <p class="m-0" style="font-size: x-small;">
-                                            April 1, 2023 <span> - May 24, 2024</span>
+                                            {{$loan->amortization->amort_start}} <span> 
+                                                - {{$loan->amortization->amort_end}}</span>
                                         </p>
-                                        <p class="m-0 fw-bold mt-4" style="font-size: small;">
+                                        <p class="m-0 fw-bold mt-4" style="font-size:   small;">
 
                                             Monthly Payable 
-                                            <span class="fw-normal"> Php 10,000</span>
+                                            <span class="fw-normal"> Php 
+                                            
+                                                {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
+                                            
+                                            </span>
                                         </p>
                                     
                                         
                                     </div>
+
+                                    @php
+                                        $paid = 0;
+                                        foreach ($loan->payment as $payment) {
+                                            $temp = $payment->principal + $payment->principal;
+                                            $paid = $paid + $temp;
+                                        }
+                                    @endphp
+
                                     <div class="col-4 text-end ">
                                         <p  class="text3-1-design m-0">Outstanding Balance</p>
-                                        <p class="fw-bold" ><span class="fw-light" style="font-size: small;">Php</span> 53,000.00</p>
+                                        <p class="fw-bold" ><span class="fw-light" style="font-size: small;">Php</span> 
+                                            {{
+                                                number_format($loan->principal_amount + $loan->interest -$paid, 2, '.',',')
+                                            }}
+
                                         
                                         <div class=" m-0">
                                             <p  class="text3-1-design m-0">Next Payment Due</p>
-                                            <p class="fw-bold m-0" style="font-size: small;">May 1, 2023</p>
+                                            <p class="fw-bold m-0" style="font-size: small;">DUMMYMay 1, 2023</p>
                                         </div>
                                     </div>
                                 </div>
@@ -65,11 +91,14 @@
                             </div>
                         </div>
                     </a>
+
+
+                    @endforeach
                     <!-- Status Card -->
 
 
                     <!-- Status Card -->
-                    <a href="#" class="text-decoration-none text-dark">
+                    {{-- <a href="#" class="text-decoration-none text-dark">
                         <div class="col-12 pb-3">
                             <div class="card bg-bugreen rounded-4 shadow-sm">
                                 <div class="row g-0 p-3">
@@ -107,7 +136,10 @@
                                 
                             </div>
                         </div>
-                    </a>
+                    </a> --}}
+
+
+                    
                 </div>
             </div>
 

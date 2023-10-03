@@ -79,6 +79,7 @@ class AdminLoanApplicationController extends Controller
         }   
 
 
+
         $loan_categories = LoanCategory::all();
 
 
