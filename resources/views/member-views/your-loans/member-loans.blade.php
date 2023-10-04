@@ -50,16 +50,22 @@
                                             {{$loan->LoanType->loan_type_description}}
                                         </p>
                                         <p class="m-0" style="font-size: x-small;">
+                                            @if($loan->amortization)
                                             {{$loan->amortization->amort_start}} <span> 
-                                                - {{$loan->amortization->amort_end}}</span>
+                                                - {{$loan->amortization->amort_end}}</span>    
+                                            @else
+                                                No amortization period yet
+                                            @endif
                                         </p>
                                         <p class="m-0 fw-bold mt-4" style="font-size:   small;">
 
                                             Monthly Payable 
-                                            <span class="fw-normal"> Php 
-                                            
-                                                {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
-                                            
+                                            <span class="fw-normal">  
+                                                @if($loan->amortization)
+                                                Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
+                                                @else
+                                                No amortization yet.
+                                                @endif
                                             </span>
                                         </p>
                                     
