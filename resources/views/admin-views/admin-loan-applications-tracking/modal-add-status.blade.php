@@ -5,9 +5,9 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
 }
 // add ID of loan states of the loan for checking
 @endphp
-<div class="modal fade" id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true" style="scale: 0.9">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
+<div class="modal fade " id="statusModal{{$loan->loan->id}}" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable d-flex justify-content-center">
+    <div class="modal-content r" style="width: 450px">
       <div class="modal-header border-0">
         <h1 class=" fw-bold fs-5">Edit Status</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
