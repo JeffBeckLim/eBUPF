@@ -45,12 +45,13 @@
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
                                     <th>ID</th>
+                                    <th></th>
                                     <th>Name</th>
                                     <th>Membership Application</th>
                                     <th>Email</th>
                                     
-                                    <th>User Type</th>
-                                    <th></th>
+                                    <th>Role</th>
+                                    
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,29 +60,60 @@
                                 @foreach ($users as $user)
                                 <tr>
                                         <td>{{$user->id}}</td>
+                                        <td>
+                                            <a class="btn btn-link" href=""><i class="bi bi-pencil-square"></i>
+                                        </td>
                                         <td>{{$user->member->firstname}} {{$user->member->lastname}}</td>
                                         <td>
                                             @if($user->member->membershipApplication)
                                             {{$user->member->membershipApplication->created_at}}
                                             @endif
                                         </td>
-                                        <td>
+                                        <td >
                                             {{$user->email}}
-                                            <label class="text-info">
+                                            <label style="color: #aaaaaa">
                                               verfied: {{$user->email_verified_at}}
                                             </label>
                                         </td>
                                         <td>
-                                            @if ($user->user_type == 'restricted')
+                                            <style>
+                                                .hidden{
+                                                    visibility: hidden;
+                                                    font-size: 3px;
+                                                }
+                                            </style>
+                                            <h5>
+                                            @if ($user->user_type == 'member')
+                                            <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Member" >
+                                                <i class="bi bi-person-check-fill"></i>
+                                                <h6 class="hidden">2</h6>
+                                            </a>
+                                            @elseif($user->user_type == 'non-member')
+                                            <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Non-member" >
+                                                <i class="bi bi-person"></i>
+                                                <h6 class="hidden">3</h6>
+                                            </a>
+                                            @elseif($user->user_type == 'admin')
+                                            <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Admin-Staff" >
+                                                <i class="bi bi-person-square"></i>
+                                                <h6 class="hidden">1</h6>
+                                            </a>
+                                            @elseif($user->user_type == 'restricted')
+                                            <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Restricted" >
+                                                <i class="bi bi-slash-circle"></i>
+                                                <h6 class="hidden">4</h6>
+                                            </a>
+                                            @endif
+                                            </h5>
+                                            {{-- @if ($user->user_type == 'restricted')
                                                 <span class="text-danger">{{$user->user_type}}</span>
                                                 
                                             @else
                                             {{$user->user_type}}    
                                             
-                                            @endif
+                                            @endif --}}
                                         </td>
-                                        <td>
-                                            <a class="btn btn-link" href=""><i class="bi bi-pencil"></i> Edit</a></td>
+
                                         <td>
                                             <!-- Button trigger modal -->
                                             <button style="font-size: 12px" type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#{{$user->id}}">
@@ -105,5 +137,9 @@
         </div>
     </div>
 </div>
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 @include('admin-components.admin-dataTables')
 @endsection

@@ -11,6 +11,7 @@ class MembershipApplicationController extends Controller
     public function show(){
 
         $memberApplications = MembershipApplication::with('member.units.campuses', 'member.user')->orderBy('created_at', 'desc')->get();
+
         
         $pending = count(MembershipApplication::where('status', 0)->get());
         $approved = count(MembershipApplication::where('status', 1)->get());
