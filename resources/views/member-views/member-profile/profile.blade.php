@@ -2,12 +2,12 @@
 
 @section('content')
 
-<main style="margin: 40px;">
+<main style="margin: 25px 20px 20px 20px;">
 
-    <div class="bg-white rounded">
+    <div class="bg-white rounded pt-1">
 
         <div class="profile-note" style="text-align: justify;">
-            Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes. <br>We value the security of your data and want to ensure the accuracy of the information associated with your account.
+            Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes.
         </div>
         @if(session('message'))
             <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">

@@ -1120,10 +1120,11 @@ tbody tr:nth-child(odd) td {
     border-radius: 10px;
     background-color: #E6F9FF;
     font-size: 12px;
+    margin: 0 10px 0 10px;
 }
 
 .profile-tag {
-    margin-top: 20px;
+    margin: 15px 10px 0 10px;
 }
 
 .profile-tag img {
