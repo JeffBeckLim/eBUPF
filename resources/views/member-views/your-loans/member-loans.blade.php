@@ -27,7 +27,8 @@
                             </div>
                         </div>
                     </div>
-                  
+                    @if (count($loans) != 0)
+                        
                     @foreach ($loans as $loan)
                         
                     
@@ -92,8 +93,21 @@
                         </div>
                     </a>
 
-
                     @endforeach
+
+                    @else
+
+                    <div class="row">
+                        <div class="col-12 p-5 text-center">
+                            <p>You have no loans yet</p>
+                            <img src="{{asset('icons/no-transaction.svg')}}" alt="" style="width: 200px">
+                            <p class="mt-5" style="font-size: small">
+                                Apply for a <a class="text-decoration-none" href="/member/mpl-application-form">Multi-purpose</a> or a <a class="text-decoration-none" href="/member/hsl-application-form">Housing Loan</a> loan today!</p>
+                        </div>                        
+                    </div>
+                    
+                    @endif
+                    
                     <!-- Status Card -->
 
 
