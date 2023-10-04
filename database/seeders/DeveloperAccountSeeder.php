@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Member;
+use App\Models\MembershipApplication;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,7 +23,7 @@ class DeveloperAccountSeeder extends Seeder
             'user_type' => 'member',
         ]);
 
-        Member::create([
+        $member  = Member::create([
             'user_id' => $user->id,
             'unit_id'=> '1', // naka comment out muna - - need pa seederss
             'firstname'=> 'Developer',
@@ -56,6 +57,13 @@ class DeveloperAccountSeeder extends Seeder
             'agree_to_certify' => 1,
             'agree_to_authorize' => 1,
         ]);
+
+        MembershipApplication::create([
+                'member_id'=>$member->id,
+                'ref_number'=>'000000',
+                'status'=>'1',
+        ]);
+
 
     }
 }
