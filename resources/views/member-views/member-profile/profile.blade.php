@@ -49,7 +49,7 @@
                     <p class="mt-3 fw-bold fs-6" style="color: #393939">Employment Information</p>
                 </div>
 
-                <div style="margin: 15px 10px; ">
+                <div style="margin: 15px 10px 0 10px; ">
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Campus :</span> {{$campus->campus_code}}&nbsp;Campus</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Unit :</span> BU{{$unit->unit_code}}</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Position :</span> {{ ucfirst($member->position) }}</p>
@@ -65,8 +65,8 @@
                     </span></p>
 
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="download-membership-pdf-profile">
-                            <a href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}" class="pdf-membership-download-link fw-bold fs-7 text-white">Download Membership Form</a>
+                        <button class="btn bu-orange w-100 mt-2" type="button">
+                            <a href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}" class="fw-bold fs-7 text-white text-decoration-none">Download Membership Form</a>
                         </button>
                     </div>
                 </div>
@@ -130,5 +130,16 @@
     @include('member-views.member-profile.profile-updateModal')
 
 </main>
+
+<script>
+    var closeButton = document.getElementById("modal-profile-close-button");
+
+    var modal = document.getElementById("profileMyModal");
+
+    closeButton.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+</script>
+
 
 @endsection
