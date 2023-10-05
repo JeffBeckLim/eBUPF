@@ -44,8 +44,8 @@
               </div>
 
               <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
-                    <button type="button" id="modal-profile-close-button" class="btn modal-profile-close">Close</button>
-                    <button type="submit" class="btn modal-profile-submit">Update Profile</button>
+                    <button type="button" id="modal-profile-close-button" class="btn btn-outline-secondary">Close</button>
+                    <button type="submit" class="btn bu-orange text-light">Update Profile</button>
               </div>
         </form>
     </div>

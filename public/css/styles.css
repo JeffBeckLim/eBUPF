@@ -1198,26 +1198,6 @@ tbody tr:nth-child(odd) td {
     left: 23%;
 }
 
-.download-membership-pdf-profile {
-    background-color: #FF6F19;
-    border-radius: 10px;
-    padding: 4px 7px;
-    border: 1px solid white;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-}
-
-.download-membership-pdf-profile:hover {
-    background-color: #ff640b;
-    transform: scale(1.05);
-    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
-}
-
-.pdf-membership-download-link {
-    text-decoration: none;
-    color: white;
-}
-
 .profile-row {
     margin: 20px 30px;
 }
@@ -1328,40 +1308,6 @@ tbody tr:nth-child(odd) td {
     line-height: normal;
     padding: 15px 0;
     border-bottom: 1px solid #b0b0b0;
-}
-
-.modal-profile-submit {
-    color: white;
-    border-radius: 10px;
-    font-size: 14px;
-    background: #FF6F19;
-    font-weight: bold;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.modal-profile-submit:hover {
-    background-color: #ff640b;
-    transform: scale(1.01);
-    transition: all 0.3s ease-in-out;
-    color: rgb(239, 239, 239);
-    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
-}
-
-.modal-profile-close {
-    border-radius: 10px;
-    background: #8C8C8C;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.modal-profile-close:hover {
-    background: #8C8C8C;
-    transform: scale(1.01);
-    transition: all 0.3s ease-in-out;
-    color: rgb(239, 239, 239);
-    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.35);
 }
 
 
