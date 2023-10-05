@@ -185,7 +185,7 @@
             <a href="{{route('admin.remittance')}}"><img src="{{asset('../icons/admin-icons/remittances.svg')}}" style="width: 1rem;" class="me-2"> Remittances</a>
           </li>
           <li class="border-bottom">
-            <a href="#"><img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2"> Receivables</a>
+            <a href="{{route('admin.receivables')}}"><img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2"> Receivables</a>
           </li>
           <li class="mt-4">
             <div class="dropup-center dropup">
