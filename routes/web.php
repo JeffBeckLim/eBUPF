@@ -20,6 +20,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MembershipApplicationController;
+use App\Http\Controllers\ReceivablesController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -62,6 +63,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update');
 
+    Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
 //TESTING ===================================================================================================
 
 
