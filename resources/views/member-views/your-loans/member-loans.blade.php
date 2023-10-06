@@ -17,7 +17,7 @@
                             <a href="#" class="px-3 text-decoration-none text-muted fw-bold "><p  class="fs-7">Paid</p></a>
                         </span>
                     </div>
-                    <div class="col-12 pt-4 pb-5">
+                    <div class="col-12 pt-4 pb-2">
                         <div class="row  align-items-center">
                             <div class="col-auto">
                               <label for="searcn-input" class="col-form-label">Search</label>
@@ -26,6 +26,11 @@
                               <input type="text" id="search-input" class="form-control search-input rounded-3" aria-labelledby="passwordHelpInline">
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 border mb-3 p-2 rounded">
+                        <h6 class="text-secondary" style="font-size: 14px">
+                            <i class="bi bi-lightbulb-fill"></i>
+                            Here are the loans with the checks you've already claimed.</h6>
                     </div>
                     @if (count($loans) != 0)
                         
@@ -48,11 +53,20 @@
                                     <div class="col-lg-6 col-5 ">
                                         <p style="font-size: 95%;" class="fw-bold m-0">
                                             {{$loan->LoanType->loan_type_description}}
+                                            <span class="fw-light" style="font-size: small">
+                                            {{$loan->term_years}}
+                                            @if ($loan->term_years > 1)
+                                                years
+                                            @else
+                                                year
+                                            @endif
+                                            </span>
                                         </p>
                                         <p class="m-0" style="font-size: x-small;">
                                             @if($loan->amortization)
-                                            {{$loan->amortization->amort_start}} <span> 
-                                                - {{$loan->amortization->amort_end}}</span>    
+                                            {{date("F j, Y", strtotime($loan->amortization->amort_start))}} 
+                                             <span> 
+                                                -  {{date("F j, Y", strtotime($loan->amortization->amort_end))}} </span>    
                                             @else
                                                 No amortization period yet
                                             @endif
@@ -87,11 +101,16 @@
                                                 number_format($loan->principal_amount + $loan->interest -$paid, 2, '.',',')
                                             }}
 
-                                        
+                                    {{-- @php
+                                        $endDate = Carbon\Carbon::parse($loan->amortization->amort_end);
+                                        $currentDate = Carbon\Carbon::now();
+                                        $monthsDifference = $endDate->diffInMonths($currentDate);
+
+                                    @endphp
                                         <div class=" m-0">
-                                            <p  class="text3-1-design m-0">Next Payment Due</p>
-                                            <p class="fw-bold m-0" style="font-size: small;">DUMMYMay 1, 2023</p>
-                                        </div>
+                                            <p  class="text3-1-design m-0">Months to Pay</p>
+                                            <p class="fw-bold m-0" style="font-size: small;">{{$monthsDifference}} Months</p>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 
