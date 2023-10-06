@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminRemittanceController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\CoBorrowerController;
+use App\Http\Controllers\LedgerController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
@@ -63,7 +64,14 @@ use App\Http\Controllers\TransactionController;
 
     Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update');
 
+
+
+
     Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
+    Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
+
+
+
 //TESTING ===================================================================================================
 
 
