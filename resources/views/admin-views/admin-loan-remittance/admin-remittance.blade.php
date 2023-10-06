@@ -92,7 +92,6 @@
                     </div>
 
                     <div class="col-md-2 d-flex justify-content-center align-items-center">
-                        {{-- <button id="remit-btn" class="btn btn-primary" type="submit">Add Payment</button> --}}
                         <button id="apply-button" type="button" class="btn btn-primary rounded-4 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment">Add Payment</button>
                     </div>
                 </div>
@@ -141,13 +140,31 @@
                                 <td>{{ $payment->principal + $payment->interest }}</td>
                                 <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
                                 <td>
-                                    <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$payment->id}}">
+                                    <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#editPayment{{$payment->id}}">
                                         <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                            @include('admin-views.admin-loan-remittance.modal-edit-payment')
 
+                            <script>
+                                $(document).ready(function() {
+                                     // Initialize Select2 on the dropdown
+                                     $('#loan_id{{$payment->id}}').select2({
+                                         placeholder: 'Select a Loan ID',
+                                         width: '100%',
+                                         allowClear: true,
+                                         dropdownParent: $("#loan_id{{$payment->id}}").parent()
+                                     });
+                                     $('.select2-selection--single').css('background-color', '#D9E4E9');
+                                     $('.select2-selection--single').css('height', '38px');
+                                     $('.select2-selection--single').css('border-radius', '10px');
+                                     $('.select2-selection--single').css('border', 'none');
+                                     $('.select2-selection--single').css('padding-top', '5px');
+                                 });
+                            </script>
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

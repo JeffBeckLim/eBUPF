@@ -168,6 +168,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
 
+    Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('update.payment.remittance');
 //ADMIN ======================================================================================================
 
 //🟩MEMBER =================================================================================================
