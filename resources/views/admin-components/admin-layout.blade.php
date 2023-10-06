@@ -121,7 +121,7 @@
               {{-- <a href="#"><img src="../icons/admin-icons/members.svg" style="width: 1.2rem;"  class="me-2">Members</a> --}}
           </li>
           <li>
-            <a href="#"><img src="{{asset('../icons/admin-icons/ledgers.svg')}}" style="width: 1rem;"  class="me-2"> Ledgers</a>
+            <a href="{{route('admin.ledgers')}}"><img src="{{asset('../icons/admin-icons/ledgers.svg')}}" style="width: 1rem;"  class="me-2"> Ledgers</a>
           </li>
           <li>
             <div class="accordion accordion-flush" id="accordionFlushExample" >
@@ -185,7 +185,7 @@
             <a href="{{route('admin.remittance')}}"><img src="{{asset('../icons/admin-icons/remittances.svg')}}" style="width: 1rem;" class="me-2"> Remittances</a>
           </li>
           <li class="border-bottom">
-            <a href="#"><img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2"> Receivables</a>
+            <a href="{{route('admin.receivables')}}"><img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2"> Receivables</a>
           </li>
           <li class="mt-4">
             <div class="dropup-center dropup">

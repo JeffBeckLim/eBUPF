@@ -12,7 +12,7 @@
                         </div>
                         <div class="g-0 ps-2 my-auto">
                             <div class="m-0 fw-bold fs-5" >User Accounts</div>
-                            <div class="fw-bold">All user accounts in eBUPF</div>
+                            <div style="font-size: small" class="fw-bold">All user accounts in eBUPF</div>
                         </div>
                 </div>
                 
