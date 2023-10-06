@@ -11,30 +11,28 @@
             </div>
             <div class="filter-group gap-3">
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                    <select id="campusSelect" class="form-control bg-white border-0">
+                    <select id="quarterSelect" class="form-control bg-white border-0">
                         <option value="All">Quarter</option>
-                        <option value="Main">1st Quarter</option>
-                        <option value="Daraga">2nd Quarter</option>
-                        <option value="East">3rd Quarter</option>
+                        <option value="1st Quarter">1st Quarter</option>
+                        <option value="2nd Quarter">2nd Quarter</option>
+                        <option value="3rd Quarter">3rd Quarter</option>
+                        <option value="4th Quarter">4th Quarter</option>
                     </select>
                 </div>
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                    <select id="unitSelect" class="form-control bg-white border-0">
+                    <select id="yearSelect" class="form-control bg-white border-0">
                         <option value="All">Year</option>
-                        <option value="BUCS">2023</option>
-                        <option value="CBEM">2022</option>
-                        <option value="unit3">2021</option>
                     </select>
                 </div>
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                    <select id="unitSelect" class="form-control bg-white border-0">
+                    <select id="loanTypeSelect" class="form-control bg-white border-0">
                         <option value="All">All</option>
-                        <option value="mpl">MPL</option>
-                        <option value="hsl">HSL</option>
+                        <option value="MPL">MPL</option>
+                        <option value="HSL">HSL</option>
                     </select>
                 </div>
-                <button id="remit-btn" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
-                <button id="remit-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
+                <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
+                <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
 
             </div>
 
@@ -105,7 +103,7 @@
         <div class="adminbox" style="margin:10px 20px;">
             <div>
                 <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
-                <input type="text" class="membership-application-search-input">
+                <input type="text" class="membership-application-search-input" id="search-input">
             </div>
             <div class="text-remit-table-head">Loan Payments</div>
             <div class="table-responsive">
@@ -131,7 +129,7 @@
                                 $sortedPayments = $payments->sortByDesc('created_at');
                             @endphp
                             @foreach ($sortedPayments as $payment)
-                            <tr class="table-row" data-status="">
+                            <tr class="table-row" data-status="" data-loan-year="@getYearFromDate($payment->payment_date)">
                                 <td>{{ $payment->id }}</td>
                                 <td>{{ $payment->or_number }}</td>
                                 <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">{{ $payment->member->firstname }} {{ $payment->member->middle_initial }}. {{ $payment->member->lastname }}</a></td>
@@ -238,5 +236,111 @@
     }
     setTimeout(hideAlert, 7000);
 
+    function getQuarterFromDate(dateStr) {
+        const date = new Date(dateStr);
+        const month = date.getMonth();
+        if (month >= 0 && month <= 2) {
+            return "1st Quarter";
+        } else if (month >= 3 && month <= 5) {
+            return "2nd Quarter";
+        } else if (month >= 6 && month <= 8) {
+            return "3rd Quarter";
+        } else {
+            return "4th Quarter";
+        }
+    }
+
+    function getYearFromDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.getFullYear();
+    }
+
+    // Function to handle the search input
+    $(document).ready(function () {
+        $("#search-input").on("keyup", function () {
+            var searchText = $(this).val().toLowerCase();
+
+            $(".table-row").each(function () {
+                var rowData = $(this).text().toLowerCase();
+
+                if (rowData.indexOf(searchText) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+
+    // Function to update the year options
+    function updateYearOptions() {
+        var min = new Date().getFullYear();
+        var select = document.getElementById('yearSelect');
+        select.innerHTML = ''; // Clear existing options
+
+        // Add the "All Years" option
+        var allYearsOption = document.createElement('option');
+        allYearsOption.value = 'All';
+        allYearsOption.innerHTML = 'All Years';
+        select.appendChild(allYearsOption);
+
+        // Populate the dropdown with years from the current year down to 2021
+        for (var i = min; i >= 2021; i--) {
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            select.appendChild(opt);
+        }
+    }
+
+    // Initial population of the dropdown
+    updateYearOptions();
+
+    // Set up an interval to update the dropdown every year
+    setInterval(updateYearOptions, 60 * 1000);
+
+    $(document).ready(function () {
+    // Function to add a "data-quarter" attribute to each table row
+    $(".table-row").each(function () {
+        var paymentDate = $(this).find("td:eq(4)").text();
+        var quarter = getQuarterFromDate(paymentDate);
+        $(this).attr("data-quarter", quarter);
+
+    });
+
+    // Function to filter the table rows based on the selected options
+    function filterTable() {
+        var selectedQuarter = $("#quarterSelect").val();
+        var selectedYear = $("#yearSelect").val();
+        var selectedLoanType = $("#loanTypeSelect").val();
+
+        $(".table-row").each(function () {
+            var quarterData = $(this).data("quarter");
+             var dateData = $(this).find("td:eq(4)").text();
+            var loanTypeData = $(this).find("td:eq(9)").text();
+
+            var shouldShowRow =
+                (selectedQuarter === "All" || quarterData === selectedQuarter)  &&
+                (selectedYear === "All" || dateData.includes(selectedYear)) &&
+                (selectedLoanType === "All" || loanTypeData.includes(selectedLoanType));
+
+            $(this).toggle(shouldShowRow);
+        });
+    }
+
+    $("#filter-button").on("click", function () {
+        filterTable();
+    });
+
+    $("#clear-filter-btn").on("click", function () {
+        $("#quarterSelect").val("All");
+        $("#yearSelect").val("All");
+        $("#loanTypeSelect").val("All");
+
+        $(".table-row").show();
+    });
+
+    filterTable();
+});
 </script>
 @endsection
