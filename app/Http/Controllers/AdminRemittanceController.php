@@ -71,5 +71,33 @@ class AdminRemittanceController extends Controller
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }
 
+    public function updatePaymentRemittance(Request $request, $id) {
+
+        // Validate the request data
+        $validatedData = $request->validate([
+            'or_number' => 'required',
+            'payment_date' => 'required|date',
+            'loan_id' => 'required',
+            'principal' => 'nullable|numeric',
+            'interest' => 'numeric',
+        ]);
+
+        // if principal is null, set to 0
+        if (is_null($validatedData['principal'])) {
+            $validatedData['principal'] = 0;
+        }
+
+        // Update the payment in the database
+        Payment::where('id', $id)->update([
+            'or_number' => $validatedData['or_number'],
+            'payment_date' => $validatedData['payment_date'],
+            'loan_id' => $validatedData['loan_id'],
+            'principal' => $validatedData['principal'],
+            'interest' => $validatedData['interest'],
+        ]);
+
+        return redirect()->back()->with('success', 'Payment updated successfully');
+    }
+
 }
 

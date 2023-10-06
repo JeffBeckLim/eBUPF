@@ -1466,3 +1466,11 @@ tbody tr:nth-child(odd) td {
     background: #FF6F19;
     padding: 5px 10px;
 }
+
+.select2-container-custom {
+    width: 100%;
+}
+
+.select2-container--open .select2-dropdown {
+    z-index: 1060 !important;
+}
