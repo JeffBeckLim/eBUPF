@@ -46,14 +46,52 @@
                                 <tr>
                                     <th style="width:5%">ID</th>
                                     <th style="width: 20%">Name</th>
-                                    <th style="width: 10%">New</th>
-                                    <th style="width: 10%">Additional</th>
-                                    <th style="width: 10%">Renewal</th>
-                                    <th class="text-center" style="width: 30%">Action</th>
+                                    <th style="width: 10%">MPL</th>
+                                    <th style="width: 10%">HSL</th>
+                                    <th class="text-center" style="width: 30%">. . . </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                @if (count($members) != 0)    
+                                    @foreach ($members as $member)
+                                    <tr>
+                                        <td>
+                                            {{$member->id}}
+                                        </td>
+                                        <td class="fw-bold">
+                                            {{$member->lastname}} , {{$member->firstname}}
+                                            <h6 class="text-secondary" style="font-size: small">{{$member->user->email}}</h6>
+                                            <h6 style="font-size: x-small">{{$member->units->unit_code}} {{$member->units->campuses->campus_code}}</h6>
+                                        </td>
+                                        <td>
+                                            @php
+                                                $mpl_count = 0;
+                                                foreach ($member->loans as $loan) {
+                                                    if($loan->loanType->id == 1){
+                                                        $mpl_count++;
+                                                    }
+                                                }
+                                            @endphp
+                                            {{$mpl_count}}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $hsl_count = 0;
+                                                foreach ($member->loans as $loan) {
+                                                    if($loan->loanType->id == 2){
+                                                        $hsl_count++;
+                                                    }
+                                                }
+                                            @endphp
+                                        {{$hsl_count}}
+                                        </td>
+                                        <td class="text-end">
+                                            <a href="" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach 
+                                @endif
+                                {{-- <tr>
                                     <td>
 
                                     </td>
@@ -72,7 +110,7 @@
                                     <td class="text-end">
                                         <a href="" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
                                     </td>
-                                </tr>
+                                </tr> --}}
                              
                             </tbody>
                         </table>
