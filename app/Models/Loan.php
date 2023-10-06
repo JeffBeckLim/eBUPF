@@ -28,7 +28,8 @@ class Loan extends Model
     //belongs to one member
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id', 'id');
+        // return $this->belongsTo(Member::class, 'member_id', 'id');
+        return $this->belongsTo(Member::class);
     }
 
     //has many co Borrower but only one is required 
