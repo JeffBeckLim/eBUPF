@@ -6,6 +6,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          @include('admin-views.admin-loan-applications.div-identifier')
+      
         <form action="{{route('loan.check.update', $loan->id)}}" method="POST">
             @csrf
 

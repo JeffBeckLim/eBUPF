@@ -1,12 +1,14 @@
-<div class="modal fade" id="amortizationModal{{$loan->id}}" tabindex="-1" aria-labelledby="amortizationModalLabel" aria-hidden="true">
+<div class="modal fade" id="addAmortizationModal{{$loan->id}}" tabindex="-1" aria-labelledby="addAmortizationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-0">
-          <h1 class="modal-title fs-5 fw-bold" id="amortizationModalLabel">Amortization</h1>
+          <h1 class="modal-title fs-5 fw-bold" id="addAmortizationModalLabel">Add Amortization</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+        
             @include('admin-views.admin-loan-applications.div-identifier')
+      
       
         <div class="border bg-light rounded p-3">
             Term of the loan: {{$loan->term_years}} years.
@@ -21,21 +23,22 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     Amortization Period
+                    <h6 style="font-size: x-small">End of amortization will be added automatically but can be editable after added.</h6>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     <label for="amort_start">Start</label>
                     <input class="form-control" type="date" name="amort_start" id="amort_start" value="{{$loan->amortization != null ? $loan->amortization->amort_start : ''}}">
                 </div>
-                <div class="col-6">
+                {{-- <div class="col-6">
                     <label for="amort_end">End</label>
                     <input class="form-control" type="date" name="amort_end" id="amort_end" value="{{$loan->amortization != null ? $loan->amortization->amort_end : ''}}">
-                </div>
+                </div> --}}
             </div>
-            <div class="border rounded p-3 mt-2">
+            {{-- <div class="border rounded p-3 mt-2">
                 <h6 class="text-secondary" style="font-size: x-small">amortization period difference, start and end</h6>
                 <h6 style="font-size: small">Amort Period: <span id="yearsResult"></h6>
                 
-            </div>
+            </div> --}}
             
         </div>
             <div class="modal-footer">
@@ -47,7 +50,7 @@
     </div>
 </div>
 
-<script>
+{{-- <script>
 
     // Get the date input elements by their IDs
 var dateStartInput = document.getElementById('amort_start');
@@ -86,4 +89,4 @@ dateEndInput.addEventListener('input', function() {
     }
 });
 
-</script>
+</script> --}}
