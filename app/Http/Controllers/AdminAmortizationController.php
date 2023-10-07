@@ -14,9 +14,9 @@ class AdminAmortizationController extends Controller
         $loan = Loan::findOrFail($id);
         
         $request->validate([
-            'amort_principal'=> 'required|numeric|min:300|max:200000',
-            'amort_interest'=> 'required|numeric|min:100|max:200000',
-            'amort_start'=> 'nullable|date',
+            'amort_principal'=> 'required|numeric|min:1|max:200000',
+            'amort_interest'=> 'required|numeric|min:1|max:200000',
+            'amort_start'=> 'required|date',
             'amort_end'=> 'nullable|date',
         ]);
 
@@ -44,9 +44,6 @@ class AdminAmortizationController extends Controller
         // the term does not match the LOAN TERM
         
 
-        // $diffInYears = $startDate->diffInMonths($endDate)+1;
-        
-
         // for new amortization
         if($loan->amortization_id == null){
 
@@ -54,8 +51,6 @@ class AdminAmortizationController extends Controller
             // // Add 24 months to the date
             $months = ($loan->term_years * 12)-1;
             $newEndDate = $startDate->addMonths($months);
-
-            // dd($newEndDate);
 
             $amortization = Amortization::create([
                 'amort_principal' => $request->amort_principal, 
@@ -71,11 +66,25 @@ class AdminAmortizationController extends Controller
         elseif($loan->amortization_id != null){
             $loan_amortization = Amortization::findOrFail($loan->amortization_id);
             
-            $loan_amortization->amort_principal = $request->amort_principal; 
-            $loan_amortization->amort_interest = $request->amort_interest;
-            $loan_amortization->amort_start = $request->amort_start;
-            $loan_amortization->amort_end = $request->amort_end;
-            $loan_amortization->save();
+
+            // if loan has amortization for interest and principal but period of term is null
+            if($loan_amortization->amort_start  == null && $request->amort_start != null){
+                $months = ($loan->term_years * 12)-1;
+                $newEndDate = $startDate->addMonths($months);
+                
+                $loan_amortization->amort_principal = $request->amort_principal; 
+                $loan_amortization->amort_interest = $request->amort_interest;
+                $loan_amortization->amort_start = $request->amort_start;
+                $loan_amortization->amort_end = $newEndDate;
+                $loan_amortization->save();
+            }
+            else{
+                $loan_amortization->amort_principal = $request->amort_principal; 
+                $loan_amortization->amort_interest = $request->amort_interest;
+                $loan_amortization->amort_start = $request->amort_start;
+                $loan_amortization->amort_end = $request->amort_end;
+                $loan_amortization->save();
+            }
             
         }
 

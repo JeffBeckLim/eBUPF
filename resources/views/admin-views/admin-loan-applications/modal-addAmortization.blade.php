@@ -6,6 +6,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+        
+            @include('admin-views.admin-loan-applications.div-identifier')
+      
+      
         <div class="border bg-light rounded p-3">
             Term of the loan: {{$loan->term_years}} years.
         </div>
