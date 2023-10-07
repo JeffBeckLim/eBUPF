@@ -27,4 +27,15 @@ class LoanController extends Controller
 
         return view('member-views.your-loans.member-loans', compact('loans'));
     }
+
+    public function displayLoanDetails($id){
+        $loan = Loan::where('id', $id)->first();
+        $payments = $loan->payment;
+
+        return view('member-views.your-loans.member-loan-details',
+            compact(
+                'loan',
+                'payments'
+            ));
+    }
 }

@@ -6,6 +6,7 @@ use App\Models\MembershipApplication;
 use App\Models\User;
 use App\Models\Loan;
 use App\Models\Payment;
+use App\Models\Adjustment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Form;
 
@@ -14,11 +15,13 @@ class AdminRemittanceController extends Controller
     public function showRemittance(){
 
         $payments = Payment::all();
+        $adjustments = Adjustment::all();
         $loans = Loan::where('is_active', 1)->get();
 
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
             'loans' => $loans,
+            'adjustments' => $adjustments,
         ]);
     }
 
