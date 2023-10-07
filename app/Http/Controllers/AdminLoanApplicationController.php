@@ -20,7 +20,7 @@ class AdminLoanApplicationController extends Controller
         $loan=Loan::findOrFail($id);
         $request->validate([
             'principal_amount'=> 'required|numeric|min:10000|max:200000',
-            'interest'=> 'nullable|numeric|min:10000|max:200000',
+            'interest'=> 'nullable|numeric|min:1000|max:200000',
             'term_years'=> 'required|numeric|min:1|max:5',
             'category'=> 'nullable|numeric',
         ]);
