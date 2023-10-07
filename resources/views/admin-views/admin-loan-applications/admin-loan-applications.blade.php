@@ -285,16 +285,28 @@
                                 </td>
                                 <td class="border-end">
                                     <h6>
-                                    @if ($loan->amortization_id == null)
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
-                                            <i class="bi bi-plus-circle"></i>
+                                    @if ($loan->interest == null)
+                                        <a class="text-danger text-decoration-none" data-bs-toggle="tooltip" data-bs-title="INTEREST column is empty" disabled>
+                                            <i class="bi bi-exclamation-circle"></i>
                                         </a>
                                     @else
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
+                                        @if ($loan->amortization_id == null)
+                                            <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
+                                                <i class="bi bi-plus-circle"></i>
+                                            </a>
+                                        @elseif($loan->amortization)
+                                            @if ($loan->amortization->amort_start == null &&
+                                                $loan->amortization->amort_start == null)
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
+                                                    <i class="bi bi-plus-circle"></i>
+                                                </a>
+                                            @else
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                            @endif
+                                        @endif
                                     @endif
-     
                                     </h6>
 
                                 </td>
@@ -343,6 +355,11 @@
     </div>
 </div>
 <script>
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+
     // Generate days of the month
     var daySelect = document.getElementById("daySelect");
     var option = document.createElement("option");
@@ -405,5 +422,6 @@
         });
     });
 </script>
+
 @include('admin-components.admin-dataTables')
 @endsection
