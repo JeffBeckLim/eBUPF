@@ -87,6 +87,8 @@ use App\Http\Controllers\TransactionController;
     //Show hsl form
     Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth')->name('hsl.application');//add middleware for verified members only
 
+    //show loan application details
+    Route::get('/member/view/loan-details/{id}', [LoanController::class, 'displayLoanDetails'])->name('loan.details');
 // ======================== ** LOAN APPLICATION MPL and HSL **  ==================================
 //
 //

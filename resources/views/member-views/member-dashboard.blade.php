@@ -12,16 +12,16 @@
                                     <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid;">
                                         <div style="position: relative;" class="mb-2">
                                             <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
-                                            <p class="text-white" style="position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%);">
+                                            <p class="text-white text-center" style="width: 100%; position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9rem;">
                                                 <?php
                                                     $mplTotalAmount = 0;
                                                     $hslTotalAmount = 0;
 
                                                     foreach ($loans as $loan) {
                                                         if ($loan->loan_type_id == 1) {
-                                                            $mplTotalAmount += $loan->principal_amount;
+                                                            $mplTotalAmount += ($loan->principal_amount + $loan->interest);
                                                         } elseif ($loan->loan_type_id == 2) {
-                                                            $hslTotalAmount += $loan->principal_amount;
+                                                            $hslTotalAmount += ($loan->principal_amount + $loan->interest);
                                                         }
                                                     }
                                                     $mplTotalBalance = $mplTotalAmount;
@@ -35,7 +35,7 @@
                                                         }
                                                     }
                                                 ?>
-                                                MPL ₱<span class="fs-6 fw-bold">{{ number_format($mplTotalBalance, 2) }}</span>
+                                                MPL ₱<span class="fw-bold">{{ number_format($mplTotalBalance, 2) }}</span>
                                                 <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ number_format($hslTotalBalance, 2) }}</span>
 
                                             </p>
@@ -54,80 +54,83 @@
 
                                                 @foreach ($sortedLoans as $loan)
                                                     @if ($loan->loan_type_id == 1)
-                                                        <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
-                                                            <div class="row mt-2 g-0">
-                                                                <div class="col-8  g-0">
-                                                                    <div class="row h-100 g-0">
-                                                                        <div class="col-3 ps-2 d-flex justify-content-center">
-                                                                            <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
-                                                                        </div>
-                                                                        <div class="col-9">
-                                                                            <p class="myline-height">
-                                                                                <span class="text14-design">Multi-Purpose Loan</span><br>
-                                                                                <span class="text13-design">{{$loan->created_at->format('F j, Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F j, Y')}}</span>
-                                                                            </p>
+                                                        <a href="{{route('loan.details', ['id' => $loan->loan_type_id])}}" style="text-decoration: none;">
+                                                            <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
+                                                                <div class="row mt-2 g-0">
+                                                                    <div class="col-8  g-0">
+                                                                        <div class="row h-100 g-0">
+                                                                            <div class="col-3 ps-2 d-flex justify-content-center">
+                                                                                <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
+                                                                            </div>
+                                                                            <div class="col-9">
+                                                                                <p class="myline-height">
+                                                                                    <span class="text14-design">Multi-Purpose Loan</span><br>
+                                                                                    <span class="text13-design">{{$loan->created_at->format('F Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F Y')}}</span>
+                                                                                </p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-4">
-                                                                    <p class="text13-design m-0">Outstanding Balance</p>
-                                                                    <p class="text14-design"><span class="text12-design">Php </span>
-                                                                     {{-- Check if theres a loan payment [isset/empty] --}}
-                                                                     @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
-                                                                     {{ number_format($loan->principal_amount - $totalPaymentMPL[$loan->id], 2) }}
-                                                                 @else
-                                                                     {{ number_format($loan->principal_amount, 2) }}
-                                                                 @endif
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mt-2 mb-2">
-                                                                <div class="col-sm-7">
-                                                                    <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <span class="text11-design fw-bold">{{$loan->remainingMonths}}</span>  <span class="text12-design">months to pay</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    @elseif($loan->loan_type_id == 2)
-                                                    <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
-                                                        <div class="row mt-2 g-0">
-                                                            <div class="col-8  g-0">
-                                                                <div class="row h-100 g-0">
-                                                                    <div class="col-3 ps-2 d-flex justify-content-center">
-                                                                        <img class="img-fluid" src="icons/HSL-mini.svg" alt="hsl mini" width="40px">
-                                                                    </div>
-                                                                    <div class="col-9">
-                                                                        <p class="myline-height">
-                                                                            <span class="text14-design">Housing Loan</span><br>
-                                                                            <span class="text13-design">{{$loan->created_at->format('F j, Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F j, Y')}}</span>
+                                                                    <div class="col-4">
+                                                                        <p class="text13-design m-0">Outstanding Balance</p>
+                                                                        <p class="text14-design"><span class="text12-design">Php </span>
+                                                                        {{-- Check if theres a loan payment [isset/empty] --}}
+                                                                        @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
+                                                                        {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
+                                                                    @else
+                                                                        {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
+                                                                    @endif
                                                                         </p>
                                                                     </div>
                                                                 </div>
+                                                                <div class="row mt-2 mb-2">
+                                                                    <div class="col-sm-7">
+                                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <span class="text11-design fw-bold">{{$loan->remainingMonths}}</span>  <span class="text12-design">months to pay</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-4">
-                                                                <p class="text13-design m-0">Outstanding Balance</p>
-                                                                <p class="text14-design"><span class="text12-design">Php </span>
-                                                                    {{-- Check if theres a loan payment [isset/empty] --}}
-                                                                    @if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
-                                                                        {{ number_format($loan->principal_amount - $totalPaymentHSL[$loan->id], 2) }}
-                                                                    @else
-                                                                        {{ number_format($loan->principal_amount, 2) }}
-                                                                    @endif
-                                                                </p>
+                                                        </a>
+                                                    @elseif($loan->loan_type_id == 2)
+                                                        <a href="{{route('loan.details', ['id' => $loan->loan_type_id])}}" style="text-decoration: none;">
+                                                            <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
+                                                                <div class="row mt-2 g-0">
+                                                                    <div class="col-8  g-0">
+                                                                        <div class="row h-100 g-0">
+                                                                            <div class="col-3 ps-2 d-flex justify-content-center">
+                                                                                <img class="img-fluid" src="icons/HSL-mini.svg" alt="hsl mini" width="40px">
+                                                                            </div>
+                                                                            <div class="col-9">
+                                                                                <p class="myline-height">
+                                                                                    <span class="text14-design">Housing Loan</span><br>
+                                                                                    <span class="text13-design">{{$loan->created_at->format('F j, Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F j, Y')}}</span>
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <p class="text13-design m-0">Outstanding Balance</p>
+                                                                        <p class="text14-design"><span class="text12-design">Php </span>
+                                                                            {{-- Check if theres a loan payment [isset/empty] --}}
+                                                                            @if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
+                                                                                {{ number_format($loan->principal_amount - $totalPaymentHSL[$loan->id], 2) }}
+                                                                            @else
+                                                                                {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
+                                                                            @endif
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row mt-2 mb-2">
+                                                                    <div class="col-sm-7">
+                                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <span class="text11-design fw-bold">{{$loan->remainingMonths}}  </span> <span class="text12-design">months to pay</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row mt-2 mb-2">
-                                                            <div class="col-sm-7">
-                                                                <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <span class="text11-design fw-bold">{{$loan->remainingMonths}}  </span> <span class="text12-design">months to pay</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        </a>
                                                     @endif
                                                 @endforeach
                                             @endif
