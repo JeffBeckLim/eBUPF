@@ -285,10 +285,18 @@
                                 </td>
                                 <td class="border-end">
                                     <h6>
+                                    @if ($loan->amortization_id == null)
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
+                                            <i class="bi bi-plus-circle"></i>
+                                        </a>
+                                    @else
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
+                                    @endif
+     
                                     </h6>
+
                                 </td>
                                 {{-- check --}}
                                 <td>
@@ -322,6 +330,7 @@
                             @include('admin-views.admin-loan-applications.modal-check')
                             @include('admin-views.admin-loan-applications.modal-adjustments')
                             @include('admin-views.admin-loan-applications.modal-amortization')
+                            @include('admin-views.admin-loan-applications.modal-addAmortization')
                             @include('admin-views.admin-loan-applications.modal-edit-loan')
                             
 

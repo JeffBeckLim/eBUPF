@@ -23,6 +23,7 @@ class AdminAmortizationController extends Controller
         $startDate = Carbon::parse($request->amort_start);
         $endDate = Carbon::parse($request->amort_end);
 
+        
         $dateError = 0;
         $dateMatchError = 0;
         if($startDate == null || $endDate == null){
@@ -48,11 +49,19 @@ class AdminAmortizationController extends Controller
 
         // for new amortization
         if($loan->amortization_id == null){
+
+            // $date = \Carbon\Carbon::parse('2023-10-07'); // Parse your initial date
+            // // Add 24 months to the date
+            $months = ($loan->term_years * 12)-1;
+            $newEndDate = $startDate->addMonths($months);
+
+            // dd($newEndDate);
+
             $amortization = Amortization::create([
                 'amort_principal' => $request->amort_principal, 
                 'amort_interest' => $request->amort_interest, 
                 'amort_start' => $request->amort_start, 
-                'amort_end' => $request->amort_end,
+                'amort_end' => $newEndDate,
 
             ]);
             $loan->amortization_id = $amortization->id;
