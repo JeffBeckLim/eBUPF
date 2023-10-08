@@ -354,6 +354,7 @@
         </div>
     </div>
 </div>
+
 <script>
 
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

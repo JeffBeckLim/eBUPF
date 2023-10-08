@@ -1,4 +1,35 @@
-<div id="myAlert" class="alert">
+<style>
+/* CSS for the alert */
+    .alert-fixed {
+    position: fixed;
+    top: 20px;
+    z-index: 9999;
+    /* width: 40%; */
+    padding: 10px;
+    transition: right 0.3s ease-in-out; /* Transition property for the 'right' property */
+    }
+
+    .slide-in {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Initially position it outside the viewport */
+    width: 30%; /* Set the width as needed */
+    height: 100%; /* Set the height as needed */
+    padding: 20px;
+    animation: slideIn 0.4s forwards; /* Animation with forwards to retain final state */
+    }
+
+    @keyframes slideIn {
+    to {
+        right: 0; /* Slide it in to the desired position */
+    }
+    }
+
+
+</style>
+
+
+<div id="myAlert" class="alert-fixed alert-fixed slide-in">
 
     {{-- AMORTIZATION ======================================================================  --}}
     @if (session('date_error'))
@@ -118,13 +149,14 @@
 
 
 <script>
+    
     // Function to hide the alert after a specific time (e.g., 5 seconds)
     function hideAlert() {
         var alert = document.getElementById('myAlert');
         alert.style.display = 'none';
     }
 
-    // Set a timeout to call the hideAlert function after 5 seconds (5000 milliseconds)
+    // Set a timeout to call the hideAlert function after 7 seconds (7000 milliseconds)
     setTimeout(hideAlert, 7000);
 </script>
 
