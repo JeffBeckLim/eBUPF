@@ -86,7 +86,7 @@
                                         {{$hsl_count}}
                                         </td>
                                         <td class="text-end">
-                                            <a href="" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
+                                            <a href="/admin/ledgers/member/mpl/{{$member->id}}" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
                                         </td>
                                     </tr>
                                     @endforeach 

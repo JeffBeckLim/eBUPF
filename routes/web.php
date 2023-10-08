@@ -69,7 +69,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
-    Route::get('/admin/ledgers/member' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
+    Route::get('/admin/ledgers/member/{loan_type}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
 
 
 

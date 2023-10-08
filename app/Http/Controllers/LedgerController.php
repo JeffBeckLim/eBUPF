@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loan;
 use App\Models\Member;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,29 @@ class LedgerController extends Controller
         return view('admin-views.admin-ledgers.admin-ledgers', compact('members'));
     }
 
-    public function showMemberLedgers(){
-        return view('admin-views.admin-ledgers.admin-members-ledgers');
+    public function showMemberLedgers( $loan_type , $id){
+        if($loan_type == 'mpl'){
+            $loan_type_id = 1;
+        }elseif($loan_type == 'hsl'){
+            $loan_type_id = 2;
+        }
+        $member = Member::with('units.campuses')->where('id' , $id)->first();
+
+        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' )->get();
+
+        // dd($raw_loans);
+        $loans = [];
+        foreach($raw_loans as $raw_loan){
+            $status_array = [];
+            foreach($raw_loan->loanApplicationStatus as $status){
+                    array_push($status_array, $status->loan_application_state_id);
+                }
+                if(in_array(5, $status_array)){
+                    array_push($loans, $raw_loan);
+                }
+            }
+        
+        // dd($loans);
+        return view('admin-views.admin-ledgers.admin-members-ledgers' , compact('loans' , 'loan_type' ,'member'));
     }
 }

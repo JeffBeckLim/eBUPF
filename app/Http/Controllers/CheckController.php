@@ -11,10 +11,10 @@ class CheckController extends Controller
 {
     //
     public function updateCheck(Request $request, $id){
-        
+
         $check = Check::where('loan_id', $id)->first();
-        $loan = Loan::findOrFail($id)->first();
-        // dd($loan);
+        $loan = Loan::findOrFail($id);
+
         // ADD VALIDATIONS
 
         if( $check == null ){
