@@ -55,8 +55,8 @@
                             <input type="number" name="prevLoan" id="prevLoan" class="form-control" placeholder="Enter previous loan">
                         </div>
                         <div class="d-flex justify-content-end mt-3 pt-2">
-                            <button type="reset" class="btn btn-outline-secondary me-2 rounded-2 bg-secondary text-white">Clear</button>
-                            <button type="submit" class="btn btn-primary rounded-2 text-white" style="background: #FF6F19; border: none;">Calculate</button>
+                            <button type="reset" class="btn btn-outline-secondary me-2 rounded-2">Clear</button>
+                            <button type="submit" class="btn bu-orange text-light" style="background: #FF6F19; border: none;">Calculate</button>
                         </div>
                     </div>
                 </form>
@@ -153,6 +153,9 @@
                             </thead>
                             <tbody class="text-center">
                                 @if ($totalMonths != 0)
+                                    @php
+                                        $yearlyBalancesCount = count($yearlyBalances);
+                                    @endphp
                                     @for ($i = 0; $i < $totalMonths; $i++)
                                         <tr class="pl-tr">
                                             <td>{{ $i + 1 }}</td>
@@ -161,21 +164,20 @@
                                             <td>{{ number_format($monthlyInterestAmort ?? '0.00', 2, '.', ',') }}</td>
                                             <td>{{ number_format($endingBalance[$i] ?? '0.00', 2, '.', ',') }}</td>
                                         </tr>
-                                        {{--
-                                        This is to view the yearly balance and interest
-                                         @if (($i + 1) % 12 === 0)
+
+
+                                        @if (($i + 1) % 12 === 0)
                                             @php
                                                 $yearly = ($i + 1) / 12;
+                                                $yearlyIndex = $yearlyBalancesCount - $yearly;
                                             @endphp
-                                             <tr class="pl-tr">
-                                                <td>Year {{ $yearly }}</td>
-                                                <td>{{ number_format($yearlyBalances[$yearly-1]['yearlyBalance'] ?? '0.00', 2, '.', ',') }}</td>
-                                                <td>{{ number_format($yearlyBalances[$yearly-1]['yearlyInterest'] ?? '0.00', 2, '.', ',') }}</td>
-                                                <td>N/A</td> <!-- Monthly principal and ending balance not applicable for yearly total -->
-                                                <td>N/A</td>
+                                            <tr class="pl-tr" style="background-color: #f2f2f2;"> <!-- Add background color to yearly total row -->
+                                                <td colspan="2" class="text-start" style="padding-left: 30px;">Year {{ $yearly }} total</td>
+                                                <td class="fw-bold text-danger">{{ number_format($yearlyBalances[$yearlyIndex]['yearlyBalance'] ?? '0.00', 2, '.', ',') }}</td>
+                                                <td class="fw-bold text-danger">{{ number_format($yearlyBalances[$yearlyIndex]['yearlyInterest'] ?? '0.00', 2, '.', ',') }}</td>
+                                                <td></td>
                                             </tr>
                                         @endif
-                                        --}}
                                     @endfor
                                 @endif
                             </tbody>

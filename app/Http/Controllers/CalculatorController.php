@@ -27,6 +27,8 @@ class CalculatorController extends Controller
         $termYears = $request->input('term');
         $prevLoan = $request->input('prevLoan', 0); // Default to 0 if not provided
 
+        $amount -= $prevLoan;
+
         // Calculate the interest rate based on the loan category. 6% for MPL, 9% for HSL
         if ($loanCategory == 'mpl') {
             $interestRate = 0.06;
@@ -54,6 +56,7 @@ class CalculatorController extends Controller
             ];
             $yearlyBalance -= $yearlyPrincipalBalance;
         }
+
 
         // Sum of total Interest and Principal
         $totalInterestAndPrincipal = $amount + $totalInterest;
