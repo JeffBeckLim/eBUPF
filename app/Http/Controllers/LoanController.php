@@ -24,7 +24,6 @@ class LoanController extends Controller
             }
         }
 
-
         return view('member-views.your-loans.member-loans', compact('loans'));
     }
 

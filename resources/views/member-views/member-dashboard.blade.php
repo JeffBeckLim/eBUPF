@@ -65,7 +65,14 @@
                                                                             <div class="col-9">
                                                                                 <p class="myline-height">
                                                                                     <span class="text14-design">Multi-Purpose Loan</span><br>
-                                                                                    <span class="text13-design">{{$loan->created_at->format('F Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F Y')}}</span>
+                                                                                    @if($loan->amortization)
+                                                                                        <span class="text13-design">
+                                                                                            {{date("F Y", strtotime($loan->amortization->amort_start))}}
+                                                                                            -  {{date("F Y", strtotime($loan->amortization->amort_end))}}
+                                                                                        </span>
+                                                                                    @else
+                                                                                        <span class="text13-design">No amortization period yet</span>
+                                                                                    @endif
                                                                                 </p>
                                                                             </div>
                                                                         </div>
@@ -84,7 +91,13 @@
                                                                 </div>
                                                                 <div class="row mt-2 mb-2">
                                                                     <div class="col-sm-7">
-                                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                                        <span class="text11-design text11-move fw-bold">Amortization </span> <span class="text12-design">
+                                                                            @if($loan->amortization)
+                                                                                Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
+                                                                            @else
+                                                                                No amortization yet.
+                                                                            @endif
+                                                                        </span>
                                                                     </div>
                                                                     <div class="col-sm-4">
                                                                         <span class="text11-design fw-bold">{{$loan->remainingMonths}}</span>  <span class="text12-design">months to pay</span>
@@ -104,7 +117,14 @@
                                                                             <div class="col-9">
                                                                                 <p class="myline-height">
                                                                                     <span class="text14-design">Housing Loan</span><br>
-                                                                                    <span class="text13-design">{{$loan->created_at->format('F j, Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F j, Y')}}</span>
+                                                                                    @if($loan->amortization)
+                                                                                        <span class="text13-design">
+                                                                                            {{date("F Y", strtotime($loan->amortization->amort_start))}}
+                                                                                            -  {{date("F Y", strtotime($loan->amortization->amort_end))}}
+                                                                                        </span>
+                                                                                    @else
+                                                                                        <span class="text13-design">No amortization period yet</span>
+                                                                                    @endif
                                                                                 </p>
                                                                             </div>
                                                                         </div>

@@ -33,7 +33,13 @@
                                             @endif
                                             </p>
                                             <p class="m-0 fs-7">
-                                                <span>{{$loan->created_at->format('F Y')}} - {{$loan->created_at->addYears($loan->term_years)->format('F Y')}}</span>
+                                                @if($loan->amortization)
+                                                {{date("F Y", strtotime($loan->amortization->amort_start))}}
+                                                <span>
+                                                    -  {{date("F Y", strtotime($loan->amortization->amort_end))}} </span>
+                                                @else
+                                                    No amortization period yet
+                                                @endif
                                             </p>
                                             <p class="m-0 fw-bold mt-4 fs-7">
                                                 Monthly Payable
@@ -83,15 +89,21 @@
                                     </p>
                                 </div>
 
-                                <div class="col-6 mb-3 ">
+                                <div class="col-6 mb-3">
                                     <p class="fw-bold m-0">
                                         Loan Category
                                     </p>
                                 </div>
-                                <div class="col-6 mb-3 ">
-                                    <p class="m-0">
-                                      {{$loan->loanCategory->loan_category_name}} Loan
-                                    </p>
+                                <div class="col-6 mb-3">
+                                    @if ($loan->loanCategory)
+                                        <p class="m-0">
+                                            {{ $loan->loanCategory->loan_category_name }} Loan
+                                        </p>
+                                    @else
+                                        <p class="m-0">
+                                            No Loan Category Yet
+                                        </p>
+                                    @endif
                                 </div>
 
                                 <div class="col-6 mb-3 ">
@@ -138,16 +150,23 @@
                                     </p>
                                 </div>
 
-                                <div class="col-6 mb-3 ">
+                                <div class="col-6 mb-3">
                                     <p class="fw-bold m-0">
                                         End of Term
                                     </p>
                                 </div>
                                 <div class="col-6">
-                                    <p class="m-0">
-                                      {{$loan->created_at->addYears($loan->term_years)->format('F Y')}}
-                                    </p>
+                                    @if ($loan->amortization && $loan->amortization->amort_end)
+                                        <p class="m-0">
+                                            {{ date("F Y", strtotime($loan->amortization->amort_end)) }}
+                                        </p>
+                                    @else
+                                        <p class="m-0">
+                                            No End of Term Yet
+                                        </p>
+                                    @endif
                                 </div>
+
                             </div>
                         </div>
                     </div>
