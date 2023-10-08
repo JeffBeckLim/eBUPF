@@ -7,6 +7,9 @@
         </div>
         <div class="modal-body">
 
+          @include('admin-views.admin-loan-applications.div-identifier')
+      
+
         <form action="{{route('update.adjustments', $loan->id)}}" method="POST">
             @csrf
 

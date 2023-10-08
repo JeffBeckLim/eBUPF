@@ -20,7 +20,7 @@ class AdminLoanApplicationController extends Controller
         $loan=Loan::findOrFail($id);
         $request->validate([
             'principal_amount'=> 'required|numeric|min:10000|max:200000',
-            'interest'=> 'nullable|numeric|min:10000|max:200000',
+            'interest'=> 'nullable|numeric|min:1000|max:200000',
             'term_years'=> 'required|numeric|min:1|max:5',
             'category'=> 'nullable|numeric',
         ]);
@@ -31,6 +31,9 @@ class AdminLoanApplicationController extends Controller
         $loan->loan_category_id = $request->category;
         $loan->save();
 
+        
+
+        // if no amortization exist yet and interest was added
         if($loan->amortization_id == null && $request->interest != null){
             $amort_principal = $request->principal_amount/($loan->term_years * 12);
             $amort_interest = $request->interest/($loan->term_years * 12);
@@ -46,6 +49,7 @@ class AdminLoanApplicationController extends Controller
 
             return back()->with('success', 'Loan Updated and Amortization Added!');
         }
+        // if amortization is added but interest is added
         elseif($loan->amortization_id != null && $request->interest != null){
             // $amortization = DB::table('amortizations')->where('id', $loan->amortization_id)->get();
             $amortization = Amortization::where('id', $loan->amortization_id)->first();
