@@ -32,25 +32,25 @@
                         <p class="pl-text-size "><span class="fw-bold">Principal: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">200,000</p>
+                        <p class="pl-text-size">{{$loan->principal_amount}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">36,000</p>
+                        <p class="pl-text-size">{{$loan->interest}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Monthly Amort. Prin.: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">3,333.33</p>
+                        <p class="pl-text-size">{{$loan->amortization->amort_principal}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Monthly Interest: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">600</p>
+                        <p class="pl-text-size">{{$loan->amortization->amort_interest}}</p>
                     </div>
                 </div>
             </div>
@@ -60,25 +60,53 @@
                         <p class="pl-text-size"><span class="fw-bold">Loan Grant: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">Dec. 2022</p>
+                        {{-- if naka base sa loan --}}
+                        {{-- @foreach ($loan->loanApplicationStatus as $status)
+                            @if ($status->loan_application_state_id == 5)
+                                <p class="pl-text-size">{{ $status->created_at->format('M Y') }}</p>        
+                            @endif
+                        @endforeach --}}
+                        @php
+                            $dateString = $loan->amortization->amort_start; // Assuming this is a date string in 'YYYY-MM-DD' format
+                            $date = \Carbon\Carbon::parse($dateString); // Parse the date string into a Carbon date object
+
+                            // Subtract one month
+                            $oneMonthAgo = $date->subMonth();
+                            
+                            // You can format and display the result
+                            // echo $oneMonthAgo->format('Y-m-d'); // Format as 'YYYY-MM-DD' or any format you prefer
+                        @endphp
+                        <p class="pl-text-size">{{ $oneMonthAgo->format('M Y') }}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Amort. Period: </span></p>
                     </div>
+                    @php
+                        $amort_start = \Carbon\Carbon::parse($loan->amortization->amort_start);
+                        $amort_end = \Carbon\Carbon::parse($loan->amortization->amort_end);
+                    @endphp 
                     <div class="col-4">
-                        <p class="pl-text-size">Dec. 2027</p>
+                        <p class="pl-text-size">{{$amort_start->format('M Y')}} | {{$amort_end->format('M Y')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Term (Year): </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">5</p>
+                        <p class="pl-text-size">{{$loan->term_years}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Term (Month): </span></p>
                     </div>
+                    @php
+                        // Parse the start and end dates as Carbon objects
+                        $carbonStartDate = Carbon\Carbon::parse($loan->amortization->amort_start);
+                        $carbonEndDate = Carbon\Carbon::parse($loan->amortization->amort_end);
+
+                        // Calculate the difference in months
+                        $monthsDifference = $carbonStartDate->diffInMonths($carbonEndDate) + 1;
+                    @endphp
                     <div class="col-4">
-                        <p class="pl-text-size">60</p>
+                        <p class="pl-text-size">{{$monthsDifference}}</p>
                     </div>
                 </div>
             </div>
@@ -88,25 +116,31 @@
                         <p class="pl-text-size"><span class="fw-bold">Principal Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">3,333.33</p>
+                        <p class="pl-text-size">{{$principal_paid}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">600</p>
+                        <p class="pl-text-size">{{$interest_paid}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Total Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">3,333.33</p>
+                        <p class="pl-text-size">{{$interest_paid + $principal_paid}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Months Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">1</p>
+                        @php
+                            // Parse the start and end dates as Carbon objects
+                            $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
+                            // Calculate the difference in months
+                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate);
+                         @endphp
+                        <p class="pl-text-size">{{$monthsDifferencePayment}}</p>
                     </div>
                 </div>
             </div>
@@ -116,25 +150,30 @@
                         <p class="pl-text-size"><span class="fw-bold">Principal Bal.: </span></p>
                     </div>
                     <div class="col-4 ">
-                        <p class="pl-text-size">196,666.67</p>
+                        <p class="pl-text-size">{{$loan->principal_amount - $principal_paid}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest Bal.: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">35,400.00</p>
+                        <p class="pl-text-size">{{$loan->interest - $interest_paid}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Total Bal.: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">232,066.67</p>
+                        <p class="pl-text-size">
+                            {{
+                              ($loan->interest - $interest_paid)  + 
+                              ($loan->principal_amount - $principal_paid)
+                            }}
+                        </p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Months Left: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">59</p>
+                        <p class="pl-text-size">{{$monthsDifferencePayment = $latestPayment->diffInMonths($carbonEndDate)}}</p>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loan;
 use App\Models\Member;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class LedgerController extends Controller
@@ -59,10 +60,22 @@ class LedgerController extends Controller
 
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
-        $loan = Loan::with('loanType')->where('id' , $id)->first();
-        dd($loan);
+        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment')->where('id' , $id)->first();
 
-        return view('admin-views.admin-ledgers.admin-personal-ledger');
+        // get principal and interest PAID
+        $principal_paid = 0;
+        $interest_paid = 0;
+        $payment_ids = [];
+        foreach($loan->payment as $payment){
+            $principal_paid += $payment->principal;
+            $interest_paid += $payment->interest;
+            
+            array_push($payment_ids, $payment->id);
+        }
+
+        $latest_payment = Payment::find(max($payment_ids));
+
+        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment'));
     }
 
 }
