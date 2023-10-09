@@ -134,6 +134,9 @@
                         <p class="pl-text-size"><span class="fw-bold">Months Paid: </span></p>
                     </div>
                     <div class="col-4">
+                        @if ($latest_payment != null)
+                            
+                        
                         @php
                             // Parse the start and end dates as Carbon objects
                             $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
@@ -141,6 +144,7 @@
                             $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate);
                          @endphp
                         <p class="pl-text-size">{{$monthsDifferencePayment}}</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -173,7 +177,11 @@
                         <p class="pl-text-size"><span class="fw-bold">Months Left: </span></p>
                     </div>
                     <div class="col-4">
+                        @if ($latest_payment != null)
                         <p class="pl-text-size">{{$monthsDifferencePayment = $latestPayment->diffInMonths($carbonEndDate)}}</p>
+                        @else
+                        {{$monthsDifference}}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -185,16 +193,27 @@
             <thead>
                 <tr class="pl-tr">
                     <th></th>
-                    <th colspan="2">2027</th>
+                    
+                    @for ($x = $loan->term_years; $x != 0; $x--)
+                        <th colspan="2">{{$year = $amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
+                    @endfor
+                    
+                    <th colspan="2">{{$amort_start->format(' Y')}}</th>
+                    {{-- <th colspan="2">2027</th>
                     <th colspan="2">2026</th>
                     <th colspan="2">2025</th>
                     <th colspan="2">2024</th>
                     <th colspan="2">2023</th>
-                    <th colspan="2">2022</th>
+                    <th colspan="2">2022</th> --}}
                 </tr>
                 <tr class="pl-tr" style="border-bottom: 1px solid black">
                     <th>Month</th>
-                    <th class="fw-normal">Principal</th>
+                    @for ( $i=-1; $i < $loan->term_years; $i++)
+                        <th class="fw-normal">Principal</th>
+                        <th class="fw-normal">Interest</th>    
+                    @endfor
+                    
+                    {{-- <th class="fw-normal">Principal</th>
                     <th class="fw-normal">Interest</th>
                     <th class="fw-normal">Principal</th>
                     <th class="fw-normal">Interest</th>
@@ -203,26 +222,24 @@
                     <th class="fw-normal">Principal</th>
                     <th class="fw-normal">Interest</th>
                     <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
-                    <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
+                    <th class="fw-normal">Interest</th> --}}
                 </tr>
             </thead>
             <tbody>
                 <tr class="pl-tr">
                     <td>January</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
                     <td>3,333.33</td>
                     <td>600.00</td>
-                    <td></td>
-                    <td></td>
+                    <td>1</td>
+                    <td>1</td>
                 </tr>
                 <tr class="pl-tr">
                     <td>February</td>

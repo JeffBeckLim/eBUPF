@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Loan;
 use App\Models\Member;
 use App\Models\Payment;
@@ -66,6 +67,7 @@ class LedgerController extends Controller
         $principal_paid = 0;
         $interest_paid = 0;
         $payment_ids = [];
+    
         foreach($loan->payment as $payment){
             $principal_paid += $payment->principal;
             $interest_paid += $payment->interest;
@@ -73,7 +75,16 @@ class LedgerController extends Controller
             array_push($payment_ids, $payment->id);
         }
 
-        $latest_payment = Payment::find(max($payment_ids));
+        if(count($payment_ids) != null){
+            $latest_payment = Payment::find(max($payment_ids));
+        }else{
+            $latest_payment = null;
+        }
+
+        // $startDate = Carbon::parse($loan->amortization->amort_start); // Your start date
+        // $endDate = $startDate->copy()->addMonths(12); // Add 12 months to the start date
+
+        // dd($endDate);
 
         return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment'));
     }
