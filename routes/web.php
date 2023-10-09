@@ -212,6 +212,8 @@ use App\Http\Controllers\TransactionController;
     //Generate HSL Application Form
     Route::get('/member/generateHousingLoanApplicationForm/{id}',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
 
+    //Generate Insurance Form
+    Route::get('/member/this/generateInsuranceForm',[PDFController::class,'generateInsuranceForm'])->middleware('auth')->name('generateInsuranceForm');
 //MEMBER ======================================================================================================
 
 
