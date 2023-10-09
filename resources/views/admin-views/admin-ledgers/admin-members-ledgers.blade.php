@@ -78,19 +78,22 @@
                                                     {{$loan->loanCategory->loan_category_name}} <i class="bi bi-caret-right-fill"></i>
                                                 @endif
                                                 {{$loan->loanType->loan_type_name}} - {{$loan->id}}
+                                                <i class="bi bi-caret-right-fill"></i>
+                                                Php {{$loan->principal_amount + $loan->interest}}
                                             </h6>
                                             <h6 style="font-size: 12px">
                                                 <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Principal Amount" >
                                                     <i class="bi bi-cash-stack"></i>
-                                                </a>
                                                  Php {{$loan->principal_amount}} <i class="bi bi-dot px-3"></i>  
+                                                 </a>
                                                  <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Interest" >
                                                     <i class="bi bi-graph-up-arrow"></i>
-                                                </a> Php {{$loan->interest}}
+                                                 Php {{$loan->interest}}
+                                                </a>
                                             </h6>
                                         </td>
                                         <td class="text-end">
-                                            <a href="" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1"><i class="bi bi-eye-fill"></i> View</a>
+                                            <a href="{{route('admin.personal.ledger', $loan->id)}}" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1"><i class="bi bi-eye-fill"></i> View</a>
                                         </td>
                                     </tr>    
                                 @endforeach

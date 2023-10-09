@@ -56,4 +56,13 @@ class LedgerController extends Controller
         // dd($loans);
         return view('admin-views.admin-ledgers.admin-members-ledgers' , compact('loans' , 'loan_type' ,'member'));
     }
+
+    public function showPersonalLedger($id){
+        // add error catcher here to make sure that loang being retrieved is valid
+        $loan = Loan::with('loanType')->where('id' , $id)->first();
+        dd($loan);
+
+        return view('admin-views.admin-ledgers.admin-personal-ledger');
+    }
+
 }
