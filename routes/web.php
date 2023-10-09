@@ -70,6 +70,8 @@ use App\Http\Controllers\TransactionController;
     Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
     Route::get('/admin/ledgers/member/{loan_type}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
+    Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
+
 
 
 
@@ -161,7 +163,7 @@ use App\Http\Controllers\TransactionController;
     Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject');
 
     // Show Admin Ledger
-    Route::get('/ledger', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
+    // Route::get('/ledger/test-me', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
 
     Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
 
