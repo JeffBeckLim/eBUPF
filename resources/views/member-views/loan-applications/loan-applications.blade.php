@@ -21,15 +21,15 @@
                         <label>Search</label>
                         <input type="text" class="ms-2 search-box" placeholder="Enter your search query">
                     </div> --}}
-                        
+
                     <div class="mx-3 mt-2">
                         <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications')}}">New</a>
                         <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.evaluated')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.evaluated')}}">Evaluated</a>
                         <a class="px-3 btn fw-bold text-secondary {{Route::is('loan.applications.all')? 'bu-orange text-light rounded-5': ''}}" href="{{Route('loan.applications.all')}}">All</a>
                     </div>
-                    
+
                     <div class="d-flex flex-column align-items-center justify-content-center mt-4 mx-lg-3 m-1">
-                        
+
                         @if ($loans)
 
                         @foreach ($loans as $loan)
@@ -47,7 +47,7 @@
                                         Since your check is now ready for claiming, you can proceed to print the insurance form. This form is one of the necessary documents you'll need when claiming your check
                                     </div>
                                     <div class="col-12 pt-3 text-end p-0">
-                                        <a href="#" class="btn text-light fw-bold grow-on-hover" style="background-color: #b700ff; font-size: 14px">Print Insurance Form</a>
+                                        <a href="{{route('generateInsuranceForm')}}" class="btn text-light fw-bold grow-on-hover" style="background-color: #b700ff; font-size: 14px">Print Insurance Form</a>
                                     </div>
                                 </div>
                             @endif
@@ -61,9 +61,9 @@
                                         @elseif($loan->loan->is_active == 2)
                                             <span style="font-size: small;" class="fw-bold">Non-performing</span>
                                         @endif
-                                     
+
                                         @if ($loan->loan->is_active == null)
-                                            
+
                                             @if(in_array(6,$status_array))
                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
                                             @elseif(in_array(5,$status_array))
@@ -77,7 +77,7 @@
                                             @else
                                                 <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
                                             @endif
-                                            
+
                                         @endif
 
                                         <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>
@@ -129,9 +129,9 @@
                         @endforeach
 
                         {{-- CARD --}}
-                       
 
-                      
+
+
 
                     </div>
 
@@ -139,12 +139,12 @@
 
                     <div class="row">
                         <div class="col-12 p-5 text-center">
-                            
+
                             <img src="{{asset('icons/no-transaction.svg')}}" alt="" style="width: 200px">
                             <p class="pt-3" style="font-size: small">You have no new loan application yet</p>
                             {{-- <p class="mt-5" style="font-size: small">
                                 Apply for a <a class="text-decoration-none" href="/member/mpl-application-form">Multi-purpose</a> or a <a class="text-decoration-none" href="/member/hsl-application-form">Housing Loan</a> loan today!</p> --}}
-                        </div>                        
+                        </div>
                     </div>
 
                     @endif

@@ -197,6 +197,16 @@ class PDFController extends controller{
         return $pdf->download('HSL Application Form.pdf');
     }
 
+    public function generateInsuranceForm(){
+
+        $data = [
+            'Firstname' => 'John',
+        ];
+        $pdf = PDF::loadView('member-views.generate-pdf-files.generate-insurance-form', $data)->setPaper('legal', 'portrait');
+
+        return $pdf->download('Insurance Form.pdf');
+    }
+
     // Add more methods for generating additional PDFs if needed
 
 }
