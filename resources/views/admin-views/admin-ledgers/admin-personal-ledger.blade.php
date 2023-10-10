@@ -3,22 +3,59 @@
 @section('content')
 <div class="container-fluid px-2" style="scale: 0.95;">
     <div class="row">
+        <h6 class="text-secondary" style="font-size: small">Personal Ledger</h6>
         <div class="col-md-6 d-flex gap-2">
-            <h3 class="pl-head">Personal Ledger</h3>
-            <p class="pl-50 d-flex justify-content-center align-items-center">Not Paid 50%</p>
+            <h3 class="pl-head">
+                {{$loan->loanType->loan_type_name}}
+                <i class="bi bi-caret-right-fill"></i>
+                <span style="font-size: 14px">ID</span>
+                <span>{{$loan->id}}</span>
+            </h3>
+            <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger">Not Paid 50%</p>
         </div>
         <div class="col-md-6 ">
             <div class="d-flex justify-content-end">
-                <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #0092D1; font-size: 12px;">Primary</span>
+                {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
                 
+                    @php
+                        if ($loan->is_active == 1){
+                            $color = "0092D1";
+                        }
+                        elseif ($loan->is_active == 2){
+                            $color = "6a9577";
+                        } 
+                        else{
+                            $color = "dd5858";
+                        }
+                    @endphp
+                    <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #{{$color}}; font-size: 12px;">
+                        @if ($loan->is_active == 1)
+                            Performing
+                        @elseif ($loan->is_active == 2)
+                            Closed 
+                        @else
+                            Not Specified    
+                        @endif
+                    </span>
+                
+                
+
                 <div class="dropdown ms-2">
                     <button  class="btn ps-4  fw-bold bu-orange text-white rounded-pill " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="font-size: 12px;">Multi-Purpose Loan 3 <img class="ms-3"  src="{{asset('icons/caret-down-white.svg')}}" style="width: 10px;" ></span>
+                            <span style="font-size: 12px;">{{$loan->loanType->loan_type_description}} {{$loan->id}}<img class="ms-3"  src="{{asset('icons/caret-down-white.svg')}}" style="width: 10px;" ></span>
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="font-size: 14px">
-                        <a class="dropdown-item" href="#">Multi-Purpose 2</a>
+                    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton" style="font-size: 14px">
+                        @foreach ($memberLoans as $memberLoan)
+                        @php
+                            $amort_start_here = \Carbon\Carbon::parse($memberLoan->amortization->amort_start);
+                        @endphp 
+                            <a class="dropdown-item" href="/admin/ledgers/personal-ledger/{{$memberLoan->id}}">{{$memberLoan->loanType->loan_type_description}} {{$memberLoan->id}}
+                            <p>{{$amort_start_here->format('M Y')}}</p>
+                            </a>    
+                        @endforeach
+                        {{-- <a class="dropdown-item" href="#">Multi-Purpose 2</a>
                         <a class="dropdown-item" href="#">Housing loan 1</a>
-                        <a class="dropdown-item" href="#">Multi-Purpose 1</a>
+                        <a class="dropdown-item" href="#">Multi-Purpose 1</a> --}}
                     </div>
                 </div>
             </div>
@@ -135,8 +172,6 @@
                     </div>
                     <div class="col-4">
                         @if ($latest_payment != null)
-                            
-                        
                         @php
                             // Parse the start and end dates as Carbon objects
                             $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
@@ -195,7 +230,7 @@
                     <th></th>
                     
                     @for ($x = $loan->term_years; $x != 0; $x--)
-                        <th colspan="2">{{$year = $amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
+                        <th colspan="2">{{$amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
                     @endfor
                     
                     <th colspan="2">{{$amort_start->format(' Y')}}</th>
@@ -228,187 +263,307 @@
             <tbody>
                 <tr class="pl-tr">
                     <td>January</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>3,333.33</td>
-                    <td>600.00</td>
-                    <td>1</td>
-                    <td>1</td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 1;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td >
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>February</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 2;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>March</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 3;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>April</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 4;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                 @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>May</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 5;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>June</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 6;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                 @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>July</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 7;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                 @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>August</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 8;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                 @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>September</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 9;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>October</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                            $targetMonth = 10;
+                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                            
+                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                            ->get();
+                        @endphp
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->principal}} <br>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach ($filteredPayments as $filteredPayment)
+                                {{$filteredPayment->interest}} <br>
+                            @endforeach
+                        </td>
+                     @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>November</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 11;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                 @endfor
                 </tr>
                 <tr class="pl-tr">
                     <td>December</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="text-danger fw-bolder">Loan Granted</td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        $targetMonth = 12;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        
+                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                        ->get();
+                    @endphp
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->principal}} <br>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach ($filteredPayments as $filteredPayment)
+                            {{$filteredPayment->interest}} <br>
+                        @endforeach
+                    </td>
+                    @endfor
                 </tr>
                 <tr class="pl-tr-last">
                     <td>Total</td>
-                    <td></td>
+                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @php
+                        // $targetMonth = 12;
+                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                        $principalTotal =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->where('loan_id', $loan->id)
+                        ->sum('principal');
+
+                        $interestTotal =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                        ->where('loan_id', $loan->id)
+                        ->sum('principal');
+                    @endphp
+                    <td>
+                        @if ($principalTotal)
+                        {{$principalTotal}}     
+                        @endif
+                    </td>
+                    <td>
+                        @if ($interestTotal)
+                        {{$interestTotal}}     
+                        @endif
+                       
+                    </td>
+                    @endfor
+                    {{-- <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -417,9 +572,9 @@
                     <td></td>
                     <td></td>
                     <td>3,333.33</td>
-                    <td>600.00</td>
+                    <td>600.00</td> 
                     <td></td>
-                    <td></td>
+                    <td></td> --}}
                 </tr>
 
             </tbody>

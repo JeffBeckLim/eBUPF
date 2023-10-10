@@ -75,18 +75,42 @@ class LedgerController extends Controller
             array_push($payment_ids, $payment->id);
         }
 
+        // check if has any payments if none, no latest payment returned
         if(count($payment_ids) != null){
             $latest_payment = Payment::find(max($payment_ids));
         }else{
             $latest_payment = null;
         }
 
-        // $startDate = Carbon::parse($loan->amortization->amort_start); // Your start date
-        // $endDate = $startDate->copy()->addMonths(12); // Add 12 months to the start date
+        $amort_start_parsed = Carbon::parse($loan->amortization->amort_start);
+        for ($x = $loan->term_years; $x != 0; $x--){
 
-        // dd($endDate);
+            $targetMonth = 1; 
+            $targetYear = $amort_start_parsed->copy()->addMonths($x * 12)->format('Y'); 
 
-        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment'));
+            
+            $filteredPaymentModes = Payment::whereYear('payment_date', $targetYear)
+            ->whereMonth('payment_date', $targetMonth)
+            ->get();
+        }
+
+        $raw_loans = Loan::where('member_id' , $loan->member_id)->where('loan_type_id' , $loan->loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $memberLoans = [];
+        foreach($raw_loans as $raw_loan){
+            $status_array = [];
+            foreach($raw_loan->loanApplicationStatus as $status){
+                    array_push($status_array, $status->loan_application_state_id);
+                }
+                if(in_array(5, $status_array)){
+                    array_push($memberLoans, $raw_loan);
+                }
+            }
+       
+        
+        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans'));
     }
 
 }
