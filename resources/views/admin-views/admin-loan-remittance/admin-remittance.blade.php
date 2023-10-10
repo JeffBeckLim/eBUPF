@@ -68,7 +68,7 @@
 
                     <div class="col-md-2 pe-1">
                         <label for="loan_id" class="fw-bold">Loan ID <span class="fw-bold text-danger">*</span></label>
-                        <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);" required>
+                        <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77); width: 100%;" required>
                             <option value="" disabled selected>Select a Loan ID</option>
                             @foreach ($loans as $loan)
                                 <option value="{{ $loan->id }}">
@@ -91,8 +91,8 @@
                         <input id="interest_input" class="form-control w-100" name="interest" type="number" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                     </div>
 
-                    <div class="col-md-2 d-flex justify-content-center align-items-center">
-                        <button id="apply-button" type="button" class="btn btn-primary rounded-4 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment">Add Payment</button>
+                    <div class="col-md-2 d-flex justify-content-center align-items-center mt-2">
+                        <button id="apply-button" type="button" class="btn btn-primary rounded-4 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment" style="width: 100%;">Add Payment</button>
                     </div>
                 </div>
                 @include('admin-views.admin-loan-remittance.modal-add-payment')
