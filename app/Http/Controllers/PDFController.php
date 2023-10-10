@@ -197,43 +197,40 @@ class PDFController extends controller{
         return $pdf->download('HSL Application Form.pdf');
     }
 
-    public function generateInsuranceForm()
-{
-    $member = Auth::user()->member;
+    public function generateInsuranceForm(){
+        $member = Auth::user()->member;
 
-    // Calculate age
-    $dateOfBirth = Carbon::parse($member->date_of_birth);
-    $currentDate = Carbon::now();
-    $age = $currentDate->diffInYears($dateOfBirth);
-    $unit = Unit::where('id', $member->unit_id)->first();
+        // Calculate age
+        $dateOfBirth = Carbon::parse($member->date_of_birth);
+        $currentDate = Carbon::now();
+        $age = $currentDate->diffInYears($dateOfBirth);
+        $unit = Unit::where('id', $member->unit_id)->first();
 
-    $dateOfBirth = Carbon::parse($member->date_of_birth)->format('m/d/Y');
+        $dateOfBirth = Carbon::parse($member->date_of_birth)->format('m/d/Y');
 
-    $data = [
-        'currentdate' => date('Y-m-d'),
-        'firstname' => $member->firstname,
-        'lastname' => $member->lastname,
-        'middlename' => $member->middle_initial,
-        'sex' => $member->sex,
-        'civilStatus' => $member->civil_status,
-        'birthPlace' => $member->place_of_birth,
-        'dateOfBirth' => $dateOfBirth,
-        'age' => $age,
-        'tin' => $member->tin_num,
-        'address' => $member->address,
-        'position' => $member->position,
-        'unit' => $unit->unit_code,
-        'employer' => 'BICOL UNIVERSITY',
-        'contactNumber' => $member->contact_num,
-        'email' => Auth::user()->email,
-        'placeOfSigning' => 'BICOL UNIVERSITY, LEGAZPI CITY',
-    ];
+        $data = [
+            'currentdate' => date('Y-m-d'),
+            'firstname' => $member->firstname,
+            'lastname' => $member->lastname,
+            'middlename' => $member->middle_initial,
+            'sex' => $member->sex,
+            'civilStatus' => $member->civil_status,
+            'birthPlace' => $member->place_of_birth,
+            'dateOfBirth' => $dateOfBirth,
+            'age' => $age,
+            'tin' => $member->tin_num,
+            'address' => $member->address,
+            'position' => $member->position,
+            'unit' => $unit->unit_code,
+            'employer' => 'BICOL UNIVERSITY',
+            'contactNumber' => $member->contact_num,
+            'email' => Auth::user()->email,
+            'placeOfSigning' => 'BICOL UNIVERSITY, LEGAZPI CITY',
+        ];
 
-    $pdf = PDF::loadView('member-views.generate-pdf-files.generate-insurance-form', $data)->setPaper('legal', 'portrait');
+        $pdf = PDF::loadView('member-views.generate-pdf-files.generate-insurance-form', $data)->setPaper('legal', 'portrait');
 
-    return $pdf->download('Insurance Form.pdf');
-}
-
-    // Add more methods for generating additional PDFs if needed
+        return $pdf->download('Insurance Form.pdf');
+    }
 
 }
