@@ -1,7 +1,7 @@
 <div class="tab g-0">
     <div class="row g-0" >
                 <p class="m-0 fw-bold">Your Name</p>
-                <div class="row g-0 "> 
+                <div class="row g-0 ">
                     <div class="col-5 pe-1">
                         <label for="lname">First name</label>
                         <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}">
@@ -16,7 +16,7 @@
                     @error('lastname')
                         <p class="text-danger mt-1 ">{{$message}}</p>
                     @enderror
-                    
+
                     <div class="col-2 ">
                         <div  class="d-none d-md-block"><label for="middle_initial">Mid int.</label></div>
                         <div class="d-block d-md-none"><label for="middle_initial" >M.I</label></div>
@@ -35,7 +35,7 @@
                 @error('address')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
-                
+
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="birthday">Date of Birth</label>
                     <input class="form-control  validate" type="date" name="date_of_birth" value="{{old('date_of_birth')}}">
@@ -56,10 +56,11 @@
                         @if (Auth::user()->member->civil_status)
                             <option selected disabled>{{Auth::user()->member->civil_status}}</option>
                         @endif
-                        <option value="single">single</option>
-                        <option value="married">married</option>
-                        <option value="divorced">divorced</option>
-                        <option value="widowed">widowed</option>
+                        <option value="single">Single</option>
+                        <option value="married">Married</option>
+                        <option value="divorced">Divorced</option>
+                        <option value="widowed">Widowed</option>
+                        <option value="separated">Separated</option>
                     </select>
                 </div>
                 @error('civil_status')
