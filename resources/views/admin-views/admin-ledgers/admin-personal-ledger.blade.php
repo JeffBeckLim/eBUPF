@@ -2,7 +2,14 @@
 
 @section('content')
 <div class="container-fluid px-2" style="scale: 0.95;">
+   
     <div class="row">
+        <div class="col-12 mb-3">
+            <h6 class="m-0 fw-bold">
+                {{$loan->member->lastname}}, {{$loan->member->firstname}}
+            </h6>
+            {{$loan->member->units->unit_code}}
+        </div>
         <h6 class="text-secondary" style="font-size: small">Personal Ledger</h6>
         <div class="col-md-6 d-flex gap-2">
             <h3 class="pl-head">
@@ -13,7 +20,7 @@
             </h3>
             @if (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) < 0.5)
                 <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger"> 
-                    Only Paid 
+                    Paid 
                     {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
                 </p>
             @endif
@@ -145,6 +152,8 @@
                         // Parse the start and end dates as Carbon objects
                         $carbonStartDate = Carbon\Carbon::parse($loan->amortization->amort_start);
                         $carbonEndDate = Carbon\Carbon::parse($loan->amortization->amort_end);
+
+                        $amortStartSubMonth = Carbon\Carbon::parse($carbonStartDate->subMonth());
 
                         // Calculate the difference in months
                         $monthsDifference = $carbonStartDate->diffInMonths($carbonEndDate) + 1;
@@ -280,6 +289,10 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -303,6 +316,10 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -326,6 +343,10 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -349,6 +370,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
@@ -372,6 +397,10 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -395,6 +424,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
@@ -418,6 +451,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
@@ -441,6 +478,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
@@ -464,6 +505,10 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -487,6 +532,11 @@
                             ->get();
                         @endphp
                         <td>
+                            @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
+
                             @foreach ($filteredPayments as $filteredPayment)
                                 {{$filteredPayment->principal}} <br>
                             @endforeach
@@ -500,6 +550,7 @@
                 </tr>
                 <tr class="pl-tr">
                     <td>November</td>
+                    
                     @for($i = $loan->term_years; $i != -1; $i--)
                     @php
                         $targetMonth = 11;
@@ -510,6 +561,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
@@ -533,6 +588,10 @@
                         ->get();
                     @endphp
                     <td>
+                        @if ($amortStartSubMonth->month == $targetMonth 
+                            && $amortStartSubMonth->year == $targetYear)
+                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                            @endif
                         @foreach ($filteredPayments as $filteredPayment)
                             {{$filteredPayment->principal}} <br>
                         @endforeach
