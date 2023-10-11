@@ -11,7 +11,14 @@
                 <span style="font-size: 14px">ID</span>
                 <span>{{$loan->id}}</span>
             </h3>
-            <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger">Not Paid 50%</p>
+            @if (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) < 0.5)
+                <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger"> 
+                    Only Paid 
+                    {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
+                </p>
+            @endif
+           
+            
         </div>
         <div class="col-md-6 ">
             <div class="d-flex justify-content-end">
