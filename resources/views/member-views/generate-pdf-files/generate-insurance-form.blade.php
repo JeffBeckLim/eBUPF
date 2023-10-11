@@ -212,7 +212,7 @@
             <td width="40%" style="padding-left: 10px;">
                 Occupation & Office/Unit <br>
                 <div style="margin: 7px 10px;">
-                    <span style="font-size: 14px;">{{$position}} {{$unit}}</span>
+                    <span style="font-size: 14px;">{{$position}} - BU{{$unit}}</span>
                 </div>
             </td>
             <td width="25%"  style="padding-left: 10px;">
@@ -497,7 +497,7 @@
             <td width="97%" style="border: none; padding-bottom: 35px; padding-left: 10px; line-height: 1.6;">
                 Yes, I understand the Terms and Conditions of Bicol University Provident Fund, Inc. <br>
                 I declare that I am between 18 to 64 years old, physically and mentally healthy, have never been hospitalized, nor treated for any illness in the past 12 months, and actively performing my normal daily activities. <br>
-                I authorize the BUPFI to process any relevant personal information on me and/or my loan with BUPFI and to disclose such personal information to their affiliated third persons, entity or entities providing services on their behalf, to enable them to evaluate and assess my application as well as to service my policy or policies and other insurance needs.
+                I authorize the BUPFI to process any relevant personal information on me and/or my loan with BUPFI and to disclose such personal information to their affiliated third persons, entity or entities providing services on their behalf, to enable them to evaluate and assess my application as well as to service my policy or policies and other insurance needs. <span style="font-weight: bold; color: red;">*</span>
             </td>
         </tr>
     </table>
@@ -508,14 +508,29 @@
 
     <table class="mytable mytable-head">
         <tr>
-            <td width="50%" style="padding-bottom: 33px; padding-left: 10px;">Signature</td>
-            <td width="50%"  style="padding-bottom: 33px; padding-left: 10px;"> Printed Name</td>
+            <td width="50%" style="padding-left: 10px; vertical-align:top;">Signature <span style="font-weight: bold; color: red;">*</span></td>
+            <td width="50%"  style="padding-left: 10px;">
+                Printed Name <br>
+                <div style="margin: 7px 10px;">
+                    <span style="font-size: 14px;">{{$firstname}} {{$lastname}}</span>
+                </div>
+            </td>
         </tr>
     </table>
     <table class="mytable mytable-body">
         <tr>
-            <td width="50%" style="padding-bottom: 33px; padding-left: 10px;">Place of Signing</td>
-            <td width="50%"  style="padding-bottom: 33px; padding-left: 10px;">Date (Month/Day/Year)</td>
+            <td width="50%" style="padding-left: 10px;">
+                Place of Signing <br>
+                <div style="margin: 7px 10px;">
+                    <span style="font-size: 13px;">{{$placeOfSigning}}</span>
+                </div>
+            </td>
+            <td width="50%"  style="padding-left: 10px;">
+                Date (Month/Day/Year) <br>
+                <div style="margin: 7px 10px;">
+                    <span style="font-size: 14px;">{{$currentdate}}</span>
+                </div>
+            </td>
         </tr>
     </table>
 
