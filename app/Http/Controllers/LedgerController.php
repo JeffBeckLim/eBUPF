@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class LedgerController extends Controller
 {
     public function show(){
-        $raw_members = Member::with('loans.loanApplicationStatus','user' , 'loans.loanType' , 'units.campuses')->has('loans')
+        $raw_members = Member::with('loans.loanApplicationStatus','user' , 'loans.loanType' , 'loans.amortization' ,'units.campuses')->has('loans.amortization')
         ->get();
 
         // CHECK IF A MEMBER HAS A CHECK picked up Status
@@ -19,14 +19,15 @@ class LedgerController extends Controller
         $members=[];
         foreach($raw_members as $raw_member){
             foreach($raw_member->loans as $loan){
-                $status_array=[];
-                foreach($loan->loanApplicationStatus as $status){
-                    array_push($status_array, $status->loan_application_state_id);
-                }
-                if(in_array(5,$status_array)){
-                    array_push($members, $raw_member);
-                    break;
-                }
+                
+                    $status_array=[];
+                    foreach($loan->loanApplicationStatus as $status){
+                        array_push($status_array, $status->loan_application_state_id);
+                    }
+                    if(in_array(5,$status_array)){
+                        array_push($members, $raw_member);
+                        break;
+                    }
             }
         }
         
@@ -41,7 +42,7 @@ class LedgerController extends Controller
         }
         $member = Member::with('units.campuses')->where('id' , $id)->first();
 
-        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' )->get();
+        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' )->has('amortization')->get();
 
         // dd($raw_loans);
         $loans = [];
@@ -61,13 +62,18 @@ class LedgerController extends Controller
 
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
-        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment')->where('id' , $id)->first();
+        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units')->where('id' , $id)->first();
 
+        // if loan has missing amortization 
+        if($loan->amortization == null){
+            return abort(403, 'Oops! This loan has some field missing.');
+        }
         // get principal and interest PAID
         $principal_paid = 0;
         $interest_paid = 0;
         $payment_ids = [];
-    
+        
+        // get total payments
         foreach($loan->payment as $payment){
             $principal_paid += $payment->principal;
             $interest_paid += $payment->interest;
@@ -98,6 +104,7 @@ class LedgerController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
+        // get the loans of the member
         $memberLoans = [];
         foreach($raw_loans as $raw_loan){
             $status_array = [];

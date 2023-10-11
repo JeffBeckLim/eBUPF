@@ -67,7 +67,7 @@
                                             @php
                                                 $mpl_count = 0;
                                                 foreach ($member->loans as $loan) {
-                                                    if($loan->loanType->id == 1){
+                                                    if($loan->loanType->id == 1 && $loan->amortization != null){
                                                         $mpl_count++;
                                                     }
                                                 }
@@ -78,7 +78,7 @@
                                             @php
                                                 $hsl_count = 0;
                                                 foreach ($member->loans as $loan) {
-                                                    if($loan->loanType->id == 2){
+                                                    if($loan->loanType->id == 2 && $loan->amortization != null){
                                                         $hsl_count++;
                                                     }
                                                 }
