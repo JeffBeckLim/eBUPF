@@ -63,13 +63,37 @@ class MemberController extends Controller
         $loans->each(function ($loan) {
             $termYears = $loan->term_years;
             $totalMonths = $termYears * 12;
-            // count all payments for this loan
-            $paymentsMade = Payment::where('loan_id', $loan->id)->count();
-            // Calculate remaining months (ensure it's at least zero)
-            $remainingMonths= max(0, $totalMonths - $paymentsMade);
+
+            // Retrieve all payments for the loan and order them by the "payment_date" column
+            $payments = Payment::where('loan_id', $loan->id)
+                ->orderBy('payment_date', 'asc')
+                ->get();
+
+            $countedMonths = 0;
+            $previousMonthYear = null;
+
+            foreach ($payments as $payment) {
+                // Convert the string to a date object
+                $paymentDate = date_create($payment->payment_date);
+
+                // check if the month and year of the payment is different from the previous month and year of the payment
+                $monthYear = date_format($paymentDate, 'Y-m');
+
+                if ($monthYear !== $previousMonthYear) {
+                    $countedMonths++;
+                    $previousMonthYear = $monthYear;
+                }
+            }
+
+            // Calculate remaining months by subtracting counted months from total months
+            $remainingMonths = max(0, $totalMonths - $countedMonths);
+
             // Assign the calculated value to the loan
             $loan->remainingMonths = $remainingMonths;
         });
+
+
+
 
         $inActiveLoan = CoBorrower::with(
             'member.units.campuses',
