@@ -86,9 +86,16 @@
                                                     <i class="bi bi-cash-stack"></i>
                                                  Php {{$loan->principal_amount}} <i class="bi bi-dot px-3"></i>  
                                                  </a>
+                                                 
                                                  <a class="text-secondary text-decoration-none" data-bs-toggle="tooltip" data-bs-title="Interest" >
                                                     <i class="bi bi-graph-up-arrow"></i>
-                                                 Php {{$loan->interest}}
+                                                 Php {{$loan->interest}} <i class="bi bi-dot px-3"></i>
+                                                </a>
+                                                <a class="text-secondary text-decoration-none fw-bold" data-bs-toggle="tooltip" data-bs-title="Amort. Period" >
+                                                    
+                                                    <i class="bi bi-calendar4-event"></i>
+                                                    {{Carbon\Carbon::parse($loan->amortization->amort_start)->format('M Y')}} -
+                                                    {{Carbon\Carbon::parse($loan->amortization->amort_end)->format('M Y')}} 
                                                 </a>
                                             </h6>
                                         </td>

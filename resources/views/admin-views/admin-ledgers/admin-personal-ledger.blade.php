@@ -192,7 +192,7 @@
                             // Parse the start and end dates as Carbon objects
                             $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
                             // Calculate the difference in months
-                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate);
+                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate) - 1;
                          @endphp
                         <p class="pl-text-size">{{$monthsDifferencePayment}}</p>
                         @endif
@@ -277,332 +277,40 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="pl-tr">
-                    <td>January</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 1;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td >
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>February</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 2;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>March</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 3;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>April</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 4;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                 @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>May</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 5;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>June</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 6;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                 @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>July</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 7;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                 @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>August</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 8;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                 @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>September</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 9;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>October</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                        @php
-                            $targetMonth = 10;
-                            $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                            
-                            $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                            ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                            ->get();
-                        @endphp
-                        <td>
-                            @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
+                @for ($x = 0; $x < count($months); $x++)
+                     
+                    <tr class="pl-tr">
+                        <td>{{$months[$x]}}</td>
+                        @for($i = $loan->term_years; $i != -1; $i--)
+                            @php
+                                $targetMonth = $x+1;
+                                $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                                
+                                $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
+                                ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
+                                ->get();
+                            @endphp
+                            <td>
+                                @if ($amortStartSubMonth->month == $targetMonth 
+                                && $amortStartSubMonth->year == $targetYear)
+                                    <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
+                                @endif
+                                @foreach ($filteredPayments as $filteredPayment)
+                                    {{$filteredPayment->principal}} <br>
+                                @endforeach
+                            </td>
+                            <td >
+                                @foreach ($filteredPayments as $filteredPayment)
+                                    {{$filteredPayment->interest}} <br>
+                                @endforeach
+                            </td>
+                        @endfor
+                    </tr>
 
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->principal}} <br>
-                            @endforeach
-                        </td>
-                        <td>
-                            @foreach ($filteredPayments as $filteredPayment)
-                                {{$filteredPayment->interest}} <br>
-                            @endforeach
-                        </td>
-                     @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>November</td>
-                    
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 11;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                 @endfor
-                </tr>
-                <tr class="pl-tr">
-                    <td>December</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
-                    @php
-                        $targetMonth = 12;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        
-                        $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                        ->get();
-                    @endphp
-                    <td>
-                        @if ($amortStartSubMonth->month == $targetMonth 
-                            && $amortStartSubMonth->year == $targetYear)
-                                <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                            @endif
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->principal}} <br>
-                        @endforeach
-                    </td>
-                    <td>
-                        @foreach ($filteredPayments as $filteredPayment)
-                            {{$filteredPayment->interest}} <br>
-                        @endforeach
-                    </td>
-                    @endfor
-                </tr>
+
+                @endfor
+                {{-- TOTAL row --}}
+
                 <tr class="pl-tr-last">
                     <td>Total</td>
                     @for($i = $loan->term_years; $i != -1; $i--)
@@ -629,18 +337,6 @@
                        
                     </td>
                     @endfor
-                    {{-- <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>3,333.33</td>
-                    <td>600.00</td> 
-                    <td></td>
-                    <td></td> --}}
                 </tr>
 
             </tbody>

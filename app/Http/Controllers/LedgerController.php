@@ -42,7 +42,7 @@ class LedgerController extends Controller
         }
         $member = Member::with('units.campuses')->where('id' , $id)->first();
 
-        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' )->has('amortization')->get();
+        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')->has('amortization')->get();
 
         // dd($raw_loans);
         $loans = [];
@@ -115,9 +115,14 @@ class LedgerController extends Controller
                     array_push($memberLoans, $raw_loan);
                 }
             }
-       
         
-        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans'));
+            $months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+        
+        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months'));
     }
 
 }
