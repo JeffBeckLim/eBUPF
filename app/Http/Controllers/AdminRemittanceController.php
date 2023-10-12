@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Loan;
 use App\Models\Payment;
 use App\Models\Adjustment;
+use App\Models\Amortization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Form;
 
@@ -16,7 +17,7 @@ class AdminRemittanceController extends Controller
 
         $payments = Payment::all();
         $adjustments = Adjustment::all();
-        $loans = Loan::where('is_active', 1)->get();
+        $loans = Loan::where('is_active', 1)->whereHas('amortization')->get();
 
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
@@ -49,6 +50,12 @@ class AdminRemittanceController extends Controller
         if (!$loan) {
             // if Loan not found
             return redirect()->back()->with('error', 'Loan not found.');
+        }
+
+        // Check if the payment is within the range of the amort_end and amort_start in the amortization table
+        $amortization = $loan->amortization;
+        if ($data['payment_date'] < $amortization->amort_start || $data['payment_date'] > $amortization->amort_end) {
+            return redirect()->back()->with('error', 'Payment date is not within the range of the amortization.');
         }
 
         //Calculate the total loan payment made using the loan_id and the principal and interest

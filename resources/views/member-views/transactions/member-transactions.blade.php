@@ -33,7 +33,7 @@
                         </div>
 
                         @if($transactions->isEmpty() == false)
-                            <div class="mt-3 transaction-container" id="transaction-container" style="height:500px;">
+                            <div class="mt-3 transaction-container" id="transaction-container" style="height:500px; pointer-events: none;">
                                 @foreach($transactions as $transaction)
                                     @if($transaction instanceof \App\Models\Payment)
                                         <div class="col-12 border-bottom border-top" >
@@ -50,44 +50,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @elseif($transaction instanceof \App\Models\Loan)
-                                        @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
-                                            <div class="col-12 border-bottom border-top"  data-filter="mpl">
-                                                <div class="row" style="padding: 0 30px 0 10px;">
-                                                    <div class="col-8 my-1">
-                                                        <p class="fs-7 fw-bold m-0">Applied a loan</p>
-                                                        <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
-                                                    </div>
-                                                    <div class="col-3 my-1">
-                                                        <p class="fs-7 fw-bold m-0">
-                                                            MPL
-                                                        </p>
-                                                    </div>
-                                                    <div class="col-1 my-1">
-                                                        <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @elseif($transaction->loanType->loan_type_description == 'Housing Loan')
-                                        <div class="col-12 border-bottom border-top"  data-filter="housing">
-                                            <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-8 my-1">
-                                                    <p class="fs-7 fw-bold m-0">Applied a loan</p>
-                                                    <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
-                                                </div>
-                                                <div class="col-3 my-1">
-                                                    <p class="fs-7 fw-bold m-0">
-                                                        HSL
-                                                    </p>
-                                                </div>
-                                                <div class="col-1 my-1">
-                                                    <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endif
 
-                                        {{-- <div class="col-12 border-bottom border-top"  data-filter="mpl">
+                                    @elseif($transaction instanceof \App\Models\Loan)
+                                    @php
+                                        $loanTypes = [
+                                            'Multi-purpose Loan' => 'mpl',
+                                            'Housing Loan' => 'housing',
+                                        ];
+
+                                        $loanCode = $loanTypes[$transaction->loanType->loan_type_description];
+                                        @endphp
+
+                                        <div class="col-12 border-bottom border-top" style="pointer-events: none;" data-filter="{{ $loanCode }}">
                                             <div class="row" style="padding: 0 30px 0 10px;">
                                                 <div class="col-8 my-1">
                                                     <p class="fs-7 fw-bold m-0">Applied a loan</p>
@@ -96,8 +70,7 @@
                                                 <div class="col-3 my-1">
                                                     <p class="fs-7 fw-bold m-0">
                                                         @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
-                                                        <div data-filter="mpl">MPL</div>
-
+                                                            MPL
                                                         @elseif($transaction->loanType->loan_type_description == 'Housing Loan')
                                                             HSL
                                                         @endif
@@ -107,10 +80,7 @@
                                                     <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                                 </div>
                                             </div>
-                                        </div> --}}
-
-
-
+                                        </div>
                                     @endif
                                 @endforeach
                             </div>
