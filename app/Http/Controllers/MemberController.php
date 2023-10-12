@@ -92,9 +92,6 @@ class MemberController extends Controller
             $loan->remainingMonths = $remainingMonths;
         });
 
-
-
-
         $inActiveLoan = CoBorrower::with(
             'member.units.campuses',
             'loan.member.units.campuses',
