@@ -5,10 +5,18 @@
    
     <div class="row">
         <div class="col-12 mb-3">
-            <h6 class="m-0 fw-bold">
-                {{$loan->member->lastname}}, {{$loan->member->firstname}}
-            </h6>
-            {{$loan->member->units->unit_code}}
+            <div class="d-flex">
+                <div>
+                    <img src="{{$loan->member->profile_picture != null ?asset('storage/'.$loan->member->profile_picture) : asset('assets/no_profile_picture.jpg') }}" alt="" style="height: 50px; width: 50px; object-fit: cover;" class="border rounded-circle">
+                </div>
+                <div class="pt-1 ms-2">
+                    <h6 class="m-0 fw-bold">
+                        {{$loan->member->lastname}}, {{$loan->member->firstname}}
+                    </h6>
+                    {{$loan->member->units->unit_code}}
+                </div>
+            </div>
+            
         </div>
         <h6 class="text-secondary" style="font-size: small">Personal Ledger</h6>
         <div class="col-md-6 d-flex gap-2">
