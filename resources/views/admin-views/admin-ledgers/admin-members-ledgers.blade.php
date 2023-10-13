@@ -63,6 +63,7 @@
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
                                     <th style="width: 5%">ID</th>
+                                    <th  style="width: 10%">Status</th>
                                     <th>Details</th>
                                     <th class="text-center">. . .</th>
                                 </tr>
@@ -72,6 +73,16 @@
                                     <tr>
                                         <td style="width: 5%">
                                             {{$loan->id}}
+                                        </td>
+                                        <td style="width: 10%">
+                                            @if ($loan->is_active == 2)
+                                            <h6 class="text-dark" style="font-size: small"> <i style="font-size: x-small" class="bi bi-stop-circle"></i> Closed </h6>
+                                            @elseif ($loan->is_active == 1)
+                                             <h6 class="text-primary" style="font-size: small"> <i style="font-size: xx-small" class="bi bi-circle-fill"></i> Performing </h6>
+                                            @else
+                                                Not specified
+                                            @endif
+                                        </td>
                                         <td>
                                             <h6 class="fw-bold" style="font-size: 14px">
                                                 @if ($loan->loanCategory)

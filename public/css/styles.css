@@ -854,7 +854,7 @@ thead tr:first-child th:first-child {
 
 tbody tr:nth-child(odd) td {
     /* background-color: #E6EEF1; */
-    background-color: #f0f6fa;
+    background-color: #f0f6fa ; 
 }
 
 .pl-table tbody td:not(:first-child) {
@@ -1474,3 +1474,4 @@ tbody tr:nth-child(odd) td {
 .select2-container--open .select2-dropdown {
     z-index: 1060 !important;
 }
+

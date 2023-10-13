@@ -72,14 +72,14 @@
             }
         </style>
         <div class="table-responsive">
-                <table class="table admin-table table-striped border mt-2" id="myTable">
+                <table class="table admin-table table-striped border" id="loanApplicationTable">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
-                            <th>Loan ID</th>
-                            <th>Loan Type</th>
-                            <th>Name</th>
-                            <th>Unit</th>
-                            <th class="border-end">Date Requested</th>
+                            <th class="sticky-header">Loan ID</th>
+                            <th class="sticky-header">Loan Type</th>
+                            <th class="sticky-header">Name</th>
+                            <th class="sticky-header">Unit</th>
+                            <th class="sticky-header border-end">Date Requested</th>
 
                             <th>Principal</th>
                             <th>Interest</th>
@@ -98,7 +98,7 @@
                             </th>
                             <th>Penalty</th>
                             <th>Net Proceeds</th>
-                            <th class="border-end">...</th>
+                            <th class="border-end ">...</th>
 
 
                             <th class="border-start">Prin</th>
@@ -167,7 +167,7 @@
                                 </td>
 
                                 {{-- date of request --}}
-                                <td class="border-end">
+                                <td class="border-end ">
                                     {{date("F j, Y", strtotime($loan->created_at))}}
                                 </td>
 
