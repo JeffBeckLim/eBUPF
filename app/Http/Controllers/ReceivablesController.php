@@ -4,24 +4,48 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Loan;
+use App\Models\Unit;
 use Carbon\Carbon;
 use App\Models\Payment;
 
 class ReceivablesController extends Controller
 {
-    public function show() {
+    public function show(Request $request) {
         // Get loans that have amortization
         $loans = Loan::whereHas('amortization')->get();
+
+        $units = Unit::all();
+
         $currentYear = Carbon::now()->year;
         // Define an array to store quarterly payments for each loan
         $quarterlyPayments = [];
 
-        // Iterate through loans
+        // Calculate quarterly payments for each loan
         foreach ($loans as $loan) {
             $loanId = $loan->id;
             $quarterlyPayments[$loanId] = $this->calculateQuarterlyPayments($loanId);
         }
-        return view('admin-views.admin-receivables.admin-receivables', compact('loans', 'quarterlyPayments', 'currentYear'));
+
+        $currentYear = Carbon::now()->year;
+
+        // Set the default selected year and unit
+        $selectedYear = $request->input('yearSelect') ?? $currentYear;
+        $selectedUnit = $request->input('unitSelect') ?? 'All';
+
+        if ($request->has('clearFilterButton')) {
+            $selectedYear = $currentYear;
+            $selectedUnit = 'All';
+        }
+
+        return view('admin-views.admin-receivables.admin-receivables',
+            compact(
+                'loans',
+                'quarterlyPayments',
+                'currentYear',
+                'selectedYear',
+                'selectedUnit',
+                'units'
+            ));
     }
 
     // Function to calculate quarterly payments for a loan
