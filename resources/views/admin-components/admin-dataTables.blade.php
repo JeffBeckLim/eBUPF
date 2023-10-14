@@ -45,6 +45,17 @@
         padding-right: 10px !important; 
     }
 
+
+    /* Make the header row sticky */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    background-color: white; /* Set your desired background color */
+    z-index: 2; /* Adjust the z-index as needed to control layering */
+}
+
+
+
 </style>
 
 
@@ -52,6 +63,16 @@
     $(document).ready( function () {
         $('#myTable').DataTable();
     } );
+
+    new DataTable('#loanApplicationTable', {
+        fixedColumns: {
+        left: 5,
+    },
+    // paging: false,
+    scrollCollapse: true,
+    scrollX: true,
+    scrollY: 300
+});
 
     $(document).ready(function() {
         $("#applyFilterBtn").click(function() {
@@ -70,4 +91,7 @@
             });
         });
     });
+
+   
+
 </script>

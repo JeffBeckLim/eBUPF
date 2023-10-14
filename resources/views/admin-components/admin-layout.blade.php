@@ -22,6 +22,11 @@
      <!-- Data tables -->
      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
      <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+
+    {{-- STICKY COLUMNS FOR DATA TABLES --}}
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+
   </head>
 
 
