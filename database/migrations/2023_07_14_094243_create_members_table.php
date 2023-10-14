@@ -27,6 +27,8 @@ return new class extends Migration
                    
             // Membership form data
             $table->string('middle_initial')->nullable();
+            $table->string('middlename')->nullable();
+            
             $table->string('contact_num')->nullable();
             $table->string('address')->nullable();
             $table->date('date_of_birth')->nullable();

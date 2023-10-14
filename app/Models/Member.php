@@ -19,6 +19,8 @@ class Member extends Model
         'firstname',
         'lastname',
         'agree_to_terms',
+
+        'middlename',
         'middle_initial',
         'contact_num',
         'address',
