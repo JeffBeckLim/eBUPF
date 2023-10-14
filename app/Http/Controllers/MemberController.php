@@ -150,7 +150,8 @@ class MemberController extends Controller
 
             'agree_to_terms'=> 'nullable',
 
-            'middle_initial'=> 'required',
+            'middle_initial'=> 'nullable',
+            'middlename'=> 'nullable',
 
             'contact_num'=> 'nullable',
 
@@ -207,8 +208,12 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Please provide names for all beneficiaries. If not, the other fields will be cleared.');
         }
         }
-
         $member->update($formFields);
+
+        if($formFields['middlename'] != null){
+            $member->middle_initial = ucfirst($formFields['middlename'][0]);
+            $member->save();
+        }
 
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Saved');
     }
@@ -248,7 +253,6 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
-        // dd($request);
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -262,7 +266,8 @@ class MemberController extends Controller
 
             'agree_to_terms'=> 'nullable',
 
-            'middle_initial'=> 'required',
+            'middlename'=> 'nullable',
+            'middle_initial'=> 'nullable',
 
             'contact_num'=> 'nullable',
 
@@ -293,7 +298,8 @@ class MemberController extends Controller
             'beneficiary_birthday0'=> 'required',
             'beneficiary_relationship0'=> 'required',
         ]);
-        // dd($formFields);
+        // dd(ucfirst($formFields['middlename'][0]));
+
         // for profile pic validation
         if($request->hasFile('profile_picture')) {
             $formFields['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
@@ -306,6 +312,12 @@ class MemberController extends Controller
         ]);
 
         $member->update($formFields);
+
+        if($formFields['middlename'] != null){
+            $member->middle_initial = ucfirst($formFields['middlename'][0]);
+            $member->save();
+        }
+
 
         Beneficiary::create([
             'member_id' => $member->id,
@@ -405,6 +417,8 @@ class MemberController extends Controller
 
         $user->save();
 
+        // $user->member->middlename = $request->middlename;
+        // $user->member->middle_initial = ucfirst($request->middlename[0]);
         $user->member->unit_id = $request->unit_id;
         $user->member->position = $request->position;
         $user->member->contact_num = $request->contact_num;
@@ -412,7 +426,8 @@ class MemberController extends Controller
 
         $user->member->save();
 
-        return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
+        // return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
+        return back()->with('message', 'Profile Saved!');
     }
 
     public function checkMembershipApplication($member_id){

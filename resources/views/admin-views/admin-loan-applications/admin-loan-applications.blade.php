@@ -10,10 +10,18 @@
         {{-- ERROR MESSAGES --}}
         
         <div class="d-flex">
+            @if ($loanType == 1)
             <div class="d-flex membership-app-header1-mpl">
                 <img src="{{asset('/icons/MPL-mini.svg')}}" alt="" width="50px">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
+            @elseif ($loanType == 2)
+            <div class="d-flex membership-app-header1-mpl">
+                <img src="{{asset('/icons/HSL-mini.svg')}}" alt="" width="50px">
+                <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Housing Loan</span> <span class="fw-bold fs-7">Applications</span></p>
+            </div>
+            @endif
+            
 
             <div class="membership-app-header2">
                 <div class="lh-1" style="padding: 15px 0 0 15px;">
@@ -71,8 +79,18 @@
                 font-size: 12px !important;
             }
         </style>
+
+        <a class="btn mt-2" style="font-size: 12px; color:#36276b"
+        @if ($table_freeze == 'table')
+             href="{{route('admin.loan.applications', ['loanType' => $loanType, 'freeze' => 'table-freeze'])}}">Freeze table <i class="bi bi-unlock"></i>    
+        @else
+             href="{{route('admin.loan.applications', ['loanType' => $loanType, 'freeze' => 'table'])}}">Freeze table <i class="bi bi-lock-fill"></i>
+        @endif
+        </a>
+        
+
         <div class="table-responsive">
-                <table class="table admin-table table-striped border" id="loanApplicationTable">
+                <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
                             <th class="sticky-header">Loan ID</th>
@@ -356,10 +374,9 @@
 </div>
 
 <script>
-
+    // for Tool Tips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
 
     // Generate days of the month
     var daySelect = document.getElementById("daySelect");

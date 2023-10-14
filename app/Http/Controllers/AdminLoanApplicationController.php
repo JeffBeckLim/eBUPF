@@ -66,9 +66,12 @@ class AdminLoanApplicationController extends Controller
         return back()->with('success', 'Loan Updated!');
     }
 
-    public function showLoanApplications(){
+    public function showLoanApplications( $loanType ,$table_freeze){
+
+        // dd($loanType);
+
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check')->has('loanApplicationStatus')
-        ->where('loan_type_id',1)
+        ->where('loan_type_id', $loanType)
         ->get(); 
 
         $loans = [];
@@ -87,7 +90,7 @@ class AdminLoanApplicationController extends Controller
         $loan_categories = LoanCategory::all();
 
 
-        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories'));
+        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType'));
     }
 
 

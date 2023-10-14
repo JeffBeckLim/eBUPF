@@ -48,10 +48,10 @@
 
     /* Make the header row sticky */
 .sticky-header {
-    position: sticky;
-    top: 0;
-    background-color: white; /* Set your desired background color */
-    z-index: 2; /* Adjust the z-index as needed to control layering */
+    position: sticky !important;
+    top: 0 !important;
+    background-color: white !important; /* Set your desired background color */
+    z-index: 2 !important; /* Adjust the z-index as needed to control layering */
 }
 
 
@@ -64,15 +64,18 @@
         $('#myTable').DataTable();
     } );
 
-    new DataTable('#loanApplicationTable', {
-        fixedColumns: {
-        left: 5,
-    },
-    // paging: false,
-    scrollCollapse: true,
-    scrollX: true,
-    scrollY: 300
-});
+        new DataTable('#loanApplicationTable', {
+            fixedColumns: {
+            left: 5,
+        },
+        paging: true,
+        scrollCollapse: true,
+        scrollX: true,
+        scrollY: 300
+    });
+    
+
+    
 
     $(document).ready(function() {
         $("#applyFilterBtn").click(function() {

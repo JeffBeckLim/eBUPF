@@ -69,7 +69,7 @@ use App\Http\Controllers\TransactionController;
 
     Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
-    Route::get('/admin/ledgers/member/{loan_type}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
+    Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
     Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
 
 
@@ -119,7 +119,7 @@ use App\Http\Controllers\TransactionController;
 //🔴ADMIN ==================================================================================================
 
     // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
-    Route::get('/admin/loan-applications', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
+    Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
 
     Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
 
@@ -130,7 +130,7 @@ use App\Http\Controllers\TransactionController;
 
 
     // Show MPL or HSL Applications
-    Route::get('/admin/loan-applications/tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
+    Route::get('/admin/loan-applications-tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
 
     // add status in regards to the application process
     Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');
