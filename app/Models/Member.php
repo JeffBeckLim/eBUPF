@@ -14,7 +14,7 @@ class Member extends Model
 
     protected $fillable = [
         'user_id',
-        'campus_id',
+        // 'campus_id',
         'unit_id',
         'firstname',
         'lastname',
@@ -44,6 +44,8 @@ class Member extends Model
 
         'agree_to_certify',
         'agree_to_authorize',
+
+        'is_editable',
     ];
     // has one user account
     public function user(){
@@ -70,16 +72,16 @@ class Member extends Model
         return $this->belongsTo(Unit::class, 'unit_id', 'id');
     }
     // has one Campus
-    public function campus()
-    {
-        return $this->belongsTo(Campus::class, 'campus_id', 'id');
-    }
+    // public function campus()
+    // {
+    //     return $this->belongsTo(Campus::class, 'campus_id', 'id');
+    // }
     //can be a witness many times
     public function witness()
     {
         return $this->hasMany(Witness::class, 'member_id', 'id');
     }
-    //can be a coBorrwer many times
+    //can be a coBorrower many times
     public function co_borrower()
     {
         return $this->hasMany(CoBorrower::class, 'member_id' , 'id');
@@ -87,6 +89,12 @@ class Member extends Model
     public function loans()
     {
         return $this->hasMany(Loan::class, 'member_id', 'id');
+    }
+
+    // member can have many penalty payment
+    public function penalty_payment()
+    {
+        return $this->hasMany(PenaltyPayment::class, 'member_id', 'id');
     }
 
 }

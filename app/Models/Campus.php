@@ -16,8 +16,8 @@ class Campus extends Model
         return $this->hasMany(Unit::class);
     }
 
-    public function members()
-    {
-        return $this->hasMany(Member::class);
-    }
+    // public function members()
+    // {
+    //     return $this->hasMany(Member::class);
+    // }
 }

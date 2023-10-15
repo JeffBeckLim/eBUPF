@@ -81,4 +81,10 @@ class Loan extends Model
         return $this->hasMany(Check::class, 'loan_id' , 'id');
     }
 
+    // loan can has one penalty
+    public function penalty()
+     {
+         return $this->hasOne(Penalty::class, 'id', 'penalty_id');
+     } 
+
 }
