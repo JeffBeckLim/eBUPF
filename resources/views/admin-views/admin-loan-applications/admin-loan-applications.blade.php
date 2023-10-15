@@ -89,7 +89,7 @@
         </a>
         
 
-        <div class="table-responsive">
+        <div class="table-responsive border rounded">
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">

@@ -66,34 +66,39 @@
                         </div>
                     </form>
                 </div>
-
-                 <div class="table-responsive">
-                        <table class="table admin-table table-striped border" id="loanApplicationTable">
-                            <thead style="border-bottom: 2px solid black">
+                 <div class="table-responsive border rounded mt-3">
+                        <style>
+                            #second-tr th{
+                                background-color: #f5f5f5;
+                                font-size: small;
+                            }
+                        </style>
+                        <table class="table admin-table table-striped border" id="myTable">
+                            <thead>
                                 <tr>
-                                    <th colspan="4" class="sticky-header">UNIT: BU GENERAL ADMINISTRATION</th>
-                                    <th colspan="6" class="sticky-header text-center" style="background-color: #4F81BD !important; color: white !important; ">Loan Receivables</th>
-                                    <th colspan="6" class="sticky-header text-center" style="background-color: #C0504D !important; color: white !important;">Interest Receivables</th>
+                                    <th colspan="4">UNIT: BU GENERAL ADMINISTRATION</th>
+                                    <th colspan="6" class=" text-center" style="background-color: #4F81BD !important; color: white !important; ">Loan Receivables</th>
+                                    <th colspan="6" class=" text-center" style="background-color: #C0504D !important; color: white !important;">Interest Receivables</th>
                                 </tr>
-                                <tr style="border-bottom: 2px solid black; ">
-                                    <th class="sticky-header" style="background-color: #e9e9e9 !important;">ID</th>
-                                    <th class="sticky-header" style="background-color: #e9e9e9 !important;">Principal Borrower</th>
-                                    <th class="sticky-header" style="background-color: #e9e9e9 !important; ">Unit</th>
-                                    <th class="sticky-header" style="background-color: #e9e9e9 !important;">Date Granted</th>
+                                <tr id="second-tr">
+                                    <th>ID</th>
+                                    <th>Principal Borrower</th>
+                                    <th>Unit</th>
+                                    <th >Date Granted</th>
                                     {{-- Loan Receivable --}}
-                                    <th style="background-color: #e9e9e9;">Balance as of 12/31/2022</th>
-                                    <th style="background-color: #e9e9e9;">First Quater</th>
-                                    <th style="background-color: #e9e9e9;">Second Quater</th>
-                                    <th style="background-color: #e9e9e9;">Third Quater</th>
-                                    <th style="background-color: #e9e9e9;">Fourth Quater</th>
-                                    <th style="background-color: #e9e9e9;">Balance as of 12/31/2023</th>
+                                    <th>Balance as of 12/31/2022</th>
+                                    <th>First Quater</th>
+                                    <th>Second Quater</th>
+                                    <th>Third Quater</th>
+                                    <th>Fourth Quater</th>
+                                    <th>Balance as of 12/31/2023</th>
                                     {{-- Interest Receivable --}}
-                                    <th style="background-color: #e9e9e9;">Balance as of 12/31/2022</th>
-                                    <th style="background-color: #e9e9e9;">First Quater</th>
-                                    <th style="background-color: #e9e9e9;">Second Quater</th>
-                                    <th style="background-color: #e9e9e9;">Third Quater</th>
-                                    <th style="background-color: #e9e9e9;">Fourth Quater</th>
-                                    <th style="background-color: #e9e9e9;">Balance as of 12/31/2023</th>
+                                    <th>Balance as of 12/31/2022</th>
+                                    <th>First Quater</th>
+                                    <th>Second Quater</th>
+                                    <th>Third Quater</th>
+                                    <th>Fourth Quater</th>
+                                    <th>Balance as of 12/31/2023</th>
                                 </tr>
                             </thead>
                             <tbody>
