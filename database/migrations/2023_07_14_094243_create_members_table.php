@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('campus_id')->nullable()->constrained('campuses', 'id'); //none
+            // $table->foreignId('campus_id')->nullable()->constrained('campuses', 'id'); //none
             $table->foreignId('unit_id')->nullable()->constrained('units', 'id'); //none
 
             $table->foreignId('user_id')->constrained('users', 'id');
@@ -58,7 +58,7 @@ return new class extends Migration
 
             $table->integer('additional_loan')->nullable();
 
-            
+            $table->integer('is_editable')->nullable();
         });
     }
 
