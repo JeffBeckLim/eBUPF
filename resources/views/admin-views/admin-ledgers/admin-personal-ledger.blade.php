@@ -303,14 +303,47 @@
                                 && $amortStartSubMonth->year == $targetYear)
                                     <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
                                 @endif
-                                @foreach ($filteredPayments as $filteredPayment)
-                                    {{$filteredPayment->principal}} <br>
-                                @endforeach
+
+                                @if ($filteredPayments != null)
+                                    @php
+                                        $totalPrincipal = null;
+                                        $num_payments = null;
+                                        foreach ($filteredPayments as $filteredPayment){
+                                            $totalPrincipal += $filteredPayment->principal;
+
+                                            if ($filteredPayment->principal > 0) {
+                                                $num_payments++;
+                                            }
+                                        }
+                                    @endphp
+                                    @if ($totalPrincipal != 0)
+                                        @if ($num_payments > 1)
+                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalPrincipal, 2, '.',',')}}</a> 
+                                        @else 
+                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalPrincipal, 2, '.',',')}}</a>
+                                        @endif
+                                    @endif
+                                @endif
                             </td>
                             <td >
-                                @foreach ($filteredPayments as $filteredPayment)
-                                    {{$filteredPayment->interest}} <br>
-                                @endforeach
+                                @if ($filteredPayments != null)
+                                @php
+                                    $totalInterest = null;
+                                    $num_payments = null;
+                                    foreach ($filteredPayments as $filteredPayment){
+                                        $totalInterest += $filteredPayment->interest;
+                                        $num_payments++;
+                                        
+                                    }
+                                @endphp
+                                @if ($totalInterest != 0)
+                                    @if ($num_payments > 1)
+                                        <a class=" text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalInterest, 2, '.',',')}}</a> 
+                                    @else 
+                                        <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalInterest, 2, '.',',')}}</a>
+                                    @endif
+                                @endif
+                                @endif
                             </td>
                         @endfor
                     </tr>
@@ -331,16 +364,16 @@
 
                         $interestTotal =  App\Models\Payment::whereYear('payment_date', $targetYear)
                         ->where('loan_id', $loan->id)
-                        ->sum('principal');
+                        ->sum('interest');
                     @endphp
                     <td>
                         @if ($principalTotal)
-                        {{$principalTotal}}     
+                        {{ number_format($principalTotal, 2,'.' , ',') }}     
                         @endif
                     </td>
                     <td>
                         @if ($interestTotal)
-                        {{$interestTotal}}     
+                        {{ number_format($interestTotal, 2, '.' , ',') }}     
                         @endif
                        
                     </td>
@@ -351,6 +384,8 @@
         </table>
     </div>
 </div>
-
-
+<script>
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>
 @endsection

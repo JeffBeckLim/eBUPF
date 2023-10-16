@@ -36,7 +36,7 @@ return new class extends Migration
 
             $table->timestamp('is_viewed')->nullable();
 
-            $table->foreignId('penalty_id')->constrained('penalties');
+            $table->foreignId('penalty_id')->nullable()->constrained('penalties');
             // campus_id_index not added 
             // units_id_index not added 
         });

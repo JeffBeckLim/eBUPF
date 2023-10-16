@@ -45,6 +45,8 @@ class Member extends Model
         'agree_to_certify',
         'agree_to_authorize',
 
+        'additional_loan',
+
         'is_editable',
     ];
     // has one user account
