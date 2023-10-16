@@ -35,8 +35,24 @@
            
             
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-6">
             <div class="d-flex justify-content-end">
+                <style>
+                    .penalty-btn{
+                        border-color: red;
+                        background-color: white;
+                        color: red;
+                    }
+                    .penalty-btn:hover{
+                        border-color: #ff6767;
+                        background-color: #ffc2c2;
+                        color: white;
+                    }
+                </style>
+                
+                <a class="btn penalty-btn mx-2"  data-bs-toggle="tooltip" data-bs-title="Add Penalty" href="#">
+                    <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                </a>
                 {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
                 
                     @php
@@ -63,7 +79,7 @@
                 
 
                 <div class="dropdown ms-2">
-                    <button  class="btn ps-4  fw-bold bu-orange text-white rounded-pill " type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button  class="btn ps-4  fw-bold bu-orange text-white rounded-pill h-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span style="font-size: 12px;">{{$loan->loanType->loan_type_description}} {{$loan->id}}<img class="ms-3"  src="{{asset('icons/caret-down-white.svg')}}" style="width: 10px;" ></span>
                     </button>
                     <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton" style="font-size: 14px">
@@ -83,38 +99,44 @@
             </div>
         </div>
     </div>
-    <div class="pl-details mt-2">
+    <div class="pl-details mt-2 border pt-4">
         <div class="row">
-            <div class="col-lg-3 ">
+            <div class="col-lg-3">
                 <div class="row">
+                    <div class="col-12 text-center fw-bold">
+                        <p style="letter-spacing: 1px; font-size: small">LOAN DETAILS</p>
+                    </div>
                     <div class="col-8">
                         <p class="pl-text-size "><span class="fw-bold">Principal: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$loan->principal_amount}}</p>
+                        <p class="pl-text-size">{{number_format($loan->principal_amount, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$loan->interest}}</p>
+                        <p class="pl-text-size">{{number_format($loan->interest, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Monthly Amort. Prin.: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$loan->amortization->amort_principal}}</p>
+                        <p class="pl-text-size">{{number_format($loan->amortization->amort_principal, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Monthly Interest: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$loan->amortization->amort_interest}}</p>
+                        <p class="pl-text-size">{{number_format($loan->amortization->amort_interest, 2, '.', ',')}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="row">
+                    <div class="col-12 text-center fw-bold">
+                        <p style="letter-spacing: 1px; font-size: small">OTHER DETAILS</p>
+                    </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Loan Grant: </span></p>
                     </div>
@@ -164,32 +186,36 @@
                         $amortStartSubMonth = Carbon\Carbon::parse($carbonStartDate->subMonth());
 
                         // Calculate the difference in months
-                        $monthsDifference = $carbonStartDate->diffInMonths($carbonEndDate) + 1;
+                        $monthsDifference = $carbonStartDate->diffInMonths($carbonEndDate);
                     @endphp
                     <div class="col-4">
                         <p class="pl-text-size">{{$monthsDifference}}</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-3">
                 <div class="row">
+                    <div class="col-12 text-center fw-bold">
+                        <p style="letter-spacing: 1px; font-size: small">PAYMENT DETAILS</p>
+                    </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Principal Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$principal_paid}}</p>
+                        <p class="pl-text-size">{{number_format($principal_paid, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$interest_paid}}</p>
+                        <p class="pl-text-size">{{number_format($interest_paid, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Total Paid: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$interest_paid + $principal_paid}}</p>
+                        <p class="pl-text-size">{{number_format($interest_paid + $principal_paid, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Months Paid: </span></p>
@@ -209,17 +235,20 @@
             </div>
             <div class="col-lg-3">
                 <div class="row ">
+                    <div class="col-12 text-center fw-bold">
+                        <p style="letter-spacing: 1px; font-size: small">OTHER PAYMENT DETAILS</p>
+                    </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Principal Bal.: </span></p>
                     </div>
                     <div class="col-4 ">
-                        <p class="pl-text-size">{{$loan->principal_amount - $principal_paid}}</p>
+                        <p class="pl-text-size">{{number_format($loan->principal_amount - $principal_paid, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Interest Bal.: </span></p>
                     </div>
                     <div class="col-4">
-                        <p class="pl-text-size">{{$loan->interest - $interest_paid}}</p>
+                        <p class="pl-text-size">{{number_format($loan->interest - $interest_paid, 2, '.', ',')}}</p>
                     </div>
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Total Bal.: </span></p>
@@ -227,8 +256,10 @@
                     <div class="col-4">
                         <p class="pl-text-size">
                             {{
+                                number_format(
                               ($loan->interest - $interest_paid)  + 
                               ($loan->principal_amount - $principal_paid)
+                              , 2, '.', ',')
                             }}
                         </p>
                     </div>
@@ -247,11 +278,19 @@
         </div>
     </div>
 
-    <div class="table-container border rounded-3">
+    <div class="table-container border rounded-3 pt-3 bg-white">
         <table class="table fixed-width-table pl-table">
             <thead>
                 <tr class="pl-tr">
-                    <th></th>
+                    <th class="text-center">
+                        @if($loan->loanCategory)
+                            <span style="color: #2f255e; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>   
+                        @else
+                            <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6> 
+                        @endif
+                        
+                    
+                    </th>
                     
                     @for ($x = $loan->term_years; $x != 0; $x--)
                         <th colspan="2">{{$amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
