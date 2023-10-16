@@ -21,7 +21,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MembershipApplicationController;
-use App\Http\Controllers\ReceivablesController;
+use App\Http\Controllers\AdminReceivablesController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -67,7 +67,7 @@ use App\Http\Controllers\TransactionController;
 
 
 
-    Route::get('/admin/receivables' , [ReceivablesController::class, 'show'])->name('admin.receivables');
+    Route::get('/admin/receivables/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
     Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
     Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
