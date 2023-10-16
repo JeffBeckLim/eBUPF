@@ -38,6 +38,7 @@ class AdminReceivablesController extends Controller
         $currentYear = Carbon::now()->year;
         // Define an array to store quarterly payments for each loan
         $quarterlyPayments = [];
+        $quarterlyPaymentsForInterest = [];
 
         // Calculate quarterly payments for each loan
         foreach ($loans as $loan) {

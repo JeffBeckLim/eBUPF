@@ -143,7 +143,13 @@
                                                                 </div>
                                                                 <div class="row mt-2 mb-2">
                                                                     <div class="col-sm-7">
-                                                                        <span class="text11-design text11-move fw-bold">Monthly Amortization </span> <span class="text12-design">wala pa</span>
+                                                                        <span class="text11-design text11-move fw-bold">Amortization </span> <span class="text12-design">
+                                                                            @if($loan->amortization)
+                                                                                Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
+                                                                            @else
+                                                                                No amortization yet.
+                                                                            @endif
+                                                                        </span>
                                                                     </div>
                                                                     <div class="col-sm-4">
                                                                         <span class="text11-design fw-bold">{{$loan->remainingMonths}}  </span> <span class="text12-design">months to pay</span>
