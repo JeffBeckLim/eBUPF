@@ -62,11 +62,17 @@ class LedgerController extends Controller
 
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
-        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units')->where('id' , $id)->first();
+        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory')->where('id' , $id)->first();
 
         // if loan has missing amortization 
         if($loan->amortization == null){
             return abort(403, 'Oops! This loan has some field missing.');
+        }
+
+        if($loan->amortization != null){
+            if($loan->amortization->amort_start == null || $loan->amortization->amort_end == null ){
+                return abort(403, 'Oops! This loan has some field missing in amortization period.');
+            }
         }
         // get principal and interest PAID
         $principal_paid = 0;
@@ -100,7 +106,7 @@ class LedgerController extends Controller
             ->get();
         }
 
-        $raw_loans = Loan::where('member_id' , $loan->member_id)->where('loan_type_id' , $loan->loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')
+        $raw_loans = Loan::where('member_id' , $loan->member_id)->where('loan_type_id' , $loan->loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')->whereHas('amortization')
         ->orderBy('created_at', 'desc')
         ->get();
 
