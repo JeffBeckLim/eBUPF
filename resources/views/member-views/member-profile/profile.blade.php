@@ -6,9 +6,16 @@
 
     <div class="bg-white rounded pt-1">
 
-        <div class="profile-note" style="text-align: justify;">
-            Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes.
-        </div>
+        @if($member->is_editable == 1)
+            <div class="profile-note" style="text-align: justify;">
+                Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes.
+            </div>
+        @else
+            <div class="profile-note" style="text-align: justify;">
+                If you want to update your profile, please go to the BUPF (BUPF Office) for verification purposes.
+            </div>
+        @endif
+
         @if(session('message'))
             <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">
                 {{session('message')}}
@@ -34,7 +41,13 @@
 
             <div class="profile-tag-details">
                 <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="profile-picture" width="100" height="120">
-                <p class="profile-name"><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}&nbsp;</span><a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a></p>
+                <p class="profile-name"><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}&nbsp;</span>
+                    @if ($member->is_editable == 1)
+                        <a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a>
+                    @else
+                        <a href="#" id="profileOpenModalLink" style="pointer-events: none; cursor: not-allowed; color: #ffffff;"><i class="bi bi-pencil-square fs-6" style="color: #dddddd;"></i></a>
+                    @endif
+                </p>
                 <p class="profile-position"><i class="bi bi-person-fill"></i> &nbsp;{{ ucfirst($member->position) }}</p>
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>

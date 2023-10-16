@@ -403,7 +403,7 @@ class MemberController extends Controller
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
-            return redirect('/member/profile/'.Auth::user()->id)->withErrors($errors);
+            return redirect('/member/profile')->withErrors($errors);
         }
 
         $user = User::with('member')->find($id);
@@ -423,7 +423,7 @@ class MemberController extends Controller
         $user->member->position = $request->position;
         $user->member->contact_num = $request->contact_num;
         $user->member->address = $request->address;
-
+        $user->member->is_editable = 0;
         $user->member->save();
 
         // return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');

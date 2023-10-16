@@ -37,9 +37,9 @@ class Member extends Model
         'civil_status',
         'spouse',
         'sex',
-        'monthly_salary',  
-        'monthly_contribution',  
-        'appointment_status', 
+        'monthly_salary',
+        'monthly_contribution',
+        'appointment_status',
         'profile_picture',
 
         'agree_to_certify',
@@ -49,6 +49,11 @@ class Member extends Model
 
         'is_editable',
     ];
+
+    protected $attributes = [
+        'is_editable' => 1,
+    ];
+
     // has one user account
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');

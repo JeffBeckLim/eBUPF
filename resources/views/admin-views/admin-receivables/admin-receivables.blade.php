@@ -75,7 +75,7 @@
                                 font-size: small;
                             }
                         </style>
-                        <table class="table admin-table table-striped border" id="myTable">
+                        <table class="table admin-table table-striped border p-1" id="myTable">
                             <thead>
                                 <tr>
                                     <th colspan="4">UNIT: BU GENERAL ADMINISTRATION</th>

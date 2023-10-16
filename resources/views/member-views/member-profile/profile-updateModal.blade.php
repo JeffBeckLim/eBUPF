@@ -18,17 +18,12 @@
                             <option value="{{$units_item->id}}" >{{$units_item->unit_code}} : {{$units_item->campuses->campus_code}}</option>
                         @endif
                     @endforeach
-
                 </select>
             </div>
 
               <div class="form-group">
                 <label for="position" class="fw-bold fs-7" style="color:#595959;">Position</label>
-                <select name="position" class="form-select form-control validate" >
-                    <option value="faculty" {{ $member->postion == 'faculty' ? 'selected' : '' }}>faculty</option>
-                    <option value="dept. head" {{ $member->postion == 'dept. head' ? 'selected' : '' }}>dept. head</option>
-                    <option value="chairman" {{ $member->postion == 'chairman' ? 'selected' : '' }}>chairman</option>
-                </select>
+                <input type="text" class="form-control" name="position" id="position" value="{{$member->position}}">
               </div>
               <div class="form-group">
                 <label for="email" class="fw-bold fs-7" style="color:#595959;">Email</label>
