@@ -31,17 +31,17 @@ class AdminLoanApplicationController extends Controller
         $loan->loan_category_id = $request->category;
         $loan->save();
 
-        
+
 
         // if no amortization exist yet and interest was added
         if($loan->amortization_id == null && $request->interest != null){
             $amort_principal = $request->principal_amount/($loan->term_years * 12);
             $amort_interest = $request->interest/($loan->term_years * 12);
             $amortization = Amortization::create([
-                'amort_principal' => $amort_principal, 
-                'amort_interest' => $amort_interest, 
-                // 'amort_start' => $request->amort_start, 
-                // 'amort_end' => $request->amort_end, 
+                'amort_principal' => $amort_principal,
+                'amort_interest' => $amort_interest,
+                // 'amort_start' => $request->amort_start,
+                // 'amort_end' => $request->amort_end,
             ]);
 
             $loan->amortization_id = $amortization->id;
@@ -72,7 +72,7 @@ class AdminLoanApplicationController extends Controller
 
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
-        ->get(); 
+        ->get();
 
         $loans = [];
         foreach($raw_loans as $raw_loan){
@@ -83,7 +83,7 @@ class AdminLoanApplicationController extends Controller
             if(in_array(3,$status_array) && !in_array(6,$status_array)){
                 array_push($loans, $raw_loan);
             }
-        }   
+        }
 
 
 
@@ -109,13 +109,13 @@ class AdminLoanApplicationController extends Controller
         $loan = Loan::findOrFail($id);
         $loan->loan_category_id = $request->category;
         $loan->save();
-        
+
         return back()->with('state_update','Loan category added!');
     }
 
 
     public function createLoanApplicationState(Request $request, $id){
-    
+
         $loan = Loan::findOrFail($id);
         $loan->is_active =$request->is_active;
         $loan->save();
@@ -124,10 +124,10 @@ class AdminLoanApplicationController extends Controller
     }
 
     public function deleteLoanStatus($id){
-        
-    
+
+
         $status = LoanApplicationStatus::findOrFail($id);
-        
+
 
         $loan = Loan::findOrFail($status->loan_id)->with('loanApplicationStatus')->first();
 
@@ -137,16 +137,16 @@ class AdminLoanApplicationController extends Controller
         }
 
         if($status->loan_application_state_id ==  1 || $status->loan_application_state_id ==  2 && in_array(5 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete status 1 or 2, when "approved" status exists');    
+            return back()->with('deleted_status', 'Cannot delete status 1 or 2, when "approved" status exists');
         }
 
 
         if($status->loan_application_state_id ==  4 && in_array(5 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete "check" status, when "picked-up" status exists');    
+            return back()->with('deleted_status', 'Cannot delete "check" status, when "picked-up" status exists');
         }
-        
+
         if($status->loan_application_state_id ==  3 && in_array(4 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" status exists');    
+            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" status exists');
         }
         elseif($status->loan_application_state_id ==  3 && in_array(5 , $status_array)){
             return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" or "picked" status exists');
@@ -154,8 +154,8 @@ class AdminLoanApplicationController extends Controller
 
         $status->delete();
 
-        return back()->with('deleted_status', 'Status deleted'); 
-        
+        return back()->with('deleted_status', 'Status deleted');
+
     }
 
     // get all MPL or HSL loan applications that are accepted by CoBorrower
@@ -179,11 +179,11 @@ class AdminLoanApplicationController extends Controller
         }else{
             abort(404);
         }
-        
+
 
         $loan_app_states = LoanApplicationState::all();
         $loan_categories = LoanCategory::all();
-        
+
 
         $approved= 0;
         $denied = 0;
@@ -207,7 +207,7 @@ class AdminLoanApplicationController extends Controller
 
 
     public function createLoanApplicationStatus(Request $request, $loan_id){
-        //Validate if loan exists 
+        //Validate if loan exists
         $loan = Loan::findOrFail($loan_id);
 
         $formFields = $request->validate([
@@ -232,7 +232,7 @@ class AdminLoanApplicationController extends Controller
             'loan_id' => $loan->id,
             'loan_application_state_id' => $formFields['loan_application_state_id'],
             'date_evaluated'=>$formFields['date_evaluated'],
-            'remarks'=>$formFields['remarks'], 
+            'remarks'=>$formFields['remarks'],
         ]);
 
         if($new_loan_status->loan_application_state_id == 5){
@@ -241,7 +241,7 @@ class AdminLoanApplicationController extends Controller
 
             return back()->with('success', 'New status added successfully and set as Performing Loan');
         }
-        
-        return back()->with('success', 'New status added successfully!'); 
+
+        return back()->with('success', 'New status added successfully!');
     }
 }

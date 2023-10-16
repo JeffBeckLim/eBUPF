@@ -28,8 +28,14 @@ class PDFController extends controller{
             $memberbene = Member::with('beneficiaries')->findOrFail($id);
             $beneficiaries = $memberbene->beneficiaries;
 
-            $profilePicturePath = 'storage/' . $member->profile_picture;
-            $orientedImage = Image::make($profilePicturePath)->orientate();
+            // Get the profile picture of the member and encode it to base64
+            if ($member->profile_picture) {
+                $profilePicturePath = 'storage/' . $member->profile_picture;
+                $orientedImage = Image::make($profilePicturePath)->orientate();
+            } else {
+                $defaultImagePath = public_path('assets/no_profile_picture.jpg');
+                $orientedImage = Image::make($defaultImagePath);
+            }
             $encodedImage = $orientedImage->encode('data-url')->encoded;
 
             $data = [
