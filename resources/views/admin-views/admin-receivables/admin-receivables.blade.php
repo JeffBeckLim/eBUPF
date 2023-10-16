@@ -13,11 +13,10 @@
                             <div class="m-0 fw-bold fs-5"> Schedule of Receivables</div> <br>
                             <div class="fs-7 text-secondary">Quarterly</div>
                         </div>
-
                     </div>
                 </div>
 
-                <div class="row mt-4 g-0 mx-3">
+                <div class="row mt-3 g-0 mx-3">
                     <style>
                         .scale-1-active{
                             background-color: #e6f3ff !important;
@@ -25,21 +24,24 @@
                     </style>
                     <div class="col-6">
                         <a class="btn border rounded-end-0 w-100 h-100 bg-white
-                        " href="">
+                        {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}}
+                        " href="{{route('admin.receivables', 'mpl')}}">
                         <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 20px;">
-                        Multi-Purpose Loans</a>
+                        Multi-Purpose Loan Receivables</a>
                     </div>
                     <div class="col-6">
                         <a
-                        class="btn border rounded-start-0 w-100 h-100 bg-white"
-                        href="">
+                        class="btn border rounded-start-0 w-100 h-100 bg-white
+                        {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}"
+                        href="{{route('admin.receivables', 'hsl')}}">
                         <img src="{{asset('icons/HSL-mini.svg')}}" alt="" style="width: 20px;">
-                        Housing Loans
+                        Housing Loan Receivables
                     </a>
                     </div>
                 </div>
+
                 <div>
-                    <form method="get" action="{{ route('admin.receivables') }}">
+                    <form method="get" action="{{ route('admin.receivables', ['loan_type' => $loan_type]) }}">
                         <div class="filter-group gap-3 mt-4">
                             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                                 <select name="unitSelect" class="form-control bg-white border-0">
@@ -104,80 +106,81 @@
                             </thead>
                             <tbody>
                                 @foreach($loans as $loan)
-                                @php
-                                    $amortStartYear = \Carbon\Carbon::parse($loan->amortization->amort_start)->year;
-                                    $amortEndYear = \Carbon\Carbon::parse($loan->amortization->amort_end)->year;
-                                @endphp
 
-                                @if ($selectedUnit == 'All' || $loan->member->units->unit_code == $selectedUnit)
-                                    @for ($year = $amortStartYear; $year <= $amortEndYear; $year++)
-                                        @if ($year == $selectedYear)
-                                            <tr>
-                                                <td>{{$loan->id}}</td>
-                                                <td>
-                                                    {{$loan->member->firstname}}
-                                                    {{$loan->member->lastname}}
-                                                </td>
-                                                <td>
-                                                    {{$loan->member->units->unit_code}}
-                                                </td>
-                                                <td>
-                                                    @php
-                                                    $dateString = $loan->amortization->amort_start;
-                                                    $date = \Carbon\Carbon::parse($dateString);
-                                                    $oneMonthAgo = $date->subMonth();
-                                                    @endphp
-                                                    {{ $oneMonthAgo->format('M. Y') }}
-                                                </td>
+                                    @php
+                                        $amortStartYear = \Carbon\Carbon::parse($loan->amortization->amort_start)->year;
+                                        $amortEndYear = \Carbon\Carbon::parse($loan->amortization->amort_end)->year;
+                                    @endphp
 
-                                                <td class="fw-bold">
-                                                    {{ number_format($yearlyBalances[$loan->id][$year]['beginning_balance_principal'], 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPayments[$loan->id][$year][1] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPayments[$loan->id][$year][2] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPayments[$loan->id][$year][3] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPayments[$loan->id][$year][4] ?? 0, 2) }}
-                                                </td>
-                                                <td class="fw-bold">
-                                                    {{ number_format($yearlyBalances[$loan->id][$year]['ending_balance_principal'], 2) }}
-                                                </td>
-                                                <td class="fw-bold">
-                                                    {{ number_format($yearlyBalances[$loan->id][$year]['beginning_balance_interest'], 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][1] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][2] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][3] ?? 0, 2) }}
-                                                </td>
-                                                <td>
-                                                    {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][4] ?? 0, 2) }}
-                                                </td>
-                                                <td class="fw-bold">
-                                                    {{ number_format($yearlyBalances[$loan->id][$year]['ending_balance_interest'], 2) }}
-                                                </td>
-                                            </tr>
-                                        @endif
-                                    @endfor
-                                @endif
+                                    @if ($selectedUnit == 'All' || $loan->member->units->unit_code == $selectedUnit)
+                                        @for ($year = $amortStartYear; $year <= $amortEndYear; $year++)
+                                            @if ($year == $selectedYear)
+                                                <tr>
+                                                    <td>{{$loan->id}}</td>
+                                                    <td>
+                                                        {{$loan->member->firstname}}
+                                                        {{$loan->member->lastname}}
+                                                    </td>
+                                                    <td>
+                                                        {{$loan->member->units->unit_code}}
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                        $dateString = $loan->amortization->amort_start;
+                                                        $date = \Carbon\Carbon::parse($dateString);
+                                                        $oneMonthAgo = $date->subMonth();
+                                                        @endphp
+                                                        {{ $oneMonthAgo->format('M. Y') }}
+                                                    </td>
+
+                                                    <td class="fw-bold">
+                                                        {{ number_format($yearlyBalances[$loan->id][$year]['beginning_balance_principal'], 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPayments[$loan->id][$year][1] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPayments[$loan->id][$year][2] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPayments[$loan->id][$year][3] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPayments[$loan->id][$year][4] ?? 0, 2) }}
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        {{ number_format($yearlyBalances[$loan->id][$year]['ending_balance_principal'], 2) }}
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        {{ number_format($yearlyBalances[$loan->id][$year]['beginning_balance_interest'], 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][1] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][2] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][3] ?? 0, 2) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ number_format($quarterlyPaymentsForInterest[$loan->id][$year][4] ?? 0, 2) }}
+                                                    </td>
+                                                    <td class="fw-bold">
+                                                        {{ number_format($yearlyBalances[$loan->id][$year]['ending_balance_interest'], 2) }}
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endfor
+                                    @endif
                                 @endforeach
                             </tbody>
-
                         </table>
                     </div>
             </div>
         </div>
     </div>
 </div>
+
 @include('admin-components.admin-dataTables')
 @endsection

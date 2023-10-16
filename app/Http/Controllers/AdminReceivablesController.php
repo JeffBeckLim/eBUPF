@@ -6,13 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Loan;
 use App\Models\Unit;
 use Carbon\Carbon;
+use App\Models\CoBorrower;
 use App\Models\Payment;
 
-class ReceivablesController extends Controller
+class AdminReceivablesController extends Controller
 {
-    public function show(Request $request) {
-        // Get loans that have amortization
-        $loans = Loan::whereHas('amortization')->get();
+    public function show(Request $request, $loan_type) {
+
+        if($loan_type == 'mpl'){
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 1)->get();
+        }elseif($loan_type == 'hsl'){
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 2)->get();
+        }else{
+            abort(404);
+        }
 
         $units = Unit::all();
 
@@ -104,7 +111,8 @@ class ReceivablesController extends Controller
                 'units',
                 'distinctYears',
                 'yearlyBalances',
-                'quarterlyPaymentsForInterest'
+                'quarterlyPaymentsForInterest',
+                'loan_type'
             ));
     }
 

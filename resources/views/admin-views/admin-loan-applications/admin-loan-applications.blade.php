@@ -8,7 +8,7 @@
         {{-- ERROR MESSAGES --}}
         @include('admin-views.admin-loan-applications.error-displays')
         {{-- ERROR MESSAGES --}}
-        
+
         <div class="d-flex">
             @if ($loanType == 1)
             <div class="d-flex membership-app-header1-mpl">
@@ -21,7 +21,7 @@
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Housing Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
             @endif
-            
+
 
             <div class="membership-app-header2">
                 <div class="lh-1" style="padding: 15px 0 0 15px;">
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
@@ -82,12 +82,12 @@
 
         <a class="btn mt-2" style="font-size: 12px; color:#36276b"
         @if ($table_freeze == 'table')
-             href="{{route('admin.loan.applications', ['loanType' => $loanType, 'freeze' => 'table-freeze'])}}">Freeze table <i class="bi bi-unlock"></i>    
+             href="{{route('admin.loan.applications', ['loanType' => $loanType, 'freeze' => 'table-freeze'])}}">Freeze table <i class="bi bi-unlock"></i>
         @else
              href="{{route('admin.loan.applications', ['loanType' => $loanType, 'freeze' => 'table'])}}">Freeze table <i class="bi bi-lock-fill"></i>
         @endif
         </a>
-        
+
 
         <div class="table-responsive border rounded">
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
@@ -157,9 +157,9 @@
                                             @php $color = '#26de8c;' @endphp
                                         @elseif ($loan->loanCategory->loan_category_name == 'Additional')
                                             @php $color = '#ce6bbf;'@endphp
-                                        @endif 
+                                        @endif
                                     @endif
-                                
+
                                 <td style="background-color: {{$color}} font-size: 10px;" class="fw-bold text-center">
                                     @if ($loan->loanCategory)
                                         @if ($loan->loanCategory->loan_category_name == 'New')
@@ -168,9 +168,9 @@
                                             {{$loan->loanCategory->loan_category_name}}
                                         @elseif ($loan->loanCategory->loan_category_name == 'Additional')
                                             {{$loan->loanCategory->loan_category_name}}
-                                        @endif 
+                                        @endif
                                     @endif
-                                
+
                                 </td>
 
                                 {{-- name --}}
@@ -191,15 +191,15 @@
 
                                 {{-- principla amount --}}
                                 <td>
-                                    {{number_format($loan->principal_amount, 2, '.',',')}}  
+                                    {{number_format($loan->principal_amount, 2, '.',',')}}
                                 </td>
-                                
+
                                 {{-- interest --}}
                                 <td>
                                     {{number_format($loan->interest, 2, '.',',')}}
-                                    
+
                                 </td>
-                            
+
                                 {{-- total payable --}}
                                 <td>
                                     {{number_format($loan->principal_amount + $loan->interest, 2, '.',',')}}
@@ -217,13 +217,13 @@
                                         </a>
                                     </h6>
                                 </td>
-                                
+
                                 {{-- gross loan -- principal amount lang to --}}
                                 <td class="border-end">
-                                    {{number_format($loan->principal_amount, 2, '.',',')}}  
+                                    {{number_format($loan->principal_amount, 2, '.',',')}}
                                 </td>
 
-                        
+
                                 {{-- interest 1st year --}}
                                 <td>
                                     @if ($loan->adjustment != null)
@@ -264,7 +264,7 @@
                                         </a>
                                     </h6>
                                 </td>
-                                
+
                                 {{-- AMORTIZATION --------------- --}}
                                 {{-- prin --}}
                                 <td class=" border-start">
@@ -289,7 +289,7 @@
                                 <td>
                                     @if ($loan->amortization != null)
                                         @if ($loan->amortization->amort_start != null)
-                                            {{date("F j, Y", strtotime($loan->amortization->amort_start))}} 
+                                            {{date("F j, Y", strtotime($loan->amortization->amort_start))}}
                                         @endif
                                     @endif
                                 </td>
@@ -297,7 +297,7 @@
                                 <td>
                                     @if ($loan->amortization != null)
                                         @if ($loan->amortization->amort_end != null)
-                                            {{date("F j, Y", strtotime($loan->amortization->amort_end))}} 
+                                            {{date("F j, Y", strtotime($loan->amortization->amort_end))}}
                                         @endif
                                     @endif
                                 </td>
@@ -331,22 +331,22 @@
                                 {{-- check --}}
                                 <td>
                                     @if (count($loan->check) != 0)
-                                        {{$loan->check[0]->adjusted_net_pay}}    
+                                        {{$loan->check[0]->adjusted_net_pay}}
                                     @endif
                                 </td>
                                 <td>
                                     @if (count($loan->check) != 0)
-                                        {{$loan->check[0]->check_co}}    
+                                        {{$loan->check[0]->check_co}}
                                     @endif
                                 </td>
                                 <td>
                                     @if (count($loan->check) != 0)
-                                        {{$loan->check[0]->date}}    
+                                        {{$loan->check[0]->date}}
                                 @endif
                                 </td>
                                 <td>
                                     @if (count($loan->check) != 0)
-                                        {{$loan->check[0]->remarks}}    
+                                        {{$loan->check[0]->remarks}}
                                     @endif
                                 </td>
                                 <td>
@@ -362,10 +362,10 @@
                             @include('admin-views.admin-loan-applications.modal-amortization')
                             @include('admin-views.admin-loan-applications.modal-addAmortization')
                             @include('admin-views.admin-loan-applications.modal-edit-loan')
-                            
+
 
                         @endforeach
-                       
+
                     </tbody>
                     @endif
                 </table>
