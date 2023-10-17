@@ -1475,3 +1475,13 @@ tbody tr:nth-child(odd) td {
     z-index: 1060 !important;
 }
 
+.penalty-btn{
+    border-color: red;
+    background-color: white;
+    color: red;
+}
+.penalty-btn:hover{
+    border-color: #ff6767;
+    background-color: #ffc2c2;
+    color: white;
+}

@@ -37,20 +37,8 @@
         </div>
         <div class="col-md-6">
             <div class="d-flex justify-content-end">
-                <style>
-                    .penalty-btn{
-                        border-color: red;
-                        background-color: white;
-                        color: red;
-                    }
-                    .penalty-btn:hover{
-                        border-color: #ff6767;
-                        background-color: #ffc2c2;
-                        color: white;
-                    }
-                </style>
-                
-                <a class="btn penalty-btn mx-2"  data-bs-toggle="tooltip" data-bs-title="Add Penalty" href="#">
+            
+                <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
                     <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
                 </a>
                 {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
@@ -284,7 +272,7 @@
                 <tr class="pl-tr">
                     <th class="text-center">
                         @if($loan->loanCategory)
-                            <span style="color: #2f255e; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>   
+                            <span style="color: #a01a1a; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>   
                         @else
                             <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6> 
                         @endif
@@ -392,7 +380,7 @@
                 {{-- TOTAL row --}}
 
                 <tr class="pl-tr-last">
-                    <td>Total</td>
+                    <td style="border-top: 2px solid black">Total</td>
                     @for($i = $loan->term_years; $i != -1; $i--)
                     @php
                         // $targetMonth = 12;
@@ -405,12 +393,12 @@
                         ->where('loan_id', $loan->id)
                         ->sum('interest');
                     @endphp
-                    <td>
+                    <td style="border-top: 2px solid black">
                         @if ($principalTotal)
                         {{ number_format($principalTotal, 2,'.' , ',') }}     
                         @endif
                     </td>
-                    <td>
+                    <td style="border-top: 2px solid black">
                         @if ($interestTotal)
                         {{ number_format($interestTotal, 2, '.' , ',') }}     
                         @endif
@@ -422,9 +410,49 @@
             </tbody>
         </table>
     </div>
+
+    
+        {{-- FOR PENALTY --}}
+        <div id="penalty-div" class="border bg-white py-2 px-3 pb-4 mt-2 rounded">
+            
+            <div class="row g-0">
+                <div class="col-12 pb-3 pt-2 border-bottom mb-3">
+                     <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn penalty-btn mx-2"  data-bs-toggle="tooltip" data-bs-title="Add Penalty" href="#">
+                        <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                    </a>
+
+                    <span class="fw-bold">Penalties</span>
+                </div>
+                <div class="col-3">
+                    Monthly Amortization
+                </div>
+                <div class="col-9">
+                    10,000.00
+                </div>
+
+                <div class="col-3">
+                    Penalty Rate
+                </div>
+                <div class="col-9">
+                    0.66
+                </div>
+
+                <div class="col-3">
+                    Total Penalty for MPL
+                </div>
+                <div class="col-9 fw-bold text-danger">
+                    90,000.00
+                </div>
+            </div>
+        </div>
 </div>
-<script>
+
+  <!-- Penalty Modal -->
+@include('admin-views.admin-ledgers.modal-penalty')
+
+  <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
+
 @endsection
