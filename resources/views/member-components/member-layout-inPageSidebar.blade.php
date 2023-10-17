@@ -15,7 +15,7 @@
         </div>
 
 
-        <ul class="nav flex-column" style=" scale: .9" >  
+        <ul class="nav flex-column" style=" scale: .9" >
 
             <a class="text-decoration-none" href="{{ route('member.profile') }}">
                 <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected fade-in  rounded-4':' '}}  ">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </li>
-            </a>   
+            </a>
 
 
             <a class="text-decoration-none" href="{{ route('home') }}">
@@ -43,12 +43,12 @@
                     </div>
                 </li>
             </a>
-                
+
 
             <li class="nav-item grow-on-hover">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
-                    
+
                         <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans', 'loan.applications', 'member.loans') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
@@ -59,15 +59,15 @@
                                 </div>
                             </div>
                         </button>
-                 
+
                       <div id="collapseLoans" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12 p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('member.loans') ? 'fw-bold' : ''}}" href="{{route('member.loans')}}">Your Loans</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('member.loans') ? 'fw-bold' : ''}}" href="{{route('member.loans', 1)}}">Your Loans</a>
                                 </div>
-                                
+
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
                                 </div>
@@ -122,7 +122,7 @@
             <li class="nav-item grow-on-hover">
                 <div  class="accordion rounded" id="accordionRequests">
                     <div class="accordion-item border-0">
-                    
+
                         <button style="padding-left: 5px !important" class="accordion-button collapsed {{Route::is('incoming.request','outgoing.request') ? 'bg-selected fade-in rounded-4' : ''}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
                             <div class="row g-0  w-100">
                                 <div class="col-3 text-center">
@@ -133,7 +133,7 @@
                                 </div>
                             </div>
                         </button>
-                  
+
                       <div id="collapseRequests" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
@@ -163,7 +163,7 @@
                     <a class="btn dropdown w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-list pe-4" style="color: #1030DA"></i>More
                     </a>
-                    
+
                     <ul class="dropdown-menu border p-2" style="width: 110%">
                         <li><a class="dropdown-item rounded" href="/logout">Log out</a></li>
                     </div>
