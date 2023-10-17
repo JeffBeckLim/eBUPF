@@ -83,9 +83,9 @@
                                                                         {{-- Check if theres a loan payment [isset/empty] --}}
                                                                         @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
                                                                         {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
-                                                                    @else
-                                                                        {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
-                                                                    @endif
+                                                                        @else
+                                                                            {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
+                                                                        @endif
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -134,10 +134,11 @@
                                                                         <p class="text14-design"><span class="text12-design">Php </span>
                                                                             {{-- Check if theres a loan payment [isset/empty] --}}
                                                                             @if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
-                                                                                {{ number_format($loan->principal_amount - $totalPaymentHSL[$loan->id], 2) }}
+                                                                            {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentHSL[$loan->id], 2) }}
                                                                             @else
                                                                                 {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
                                                                             @endif
+                                                                            </p>
                                                                         </p>
                                                                     </div>
                                                                 </div>

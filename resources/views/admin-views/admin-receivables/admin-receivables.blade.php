@@ -57,9 +57,13 @@
 
                             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                                 <select name="yearSelect" class="form-control bg-white border-0">
-                                    @foreach ($distinctYears as $year)
-                                        <option value="{{ $year }}"{{ $year == $selectedYear ? ' selected' : '' }}>{{ $year }}</option>
-                                    @endforeach
+                                    @if($distinctYears == null)
+                                        <option value="" selected>No Data</option>
+                                    @else
+                                        @foreach ($distinctYears as $year)
+                                            <option value="{{ $year }}"{{ $year == $selectedYear ? ' selected' : '' }}>{{ $year }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
 

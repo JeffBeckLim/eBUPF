@@ -39,7 +39,7 @@ use App\Http\Controllers\TransactionController;
 //🛠️TESTING ===================================================================================================
     Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-    Route::get('member/loan/your-loans', [LoanController::class, 'show'])->name('member.loans');
+    Route::get('member/loan/your-loans/{loan_status}', [LoanController::class, 'show'])->name('member.loans');
 
 
     Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
