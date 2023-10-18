@@ -62,8 +62,9 @@ class LedgerController extends Controller
 
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
-        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory')->where('id' , $id)->first();
+        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();
 
+        
         // if loan has missing amortization 
         if($loan->amortization == null){
             return abort(403, 'Oops! This loan has some field missing.');
@@ -110,7 +111,7 @@ class LedgerController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-        // get the loans of the member
+        // get the loans of the member for the dropdown
         $memberLoans = [];
         foreach($raw_loans as $raw_loan){
             $status_array = [];

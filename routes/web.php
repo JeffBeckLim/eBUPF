@@ -22,7 +22,9 @@ use App\Http\Controllers\LoanApplicationController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MembershipApplicationController;
 use App\Http\Controllers\AdminReceivablesController;
+use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Penalty;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,11 +70,15 @@ use App\Http\Controllers\TransactionController;
 
 
     Route::get('/admin/receivables/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
+
+
+    // LEDGER
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
     Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
     Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
 
-
+    // PENALTY
+    Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate');
 
 
 //TESTING ===================================================================================================
