@@ -69,9 +69,9 @@ use App\Models\Penalty;
 
 
 
-    Route::get('/admin/receivables/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
-    Route::get('/admin/receivables/yearly/summary' , [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary');
-    Route::get('/admin/receivables/yearly/remit' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit');
+    Route::get('/admin/receivables/{report}/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
+    Route::get('/admin/receivables/yearly/summary/{report}/{loan_type}', [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary');
+    Route::get('/admin/receivables/yearly/remit/{report}/{loan_type}' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit');
 
 
     // LEDGER
