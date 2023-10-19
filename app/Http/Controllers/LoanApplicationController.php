@@ -209,4 +209,34 @@ class LoanApplicationController extends Controller
 
         return view('member-views.mpl-application-form.confirmation');
     }
+
+
+    public function cancelApplication($id){
+        $co_borrower = CoBorrower::where('loan_id',$id)->with('loan')->first();
+
+        if($co_borrower == null){
+            abort(404);
+        }else{
+            if($co_borrower->accept_request == 1){
+                return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
+            }
+            else{                        
+                $witnesses = Witness::where('loan_id' , $id)->with('loan')->get();
+                $loan = Loan::find($id);
+
+                foreach ($witnesses as $witness) {
+                    $witness->delete();
+                }
+                $co_borrower->delete();
+                $loan->delete();
+
+                return back()->with('passed' ,'Loan Application Cancelled: Loan Application has been deleted.');
+            }
+        }
+
+
+    }
+
+
+
 } // THIS IS THE LAST TAG

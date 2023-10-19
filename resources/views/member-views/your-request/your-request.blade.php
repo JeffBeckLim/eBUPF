@@ -3,10 +3,32 @@
 @section('content')
 
 <main>
+
     <div class="container-fluid">
+        
         <div class="row  d-flex justify-content-center">
+
             <div class="col-lg-8 col-md-10 ">
+
+                
+
                 <div class="bg-white rounded border mx-1 mt-2 p-2">
+
+                    @if (session('fail'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{session('fail')}}
+                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>    
+                    @endif
+
+                    @if (session('passed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{session('passed')}}
+                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>    
+                    @endif
+                    
+
                     <div class="row my-3 g-0 p-3">
                         <p class="fs-5 fw-bold">Outgoing Requests</p>
                     </div>
@@ -25,6 +47,8 @@
                                     <ul>
                                         <li><strong>If co-borrower accepts</strong>: You will be able to print the loan application form with the co-borrowers detail ready for them to sign</li>
                                         <li><strong>If co-borrower denies</strong>: You cannot print the form</li>
+
+                                        <li><strong>Accepted request can not be cancelled</strong></li>
                                     </ul>
                                     <p>Your decision ensures transparency and consent in the loan application process.</p>
                                 </div>
@@ -74,7 +98,7 @@
                                                     <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture"  style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle img-fluid"> 
                                                 </div>
                                                 <div class="col-lg-9 ps-lg-2  m-0 p-0">
-                                                    <p class="mb-0 fs-7">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
+                                                    <p class="mb-0 fs-7 fw-bold">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
                                                     <p class="mb-0 fs-7">{{$cb_withLoan->member->units->unit_code}} | {{$cb_withLoan->member->units->campuses->campus_code}}</p>
                                                     {{-- <p class="fs-7">ID: {{$cb_withLoan->member->id}}</p> --}}
                                                 </div>
@@ -92,23 +116,39 @@
                                         @endif
                                         {{-- =============================================================== --}}
                                         @if ($cb_withLoan->loan->is_viewed != null)
-                                        <p class="text-secondary m-0" style="font-size: small"><i class="bi bi-eye"></i> {{$cb_withLoan->loan->is_viewed}}</p>
+                                        <p class="text-secondary m-0" style="font-size: x-small"><i class="bi bi-eye"></i> 
+                                        
+                                            {{ Carbon\Carbon::parse($cb_withLoan->loan->is_viewed)->format('F j, Y g:i A') }}
+                                        </p>
                                         @endif
 
                                     </td>
                                     <td class="align-middle  text-center" style="width: 20%">
-                                        @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
-                                            <a href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-1 {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}"> <i class="bi bi-printer-fill"></i> Print</a>
-                                        @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
-                                            <a href="{{ route('generateHousingLoanApplicationForm', ['id' => $cb_withLoan->loan->id]) }}" type="button" class="btn w-100 bu-orange fs-6 text-light rounded-1 {{ $cb_withLoan->accept_request != '1' ? 'disabled' : '' }}">
-                                                <i class="bi bi-printer-fill"></i> Print
+                                        @if ($cb_withLoan->accept_request == 1)
+                                            {{-- Display print if co borrower accepts --}}
+                                            @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
+                                                <a href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-4 fw-bold {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}">  Print</a>
+                                            @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
+                                                <a href="{{ route('generateHousingLoanApplicationForm', ['id' => $cb_withLoan->loan->id]) }}" type="button" class="btn w-100 bu-orange fs-6 text-light rounded-4 fw-bold {{ $cb_withLoan->accept_request != '1' ? 'disabled' : '' }}">
+                                                    Print
+                                                </a>
+                                            @endif
+                                        @else 
+                                            <a data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold fs-6 rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
+                                                Cancel
                                             </a>
                                         @endif
+                                        
                                     </td>
                                     <td class="align-middle text-center" style="width: 15%">
-                                        <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                        <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}">
+                                            <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                        </a>
                                     </td>
                                 </tr>
+                                @include('member-views.your-request.modal-cancel-request')
+
+
                                 @endforeach
                             </tbody>
                         </table>
@@ -124,52 +164,8 @@
                 </div>
             </div>
         </div>
-       
     </div>
     
-    {{-- <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable();
-        } );
-    </script> --}}
-
 </main>
-{{-- <style>
-    #myTable{
-        width: ;
-    }
-    .dataTables_length{
-        display: none !important; 
-    }
-    .dataTables_filter{
-        display: flex !important;
-        justify-content: flex-start !important;
-        width: 100% !important;
-        display: flex;
-        border: 1px solid green;
-        padding: 1rem;
-        
-    }
-    .dataTables_filter input{
-        width: auto !important;
-    }
-    th.sorting{
-        pointer-events: none !important;
-    }
-    /* th.sorting.sorting_asc::before{
-        display: none !important;
-       
-    }
-    th.sorting.sorting_asc::after{
-        display: none !important;
 
-    } */
-    th.sorting::before{
-        display: none !important;
-    }
-    th.sorting::after{
-        display: none !important;
-    }
-
-</style> --}}
 @endsection

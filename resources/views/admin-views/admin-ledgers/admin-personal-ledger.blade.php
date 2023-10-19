@@ -5,7 +5,26 @@
    
     <div class="row">
         <div class="col-12 mb-3">
+            @if (session('passed'))
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    {{session('passed')}}                
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>    
+            @endif
+            @error('penalty_total')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$message}}                
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>                
+            @enderror
+            <div class="mb-2">
+
+                <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
+                    <i class="bi bi-arrow-left-short"></i>Go back
+                </a>
+            </div>
             <div class="d-flex">
+                
                 <div>
                     <img src="{{$loan->member->profile_picture != null ?asset('storage/'.$loan->member->profile_picture) : asset('assets/no_profile_picture.jpg') }}" alt="" style="height: 50px; width: 50px; object-fit: cover;" class="border rounded-circle">
                 </div>
@@ -37,10 +56,12 @@
         </div>
         <div class="col-md-6">
             <div class="d-flex justify-content-end">
-            
-                <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
-                    <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
-                </a>
+                
+                @if ($loan->penalty)
+                    <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
+                        <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                    </a>                    
+                @endif
                 {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
                 
                     @php
@@ -420,7 +441,7 @@
   <!-- Penalty Modal -->
 @include('admin-views.admin-ledgers.modal-penalty')
 
-  <script>
+<script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
