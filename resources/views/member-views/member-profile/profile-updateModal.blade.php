@@ -31,7 +31,7 @@
               </div>
               <div class="form-group">
                 <label for="contact_num" class="fw-bold fs-7" style="color:#595959;">Contact Number</label>
-                <input type="text" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
+                <input type="number" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
               </div>
               <div class="form-group">
                 <label for="address" class="fw-bold fs-7" style="color:#595959;">Address</label>

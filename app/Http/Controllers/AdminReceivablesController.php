@@ -176,4 +176,12 @@ class AdminReceivablesController extends Controller
         return $quarterlyPayments;
     }
 
+    public function summary(){
+        return view('admin-views.admin-receivables.admin-receivables-summary');
+    }
+
+    public function remit(){
+        return view('admin-views.admin-receivables.admin-receivables-remit');
+    }
+
 }

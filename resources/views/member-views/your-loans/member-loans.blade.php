@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mt-2">
             <div class="col">
-                <div class="card border col-lg-7 col-sm-12 mx-auto p-lg-4 p-3 pt-4">
+                <div class="card border col-lg-7 col-sm-12 mx-auto p-lg-4 p-3 pt-4 my-2">
                     <div class="col-12">
                         <p class="text-center fw-bold fs-5">Your Loans</p>
                     </div>
@@ -42,13 +42,19 @@
                     </div>
 
                     <div class="col-12">
-                        <div class="loan-container p-1" style="min-height: 100px; max-height: 450px; overflow-y: scroll;">
+                        <div class="loan-container p-1" style="min-height: 100px; max-height: 450px; width: 100%; overflow-y: auto; overflow-x:hidden;">
                             @if (count($loans) != 0)
                                 @foreach ($loans as $loan)
+                                    @php
+                                        $paid = false;
+                                        if ($loan->totalPayment >= ($loan->principal_amount + $loan->interest)) {
+                                            $paid = true;
+                                        }
+                                    @endphp
                                     <!-- Status Card -->
                                     <a href="{{route('loan.details', ['id' => $loan->loan_type_id])}}" class="text-decoration-none text-dark">
                                         <div class="col-12 pb-3">
-                                            <div class="card rounded-4 shadow-sm loan_card">
+                                            <div class="card {{ $paid ? 'bg-bugreen' : '' }} rounded-4 shadow-sm loan_card">
                                                 <div class="row g-0 p-3">
                                                     <div class="col m-0 d-flex justify-content-center">
                                                         @if ($loan->loan_type_id == 1)
@@ -93,24 +99,35 @@
 
                                                     <div class="col-4 text-end ">
                                                         <p  class="text3-1-design m-0">Outstanding Balance</p>
-                                                        <p class="fw-bold" ><span class="fw-light" style="font-size: small;">Php</span>
-                                                            {{
-                                                                number_format($loan->principal_amount + $loan->interest - $loan->totalPayment, 2, '.',',')
-                                                            }}
-                                                        </p>
+                                                        @if($paid)
+                                                            <span class="fs-7 fw-bold text-success">
+                                                                Fully Paid <img src="{{asset('icons/check-icon.svg')}}" alt="check-icon">
+                                                            </span>
+                                                        @else
+                                                            <p class="fw-bold" ><span class="fw-light" style="font-size: small;">Php</span>
+                                                                {{
+                                                                    number_format($loan->principal_amount + $loan->interest - $loan->totalPayment, 2, '.',',')
+                                                                }}
+                                                            </p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 @endforeach
-
                             @else
                                 <div class="row">
                                     <div class="col-12 p-5 text-center">
-                                        <p>You have no loans yet</p>
+                                        @if($loan_status == 1)
+                                        <p>You don't have performing loans yet</p>
+                                        @elseif($loan_status == 2)
+                                        <p>You don't have paid loans yet</p>
+                                        @else
+                                        <p>You don't have loans yet</p>
+                                        @endif
                                         <img src="{{asset('icons/no-transaction.svg')}}" alt="" style="width: 200px">
-                                        <p class="mt-5" style="font-size: small">
+                                        <p class="mt-5" style="font-size: small;">
                                             Apply for a <a class="text-decoration-none" href="/member/mpl-application-form">Multi-purpose</a> or a <a class="text-decoration-none" href="/member/hsl-application-form">Housing Loan</a> loan today!</p>
                                     </div>
                                 </div>

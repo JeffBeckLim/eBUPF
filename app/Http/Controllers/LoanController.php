@@ -54,7 +54,7 @@ class LoanController extends Controller
                 }
 
                 // Check if the loan is paid
-                $loanIsPaid = $totalPayment == ($loan->principal_amount + $loan->interest);
+                $loanIsPaid = $totalPayment >= ($loan->principal_amount + $loan->interest);
 
                 return $loanIsPaid;
             });
@@ -70,7 +70,7 @@ class LoanController extends Controller
             }
             $loan->totalPayment = $totalPayment;
         }
-
+        /* dd($loans); */
         return view('member-views.your-loans.member-loans', compact('loans', 'loan_status', 'payments'));
     }
 
