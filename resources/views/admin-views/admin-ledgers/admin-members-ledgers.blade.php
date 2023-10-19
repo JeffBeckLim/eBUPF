@@ -105,9 +105,35 @@
                                                 <a class="text-secondary text-decoration-none fw-bold" data-bs-toggle="tooltip" data-bs-title="Amort. Period" >
                                                     
                                                     <i class="bi bi-calendar4-event"></i>
+                                                    {{-- of amortization period exist --}}
+                                                    @if ($loan->amortization->amort_start != null &&
+                                                    $loan->amortization->amort_end != null 
+                                                    )
                                                     {{Carbon\Carbon::parse($loan->amortization->amort_start)->format('M Y')}} -
                                                     {{Carbon\Carbon::parse($loan->amortization->amort_end)->format('M Y')}} 
+                                                    
+                                                     @else {{--  else display NaN --}}
+                                                        NaN
+                                                    @endif
                                                 </a>
+                                                @if ($loan->penalty != null)
+                                                <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has been penalized" >
+                                                    <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                                                </a>     
+                                                @endif
+
+                                                {{-- if has missing amortization details --}}
+                                                @if ($loan->amortization->amort_start == null ||
+                                                        $loan->amortization->amort_end == null ||
+                                                        $loan->amortization->amort_principal == null ||
+                                                        $loan->amortization->amort_interest == null 
+                                                    )
+                                                    
+                                                    <a style="font-size: 21px" href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="Incomplete amortization details" >
+                                                        <i style="color: #b82744" class="bi bi-exclamation-triangle"></i>
+                                                    </a>
+                                                @endif
+                                                  
                                             </h6>
                                         </td>
                                         <td class="text-end">
