@@ -40,38 +40,47 @@
                     </div>
                 </div>
 
-                <div>
-                    <form method="get" action="{{ route('admin.receivables', ['loan_type' => $loan_type]) }}">
-                        <div class="filter-group gap-3 mt-4">
-                            <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                                <select name="unitSelect" class="form-control bg-white border-0">
-                                    <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }}>All Unit</option>
-                                    @foreach ($units as $unit)
-                                        <option value="{{ $unit->unit_code }}" {{ $selectedUnit == $unit->unit_code ? 'selected' : '' }}>
-                                            {{ $unit->unit_code }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-
-                            <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                                <select name="yearSelect" class="form-control bg-white border-0">
-                                    @if($distinctYears == null)
-                                        <option value="" selected>No Data</option>
-                                    @else
-                                        @foreach ($distinctYears as $year)
-                                            <option value="{{ $year }}"{{ $year == $selectedYear ? ' selected' : '' }}>{{ $year }}</option>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form method="get" action="{{ route('admin.receivables', ['loan_type' => $loan_type]) }}">
+                            <div class="filter-group gap-3 mt-4">
+                                <div class="form-group fg-admin" style="width: 150px; position: relative;">
+                                    <select name="unitSelect" class="form-control bg-white border-0">
+                                        <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }}>All Unit</option>
+                                        @foreach ($units as $unit)
+                                            <option value="{{ $unit->unit_code }}" {{ $selectedUnit == $unit->unit_code ? 'selected' : '' }}>
+                                                {{ $unit->unit_code }}
+                                            </option>
                                         @endforeach
-                                    @endif
-                                </select>
-                            </div>
+                                    </select>
+                                </div>
 
-                            <button type="submit" class="btn btn-outline-dark" name="applyFilterButton">Apply Filter</button>
-                            <button type="submit" class="btn btn-outline-primary" name="clearFilterButton">Clear Filter</button>
-                        </div>
-                    </form>
+
+                                <div class="form-group fg-admin" style="width: 150px; position: relative;">
+                                    <select name="yearSelect" class="form-control bg-white border-0">
+                                        @if($distinctYears == null)
+                                            <option value="" selected>No Data</option>
+                                        @else
+                                            @foreach ($distinctYears as $year)
+                                                <option value="{{ $year }}"{{ $year == $selectedYear ? ' selected' : '' }}>{{ $year }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-outline-dark" name="applyFilterButton">Apply Filter</button>
+                                <button type="submit" class="btn btn-outline-primary" name="clearFilterButton">Clear Filter</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 text-end mt-4">
+                        <a href="{{route('admin.receivables', 'mpl')}}" class="btn fs-6"><img width="24" height="24" src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/24/external-quarter-date-and-time-tanah-basah-basic-outline-tanah-basah-2.png" alt="external-quarter-date-and-time-tanah-basah-basic-outline-tanah-basah-2"/> Quarterly</a>
+                        <a href="{{route('admin.receivables.summary')}}" class="btn fs-6"><i class="bi bi-calendar"></i> Yearly Summary</a>
+                        <a href="{{route('admin.receivables.remit')}}" class="btn fs-6"><img width="18" height="20" src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/external-bar-chart-in-down-trend-after-market-crash-business-regular-tal-revivo.png" alt="external-bar-chart-in-down-trend-after-market-crash-business-regular-tal-revivo"/> Yearly Remit</a>
+                    </div>
                 </div>
+
                  <div class="table-responsive border rounded mt-3">
                         <style>
                             #second-tr th{
@@ -79,10 +88,10 @@
                                 font-size: small;
                             }
                         </style>
-                        <table class="table admin-table table-striped border p-1" id="myTable">
+                        <table class="table admin-table table-striped border px-1" id="myTable">
                             <thead>
                                 <tr>
-                                    <th colspan="4">UNIT: BU GENERAL ADMINISTRATION</th>
+                                    <th colspan="4"></th>
                                     <th colspan="6" class=" text-center" style="background-color: #4F81BD !important; color: white !important; ">Loan Receivables</th>
                                     <th colspan="6" class=" text-center" style="background-color: #C0504D !important; color: white !important;">Interest Receivables</th>
                                 </tr>
