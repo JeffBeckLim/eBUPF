@@ -1,10 +1,10 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penaltylModal" tabindex="-1" aria-labelledby="penaltyleModalLabel" aria-hidden="true">
  
   
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-0">
-          <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Penalty</h1>
+          <h1 class="modal-title fs-5 fw-bold" id="penaltyleModalLabel">Penalty</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -13,7 +13,7 @@
             @csrf
 
             <label for="date" >Update Penalty Total</label>
-            <input  class="form-control" type="numeric" name="penalty_total" id="numericInput" value="{{$loan->penalty->penalty_total}}">
+            <input  class="form-control" type="numeric" name="penalty_total" id="numericInput" value="{{$loan->penalty != null ? $loan->penalty->penalty_total : ''}}">
             
             {{-- <label for="remarks">Remarks</label>
             <input class="form-control" type="text" name="remarks" id="remarks" value="">

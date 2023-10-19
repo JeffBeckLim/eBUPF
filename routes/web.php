@@ -113,11 +113,14 @@ use App\Models\Penalty;
     Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept']);
     //update decline request co-borrower
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
+    // cancel loan application
+    Route::get('/member/coBorrower/cancel-application/{id}', [LoanApplicationController::class, 'cancelApplication'])->name('cancel.application');
 
     // Verify email
     Route::get('/verify/email', function(){
         return view('auth.verify');
     });
+
 // ======================== ** LOAN APPLICATION REQUESTS **  ====================================
 //
 //
