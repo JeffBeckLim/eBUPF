@@ -1,10 +1,10 @@
-<div class="modal fade" id="penaltylModal" tabindex="-1" aria-labelledby="penaltyleModalLabel" aria-hidden="true">
+<div class="modal fade" id="penaltyModal" tabindex="-1" aria-labelledby="penaltyModalLabel" aria-hidden="true">
  
   
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-0">
-          <h1 class="modal-title fs-5 fw-bold" id="penaltyleModalLabel">Penalty</h1>
+          <h1 class="modal-title fs-5 fw-bold" id="penaltyModalLabel">Penalty</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

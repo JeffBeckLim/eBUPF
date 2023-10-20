@@ -30,7 +30,7 @@ class LoanController extends Controller
 
         // Get all loans of the member with related data
         $loans = Loan::where('member_id', $memberID)
-        ->with('loanType', 'payment', 'amortization', 'loanApplicationStatus')
+        ->with('loanType', 'payment', 'amortization', 'loanApplicationStatus' , 'penalty')
         ->orderBy('created_at', 'desc') // Sort by created_at in descending order
         ->get();
 
@@ -75,7 +75,7 @@ class LoanController extends Controller
     }
 
     public function displayLoanDetails($id){
-        $loan = Loan::where('id', $id)->first();
+        $loan = Loan::where('id', $id)->with('penalty')->first();
         $payments = $loan->payment;
 
         return view('member-views.your-loans.member-loan-details',
