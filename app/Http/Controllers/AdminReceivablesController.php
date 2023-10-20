@@ -178,129 +178,131 @@ class AdminReceivablesController extends Controller
         return $quarterlyPayments;
     }
 
-    public function summary($report, $loan_type) {
-        // Get all payments
-        $payments = Payment::all();
-
-        // Get all units and count their members
-        $units = Unit::whereHas('members')->withCount('members')->get();
-
-        // Initialize an array to store unit payments
-        $unitPayments = [];
-
+    public function summary(Request $request, $report, $loan_type)
+    {
         if ($loan_type == 'mpl') {
-            // Retrieve all members who have MPL loans with at least one payment
-            $membersWithMPLLoans = Member::whereHas('loans', function ($query) {
-                $query->where('loan_type_id', 1); // Get MPL loans
-            })->get();
-
-            foreach ($units as $unit) {
-                $unitId = $unit->id;
-                $membersInUnit = $membersWithMPLLoans->where('unit_id', $unitId);
-                $unitPrincipalPayments = 0;
-                $unitInterestPayments = 0;
-
-                foreach ($membersInUnit as $member) {
-                    // Get all loans of this member with the specified loan type
-                    $memberLoans = $member->loans->where('loan_type_id', 1);
-
-                    // Initialize member-level payments
-                    $memberPrincipalPayments = 0;
-                    $memberInterestPayments = 0;
-
-                    foreach ($memberLoans as $loan) {
-                        $loanId = $loan->id;
-
-                        $memberPayments = $payments->where('member_id', $member->id)->where('loan_id', $loanId);
-
-                        if ($memberPayments->isNotEmpty()) {
-                            // Calculate principal and interest payments for each loan
-                            $principalPayments = $memberPayments->sum('principal');
-                            $interestPayments = $memberPayments->sum('interest');
-                        } else {
-                            $principalPayments = 0;
-                            $interestPayments = 0;
-                        }
-
-                        // Accumulate payments for all loans of this member
-                        $memberPrincipalPayments += $principalPayments;
-                        $memberInterestPayments += $interestPayments;
-                    }
-
-                    // Accumulate payments for all members in the unit
-                    $unitPrincipalPayments += $memberPrincipalPayments;
-                    $unitInterestPayments += $memberInterestPayments;
-                }
-
-                // Store the unit payments in the array
-                $unitPayments[$unitId] = [
-                    'principal_payments' => $unitPrincipalPayments,
-                    'interest_payments' => $unitInterestPayments,
-                ];
-            }
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 1)->get();
         } elseif ($loan_type == 'hsl') {
-            // Retrieve all members who have HSL loans with at least one payment
-            $membersWithHSLLoans = Member::whereHas('loans', function ($query) {
-                $query->where('loan_type_id', 2); // Get HSL loans
-            })->get();
-
-            foreach ($units as $unit) {
-                $unitId = $unit->id;
-                $membersInUnit = $membersWithHSLLoans->where('unit_id', $unitId);
-                $unitPrincipalPayments = 0;
-                $unitInterestPayments = 0;
-
-                foreach ($membersInUnit as $member) {
-                    // Get all loans of this member with the specified loan type
-                    $memberLoans = $member->loans->where('loan_type_id', 2);
-
-                    // Initialize member-level payments
-                    $memberPrincipalPayments = 0;
-                    $memberInterestPayments = 0;
-
-                    foreach ($memberLoans as $loan) {
-                        $loanId = $loan->id;
-
-                        $memberPayments = $payments->where('member_id', $member->id)->where('loan_id', $loanId);
-
-                        if ($memberPayments->isNotEmpty()) {
-                            // Calculate principal and interest payments for each loan
-                            $principalPayments = $memberPayments->sum('principal');
-                            $interestPayments = $memberPayments->sum('interest');
-                        } else {
-                            $principalPayments = 0;
-                            $interestPayments = 0;
-                        }
-
-                        // Accumulate payments for all loans of this member
-                        $memberPrincipalPayments += $principalPayments;
-                        $memberInterestPayments += $interestPayments;
-                    }
-
-                    // Accumulate payments for all members in the unit
-                    $unitPrincipalPayments += $memberPrincipalPayments;
-                    $unitInterestPayments += $memberInterestPayments;
-                }
-
-                // Store the unit payments in the array
-                $unitPayments[$unitId] = [
-                    'principal_payments' => $unitPrincipalPayments,
-                    'interest_payments' => $unitInterestPayments,
-                ];
-            }
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 2)->get();
         } else {
             abort(404); // Invalid loan type
         }
 
-        // Pass the data to the view and render it
+        $units = Unit::all();
+
+        $distinctYears = [];
+        foreach ($loans as $loan) {
+            $amortStartYear = Carbon::parse($loan->amortization->amort_start)->year;
+            $amortEndYear = Carbon::parse($loan->amortization->amort_end)->year;
+
+            // Add all years from amort_start to amort_end (inclusive) to the distinctYears array
+            for ($year = $amortStartYear; $year <= $amortEndYear; $year++) {
+                $distinctYears[] = $year;
+            }
+        }
+        $distinctYears = array_unique($distinctYears);
+
+        $currentYear = Carbon::now()->year;
+        // Define an array to store quarterly payments for each loan
+        $quarterlyPayments = [];
+        $quarterlyPaymentsForInterest = [];
+
+        // Calculate quarterly payments for each loan
+        foreach ($loans as $loan) {
+            $loanId = $loan->id;
+            $quarterlyPayments[$loanId] = $this->calculateQuarterlyPayments($loanId);
+            $quarterlyPaymentsForInterest[$loanId] = $this->calculateQuarterlyInterestPayments($loanId);
+        }
+
+        $currentYear = Carbon::now()->year;
+
+        // Set the default selected year and unit
+        $selectedYear = $request->input('yearSelect') ?? $currentYear;
+
+        if ($request->has('clearFilterButton')) {
+            $selectedYear = $currentYear;
+        }
+
+        $yearlyBalances = [];
+        $combinedYearlyBalances = []; // To store combined yearly balances(ending) for units
+
+        foreach ($loans as $loan) {
+            $amortStartYear = Carbon::parse($loan->amortization->amort_start)->year;
+            $amortEndYear = Carbon::parse($loan->amortization->amort_end)->year;
+
+            $loanId = $loan->id;
+            $unitCode = $loan->member->units->unit_code; // Get the unit code
+
+            // Initialize the combined yearly balances for the unit if it doesn't exist
+            if (!isset($combinedYearlyBalances[$unitCode])) {
+                $combinedYearlyBalances[$unitCode] = [];
+            }
+
+            $yearlyBalances[$loanId] = [];
+
+            // Calculate yearly balances for the loan
+            for ($year = $amortStartYear; $year <= $amortEndYear; $year++) {
+                if ($year == $amortStartYear) {
+                    // First year, use loan's principal as beginning balance
+                    $beginningBalancePrincipal = $loan->principal_amount;
+                    $beginningBalanceInterest = $loan->interest;
+                } else {
+                    // Subsequent years, use the ending balance of the previous year
+                    $beginningBalancePrincipal = $yearlyBalances[$loanId][$year - 1]['ending_balance_principal'];
+                    $beginningBalanceInterest = $yearlyBalances[$loanId][$year - 1]['ending_balance_interest'];
+                }
+
+                // Calculate payments made in this year
+                $paymentsInYearPrincipal = 0;
+                $paymentsInYearInterest = 0;
+
+                if (isset($quarterlyPayments[$loanId][$year])) {
+                    $paymentsInYearPrincipal = array_sum($quarterlyPayments[$loanId][$year]);
+                }
+
+                $paymentsInYearInterest = 0;
+                if (isset($quarterlyPaymentsForInterest[$loanId][$year])) {
+                    $paymentsInYearInterest = array_sum($quarterlyPaymentsForInterest[$loanId][$year]);
+                }
+
+                $endingBalancePrincipal = $beginningBalancePrincipal - $paymentsInYearPrincipal;
+                $endingBalanceInterest = $beginningBalanceInterest - $paymentsInYearInterest;
+
+                $yearlyBalances[$loanId][$year] = [
+                    'beginning_balance_principal' => $beginningBalancePrincipal,
+                    'ending_balance_principal' => $endingBalancePrincipal,
+                    'beginning_balance_interest' => $beginningBalanceInterest,
+                    'ending_balance_interest' => $endingBalanceInterest,
+                ];
+
+                // Update the combined yearly balances for the unit
+                if (!isset($combinedYearlyBalances[$unitCode][$year])) {
+                    $combinedYearlyBalances[$unitCode][$year] = [
+                        'beginning_balance_principal' => 0,
+                        'ending_balance_principal' => 0,
+                        'beginning_balance_interest' => 0,
+                        'ending_balance_interest' => 0,
+                    ];
+                }
+
+                $combinedYearlyBalances[$unitCode][$year]['beginning_balance_principal'] += $beginningBalancePrincipal;
+                $combinedYearlyBalances[$unitCode][$year]['ending_balance_principal'] += $endingBalancePrincipal;
+                $combinedYearlyBalances[$unitCode][$year]['beginning_balance_interest'] += $beginningBalanceInterest;
+                $combinedYearlyBalances[$unitCode][$year]['ending_balance_interest'] += $endingBalanceInterest;
+            }
+        }
+
         return view('admin-views.admin-receivables.admin-receivables-summary', compact(
             'report',
             'loan_type',
+            'loans',
+            'yearlyBalances',
             'units',
-            'unitPayments'
+            'distinctYears',
+            'selectedYear',
+            'combinedYearlyBalances'
         ));
     }
-
 
 
     public function remit($report, $loan_type){
