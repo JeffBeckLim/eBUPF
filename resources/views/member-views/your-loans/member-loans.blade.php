@@ -76,6 +76,15 @@
                                                             @endif
                                                             </span>
                                                         </p>
+
+                                                        @if ($loan->penalty != null)
+                                                        <span style="font-size: 12px" class="text-danger">
+                                                            <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                                                        </span>    
+                                                        @endif
+                                                        
+                                                       
+
                                                         <p class="m-0" style="font-size: x-small;">
                                                             @if($loan->amortization)
                                                             {{date("F Y", strtotime($loan->amortization->amort_start))}}
@@ -111,6 +120,8 @@
                                                             </p>
                                                         @endif
                                                     </div>
+
+                                                
                                                 </div>
                                             </div>
                                         </div>
@@ -141,6 +152,7 @@
 </main>
 
 <script>
+     
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('search-input');
         const cards = document.querySelectorAll('.loan_card');

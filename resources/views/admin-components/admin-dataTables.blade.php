@@ -61,13 +61,16 @@
 
 <script>
     $(document).ready( function () {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            order: [[0, 'desc']]
+        });
     } );
 
         new DataTable('#loanApplicationTable', {
             fixedColumns: {
             left: 5,
         },
+        order: [[0, 'desc']],
         paging: true,
         scrollCollapse: true,
         scrollX: true,

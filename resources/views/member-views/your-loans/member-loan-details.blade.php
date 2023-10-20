@@ -14,7 +14,9 @@
                                 <div class="col-12 pb-3" style="margin: 10px 0 0 10px">
                                     <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
                                     <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
+                                    
                                 </div>
+                                
                                 <div class="col-12 " style=" scale: 0.9;">
                                     <div class="row">
                                         <div class="col-2">
@@ -51,6 +53,19 @@
                                                     @endif
                                                 </span>
                                             </p>
+                                            
+                                            @if ($loan->penalty != null)
+                                                <h6 class="">
+                                                    <span style="font-size: 14px" class="text-danger">
+                                                        <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                                                            Loan Penalized 
+                                                    </span>
+                                                    <h6 class="text-danger fw-bold">
+                                                        Php {{number_format($loan->penalty->penalty_total, 2,',','.')}}
+                                                    </h6>
+                                                </h6>                                          
+                                            @endif
+
                                         </div>
                                         <div class="col-4">
                                             <p  class="text3-1-design m-0">Outstanding Balance</p>
