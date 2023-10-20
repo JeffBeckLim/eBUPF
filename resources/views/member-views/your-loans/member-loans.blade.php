@@ -52,7 +52,7 @@
                                         }
                                     @endphp
                                     <!-- Status Card -->
-                                    <a href="{{route('loan.details', ['id' => $loan->loan_type_id])}}" class="text-decoration-none text-dark">
+                                    <a href="{{route('loan.details', ['id' => $loan->id])}}" class="text-decoration-none text-dark">
                                         <div class="col-12 pb-3">
                                             <div class="card {{ $paid ? 'bg-bugreen' : '' }} rounded-4 shadow-sm loan_card">
                                                 <div class="row g-0 p-3">

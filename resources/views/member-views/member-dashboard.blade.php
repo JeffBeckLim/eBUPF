@@ -54,7 +54,7 @@
 
                                                 @foreach ($sortedLoans as $loan)
                                                     @if ($loan->loan_type_id == 1)
-                                                        <a href="{{route('loan.details', ['id' => $loan->loan_type_id])}}" style="text-decoration: none;">
+                                                        <a href="{{route('loan.details', ['id' => $loan->id])}}" style="text-decoration: none;">
                                                             <div style="border-radius: 10px; border: 1px solid #DCDCDC; background: #FFF; margin: 12px 20px 12px;" class="card  g-0">
                                                                 <div class="row mt-2 g-0">
                                                                     <div class="col-8  g-0">

@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <form method="get" action="{{ route('admin.receivables', ['report' => $report, 'loan_type' => $loan_type]) }}">
                             <div class="filter-group gap-3 mt-4">
                                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
@@ -73,24 +73,26 @@
                             </div>
                         </form>
                     </div>
+                </div>
 
-                    <div class="col-md-6 text-end mt-4">
-                        <a href="{{ route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl']) }}" class="btn fs-6 {{$report == 'quarterly' ? 'fw-bold' : ''}}">
-                            <img width="24" height="24" src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/24/external-quarter-date-and-time-tanah-basah-basic-outline-tanah-basah-2.png" alt="quarterly logo"/>
-                            Quarterly
+                <div class="row">
+                    <div class="col-12 text-end mt-4">
+                        <a href="{{ route('admin.receivables', ['report' => 'quarterly', 'loan_type' => $loan_type ]) }}" class="btn text-secondary  fs-7 {{ $report == 'quarterly' ? 'fw-bold' : '' }}">
+                            <img width="24" height="24" src="https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/24/external-quarter-date-and-time-tanah-basah-basic-outline-tanah-basah-2.png" alt="quarterly logo" /> &nbsp;
+                                Quarterly
                         </a>
-                        <a href="{{ route('admin.receivables.summary', ['report' => 'summary', 'loan_type' => 'mpl']) }}" class="btn fs-6 {{ $report == 'summary' ? 'fw-bold' : '' }}">
-                            <i class="bi bi-calendar"></i>
-                            Yearly Summary
+                        <a href="{{ route('admin.receivables.summary', ['report' => 'summary', 'loan_type' => $loan_type ]) }}" class="btn text-secondary fs-7 {{ $report == 'summary' ? 'fw-bold' : '' }}">
+                            <i class="bi bi-calendar"></i> &nbsp;
+                                Yearly Summary
                         </a>
-                        <a href="{{ route('admin.receivables.remit', ['report' => 'remit', 'loan_type' => 'mpl']) }}" class="btn fs-6 {{ $report == 'remit' ? 'fw-bold' : '' }}">
-                            <img width="18" height="20" src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/external-bar-chart-in-down-trend-after-market-crash-business-regular-tal-revivo.png" alt="remit logo"/>
-                            Yearly Remit
+                        <a href="{{ route('admin.receivables.remit', ['report' => 'remit', 'loan_type' => $loan_type ]) }}" class="btn text-secondary fs-7 {{ $report == 'remit' ? 'fw-bold' : '' }}">
+                            <img width="18" height="20" src="https://img.icons8.com/external-tal-revivo-regular-tal-revivo/24/external-bar-chart-in-down-trend-after-market-crash-business-regular-tal-revivo.png" alt="remit logo" /> &nbsp;
+                                Yearly Remit
                         </a>
                     </div>
                 </div>
 
-                 <div class="table-responsive border rounded mt-3">
+                 <div class="table-responsive border rounded">
                         <style>
                             #second-tr th{
                                 background-color: #f5f5f5;
