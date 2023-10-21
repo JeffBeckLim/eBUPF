@@ -5,18 +5,23 @@
     <div class="row mt-2">
         <div class="container-fluid">
             <div class="adminbox">
-
-                <div class="d-flex text-dark mt-3">
-                    <div class="g-0 ps-2 my-auto d-flex align-items-center">
+                <div class="row d-flex text-dark mt-3">
+                    <div class="col-7 g-0 ps-2 my-auto d-flex align-items-center">
                         <img src="{{ asset('icons/admin-icons/receivables-big.svg') }}" alt="Receivables Big Icon" width="40px" height="40px" style="margin-right: 5px;">
                         <div style="line-height: 0.6;">
-                            <div class="m-0 fw-bold fs-5">Schedule of Receivables &nbsp;
-                                <a href="#">
-                                    <i class="bi bi-download"></i>
-                                </a>
-                            </div>
+                            <div class="m-0 fw-bold fs-5">Schedule of Receivables</div>
                             <br>
                             <div class="fs-7 text-secondary">Yearly Summary</div>
+                        </div>
+                    </div>
+                    <div class="col-5 text-end">
+                        <div class="btn-group" style="margin-right: 20px;">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Download Report
+                            </button>
+                            <ul class="dropdown-menu" id="yearDropdown">
+
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -126,6 +131,49 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Function to update the year options
+    function updateYearOptions() {
+        var currentYear = new Date().getFullYear();
+        var currentMonth = new Date().getMonth() + 1; // Add 1 since getMonth() returns 0-11
+        var select = document.getElementById('yearDropdown');
+
+        // Clear existing options
+        select.innerHTML = '';
+
+        // Populate the dropdown with the current year
+        var currentYearOption = document.createElement('li');
+        currentYearOption.innerHTML = '<button class="dropdown-item" type="button" data-year="' + currentYear + '">' + currentYear + '</button>';
+        select.appendChild(currentYearOption);
+
+        // Check if it's a new year, and if so, add the next year
+        if (currentMonth === 12) {
+            var nextYear = currentYear + 1;
+            var nextYearOption = document.createElement('li');
+            nextYearOption.innerHTML = '<button class="dropdown-item" type="button" data-year="' + nextYear + '">' + nextYear + '</button>';
+            select.appendChild(nextYearOption);
+        }
+    }
+
+    // Add a click event listener to the dropdown items
+    document.addEventListener('click', function (event) {
+        if (event.target.matches('.dropdown-item')) {
+            var selectedYear = event.target.getAttribute('data-year');
+            // Generate the URL for the route using Laravel's route function
+            var routeUrl = "{{ route('generate.receivables.summary.report', ['year' => 'YEAR_PLACEHOLDER', 'loan_type' => $loan_type]) }}";
+            routeUrl = routeUrl.replace('YEAR_PLACEHOLDER', selectedYear);
+            window.location.href = routeUrl;
+        }
+    });
+
+    // Initial population of the dropdown
+    updateYearOptions();
+
+    // Set up an interval to check and update the dropdown (every day)
+    setInterval(updateYearOptions, 24 * 60 * 60 * 1000); // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+</script>
+
 
 @include('admin-components.admin-dataTables')
 @endsection
