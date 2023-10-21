@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Loan;
 use App\Models\Penalty;
+use App\Models\PenaltyPayment;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,7 @@ class PenaltyController extends Controller
     public function createPenaltyPayment(Request $request, $penalty_id){
         $penalty = Penalty::find($penalty_id);
         $loan = Loan::where('penalty_id', $penalty_id)->first();
-
+        
         $formFields = $request->validate([
             'penalty_payment_amount'=> 'required|numeric|min:1',
             'payment_date'=>'required|date',
@@ -46,7 +47,7 @@ class PenaltyController extends Controller
 
         // check if penalty table exist
         if($penalty != null){
-            $new_penalty_payment = Penalty::create([
+            $new_penalty_payment = PenaltyPayment::create([
                 'penalty_payment_amount'=> $formFields['penalty_payment_amount'],
                 'payment_date'=> $formFields['payment_date'],
                 'member_id'=>$loan->member_id,
@@ -55,6 +56,29 @@ class PenaltyController extends Controller
             ]);
             
             return back()->with('passed', 'Penalty Payment Added');
+
+        }else{
+            abort(404);
+        }
+    }
+
+    public function updatePenaltyPayment(Request $request, $penaltyPayment_id){
+        $penaltyPayment = PenaltyPayment::findOrFail($penaltyPayment_id);
+
+        $formFields = $request->validate([
+            'penalty_payment_amount'=> 'required|numeric|min:1',
+            'payment_date'=>'required|date',
+            'or_number'=>'nullable',
+        ]);
+
+        if($penaltyPayment != null){
+            
+            $penaltyPayment->penalty_payment_amount = $formFields['penalty_payment_amount'];
+            $penaltyPayment->payment_date = $formFields['payment_date'];
+            $penaltyPayment->or_number = $formFields['or_number'];
+            $penaltyPayment->save();
+
+            return back()->with('passed', 'Penalty Payment Updated');
 
         }else{
             abort(404);

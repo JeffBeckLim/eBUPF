@@ -446,16 +446,19 @@
             </tbody>
         </table>
     </div>
-
-    
         {{-- FOR PENALTY --}}
         @include('admin-views.admin-ledgers.card-penalty')
         
+        
 </div>
+@include('admin-views.admin-ledgers.modal-edit-penalty-payment')
 
   <!-- Penalty Modal -->
 @include('admin-views.admin-ledgers.modal-penalty')
-@include('admin-views.admin-ledgers.modal-penalty-payment')
+
+@if ($loan->penalty_id != null)
+    @include('admin-views.admin-ledgers.modal-penalty-payment')
+@endif
 
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

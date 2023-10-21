@@ -85,9 +85,13 @@ use App\Models\Penalty;
     // PENALTY
     Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate');
         //penalty payment 
+        // createPenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment/{penalty_id}', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment');
+        // updatePenaltyPayment
+    Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment');
 
-    // createPenaltyPayment
+
+    
 
 //TESTING ===================================================================================================
 
