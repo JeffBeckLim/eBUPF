@@ -83,12 +83,12 @@
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>
-                        <input id="principal_input" class="form-control" name="principal" type="number" min="0" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input id="principal_input" class="form-control" name="principal" type="number" step="0.01" min="0" value="{{ old('principal') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                     </div>
 
                     <div class="col-md-2 pe-1">
                         <label for="interest" class="fw-bold">Interest <span class="fw-bold text-danger">*</span></label>
-                        <input id="interest_input" class="form-control w-100" name="interest" type="number" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
+                        <input id="interest_input" class="form-control w-100" name="interest" type="number" step="0.01" min="0" value="{{ old('interest') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77);">
                     </div>
 
                     <div class="col-md-2 d-flex justify-content-center align-items-center mt-2">

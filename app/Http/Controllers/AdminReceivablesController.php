@@ -37,6 +37,15 @@ class AdminReceivablesController extends Controller
         $distinctYears = array_unique($distinctYears);
 
         $currentYear = Carbon::now()->year;
+        // Set the default selected year and unit
+        $selectedYear = $request->input('yearSelect') ?? $currentYear;
+        $selectedUnit = $request->input('unitSelect') ?? 'All';
+
+        if ($request->has('clearFilterButton')) {
+            $selectedYear = $currentYear;
+            $selectedUnit = 'All';
+        }
+
         // Define an array to store quarterly payments for each loan
         $quarterlyPayments = [];
         $quarterlyPaymentsForInterest = [];
@@ -48,16 +57,7 @@ class AdminReceivablesController extends Controller
             $quarterlyPaymentsForInterest[$loanId] = $this->calculateQuarterlyInterestPayments($loanId);
         }
 
-        $currentYear = Carbon::now()->year;
 
-        // Set the default selected year and unit
-        $selectedYear = $request->input('yearSelect') ?? $currentYear;
-        $selectedUnit = $request->input('unitSelect') ?? 'All';
-
-        if ($request->has('clearFilterButton')) {
-            $selectedYear = $currentYear;
-            $selectedUnit = 'All';
-        }
         $yearlyBalances = [];
 
         foreach ($loans as $loan) {
@@ -213,9 +213,6 @@ class AdminReceivablesController extends Controller
             $quarterlyPayments[$loanId] = $this->calculateQuarterlyPayments($loanId);
             $quarterlyPaymentsForInterest[$loanId] = $this->calculateQuarterlyInterestPayments($loanId);
         }
-
-        $currentYear = Carbon::now()->year;
-
         // Set the default selected year and unit
         $selectedYear = $request->input('yearSelect') ?? $currentYear;
 
@@ -305,12 +302,107 @@ class AdminReceivablesController extends Controller
     }
 
 
-    public function remit($report, $loan_type){
-        return view('admin-views.admin-receivables.admin-receivables-remit',
-        compact(
+    public function remit(Request $request, $report, $loan_type){
+
+        if ($loan_type == 'mpl') {
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 1)->get();
+        } elseif ($loan_type == 'hsl') {
+            $loans = Loan::whereHas('amortization')->where('loan_type_id', 2)->get();
+        } else {
+            abort(404); // Invalid loan type
+        }
+
+        $units = Unit::all();
+
+        $distinctYears = [];
+
+        foreach ($loans as $loan) {
+            $amortStartYear = Carbon::parse($loan->amortization->amort_start)->year;
+            $amortEndYear = Carbon::parse($loan->amortization->amort_end)->year;
+
+            // Add all years from amort_start to amort_end (inclusive) to the distinctYears array
+            for ($year = $amortStartYear; $year <= $amortEndYear; $year++) {
+                $distinctYears[] = $year;
+            }
+        }
+        $distinctYears = array_unique($distinctYears);
+
+        $currentYear = Carbon::now()->year;
+        // Set the default selected year and unit
+        $selectedYear = $request->input('yearSelect') ?? $currentYear;
+        $selectedUnit = $request->input('unitSelect') ?? 'All';
+
+        if ($request->has('clearFilterButton')) {
+            $selectedYear = $currentYear;
+            $selectedUnit = 'All';
+        }
+
+        // Create an array to store members and their payments
+        $membersWithPayments = [];
+        // Iterate through units and their members
+        foreach ($units as $unit) {
+            $members = $unit->members;
+
+            // Iterate through members of the unit
+            foreach ($members as $member) {
+                // Check if the member has any loans for the selected year
+                $memberLoans = $loans->filter(function ($loan) use ($member, $selectedYear) {
+                    $payments = Payment::where('loan_id', $loan->id)
+                        ->where('member_id', $member->id)
+                        ->whereYear('payment_date', $selectedYear)
+                        ->exists();
+                    return $payments;
+                });
+
+                // Collect information about the member only if they have loans and payments
+                if ($memberLoans->isNotEmpty()) {
+                    $memberInfo = [
+                        'unit_name' => $unit->unit_code,
+                        'member_name' => $member->lastname . ', ' . $member->firstname,
+                        'member_loans' => [],
+                    ];
+
+                    // Iterate through loans for this member
+                    foreach ($memberLoans as $loan) {
+                        // Filter the payments related to this loan and member
+                        $payments = Payment::where('loan_id', $loan->id)
+                            ->where('member_id', $member->id)
+                            ->whereYear('payment_date', $selectedYear)
+                            ->get();
+
+                        // Store the principal, interest, and total payments for this loan
+                        $monthlyPayments = $payments->groupBy(function ($payment) {
+                            return Carbon::parse($payment->payment_date)->format('F Y');
+                        })->map(function ($payments) {
+                            return [
+                                'principal' => $payments->sum('principal'),
+                                'interest' => $payments->sum('interest'),
+                                'total' => $payments->sum('principal') + $payments->sum('interest'),
+                            ];
+                        });
+
+                        // Store the member's payments for this loan
+                        $memberInfo['member_loans'][] = [
+                            'loan_name' => $loan_type == 'mpl' ? 'MPL ' . $loan->id : 'HSL ' . $loan->id,
+                            'monthly_payments' => $monthlyPayments,
+                        ];
+                    }
+
+                    // Add the member's information to the array
+                    $membersWithPayments[] = $memberInfo;
+                }
+            }
+        }
+
+        return view('admin-views.admin-receivables.admin-receivables-remit', compact(
             'report',
             'loan_type',
+            'currentYear',
+            'selectedYear',
+            'selectedUnit',
+            'units',
+            'distinctYears',
+            'membersWithPayments'
         ));
     }
-
 }

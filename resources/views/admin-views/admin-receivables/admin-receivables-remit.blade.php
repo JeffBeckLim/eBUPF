@@ -11,7 +11,7 @@
                         <img src="{{asset('icons/admin-icons/receivables-big.svg')}}" alt="Receivables Big Icon" width="40px" height="40px"  style="margin-right: 5px;">
                         <div style="line-height: 0.6;">
                             <div class="m-0 fw-bold fs-5"> Schedule of Receivables</div> <br>
-                            <div class="fs-7 text-secondary">Quarterly</div>
+                            <div class="fs-7 text-secondary">Monthly Remit</div>
                         </div>
                     </div>
                 </div>
@@ -42,29 +42,29 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <form method="get" action="{{ route('admin.receivables.summary', ['report' => $report, 'loan_type' => $loan_type]) }}">
+                        <form method="get" action="{{ route('admin.receivables.remit', ['report' => $report, 'loan_type' => $loan_type]) }}">
                             <div class="filter-group gap-3 mt-4">
                                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                                     <select name="unitSelect" class="form-control bg-white border-0">
-                                        {{-- <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }}>All Unit</option>
+                                        <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }}>All Unit</option>
                                         @foreach ($units as $unit)
                                             <option value="{{ $unit->unit_code }}" {{ $selectedUnit == $unit->unit_code ? 'selected' : '' }}>
                                                 {{ $unit->unit_code }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach
                                     </select>
                                 </div>
 
 
                                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                                     <select name="yearSelect" class="form-control bg-white border-0">
-                                       {{--  @if($distinctYears == null)
+                                        @if($distinctYears == null)
                                             <option value="" selected>No Data</option>
                                         @else
                                             @foreach ($distinctYears as $year)
                                                 <option value="{{ $year }}"{{ $year == $selectedYear ? ' selected' : '' }}>{{ $year }}</option>
                                             @endforeach
-                                        @endif --}}
+                                        @endif
                                     </select>
                                 </div>
 
@@ -101,11 +101,65 @@
                         <table class="table admin-table table-striped border px-1" id="myTable">
                             <thead>
                                 <tr>
+                                    <th colspan="2" class="border-end"></th>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <th colspan="3" class="text-center border-end text-muted">{{ date("F", mktime(0, 0, 0, $i, 1, 2000)) }}</th>
+                                    @endfor
+                                    <th colspan="3" class="text-center border-end text-muted">{{ $selectedYear }} TOTAL PAYMENTS</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">UNIT</th>
+                                    <th class="text-center border-end">Name of Borrower</th>
+                                    @for ($i = 1; $i <= 12; $i++)
+                                        <th class="text-center">Principal</th>
+                                        <th class="text-center">Interest</th>
+                                        <th class="text-center border-end">Total</th>
+                                    @endfor
+                                    <th class="text-center">Principal</th>
+                                    <th class="text-center">Interest</th>
+                                    <th class="text-center">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($membersWithPayments as $memberData)
+                                    @foreach ($memberData['member_loans'] as $loanData)
+                                        @if ($selectedUnit == 'All' || $selectedUnit == $memberData['unit_name'])
+                                            <tr>
+                                                <td class="fw-bold">{{ $memberData['unit_name'] }}</td>
+                                                <td class="border-end">{{ $memberData['member_name'] }}</td>
+                                                @php
+                                                    $monthlyPayments = $loanData['monthly_payments'];
+                                                @endphp
+                                                @for ($i = 1; $i <= 12; $i++)
+                                                    @php
+                                                        $month = date("F Y", mktime(0, 0, 0, $i, 1, $selectedYear));
+                                                        $payments = $monthlyPayments[$month] ?? ['principal' => '', 'interest' => '', 'total' => ''];
+                                                    @endphp
+                                                    <td class="text-center">{{ $payments['principal'] ?? '' }}</td>
+                                                    <td class="text-center">{{ $payments['interest'] ?? '' }}</td>
+                                                    <td class="text-center border-end">{{ $payments['total'] ?? '' }}</td>
+                                                @endfor
+                                                @php
+                                                    $loanName = $loanData['loan_name'];
+                                                    // Calculate the total payments for the selected year
+                                                    $yearlyTotal = ['principal' => 0, 'interest' => 0, 'total' => 0];
+                                                    foreach ($monthlyPayments as $payments) {
+                                                        $yearlyTotal['principal'] += $payments['principal'];
+                                                        $yearlyTotal['interest'] += $payments['interest'];
+                                                        $yearlyTotal['total'] += $payments['total'];
+                                                    }
+                                                @endphp
+                                                <td class="text-center">{{ $yearlyTotal['principal'] }}</td>
+                                                <td class="text-center">{{ $yearlyTotal['interest'] }}</td>
+                                                <td class="text-center fw-bold">{{ $yearlyTotal['total'] }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             </tbody>
+
                         </table>
+
                     </div>
             </div>
         </div>
