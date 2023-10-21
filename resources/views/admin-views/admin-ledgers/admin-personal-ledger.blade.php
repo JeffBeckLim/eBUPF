@@ -17,6 +17,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>                
             @enderror
+
+            @error('penalty_payment_amount')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$message}}                
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>                
+            @enderror
+
+            @error('payment_date')
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$message}}                
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>                
+            @enderror
+
             <div class="mb-2">
 
                 <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
@@ -440,6 +455,7 @@
 
   <!-- Penalty Modal -->
 @include('admin-views.admin-ledgers.modal-penalty')
+@include('admin-views.admin-ledgers.modal-penalty-payment')
 
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

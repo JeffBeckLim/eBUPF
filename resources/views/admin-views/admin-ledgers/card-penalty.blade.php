@@ -5,9 +5,13 @@
             <p class="ms-2">
                 <span class="fw-bold text-danger">Penalties</span>
             </p>
-             <a type="button" data-bs-toggle="modal" data-bs-target="#penaltylModal" class="btn penalty-btn mx-2 text-danger" data-bs-title="Add Penalty" href="#">
-                <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+             <a type="button" data-bs-toggle="modal" data-bs-target="#penaltyModal" class="btn penalty-btn mx-2 text-danger" data-bs-title="Add Penalty" href="#">
+                <img style="height: 20px;" src="{{asset('icons/penalty.svg')}}" alt="">
                 Add Penalty
+            </a>
+            <a class="btn btn-outline-dark" href="#" data-bs-toggle="modal" data-bs-target="#penaltyPaymentModal">
+                <i class="bi bi-plus"></i>
+                Add Penalty Payment
             </a>
         </div>
         <div class="col-3">
