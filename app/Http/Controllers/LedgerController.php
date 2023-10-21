@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Loan;
 use App\Models\Member;
 use App\Models\Payment;
+use App\Models\PenaltyPayment;
 use Illuminate\Http\Request;
 
 class LedgerController extends Controller
@@ -64,6 +65,9 @@ class LedgerController extends Controller
         // add error catcher here to make sure that loang being retrieved is valid
         $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();
 
+        $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
+        ->orderBy('created_at', 'desc')
+        ->get();
         
         // if loan has missing amortization 
         if($loan->amortization == null){
@@ -129,7 +133,8 @@ class LedgerController extends Controller
             ];
             
         
-        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months'));
+
+        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months' , 'penalty_payments'));
     }
 
 }
