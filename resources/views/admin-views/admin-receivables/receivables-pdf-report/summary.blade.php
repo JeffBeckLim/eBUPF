@@ -63,7 +63,7 @@
         <div class="logo">
         </div>
         <div class="center-text">
-            <span style="font-size: 18px;">SUMMARY LOANS RECEIVABLE <br> Multi-Purpose Loan</span> <br> <span style="font-size: 12px;">As of {{$lastMonth}} {{$lastDay}}, {{$year}}</span>
+            <span style="font-size: 18px;">SUMMARY LOANS RECEIVABLE <br> {{$type}}</span> <br> <span style="font-size: 12px;">As of {{$lastMonth}} {{$lastDay}}, {{$year}}</span>
         </div>
         <div class="right-corner">
 

@@ -95,14 +95,14 @@
                             <tr>
                                 <th style="border: none;"></th>
                                 <th style="border: none;"></th>
-                                <th colspan="2" class="text-center">Loan Payments</th>
+                                <th colspan="2" class="border-end border-start border-bottom-0 text-center text-muted">Loan Payments</th>
                                 <th style="border: none;"></th>
                             </tr>
                             <tr>
                                 <th style="width: 10%;" class="text-center">Unit</th>
                                 <th style="width: 15%;" class="text-center">No. of Members</th>
-                                <th style="width: 25%;" class="text-center">Principal</th>
-                                <th style="width: 25%;" class="text-center">Interest</th>
+                                <th style="width: 25%;" class="border-start text-center">Principal</th>
+                                <th style="width: 25%;" class="border-end text-center">Interest</th>
                                 <th style="width: 25%;" class="text-center">Total</th>
                             </tr>
                         </thead>
@@ -115,7 +115,7 @@
                                     @endphp
                                     @if($yearlyBalance)
                                         <tr>
-                                            <td>{{ $unitCode }}</td>
+                                            <td class="fw-bold">{{ $unitCode }}</td>
                                             <td>{{ $unit->members->count() }}</td>
                                             <td>{{ number_format($yearlyBalance['ending_balance_principal'], 2) }}</td>
                                             <td>{{ number_format($yearlyBalance['ending_balance_interest'], 2) }}</td>

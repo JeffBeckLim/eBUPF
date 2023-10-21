@@ -16,11 +16,14 @@ class AdminReceivablesPDFController extends Controller{
         $lastMonth = 'December';
         $lastDay = '31';
         $pdfName = $lastMonth . ' ' . $lastDay . ', ' . $year . ' Summary.pdf';
+        $type = '';
 
         if ($loan_type == 'mpl') {
             $loans = Loan::whereHas('amortization')->where('loan_type_id', 1)->get();
+            $type = 'Multi-Purpose Loan';
         } elseif ($loan_type == 'hsl') {
             $loans = Loan::whereHas('amortization')->where('loan_type_id', 2)->get();
+            $type = 'Housing Loan';
         } else {
             abort(404); // Invalid loan type
         }
@@ -119,6 +122,7 @@ class AdminReceivablesPDFController extends Controller{
             'yearlyBalances' => $yearlyBalances,
             'units' => Unit::all(),
             'combinedYearlyBalances' => $combinedYearlyBalances,
+            'type' => $type,
         ];
 
         $pdf = PDF::loadView('admin-views.admin-receivables.receivables-pdf-report.summary', $data)->setPaper('legal', 'portrait');
