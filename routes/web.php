@@ -24,6 +24,7 @@ use App\Http\Controllers\MembershipApplicationController;
 use App\Http\Controllers\AdminReceivablesController;
 use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AdminReceivablesPDFController;
 use App\Models\Penalty;
 
 /*
@@ -73,6 +74,8 @@ use App\Models\Penalty;
     Route::get('/admin/receivables/yearly/summary/{report}/{loan_type}', [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary');
     Route::get('/admin/receivables/yearly/remit/{report}/{loan_type}' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit');
 
+    // For generating PDF in the receivables
+    Route::get('/admin/receivables/summary/generated-pdf/{year}/{loan_type}', [AdminReceivablesPDFController::class, 'generateReceivablesSummary'])->name('generate.receivables.summary.report');
 
     // LEDGER
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
