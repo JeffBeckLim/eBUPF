@@ -5,7 +5,6 @@
 <div class="container-fluid mt-2">
     
     <div class="adminbox p-0 pb-3 mb-5">
-        
         <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
             <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
             @error('loan_application_state_id')
@@ -44,7 +43,14 @@
 
             @if (session('deleted_status'))
             <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
-                <p style="font-size: 12px" class="m-0">{{session('deleted_status')}}</p>
+                <p style="font-size: 12px" class="m-0"><i class="bi bi-exclamation-lg"></i> {{session('deleted_status')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if (session('deleted_status_passed'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0"> <i class="bi bi-check-lg"></i> {{session('deleted_status_passed')}}</p>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
@@ -166,6 +172,7 @@
                             }
                         </style>
                         <tr>
+                
                             <th>Loan ID</th>
                             <th>Loan Type</th>
                             <th>State</th>
@@ -184,6 +191,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @php
+                        $count = 0;
+                    @endphp
                     @foreach ($loans as $loan)
                           <tr class="table-row" data-status="approved">
                             <td class="fw-bold">{{$loan->loan->id}}</td>
@@ -413,6 +423,26 @@
             buttons.style.display = 'none';
         });
     });
+
+
+    window.onload = function() {
+        scrollToRowIndex(0); // Specify the row index (0-based) you want to scroll to
+    };
+
+    function scrollToRowIndex(index) {
+        // Find the table
+        var table = document.getElementById('myTable');
+        if (!table) return;
+
+        // Find all rows in the table
+        var rows = table.getElementsByTagName('tr');
+
+        if (index >= 0 && index < rows.length) {
+            // Scroll to the row at the specified index
+            rows[index].scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
 </script>
 @include('admin-components.admin-dataTables')
 @endsection

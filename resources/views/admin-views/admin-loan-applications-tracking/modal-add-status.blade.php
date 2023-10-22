@@ -108,15 +108,40 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
           
           <div class="mb-2">
             <label for="message-text" class="col-form-label">Remarks</label>
-            <textarea name="remarks" class="form-control" id="message-text"></textarea>
+            <textarea name="remarks" class="form-control" id="remarks"></textarea>
           </div>
         
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn bu-orange text-light">Add Status</button>
+
           </div>
       </form>
     </div>
   </div>
 </div>
+
+{{-- TESTING SERVER SIDE ADD --}}
+{{-- <script>
+  $(document).on('click', '.update_student' function (e) {
+    e.preventDefault();
+    var loan_id = {{$loan->loan->id}}
+    var data = {
+      'loan_application_state_id' : $('#statusDropdown').val();
+      'date_evaluated' : $('#date_evaluated').val();
+      'date_evaluated' : $('#remarks').val();
+    }
+
+    $.ajax({
+      type: 'PUT',
+        url: '/admin/loan-application/status/'+loan_id,
+        data: data,
+        dataType: "json",
+        success: function(response){
+          console.log(response);
+        }
+    })
+
+  });
+</script> --}}
