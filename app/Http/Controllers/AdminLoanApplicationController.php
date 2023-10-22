@@ -125,37 +125,54 @@ class AdminLoanApplicationController extends Controller
 
     public function deleteLoanStatus($id){
 
-
         $status = LoanApplicationStatus::findOrFail($id);
 
-
-        $loan = Loan::findOrFail($status->loan_id)->with('loanApplicationStatus')->first();
+        $loan = Loan::where('id' ,$status->loan_id)->with('loanApplicationStatus')->first();
 
         $status_array = [];
         foreach($loan->loanApplicationStatus as $item){
             array_push($status_array, $item->loan_application_state_id);
         }
 
-        if($status->loan_application_state_id ==  1 || $status->loan_application_state_id ==  2 && in_array(5 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete status 1 or 2, when "approved" status exists');
+        
+
+        if($status->loan_application_state_id ==  1 || $status->loan_application_state_id ==  2){
+            if(in_array(5 , $status_array) || in_array(4 , $status_array) ||  in_array(3 , $status_array)){
+                return back()->with('deleted_status', 'Cannot delete status 1 and 2, if status  3, 4 or 5 exists');
+            }
+            else{
+                $status->delete();
+                return back()->with('deleted_status_passed', 'Status deleted');
+            }
         }
+        elseif($status->loan_application_state_id ==  3){
+            if(in_array(5 , $status_array) || in_array(4 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete status 3 (Approved by exe.), if status 4 or 5 exists');}
+            
+            else{
+                $status->delete();
+                return back()->with('deleted_status_passed', 'Status deleted');
+            }
 
-
-        if($status->loan_application_state_id ==  4 && in_array(5 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete "check" status, when "picked-up" status exists');
         }
-
-        if($status->loan_application_state_id ==  3 && in_array(4 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" status exists');
+        elseif($status->loan_application_state_id ==  4 && in_array(5 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete status 4 ( check ), if status 5 (picked up) exists');
         }
-        elseif($status->loan_application_state_id ==  3 && in_array(5 , $status_array)){
-            return back()->with('deleted_status', 'Cannot delete "approved" status, when "check" or "picked" status exists');
+        elseif($status->loan_application_state_id ==  4 && in_array(5 , $status_array)){
+            return back()->with('deleted_status', 'Cannot delete status 4 ( check ), if status 5 (picked up) exists');
         }
+        elseif($status->loan_application_state_id ==  5){
 
-        $status->delete();
+            $loan->is_active = null; 
+            $loan->save();
+            $status->delete();
 
-        return back()->with('deleted_status', 'Status deleted');
-
+            return back()->with('deleted_status_passed', 'Status 5 (check picked up) deleted! Loan state set reverted to NONE');
+        }
+        else{
+            $status->delete();
+            return back()->with('deleted_status_passed', 'Status deleted');
+        }
     }
 
     // get all MPL or HSL loan applications that are accepted by CoBorrower
@@ -207,6 +224,7 @@ class AdminLoanApplicationController extends Controller
 
 
     public function createLoanApplicationStatus(Request $request, $loan_id){
+        
         //Validate if loan exists
         $loan = Loan::findOrFail($loan_id);
 
@@ -239,6 +257,10 @@ class AdminLoanApplicationController extends Controller
             $loan->is_active = 1;
             $loan->save();
 
+            // return response()->json([
+            //     'status'=>200,
+            //     'message'=>$loan,
+            // ])
             return back()->with('success', 'New status added successfully and set as Performing Loan');
         }
 
