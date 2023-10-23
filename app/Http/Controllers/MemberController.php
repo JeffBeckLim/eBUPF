@@ -120,6 +120,45 @@ class MemberController extends Controller
         //sort transactions by date
         $transactions = $unsortedTransactions->sortByDesc('created_at');
 
+        $mplTotalAmount = 0;
+        $hslTotalAmount = 0;
+
+        // Get total amount of all loans
+        foreach ($loans as $loan) {
+            if ($loan->loan_type_id == 1) {
+                $mplTotalAmount += ($loan->principal_amount + $loan->interest);
+            } elseif ($loan->loan_type_id == 2) {
+                $hslTotalAmount += ($loan->principal_amount + $loan->interest);
+            }
+        }
+
+        $mplTotalBalance = $mplTotalAmount;
+        $hslTotalBalance = $hslTotalAmount;
+
+        // Get total balance of all loans
+        foreach ($loans as $loan) {
+            if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
+            $mplTotalBalance -= $totalPaymentMPL[$loan->id];
+        }
+        if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
+            $hslTotalBalance -= $totalPaymentHSL[$loan->id];
+            }
+        }
+
+        // Check if all MPL loans have been paid 50%
+        $allMPLPaid50Percent = $mplLoans->isEmpty() || $mplLoans->every(function ($loan) use ($totalPaymentsMPL) {
+            return isset($totalPaymentsMPL[$loan->id]) && $totalPaymentsMPL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+        });
+
+        // Check if all HSL loans have been paid 50%
+        $allHSLPaid50Percent = $hslLoans->isEmpty() || $hslLoans->every(function ($loan) use ($totalPaymentsHSL) {
+            return isset($totalPaymentsHSL[$loan->id]) && $totalPaymentsHSL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+        });
+
+        // Determine if the MPL and HSL apply buttons should be disabled
+        // MPL is disabled if there is an active loan or if all MPL loans have not been paid 50% and
+        $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+        $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 1 && $additionalLoan != 3);
 
         return view('member-views.member-dashboard', [
             'additionalLoan' => $additionalLoan,
@@ -132,6 +171,8 @@ class MemberController extends Controller
             'transactionLoans' => $transactionLoans,
             'totalPaymentMPL' => $totalPaymentsMPL,
             'totalPaymentHSL' => $totalPaymentsHSL,
+            'mplDisabled' => $mplDisabled,
+            'hslDisabled' => $hslDisabled,
         ]);
     }
 

@@ -36,39 +36,6 @@
         return $totalInterest + $totalPrincipal;
     });
 
-    //get remaining months[term] for each loan
-    $loans->each(function ($loan) {
-        $termYears = $loan->term_years;
-        $totalMonths = $termYears * 12;
-
-        // Retrieve all payments for the loan and order them by the "payment_date" column
-        $payments = Payment::where('loan_id', $loan->id)
-        ->orderBy('payment_date', 'asc')
-        ->get();
-
-        $countedMonths = 0;
-        $previousMonthYear = null;
-
-        foreach ($payments as $payment) {
-            // Convert the string to a date object
-            $paymentDate = date_create($payment->payment_date);
-
-            // check if the month and year of the payment is different from the previous month and year of the payment
-            $monthYear = date_format($paymentDate, 'Y-m');
-
-            if ($monthYear !== $previousMonthYear) {
-                $countedMonths++;
-                $previousMonthYear = $monthYear;
-            }
-        }
-
-        // Calculate remaining months by subtracting counted months from total months
-        $remainingMonths = max(0, $totalMonths - $countedMonths);
-
-        // Assign the calculated value to the loan
-        $loan->remainingMonths = $remainingMonths;
-    });
-
     $inActiveLoan = CoBorrower::with(
         'member.units.campuses',
         'loan.member.units.campuses',
@@ -84,32 +51,36 @@
         })
         ->where(function ($query) {
             $query->where('is_active', 0)
-                ->orWhereNull('is_active')
-                ->orWhere('is_active', 0);
+                ->orWhereNull('is_active');
         });
     })->first();
 
     $mplTotalAmount = 0;
-                                                    $hslTotalAmount = 0;
+    $hslTotalAmount = 0;
 
-                                                    foreach ($loans as $loan) {
-                                                        if ($loan->loan_type_id == 1) {
-                                                            $mplTotalAmount += ($loan->principal_amount + $loan->interest);
-                                                        } elseif ($loan->loan_type_id == 2) {
-                                                            $hslTotalAmount += ($loan->principal_amount + $loan->interest);
-                                                        }
-                                                    }
-                                                    $mplTotalBalance = $mplTotalAmount;
-                                                    $hslTotalBalance = $hslTotalAmount;
-                                                    foreach ($loans as $loan) {
-                                                        if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
-                                                            $mplTotalBalance -= $totalPaymentMPL[$loan->id];
-                                                        }
-                                                        if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
-                                                            $hslTotalBalance -= $totalPaymentHSL[$loan->id];
-                                                        }
-                                                    }
+    // Get total amount of all loans
+    foreach ($loans as $loan) {
+        if ($loan->loan_type_id == 1) {
+            $mplTotalAmount += ($loan->principal_amount + $loan->interest);
+        } elseif ($loan->loan_type_id == 2) {
+            $hslTotalAmount += ($loan->principal_amount + $loan->interest);
+        }
+    }
 
+    $mplTotalBalance = $mplTotalAmount;
+    $hslTotalBalance = $hslTotalAmount;
+
+    // Get total balance of all loans
+    foreach ($loans as $loan) {
+        if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
+        $mplTotalBalance -= $totalPaymentMPL[$loan->id];
+    }
+    if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
+        $hslTotalBalance -= $totalPaymentHSL[$loan->id];
+        }
+    }
+
+    // Check if all MPL loans have been paid 50%
     $allMPLPaid50Percent = $mplLoans->isEmpty() || $mplLoans->every(function ($loan) use ($totalPaymentsMPL) {
         return isset($totalPaymentsMPL[$loan->id]) && $totalPaymentsMPL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
     });
@@ -118,9 +89,11 @@
     $allHSLPaid50Percent = $hslLoans->isEmpty() || $hslLoans->every(function ($loan) use ($totalPaymentsHSL) {
         return isset($totalPaymentsHSL[$loan->id]) && $totalPaymentsHSL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
     });
+
     // Determine if the MPL and HSL apply buttons should be disabled
-    $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent || ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
-    $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent || ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+    // MPL is disabled if there is an active loan or if all MPL loans have not been paid 50% and
+    $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+    $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 1 && $additionalLoan != 3);
 
 @endphp
 
