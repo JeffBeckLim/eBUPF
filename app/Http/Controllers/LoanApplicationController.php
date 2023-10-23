@@ -7,6 +7,7 @@ use App\Models\Loan;
 use App\Models\LoanApplicationState;
 use App\Models\LoanApplicationStatus;
 use App\Models\User;
+use App\Models\Payment;
 use App\Models\Witness;
 use GuzzleHttp\Psr7\Query;
 use Illuminate\Http\Request;
@@ -43,11 +44,149 @@ class LoanApplicationController extends Controller
 
     //SHOW MPL APPLICATION FORM
     public function show(){
+        $user = Auth::user();
+        $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
+        //get members additional_loan column
+        $additionalLoan = $user->member->additional_loan;
+
+        //get all mpl loans
+        $mplLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 1)->where('is_active', 1)->get();
+
+        //get all payments for mpl loans, grouped by loan_id
+        $mplPayments = Payment::where('member_id', $user->member->id)
+        ->whereIn('loan_id', $mplLoans->pluck('id'))
+        ->get()
+        ->groupBy('loan_id');
+
+        //get total payments for mpl loans, by grouping the payments by loan_id and summing the interest and principal
+        $totalPaymentsMPL = $mplPayments->map(function ($payments) {
+            $totalInterest = $payments->sum('interest');
+            $totalPrincipal = $payments->sum('principal');
+            return $totalInterest + $totalPrincipal;
+        });
+
+        $inActiveLoan = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType'
+        )
+        ->where('accept_request', '1') // Get loans accepted by coBorrower
+        ->whereHas('loan', function ($query) {
+            $query->where(function ($query) {
+                $query->where('member_id', Auth::user()->member->id)
+                    ->orWhereNull('member_id')
+                    ->orWhere('member_id', 0);
+            })
+            ->where(function ($query) {
+                $query->where('is_active', 0)
+                    ->orWhereNull('is_active');
+            });
+        })->first();
+
+        $mplTotalAmount = 0;
+
+        // Get total amount of all loans
+        foreach ($loans as $loan) {
+            $mplTotalAmount += ($loan->principal_amount + $loan->interest);
+        }
+
+        $mplTotalBalance = $mplTotalAmount;
+
+        // Get total balance of all loans
+        foreach ($loans as $loan) {
+            if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
+            $mplTotalBalance -= $totalPaymentMPL[$loan->id];
+            }
+        }
+
+        // Check if all MPL loans have been paid 50%
+        $allMPLPaid50Percent = $mplLoans->isEmpty() || $mplLoans->every(function ($loan) use ($totalPaymentsMPL) {
+            return isset($totalPaymentsMPL[$loan->id]) && $totalPaymentsMPL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+        });
+
+        // MPL is disabled if there is an active loan or if all MPL loans have not been paid 50% and
+        $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+
+        // if mplDisabled is true, return abort 403
+        if($mplDisabled){
+            abort(403);
+        }
+
         return view('member-views.mpl-application-form.mpl-application-form');
     }
 
     // SHOW HSL APPLICATION FORM
     public function showHsl(){
+        $user = Auth::user();
+        $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
+        //get members additional_loan column
+        $additionalLoan = $user->member->additional_loan;
+
+        //get all hsl loans
+        $hslLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 2)->where('is_active', 1)->get();
+
+        //get all payments for hsl loans, grouped by loan_id
+        $hslPayments = Payment::where('member_id', $user->member->id)
+        ->whereIn('loan_id', $hslLoans->pluck('id'))
+        ->get()
+        ->groupBy('loan_id');
+
+        //get total payments for hsl loans, by grouping the payments by loan_id and summing the interest and principal
+        $totalPaymentsHSL = $hslPayments->map(function ($payments) {
+            $totalInterest = $payments->sum('interest');
+            $totalPrincipal = $payments->sum('principal');
+            return $totalInterest + $totalPrincipal;
+        });
+
+        $inActiveLoan = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType'
+        )
+        ->where('accept_request', '1') // Get loans accepted by coBorrower
+        ->whereHas('loan', function ($query) {
+            $query->where(function ($query) {
+                $query->where('member_id', Auth::user()->member->id)
+                    ->orWhereNull('member_id')
+                    ->orWhere('member_id', 0);
+            })
+            ->where(function ($query) {
+                $query->where('is_active', 0)
+                    ->orWhereNull('is_active');
+            });
+        })->first();
+
+        $hslTotalAmount = 0;
+
+        // Get total amount of all loans
+        foreach ($loans as $loan) {
+            $hslTotalAmount += ($loan->principal_amount + $loan->interest);
+        }
+
+        $hslTotalBalance = $hslTotalAmount;
+
+        // Get total balance of all loans
+        foreach ($loans as $loan) {
+            if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
+                $hslTotalBalance -= $totalPaymentHSL[$loan->id];
+            }
+        }
+
+        // Check if all HSL loans have been paid 50%
+        $allHSLPaid50Percent = $hslLoans->isEmpty() || $hslLoans->every(function ($loan) use ($totalPaymentsHSL) {
+            return isset($totalPaymentsHSL[$loan->id]) && $totalPaymentsHSL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+        });
+
+        // HSL is disabled if there is an active loan or if all HSL loans have not been paid 50% and additional loan is not 3 and 2
+        $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 1 && $additionalLoan != 3);
+
+        // if hslDisabled is true, return abort 403
+        if($hslDisabled){
+            abort(403);
+        }
+
         return view('member-views.hsl-application-form.hsl-application-form');
     }
 
@@ -78,7 +217,7 @@ class LoanApplicationController extends Controller
                 }
                 if(!in_array(6,$array)){
                     array_push($loans, $raw_loan);
-                }  
+                }
             }
 
 
@@ -109,10 +248,10 @@ class LoanApplicationController extends Controller
                 }
                 if(in_array(6,$array) || $raw_loan->loan->is_active != null){
                     array_push($loans, $raw_loan);
-                }  
+                }
             }
 
-         
+
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
 
@@ -127,7 +266,7 @@ class LoanApplicationController extends Controller
             )
             ->where('accept_request', '1') //get loans accepted by coBorrower
             ->whereHas('loan', function ($query){
-                $query->where('member_id', Auth::user()->member->id);      
+                $query->where('member_id', Auth::user()->member->id);
             })->orderBy('id','desc')->get();
 
 
@@ -220,7 +359,7 @@ class LoanApplicationController extends Controller
             if($co_borrower->accept_request == 1){
                 return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
             }
-            else{                        
+            else{
                 $witnesses = Witness::where('loan_id' , $id)->with('loan')->get();
                 $loan = Loan::find($id);
 
