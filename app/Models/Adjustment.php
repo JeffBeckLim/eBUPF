@@ -15,6 +15,7 @@ class Adjustment extends Model
         'previous_loan_balance',
         'interest_first_yr',
         'housing_service_fee',
+        'previous_penalty',
     ];
 
     public function loan(){

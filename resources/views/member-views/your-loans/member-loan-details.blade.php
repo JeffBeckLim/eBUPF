@@ -58,10 +58,10 @@
                                                 <h6 class="">
                                                     <span style="font-size: 14px" class="text-danger">
                                                         <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
-                                                            Loan Penalized 
+                                                            Loan Penalized, Balance:
                                                     </span>
                                                     <h6 class="text-danger fw-bold">
-                                                        Php {{number_format($loan->penalty->penalty_total, 2,',','.')}}
+                                                        Php {{number_format($loan->penalty->penalty_total - $sumPenaltyPayments, 2,',','.')}}
                                                     </h6>
                                                 </h6>                                          
                                             @endif

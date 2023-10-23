@@ -34,6 +34,13 @@
             </div>
             @endif
 
+            @if (session('status_danger'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+                <p style="font-size: 12px" class="m-0">{{session('status_danger')}}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
                 <p style="font-size: 12px" class="m-0">{{session('success')}}</p>
@@ -423,24 +430,6 @@
         });
     });
 
-
-    window.onload = function() {
-        scrollToRowIndex(0); // Specify the row index (0-based) you want to scroll to
-    };
-
-    function scrollToRowIndex(index) {
-        // Find the table
-        var table = document.getElementById('myTable');
-        if (!table) return;
-
-        // Find all rows in the table
-        var rows = table.getElementsByTagName('tr');
-
-        if (index >= 0 && index < rows.length) {
-            // Scroll to the row at the specified index
-            rows[index].scrollIntoView({ behavior: 'smooth' });
-        }
-    }
 
 </script>
 @include('admin-components.admin-dataTables')

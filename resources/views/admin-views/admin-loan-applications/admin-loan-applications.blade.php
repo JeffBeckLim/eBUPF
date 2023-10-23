@@ -25,15 +25,16 @@
 
             <div class="membership-app-header2">
                 <div class="lh-1" style="padding: 15px 0 0 15px;">
-                    <p class="fw-bold">1 Pending</p>
+                    <p class="fw-bold">{{$null_interest}} w/o Interest</p>
+                    <p style="font-size: 12px" class="text-danger">{{$incomplete_amort}} Incomplete Amort. info</p>
                     <div class="d-flex">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;" class="text-success">2 Approved</p>
+                        <div class="row  g-0 w-100">
+                            <div class="col-sm-6 ">
+                                <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;">{{$no_loanType}} w/o Loan Type</p>
                             </div>
-                            <div class="col-sm-6">
+                            {{-- <div class="col-sm-6">
                                 <p class="text-danger" style="font-size: 0.7rem; width: 100%">1 Denied</p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -107,6 +108,11 @@
 
                             <th class="border-end">Gross Loan</th>
 
+                            {{-- for Housing --}}
+                            @if ($loanType == 2)
+                                <th class="text-primary">Service Fee</th>    
+                            @endif
+                        
                             <th>Interest <h6 style="font-size: small">1st YR</h6></th>
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
@@ -224,37 +230,55 @@
                                 </td>
 
 
+                                @if ($loanType == 2)
+                                <td>
+                                    @if ($loan->adjustment != null && $loan->adjustment->housing_service_fee != null)
+                                        {{number_format($loan->adjustment->housing_service_fee, 2, '.',',')}}
+                                    @endif
+                                </td>    
+                                 @endif
+
+
                                 {{-- interest 1st year --}}
                                 <td>
-                                    @if ($loan->adjustment != null)
+                                    @if ($loan->adjustment != null && $loan->adjustment->interest_first_yr != null)
                                         {{number_format($loan->adjustment->interest_first_yr, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- MRI --}}
                                 <td>
-                                    @if ($loan->adjustment != null)
+                                    @if ($loan->adjustment != null && $loan->adjustment->mri != null)
                                         {{number_format($loan->adjustment->mri, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- Previous Loan Balance --}}
                                 <td>
-                                    @if ($loan->adjustment != null)
+                                    @if ($loan->adjustment != null && $loan->adjustment->previous_loan_balance != null)
                                         {{number_format($loan->adjustment->previous_loan_balance, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- Interest Rebate/Refund --}}
                                 <td>
-                                    @if ($loan->adjustment != null)
+                                    @if ($loan->adjustment != null && $loan->adjustment->interest_rebate != null)
                                         {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- Penalty --}}
                                 <td>
-                                    {{-- {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}} --}}
+                                    @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
+                                        {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}    
+                                    @endif
                                 </td>
                                 {{-- Net Proceeds --}}
                                 <td>
-                                    {{-- {{number_format($loan->adjustment->interest_rebate, 2, '.',',')}} --}}
+                                    @if ($loan->adjustment != null)
+                                    {{
+                                        number_format(
+                                            $loan->principal_amount -$loan->adjustment->interest_first_yr-$loan->adjustment->housing_service_fee-$loan->adjustment->mri - $loan->adjustment->previous_loan_balance + $loan->adjustment->interest_rebate -$loan->adjustment->previous_penalty 
+                                        , 2, '.',',')
+                                    }}  
+                                    @endif
+                                    
                                 </td>
                                 {{-- ... --}}
                                 <td>

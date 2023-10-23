@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use App\Models\PenaltyPayment;
 use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
@@ -78,10 +79,15 @@ class LoanController extends Controller
         $loan = Loan::where('id', $id)->with('penalty')->first();
         $payments = $loan->payment;
 
+        // get sum of penalty payment
+        $penalty_payments = PenaltyPayment::where('penalty_id', $loan->penalty_id)->get();
+        $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
+
         return view('member-views.your-loans.member-loan-details',
             compact(
                 'loan',
-                'payments'
+                'payments',
+                'sumPenaltyPayments'
             ));
     }
 }

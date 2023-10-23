@@ -793,6 +793,15 @@ input.invalid {
     margin-bottom: 25px;
     color: #000000;
 }
+.pl-50-plus {
+    font-size: 0.7rem;
+    border: 1px solid #226d33;
+    border-radius: 20px;
+    background-color: #c2feb3;
+    padding: 0px 5px;
+    margin-bottom: 25px;
+    color: #0a170b;
+}
 
 .pl-details {
     border-radius: 10px;

@@ -12,7 +12,12 @@
 
         <form action="{{route('update.adjustments', $loan->id)}}" method="POST">
             @csrf
-
+            {{-- housing_service_fee --}}
+            @if ($loanType == 2)
+              <label for="housing_service_fee">For Housing: Service Fee</label>
+              <input class="form-control" type="number" name="housing_service_fee" id="housing_service_fee" value="{{ $loan->adjustment != null ? $loan->adjustment->housing_service_fee : '' }}">    
+            @endif
+            
             <label for="interest_first_yr">Interest (1st YR)</label>
             <input class="form-control" type="number" name="interest_first_yr" id="interest_first_yr" value="{{ $loan->adjustment != null ? $loan->adjustment->interest_first_yr : '' }}">
 
@@ -24,6 +29,9 @@
             
             <label for="interest_rebate">Interest Rebate / Refund</label>
             <input class="form-control" type="number" name="interest_rebate" id="interest_rebate" value="{{ $loan->adjustment != null ? $loan->adjustment->interest_rebate : '' }}">
+
+            <label for="previous_penalty">Penalty</label>
+            <input class="form-control" type="number" name="previous_penalty" id="previous_penalty" value="{{ $loan->adjustment != null ? $loan->adjustment->previous_penalty : '' }}">
             
             
             {{-- placeholder="current term: {{$loan->term_years}} year(s)" --}}

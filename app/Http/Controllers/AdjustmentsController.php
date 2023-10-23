@@ -16,6 +16,7 @@ class AdjustmentsController extends Controller
             'previous_loan_balance'=> 'nullable|numeric|min:0',
             'interest_first_yr'=> 'nullable|numeric|min:0',
             'housing_service_fee'=> 'nullable|numeric|min:0',
+            'previous_penalty' => 'nullable|numeric|min:0',
         ]);
 
         $loan = Loan::findOrFail($id);
@@ -27,6 +28,7 @@ class AdjustmentsController extends Controller
                 'previous_loan_balance'=> $request->previous_loan_balance,
                 'interest_first_yr'=> $request->interest_first_yr,
                 'housing_service_fee'=> $request->housing_service_fee,
+                'previous_penalty' => $request->previous_penalty,
             ]);
 
             $loan->adjustment_id = $adjustment->id;

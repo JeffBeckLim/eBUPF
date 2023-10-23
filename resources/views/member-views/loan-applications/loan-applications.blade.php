@@ -43,6 +43,7 @@
                             @if(in_array(4,$status_array) && !in_array(5,$status_array) && !in_array(6,$status_array))
                                 <div class="border w-100 rounded mb-2 p-2 row">
                                     <i class="bi bi-circle-fill my-3" style="color: #b700ff"></i>
+                                    <span class="fw-bold" style="font-size: 12px">{{$loan->loan->loanType->loan_type_description}} | {{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}   </span>
                                     <div class="col-12 " style="font-size: 12px">
                                         Since your check is now ready for claiming, you can proceed to print the insurance form. This form is one of the necessary documents you'll need when claiming your check
                                     </div>

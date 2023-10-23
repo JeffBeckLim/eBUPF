@@ -65,6 +65,11 @@
                     Paid 
                     {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
                 </p>
+            @elseif (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) > 0.5)
+                <p class="pl-50-plus d-flex justify-content-center align-items-center py-1 "> 
+                    Paid 
+                    {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
+                </p>
             @endif
            
             
