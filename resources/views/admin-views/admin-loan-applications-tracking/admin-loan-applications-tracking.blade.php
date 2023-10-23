@@ -172,7 +172,6 @@
                             }
                         </style>
                         <tr>
-                
                             <th>Loan ID</th>
                             <th>Loan Type</th>
                             <th>State</th>

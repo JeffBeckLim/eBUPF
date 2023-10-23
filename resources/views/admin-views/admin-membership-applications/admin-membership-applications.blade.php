@@ -117,7 +117,21 @@
 
                                         
                                     </td>
-                                    <td><a href="#" class="fs-6 text-dark"><i class="bi bi-three-dots"></i></a></td>
+                                    <td>
+                                        <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="bi bi-three-dots fs-4 icon"></i>
+                                          </button>
+                                          <ul class="dropdown-menu">
+                                            {{-- SEE INCLUDED MODALS BELOW --}}
+                                            <li>
+                                                <a type="button" class="dropdown-item" href="{{ route('generateMembershipForm', ['id' => $memberApplication->member->id]) }}">
+                                                    Download Membership Application
+                                                    <p class="" style="font-size: x-small">PDF of Membership Application</p>
+                                                </a>
+                                                
+                                            </li>
+                                          </ul>
+                                    </td>
                                 </tr>   
                             
                             @endforeach

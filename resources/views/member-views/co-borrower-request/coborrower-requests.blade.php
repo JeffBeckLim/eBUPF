@@ -47,7 +47,7 @@
                 </div>
                 {{-- CHECK IF THEIR ARE CB REQUEST --}}
                 @if (count($loans) != 0)
-                    <table class="table table-hover mt-4" style=" background-color: white;">
+                    <table class="table mt-4" style=" background-color: white;">
                         <thead>
                             <tr>
                                 <th class="text-center"  scope="col">Loan</th>
@@ -61,10 +61,15 @@
                         </thead>
                         <tbody>
                             @foreach ($loans as $loan)
+                                    {{-- USED ON COLUMN 1 -NEW indicator and COLUMN 3 --}}
+                                    @php
+                                        $try = App\Models\CoBorrower::findorfail($loan->loan->id)
+                                    @endphp
+
                                     <tr class="align-middle">
                                         <td > 
                                             <div>
-                                                @if (is_null($loan->loan->is_viewed))
+                                                @if (is_null($loan->loan->is_viewed && $try->accept_request >= 0))
                                                     <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
@@ -95,11 +100,8 @@
                                         </td>
                                         <td class="text-center">
 
-                                            @php
-                                                $try = App\Models\CoBorrower::findorfail($loan->loan->id)
-                                            @endphp
                                             @if ($try->accept_request == '0')
-                                                <h6>You <strong>Declined</strong></h6>
+                                                <h6 style="font-size: 14px">You <strong>Declined</strong></h6>
                                                     @php
                                                 
                                                     $time = \Carbon\Carbon::parse($try->updated_at);
@@ -107,10 +109,12 @@
                                                     $diff = $now->shortAbsoluteDiffForHumans($time); 
                                                                                                 
                                                     @endphp
-                                                {{$diff}} ago
+                                                    <h6 style="font-size: 12px">
+                                                    {{$diff}} ago
+                                                    </h6>
 
                                             @elseif ($try->accept_request == '1')
-                                                    <h6 class="text-success">You <strong>Accepted</strong></h6>
+                                                    <h6  style="font-size: 14px" class="text-success">You <strong>Accepted</strong></h6>
                                                     @php
                                                     
                                                     $time = \Carbon\Carbon::parse($try->updated_at);
@@ -118,7 +122,9 @@
                                                     $diff = $now->shortAbsoluteDiffForHumans($time); 
                                                                                                 
                                                     @endphp
-                                                {{$diff}} ago                                                
+                                                    <h6 style="font-size: 12px">
+                                                    {{$diff}} ago
+                                                    </h6>                                             
                                             @else
 
                                                 <div class=" g-0 row d-flex justify-content-center align-items-center">

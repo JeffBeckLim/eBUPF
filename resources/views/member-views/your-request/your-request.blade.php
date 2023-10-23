@@ -110,7 +110,7 @@
                                         @if ($cb_withLoan->accept_request == '1')
                                             <p style="color: #00B733;" class="fs-7 fw-bold">Accepted</p>
                                         @elseif($cb_withLoan->accept_request == '0')
-                                            <p style="color: #FF0000;" class="fs-7 fw-bold">Rejected</p>
+                                            <p style="color: #ff4141;" class="fs-7 fw-bold">Declined</p>
                                         @else
                                             <p class="text-muted fs-7 fw-bold">Pending</p>
                                         @endif
@@ -127,14 +127,14 @@
                                         @if ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}
                                             @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
-                                                <a href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange fs-6 text-light rounded-4 fw-bold {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}">  Print</a>
+                                                <a style="font-size: 14px" href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange text-light rounded-4 fw-bold {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}">  Print</a>
                                             @elseif ($cb_withLoan->loan->loanType->loan_type_name == "HSL")
-                                                <a href="{{ route('generateHousingLoanApplicationForm', ['id' => $cb_withLoan->loan->id]) }}" type="button" class="btn w-100 bu-orange fs-6 text-light rounded-4 fw-bold {{ $cb_withLoan->accept_request != '1' ? 'disabled' : '' }}">
+                                                <a style="font-size: 14px" href="{{ route('generateHousingLoanApplicationForm', ['id' => $cb_withLoan->loan->id]) }}" type="button" class="btn w-100 bu-orange text-light rounded-4 fw-bold {{ $cb_withLoan->accept_request != '1' ? 'disabled' : '' }}">
                                                     Print
                                                 </a>
                                             @endif
                                         @else 
-                                            <a data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold fs-6 rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
+                                            <a style="font-size: 14px" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
                                                 Cancel
                                             </a>
                                         @endif
