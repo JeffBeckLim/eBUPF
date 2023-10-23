@@ -1,3 +1,129 @@
+@php
+    use App\Models\Loan;
+    use App\Models\Payment;
+    use App\Models\CoBorrower;
+
+    $user = Auth::user();
+    $loans = Loan::where('member_id', $user->member->id)->where('is_active', 1)->get();
+    //get members additional_loan column
+    $additionalLoan = $user->member->additional_loan;
+
+    //get all mpl and hsl loans
+    $mplLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 1)->where('is_active', 1)->get();
+    $hslLoans = Loan::where('member_id', $user->member->id)->where('loan_type_id', 2)->where('is_active', 1)->get();
+
+    //get all payments for mpl and hsl loans, grouped by loan_id
+    $mplPayments = Payment::where('member_id', $user->member->id)
+    ->whereIn('loan_id', $mplLoans->pluck('id'))
+    ->get()
+    ->groupBy('loan_id');
+
+    $hslPayments = Payment::where('member_id', $user->member->id)
+    ->whereIn('loan_id', $hslLoans->pluck('id'))
+    ->get()
+    ->groupBy('loan_id');
+
+    //get total payments for mpl and hsl loans, by grouping the payments by loan_id and summing the interest and principal
+    $totalPaymentsMPL = $mplPayments->map(function ($payments) {
+        $totalInterest = $payments->sum('interest');
+        $totalPrincipal = $payments->sum('principal');
+        return $totalInterest + $totalPrincipal;
+    });
+
+    $totalPaymentsHSL = $hslPayments->map(function ($payments) {
+        $totalInterest = $payments->sum('interest');
+        $totalPrincipal = $payments->sum('principal');
+        return $totalInterest + $totalPrincipal;
+    });
+
+    //get remaining months[term] for each loan
+    $loans->each(function ($loan) {
+        $termYears = $loan->term_years;
+        $totalMonths = $termYears * 12;
+
+        // Retrieve all payments for the loan and order them by the "payment_date" column
+        $payments = Payment::where('loan_id', $loan->id)
+        ->orderBy('payment_date', 'asc')
+        ->get();
+
+        $countedMonths = 0;
+        $previousMonthYear = null;
+
+        foreach ($payments as $payment) {
+            // Convert the string to a date object
+            $paymentDate = date_create($payment->payment_date);
+
+            // check if the month and year of the payment is different from the previous month and year of the payment
+            $monthYear = date_format($paymentDate, 'Y-m');
+
+            if ($monthYear !== $previousMonthYear) {
+                $countedMonths++;
+                $previousMonthYear = $monthYear;
+            }
+        }
+
+        // Calculate remaining months by subtracting counted months from total months
+        $remainingMonths = max(0, $totalMonths - $countedMonths);
+
+        // Assign the calculated value to the loan
+        $loan->remainingMonths = $remainingMonths;
+    });
+
+    $inActiveLoan = CoBorrower::with(
+        'member.units.campuses',
+        'loan.member.units.campuses',
+        'loan.loanApplicationStatus.loanApplicationState',
+        'loan.loanType'
+    )
+    ->where('accept_request', '1') // Get loans accepted by coBorrower
+    ->whereHas('loan', function ($query) {
+        $query->where(function ($query) {
+            $query->where('member_id', Auth::user()->member->id)
+                ->orWhereNull('member_id')
+                ->orWhere('member_id', 0);
+        })
+        ->where(function ($query) {
+            $query->where('is_active', 0)
+                ->orWhereNull('is_active')
+                ->orWhere('is_active', 0);
+        });
+    })->first();
+
+    $mplTotalAmount = 0;
+                                                    $hslTotalAmount = 0;
+
+                                                    foreach ($loans as $loan) {
+                                                        if ($loan->loan_type_id == 1) {
+                                                            $mplTotalAmount += ($loan->principal_amount + $loan->interest);
+                                                        } elseif ($loan->loan_type_id == 2) {
+                                                            $hslTotalAmount += ($loan->principal_amount + $loan->interest);
+                                                        }
+                                                    }
+                                                    $mplTotalBalance = $mplTotalAmount;
+                                                    $hslTotalBalance = $hslTotalAmount;
+                                                    foreach ($loans as $loan) {
+                                                        if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id])){
+                                                            $mplTotalBalance -= $totalPaymentMPL[$loan->id];
+                                                        }
+                                                        if(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id])){
+                                                            $hslTotalBalance -= $totalPaymentHSL[$loan->id];
+                                                        }
+                                                    }
+
+    $allMPLPaid50Percent = $mplLoans->isEmpty() || $mplLoans->every(function ($loan) use ($totalPaymentsMPL) {
+        return isset($totalPaymentsMPL[$loan->id]) && $totalPaymentsMPL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+    });
+
+    // Check if all HSL loans have been paid 50%
+    $allHSLPaid50Percent = $hslLoans->isEmpty() || $hslLoans->every(function ($loan) use ($totalPaymentsHSL) {
+        return isset($totalPaymentsHSL[$loan->id]) && $totalPaymentsHSL[$loan->id] >= 0.5 * ($loan->principal_amount + $loan->interest);
+    });
+    // Determine if the MPL and HSL apply buttons should be disabled
+    $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent || ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+    $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent || ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
+
+@endphp
+
 <div class="row">
 
     <!-- Placeholder to prevent overlapping -->
@@ -58,7 +184,7 @@
                 </li>
             </a>
 
-            
+
             <li class="nav-item grow-on-hover">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
@@ -79,12 +205,27 @@
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is( 'mpl.application') ? 'fw-bold' : ''}}" href="{{route('mpl.application')}}">Apply for MPL</a>
+                                    <a class="text-decoration-none text-secondary {{ Route::is('mpl.application') ? 'fw-bold' : '' }}" href="{{ route('mpl.application') }}"
+                                        @if ($mplDisabled)
+                                            disabled
+                                            style="pointer-events: none; opacity: 0.6;"
+                                        @endif
+                                    >
+                                        Apply for MPL
+                                    </a>
                                 </div>
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is( 'hsl.application') ? 'fw-bold' : ''}}" href="{{route('hsl.application')}}">Apply for HSL</a>
+                                    <a class="text-decoration-none text-secondary {{ Route::is('hsl.application') ? 'fw-bold' : '' }}" href="{{ route('hsl.application') }}"
+                                        @if ($hslDisabled)
+                                            disabled
+                                            style="pointer-events: none; opacity: 0.6;"
+                                        @endif
+                                    >
+                                        Apply for HSL
+                                    </a>
                                 </div>
+
                             </div>
                         </div>
                       </div>
@@ -129,7 +270,7 @@
 
 
 
-            
+
             <a class="text-decoration-none" href="{{route('incoming.request')}}">
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('incoming.request') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
                     <div class="row g-0">
