@@ -7,10 +7,10 @@
     <!-- Placeholder to prevent overlapping -->
 
     <!-- NAVBAR -->
-    <div class="   d-none  d-lg-block  position-fixed h-100 " style="background-color: #ffffff; width: 20%;">
-        <div class="row d-flex   py-3">
+    <div class=" d-none  d-lg-block  position-fixed h-100 " style="background-color: #ffffff; width: 20%;">
+        <div class="row d-flex py-3  m-0">
             <a href="{{route('home')}}">
-                <img class="img-fluid ps-2 pt-2" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 14rem;">
+                <img class="img-fluid ps-3 pt-2" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 14rem;">
             </a>
         </div>
 
@@ -45,17 +45,31 @@
             </a>
 
 
+            <a class="text-decoration-none" href="{{route('member.loans', 1)}}">
+                <li class="nav-item  py-3 grow-on-hover {{ Route::is('member.loans') ? 'bg-selected fade-in  rounded-4':' '}} ">
+                    <div class="row g-0">
+                        <div class="col-3 text-center ">
+                            <i class="fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
+                        </div>
+                        <div class="col-9">
+                            <span class="fw-bold fs-7 text-secondary">Loans</span>
+                        </div>
+                    </div>
+                </li>
+            </a>
+
+            
             <li class="nav-item grow-on-hover">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
 
-                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application','displayAvailableLoans', 'loan.applications', 'member.loans') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
-                                    <i class="fa-sharp fa-solid fa-peso-sign fa-lg" style="color: #ff6767;"></i>
+                                    <img src="{{asset('icons/loan-options.svg')}}" alt="">
                                 </div>
                                 <div class="col-9 ">
-                                    <span class="fw-bold fs-7 text-secondary">Loans</span>
+                                    <span class="fw-bold fs-7 text-secondary">Loan Options</span>
                                 </div>
                             </div>
                         </button>
@@ -64,14 +78,6 @@
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
 
-                                <div class="co-12 p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('member.loans') ? 'fw-bold' : ''}}" href="{{route('member.loans', 1)}}">Your Loans</a>
-                                </div>
-
-                                <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
-                                </div>
-
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-secondary {{Route::is( 'mpl.application') ? 'fw-bold' : ''}}" href="{{route('mpl.application')}}">Apply for MPL</a>
                                 </div>
@@ -79,10 +85,40 @@
                                 <div class="co-12  p-2">
                                     <a class="text-decoration-none text-secondary {{Route::is( 'hsl.application') ? 'fw-bold' : ''}}" href="{{route('hsl.application')}}">Apply for HSL</a>
                                 </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </li>
 
 
+            <li class="nav-item grow-on-hover">
+                <div class="accordion" id="accordionRequests">
+                    <div class="accordion-item  border-0">
 
+                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('loan.applications','outgoing.request') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoanApplications" aria-expanded="false" aria-controls="collapseLoanApplications">
+                            <div class="row g-0 w-100">
+                                <div class="col-3 text-center pe-2">
+                                    <i style="font-size: 23px; color: #FF6F19;" class="bi bi-file-earmark-check-fill"></i>
+                                </div>
+                                <div class="col-9 d-flex align-items-center">
+                                    <span class="fw-bold fs-7 text-secondary">Applications</span>
+                                </div>
+                            </div>
+                        </button>
 
+                      <div id="collapseLoanApplications" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row ms-3 rounded">
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
+                                </div>
+
+                                <div class="co-12  p-2">
+                                    <a class="text-decoration-none text-secondary {{Route::is('outgoing.request')? 'fw-bold': ''}}" href="/member/Your/coBorrower/requests/">Your Requests</a>
+                                </div>
                             </div>
                         </div>
                       </div>
@@ -92,19 +128,20 @@
 
 
 
-            <a class="text-decoration-none" href="{{route('calculator')}}">
-                <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
+
+            
+            <a class="text-decoration-none" href="{{route('incoming.request')}}">
+                <li class="nav-item  py-3 grow-on-hover {{Route::is('incoming.request') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
                     <div class="row g-0">
-                        <div class="col-3 text-center  ">
-                            <img src="{{asset('icons/calculator.svg')}}" alt="">
+                        <div class="col-3 text-center">
+                            <i style="font-size: 23px; color: #D100B0;" class="bi bi-person-plus-fill"></i>
                         </div>
-                        <div class="col-9  ">
-                            <span class=" fw-bold fs-7 text-secondary">Calculator</span>
+                        <div class="col-9  d-flex align-items-center">
+                            <span class="fw-bold fs-7 text-secondary">Co-borrower Request</span>
                         </div>
                     </div>
                 </li>
             </a>
-
 
             <a class="text-decoration-none" href="{{route('member.transactions')}}">
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('member.transactions') ? 'bg-selected fade-in rounded-4' : '' }}">
@@ -119,41 +156,19 @@
                 </li>
             </a>
 
-            <li class="nav-item grow-on-hover">
-                <div  class="accordion rounded" id="accordionRequests">
-                    <div class="accordion-item border-0">
-
-                        <button style="padding-left: 5px !important" class="accordion-button collapsed {{Route::is('incoming.request','outgoing.request') ? 'bg-selected fade-in rounded-4' : ''}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRequests" aria-expanded="false" aria-controls="collapseRequests">
-                            <div class="row g-0  w-100">
-                                <div class="col-3 text-center">
-                                    <img src="{{asset('icons/envelope.svg')}}" alt="">
-                                </div>
-                                <div class="col-9 ps-1">
-                                    <span class="fw-bold fs-7 text-secondary">Requests</span>
-                                </div>
-                            </div>
-                        </button>
-
-                      <div id="collapseRequests" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="row ms-3 rounded">
-
-                                <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('outgoing.request')? 'fw-bold': ''}}" href="/member/Your/coBorrower/requests/">Your Requests</a>
-                                </div>
-
-                                <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('incoming.request')? 'fw-bold': ''}}" href="/member/coBorrower/requests/">Incoming Requests</a>
-                                </div>
-
-                            </div>
+            <a class="text-decoration-none" href="{{route('calculator')}}">
+                <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
+                    <div class="row g-0">
+                        <div class="col-3 text-center  ">
+                            <img src="{{asset('icons/calculator.svg')}}" alt="">
                         </div>
-                      </div>
+                        <div class="col-9  ">
+                            <span class=" fw-bold fs-7 text-secondary">Calculator</span>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </a>
 
-        </ul>
 
         <div class="ms-3 d-flex align-items-end mt-1">
             <div class="row g-0  w-100">
