@@ -143,6 +143,13 @@
     </div>
     @enderror
 
+    @error('previous_penalty')
+    <div class="alert alert-danger alert-dismissible fade show mt-3 border border-danger" role="alert">
+        <p style="font-size: 12px" class="m-0">ADJUSTMENTS: {{$message}}</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @enderror
+
 
 </div>
 {{-- ADJUSTMENTS ============================================================================= --}}

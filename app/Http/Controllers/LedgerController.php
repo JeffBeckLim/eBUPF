@@ -69,6 +69,8 @@ class LedgerController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
         
+        $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
+        
         // if loan has missing amortization 
         if($loan->amortization == null){
             return abort(403, 'Oops! This loan has some field missing.');
@@ -134,7 +136,7 @@ class LedgerController extends Controller
             
         
 
-        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months' , 'penalty_payments'));
+        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months' , 'penalty_payments', 'sumPenaltyPayments'));
     }
 
 }

@@ -37,9 +37,25 @@
         <div class="col-3">
             Total Penalty for <strong>{{$loan->loanType->loan_type_name}}</strong>
         </div>
-        <div class="col-9 fw-bold text-danger">
+        <div class="col-9 text-danger">
             @if ($loan->penalty)
                 {{number_format($loan->penalty->penalty_total , 2, '.',',')}}     
+            @endif
+        </div>
+
+        <div class="col-3">
+            Penalty Payment Sum
+        </div>
+        <div class="col-9 text-success">
+            <span class="">{{number_format($sumPenaltyPayments, 2,'.',',')}}</span>
+        </div>
+
+        <div class="col-3">
+            Penalty Balance
+        </div>
+        <div class="col-9" style="font-size: 20px">
+            @if ($loan->penalty)
+                <span class="text-danger fw-bold">{{number_format($loan->penalty->penalty_total  - $sumPenaltyPayments , 2,'.',',')}}</span>
             @endif
         </div>
     </div>

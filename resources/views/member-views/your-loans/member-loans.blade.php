@@ -75,14 +75,13 @@
                                                                 year
                                                             @endif
                                                             </span>
+                                                            @if ($loan->penalty != null)
+                                                            <span style="font-size: 12px" class="text-danger">
+                                                                <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                                                            </span>    
+                                                            @endif
                                                         </p>
 
-                                                        @if ($loan->penalty != null)
-                                                        <span style="font-size: 12px" class="text-danger">
-                                                            <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
-                                                        </span>    
-                                                        @endif
-                                                        
                                                        
 
                                                         <p class="m-0" style="font-size: x-small;">

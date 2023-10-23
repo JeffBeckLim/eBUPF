@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('previous_loan_balance', 20, 2)->nullable() ;
             $table->decimal('interest_first_yr', 20, 2)->nullable() ;
             $table->decimal('housing_service_fee', 20, 2)->nullable() ;
+            $table->decimal('previous_penalty', 20, 2)->nullable();
             
         });
     }

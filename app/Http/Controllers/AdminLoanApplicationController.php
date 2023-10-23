@@ -70,11 +70,13 @@ class AdminLoanApplicationController extends Controller
 
         // dd($loanType);
 
-        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check')->has('loanApplicationStatus')
+        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check', 'penalty')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
         ->get();
 
         $loans = [];
+
+        // Check approved and not denied
         foreach($raw_loans as $raw_loan){
             $status_array = [];
             foreach($raw_loan->loanApplicationStatus as $status){
@@ -85,12 +87,38 @@ class AdminLoanApplicationController extends Controller
             }
         }
 
+        // count
+        $null_interest = 0;
+        $incomplete_amort = 0;
+        $no_loanType = 0;
+        foreach($loans as $loan){
+            if($loan->interest == null || $loan->interest == 0){
+                $null_interest += 1;
+            }
 
+            if($loan->amortization == null){
+                $incomplete_amort += 1;
+            }
+            elseif($loan->amortization->amort_start == null ||
+                $loan->amortization->amort_end == null || 
+                $loan->amortization->amort_principal == null || 
+                $loan->amortization->amort_interest == null 
+            ){
+                $incomplete_amort += 1;
+            }
+
+            if($loan->loan_category_id == null){
+                $no_loanType +=1;
+            }
+
+
+        }
+        
 
         $loan_categories = LoanCategory::all();
 
 
-        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType'));
+        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType', 'incomplete_amort' , 'null_interest', 'no_loanType'));
     }
 
 
@@ -116,7 +144,24 @@ class AdminLoanApplicationController extends Controller
 
     public function createLoanApplicationState(Request $request, $id){
 
-        $loan = Loan::findOrFail($id);
+        $loan = Loan::where('id',$id)->with('loanApplicationStatus')->first();
+
+        $loanApp = LoanApplicationStatus::where('loan_id',$loan->id)->get();
+        dd($loanApp);
+
+        if($request->is_active ==  1){
+
+            $flag = 0;
+            foreach($loan->loanApplicationStatus as $states){
+                if($states->loan_application_state_id == 5){
+                    $flag += 1;
+                }
+            }
+            if($flag == 0){
+                return back()->with('status_danger', 'This loan cannot be set to performing if "check" picked up" status is missing');
+            }
+        }
+
         $loan->is_active =$request->is_active;
         $loan->save();
 
@@ -228,6 +273,19 @@ class AdminLoanApplicationController extends Controller
         //Validate if loan exists
         $loan = Loan::findOrFail($loan_id);
 
+        $amortization = Amortization::find($loan->amortization_id);
+        
+        if($request->loan_application_state_id == 5){
+            if($amortization == null){
+                return back()->with('status_danger', 'Please add amortization details first before adding "check picked up" status.');
+            }
+            elseif($amortization->amort_end == null || $amortization->amort_start == null ||$amortization->amort_principal == null || $amortization->amort_interest){
+                return back()->with('status_danger', 'Please make sure all details in amortization columns are filled out.');
+            }elseif($loan->interest == null){
+                return back()->with('status_danger', 'Please add the interest value of this loan first.');
+            }
+        }
+     
         $formFields = $request->validate([
             'loan_application_state_id' => 'required',
             'remarks'=>'nullable',
@@ -256,11 +314,6 @@ class AdminLoanApplicationController extends Controller
         if($new_loan_status->loan_application_state_id == 5){
             $loan->is_active = 1;
             $loan->save();
-
-            // return response()->json([
-            //     'status'=>200,
-            //     'message'=>$loan,
-            // ])
             return back()->with('success', 'New status added successfully and set as Performing Loan');
         }
 
