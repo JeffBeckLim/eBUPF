@@ -76,13 +76,18 @@ class AdminLoanApplicationController extends Controller
 
         $loans = [];
 
-        // Check approved and not denied
+        // Check approved and not <denied></denied>
+        $latest_id = 0;
         foreach($raw_loans as $raw_loan){
             $status_array = [];
             foreach($raw_loan->loanApplicationStatus as $status){
                 array_push($status_array, $status->loan_application_state_id);
             }
             if(in_array(3,$status_array) && !in_array(6,$status_array)){
+                if($raw_loan->id > $latest_id){
+                    // get latest id 
+                    $latest_id = $raw_loan->id;
+                }
                 array_push($loans, $raw_loan);
             }
         }
@@ -118,7 +123,7 @@ class AdminLoanApplicationController extends Controller
         $loan_categories = LoanCategory::all();
 
 
-        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType', 'incomplete_amort' , 'null_interest', 'no_loanType'));
+        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType', 'incomplete_amort' , 'null_interest', 'no_loanType' , 'latest_id')) ;
     }
 
 
@@ -272,14 +277,16 @@ class AdminLoanApplicationController extends Controller
         
         //Validate if loan exists
         $loan = Loan::findOrFail($loan_id);
-
+        
         $amortization = Amortization::find($loan->amortization_id);
         
+        
+
         if($request->loan_application_state_id == 5){
             if($amortization == null){
                 return back()->with('status_danger', 'Please add amortization details first before adding "check picked up" status.');
             }
-            elseif($amortization->amort_end == null || $amortization->amort_start == null ||$amortization->amort_principal == null || $amortization->amort_interest){
+            elseif(is_null($amortization->amort_end)|| is_null($amortization->amort_start == null) || is_null($amortization->amort_principal) || is_null($amortization->amort_interest)){
                 return back()->with('status_danger', 'Please make sure all details in amortization columns are filled out.');
             }elseif($loan->interest == null){
                 return back()->with('status_danger', 'Please add the interest value of this loan first.');
