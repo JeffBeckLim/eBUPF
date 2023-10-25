@@ -51,6 +51,12 @@
 
 
   </style>
+
+  @php
+      if(!isset($loanType)){
+        $loanType = 0; 
+      }
+  @endphp
   {{-- HIDE NAV BAR WHEN SCROLLING UP --}}
   <body>
 
@@ -77,17 +83,30 @@
     </style>
 		<div class="wrapper d-flex align-items-stretch">
 
+      <style>
+         li a{
+          font-size: 14px ;
+          color: rgb(48, 28, 98) !important ;
+         }
+         .accordion-sidebar p{
+          font-size: 14px ;
+          color: rgb(48, 28, 98) !important ;
+         }
+      </style>
       <nav id="sidebar" style="padding-top: 60px" class="d-none d-sm-block">
-        <ul class="list-unstyled components mb-5" style="scale: 0.95;">
+        <ul class="list-unstyled components mb-5 " style="scale: 0.93;" >
           <li>
 
-            <a href="#"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5 me-2" style="width: 1.5rem;">
+            <a href="#"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5" style="width: 1.5rem;">
               {{ Auth::user()->member->firstname }}
-              {{ Auth::user()->member->lastname }}</a>
+              {{-- {{ Auth::user()->member->lastname }}--}}</a> 
 
           </li>
           <li class="active">
-            <a style="color: #868686" href="#"><img src="{{asset('../icons/admin-icons/dashboard.svg')}}" style="width: 1rem;"  class="me-2"> Dashboard</a>
+            <a class="{{Route::is('admin-dashboard')? 'fw-bold' : ''}}" href="{{route('admin-dashboard')}}">
+              <i style="font-size: 18px; color: #0082BA" class="bi bi-grid-1x2{{Route::is('admin-dashboard')? '-fill' : ''}} me-1"></i>
+              Dashboard
+            </a>
           </li>
           <li>
 
@@ -95,58 +114,25 @@
 
               <div class="accordion-item">
                 <p class="accordion-header fw-7">
-                  <button class="accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
+                  <button class="accordion-sidebar accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
 
-                    <img src="{{asset('../icons/admin-icons/members.svg')}}" style="width: 1.1rem; margin-left: 10px;">
-
-                      <p class="fw-7 my-auto ms-2">Members</p>
+                    {{-- <img src="{{asset('../icons/admin-icons/members.svg')}}" style="width: 1.1rem; margin-left: 10px;"> --}}
+                      <i style="font-size: 20px; color: #C066DF; margin-left: 10px;" class="bi bi-people{{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? '-fill' : ''}} me-2"></i>
+                      <p class="fw-7 my-auto {{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? 'fw-bold' : ''}} ">Members</p>
                   </button>
                 </p>
                 <div id="flush-collapseMember" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                   <ul class="list-unstyled components ms-4">
                     <li>
-                      <a href="/admin/membership-applications"  class="fs-7">Membership Applications</a>
+                      <a href="{{route('admin.membership-application')}}"  class="fs-7">Membership Applications</a>
                     </li>
                     {{-- show list od all USERS regardless of user type --}}
                     <li>
-                      <a href="/admin/all-users" class="fs-7">All Users</a>
+                      <a href="{{route('admin.all.users')}}" class="fs-7">All Users</a>
                     </li>
                     {{-- show list of all MEMBERS --}}
                     <li>
-                      <a href="/admin/members"  class="fs-7">Members</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-            </div>
-
-
-
-              {{-- <a href="#"><img src="../icons/admin-icons/members.svg" style="width: 1.2rem;"  class="me-2">Members</a> --}}
-          </li>
-          <li>
-            <a href="{{route('admin.ledgers')}}"><img src="{{asset('../icons/admin-icons/ledgers.svg')}}" style="width: 1rem;"  class="me-2"> Ledgers</a>
-          </li>
-          <li>
-            <div class="accordion accordion-flush" id="accordionFlushExample" >
-
-              <div class="accordion-item">
-                <p class="accordion-header fw-7">
-                  <button class="accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-
-                    <img src="{{asset('../icons/admin-icons/pesos.svg')}}" style="width: 1.1rem; margin-left: 10px;">
-
-                      <p class="fw-7 my-auto ms-2">Loans</p>
-                  </button>
-                </p>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <ul class="list-unstyled components ms-4">
-                    <li>
-                      <a href="" class="fs-7">Multi-purpose Loans</a>
-                    </li>
-                    <li>
-                      <a href=""  class="fs-7">Housing Loans</a>
+                      <a href="{{route('admin.members')}}"  class="fs-7">Members</a>
                     </li>
                   </ul>
                 </div>
@@ -154,43 +140,56 @@
 
             </div>
           </li>
+
+          <li >
+            <a class="d-flex align-items-center {{Route::is('admin.loan.applications.tracking')? 'fw-bold' : ''}}" href="{{route('admin.loan.applications.tracking', 'mpl')}}">
+              <i style="font-size: 20px; color: #FF6F19" class="bi bi-compass{{Route::is('admin.loan.applications.tracking')? '-fill' : ''}} me-2"></i> 
+              Tracking Loans
+            </a>
+          </li>
+
           <li>
+              <h6 class="border-top pt-3 ps-4" style="font-size: 12px; color: #ACACAC;">Loan Applications</h6>
+          </li>
 
-            <div class="accordion accordion-flush" id="accordionFlushExample" >
+          <li>
+            <a class="d-flex align-items-center {{$loanType == 1 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}">
+              <i style="font-size: 20px; color: #0038FF" class="bi bi-layers{{$loanType == 1? '-fill' : ''}} me-2"></i> 
+              Multi-purpose Loans
+            </a>
+          </li>
 
-              <div class="accordion-item">
-                <p class="accordion-header fw-7">
-                  <button class="accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                    <img src="{{asset('../icons/admin-icons/loan-applications.svg')}}" style="width: 1.3rem; margin-left: 5px;">
-                      <p class="fw-7 my-auto ms-2">Loan Applications</p>
-                  </button>
-                </p>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                  <ul class="list-unstyled components ms-4">
-                    <li>
-                      <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="fs-7">
-                        Tracking Loan Applications
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}" class="fs-7">Multi-purpose Loans</a>
-                    </li>
-                    <li>
-                      <a href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}"  class="fs-7">Housing Loans</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+          <li>
+            <a class="d-flex align-items-center {{$loanType == 2 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}">
+              <i style="font-size: 20px; color: #FF0000" class="bi bi-house{{$loanType == 2 ? '-fill' : ''}} me-2"></i> 
+              Housing Loans
+            </a>
+          </li>
 
-            </div>
+          <li class="border-bottom">
+            <a class="d-flex align-items-center {{Route::is('admin.ledgers')? 'fw-bold' : ''}}" href="{{route('admin.ledgers')}}">
+              {{-- <img src="{{asset('../icons/admin-icons/ledgers.svg')}}" style="width: 1rem;"  class="me-2">  --}}
+              <i style="font-size: 20px; color: #00D186" class="bi bi-book{{Route::is('admin.ledgers')? '-half' : ''}} me-2"></i>
+              Ledgers</a>
+          </li>
 
+
+          
+          <li>
 
           </li>
           <li>
-            <a href="{{route('admin.remittance')}}"><img src="{{asset('../icons/admin-icons/remittances.svg')}}" style="width: 1rem;" class="me-2"> Remittances</a>
+            <a class="d-flex align-items-center {{Route::is('admin.remittance')? 'fw-bold' : ''}}" href="{{route('admin.remittance')}}">
+              {{-- <img src="{{asset('../icons/admin-icons/remittances.svg')}}" style="width: 1rem;" class="me-2"> --}}
+              <i style="font-size: 20px; color: #FF6F19;" class="bi bi-sticky{{Route::is('admin.remittance')? '-fill' : ''}} me-2"></i>
+              Remittances</a>
           </li>
           <li class="border-bottom">
-            <a href="{{ route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl']) }}"><img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2"> Receivables</a>
+            <a class="d-flex align-items-center {{Route::is('admin.receivables')? 'fw-bold' : ''}}" href="{{ route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl']) }}">
+              {{-- <img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2">  --}}
+              <i style="font-size: 20px; color: #4C7EFF;" class="bi bi-hourglass{{Route::is('admin.receivables')? '-split' : ''}} me-2"></i>
+              Receivables
+            </a>
           </li>
           <li class="mt-4">
             <div class="dropup-center dropup">
