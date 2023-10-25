@@ -44,7 +44,6 @@ use App\Models\Penalty;
 
     Route::get('member/loan/your-loans/{loan_status}', [LoanController::class, 'show'])->name('member.loans');
 
-
     Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
 
     Route::get('member/loan/loan-applications/evaluated', [LoanApplicationController::class, 'showLoanApplicationsEvaluated'])->name('loan.applications.evaluated');
@@ -69,7 +68,7 @@ use App\Models\Penalty;
 
 
 
-
+    // RECEIVABLES
     Route::get('/admin/receivables/{report}/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
     Route::get('/admin/receivables/yearly/summary/{report}/{loan_type}', [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary');
     Route::get('/admin/receivables/yearly/remit/{report}/{loan_type}' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit');
@@ -172,11 +171,11 @@ use App\Models\Penalty;
     Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
 
     //Show All Accounts View
-    Route::get('/admin/all-users', [AdminController::class, 'allUsers']); //->middleware('auth','admin.access');
+    Route::get('/admin/all-users', [AdminController::class, 'allUsers'])->name('admin.all.users'); //->middleware('auth','admin.access');
     //Show all members
-    Route::get('/admin/members', [AdminController::class, 'showMembers']);
+    Route::get('/admin/members', [AdminController::class, 'showMembers'])->name('admin.members');
     //Show membership Applications
-    Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show']);
+    Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show'])->name('admin.membership-application');
 
     //Accept membership application
     Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept');
