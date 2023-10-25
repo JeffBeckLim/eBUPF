@@ -45,7 +45,6 @@ class LedgerController extends Controller
 
         $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization', 'penalty')->has('amortization')->get();
 
-        // dd($raw_loans);
         $loans = [];
         foreach($raw_loans as $raw_loan){
             $status_array = [];
