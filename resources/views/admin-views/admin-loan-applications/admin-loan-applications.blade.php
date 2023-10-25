@@ -41,6 +41,15 @@
             </div>
         </div>
 
+        <div class="col-12 p-2" style="font-size: 14px; color: #36276b" id="loading">
+            <div  class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <span class="ms-3">Loading Modals</span>
+        </div>
+        
+
+
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
@@ -398,6 +407,24 @@
 </div>
 
 <script>
+var modal_id = @json($latest_id);
+// load until last modal is found
+function checkForModal() {
+    var modal = document.getElementById('checkModal'+modal_id); // Replace 'your-modal-id' with the actual ID of your modal
+
+    if (modal) {
+        $('#loading').hide();
+        clearInterval(modalCheck); // Stop the interval
+    }
+}
+
+var modalCheck = setInterval(checkForModal, 1000); // Check every 1000 milliseconds (1 second)
+
+// $(document).ready(function () {
+//     setTimeout(function () {
+//         $('#loading').hide();
+//     }, 300); // 2000 milliseconds (2 seconds)
+// });
     // for Tool Tips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
