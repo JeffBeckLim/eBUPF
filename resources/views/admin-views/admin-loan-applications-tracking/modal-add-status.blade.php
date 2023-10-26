@@ -122,6 +122,8 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
   </div>
 </div>
 
+
+
 {{-- TESTING SERVER SIDE ADD --}}
 {{-- <script>
   $(document).on('click', '.update_student' function (e) {

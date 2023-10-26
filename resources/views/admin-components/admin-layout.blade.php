@@ -91,18 +91,30 @@
          .accordion-sidebar p{
           font-size: 14px ;
           color: rgb(48, 28, 98) !important ;
+          
          }
+  
+         .hover-menu{
+          transition: background-color 500ms ease
+          
+         }
+          .hover-menu:hover{
+            background-color: #eef2ff !important;
+          
+          }
+          
       </style>
       <nav id="sidebar" style="padding-top: 60px" class="d-none d-sm-block">
         <ul class="list-unstyled components mb-5 " style="scale: 0.93;" >
-          <li>
+          <li class="hover-menu">
 
             <a href="#"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5" style="width: 1.5rem;">
               {{ Auth::user()->member->firstname }}
               {{-- {{ Auth::user()->member->lastname }}--}}</a> 
 
           </li>
-          <li class="active">
+          
+          <li class="active hover-menu">
             <a class="{{Route::is('admin-dashboard')? 'fw-bold' : ''}}" href="{{route('admin-dashboard')}}">
               <i style="font-size: 18px; color: #0082BA" class="bi bi-grid-1x2{{Route::is('admin-dashboard')? '-fill' : ''}} me-1"></i>
               Dashboard
@@ -114,7 +126,7 @@
 
               <div class="accordion-item">
                 <p class="accordion-header fw-7">
-                  <button class="accordion-sidebar accordion-button text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
+                  <button class="accordion-sidebar accordion-button text-start collapsed hover-menu" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseMember" aria-expanded="false" aria-controls="flush-collapseMember">
 
                     {{-- <img src="{{asset('../icons/admin-icons/members.svg')}}" style="width: 1.1rem; margin-left: 10px;"> --}}
                       <i style="font-size: 20px; color: #C066DF; margin-left: 10px;" class="bi bi-people{{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? '-fill' : ''}} me-2"></i>
@@ -141,7 +153,7 @@
             </div>
           </li>
 
-          <li >
+          <li class="hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.loan.applications.tracking')? 'fw-bold' : ''}}" href="{{route('admin.loan.applications.tracking', 'mpl')}}">
               <i style="font-size: 20px; color: #FF6F19" class="bi bi-compass{{Route::is('admin.loan.applications.tracking')? '-fill' : ''}} me-2"></i> 
               Tracking Loans
@@ -152,46 +164,41 @@
               <h6 class="border-top pt-3 ps-4" style="font-size: 12px; color: #ACACAC;">Loan Applications</h6>
           </li>
 
-          <li>
+          <li class="hover-menu">
             <a class="d-flex align-items-center {{$loanType == 1 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}">
               <i style="font-size: 20px; color: #0038FF" class="bi bi-layers{{$loanType == 1? '-fill' : ''}} me-2"></i> 
               Multi-purpose Loans
             </a>
           </li>
 
-          <li>
+          <li class="hover-menu">
             <a class="d-flex align-items-center {{$loanType == 2 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}">
               <i style="font-size: 20px; color: #FF0000" class="bi bi-house{{$loanType == 2 ? '-fill' : ''}} me-2"></i> 
               Housing Loans
             </a>
           </li>
 
-          <li class="border-bottom">
+          <li class="border-bottom hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.ledgers')? 'fw-bold' : ''}}" href="{{route('admin.ledgers')}}">
               {{-- <img src="{{asset('../icons/admin-icons/ledgers.svg')}}" style="width: 1rem;"  class="me-2">  --}}
               <i style="font-size: 20px; color: #00D186" class="bi bi-book{{Route::is('admin.ledgers')? '-half' : ''}} me-2"></i>
               Ledgers</a>
           </li>
 
-
-          
-          <li>
-
-          </li>
-          <li>
+          <li class="hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.remittance')? 'fw-bold' : ''}}" href="{{route('admin.remittance')}}">
               {{-- <img src="{{asset('../icons/admin-icons/remittances.svg')}}" style="width: 1rem;" class="me-2"> --}}
               <i style="font-size: 20px; color: #FF6F19;" class="bi bi-sticky{{Route::is('admin.remittance')? '-fill' : ''}} me-2"></i>
               Remittances</a>
           </li>
-          <li class="border-bottom">
+          <li class="border-bottom hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.receivables')? 'fw-bold' : ''}}" href="{{ route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl']) }}">
               {{-- <img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2">  --}}
               <i style="font-size: 20px; color: #4C7EFF;" class="bi bi-hourglass{{Route::is('admin.receivables')? '-split' : ''}} me-2"></i>
               Receivables
             </a>
           </li>
-          <li class="mt-4">
+          <li class="mt-4 hover-menu py-2">
             <div class="dropup-center dropup">
               <button class="btn btn-block text-start w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #868686">
                 <img class=" me-2 ms-3" src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
