@@ -227,7 +227,7 @@
                                 {{-- ... --}}
                                 <td class="border-end">
                                     <h6>
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#editLoanModal{{$loan->id}}"  href="#">
+                                        <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#editLoanModal{{$loan->id}}"  href="#">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </h6>
@@ -292,7 +292,7 @@
                                 {{-- ... --}}
                                 <td>
                                     <h6>
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#adjustmentsModal{{$loan->id}}"  href="#">
+                                        <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#adjustmentsModal{{$loan->id}}"  href="#">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </h6>
@@ -337,22 +337,22 @@
                                 <td class="border-end">
                                     <h6>
                                     @if ($loan->interest == null)
-                                        <a class="text-danger text-decoration-none" data-bs-toggle="tooltip" data-bs-title="INTEREST column is empty" disabled>
+                                        <a  class="text-danger text-decoration-none btn" data-bs-toggle="tooltip" data-bs-title="INTEREST column is empty" disabled>
                                             <i class="bi bi-exclamation-circle"></i>
                                         </a>
                                     @else
                                         @if ($loan->amortization_id == null)
-                                            <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
+                                            <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
                                                 <i class="bi bi-plus-circle"></i>
                                             </a>
                                         @elseif($loan->amortization)
                                             @if ($loan->amortization->amort_start == null &&
                                                 $loan->amortization->amort_start == null)
-                                                <a type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
+                                                <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#addAmortizationModal{{$loan->id}}"  href="#">
                                                     <i class="bi bi-plus-circle"></i>
                                                 </a>
                                             @else
-                                                <a type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
+                                                <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#amortizationModal{{$loan->id}}"  href="#">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </a>
                                             @endif
@@ -384,7 +384,7 @@
                                 </td>
                                 <td>
                                     <h6>
-                                        <a type="button" data-bs-toggle="modal" data-bs-target="#checkModal{{$loan->id}}"  href="#">
+                                        <a class="btn btn-link" type="button" data-bs-toggle="modal" data-bs-target="#checkModal{{$loan->id}}"  href="#">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                     </h6>
@@ -410,7 +410,7 @@
 var modal_id = @json($latest_id);
 // load until last modal is found
 function checkForModal() {
-    var modal = document.getElementById('checkModal'+modal_id); // Replace 'your-modal-id' with the actual ID of your modal
+    var modal = document.getElementById('editLoanModal'+modal_id); // Replace 'your-modal-id' with the actual ID of your modal
 
     if (modal) {
         $('#loading').hide();
@@ -418,7 +418,7 @@ function checkForModal() {
     }
 }
 
-var modalCheck = setInterval(checkForModal, 1000); // Check every 1000 milliseconds (1 second)
+var modalCheck = setInterval(checkForModal, 500); // Check every 1000 milliseconds (1 second)
 
 // $(document).ready(function () {
 //     setTimeout(function () {
