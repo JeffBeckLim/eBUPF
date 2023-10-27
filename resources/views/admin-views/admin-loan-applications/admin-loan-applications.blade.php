@@ -49,39 +49,44 @@
         </div>
         
 
+      
 
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">Month</option>
-                    <option value="">January</option>
-                    <option value="">February</option>
-                    <option value="">March</option>
-                    <option value="">April</option>
-                    <option value="">May</option>
-                    <option value="">June</option>
-                    <option value="">July</option>
-                    <option value="">August</option>
-                    <option value="">September</option>
-                    <option value="">October</option>
-                    <option value="">November</option>
-                    <option value="">December</option>
+                <select id="year-filter" class="form-control bg-white border-0 fw-semibold">
+                    <option value="">Year</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
                 </select>
             </div>
+
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="daySelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">Day</option>
+                <select id="month-filter" class="form-control bg-white border-0 fw-semibold">
+                    <option value="">Month</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                 </select>
             </div>
+            
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="typeSelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">All Loan</option>
-                    <option value="BUCS">New Loan</option>
-                    <option value="CBEM">Renewal</option>
-                    <option value="unit3">Additional</option>
+                <select id="unit-filter" class="form-control bg-white border-0 fw-semibold">
+                    <option value="">All Units</option>
+                    <option value="BUCS">BUCS</option>
+                    <option value="CBEM">CBEM</option>
+                    <option value="GASS">GASS</option>
                 </select>
             </div>
-            <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
+            <button id="applyFilterBtn" class="btn btn-primary " onclick="filterTable()" style="">Apply Filter</button>
         </div>
 
         <style>
@@ -420,76 +425,49 @@ function checkForModal() {
 
 var modalCheck = setInterval(checkForModal, 500); // Check every 1000 milliseconds (1 second)
 
-// $(document).ready(function () {
-//     setTimeout(function () {
-//         $('#loading').hide();
-//     }, 300); // 2000 milliseconds (2 seconds)
-// });
     // for Tool Tips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-    // Generate days of the month
-    var daySelect = document.getElementById("daySelect");
-    var option = document.createElement("option");
-    option.value = "All";
-    option.text = "1";
-    daySelect.add(option);
 
-    for (var i = 2; i <= 31; i++) {
-        option = document.createElement("option");
-        option.value = i.toString();
-        option.text = i.toString();
-        daySelect.add(option);
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        var filterOptions = document.querySelectorAll('.filter-option');
-        var tableRows = document.querySelectorAll('.table-row');
+//     function filterTable() {
+//     var yearFilter = document.getElementById('year-filter').value;
+//     var monthFilter = document.getElementById('month-filter').value;
+//     var schoolFilter = document.getElementById('unit-filter').value;
 
-        filterOptions.forEach(function(option) {
-            option.addEventListener('click', function() {
-                var filterValue = this.getAttribute('data-filter');
+//     var table = document.getElementsByClassName('admin-table')[0]; // Make sure to use getElementsByClassName() and [0] to select the first element if there are multiple with the same class.
+//     var rows = table.getElementsByTagName('tr');
 
-                // Remove active class from other options
-                filterOptions.forEach(function(filterOption) {
-                    filterOption.classList.remove('active');
-                });
+//     for (var i = 1; i < rows.length; i++) {
+//         var school = rows[i].getElementsByTagName('td')[3].textContent;
+//         var date = rows[i].getElementsByTagName('td')[4].textContent;
 
-                // Add active class to clicked option
-                this.classList.add('active');
 
-                tableRows.forEach(function(row) {
-                    if (filterValue === 'all') {
-                        row.style.display = 'table-row';
-                    } else {
-                        row.style.display = row.getAttribute('data-status') === filterValue ? 'table-row' : 'none';
-                    }
-                });
-            });
-        });
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        const icon = document.querySelector('.icon');
-        const buttons = document.querySelector('.buttons');
-        const approveBtn = document.querySelector('.approve-btn');
-        const denyBtn = document.querySelector('.deny-btn');
+//         var rowDate = new Date(date);
+//         var selectedYear = document.getElementById('year-filter').value;
+//         var selectedMonth = document.getElementById('month-filter').value;
+//         var selectedUnit = document.getElementById('unit-filter').value;
+        
+//        if(selectedUnit === school){
+//         console.log('true');
+//        }
+//         if (
+//             (selectedYear === '' || rowDate.getFullYear() === parseInt(selectedYear)) &&
+//             (selectedMonth === '' || rowDate.getMonth() + 1 === parseInt(selectedMonth)) 
+//             // &&
+//             // (selectedUnit === ''|| selectedUnit === school)
+//         ) {
+//             console.log('display blank')
+//             rows[i].style.display = '';
+//         } else {
+//             console.log('display none')
+//             rows[i].style.display = 'none';
+//         }
+//     }
+// }
 
-        icon.addEventListener('click', function() {
-            buttons.style.display = 'block';
-        });
 
-        approveBtn.addEventListener('click', function() {
-            // Handle approve button click
-            console.log('Approved');
-            buttons.style.display = 'none';
-        });
 
-        denyBtn.addEventListener('click', function() {
-            // Handle deny button click
-            console.log('Denied');
-            buttons.style.display = 'none';
-        });
-    });
 </script>
 
 @include('admin-components.admin-dataTables')
