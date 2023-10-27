@@ -108,7 +108,7 @@
         <ul class="list-unstyled components mb-5 " style="scale: 0.93;" >
           <li class="hover-menu">
 
-            <a href="#"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5" style="width: 1.5rem;">
+            <a class="{{Route::is('admin.profile')? 'fw-bold' : ''}}"  href="{{route('admin.profile')}}"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5" style="width: 1.5rem;">
               {{ Auth::user()->member->firstname }}
               {{-- {{ Auth::user()->member->lastname }}--}}</a> 
 

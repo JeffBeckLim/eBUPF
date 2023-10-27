@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminLoanApplicationController;
 use App\Http\Controllers\AdminLoanApplicationControlller;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminRemittanceController;
 use App\Http\Controllers\CalculatorController;
 use App\Http\Controllers\CheckController;
@@ -54,16 +55,20 @@ use App\Models\Penalty;
 
     Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
 
+    // Delete status of loan
     Route::get('admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status');
 
-
+    // Show Transactions
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
+
+    // For Calculator
     Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
     Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
 
-
+    // Toggle Additional Loan
     Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan');
 
+    // Update Check details
     Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update');
 
 
@@ -89,10 +94,6 @@ use App\Models\Penalty;
         // updatePenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment');
 
-
-    
-
-//TESTING ===================================================================================================
 
 
 // 💸======================== ** LOAN APPLICATION MPL and HSL **  ==================================
@@ -138,15 +139,19 @@ use App\Models\Penalty;
 //
 //🔴ADMIN ==================================================================================================
 
-    // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
+    // Show Admin Profile
+    Route::get('admin/my-profile' , [AdminProfileController:: class, 'show'])->name('admin.profile');
+    Route::get('admin/my-profile/update' , [AdminProfileController:: class, 'update'])->name('admin.update.profile');
+    Route::post('admin/my-profile/save-updates/{member_id}', [AdminProfileController::class, 'saveUpdate'])->name('admin.update.profile.save');
+
+    // Show loan Applications
     Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
 
+    // Add Amortization
     Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
 
+    // Edit Loan 
     Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
-
-
-    // UNDER TESTING UNDER TESTING UNDER TESTING ---------------------------------------------------------
 
 
     // Show MPL or HSL Applications
