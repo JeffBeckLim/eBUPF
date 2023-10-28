@@ -1,6 +1,17 @@
 @extends('admin-components.admin-layout')
 
 @section('content')
+@php
+    if(!isset($year_selected)){
+        $year_selected = 0;
+    }
+    if(!isset($month_selected)){
+        $month_selected = 0;
+    }
+    if(!isset($unit_selected)){
+        $unit_selected = 0;
+    }
+@endphp
 
 <div class="container-fluid mt-2">
     <div class="adminbox m-4">
@@ -39,56 +50,46 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
 
-        <div class="col-12 p-2" style="font-size: 14px; color: #36276b" id="loading">
-            <div  class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="ms-3">Loading Modals</span>
-        </div>
         
-
-      
-
+        <form action="{{route('admin.loan.applications.filter' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">
+            <p class="ms-2 pt-2 text-secondary" style="font-size: 12px">Filter by date requested and Unit</p>
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="year-filter" class="form-control bg-white border-0 fw-semibold">
-                    <option value="">Year</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
+                <select id="year-filter" class="form-control bg-white border-0 fw-semibold" name="year_filter">
+                    <option value="0" {{$year_selected == 0 ? 'selected' : ''}}>Year</option>
+                    @foreach ($years as $year)
+                    <option value="{{$year}}" {{$year_selected == $year ? 'selected' : ''}}>{{$year}}</option>
+                    @endforeach
                 </select>
             </div>
 
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="month-filter" class="form-control bg-white border-0 fw-semibold">
-                    <option value="">Month</option>
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
+                <select id="month-filter" class="form-control bg-white border-0 fw-semibold" name="month_filter">
+                    <option value="0" {{$month_selected == 0 ? 'selected' : ''}}>Month</option>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($months as $month)
+                        <option  value="{{$i+=1}}" {{$month_selected == $i ? 'selected' : ''}}>{{$month}}</option>
+                    @endforeach
                 </select>
             </div>
             
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="unit-filter" class="form-control bg-white border-0 fw-semibold">
-                    <option value="">All Units</option>
-                    <option value="BUCS">BUCS</option>
-                    <option value="CBEM">CBEM</option>
-                    <option value="GASS">GASS</option>
+                <select id="unit-filter" class="form-control bg-white border-0 fw-semibold" name="unit_filter">
+                    <option value="0" {{$unit_selected == 0 ? 'selected' : ''}}>All Units</option>
+                    @foreach ($units as $unit)
+                    <option value="{{$unit->id}}" {{$unit_selected == $unit->id ? 'selected' : ''}}>{{$unit->unit_code}}</option>
+                    @endforeach
                 </select>
             </div>
-            <button id="applyFilterBtn" class="btn btn-primary " onclick="filterTable()" style="">Apply Filter</button>
+            <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
+            <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">Clear Filter</a>
+            
         </div>
-
+        </form>
         <style>
             th, td{
                 font-size: 12px !important;
@@ -412,61 +413,11 @@
 </div>
 
 <script>
-var modal_id = @json($latest_id);
-// load until last modal is found
-function checkForModal() {
-    var modal = document.getElementById('editLoanModal'+modal_id); // Replace 'your-modal-id' with the actual ID of your modal
-
-    if (modal) {
-        $('#loading').hide();
-        clearInterval(modalCheck); // Stop the interval
-    }
-}
-
-var modalCheck = setInterval(checkForModal, 500); // Check every 1000 milliseconds (1 second)
 
     // for Tool Tips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
-//     function filterTable() {
-//     var yearFilter = document.getElementById('year-filter').value;
-//     var monthFilter = document.getElementById('month-filter').value;
-//     var schoolFilter = document.getElementById('unit-filter').value;
-
-//     var table = document.getElementsByClassName('admin-table')[0]; // Make sure to use getElementsByClassName() and [0] to select the first element if there are multiple with the same class.
-//     var rows = table.getElementsByTagName('tr');
-
-//     for (var i = 1; i < rows.length; i++) {
-//         var school = rows[i].getElementsByTagName('td')[3].textContent;
-//         var date = rows[i].getElementsByTagName('td')[4].textContent;
-
-
-//         var rowDate = new Date(date);
-//         var selectedYear = document.getElementById('year-filter').value;
-//         var selectedMonth = document.getElementById('month-filter').value;
-//         var selectedUnit = document.getElementById('unit-filter').value;
-        
-//        if(selectedUnit === school){
-//         console.log('true');
-//        }
-//         if (
-//             (selectedYear === '' || rowDate.getFullYear() === parseInt(selectedYear)) &&
-//             (selectedMonth === '' || rowDate.getMonth() + 1 === parseInt(selectedMonth)) 
-//             // &&
-//             // (selectedUnit === ''|| selectedUnit === school)
-//         ) {
-//             console.log('display blank')
-//             rows[i].style.display = '';
-//         } else {
-//             console.log('display none')
-//             rows[i].style.display = 'none';
-//         }
-//     }
-// }
-
-
+    
 
 </script>
 

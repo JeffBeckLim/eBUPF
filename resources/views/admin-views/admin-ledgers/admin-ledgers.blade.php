@@ -4,8 +4,12 @@
 
 <div class="container-fluid px-2" >
     <div class="row mt-2">
+    
         <div class="container-fluid">
             <div class="adminbox">
+                <div class="row mx-3 mt-1 mb-2 pb-1 border-bottom g-0">
+                    <p class="m-0 text-secondary" style="font-size: 12px">Note: The Loan account ledger displayed here are those with "Check Picked Up" status only. </p>
+                </div>
                 <div class=" d-flex text-dark">
                         <div >
                             <img src="{{asset('icons/book.svg')}}" alt="" width="50px" height="58px">
@@ -68,7 +72,9 @@
                                                 $mpl_count = 0;
                                                 foreach ($member->loans as $loan) {
                                                     if($loan->loanType->id == 1 && $loan->amortization != null){
-                                                        $mpl_count++;
+                                                        if (count($loan->loanApplicationStatus)==5 ) {
+                                                            $mpl_count++;   
+                                                        }
                                                     }
                                                 }
                                             @endphp
@@ -79,7 +85,9 @@
                                                 $hsl_count = 0;
                                                 foreach ($member->loans as $loan) {
                                                     if($loan->loanType->id == 2 && $loan->amortization != null){
-                                                        $hsl_count++;
+                                                        if (count($loan->loanApplicationStatus)==5  ) {
+                                                            $hsl_count++;   
+                                                        }
                                                     }
                                                 }
                                             @endphp
@@ -91,26 +99,7 @@
                                     </tr>
                                     @endforeach 
                                 @endif
-                                {{-- <tr>
-                                    <td>
 
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                    <td class="text-end">
-                                        <a href="" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
-                                    </td>
-                                </tr> --}}
                              
                             </tbody>
                         </table>

@@ -24,6 +24,7 @@
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; overflow: hidden;">
         <div class="text-center">
             <p class="lead">
+                
                 @if(!is_null($customMessage))
                     <div class="d-flexbox justify-content-center align-items-center">
                         <div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use finfo;
 use App\Models\Loan;
+use App\Models\Unit;
 use App\Models\CoBorrower;
 use App\Models\Amortization;
 use App\Models\LoanCategory;
@@ -68,8 +69,6 @@ class AdminLoanApplicationController extends Controller
 
     public function showLoanApplications( $loanType ,$table_freeze){
 
-        // dd($loanType);
-
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check', 'penalty')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
         ->get();
@@ -122,8 +121,38 @@ class AdminLoanApplicationController extends Controller
 
         $loan_categories = LoanCategory::all();
 
+        // get all units for select filter
+        $units = Unit::all();
 
-        return view('admin-views.admin-loan-applications.admin-loan-applications', compact('loans' , 'loan_categories', 'table_freeze', 'loanType', 'incomplete_amort' , 'null_interest', 'no_loanType' , 'latest_id')) ;
+        // get all years for select filter
+        $years = [];
+        foreach ($loans as $loan) {
+            $date_requested = Carbon::parse($loan->date_requested)->year;
+            array_push($years, $date_requested);
+        }
+        $years = array_unique($years);
+
+        // initialize months for select filter
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+
+        return view('admin-views.admin-loan-applications.admin-loan-applications', 
+        compact(
+            'loans' , 
+            'loan_categories', 
+            'table_freeze', 
+            'loanType', 
+            'incomplete_amort' , 
+            'null_interest', 
+            'no_loanType' , 
+            'latest_id', 
+            'units',
+            'years',
+            'months',            
+            )
+            ) ;
     }
 
 
