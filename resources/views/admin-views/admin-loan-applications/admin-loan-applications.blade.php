@@ -58,7 +58,7 @@
         <div class="filter-group gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="year-filter" class="form-control bg-white border-0 fw-semibold" name="year_filter">
-                    <option value="0" {{$year_selected == 0 ? 'selected' : ''}}>Year</option>
+                    <option value="0" {{$year_selected == 0 ? 'selected' : ''}}>All Year</option>
                     @foreach ($years as $year)
                     <option value="{{$year}}" {{$year_selected == $year ? 'selected' : ''}}>{{$year}}</option>
                     @endforeach
@@ -67,7 +67,7 @@
 
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="month-filter" class="form-control bg-white border-0 fw-semibold" name="month_filter">
-                    <option value="0" {{$month_selected == 0 ? 'selected' : ''}}>Month</option>
+                    <option value="0" {{$month_selected == 0 ? 'selected' : ''}}>All Months</option>
                     @php
                         $i = 0;
                     @endphp
