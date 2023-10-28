@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class LedgerController extends Controller
 {
     public function show(){
-        $raw_members = Member::with('loans.loanApplicationStatus','user' , 'loans.loanType' , 'loans.amortization' ,'units.campuses')->has('loans.amortization')
+        $raw_members = Member::with('loans.loanApplicationStatus','user' , 'loans.loanType' , 'loans.amortization' ,'units.campuses' , 'loans.loanApplicationStatus')->has('loans.amortization')
         ->get();
 
         // CHECK IF A MEMBER HAS A CHECK picked up Status
@@ -72,7 +72,7 @@ class LedgerController extends Controller
         
         // if loan has missing amortization 
         if($loan->amortization == null){
-            return abort(403, 'Oops! This loan has some field missing.');
+            return abort(401, 'Oops! This loan has some field missing.');
         }
 
         if($loan->amortization != null){

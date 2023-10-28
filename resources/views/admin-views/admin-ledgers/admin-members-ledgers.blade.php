@@ -121,13 +121,19 @@
                                                     <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
                                                 </a>     
                                                 @endif
-
+                                                @php
+                                                $disable_incomplete = 0;
+                                            @endphp
                                                 {{-- if has missing amortization details --}}
                                                 @if ($loan->amortization->amort_start == null ||
                                                         $loan->amortization->amort_end == null ||
                                                         $loan->amortization->amort_principal == null ||
                                                         $loan->amortization->amort_interest == null 
                                                     )
+                                                    @php
+                                                        // this is for disabling the view button
+                                                        $disable_incomplete = 1;
+                                                    @endphp
                                                     
                                                     <a style="font-size: 21px" href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="Incomplete amortization details" >
                                                         <i style="color: #b82744" class="bi bi-exclamation-triangle"></i>
@@ -137,7 +143,12 @@
                                             </h6>
                                         </td>
                                         <td class="text-end">
+                                            @if ($disable_incomplete == 1)
+                                                Cannot View: Incomplete amortization details
+                                            @else
                                             <a href="{{route('admin.personal.ledger', $loan->id)}}" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1"><i class="bi bi-eye-fill"></i> View</a>
+                                            @endif
+                                            
                                         </td>
                                     </tr>    
                                 @endforeach

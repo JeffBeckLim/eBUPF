@@ -26,6 +26,7 @@ use App\Http\Controllers\AdminReceivablesController;
 use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminReceivablesPDFController;
+use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Models\Penalty;
 
 /*
@@ -146,6 +147,11 @@ use App\Models\Penalty;
 
     // Show loan Applications
     Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
+
+    // Show loan Applications
+    Route::get('/admin/loan-applications/{loanType}/{freeze}/filter', [LoanApplicationsFilterController::class, 'show'])->name('admin.loan.applications.filter');
+
+
 
     // Add Amortization
     Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
