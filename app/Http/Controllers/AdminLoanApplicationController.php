@@ -67,7 +67,7 @@ class AdminLoanApplicationController extends Controller
         return back()->with('success', 'Loan Updated!');
     }
 
-    public function showLoanApplications( $loanType ,$table_freeze){
+    public function showLoanApplications(Request $request, $loanType ,$table_freeze){
 
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check', 'penalty')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
@@ -127,7 +127,7 @@ class AdminLoanApplicationController extends Controller
         // get all years for select filter
         $years = [];
         foreach ($loans as $loan) {
-            $date_requested = Carbon::parse($loan->date_requested)->year;
+            $date_requested = Carbon::parse($loan->created_at)->year;
             array_push($years, $date_requested);
         }
         $years = array_unique($years);

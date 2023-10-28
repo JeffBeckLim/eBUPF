@@ -47,12 +47,12 @@ class LoanApplicationsFilterController extends Controller
             $month_flag = 1;
             $unit_flag = 1;
             if($request->query('year_filter') != 0){
-                if($request->query('year_filter') != Carbon::parse($unfilteredLoan->date_requested)->year){
+                if($request->query('year_filter') != Carbon::parse($unfilteredLoan->created_at)->year){
                     $year_flag = 0;
                 }
             }
             if($request->query('month_filter') != 0){
-                if($request->query('month_filter') != Carbon::parse($unfilteredLoan->date_requested)->month){
+                if($request->query('month_filter') != Carbon::parse($unfilteredLoan->created_at)->month){
                     $month_flag = 0;
                 }
             }
@@ -107,7 +107,7 @@ class LoanApplicationsFilterController extends Controller
         // get all years for select filter
         $years = [];
         foreach ($raw_loans as $raw_loan) {
-            $date_requested = Carbon::parse($raw_loan->date_requested)->year;
+            $date_requested = Carbon::parse($raw_loan->created_at)->year;
             array_push($years, $date_requested);
         }
         $years = array_unique($years);
