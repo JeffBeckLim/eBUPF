@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">        
                         <div class="col-3  text-center">
-                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow  img-fluid" width="150" height="150" style="object-fit:cover;">
+                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow  img-fluid" style="object-fit:cover; width: 150px; height: 150px">
                         </div>
                         <div class="col  my-auto text-white p-2" style="text-shadow: 2px 1px rgb(48, 48, 48);">
                             <span>
