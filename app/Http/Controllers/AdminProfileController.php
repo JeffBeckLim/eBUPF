@@ -15,7 +15,8 @@ class AdminProfileController extends Controller
     }
 
     public function update(){
-        return view ('admin-views.admin-profile.admin-update-profile');
+        return view ('admin-views.admin-profile.admin-profile');
+        // return view ('admin-views.admin-profile.admin-update-profile');
     }
 
     public function saveUpdate(Request $request, $member_id){
