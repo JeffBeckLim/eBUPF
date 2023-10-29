@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">        
                         <div class="col-3  text-center">
-                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid" width="150" height="150" style="object-fit:cover;">
+                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid" style="object-fit:cover; width: 150px; height: 150px">
                         </div>
                         <div class="col  my-auto text-white p-2" style="text-shadow: 2px 1px rgb(48, 48, 48);">
                             <span>
@@ -100,10 +100,13 @@
                             {{Auth::user()->member->contact_num}}
                         </div>
                         <div class="col-12 pt-2 text-secondary pt-3">
-                            <a href="" class="btn bu-orange w-50 fw-bold text-white" style="font-size: 14px">
+                            <a href="" class="btn bu-orange w-50 fw-bold text-white" style="font-size: 14px"
+                            data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                 Change Password
-                            </a>
-                        </div>
+                            </a>  
+                        @include('admin-views.admin-profile.modal-change-password')
+                        
+                    </div>
 
                         <div class="col-6 text-secondary" style="font-size: 12px">
                             Account Created: {{Auth::user()->created_at}}

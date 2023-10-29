@@ -40,20 +40,7 @@
                         </div>
                 </div>
                 <div class="border mt-2">
-                </div>
-
-                <div class="filter-group gap-3 mt-4">
-                    <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                        <select id="campusSelect" class="form-control bg-white border-0">
-                            <option value="All">All Year</option>
-                            <option value="Main">2023</option>
-                            <option value="Daraga">2024</option>
-                            <option value="East">2025</option>
-                        </select>
-                    </div>
-                    <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
-                </div>
-    
+                </div>    
 
                 <div class="table-responsive ">
                     <div class="custom-table-for-admin">

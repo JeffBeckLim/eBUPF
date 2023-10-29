@@ -26,7 +26,9 @@ use App\Http\Controllers\AdminReceivablesController;
 use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminReceivablesPDFController;
+use App\Http\Controllers\LedgerFilterController;
 use App\Http\Controllers\LoanApplicationsFilterController;
+use App\Http\Controllers\LoanApplicationTrackingFilterController;
 use App\Models\Penalty;
 
 /*
@@ -84,6 +86,7 @@ use App\Models\Penalty;
 
     // LEDGER
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
+    Route::get('/admin/ledgers/filter' , [LedgerFilterController::class, 'show'])->name('admin.ledgers.filter');
     Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
     Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
 
@@ -162,6 +165,9 @@ use App\Models\Penalty;
 
     // Show MPL or HSL Applications
     Route::get('/admin/loan-applications-tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
+
+    Route::get('/admin/loan-applications-tracking/{loan_type}/filter', [LoanApplicationTrackingFilterController::class, 'show'])->name('admin.loan.applications.tracking.filter');
+
 
     // add status in regards to the application process
     Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');

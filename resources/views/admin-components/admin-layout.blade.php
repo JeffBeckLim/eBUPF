@@ -106,11 +106,13 @@
       </style>
       <nav id="sidebar" style="padding-top: 60px" class="d-none d-sm-block">
         <ul class="list-unstyled components mb-5 " style="scale: 0.93;" >
-          <li class="hover-menu">
+          <li class="hover-menu border-bottom">
 
-            <a class="{{Route::is('admin.profile')? 'fw-bold' : ''}}"  href="{{route('admin.profile')}}"><img src="{{asset('../icons/profile-holder.png')}}" class="rounded-5" style="width: 1.5rem;">
+            <a class="{{Route::is('admin.profile')? 'fw-bold' : ''}}"  href="{{route('admin.profile')}}">
+              <img style="width: 2rem; height: 2rem; object-fit: cover" class="me-1 rounded-circle" src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="icon">
               {{ Auth::user()->member->firstname }}
-              {{-- {{ Auth::user()->member->lastname }}--}}</a> 
+              {{-- {{ Auth::user()->member->lastname }}--}}
+            </a> 
 
           </li>
           
