@@ -257,25 +257,18 @@ class AdminLoanApplicationController extends Controller
     // get all MPL or HSL loan applications that are accepted by CoBorrower
     public function showLoanApplicationsTracking($loan_type){
         if($loan_type == 'mpl'){
-
-            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState', 'loan.loanCategory')
-            ->where('accept_request', 1)
-            ->whereHas('loan', function($query){
-                $query->where('loan_type_id',  1); //loan type of MPL
-            })->get();
-
+            $loan_type_id = 1;
         }elseif($loan_type == 'hsl'){
-
-            $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState' , 'loan.loanCategory')
-            ->where('accept_request', 1)
-            ->whereHas('loan', function($query){
-                $query->where('loan_type_id',  2); //loan type of HSL
-            })->get();
-
+            $loan_type_id = 2;
         }else{
             abort(404);
         }
-
+        $loans = CoBorrower::with('loan.member.units.campuses', 'loan.loanApplicationStatus.loanApplicationState', 'loan.loanCategory')
+        ->where('accept_request', 1)
+        ->whereHas('loan', function($query) use ($loan_type_id) {
+            $query->where('loan_type_id', $loan_type_id);
+        })
+        ->get();
 
         $loan_app_states = LoanApplicationState::all();
         $loan_categories = LoanCategory::all();
@@ -284,7 +277,10 @@ class AdminLoanApplicationController extends Controller
         $approved= 0;
         $denied = 0;
         $pending = 0;
+        $years = [];
         foreach($loans as $loan){
+            $date_requested = Carbon::parse($loan->loan->created_at)->year;
+            array_push($years, $date_requested);
             if(count($loan->loan->loanApplicationStatus) == 0){
                 $pending += 1;
             }
@@ -297,7 +293,33 @@ class AdminLoanApplicationController extends Controller
                 }
             }
         }
-        return view('admin-views.admin-loan-applications-tracking.admin-loan-applications-tracking', compact('loans', 'loan_app_states', 'loan_categories', 'approved' , 'denied', 'pending' ,'loan_type'));
+        $years = array_unique($years);
+    
+        $units = Unit::all();
+
+        
+        // dd($years);
+        // initialize months for select filter
+        $months = [
+            'January', 'February', 'March', 'April', 'May', 'June',
+            'July', 'August', 'September', 'October', 'November', 'December'
+        ];
+        
+    
+
+        return view('admin-views.admin-loan-applications-tracking.admin-loan-applications-tracking', compact(
+            'loans', 
+            'loan_app_states', 
+            'loan_categories', 
+            'approved' , 
+            'denied', 
+            'pending' ,
+            'loan_type',
+            'months',
+            'years',
+            'units',
+            'loan_type'
+        ));
     }
 
 

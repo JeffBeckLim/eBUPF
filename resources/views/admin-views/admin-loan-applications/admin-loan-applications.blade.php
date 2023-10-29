@@ -1,6 +1,7 @@
 @extends('admin-components.admin-layout')
 
 @section('content')
+{{-- set value if nothing is selected for filters --}}
 @php
     if(!isset($year_selected)){
         $year_selected = 0;
@@ -15,6 +16,9 @@
 
 <div class="container-fluid mt-2">
     <div class="adminbox m-4">
+        <div class="row mt-1 mb-4 border-bottom mx-2 pb-2">
+            <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those with "Approved by Executive Director" status.</p>
+        </div>
 
         {{-- ERROR MESSAGES --}}
         @include('admin-views.admin-loan-applications.error-displays')

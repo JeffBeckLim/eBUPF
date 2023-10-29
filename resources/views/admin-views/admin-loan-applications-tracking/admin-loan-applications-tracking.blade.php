@@ -1,7 +1,17 @@
 @extends('admin-components.admin-layout')
 
 @section('content')
-
+@php
+    if(!isset($year_selected)){
+        $year_selected = 0;
+    }
+    if(!isset($month_selected)){
+        $month_selected = 0;
+    }
+    if(!isset($unit_selected)){
+        $unit_selected = 0;
+    }
+@endphp
 <div class="container-fluid mt-2">
     
     <div class="adminbox p-0 pb-3 mb-5">
@@ -124,50 +134,53 @@
                 </div>
             </div>
         </div>
-        
+        {{-- {{route('admin.loan.applications.tracking', 'mpl')}} --}}
+        <form action="{{route('admin.loan.applications.tracking.filter', $loan_type)}}">
         <div class="filter-group px-3 gap-2 mt-4">
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="monthSelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">Month</option>
-                    <option value="">January</option>
-                    <option value="">February</option>
-                    <option value="">March</option>
-                    <option value="">April</option>
-                    <option value="">May</option>
-                    <option value="">June</option>
-                    <option value="">July</option>
-                    <option value="">August</option>
-                    <option value="">September</option>
-                    <option value="">October</option>
-                    <option value="">November</option>
-                    <option value="">December</option>
+                <select name="year_filter" class="form-control bg-white border-0 fw-semibold">
+                    <option value="0" {{$year_selected == 0 ? 'selected' : ''}}> All Year</option>
+                    @foreach ($years as $year)
+                        <option value="{{$year}}" {{$year_selected == $year ? 'selected' : ''}}>{{$year}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                <select id="daySelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">Day</option>
+                <select name="month_filter" id="monthSelect" class="form-control bg-white border-0 fw-semibold">
+                    <option value="0" {{$month_selected == 0 ? 'selected' : ''}}>All Month</option>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($months as $month)
+                        <option value="{{$i+=1}}" {{$month_selected == $i ? 'selected' : ''}}>{{$month}}</option>
+                    @endforeach
                 </select>
             </div>
+            
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
+                <select name="unit_filter" id="typeSelect" class="form-control bg-white border-0 fw-semibold">
+                    <option value="0">All Units</option>
+                    @foreach ($units as $unit)
+                        <option value="{{$unit->id}}" {{$unit_selected == $unit->id ? 'selected' : ''}}>{{$unit->unit_code}}</option>
+                    @endforeach
+                </select>
+            </div>
+            
+            {{-- <div class="form-group fg-admin" style="width: 175px; position: relative;">
                 <select id="typeSelect" class="form-control bg-white border-0 fw-semibold">
-                    <option value="All">All Loan</option>
-                    <option value="BUCS">New Loan</option>
-                    <option value="CBEM">Renewal</option>
-                    <option value="unit3">Additional</option>
+                    <option value="">All Applications</option>
+                    <option value="">Approved</option>
+                    <option value="">Denied</option>
                 </select>
-            </div>
-            <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
-        </div>
-        <div class="row g-0 mt-2 mx-3">
-            <div class="col d-flex justify-content-end gap-3">
-                <span class="filter-option active" data-filter="all">All Applications</span>
-                <span class="filter-option" data-filter="approved">Approved</span>
-                <span class="filter-option" data-filter="denied">Denied</span>
-            </div>
-        </div>
-        
-        
+            </div> --}}
 
+            <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
+            <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications.tracking', $loan_type)}}">Clear Filter</a>
+        </form>
+        </div>
+
+        
+    
         <div class="table-responsive border m-3 rounded">
             {{-- <div class="custom-table-for-admin"> --}}
 

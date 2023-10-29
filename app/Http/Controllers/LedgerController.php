@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Loan;
+use App\Models\Unit;
 use App\Models\Member;
 use App\Models\Payment;
-use App\Models\PenaltyPayment;
 use Illuminate\Http\Request;
+use App\Models\PenaltyPayment;
 
 class LedgerController extends Controller
 {
@@ -18,7 +19,7 @@ class LedgerController extends Controller
         // CHECK IF A MEMBER HAS A CHECK picked up Status
         // Remember that check pick up status id == 5
         $members=[];
-        foreach($raw_members as $raw_member){
+        foreach($raw_members as $raw_member){   
             foreach($raw_member->loans as $loan){
                 
                     $status_array=[];
@@ -31,8 +32,8 @@ class LedgerController extends Controller
                     }
             }
         }
-        
-        return view('admin-views.admin-ledgers.admin-ledgers', compact('members'));
+        $units = Unit::all();
+        return view('admin-views.admin-ledgers.admin-ledgers', compact('members','units'));
     }
 
     public function showMemberLedgers( $loan_type , $id){
