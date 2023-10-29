@@ -145,8 +145,12 @@ use App\Models\Penalty;
 
     // Show Admin Profile
     Route::get('admin/my-profile' , [AdminProfileController:: class, 'show'])->name('admin.profile');
+    // Show profile update page
     Route::get('admin/my-profile/update' , [AdminProfileController:: class, 'update'])->name('admin.update.profile');
+    // save profile updates
     Route::post('admin/my-profile/save-updates/{member_id}', [AdminProfileController::class, 'saveUpdate'])->name('admin.update.profile.save');
+    // save password change
+    Route::put('admin/my-profile/change-password/{member_id}', [AdminProfileController::class, 'changePassword'])->name('admin.change.password');
 
     // Show loan Applications
     Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');

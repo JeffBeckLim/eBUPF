@@ -7,21 +7,26 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="">
-            <label for="current_password">Current Password</label>
-            <input class="form-control" type="password" name="current_password" id="current_password">
+            <small class="text-muted">Your password must be at least 8 characters long and include at least 1 number and 1 special character.</small>
+          <form action="{{ route('admin.change.password', ['member_id' => Auth::user()->member->id]) }}"  method="post">
+            @csrf
+            @method('PUT')
+            
+            <label for="current_password" class="mt-3">Current Password</label>
+            <input required class="form-control" type="password" name="old_password" id="old_password">
             <div class="border-top mt-4">
             <label for="new_password">New Password</label>
-            <input class="form-control" type="password" name="new_password" id="new_password">
+            <input required class="form-control" type="password" name="password" id="password">
             
             <label for="confirm_password">Confirm New Password</label>
-            <input class="form-control" type="password" name="confirm_password" id="confirm_password">
+            <input required class="form-control" type="password" name="password_confirmation" id="password_confirmation">
             </div>
-          </form>
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn bu-orange text-light">Chnage Password</button>
+          <button type="submit" class="btn bu-orange text-light">Change Password</button>
+        </form>
         </div>
       </div>
     </div>

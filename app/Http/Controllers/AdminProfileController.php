@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Svg\Tag\Rect;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminProfileController extends Controller
 {
@@ -12,7 +15,8 @@ class AdminProfileController extends Controller
     }
 
     public function update(){
-        return view ('admin-views.admin-profile.admin-update-profile');
+        return view ('admin-views.admin-profile.admin-profile');
+        // return view ('admin-views.admin-profile.admin-update-profile');
     }
 
     public function saveUpdate(Request $request, $member_id){
@@ -39,6 +43,26 @@ class AdminProfileController extends Controller
 
         return back()->with('passed', 'Profile Updated!');
         // return view('admin-views.admin-profile.admin-profile')->with('passed', 'Profile Updated!');
+
+    }
+
+    public function changePassword(Request $request, $member_id){
+
+        $request->validate([
+            'old_password' => 'required',
+            // 'password'=>'required',
+            'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+        ]);
+    
+        $user = Auth::user();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->route('admin.profile')->with('fail', 'The old password is incorrect.');
+        }
+        
+        $user->password = Hash::make($request->password);
+        $user->save();
+    
+        return redirect()->route('admin.profile')->with('passed', 'Password changed successfully.');
 
     }
 }
