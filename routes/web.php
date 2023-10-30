@@ -10,6 +10,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCreateMemberController;
 use App\Http\Controllers\AdminLoanApplicationController;
 use App\Http\Controllers\AdminLoanApplicationControlller;
 use App\Http\Controllers\AdminProfileController;
@@ -195,6 +196,12 @@ use App\Models\Penalty;
     Route::get('/admin/all-users', [AdminController::class, 'allUsers'])->name('admin.all.users'); //->middleware('auth','admin.access');
     //Show all members
     Route::get('/admin/members', [AdminController::class, 'showMembers'])->name('admin.members');
+    //Show filter members
+    Route::get('/admin/members/filter', [AdminController::class, 'showMembersFilter'])->name('admin.members.filter');
+    // Show Create Member Page
+    Route::get('/admin/members/create-member', [AdminCreateMemberController::class, 'show'])->name('admin.members.create');
+    Route::post('/admin/members/create-member', [AdminCreateMemberController::class, 'create'])->name('admin.members.save');
+
     //Show membership Applications
     Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show'])->name('admin.membership-application');
 

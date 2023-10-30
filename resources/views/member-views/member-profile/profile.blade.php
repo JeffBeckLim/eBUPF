@@ -66,6 +66,7 @@
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Campus :</span> {{$campus->campus_code}}&nbsp;Campus</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Unit :</span> BU{{$unit->unit_code}}</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Position :</span> {{ ucfirst($member->position) }}</p>
+                    <p style="color: #393939" class="fs-7"><span class="fw-bold ">Monthly Salary :</span> Php {{ number_format($member->monthly_salary, '2','.',',') }}</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Employee No. :</span> {{ $member->employee_num }}</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Date Appointed at BU :</span> {{ \Carbon\Carbon::createFromFormat('Y-m-d', $member->bu_appointment_date)->format('F j, Y') }}</p>
                     <p style="color: #393939" class="fs-7"><span class="fw-bold ">Member Status :</span> <span class="fw-bold"  style="color: {{ $member->disabled_at ? 'red' : 'green' }}">{{ $member->disabled_at ? 'Inactive' : 'Active' }}</span></p>

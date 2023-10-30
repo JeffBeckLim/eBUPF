@@ -1,6 +1,11 @@
 @extends('admin-components.admin-layout')
 
 @section('content')
+@php
+    if(!isset($unit_selected)){
+        $unit_selected = 0;
+    }
+@endphp
 <div class="container-fluid">
     <div class="row g-0">
         <div class="container-fluid">
@@ -11,40 +16,38 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-{{-- 
-            @if(session('additional_error'))
-                <div class="alert alert-danger alert-dismissible fade show text-danger" role="alert" style="font-size: small">
-                    {{session('additional_error')}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif --}}
            
             <div class="adminbox m-2 mb-5">
                 <div class="d-flex">
-                    <div class="d-flex membership-app-header1">
-                        <img src="../icons/admin-icons/members.svg" alt="" width="50px" height="58px">
+                    <div class="d-flex membership-app-header1 ">
+                        <img src="{{asset('icons/admin-icons/members.svg')}}" alt="" width="50px" height="58px">
                         <p style="padding-left: 10px; padding-top: 5px;" class="d-flex justify-content-center align-items-center"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Members</span></p>
                     </div>
-                </div>
-                <div class="filter-group gap-3">
-                    <div class="form-group" style="width: 150px; position: relative;">
-                        <select id="campusSelect" class="form-control bg-white border-0">
-                            <option value="All">Campus</option>
-                            <option value="Main">Main</option>
-                            <option value="Daraga">Daraga</option>
-                            <option value="East">East</option>
-                        </select>
+                    <div class=" px-2 pt-1 rounded" style="width: 7rem">
+                        <h6 style="font-size: 12px">Total</h6>
+                        <h4 class="text-center fw-bold">{{count($memberUsers)}}</h4>
                     </div>
-                    <div class="form-group" style="width: 150px; position: relative;">
-                        <select id="unitSelect" class="form-control bg-white border-0">
-                            <option value="All">Unit</option>
-                            <option value="BUCS">BUCS</option>
-                            <option value="CBEM">CBEM</option>
-                            <option value="unit3">Unit 3</option>
-                        </select>
+                    <div class=" d-flex align-items-center">
+                        <a class="btn btn-outline-dark rounded-4 " style="font-size: 14px" href="{{route('admin.members.create')}}"><i class="bi bi-person-plus-fill"></i> Add Member Account</a>
                     </div>
-                    <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
+
                 </div>
+                 
+                <form action="{{route('admin.members.filter')}}">
+                    <div class="filter-group gap-3">
+                        <div class="form-group fg-admin " style="width: 150px; position: relative;">
+                            <select name="unit_filter" id="unitSelect" class="form-control bg-white border-0 fw-bold">
+                                <option value="0" {{$unit_selected == 0 ? 'selected' : ''}}>All units</option>
+                                @foreach ($units as $unit)
+                                    <option value="{{$unit->id}}" {{$unit_selected == $unit->id ? 'selected' : ''}}>{{$unit->unit_code}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        
+                        <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
+                        <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.members')}}">Clear Filter</a>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <div class="custom-table-for-admin">
                         <table class="table admin-table table-striped " id="myTable">
