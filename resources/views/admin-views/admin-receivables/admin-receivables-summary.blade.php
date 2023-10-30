@@ -95,7 +95,7 @@
                             <tr>
                                 <th style="border: none;"></th>
                                 <th style="border: none;"></th>
-                                <th colspan="2" class="border-end border-start border-bottom-0 text-center text-muted">Loan Payments</th>
+                                <th colspan="2" class="border-end border-start border-bottom-0 text-center text-muted">{{$selectedYear}} Balances</th>
                                 <th style="border: none;"></th>
                             </tr>
                             <tr>

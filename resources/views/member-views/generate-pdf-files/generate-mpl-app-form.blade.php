@@ -255,11 +255,20 @@
         </div>
     </div>
 
-    <div class="duo" style="margin-top: 43px;">
-        <div class="duo-one">
+    <div style="margin-top: 30px; display: table; width: 100%; font-size: 15px;">
+        <div style="display: table-cell; width: 60%;">
 
         </div>
-        <div class="duo-two" style="border-top: 1px solid black; text-align: center; ">
+        <div style="text-align: center; display: table-cell; width: 40%;">
+            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
+        <div style="display: table-cell; width: 60%;">
+
+        </div>
+        <div style="border-top: 1px solid black; text-align: center; display: table-cell; width: 40%;">
             <span class="toBold">Signature over Printed Name</span>
         </div>
     </div>
@@ -309,11 +318,20 @@
         </div>
     </div>
 
-    <div class="duo" style="margin-top: 43px;">
-        <div class="duo-one">
+    <div style="margin-top: 30px; display: table; width: 100%; font-size: 15px;">
+        <div style="display: table-cell; width: 60%;">
 
         </div>
-        <div class="duo-two" style="border-top: 1px solid black; text-align: center; ">
+        <div style="text-align: center; display: table-cell; width: 40%;">
+           {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
+        <div style="display: table-cell; width: 60%;">
+
+        </div>
+        <div style="border-top: 1px solid black; text-align: center; display: table-cell; width: 40%;">
             <span class="toBold">Signature over Printed Name</span>
         </div>
     </div>

@@ -9,6 +9,13 @@
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-12">
+                                @if($inActiveLoan)
+                                    <div class="card" style="color: #545454; padding: 10px; margin-bottom: 10px;">
+                                        <div class="d-flex">
+                                            <img width="20" height="20" src="https://img.icons8.com/sf-regular/48/545454/high-priority.png"  alt="alert"/><span class="fw-bold" style="font-size: 12px; padding-top: 1px;"> Your loan application is now being reviewed by our BUPF Staff. You won't be able to apply for another loan.</span>
+                                        </div>
+                                    </div>
+                                @endif
                                     <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid;">
                                         <div style="position: relative;" class="mb-2">
                                             <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />

@@ -132,7 +132,16 @@
         </div>
     </div>
 
-    <div style="margin-top: 45px; display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
+    <div style="margin-top: 30px; display: table; width: 100%; font-size: 15px;">
+        <div style="display: table-cell; width: 50%;">
+
+        </div>
+        <div style="text-align: center; display: table-cell; width: 50%;">
+            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
         <div style="display: table-cell; width: 50%;">
 
         </div>
@@ -194,7 +203,16 @@
         </div>
     </div>
 
-    <div style="margin-top: 45px; display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
+    <div style="margin-top: 30px; display: table; width: 100%; font-size: 15px;">
+        <div style="display: table-cell; width: 50%;">
+
+        </div>
+        <div style="text-align: center; display: table-cell; width: 50%;">
+            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        </div>
+    </div>
+
+    <div style="display: table; width: 100%; font-size: 15px; margin-bottom: 12px;">
         <div style="display: table-cell; width: 50%;">
 
         </div>
@@ -636,13 +654,13 @@
     <div style="display: table; width: 100%; margin-top: 35px;">
         <div style="display: table-cell; width: 5%; font-weight: bold; font-size: 14px;">
         </div>
-        <div style="display: table-cell; width: 45%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
-
+        <div style="display: table-cell; width: 45%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center;">
+            {{$firstname}} {{$middle_initial}}. {{$lastname}}
         </div>
         <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
         </div>
-        <div style="display: table-cell; width: 40%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
-
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center;">
+            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
         </div>
         <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
         </div>
@@ -700,13 +718,13 @@ bottom: 0;">
         For the payment of all installments and amounts due and demandable under the Promissory Note, I hereby assign and transfer an amount equivalent to the monthly installment the salaries, wages, allowances and other benefits payable to me by the University.
     </div>
 
-    <div style="margin-top: 10px; font-size: 14pxtext-align: justify;">
+    <div style="margin-top: 10px; font-size: 14px; text-align: justify;">
         I do hereby grant the BUPF, its management assign the full power and authority to deduct, withhold, collect and receive and give acquintance for the same or any part thereof, in may name of otherwise.
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 14px; margin-top: 25px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;">
-
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
+            {{$firstname}} {{$middle_initial}}. {{$lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -753,8 +771,7 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; font-size: 14px;">
-        <div style="display: table-cell; width: 40%; font-size: 14px; text-align: center;">
-
+        <div style="display: table-cell; width: 40%; font-size: 14px; text-align: center; ">
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -777,8 +794,8 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 14px; margin-top: 25px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;">
-
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
+            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
