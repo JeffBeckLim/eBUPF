@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">
                             <p class="appdetails-text">Tin</p>
@@ -81,7 +81,7 @@
                             {{$loan->member->tin_num}}
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">

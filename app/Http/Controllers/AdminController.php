@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Loan;
 use App\Models\Member;
 use App\Models\Payment;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -21,10 +22,33 @@ class AdminController extends Controller
         return view('admin-views.admin-members.admin-all-accounts', compact('users'));
     }
 
-
+    // show all Members Page
     public function showMembers(){
         $memberUsers = User::with('member.units.campuses')->where('user_type', 'member')->get();
-        return view('admin-views.admin-members.admin-members', compact('memberUsers'));
+        $units = Unit::all();
+        return view('admin-views.admin-members.admin-members', compact('memberUsers','units'));
+    }
+    // show filtered Members Page
+    public function  showMembersFilter(Request $request){
+        if($request->query('unit_filter') == 0){
+            return redirect()->route('admin.members'); 
+        }
+        else{
+            $unit_selected = $request->query('unit_filter');
+        }
+
+        $memberRaw = User::with('member.units.campuses')->where('user_type', 'member')->get();
+
+        $memberUsers = [];
+        foreach($memberRaw as $raw){
+            if($raw->member->units->id == $unit_selected){
+                array_push($memberUsers, $raw);
+            }
+        }
+
+        $units = Unit::all();
+        return view('admin-views.admin-members.admin-members', compact('memberUsers','units','unit_selected'));
+
     }
 
 

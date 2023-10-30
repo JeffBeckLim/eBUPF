@@ -15,26 +15,7 @@
                             <div style="font-size: small" class="fw-bold">All user accounts in eBUPF</div>
                         </div>
                 </div>
-                
-                <div class="filter-group gap-3">
-                    <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                        <select id="campusSelect" class="form-control bg-white border-0">
-                            <option value="All">Campus</option>
-                            <option value="Main">Main</option>
-                            <option value="Daraga">Daraga</option>
-                            <option value="East">East</option>
-                        </select>
-                    </div>
-                    <div class="form-group fg-admin" style="width: 150px; position: relative;">
-                        <select id="unitSelect" class="form-control bg-white border-0">
-                            <option value="All">Unit</option>
-                            <option value="BUCS">BUCS</option>
-                            <option value="CBEM">CBEM</option>
-                            <option value="unit3">Unit 3</option>
-                        </select>
-                    </div>
-                    <button id="applyFilterBtn" class="btn btn-primary " style="">Apply Filter</button>
-                </div>
+
     
 
                 <div class="table-responsive ">
@@ -123,7 +104,7 @@
                                 </tr>
                                 
                                  <!-- Modal in views/admin-compinents/admin-modalAllUsers -->
-                                @include('admin-components.admin-modalAllUsers')
+                                @include('admin-views.admin-members.modal-change-role')
                                 
                             @endforeach
                             </tbody>
