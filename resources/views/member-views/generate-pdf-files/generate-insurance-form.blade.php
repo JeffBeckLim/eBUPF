@@ -495,9 +495,9 @@
                 <input type="checkbox" name="checkbox1" value="option1">
             </td>
             <td width="97%" style="border: none; padding-bottom: 35px; padding-left: 10px; line-height: 1.6;">
-                Yes, I understand the Terms and Conditions of Bicol University Provident Fund, Inc. <br>
+                <span style="font-weight: bold; color: red;">*</span> Yes, I understand the Terms and Conditions of Bicol University Provident Fund, Inc. <br>
                 I declare that I am between 18 to 64 years old, physically and mentally healthy, have never been hospitalized, nor treated for any illness in the past 12 months, and actively performing my normal daily activities. <br>
-                I authorize the BUPFI to process any relevant personal information on me and/or my loan with BUPFI and to disclose such personal information to their affiliated third persons, entity or entities providing services on their behalf, to enable them to evaluate and assess my application as well as to service my policy or policies and other insurance needs. <span style="font-weight: bold; color: red;">*</span>
+                I authorize the BUPFI to process any relevant personal information on me and/or my loan with BUPFI and to disclose such personal information to their affiliated third persons, entity or entities providing services on their behalf, to enable them to evaluate and assess my application as well as to service my policy or policies and other insurance needs.
             </td>
         </tr>
     </table>

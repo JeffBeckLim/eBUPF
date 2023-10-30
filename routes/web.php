@@ -93,7 +93,7 @@ use App\Models\Penalty;
 
     // PENALTY
     Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate');
-        //penalty payment 
+        //penalty payment
         // createPenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment/{penalty_id}', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment');
         // updatePenaltyPayment
@@ -164,7 +164,7 @@ use App\Models\Penalty;
     // Add Amortization
     Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
 
-    // Edit Loan 
+    // Edit Loan
     Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
 
 
@@ -258,7 +258,7 @@ use App\Models\Penalty;
     Route::get('/member/generateMulti-PurposeLoanApplicationForm/{id}',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
 
     //Generate HSL Application Form
-    Route::get('/member/generateHousingLoanApplicationForm/{id}',[PDFController::class,'generateHSL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
+    Route::get('/member/generateHousingLoanApplicationForm/{id}',[PDFController::class,'generateHL'])->middleware('auth')->name('generateHousingLoanApplicationForm');
 
     //Generate Insurance Form
     Route::get('/member/this/generateInsuranceForm',[PDFController::class,'generateInsuranceForm'])->middleware('auth')->name('generateInsuranceForm');

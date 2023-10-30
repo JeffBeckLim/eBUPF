@@ -138,7 +138,7 @@ class PDFController extends controller{
         return $pdf->download('MPL Application Form.pdf');
     }
 
-    public function generateHSL($loanId){
+    public function generateHL($loanId){
         $id = Auth::user()->member->id;
         $member = Member::find($id);
         $unit = Unit::where('id', $member->unit_id)->first();
@@ -200,7 +200,7 @@ class PDFController extends controller{
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
 
-        return $pdf->download('HSL Application Form.pdf');
+        return $pdf->download('Housing Loan Application Form.pdf');
     }
 
     public function generateInsuranceForm(){
