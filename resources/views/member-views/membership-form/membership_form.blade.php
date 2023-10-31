@@ -34,7 +34,7 @@
                     <p class="text-danger mt-1"><i style="color: rgb(226, 78, 78)" class="bi bi-exclamation-circle"></i>  {{$message}}</p>
                 </div>
             @enderror
-            <form method="POST" action="/member/application/{{Auth::user()->member->id}}" enctype="multipart/form-data">
+            <form id="membership_form" method="POST" action="/member/application/{{Auth::user()->member->id}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row g-0">

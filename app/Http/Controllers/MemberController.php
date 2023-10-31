@@ -194,7 +194,7 @@ class MemberController extends Controller
             'middle_initial'=> 'nullable',
             'middlename'=> 'nullable',
 
-            'contact_num'=> 'nullable',
+            'contact_num'=> 'required',
 
             'address'=> 'required',
             'date_of_birth'=> 'required',
@@ -204,7 +204,7 @@ class MemberController extends Controller
             'employee_num'=> 'required',
             'bu_appointment_date'=> 'required',
 
-            'place_of_birth'=> 'required',
+            'place_of_birth'=> 'nullable',
             'civil_status'=> 'required',
 
             'spouse'=> 'nullable',
@@ -249,6 +249,9 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Please provide names for all beneficiaries. If not, the other fields will be cleared.');
         }
         }
+        $temp = '+63'.$formFields['contact_num'];
+        $formFields['contact_num'] = $temp;
+        
         $member->update($formFields);
 
         if($formFields['middlename'] != null){
@@ -320,7 +323,7 @@ class MemberController extends Controller
             'employee_num'=> 'required',
             'bu_appointment_date'=> 'required',
 
-            'place_of_birth'=> 'required',
+            'place_of_birth'=> 'nullable',
             'civil_status'=> 'required',
 
             'spouse'=> 'nullable',
@@ -339,7 +342,6 @@ class MemberController extends Controller
             'beneficiary_birthday0'=> 'required',
             'beneficiary_relationship0'=> 'required',
         ]);
-        // dd(ucfirst($formFields['middlename'][0]));
 
         // for profile pic validation
         if($request->hasFile('profile_picture')) {
@@ -352,7 +354,11 @@ class MemberController extends Controller
             'status' => 0,
         ]);
 
+        $temp = '+63'.$formFields['contact_num'];
+        $formFields['contact_num'] = $temp;
+        
         $member->update($formFields);
+        
 
         if($formFields['middlename'] != null){
             $member->middle_initial = ucfirst($formFields['middlename'][0]);

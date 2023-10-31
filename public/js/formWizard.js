@@ -8,6 +8,7 @@ function showTab(n) {
     //... and fix the Previous/Next buttons:
     if (n == 0) {
         document.getElementById("prevBtn").style.display = "none";
+
     } else {
         document.getElementById("prevBtn").style.display = "inline";
     }
@@ -54,7 +55,8 @@ function validateForm() {
             // For checkboxes, check if it's not checked
             y[i].classList.add("invalid"); // Add "invalid" class
             valid = false;
-        } else if (y[i].value == "") {
+        } 
+        else if (y[i].value == "") {
             // For other input fields, if empty...
             y[i].classList.add("invalid"); // Add "invalid" class
             valid = false;
@@ -71,8 +73,26 @@ function validateForm() {
         }
     }
 
+    // CHECK CONTACT NUMBER
+    const contactNumberInput = document.getElementById('contact_num');
+    const value = contactNumberInput.value;
+    
+        if (value.length != 10 || value[0] != 9) {    
+            contactNumberInput.classList.add("invalid");
+            contactNumberInput.setCustomValidity('Please enter valid PH sim number format');
+            contactNumberInput.reportValidity();
+            valid = false;
+        } else {
+            contactNumberInput.classList.remove("invalid");
+            contactNumberInput.setCustomValidity('');
+            
+        }
+
+    ;
+
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
+
         document.getElementsByClassName("step")[currentTab].className += " finish";
     } else {
         window.scrollTo(0, 0); // Scroll to the top of the page
@@ -80,7 +100,6 @@ function validateForm() {
 
     return valid; // return the valid status
 }
-
 
 
 
@@ -115,3 +134,5 @@ document.addEventListener("DOMContentLoaded", function() {
     var selectElement = document.getElementsByClassTagName("select");
     selectElement.selectedIndex = -1;
 });
+
+
