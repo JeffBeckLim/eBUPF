@@ -74,6 +74,8 @@ class AdminCreateMemberController extends Controller
 
         if($user != null && $member != null){
             return back()->with('passed','Account Created!');
+        }else{
+            return back()->with('failed','Something Went Wrong in Creating Member Account');
         }
         
 

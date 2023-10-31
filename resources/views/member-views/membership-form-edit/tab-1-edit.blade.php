@@ -78,7 +78,15 @@
                 </div>
                 <div class="col-6 pe-1">
                     <label class="fw-bold" for="contact_num">Contact Number</label>
-                    <input type="number" placeholder="ex. 09150012457" class="form-control validate" name="contact_num" value="{{Auth::user()->member->contact_num}}">
+
+                    <div class="input-group ">
+                        <span class="input-group-text" id="inputGroupPrepend" style="background-color: #ffffff">+63</span>
+                        @php
+                                $contact = (int)substr(Auth::user()->member->contact_num,3);
+                        @endphp
+                    <input type="number" placeholder="ex. 09150012457" class="form-control validate" name="contact_num" value="{{$contact }}" id="contact_num">
+
+                    </div>
                 </div>
 
                 <div class="col-6 pb-1">
