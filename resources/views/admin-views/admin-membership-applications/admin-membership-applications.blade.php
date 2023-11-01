@@ -81,7 +81,7 @@
                                         <img src="{{$memberApplication->member->profile_picture != null ?asset('storage/'.$memberApplication->member->profile_picture) : asset('assets/no_profile_picture.jpg') }}" alt="" style="height: 30px; width: 30px; object-fit: cover;" class="border rounded-circle">
                                         <a href="#" class="fw-bold text-dark" style="text-decoration: none;">
                                             {{$memberApplication->member->firstname}}
-                                            {{$memberApplication->member->middle_initial}}.
+                                            {{$memberApplication->member->middle_initial ? $memberApplication->member->middle_initial.'.' : ''   }}
                                             {{$memberApplication->member->lastname}}
                                         </a>
                                     </td>

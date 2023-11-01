@@ -72,6 +72,11 @@ class AdminCreateMemberController extends Controller
             'agree_to_authorize'=>1,
         ]);
 
+           if($formFields['middlename'] != null){
+            $member->middlename = ucfirst($formFields['middlename'][0]);
+        }
+
+
         if($user != null && $member != null){
             return back()->with('passed','Account Created!');
         }else{
