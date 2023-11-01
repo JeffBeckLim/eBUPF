@@ -27,6 +27,7 @@ use App\Http\Controllers\AdminReceivablesController;
 use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminReceivablesPDFController;
+use App\Http\Controllers\AdminUpdateMemberController;
 use App\Http\Controllers\LedgerFilterController;
 use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
@@ -201,6 +202,12 @@ use App\Models\Penalty;
     // Show Create Member Page
     Route::get('/admin/members/create-member', [AdminCreateMemberController::class, 'show'])->name('admin.members.create');
     Route::post('/admin/members/create-member', [AdminCreateMemberController::class, 'create'])->name('admin.members.save');
+
+    // Show Update Member Page
+    Route::get('/admin/members/update-member/{member_id}', [AdminUpdateMemberController::class, 'show'])->name('admin.members.update');
+    Route::post('/admin/members/update-member/{member_id}/update', [AdminUpdateMemberController::class, 'update'])->name('admin.members.update.save');
+
+
 
     //Show membership Applications
     Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show'])->name('admin.membership-application');
