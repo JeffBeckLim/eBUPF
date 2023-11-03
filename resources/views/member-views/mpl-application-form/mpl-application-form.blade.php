@@ -82,15 +82,15 @@
                 </div>
 
                 <p class="text1-design pt-4">Witnesses</p>
-
+                <p class="text-secondary" style="font-size: 12px">Please enter the names of your witnesses, these are required.</p>
 
                 <div class="form-group">
-                    <input type="text" class="form-control {{ $errors->has('email_witness_1') ? 'invalid' : '' }}" id="myWitness1" name="email_witness_1" placeholder="ex. jeffbeckmendaza.lim@bicol-u.edu.ph" value="{{old('email_witness_1')}}">
-                    @error('email_witness_1')
+                    <input type="text" class="form-control {{ $errors->has('witness_name_1') ? 'invalid' : '' }}" id="myWitness1" name="witness_name_1" placeholder="ex. Jeff Beck M. Lim" value="{{old('witness_name_1')}}">
+                    @error('witness_name_1')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
-                    <input type="text" class="form-control mt-2 {{ $errors->has('email_witness_2') ? 'invalid' : '' }}" id="myWitness2" name="email_witness_2" placeholder="ex. aaronbarlas.labini@bicol-u.edu.ph" value="{{old('email_witness_2')}}">
-                    @error('email_witness_2')
+                    <input type="text" class="form-control mt-2 {{ $errors->has('witness_name_2') ? 'invalid' : '' }}" id="myWitness2" name="witness_name_2" placeholder="ex. Aaron B. Labini" value="{{old('witness_name_2')}}">
+                    @error('witness_name_2')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
                 </div>
@@ -98,7 +98,7 @@
                 <div class="row d-flex align-items-center justify-content-center">
                     <p class="warning">Based on the information you have provided in your profile, we will use that as your personal details such as your name, age, and other relevant information.</p>
                 </div>
-                <button type="button" class="btn bu-orange text-light fw-bold w-100" onclick="validateForm()">Proceed</button>
+                <button  id="proceedButton" type="button" class="btn bu-orange text-light fw-bold w-100" onclick="validateForm()">Proceed</button>
                 
 
             </div>
@@ -110,16 +110,6 @@
             @include('member-views.mpl-application-form.mpl-details')
             
         {{-- ------------------------------------------------------- --}}
-        {{-- <div class="v-stack gap-2">
-            <button type="submit" class=" btn bu-orange text-light fw-bold w-100 mt-3">Send Request to Co-Borrower</button>
-            <button type="button" class="btn btn-outline-secondary fw-bold w-100 mt-2" onclick="goBack()">Go back</button>
-        </div>    
-         --}}
-         
-
-      
-
-
         </form>
         
         
@@ -128,7 +118,19 @@
     </div>
   </div>
 </div>
+<script>
+    // Get the button element by its id
+    var proceedButton = document.getElementById("proceedButton");
+    var targetButton = document.getElementById("submitButton");
 
-{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+    document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        // Trigger a click on the button
+        proceedButton.click();
+        event.preventDefault(); // Prevent the form from submitting on Enter key press
+        
+    }
+});
+</script>
 
 @endsection

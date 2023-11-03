@@ -282,6 +282,7 @@ class LoanApplicationController extends Controller
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
     public function storeRequest(Request $request, $loanTypeId){
+        // dd($request);
         if($loanTypeId > 2){
             abort(404);
         }
@@ -289,9 +290,10 @@ class LoanApplicationController extends Controller
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-
-            'email_witness_1'=> 'required|email|exists:users,email',
-            'email_witness_2'=> 'required|email|exists:users,email',
+            'witness_name_1'=>'required',
+            'witness_name_2'=>'required',
+            // 'email_witness_1'=> 'required|email|exists:users,email',
+            // 'email_witness_2'=> 'required|email|exists:users,email',
         ]);
 
         // check if the email inputs are the same with the User's logged in email
@@ -304,21 +306,21 @@ class LoanApplicationController extends Controller
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
-        if($request->email_witness_1 == $request->email_witness_2 ||
-            $request->email_witness_1 == $request->email_co_borrower ||
-            $request->email_witness_2 == $request->email_co_borrower
-        ){
-            return back()->with('email_error', 'Make sure all emails are unique');
-        }
+        // if($request->email_witness_1 == $request->email_witness_2 ||
+        //     $request->email_witness_1 == $request->email_co_borrower ||
+        //     $request->email_witness_2 == $request->email_co_borrower
+        // ){
+        //     return back()->with('email_error', 'Make sure all emails are unique');
+        // }
 
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
-        $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
-        $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
+        // $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
+        // $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
 
         if(
             !$co_borrower->member->verified_at
-            || !$witness_1->member->verified_at
-            || !$witness_2->member->verified_at
+            // || !$witness_1->member->verified_at
+            // || !$witness_2->member->verified_at
         ){
             return back()->with('email_error', 'Make sure that all emails are from verified eBUPF members');
         }
@@ -337,12 +339,12 @@ class LoanApplicationController extends Controller
         ]);
 
         Witness::create([
-            'member_id'=>$witness_1->member->id,
+            'witness_name'=>$formFields['witness_name_1'],
             'loan_id'=>$loan->id,
         ]);
 
         Witness::create([
-            'member_id'=>$witness_2->member->id,
+            'witness_name'=>$formFields['witness_name_2'],
             'loan_id'=>$loan->id,
         ]);
 

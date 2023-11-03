@@ -81,7 +81,7 @@
         </div>
     </div>
     <div class="v-stack gap-2">
-        <button type="submit" class=" btn bu-orange text-light fw-bold w-100 mt-3">Send Request to Co-Borrower</button>
+        <button id="submitButton" type="submit" class=" btn bu-orange text-light fw-bold w-100 mt-3">Send Request to Co-Borrower</button>
         <button type="button" class="btn btn-outline-secondary fw-bold w-100 mt-2" onclick="goBack()">Go back</button>
     </div>    
     

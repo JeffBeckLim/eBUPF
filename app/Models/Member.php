@@ -84,10 +84,10 @@ class Member extends Model
     //     return $this->belongsTo(Campus::class, 'campus_id', 'id');
     // }
     //can be a witness many times
-    public function witness()
-    {
-        return $this->hasMany(Witness::class, 'member_id', 'id');
-    }
+    // public function witness()
+    // {
+    //     return $this->hasMany(Witness::class, 'member_id', 'id');
+    // }
     //can be a coBorrower many times
     public function co_borrower()
     {

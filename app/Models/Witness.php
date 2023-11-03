@@ -10,16 +10,16 @@ class Witness extends Model
     use HasFactory;
 
     protected $fillable = [
-        'member_id',
         'loan_id',
+        'witness_name',
     ];
     
 
     //wtiness instance is one member
-    public function member()
-    {
-        return $this->belongsTo(Member::class, 'member_id', 'id');
-    }
+    // public function member()
+    // {
+    //     return $this->belongsTo(Member::class, 'member_id', 'id');
+    // }
     public function loan()
     {
         return $this->belongsTo(Loan::class, 'loan_id', 'id');

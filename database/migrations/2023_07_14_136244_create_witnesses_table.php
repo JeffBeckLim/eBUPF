@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('witnesses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            $table->foreignId('member_id')->constrained('members');
+            $table->string('witness_name')->nullable(); //witness name instead of member ID. Not required for witness to be member.
+            // $table->foreignId('member_id')->constrained('members');
             $table->foreignId('loan_id')->constrained('loans');
         });
     }

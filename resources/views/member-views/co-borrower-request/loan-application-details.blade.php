@@ -119,8 +119,7 @@
                         </div>
                         <div class="col-6">
                             @if (!empty($witnesses[0]))
-                                {{$witnesses[0]->member->firstname}}
-                                {{$witnesses[0]->member->lastname}}
+                                {{$witnesses[0]->witness_name}}
                             @else
                                 <i>No Witness Included</i>
                             @endif
@@ -134,8 +133,7 @@
                         </div>
                         <div class="col-6">
                             @if (!empty($witnesses[1]))
-                                {{$witnesses[1]->member->firstname}}
-                                {{$witnesses[1]->member->lastname}}
+                                {{$witnesses[1]->witness_name}}
                             @else
                                 <i>No Witness Included</i>
                             @endif
