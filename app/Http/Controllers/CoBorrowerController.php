@@ -74,10 +74,10 @@ class CoBorrowerController extends Controller
         abort(404);
     }
 
-        $witnesses=Witness::with('member')->where('loan_id', $id)->get();
+        $witnesses=Witness::where('loan_id', $id)->get();
        
         // viewed indicator (in the page a 'NEW' icon is displayed when 'is_viewed' field is null 
-        // when a user views it, then this code si triggred to set date when it was viewed now() ) 
+        // when a user views it, then this code si triggered to set date when it was viewed now() ) 
         if(is_null($loan->is_viewed)){
             $loan->is_viewed = now();
             $loan->save();
