@@ -13,7 +13,32 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin-views.admin-dashboard');
+
+        $member_count = count(User::where('user_type','member')->get());
+
+        $user_total = count(User::all());
+    
+        $admin_count = count(User::where('user_type','admin')->get());
+        $restricted_count = count(User::where('user_type','restricted')->get());
+        $non_member_count = count(User::where('user_type','non-member')->get());
+
+        $membership_total = count(MembershipApplication::all());
+        $membership_pending_count = count(MembershipApplication::where('status', 0)->get());
+        $membership_approved_count = count(MembershipApplication::where('status', 1)->get());
+        $membership_rejected_count = count(MembershipApplication::where('status', 2)->get());
+    
+
+        return view('admin-views.admin-dashboard', compact(
+            'member_count',
+            'user_total',
+            'admin_count',
+            'restricted_count',
+            'non_member_count',
+            'membership_total',
+            'membership_pending_count',
+            'membership_approved_count',
+            'membership_rejected_count',
+        ));
 
     }
 
