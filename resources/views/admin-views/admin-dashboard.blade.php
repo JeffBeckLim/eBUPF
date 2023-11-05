@@ -17,15 +17,22 @@
 
    </style>
    <div class="row">
-      <div class="d-flex align-items-center">
-         <img style="width: 3rem; height: 3rem; object-fit: cover" class="me-1 rounded-circle" src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="icon">
-         <h4 class="fw-bold m-0" style="font-size: 24px">
-            Hello, {{Auth::user()->member->firstname}}!
-         </h4>
+      <div class="col-6">
+         <div class="d-flex align-items-center">
+            <img style="width: 3rem; height: 3rem; object-fit: cover" class="me-1 rounded-circle" src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="icon">
+            <h4 class="fw-bold m-0" style="font-size: 24px">
+               Hello, {{Auth::user()->member->firstname}}!
+            </h4>
+         </div>
+         <h6 class="mt-2 pb-3" style="font-size: 14px">
+            Welcome to eBUPF, your online website for managing BUPF loans.
+         </h6>
       </div>
-      <h6 class="mt-2 pb-3" style="font-size: 14px">
-         Welcome to eBUPF, your online website for managing BUPF loans.
-      </h6>
+      <div class="col-6 text-end"> 
+         <button class="btn btn-outline-secondary rounded-5" disabled style="font-size: 10px">
+            Ver. 1
+         </button>
+      </div>
    </div>
     <div class="row">
        <div class="col-lg-6 ">
@@ -212,34 +219,35 @@
                <table class="table table-borderless border-0 overflow-hidden">
                   <thead>
                     <tr>
-                      <th scope="col">Loan Type</th>
-                      <th scope="col">Interest</th>
-                      <th scope="col">Principal</th>
+                      <th scope="col"></th>
+                      <th scope="col"><i style="color: blue" class="bi bi-layers"></i>
+                        Multi-purpose</th>
+                      <th scope="col"><i style="color: red" class="bi bi-house"></i>
+                        Housing</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       
                       <td> 
-                        <i style="color: blue" class="bi bi-layers"></i>
-                        Multi-purpose
+                        Principal
                      </td>
-                      <td></td>
-                      <td></td>
+                     <td>{{$performing_mpl_principal}}</td>
+                     <td>{{$performing_hsl_principal}}</td>
                     </tr>
                     <tr>
                     
-                      <td><i style="color: red" class="bi bi-house"></i>
-                        Housing
+                      <td>
+                        Interest
                      </td>
-                      <td></td>
-                      <td></td>
+                     <td>{{$performing_mpl_interest}}</td>
+                     <td>{{$performing_hsl_interest}}</td>
                     </tr>
                     <tr>
               
                       <td class="fw-bold">Totals</td>
-                      <td></td>
-                      <td></td>
+                      <td>{{$performing_mpl_principal + $performing_mpl_interest}}</td>
+                      <td>{{$performing_hsl_principal + $performing_hsl_interest}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -247,48 +255,63 @@
             </div>
         </div>
         <div class="col-lg-6">
-         <div class="bg-white border rounded">
-            <h6 class="m-0 fw-bold ps-3 pt-3">
-               Receivables
-            </h6>
-            <div class="table-responsive m-3">
-            <table class="table table-borderless border-0 overflow-hidden">
-               <thead>
-                 <tr>
-                   <th scope="col">Loan Type</th>
-                   <th scope="col">Interest</th>
-                   <th scope="col">Principal</th>
-                 </tr>
-               </thead>
-               <tbody>
-                 <tr>
-                   
-                   <td> 
-                     <i style="color: blue" class="bi bi-layers"></i>
-                     Multi-purpose
-                  </td>
-                   <td></td>
-                   <td></td>
-                 </tr>
-                 <tr>
-                 
-                   <td><i style="color: red" class="bi bi-house"></i>
-                     Housing
-                  </td>
-                   <td></td>
-                   <td></td>
-                 </tr>
-                 <tr>
-           
-                   <td class="fw-bold">Totals</td>
-                   <td></td>
-                   <td></td>
-                 </tr>
-               </tbody>
-             </table>
-             </div>
-         </div>
-     </div>
+            <div class="bg-white border rounded">
+               <div class="row  g-0">
+                  <div class="col-6">
+                     <h6 class="m-0 fw-bold ps-3 pt-3">
+                        Receivables <span class="text-secondary fw-light" style="font-size: 12px">Performing Loans</span>
+                     </h6>
+                  </div>
+                  <div class="col-6 mt-3 px-3 text-end">
+                     <a href="{{route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl'])}}" class="btn btn-outline-primary">
+                        <i class="bi bi-hourglass"></i>
+                     </a>
+                  </div>
+               </div>
+               
+               <div class="table-responsive m-3">
+               <table class="table table-borderless border-0 overflow-hidden">
+                  <thead>
+                  <tr>
+                     <th scope="col"></th>
+                     <th scope="col"><i style="color: blue" class="bi bi-layers"></i>
+                        Multi-purpose</th>
+                     <th scope="col"><i style="color: red" class="bi bi-house"></i>
+                        Housing</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                     
+                     <td> 
+                        Principal
+                     </td>
+                     <td>{{$performing_mpl_principal - $mpl_principal_pay}}</td>
+                     <td>{{$performing_hsl_principal - $hsl_principal_pay}}</td>
+                  </tr>
+                  <tr>
+                  
+                     <td>
+                        Interest
+                     </td>
+                     <td>{{$performing_mpl_interest - $mpl_interest_pay}}</td>
+                     <td>{{$performing_hsl_interest - $hsl_interest_pay}}</td>
+                  </tr>
+                  <tr>
+            
+                     <td class="fw-bold">Totals</td>
+                     <td>
+                        {{ ($performing_mpl_principal - $mpl_principal_pay) + ($performing_mpl_interest - $mpl_interest_pay) }}
+                     </td>
+                     <td>
+                        {{ ($performing_hsl_principal - $hsl_principal_pay) + ($performing_hsl_interest - $hsl_interest_pay) }}
+                     </td>
+                  </tr>
+                  </tbody>
+               </table>
+               </div>
+            </div>
+      </div>
      </div>
 
 </div>
@@ -296,9 +319,9 @@
 
 <script>
 
-   // PIE CHART 1
+      // PIE CHART 1
    var xValues = [ "Performing", "Closed", "Unevaluated"];
-   var yValues = [55, 49, 44];
+   var yValues =  @json($pie_mpl);
    var barColors = [
      "#FF6F19",
      "#E2E2E2",
@@ -336,7 +359,7 @@
 
 // PIE CHART 2
 var xValues3 = [ "Performing", "Closed", "Unevaluated"];
-   var yValues3 = [55, 49, 44];
+   var yValues3 = @json($pie_hsl);
    var barColors = [
       "#FF6F19",
      "#E2E2E2",
@@ -375,15 +398,17 @@ var xValues3 = [ "Performing", "Closed", "Unevaluated"];
 
 // bar char 3
 
-var trackingLabels = ["Received by Staff", "Under Evaluation", "Approved", "Released", "Rejected"];
-var mplData = [10, 8, 10, 12, 10]; // Sample MPL data for each tracking status
-var hslData = [10, 12, 10, 10, 10]; // Sample HSL data for each tracking status
+var trackingLabels = ["Staff", "Analyst", "Approved Exe.", "Check Ready","Check Picked Up", "Rejected"];
+var mplData = @json($bar_mpl); // Sample MPL data for each tracking status
+var hslData = @json($bar_hsl); // Sample HSL data for each tracking status
 var barColorsMpl = [
       
       "#FF6F19",
       "#FF6F19",
       "#FF6F19",
       "#FF6F19",
+      "#FF6F19",
+
       "#1E1E1E",
       
    ];
@@ -393,6 +418,8 @@ var barColorsHsl = [
       "#4C7EFF",
       "#4C7EFF",
       "#4C7EFF",
+      "#4C7EFF",
+
       "#878787",
    ];
 new Chart("myChart3", {

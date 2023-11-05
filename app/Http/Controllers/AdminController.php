@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MembershipApplication;
 use App\Models\User;
 use App\Models\Loan;
+use App\Models\LoanApplicationStatus;
 use App\Models\Member;
 use App\Models\Payment;
 use App\Models\Unit;
@@ -22,11 +23,102 @@ class AdminController extends Controller
         $restricted_count = count(User::where('user_type','restricted')->get());
         $non_member_count = count(User::where('user_type','non-member')->get());
 
-        $membership_total = count(MembershipApplication::all());
+       
         $membership_pending_count = count(MembershipApplication::where('status', 0)->get());
         $membership_approved_count = count(MembershipApplication::where('status', 1)->get());
         $membership_rejected_count = count(MembershipApplication::where('status', 2)->get());
+        $membership_total = count(MembershipApplication::all());
+
+        $performing_mpl_interest = Loan::where('is_active', 1)->where('loan_type_id', 1)->sum('interest');
+        $performing_mpl_principal = Loan::where('is_active', 1)->where('loan_type_id', 1)->sum('principal_amount');
+
+        $performing_hsl_interest = Loan::where('is_active', 1)->where('loan_type_id', 2)->sum('interest');
+        $performing_hsl_principal = Loan::where('is_active', 1)->where('loan_type_id', 2)->sum('principal_amount');
+
     
+        $performing_loans = Loan::where('is_active', 1)->with('payment')->get();
+        
+        $mpl_principal_pay = 0;
+        $mpl_interest_pay = 0;
+        $hsl_principal_pay = 0;
+        $hsl_interest_pay = 0;
+
+        foreach($performing_loans as $performing_loan){
+            foreach($performing_loan->payment as $payment){
+                if($performing_loan->loan_type_id == 1){
+                    $mpl_principal_pay +=$payment->principal;
+                    $mpl_interest_pay +=$payment->interest;
+                }else{
+                    $hsl_principal_pay +=$payment->principal;
+                    $hsl_interest_pay +=$payment->interest;
+                }   
+            }
+        }
+
+
+        // charts 
+        // pie 1
+        $performing_mpl = count(Loan::where('is_active', 1)->where('loan_type_id', 1)->get());
+        $closed_mpl = count(Loan::where('is_active', 2)->where('loan_type_id', 1)->get());
+        $unevaluated_mpl = count(Loan::where('is_active', 0)->where('loan_type_id', 1)->get());
+
+        $pie_mpl = [$performing_mpl, $closed_mpl, $unevaluated_mpl];
+
+        // pie 2
+        $performing_hsl = count(Loan::where('is_active', 1)->where('loan_type_id', 2)->get());
+        $closed_hsl = count(Loan::where('is_active', 2)->where('loan_type_id', 2)->get());
+        $unevaluated_hsl = count(Loan::where('is_active', 0)->where('loan_type_id', 2)->get());
+        
+        $pie_hsl = [$performing_hsl, $closed_hsl, $unevaluated_hsl];
+
+
+        // used in bar chart
+        $mpl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 1)->get();
+        $hsl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 2)->get();
+
+        $loans = Loan::with('loanApplicationStatus')->get();
+
+        // bar chart
+        $staff_mpl = 0;
+        $analyst_mpl=0;
+        $approved_mpl=0;
+        $check_mpl=0;
+        $picked_mpl=0;
+        $rejected_mpl=0;
+
+        $staff_hsl = 0;
+        $analyst_hsl=0;
+        $approved_hsl=0;
+        $check_hsl=0;
+        $picked_hsl=0;
+        $rejected_hsl=0;
+
+        foreach($loans as $loan){
+            foreach($loan->loanApplicationStatus as $status){                
+                if($status->loan_application_state_id == 1){
+                    $loan->loan_type_id == 1 ? $staff_mpl+=1 : $staff_hsl+=1;
+                }
+                else if($status->loan_application_state_id == 2){
+                    $loan->loan_type_id == 1 ? $analyst_mpl+=1 : $analyst_hsl+=1;
+                }
+                else if($status->loan_application_state_id == 3){
+                    $loan->loan_type_id == 1 ? $approved_mpl=1 : $approved_hsl+=1;
+                }
+                else if($status->loan_application_state_id == 4){
+                    $loan->loan_type_id == 1 ? $check_mpl=1 : $check_hsl+=1;
+                }
+                else if($status->loan_application_state_id == 5){
+                    $loan->loan_type_id == 1 ? $picked_mpl=1 : $picked_hsl+=1;
+                }
+                else if($status->loan_application_state_id == 6){
+                    $loan->loan_type_id == 1 ? $rejected_mpl=1 : $rejected_hsl+=1;
+                }
+            }
+        }
+        
+        $bar_mpl = [$staff_mpl, $analyst_mpl, $approved_mpl, $check_mpl, $picked_mpl, $rejected_mpl,];
+        $bar_hsl = [$staff_hsl, $analyst_hsl, $approved_hsl, $check_hsl, $picked_hsl, $rejected_hsl,];
+
 
         return view('admin-views.admin-dashboard', compact(
             'member_count',
@@ -38,6 +130,21 @@ class AdminController extends Controller
             'membership_pending_count',
             'membership_approved_count',
             'membership_rejected_count',
+            'performing_mpl_interest',
+            'performing_mpl_principal',
+            'performing_hsl_interest',
+            'performing_hsl_principal',
+
+            'mpl_principal_pay',
+            'mpl_interest_pay',
+            'hsl_principal_pay',
+            'hsl_interest_pay',
+
+            'pie_mpl',
+            'pie_hsl',
+
+            'bar_mpl',
+            'bar_hsl'
         ));
 
     }
