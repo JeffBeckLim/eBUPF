@@ -5,6 +5,10 @@
     label{
         font-size: small !important;
     }
+    .text-danger{
+        font-size: 14px;
+        margin: 0px;
+    }
 </style>
 <main class="container">
     <div class="row d-flex justify-content-center">
@@ -29,6 +33,12 @@
             <div class="text-center pb-4" style="font-size: small">
                 Let's get you started on your journey to becoming a member!
             </div>
+            <div class="text-center" style="scale: .8">
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+            </div>
             @error('profile_picture')
                 <div class="alert alert-danger" role="alert">
                     <p class="text-danger mt-1"><i style="color: rgb(226, 78, 78)" class="bi bi-exclamation-circle"></i>  {{$message}}</p>
@@ -51,12 +61,7 @@
 
                     </div>
                     <!-- Circles which indicates the steps of the form: -->
-                    <div class="text-center" style="scale: .8">
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                    </div>
+                  
             </form>
 
             <script src="{{asset('js/formWizard.js')}}"></script>
