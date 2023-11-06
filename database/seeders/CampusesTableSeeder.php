@@ -15,31 +15,31 @@ class CampusesTableSeeder extends Seeder
     {
         Campus::create([
             'campus_code' => 'Main',
-            'campus_address' => 'Legazpi'
+            'campus_address' => 'Legazpi West (Main) Campus'
         ]);
         Campus::create([
             'campus_code' => 'East',
-            'campus_address' => 'Legazpi'
+            'campus_address' => 'Legazpi East Campus'
         ]);
         Campus::create([
             'campus_code' => 'Daraga',
-            'campus_address' => 'Daraga'
+            'campus_address' => 'Daraga Campus'
         ]);
         Campus::create([
             'campus_code' => 'Tabaco',
-            'campus_address' => 'Tabaco'
+            'campus_address' => 'Tabaco Campus' 
         ]);
         Campus::create([
             'campus_code' => 'Guinobtan',
-            'campus_address' => 'Guinobatan'
+            'campus_address' => 'Guinobatan Campus'
         ]);
         Campus::create([
             'campus_code' => 'Polangui',
-            'campus_address' => 'Polangui'
+            'campus_address' => 'Polangui Campus'
         ]);
         Campus::create([
             'campus_code' => 'Gubat',
-            'campus_address' => 'Gubat'
+            'campus_address' => 'Gubat Campus'
         ]);
 
     }

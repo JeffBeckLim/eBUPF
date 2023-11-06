@@ -297,6 +297,7 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
+        // dd($request);
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');

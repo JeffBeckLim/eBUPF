@@ -98,4 +98,31 @@
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
             </div>
+            
+{{-- TESTING ADRESSs --}}
+
+{{-- 
+<div class="col-sm-6 mb-3">
+    <label class="form-label">Region *</label>
+    <select name="region" class="form-control form-control-md" id="region"></select>
+    <input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
 </div>
+<div class="col-sm-6 mb-3">
+    <label class="form-label">Province *</label>
+    <select name="province" class="form-control form-control-md" id="province"></select>
+    <input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
+</div>
+<div class="col-sm-6 mb-3">
+    <label class="form-label">City / Municipality *</label>
+    <select name="city" class="form-control form-control-md" id="city"></select>
+    <input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
+</div>
+<div class="col-sm-6 mb-3">
+    <label class="form-label">Barangay *</label>
+    <select name="barangay" class="form-control form-control-md" id="barangay"></select>
+    <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
+</div> --}}
+
+</div> {{-- Last Tag --}}  
+
+{{-- <script src="{{asset('js/ph_address_selector.js')}}" defer></script> --}}
