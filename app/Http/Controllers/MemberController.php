@@ -252,7 +252,7 @@ class MemberController extends Controller
         }
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $member->update($formFields);
 
         if($formFields['middlename'] != null){
@@ -357,9 +357,9 @@ class MemberController extends Controller
 
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $member->update($formFields);
-        
+
 
         if($formFields['middlename'] != null){
             $member->middle_initial = ucfirst($formFields['middlename'][0]);
@@ -448,6 +448,7 @@ class MemberController extends Controller
             ],
             'contact_num' => 'required',
             'address' => 'required',
+            'monthly_salary' => 'required',
         ]);
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
@@ -471,6 +472,7 @@ class MemberController extends Controller
         $user->member->position = $request->position;
         $user->member->contact_num = $request->contact_num;
         $user->member->address = $request->address;
+        $user->member->monthly_salary = $request->monthly_salary;
         $user->member->is_editable = 0;
         $user->member->save();
 

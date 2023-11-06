@@ -75,7 +75,7 @@
             <tr>
                 <th width="15%" rowspan="2" style="text-align: center;">Unit</th>
                 <th width="10%" rowspan="2" style="text-align: center;">No. of Members</th>
-                <th colspan="2" style="text-align: center;">Loan Payments</th>
+                <th colspan="2" style="text-align: center;">{{ $year }} Balances</th>
                 <th rowspan="2" style="text-align: center;">Total</th>
             </tr>
             <tr>
