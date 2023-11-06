@@ -30,6 +30,10 @@
                 <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
               </div>
               <div class="form-group">
+                <label for="monthly_salary" class="fw-bold fs-7" style="color:#595959;">Monthly Salary</label>
+                <input type="number" name="monthly_salary" class="form-control" id="monthly_salary" value="{{ $member->monthly_salary }}">
+              </div>
+              <div class="form-group">
                 <label for="contact_num" class="fw-bold fs-7" style="color:#595959;">Contact Number</label>
                 <input type="number" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
               </div>
