@@ -68,6 +68,14 @@
                     </div>
                     <div class="row">
                         <div class="col-md-7">
+                            <div class="row mt-3">
+                                <div class="col-7 fs-7">
+                                    Loan Amount
+                                </div>
+                                <div class="col-5 fs-7 fw-bold">
+                                    {{ number_format($amount ?? '0.00', 2, '.', ',') }}
+                                </div>
+                            </div>
                             <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Monthly principal
@@ -76,7 +84,15 @@
                                     {{ number_format($monthlyPrincipalAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-2">
+                                <div class="col-7 fs-7">
+                                    Interest
+                                </div>
+                                <div class="col-5 fs-7 fw-bold">
+                                    {{ number_format($totalInterest ?? '0.00', 2, '.', ',') }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Monthly Interest
                                 </div>
@@ -84,7 +100,7 @@
                                     {{ number_format($monthlyInterestAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Monthly Payable
                                 </div>
@@ -92,15 +108,7 @@
                                     {{ number_format($monthlyAmort ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
-                            <div class="row mt-3">
-                                <div class="col-7 fs-7">
-                                    Total Interest
-                                </div>
-                                <div class="col-5 fs-7 fw-bold">
-                                    {{ number_format($totalInterest ?? '0.00', 2, '.', ',') }}
-                                </div>
-                            </div>
-                            <div class="row mt-3">
+                            <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Total Amount
                                 </div>
@@ -108,7 +116,7 @@
                                     {{ number_format($totalAmount ?? '0.00', 2, '.', ',') }}
                                 </div>
                             </div>
-                            <div class="row mt-3">
+                            <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Total Months
                                 </div>
@@ -118,7 +126,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <canvas id="myPieChart" style="max-width: 300px; height: 300px; margin: 0 auto;"></canvas>
+                            <canvas id="myPieChart" style="max-width: 225px; height: 225px; margin: 0 auto;"></canvas>
                         </div>
                         <div class="pt-2">
                                 <a href="#" class="btn d-flex justify-content-center align-items-center fs-7 text-white"

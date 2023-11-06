@@ -6,14 +6,14 @@
     <div class="row mt-2">
         <div class="container">
             <div class="row border  mx-4 bg-white rounded p-4">
-                
+
                 @if (session('passed'))
                 <div class="col-12">
                     <div class="alert alert-dismissible fade show" role="alert" style="background-color: #e8cfff; border: 1px solid #994ede">
                         {{session('passed')}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                </div>    
+                </div>
                 @endif
                 @if (session('failed'))
                 <div class="col-12">
@@ -21,14 +21,14 @@
                         {{session('failed')}}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                </div>    
+                </div>
                 @endif
-                
+
                 <div class="col-12">
                     <h5 class="fw-bold p-3"><i style="color: #994ede" class="bi bi-person-plus-fill"></i> Create Member Account</h5>
 
                     <h6 class="ms-3 text-secondary pb-3" style="font-size: 12px">
-                        By creating an account here, the account will automatically become a member of BUPF. The account will be ready to use by any client member in BUPF. 
+                        By creating an account here, the account will automatically become a member of BUPF. The account will be ready to use by any client member in BUPF.
                     </h6>
                     <form action="{{route('admin.members.save')}}" method="POST">
                         @csrf
@@ -82,7 +82,7 @@
                                 <div class="col-6 ">
                                     <label for="contact_num">Contact Number <span class="text-danger fw-bold">*</span></label>
                                     <div class="input-group ">
-                                   
+
                                     <span class="input-group-text" id="inputGroupPrepend" style="background-color: #ffffff">+63</span>
                                     <input class="form-control" type="number" name="contact_num" id="contact_num" aria-describedby="inputGroupPrepend"  pattern="9[0-9]{10}" title="Please enter 10 digits starting with '9'."  value="{{old('contact_num')}}" required>
                                     @error('contact_num')
@@ -99,7 +99,7 @@
                                         <h6 style="font-size: 14px" class="text-danger pt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</h6>
                                     @enderror
                                 </div>
-                                
+
                                 <h6 class="pt-3 fw-bold">
                                     Employment Information
                                 </h6>
@@ -114,7 +114,7 @@
                                 <div class="col-4 ">
                                     <label for="unit_id">Unit <span class="text-danger fw-bold">*</span></label>
                                     <select class="form-control form-select" name="unit_id" id="unit_id">
-                                        <option selected>ex. BUCS</option>
+                                        <option selected disabled>ex. BUCS</option>
                                         @foreach ($units as $unit)
                                             <option value="{{$unit->id}}" {{old('unit_id') == $unit->id? 'selected' : ''  }}>{{$unit->unit_code}}</option>
                                         @endforeach
@@ -135,10 +135,10 @@
                         </div>
                         <div class="col-lg-6 ">
                             <div class="row">
-                            
+
                                 <div class="col-6">
                                     <label for="monthly_salary">Monthly Salary <span class="text-danger fw-bold">*</span></label>
-                                    <input class="form-control" type="number" name="monthly_salary" id="monthly_salary" value="{{old('monthly_salary')}}"> 
+                                    <input class="form-control" type="number" name="monthly_salary" id="monthly_salary" value="{{old('monthly_salary')}}">
                                     @error('monthly_salary')
                                         <h6 style="font-size: 14px" class="text-danger pt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</h6>
                                     @enderror
@@ -170,7 +170,7 @@
                                     @enderror
                                 </div>
 
-                                
+
 
                                 <h6 class="pt-3 fw-bold">
                                     User Account Credentials <span class="text-danger fw-bold" style="font-size: 12px">All fields here required.</span>
@@ -214,13 +214,13 @@
                 </div>
             </div>
         </div>
-    
-    
+
+
     </div>
 </div>
 <script>
     const numericInput = document.getElementById('contact_num');
-  
+
     numericInput.addEventListener('input', function () {
       const value = numericInput.value;
       if (!/9[0-9]{0,10}/.test(value) || value.length != 10 || value[0] != 9) {
