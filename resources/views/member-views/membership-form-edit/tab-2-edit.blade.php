@@ -30,12 +30,8 @@
 
         <div class="col-6">
             <label   for="">Position</label>
-            <select name="position" class="form-select form-control validate" >
-                <option value="faculty" {{ Auth::user()->member->position == 'faculty' ? 'selected' : '' }}>faculty</option>
-                <option value="dept. head" {{ Auth::user()->member->position ? 'selected' : '' }}>dept. head</option>
-                <option value="chairman" {{Auth::user()->member->position ? 'selected' : '' }}>chairman</option>
-                
-            </select>
+            
+            <input class="form-control validate" name="position" value="{{Auth::user()->member->position}}">
         </div>
         @error('position')
             <p class="text-danger mt-1">{{$message}}</p>

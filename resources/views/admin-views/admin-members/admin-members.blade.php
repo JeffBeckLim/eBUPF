@@ -18,12 +18,12 @@
             @endif
            
             <div class="adminbox m-2 mb-5">
-                <div class="d-flex">
+                <div class="d-flex mb-3">
                     <div class="d-flex membership-app-header1 ">
                         <img src="{{asset('icons/admin-icons/members.svg')}}" alt="" width="50px" height="58px">
                         <p style="padding-left: 10px; padding-top: 5px;" class="d-flex justify-content-center align-items-center"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Members</span></p>
                     </div>
-                    <div class=" px-2 pt-1 rounded" style="width: 7rem">
+                    <div class=" px-2 pt-1 rounded border me-2" style="width: 7rem">
                         <h6 style="font-size: 12px">Total</h6>
                         <h4 class="text-center fw-bold">{{count($memberUsers)}}</h4>
                     </div>
@@ -53,13 +53,14 @@
                         <table class="table admin-table table-striped " id="myTable">
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
-                                    <th>ID <i class="fw-light">member</i> </th>
+                                    <th><h6 class="fw-bold" style="font-size: 12px">MEMBER</h6>ID</th>
                                     <th>Name</th>
                                     <th>Campus</th>
                                     <th>Unit</th>
                                     <th>Address</th>
                                     <th>Contact</th>
                                     <th>Addtnl. Loan</th>
+                                    <th></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -112,6 +113,9 @@
 
                                         @endif
                                          --}}
+                                    <td>
+                                        <a class="btn btn-link" href="{{route('admin.members.update', $user->member->id)}}"><i class="bi bi-pencil-square"></i>
+                                    </td>
                                     </td>
                                     <td class="text-center">
                                         <div class="dropdown">

@@ -25,8 +25,7 @@
                             
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
-                                    <th>ID</th>
-                                    <th></th>
+                                    <th><h6 class="fw-bold" style="font-size: 12px">MEMBER</h6> ID</th>
                                     <th>Name</th>
                                     <th>Membership Application</th>
                                     <th>Email</th>
@@ -40,10 +39,7 @@
                              
                                 @foreach ($users as $user)
                                 <tr>
-                                        <td>{{$user->id}}</td>
-                                        <td>
-                                            <a class="btn btn-link" href=""><i class="bi bi-pencil-square"></i>
-                                        </td>
+                                        <td>{{$user->member->id}}</td>
                                         <td>{{$user->member->firstname}} {{$user->member->lastname}}</td>
                                         <td>
                                             @if($user->member->membershipApplication)

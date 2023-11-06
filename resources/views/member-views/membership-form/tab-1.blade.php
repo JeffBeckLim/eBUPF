@@ -45,7 +45,7 @@
                 @enderror
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
-                    <input class="form-control validate" name="place_of_birth" value="{{old('place_of_birth')}}">
+                    <input class="form-control" name="place_of_birth" value="{{old('place_of_birth')}}">
                 </div>
                 @error('place_of_birth')
                     <p class="text-danger mt-1">{{$message}}</p>
@@ -72,7 +72,13 @@
                 </div>
                 <div class="col-6 pe-1">
                     <label class="fw-bold" for="contact_num">Contact Number</label>
-                    <input type="number" placeholder="ex. 09150012457" class="form-control validate" name="contact_num" value="{{old('contact_num')}}">
+                    
+                    <div class="input-group ">
+                    <span class="input-group-text" id="inputGroupPrepend" style="background-color: #ffffff">+63</span>
+
+                    <input type="number" placeholder="ex. 9150012457" class="form-control validate" name="contact_num" value="{{old('contact_num')}}" id="contact_num" pattern="9[0-9]{10}" title="Please enter 10 digits starting with '9'." aria-describedby="inputGroupPrepend">
+
+                    </div>
                 </div>
                 {{-- @error('firstname')
                     <p class="text-danger mt-1">{{$message}}</p>

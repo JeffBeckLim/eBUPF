@@ -27,6 +27,8 @@
      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
 
+    {{-- CHARTS .js --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   </head>
 
 
@@ -132,7 +134,7 @@
 
                     {{-- <img src="{{asset('../icons/admin-icons/members.svg')}}" style="width: 1.1rem; margin-left: 10px;"> --}}
                       <i style="font-size: 20px; color: #C066DF; margin-left: 10px;" class="bi bi-people{{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? '-fill' : ''}} me-2"></i>
-                      <p class="fw-7 my-auto {{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? 'fw-bold' : ''}} ">Members</p>
+                      <p class="fw-7 my-auto {{Route::is('admin.membership-application') || Route::is('admin.all.users') || Route::is('admin.members')? 'fw-bold' : ''}} ">Users</p>
                   </button>
                 </p>
                 <div id="flush-collapseMember" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
