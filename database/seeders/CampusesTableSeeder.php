@@ -30,7 +30,7 @@ class CampusesTableSeeder extends Seeder
             'campus_address' => 'Tabaco Campus' 
         ]);
         Campus::create([
-            'campus_code' => 'Guinobtan',
+            'campus_code' => 'Guinobatan',
             'campus_address' => 'Guinobatan Campus'
         ]);
         Campus::create([

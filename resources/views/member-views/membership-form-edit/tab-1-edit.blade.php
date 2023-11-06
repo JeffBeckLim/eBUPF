@@ -4,11 +4,13 @@
                 <p class="m-0 fw-bold">Your Name</p>
                 <div class="row g-0 ">
                     <div class="col pe-1">
-                        <label for="lname">First name</label>
+                        <label for="lname"></label>
+                            First name
+                        </label>
                         <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}">
                     </div>
                     @error('firstname')
-                        <p class="text-danger mt-1">{{$message}}</p>
+                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                      @enderror
                     
                     <div class="col ">
@@ -16,15 +18,17 @@
                         <input type="text" class="form-control w-100" name="middlename" value="{{Auth::user()->member->middlename}}">
                     </div>
                     @error('middle_initial')
-                        <p class="text-danger mt-1">{{$message}}</p>
+                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
 
                     <div class="col-12  pe-1 pb-3">
-                        <label for="lname">Last name</label>
+                        <label for="lname">
+                            Last name
+                        </label>
                         <input id="myForm" class="form-control validate"  name="lastname" value="{{Auth::user()->member->lastname}}">
                     </div>
                     @error('lastname')
-                        <p class="text-danger mt-1 ">{{$message}}</p>
+                        <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
                 </div>
 
@@ -32,27 +36,32 @@
 
                 <div class="row g-0 ">
                     <div class="col-12 pb-1 pb-3">
-                        <label class="fw-bold" for="address">Address</label>
+                        <label class="fw-bold" for="address">
+                            Address
+                        </label>
                         <input class="form-control validate" name="address" value="{{Auth::user()->member->address}}">
+                        @error('address')
+                            <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                        @enderror
                     </div>
                 </div>
-                @error('address')
-                    <p class="text-danger mt-1">{{$message}}</p>
-                @enderror
+                
 
                 <div class="col-6 pe-1 pb-3">
-                    <label class="fw-bold" for="birthday">Date of Birth</label>
+                    <label class="fw-bold" for="birthday"> Date of Birth
+                    </label>
                     <input class="form-control  validate" type="date" name="date_of_birth" value="{{Auth::user()->member->date_of_birth}}">
+                    @error('date_of_birth')
+                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                    @enderror
                 </div>
-                @error('date_of_birth')
-                    <p class="text-danger mt-1">{{$message}}</p>
-                @enderror
+                
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
                     <input class="form-control validate" name="place_of_birth" value="{{Auth::user()->member->place_of_birth}}">
                 </div>
                 @error('place_of_birth')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="civilStatus">Civil Status</label>
@@ -68,7 +77,7 @@
                     </select>
                 </div>
                 @error('civil_status')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
                 <div class="col-6 pb-1">
                     <label class="fw-light" for="spouse">Name of Spouse</label>
@@ -78,7 +87,8 @@
                     @endif>
                 </div>
                 <div class="col-6 pe-1">
-                    <label class="fw-bold" for="contact_num">Contact Number</label>
+                    <label class="fw-bold" for="contact_num">Contact Number
+                    </label>
 
                     <div class="input-group ">
                         <span class="input-group-text" id="inputGroupPrepend" style="background-color: #ffffff">+63</span>
@@ -99,11 +109,14 @@
                     </select>
                 </div>
                 @error('sex')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
 
                 
             </div>
 
             
+{{-- <button class="btn" type="submit">
+    submit
+    </button> --}}
 </div>
