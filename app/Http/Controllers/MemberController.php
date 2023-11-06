@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loan;
 use App\Models\Unit;
 use App\Models\User;
-use App\Models\Loan;
 use App\Models\Campus;
 use App\Models\Member;
-use App\Models\CoBorrower;
 use App\Models\Payment;
-use App\Models\LoanApplicationState;
-use App\Models\LoanApplicationStatus;
 use App\Models\Witness;
+use App\Models\CoBorrower;
 use App\Rules\EmailDomain;
 use App\Models\Beneficiary;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\LoanApplicationState;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\LoanApplicationStatus;
 use App\Models\MembershipApplication;
 use App\Models\BeneficiaryRelationship;
 use Illuminate\Support\Facades\Validator;
@@ -297,7 +298,6 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
-        
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -314,7 +314,7 @@ class MemberController extends Controller
             'middlename'=> 'nullable',
             'middle_initial'=> 'nullable',
 
-            'contact_num'=> 'required',
+            'contact_num'=> 'nullable',
 
             'address'=> 'required',
             'date_of_birth'=> 'required',
@@ -487,7 +487,26 @@ class MemberController extends Controller
            return redirect('/member/membership-form/edit-download');
         }
    }
-//    public function applyLoan(){
-//        return view('/member-views/apply-loan');
-//     }
+
+   public function changePassword(Request $request, $member_id){	
+
+    $request->validate([	
+        'old_password' => 'required',	
+        // 'password'=>'required',	
+        'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],	
+    ]);	
+
+    $user = Auth::user();	
+    if (!Hash::check($request->old_password, $user->password)) {	
+        return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');	
+    }	
+
+    $user->password = Hash::make($request->password);	
+    $user->save();	
+
+    return redirect()->route('member.profile')->with('message', 'Password changed successfully.');	
+
 }
+
+
+}// last tag
