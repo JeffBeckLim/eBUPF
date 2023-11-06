@@ -13,6 +13,9 @@
                 
                 <div class="card-header fw-bold bg-white border-0 text-center fs-5">
                     {{ __('Verify Your Email Address') }}
+                    <h6>
+                        {{Auth::user()->email}}
+                    </h6>
                 </div>
                 <div class="row border g-0 mx-4 ">
                     

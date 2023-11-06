@@ -1,5 +1,6 @@
 <div class="tab g-0">
     <div class="row g-0" >
+        
                 <p class="m-0 fw-bold">Your Name</p>
                 <div class="row g-0 ">
                     <div class="col pe-1">
@@ -100,5 +101,9 @@
                 @error('sex')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
+
+                
             </div>
+
+            
 </div>
