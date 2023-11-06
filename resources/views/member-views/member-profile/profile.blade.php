@@ -5,7 +5,6 @@
 <main style="margin: 25px 20px 20px 20px;">
 
     <div class="bg-white rounded pt-1">
-
         @if($member->is_editable == 1)
             <div class="profile-note" style="text-align: justify;">
                 Note that you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes.
@@ -16,27 +15,66 @@
             </div>
         @endif
 
-        @if(session('message'))
-            <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">
-                {{session('message')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
-        @if(count($errors) != 0)
+        <div class="mt-2">
+            @if (session('fail'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{session('fail')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
-            @foreach ($errors->all() as $error )
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{$error}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            @endforeach
-        @endif
+            @if(session('message'))
+                <div class="alert alert-primary alert-dismissible fade show mt-1" role="alert">
+                    {{session('message')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if(count($errors) != 0)
+                @foreach ($errors->all() as $error )
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{$error}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endforeach
+            @endif
+        </div>
+
         @if (Auth::user()->email_verified_at == null)
             <div class="alert alert-warning mt-3" style="font-size: small">
                 Your Email <strong>{{Auth::user()->email}}</strong> is not yet verified. Go to <a href="/verify/email">Verify Email</a>
             </div>
         @endif
-        <div class="profile-tag">
+
+        <div style="padding: 10px 15px 0 15px;">
+            <div class="col-12 p-2 rounded shadow" style="background-image: url({{ asset('assets/core-feature-bg.png') }}); filter: saturate(200%);">
+                <div class="row">
+                    <div class="col-3 text-end">
+                        <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid m-2" style="object-fit:cover; width: 8rem; height: auto; border: 4px solid white;">
+                    </div>
+                    <div class="col-9 my-auto text-white p-2" style="text-shadow: 1px 1px 4px rgb(46, 46, 46);">
+                        <span>
+                            <div class="fw-bold" style="font-size: 1.1rem; ">
+                                {{ Auth::user()->member->firstname}}
+                                {{ Auth::user()->member->middle_initial}}.
+                                {{ Auth::user()->member->lastname}}
+                                @if ($member->is_editable == 1)
+                                    <a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a>
+                                @else
+                                    <a href="#" id="profileOpenModalLink" style="pointer-events: none; cursor: not-allowed; color: #ffffff;"><i class="bi bi-pencil-square fs-6" style="color: #dddddd;"></i></a>
+                                @endif
+                            </div>
+                        </span>
+                        <div><i class="bi bi-person-fill"></i>
+                            <span style="font-size: 0.9rem">{{ ucfirst($member->position) }}</span>
+                        </div>
+                        <div><i class="bi bi-building-fill"></i>
+                            <span style="font-size: 0.9rem">BU{{$unit->unit_code}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       {{--  <div class="profile-tag">
             <img src="{{ asset('assets/core-feature-bg.png') }}" alt="tag" width="100%" style="height: 190px;">
 
             <div class="profile-tag-details">
@@ -51,7 +89,7 @@
                 <p class="profile-position"><i class="bi bi-person-fill"></i> &nbsp;{{ ucfirst($member->position) }}</p>
                 <p class="profile-college"><i class="bi bi-building-fill"></i> &nbsp;BU{{$unit->unit_code}}</p>
             </div>
-        </div>
+        </div> --}}
         <div class="row gap-4 profile-row" style="display: flex;
         align-items: center;
         justify-content: center;
@@ -79,7 +117,7 @@
                     </span></p>
 
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn bu-orange w-100 mt-2" type="button">
+                        <button class="btn bu-orange w-100" type="button">
                             <a href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}" class="fw-bold fs-7 text-white text-decoration-none">Download Membership Form</a>
                         </button>
                     </div>
@@ -91,7 +129,7 @@
                     <p class="mt-3 fw-bold fs-6" style="color: #393939">Personal Information</p>
                 </div>
 
-                <div class="row fs-7" style="margin: 15px 10px; color: #393939;">
+                <div class="row fs-7" style="color: #393939; margin-top: 10px;">
                     <div class="col-5">
                         <p><span class="fw-bold">Name :</span></p>
                     </div>
@@ -132,16 +170,27 @@
                     <div class="col-5">
                         <p><span class="fw-bold">Birthdate :</span></p>
                     </div>
-                    <div class="col-7" style="margin-bottom: 37px">
+                    <div class="col-7">
                         <p><span>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $member->date_of_birth)->format('F j, Y') }}</span></p>
+                    </div>
+                    <div class="col-5">
+                        <p><span class="fw-bold">Civil Status :</span></p>
+                    </div>
+                    <div class="col-7">
+                        <p><span>{{$member->civil_status}}</span></p>
+                    </div>
+                    <div class="col-5">
+                        <a href="#edit" class="btn d-flex justify-content-center align-items-center fs-7 text-white" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                            <span style="border-radius: 5px;background: #0092D1; padding: 8px 15px; width: 100%; font-weight: bold;">Change password</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     {{-- Contains the Modal for editing the Profile --}}
     @include('member-views.member-profile.profile-updateModal')
+    @include('member-views.member-profile.change-passwordModal')
 
 </main>
 

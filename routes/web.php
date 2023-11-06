@@ -236,6 +236,9 @@ use App\Models\Penalty;
     // Update Profile
     Route::post('/member/profile/update/{id}', [MemberController::class, 'profileUpdate'])->middleware('auth','member.access')->name('member.profile.update');
 
+    // Change Password
+    Route::post('/member/profile/change-password/{id}', [MemberController::class, 'changePassword'])->middleware('auth','member.access')->name('member.change.password');
+
     //Show Membership Form
     Route::get('/member/membership-form', [MemberController::class,'membershipForm']);
 

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\MembershipApplication;
 use App\Models\BeneficiaryRelationship;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -480,6 +481,26 @@ class MemberController extends Controller
            return redirect('/member/membership-form/edit-download');
         }
    }
+
+   public function changePassword(Request $request, $member_id){
+
+        $request->validate([
+            'old_password' => 'required',
+            // 'password'=>'required',
+            'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+        ]);
+
+        $user = Auth::user();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('member.profile')->with('message', 'Password changed successfully.');
+
+    }
 //    public function applyLoan(){
 //        return view('/member-views/apply-loan');
 //     }
