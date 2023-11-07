@@ -267,7 +267,7 @@ class MemberController extends Controller
             $request->city_text != null &&
             $request->barangay_text != null
             ){
-                $member->address = $request->region_text.",".$request->province_text.",".$request->city_text.",".$request->barangay_text;
+                $member->address = $request->region_text.", ".$request->province_text.", ".$request->city_text.", ".$request->barangay_text;
                 $member->save();
             }
 
@@ -379,7 +379,7 @@ class MemberController extends Controller
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
         
-        $address = $formFields['barangay_text'].",".$formFields['city_text'].",".$formFields['province_text'].",".$formFields['region_text'];
+        $address = $formFields['barangay_text'].", ".$formFields['city_text'].", ".$formFields['province_text'].", ".$formFields['region_text'];
         $formFields['address'] = $address;
 
         $member->update($formFields);

@@ -181,7 +181,6 @@ class AdminLoanApplicationController extends Controller
         $loan = Loan::where('id',$id)->with('loanApplicationStatus')->first();
 
         $loanApp = LoanApplicationStatus::where('loan_id',$loan->id)->get();
-        dd($loanApp);
 
         if($request->is_active ==  1){
 
@@ -327,12 +326,37 @@ class AdminLoanApplicationController extends Controller
     public function createLoanApplicationStatus(Request $request, $loan_id){
         
         //Validate if loan exists
-        $loan = Loan::findOrFail($loan_id);
-        
+        $loan = Loan::findOrFail($loan_id);    
         $amortization = Amortization::find($loan->amortization_id);
+        $loan_app_status = LoanApplicationStatus::where('loan_id', $loan->id)->get();
         
-        
+        // Validate Make sure Adding Status are in squence
+        $statuses = [];
+        foreach($loan_app_status as $loan_status){
+            array_push($statuses, $loan_status->loan_application_state_id );
+        }
+        if($request->loan_application_state_id == 2){
+            if(!in_array(1,$statuses)){
+                return back()->with('status_danger', 'Add status 1 first before adding status 2.');
+            }
+        }
+        if($request->loan_application_state_id == 3){
+            if(!in_array(2,$statuses)){
+                return back()->with('status_danger', 'Add status 2 first before adding status 3.');
+            }
+        }
+        if($request->loan_application_state_id == 4){
+            if(!in_array(3,$statuses)){
+                return back()->with('status_danger', 'Add status 3 first before adding status 4.');
+            }
+        }
+        if($request->loan_application_state_id == 5){
+            if(!in_array(4,$statuses)){
+                return back()->with('status_danger', 'Add status 4 first before adding status 5.');
+            }
+        }
 
+        // Assure that before adding status 5, amortization is complete
         if($request->loan_application_state_id == 5){
             if($amortization == null){
                 return back()->with('status_danger', 'Please add amortization details first before adding "check picked up" status.');
@@ -343,6 +367,7 @@ class AdminLoanApplicationController extends Controller
                 return back()->with('status_danger', 'Please add the interest value of this loan first.');
             }
         }
+        
      
         $formFields = $request->validate([
             'loan_application_state_id' => 'required',
@@ -372,7 +397,12 @@ class AdminLoanApplicationController extends Controller
         if($new_loan_status->loan_application_state_id == 5){
             $loan->is_active = 1;
             $loan->save();
-            return back()->with('success', 'New status added successfully and set as Performing Loan');
+            return back()->with('success', 'New status added successfully and set as Performing Loan.');
+        }
+        elseif($new_loan_status->loan_application_state_id == 6){
+            $loan->is_active = 2;
+            $loan->save();
+            return back()->with('status_danger', 'Loan has been rejected and has been set to CLOSED.');
         }
 
         return back()->with('success', 'New status added successfully!');

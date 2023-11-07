@@ -157,14 +157,19 @@
     <div class="row mt-2">
         <div class="col-lg-6">
             <div class="bg-white h-100 border rounded    g-0">
+             
                <div class="row  g-0 h-100">
                   
-                     <div class="col-6 ps-3 pt-3"> 
+                     <div class="col-9 ps-3 pt-3"> 
                         <h6 class=" fw-bold">
                            Loan Applications
+                          
                         </h6>
+                        <span class="fw-light m-0 p-0" style="font-size: 12px">
+                           <i class="bi bi-info-circle"></i> Loans here are those with APPROVED status.
+                        </span>
                      </div>  
-                     <div class="col-6 text-end pe-3 pt-3"> 
+                     <div class="col-3 text-end pe-3 pt-3"> 
                         <span>
                            <a href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-primary">
                               <i class="bi bi-layers"></i>
@@ -212,8 +217,10 @@
      <div class="row  mt-2">
         <div class="col-lg-6">
             <div class="bg-white border rounded">
+               
                <h6 class="m-0 fw-bold ps-3 pt-3">
                   Performing Loans
+                  
                </h6>
                <div class="table-responsive m-3">
                <table class="table table-borderless border-0 overflow-hidden">
@@ -312,7 +319,12 @@
                </div>
             </div>
       </div>
+
+
+      
      </div>
+
+     
 
 </div>
 

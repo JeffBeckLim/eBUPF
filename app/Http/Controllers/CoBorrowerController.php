@@ -31,7 +31,12 @@ class CoBorrowerController extends Controller
 
         // Get all the Loans with CoBorrowers, where in the member ID in the CO-Borrower table must match 
         // the id of the member logged in
-        $requests = CoBorrower::with('Loan')->where('member_id', Auth::user()->member->id)->get();
+        $requests = CoBorrower::with('Loan')
+        ->where('member_id', Auth::user()->member->id)
+        ->whereHas('Loan', function($query){
+            $query->where('deleted_at', null);
+        })
+        ->get();
         
         // intialize the array, this will store the loan associated with the Principal Borrowers data
         $loans=[];
@@ -40,21 +45,6 @@ class CoBorrowerController extends Controller
             // Hindi man ata to nagagamit na Member, and Member.units.campuses data
             $loans = CoBorrower::with(['Member', 'Member.units.campuses', 'Loan.LoanType', 'Loan.Member.units.campuses',])
                 ->whereIn('id', $loanIds)->get();
-
-                   // $loans = Loan::with(['Member', 'Member.units', 'LoanType'])
-                    //     ->whereIn('id', $loanIds)
-                    //     ->get();
-
-                        // foreach($requests as $request){
-
-                    //     // get the loans of the Co-borrower and the Principal Borrowers Details
-                    //     $temp = Loan::with('Member')->where('id', $request->loan->id)->get();
-
-                    //     // Eager loading units  
-                    //     $temp[0]->Member->load('units');
-                        
-                    //     array_push($loans, $temp);
-                    // }
         }
         // SORT LOANS FROM THE LATEST TO THE OLDEST
         $loans = collect($loans)->sortByDesc('created_at')->values()->all();

@@ -32,12 +32,18 @@ return new class extends Migration
             $table->integer('term_years');
 
             $table->integer('is_visible')->nullable();
+
             $table->integer('is_active')->nullable();
 
             $table->timestamp('is_viewed')->nullable();
             
 
             $table->foreignId('penalty_id')->nullable()->constrained('penalties');
+
+            $table->timestamp('deleted_at')->nullable();
+
+            $table->integer('last_edited_by')->nullable();
+
             // campus_id_index not added 
             // units_id_index not added 
         });

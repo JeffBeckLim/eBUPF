@@ -360,16 +360,18 @@ class LoanApplicationController extends Controller
                 return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
             }
             else{
-                $witnesses = Witness::where('loan_id' , $id)->with('loan')->get();
+                // $witnesses = Witness::where('loan_id' , $id)->with('loan')->get();
                 $loan = Loan::find($id);
 
-                foreach ($witnesses as $witness) {
-                    $witness->delete();
-                }
-                $co_borrower->delete();
-                $loan->delete();
+                // foreach ($witnesses as $witness) {
+                //     $witness->delete();
+                // }
+                // $co_borrower->delete();
+                $loan->deleted_at = now();
+                $loan->is_active = 2;
+                $loan->save();
 
-                return back()->with('passed' ,'Loan Application Cancelled: Loan Application has been deleted.');
+                return back()->with('passed' ,'Loan Application Cancelled.');
             }
         }
 
