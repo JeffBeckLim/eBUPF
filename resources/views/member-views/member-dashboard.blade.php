@@ -12,7 +12,7 @@
                                 @if($inActiveLoan)
                                     <div class="card" style="color: #545454; padding: 10px; margin-bottom: 10px;">
                                         <div class="d-flex">
-                                            <img width="20" height="20" src="https://img.icons8.com/sf-regular/48/545454/high-priority.png"  alt="alert"/><span class="fw-bold" style="font-size: 12px; padding-top: 1px;"> Your loan application is now being reviewed by our BUPF Staff. You won't be able to apply for another loan.</span>
+                                            <img width="20" height="20" src="https://img.icons8.com/sf-regular/48/545454/high-priority.png"  alt="alert"/><span class="fw-bold" style="font-size: 12px; padding-top: 1px;"> You have a pending loan application. You won't be able to apply for another loan.</span>
                                         </div>
                                     </div>
                                 @endif

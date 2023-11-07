@@ -42,7 +42,6 @@
         'loan.loanApplicationStatus.loanApplicationState',
         'loan.loanType'
     )
-    ->where('accept_request', '1') // Get loans accepted by coBorrower
     ->whereHas('loan', function ($query) {
         $query->where(function ($query) {
             $query->where('member_id', Auth::user()->member->id)

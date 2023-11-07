@@ -858,14 +858,14 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; font-size: 14px; margin-top: 15px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+            {{ $witnesses[0] }}
+        </div>
+        <div style="display: table-cell; width: 20%;">
 
         </div>
-        <div style="display: table-cell; width: 15%;">
-
-        </div>
-        <div style="display: table-cell; width: 45%; font-size: 14px; padding-left: 50px;">
-            _______________________________
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+            {{ $witnesses[1] }}
         </div>
     </div>
 

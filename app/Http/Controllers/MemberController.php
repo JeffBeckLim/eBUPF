@@ -99,7 +99,6 @@ class MemberController extends Controller
             'loan.loanApplicationStatus.loanApplicationState',
             'loan.loanType'
         )
-        ->where('accept_request', '1') // Get loans accepted by coBorrower
         ->whereHas('loan', function ($query) {
             $query->where(function ($query) {
                 $query->where('member_id', Auth::user()->member->id)
@@ -252,7 +251,7 @@ class MemberController extends Controller
         }
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $member->update($formFields);
 
         if($formFields['middlename'] != null){
@@ -357,9 +356,9 @@ class MemberController extends Controller
 
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $member->update($formFields);
-        
+
 
         if($formFields['middlename'] != null){
             $member->middle_initial = ucfirst($formFields['middlename'][0]);
@@ -488,23 +487,23 @@ class MemberController extends Controller
         }
    }
 
-   public function changePassword(Request $request, $member_id){	
+   public function changePassword(Request $request, $member_id){
 
-    $request->validate([	
-        'old_password' => 'required',	
-        // 'password'=>'required',	
-        'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],	
-    ]);	
+    $request->validate([
+        'old_password' => 'required',
+        // 'password'=>'required',
+        'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+    ]);
 
-    $user = Auth::user();	
-    if (!Hash::check($request->old_password, $user->password)) {	
-        return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');	
-    }	
+    $user = Auth::user();
+    if (!Hash::check($request->old_password, $user->password)) {
+        return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');
+    }
 
-    $user->password = Hash::make($request->password);	
-    $user->save();	
+    $user->password = Hash::make($request->password);
+    $user->save();
 
-    return redirect()->route('member.profile')->with('message', 'Password changed successfully.');	
+    return redirect()->route('member.profile')->with('message', 'Password changed successfully.');
 
 }
 
