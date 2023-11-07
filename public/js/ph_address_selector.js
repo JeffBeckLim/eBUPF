@@ -1,4 +1,6 @@
 console.log("PH Address Selector is now running");
+
+
 var my_handlers = {
     // fill province
     fill_provinces: function() {
@@ -147,6 +149,8 @@ $(function() {
     // load region
     let dropdown = $('#region');
     dropdown.empty();
+
+
     dropdown.append('<option selected="true" disabled>Choose Region</option>');
     dropdown.prop('selectedIndex', 0);
     const url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json';

@@ -34,21 +34,62 @@
                     </div>
                   
                 </div>
-                <div class="row g-0 ">
-                    <div class="col-12 pb-1 pb-3">
+                
+
+
+                
+                {{-- Adress Selector --}}
+                <div class="row g-0 border-bottom" id="edit_address">
+                    {{-- <div class="col-12 pb-1 pb-3">
                         <label class="fw-bold" for="address">
-                            
                             Address
                         </label>
                         <input class="form-control validate" name="address" value="{{old('address')}}">
                         @error('address')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
-                    </div>
-                </div>
+                    </div> --}}
+                    <label class="fw-bold" for="address">
+                        Address
+                    </label>                    
+                        <div class="col-sm-6 mb-3 pe-1" >
+                            <label class="form-label">Region *</label>
+                            <select name="region" class="form-control form-control-md validate" id="region"></select>
+                            <input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
+                            @error('region_text')
+                                <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 ">
+                            <label class="form-label">Province *</label>
+                            <select name="province" class="form-control form-control-md validate" id="province" disabled></select>
+                            <input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
+                            @error('province_text')
+                                <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3 pe-1">
+                            <label class="form-label">City / Municipality *</label>
+                            <select name="city" class="form-control form-control-md validate" id="city" disabled></select>
+                            <input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
+                            @error('city_text')
+                                <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label">Barangay *</label>
+                            <select name="barangay" class="form-control form-control-md validate" id="barangay" disabled></select>
+                            <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
+                            @error('<barangay_text></barangay_text>')
+                                <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                            @enderror
+                        </div>  
+                </div> {{-- last row tag for address--}}
               
 
-                <div class="col-6">
+
+
+                <div class="col-6 pe-1">
                     <label class="fw-bold" for="birthday">
                          Date of Birth
                     </label>
@@ -58,7 +99,7 @@
                     @enderror
                 </div>
                 
-                <div class="col-6 ps-1 pb-1">
+                <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
                     <input class="form-control" name="place_of_birth" value="{{old('place_of_birth')}}">
                 </div>
@@ -116,37 +157,36 @@
                 @error('sex')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
-            </div>
+
+                {{-- TESTING ADRESSs --}}
+                
+    </div>{{-- row - last tag --}}
             
-{{-- TESTING ADRESSs --}}
 
 
-{{-- <div class="col-sm-6 mb-3">
-    <label class="form-label">Region *</label>
-    <select name="region" class="form-control form-control-md" id="region"></select>
-    <input type="hidden" class="form-control form-control-md" name="region_text" id="region-text" required>
-</div>
-<div class="col-sm-6 mb-3">
-    <label class="form-label">Province *</label>
-    <select name="province" class="form-control form-control-md" id="province"></select>
-    <input type="hidden" class="form-control form-control-md" name="province_text" id="province-text" required>
-</div>
-<div class="col-sm-6 mb-3">
-    <label class="form-label">City / Municipality *</label>
-    <select name="city" class="form-control form-control-md" id="city"></select>
-    <input type="hidden" class="form-control form-control-md" name="city_text" id="city-text" required>
-</div>
-<div class="col-sm-6 mb-3">
-    <label class="form-label">Barangay *</label>
-    <select name="barangay" class="form-control form-control-md" id="barangay"></select>
-    <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
-</div>
 
- --}}
- {{-- <button class="btn" type="submit">
+ <button class="btn" type="submit">
     submit
-    </button> --}}
+    </button>
 
 </div> {{-- Last Tag --}}  
+<script>
+const regionSelector = document.getElementById('region');
+const provinceSelector = document.getElementById('province');
+const citySelector = document.getElementById('city');
+const barangaySelector = document.getElementById('barangay');
 
+regionSelector.addEventListener('change', function() {
+
+    if(regionSelector.value != ''){
+        provinceSelector.disabled = false;
+    }
+});
+provinceSelector.addEventListener('change', function() {
+        citySelector.disabled = false;
+});
+citySelector.addEventListener('change', function() {
+        barangaySelector.disabled = false;
+});
+</script>
 <script src="{{asset('js/ph_address_selector.js')}}" defer></script>

@@ -3,13 +3,10 @@
       
         <div class="col-12 mb-4 ">
             <div class="text-center mb-2">
-                <div>
-
-                </div>
-                <img class="p-2 rounded-5 border" src="{{asset('storage/'.Auth::user()->member->profile_picture)}}" alt=""style="width: 150px; height: 150px; object-fit:cover">
-
-             
+                @if (Auth::user()->member->profile_picture != null)        
+                    <img class="p-2 rounded-5 border" src="{{asset('storage/'.Auth::user()->member->profile_picture)}}" alt=""style="width: 150px; height: 150px; object-fit:cover">
                   <p class="p-1 m-0" style="font-size: small;">Current profile picture</p>
+                  @endif
             </div>
             <label for="formFile" class="fw-bold mb-3">Upload Your Profile Picture</label>
             <input class="form-upload" type="file" id="formFile" name="profile_picture">
