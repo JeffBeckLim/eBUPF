@@ -244,7 +244,7 @@
                                 @if ($loan->loan->is_active == 1)
                                     <span class="text-primary">Performing</span>
                                 @elseif($loan->loan->is_active == 2)
-                                    <span class="text-dark">Non-performing</span>
+                                    <span class="text-dark">Closed</span>
                                 @elseif($loan->loan->is_active == null)
                                     <i>n/a</i>
                                 @endif    

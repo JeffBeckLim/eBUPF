@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CoBorrower;
 use App\Models\MembershipApplication;
 use App\Models\User;
 use App\Models\Loan;
@@ -13,6 +14,28 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function countLoanApp($mpl_loans, $state_id){
+        
+         if(count($mpl_loans) == 0){
+            return 0;
+            // if no loans exist
+         }
+         $count = 0;
+        foreach($mpl_loans as $mpl){
+            $loan_statuses = [];
+            foreach($mpl->loanApplicationStatus as $mpl_status){
+                array_push($loan_statuses,$mpl_status->loan_application_state_id);
+            }
+            
+            // check if approved status is in array
+            if(in_array(3,$loan_statuses)){
+                if($mpl->is_active == $state_id){
+                    $count += 1;
+                }
+            }
+        }
+        return ($count);
+    }
     public function index(){
 
         $member_count = count(User::where('user_type','member')->get());
@@ -54,20 +77,23 @@ class AdminController extends Controller
                 }   
             }
         }
-
+        // Used in charts
+        $mpl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 1)->get();
+        $hsl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 2)->get();
 
         // charts 
         // pie 1
-        $performing_mpl = count(Loan::where('is_active', 1)->where('loan_type_id', 1)->get());
-        $closed_mpl = count(Loan::where('is_active', 2)->where('loan_type_id', 1)->get());
-        $unevaluated_mpl = count(Loan::where('is_active', 0)->where('loan_type_id', 1)->get());
+
+        $performing_mpl = $this->countLoanApp($mpl_loans, 1);
+        $closed_mpl = $this->countLoanApp($mpl_loans, 2);
+        $unevaluated_mpl = $this->countLoanApp($mpl_loans, 0);
 
         $pie_mpl = [$performing_mpl, $closed_mpl, $unevaluated_mpl];
 
         // pie 2
-        $performing_hsl = count(Loan::where('is_active', 1)->where('loan_type_id', 2)->get());
-        $closed_hsl = count(Loan::where('is_active', 2)->where('loan_type_id', 2)->get());
-        $unevaluated_hsl = count(Loan::where('is_active', 0)->where('loan_type_id', 2)->get());
+        $performing_hsl = $this->countLoanApp($hsl_loans, 1);
+        $closed_hsl = $this->countLoanApp($hsl_loans, 2);
+        $unevaluated_hsl = $this->countLoanApp($hsl_loans, 0);
         
         $pie_hsl = [$performing_hsl, $closed_hsl, $unevaluated_hsl];
 
@@ -148,6 +174,7 @@ class AdminController extends Controller
         ));
 
     }
+   
 
     public function allUsers(){
         $users = User::with('member.membershipApplication')->get();

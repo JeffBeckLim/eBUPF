@@ -133,6 +133,8 @@
                                                     Print
                                                 </a>
                                             @endif
+                                        @elseif($cb_withLoan->loan->deleted_at)
+                                            <p style="font-size: 12px">Loan Application Cancelled.</p>
                                         @else 
                                             <a style="font-size: 14px" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
                                                 Cancel
