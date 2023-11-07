@@ -16,7 +16,7 @@
                     
                 </div>
                 @error('unit_id')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
     </div>
     <div class="row g-1  mb-3  mt-2">
@@ -50,14 +50,14 @@
             <input class="form-control validate" type="number" name="tin_num" value="{{old('tin_num')}}">
         </div>
         @error('tin_num')
-             <p class="text-danger mt-1">{{$message}}</p>
+             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
         @enderror
         <div class="col-6">
             <label for="salary">Employee Number</label>
             <input class="form-control validate" type="number" name="employee_num" value="{{old('employee_num')}}">
         </div>
         @error('employee_num')
-                <p class="text-danger mt-1">{{$message}}</p>
+                <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
         @enderror
     </div>
     <div class="row g-1 mb-3">
@@ -69,14 +69,14 @@
             </select>
         </div>
         @error('appointment_status')
-            <p class="text-danger mt-1">{{$message}}</p>
+            <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
         @enderror
         <div class="col-6">
             <label for="salary">Date of Appointment in BU.</label>
             <input class="form-control validate" type="date" name="bu_appointment_date" value="{{old('bu_appointment_date')}}">
         </div>   
         @error('bu_appointment_date')
-            <p class="text-danger mt-1">{{$message}}</p>
+            <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
         @enderror
     </div>
     <div class="col-12  mt-2">  
@@ -87,6 +87,6 @@
         <input class="form-control validate" type="number" name="monthly_contribution" value="{{old('monthly_contribution')}}">
     </div>
     @error('monthly_contribution')
-    <p class="text-danger mt-1">{{$message}}</p>
+    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
 @enderror
 </div>

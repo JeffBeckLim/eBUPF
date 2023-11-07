@@ -1,3 +1,36 @@
+var editAddress =  document.getElementById("edit_address");
+var showBtn =  document.getElementById("show_btn");
+var hideBtn =  document.getElementById("hide_btn");
+
+function showEditAddress(){
+    editAddress.classList.remove("d-none");
+    showBtn.classList.add("d-none");
+    hideBtn.classList.remove("d-none");
+
+    // clear input when edit is hidden
+    var dropdown = document.getElementById("region");
+    var dropdown1 = document.getElementById("city");
+    var dropdown2 = document.getElementById("province");
+    var dropdown3 = document.getElementById("barangay");
+    dropdown.selectedIndex = 0;
+    dropdown.classList.remove("invalid","shake");
+
+    dropdown1.selectedIndex = 0;
+    dropdown1.classList.remove("invalid","shake");
+
+    dropdown2.selectedIndex = 0;
+    dropdown2.classList.remove("invalid","shake");
+
+    dropdown3.selectedIndex = 0;
+    dropdown3.classList.remove("invalid","shake");
+}   
+function HideEditAddress(){
+    editAddress.classList.add("d-none");
+    hideBtn.classList.add("d-none");
+    showBtn.classList.remove("d-none")
+}
+
+
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 
@@ -88,7 +121,47 @@ function validateForm() {
             
         }
 
-    ;
+        if(!editAddress.classList.contains("d-none")){
+            const regionSelector = document.getElementById('region');
+            const provinceSelector = document.getElementById('province');
+            const citySelector = document.getElementById('city');
+            const barangaySelector = document.getElementById('barangay');
+
+            console.log(barangaySelector.value);
+
+            if(regionSelector.value === 'Choose Region'){
+                regionSelector.classList.add("invalid","shake");
+                valid = false;
+            }
+            else{
+                regionSelector.classList.remove("invalid","shake");
+            }
+
+            if(provinceSelector.value === 'Choose State/Province' || provinceSelector.value === '' ){
+                provinceSelector.classList.add("invalid","shake");
+                valid = false;
+            }
+            else{
+                provinceSelector.classList.remove("invalid","shake");
+            }
+
+
+            if(citySelector.value === 'Choose city/municipality' || citySelector.value === '' ){
+                citySelector.classList.add("invalid","shake");
+                valid = false;
+            }
+            else{
+                citySelector.classList.remove("invalid","shake");
+            }
+
+            if(barangaySelector.value === 'Choose barangay' || barangaySelector.value === '' ){
+                barangaySelector.classList.add("invalid","shake");
+                valid = false;
+            }
+            else{
+                barangaySelector.classList.remove("invalid","shake");
+            }
+         }
 
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
@@ -128,10 +201,8 @@ function enableSpouseInput() {
     }
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function() {
-    var selectElement = document.getElementsByClassTagName("select");
+    var selectElement = document.getElementsByTagName("select");
     selectElement.selectedIndex = -1;
 });
 

@@ -177,6 +177,7 @@ class MemberController extends Controller
     }
 
     public function updateMembership(Request $request, Member $member){
+       
        $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
        if($member->user_id != auth()->id()) {
@@ -249,6 +250,7 @@ class MemberController extends Controller
             return redirect()->back()->with('error', 'Please provide names for all beneficiaries. If not, the other fields will be cleared.');
         }
         }
+        // for adding +63 in contact number
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
 
@@ -258,6 +260,17 @@ class MemberController extends Controller
             $member->middle_initial = ucfirst($formFields['middlename'][0]);
             $member->save();
         }
+
+        // check if all fields for new address exist, save if yes
+        if($request->region_text != null &&
+            $request->province_text != null&&
+            $request->city_text != null &&
+            $request->barangay_text != null
+            ){
+                $member->address = $request->region_text.",".$request->province_text.",".$request->city_text.",".$request->barangay_text;
+                $member->save();
+            }
+
 
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Saved');
     }
@@ -297,6 +310,8 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
+        $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
+       
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -313,9 +328,16 @@ class MemberController extends Controller
             'middlename'=> 'nullable',
             'middle_initial'=> 'nullable',
 
-            'contact_num'=> 'nullable',
+            'contact_num'=> 'required',
 
-            'address'=> 'required',
+            // for address
+            'address'=> 'nullable',
+            'region_text'=>'required',
+            'province_text'=>'required',
+            'city_text'=>'required',
+            'barangay_text'=>'required',
+
+
             'date_of_birth'=> 'required',
             'tin_num'=> 'required',
             'position'=> 'required',
@@ -356,9 +378,12 @@ class MemberController extends Controller
 
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
+        
+        $address = $formFields['barangay_text'].",".$formFields['city_text'].",".$formFields['province_text'].",".$formFields['region_text'];
+        $formFields['address'] = $address;
 
         $member->update($formFields);
-
+        
 
         if($formFields['middlename'] != null){
             $member->middle_initial = ucfirst($formFields['middlename'][0]);

@@ -14,7 +14,7 @@
                 </label>
             </div>
             @error('agree_to_certify')
-                <p class="text-danger mt-1">{{$message}}</p>
+                <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
             @enderror
         </div>
         <div class="col-12 mb-5">
@@ -25,7 +25,7 @@
                 </label>
             </div>
             @error('agree_to_authorize')
-                <p class="text-danger mt-1">{{$message}}</p>
+                <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
             @enderror
             
         </div>

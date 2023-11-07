@@ -6,14 +6,14 @@
                     <input class="form-control validate" type="text" name="beneficiary0" value="{{old('beneficiary0')}}">
                 </div>
                 @error('beneficiary0')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
                 <div class="col-6">
                     <label class="fw-bold" for="salary">Beneficiary's Date of Birth</label>
                     <input class="form-control validate" type="date" name="beneficiary_birthday0" value="{{old('beneficiary_birthday0')}}">
                 </div>
                 @error('beneficiary_birthday0')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
                 <div class="col-6">
                     <label class="fw-bold"  for="appointmentStatus">Relationship to Applicant</label>
@@ -25,7 +25,7 @@
                     </select>
                 </div>
                 @error('beneficiary_relationship0')
-                    <p class="text-danger mt-1">{{$message}}</p>
+                    <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
             </div>
 
