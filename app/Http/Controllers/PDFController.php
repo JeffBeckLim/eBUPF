@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\Loan;
 use App\Models\Campus;
+use App\Models\Witness;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -103,6 +104,15 @@ class PDFController extends controller{
         //co-borrower campus
         $co_borrower_campus = Campus::where('id', $co_borrower_unit->campus_id)->first();
 
+         // get the witness
+         $witnesses = $loan->witness;
+
+         // get the witness names
+         $witnessNames = [];
+         foreach ($witnesses as $witness) {
+             $witnessNames[] = $witness->witness_name;
+         }
+
         $data = [
             'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
@@ -130,6 +140,8 @@ class PDFController extends controller{
             'co_office' => $co_borrower_campus->campus_code,
             'co_monthly_net_pay' => $co_borrower_details->first()->monthly_salary,
             'co_amount_requested' => $loan->principal_amount,
+
+            'witnesses' => $witnessNames,
 
         ];
 
@@ -166,6 +178,15 @@ class PDFController extends controller{
         //co-borrower campus
         $co_borrower_campus = Campus::where('id', $co_borrower_unit->campus_id)->first();
 
+        // get the witness
+        $witnesses = $loan->witness;
+
+        // get the witness names
+        $witnessNames = [];
+        foreach ($witnesses as $witness) {
+            $witnessNames[] = $witness->witness_name;
+        }
+
         $data = [
             'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
@@ -195,6 +216,8 @@ class PDFController extends controller{
             'co_monthly_net_pay' => $co_borrower_details->first()->monthly_salary,
             'co_amount_requested' => $loan->principal_amount,
             'co_payment_period' => $loan->term_years,
+
+            'witnesses' => $witnessNames,
 
         ];
 
