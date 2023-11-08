@@ -346,6 +346,12 @@ class LoanApplicationController extends Controller
             'loan_id'=>$loan->id,
         ]);
 
+        $user = Auth::user();
+        if($user->member->additional_loan > 0){
+            $user->member->additional_loan = 0;
+            $user->member->save();
+        }
+
         return view('member-views.mpl-application-form.confirmation');
     }
 
