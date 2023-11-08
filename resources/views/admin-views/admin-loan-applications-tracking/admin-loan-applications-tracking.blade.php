@@ -333,8 +333,8 @@
 
                             <td>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
-                                    <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
+                                    <i class="bi bi-pencil-square"></i>
                                 </button>
                             </td>
                             <td class="text-center">
