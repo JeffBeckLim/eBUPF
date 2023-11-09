@@ -157,7 +157,7 @@ class AdminController extends Controller
         $latest_user = User::latest('id')->first();
         $latest_member_app = MembershipApplication::latest('id')->first();
         $latest_loan_app = CoBorrower::latest('id')->whereNotNull('accept_request')->first();
-        // dd($latest_loan_app);
+        $latest_active_loan = Loan::latest('id')->where('is_active',1)->first();
 
 
         return view('admin-views.admin-dashboard', compact(
@@ -195,6 +195,7 @@ class AdminController extends Controller
             'latest_user',
             'latest_member_app',
             'latest_loan_app',
+            'latest_active_loan',
         ));
 
     }
