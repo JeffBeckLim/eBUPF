@@ -18,4 +18,16 @@ class PaymentLog extends Model
         'interest_log',
         'member_id_log',
     ];
+
+    public function member()
+    {
+        return $this->belongsTo(Member::class, 'member_id_log');
+    }
+
+    // Payment is for a loan
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class, 'loan_id_log');
+    }
+
 }

@@ -6,6 +6,7 @@ use App\Models\MembershipApplication;
 use App\Models\User;
 use App\Models\Loan;
 use App\Models\Payment;
+use App\Models\PaymentLog;
 use App\Models\Adjustment;
 use App\Models\Amortization;
 use Illuminate\Http\Request;
@@ -108,6 +109,42 @@ class AdminRemittanceController extends Controller
 
         return redirect()->back()->with('success', 'Payment updated successfully');
     }
+
+    public function showLogsRemittance(){
+        $paymentLogs = PaymentLog::with('member')->get();
+
+        return view('admin-views\admin-loan-remittance\admin-remittance-log', [
+            'paymentLogs' => $paymentLogs,
+        ]);
+    }
+
+    public function deletePaymentRemittance($id) {
+        // Retrieve the payment record
+        $payment = Payment::find($id);
+
+        if ($payment) {
+            //record the payment to the PaymentLog table
+            PaymentLog::create([
+                'primary_key_log' => $payment->id,
+                'or_number_log' => $payment->or_number,
+                'payment_date_log' => $payment->payment_date,
+                'loan_id_log' => $payment->loan_id,
+                'principal_log' => $payment->principal,
+                'interest_log' => $payment->interest,
+                'member_id_log' => $payment->member_id,
+            ]);
+
+            // Delete the payment record from the original table
+            $payment->delete();
+
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Payment deleted and moved to PaymentLog successfully');
+        } else {
+            // Payment not found, return an error message
+            return redirect()->back()->with('error', 'Payment not found');
+        }
+    }
+
 
 }
 

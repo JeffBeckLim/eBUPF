@@ -33,7 +33,6 @@
                 </div>
                 <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
                 <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
-
             </div>
 
             <div class="text-add-payment">
@@ -100,11 +99,20 @@
         </div>
 
         <div class="adminbox" style="margin:10px 20px;">
-            <div>
+            <div class="d-flex">
                 <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
                 <input type="text" class="membership-application-search-input" id="search-input">
+                <div class="d-flex justify-content-end w-100">
+                    <a href="{{route('logs.remittance')}}" type="button" class="btn bu-orange rounded-4 fs-7 text-white fw-bold" style="width: auto; margin-right: 10px;">
+                        <img width="18" height="18" src="https://img.icons8.com/fluency-systems-filled/18/ffffff/delete-history.png" alt="delete-history"/>
+                        View Logs
+                    </a>
+
+                </div>
             </div>
-            <div class="text-remit-table-head">Loan Payments</div>
+            <div class="text-remit-table-head">
+                Loan Payments
+            </div>
             <div class="table-responsive">
                 <div class="custom-table-for-admin p-2 pt-3">
                     <table class="table admin-table table-striped ">
@@ -120,7 +128,7 @@
                                 <th class="text-danger">MRI Adj</th>
                                 <th>Total</th>
                                 <th>Loan Particular</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -141,11 +149,12 @@
                                 <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
                                 <td>
                                     <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#editPayment{{$payment->id}}">
-                                        <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5>
+                                       {{--  <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5> --}}
+                                       <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/24/6D0000/trash--v1.png" alt="trash--v1"/>
                                     </button>
                                 </td>
                             </tr>
-                            @include('admin-views.admin-loan-remittance.modal-edit-payment')
+                            @include('admin-views.admin-loan-remittance.modal-delete-payment')
 
                             <script>
                                 $(document).ready(function() {
