@@ -227,8 +227,14 @@ use App\Models\Penalty;
 
     Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
 
-    Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('update.payment.remittance');
-//ADMIN ======================================================================================================
+/*     Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') ->name('update.payment.remittance');
+ */
+    //View Logs
+    Route::get('/admin/remittance/view/logs', [AdminRemittanceController::class, 'showLogsRemittance'])/* ->middleware('auth','admin.access') */->name('logs.remittance');
+    //delete payment
+    Route::delete('/admin/remittance/view/payment/delete/{id}', [AdminRemittanceController::class, 'deletePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('delete.payment.remittance');
+
+ //ADMIN ======================================================================================================
 
 //🟩MEMBER =================================================================================================
     //Show Member Profile
