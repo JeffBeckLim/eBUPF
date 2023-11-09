@@ -35,12 +35,37 @@
       </div>
    </div>
     <div class="row">
+      <div class="col-6 mb-2" style="font-size: 12px">
+         @php
+                                                   
+         $time = \Carbon\Carbon::parse($latest_user->created_at);
+         $now = \Carbon\Carbon::now();
+         $diff = $now->shortAbsoluteDiffForHumans($time); 
+                                                   
+         @endphp
+         <i class="bi bi-info-circle"></i> Latest account created was <span class="fw-bold">{{$diff}} ago</span>,
+         {{$latest_user->email}}
+
+      </div>
+
+      <div class="col-6" style="font-size: 12px">
+         @php
+                                                   
+         $time_app = \Carbon\Carbon::parse($latest_member_app->created_at);
+         $now = \Carbon\Carbon::now();
+         $diff_app = $now->shortAbsoluteDiffForHumans($time_app); 
+                                                   
+         @endphp
+         <i class="bi bi-info-circle"></i> Last membership application recorded in the system <span class="fw-bold">{{$diff_app}} ago</span> 
+      </div>
        <div class="col-lg-6 ">
-         <div class="row">
+         <div class="row g-1">
             <div class="col-3">
-               <div class="bg-white rounded border text-center" style="border-color: #00D186 !important">
+               <div class="bg-white rounded border text-center h-100" style="border-color: #00D186 !important">
                   <h6 class="text-end m-0 fw-bold pb-1 pt-3 mx-3">
-                     <i class="bi bi-person-check-fill "></i>
+                     <a href="" class="btn btn-outline">
+                        <i class="bi bi-person-check-fill "></i>
+                     </a>
                   </h6>
                   <h2 class=" m-0 fw-bold pt-3 count">
                      {{$member_count}}
@@ -54,9 +79,9 @@
                </div>
             </div>
             <div class="col">
-               <div class="bg-white border  rounded h-100">
-                  <div class="row  g-0 mx-3 pt-3">
-                     <div class="col-6 d-flex align-items-center"> 
+               <div class="bg-white border w-100 p-2 rounded h-100">
+                  <div class="row  g-0 mx-3 pt-2">
+                     <div class="col-9 d-flex align-items-center"> 
                         <h6 class="m-0 fw-bold">
                            Users
                         </h6>
@@ -64,8 +89,10 @@
                            Total {{$user_total}}
                         </button>
                      </div>  
-                     <div class="col-6 text-end"> 
-                        <i class="bi bi-people-fill"></i>
+                     <div class="col-3 text-end"> 
+                        <a href="{{route('admin.all.users')}}" class="btn btn-outline-dark">
+                           <i class="bi bi-people-fill" style="font-size:12px"></i>
+                        </a>
                      </div>  
                   </div>
                   <div class="row g-0 text-center">
@@ -108,7 +135,9 @@
                   </h6>
                </div>  
                <div class="col-6 text-end"> 
-                  <i class="bi bi-file-person-fill"></i>
+                  <a href="{{route('admin.membership-application')}}" class="btn btn-outline-dark">
+                     <i class="bi bi-file-person-fill"></i>
+                  </a>
                </div>  
             </div>
 
@@ -155,26 +184,50 @@
    
 
     <div class="row mt-2">
+      <div class="col-12 mb-2 mt-2" style="font-size: 12px">
+         @php
+                                                   
+         $time_loan_app = \Carbon\Carbon::parse($latest_loan_app->created_at);
+         $now = \Carbon\Carbon::now();
+         $diff_loan_app = $now->shortAbsoluteDiffForHumans($time_loan_app); 
+                                                   
+         @endphp
+         <i class="bi bi-info-circle"></i> Last loan application was <span class="fw-bold">{{$diff_loan_app}} ago</span>
+
+      </div>
+
         <div class="col-lg-6">
             <div class="bg-white h-100 border rounded    g-0">
              
                <div class="row  g-0 h-100">
                   
-                     <div class="col-9 ps-3 pt-3"> 
+                     <div class="col-8 ps-3 pt-3"> 
                         <h6 class=" fw-bold">
                            Loan Applications
+                           <button class="btn mx-2 rounded-5" style="font-size: 12px"  disabled>
+                              Total Approved {{array_sum($pie_mpl) + array_sum($pie_hsl) }}
+                           </button>
                           
                         </h6>
                         <span class="fw-light m-0 p-0" style="font-size: 12px">
                            <i class="bi bi-info-circle"></i> Loans here are those with APPROVED status.
                         </span>
                      </div>  
-                     <div class="col-3 text-end pe-3 pt-3"> 
+                     <div class="col text-end pe-3 pt-3">
+                        <h6 style="font-size: 10px">
+                           Num. of Approved Application   
+                        </h6> 
                         <span>
                            <a href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-primary">
+                              @if(array_sum($pie_mpl) != 0)
+                                 {{array_sum($pie_mpl)}}    
+                              @endif
                               <i class="bi bi-layers"></i>
                            </a>
                            <a href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-danger">
+                              @if(array_sum($pie_hsl) != 0)
+                                 {{array_sum($pie_hsl)}}    
+                              @endif
                               <i class="bi bi-house"></i>
                            </a>
                            
@@ -192,12 +245,38 @@
         </div>
         <div class="col-lg-6">
             <div class="row">
-               <div class="col-6 ps-3 pt-3"> 
+               <div class="col-10 ps-3 pt-3"> 
                   <h6 class=" fw-bold">
                      Tracking Applications
+                     @if ($no_status_mpl > 0)
+                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px"  disabled>
+                        {{$no_status_mpl}} Null status <i class="bi bi-layers"></i>
+                     </button>    
+                     @endif   
+                     @if ($no_status_hsl > 0)
+                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px;"  disabled>
+                        {{$no_status_hsl}} Null status <i class="bi bi-house"></i>
+                     </button>    
+                     @endif   
                   </h6>
+                  <span>
+                     <h6 style="font-size: 10px">Num of loan applications</h6>
+                     <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="btn btn-outline-primary">
+                        @if($count_application_mpl > 0)
+                           {{$count_application_mpl}}  
+                        @endif
+                        <i class="bi bi-layers"></i>
+                     </a>
+                     <a href="{{route('admin.loan.applications.tracking', 'hsl')}}" class="btn btn-outline-danger">
+                        @if($count_application_hsl > 0)
+                           {{$count_application_hsl}}  
+                        @endif
+                        <i class="bi bi-house"></i>
+                     </a>
+                     
+                  </span>
                </div>  
-               <div class="col-6 text-end pe-3 pt-3"> 
+               <div class="col-2 text-end pe-3 pt-3"> 
                   <span>
                      <a class="btn bu-orange text-light" href="{{route('admin.loan.applications.tracking', 'mpl')}}">
                         <i class="bi bi-compass"></i>
