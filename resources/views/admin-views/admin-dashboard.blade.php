@@ -36,27 +36,30 @@
    </div>
     <div class="row">
       <div class="col-6 mb-2" style="font-size: 12px">
-         @php
-                                                   
-         $time = \Carbon\Carbon::parse($latest_user->created_at);
-         $now = \Carbon\Carbon::now();
-         $diff = $now->shortAbsoluteDiffForHumans($time); 
-                                                   
-         @endphp
-         <i class="bi bi-info-circle"></i> Latest account created was <span class="fw-bold">{{$diff}} ago</span>,
-         {{$latest_user->email}}
-
+         @if ($latest_user)
+            @php
+                                                      
+            $time = \Carbon\Carbon::parse($latest_user->created_at);
+            $now = \Carbon\Carbon::now();
+            $diff = $now->shortAbsoluteDiffForHumans($time); 
+                                                      
+            @endphp
+            <i class="bi bi-info-circle"></i> Latest account created was <span class="fw-bold">{{$diff}} ago</span>,
+            {{$latest_user->email}}             
+         @endif
       </div>
 
       <div class="col-6" style="font-size: 12px">
-         @php
-                                                   
-         $time_app = \Carbon\Carbon::parse($latest_member_app->created_at);
-         $now = \Carbon\Carbon::now();
-         $diff_app = $now->shortAbsoluteDiffForHumans($time_app); 
-                                                   
-         @endphp
-         <i class="bi bi-info-circle"></i> Last membership application recorded in the system <span class="fw-bold">{{$diff_app}} ago</span> 
+         @if ($latest_member_app)
+            @php
+                                                      
+            $time_app = \Carbon\Carbon::parse($latest_member_app->created_at);
+            $now = \Carbon\Carbon::now();
+            $diff_app = $now->shortAbsoluteDiffForHumans($time_app); 
+                                                      
+            @endphp
+            <i class="bi bi-info-circle"></i> Last membership application recorded in the system <span class="fw-bold">{{$diff_app}} ago</span> 
+         @endif
       </div>
        <div class="col-lg-6 ">
          <div class="row g-1">
@@ -185,15 +188,16 @@
 
     <div class="row mt-2">
       <div class="col-12 mb-2 mt-2" style="font-size: 12px">
-         @php
-                                                   
-         $time_loan_app = \Carbon\Carbon::parse($latest_loan_app->created_at);
-         $now = \Carbon\Carbon::now();
-         $diff_loan_app = $now->shortAbsoluteDiffForHumans($time_loan_app); 
-                                                   
-         @endphp
-         <i class="bi bi-info-circle"></i> Last loan application was <span class="fw-bold">{{$diff_loan_app}} ago</span>
-
+        @if ($latest_loan_app)
+            @php
+                                                         
+            $time_loan_app = \Carbon\Carbon::parse($latest_loan_app->created_at);
+            $now = \Carbon\Carbon::now();
+            $diff_loan_app = $now->shortAbsoluteDiffForHumans($time_loan_app); 
+                                                      
+            @endphp
+            <i class="bi bi-info-circle"></i> Last loan application was <span class="fw-bold">{{$diff_loan_app}} ago</span>   
+        @endif
       </div>
 
         <div class="col-lg-6">
@@ -294,6 +298,18 @@
 
 
      <div class="row  mt-2">
+      <div class="col-12 mb-2 mt-1" style="font-size: 12px">
+         @if ($latest_active_loan)
+            @php
+                                                      
+            $time_loan_active = \Carbon\Carbon::parse($latest_active_loan->created_at);
+            $now = \Carbon\Carbon::now();
+            $diff_loan_active = $now->shortAbsoluteDiffForHumans($time_loan_active); 
+                                                      
+            @endphp
+            <i class="bi bi-info-circle"></i> Latest performing loan was applied <span class="fw-bold">{{$diff_loan_active}} ago</span> 
+         @endif
+      </div>
         <div class="col-lg-6">
             <div class="bg-white border rounded">
                
