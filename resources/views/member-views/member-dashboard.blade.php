@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class=" mt-lg-4 mt-2 me-lg-4 mx-md-4  ms-3">
+    <div class=" mt-lg-4 mt-2 me-lg-4 mx-md-4 mx-2">
             <!-- Main Content -->
                 <div class="row g-2">
                     <div class="col-lg-8">
@@ -106,15 +106,9 @@
                                                                         </p>
                                                                     </div>
                                                                 </div>
-<<<<<<< HEAD
                                                                 <div class="row mt-2 mb-2 g-0 ">
                                                                     <div class="col ">
-                                                                        <span class="text11-design fw-bold">Amortization </span> <span class="text12-design">
-=======
-                                                                <div class="row mt-2 mb-2">
-                                                                    <div class="col-sm-7">
-                                                                        <span class="text11-design text11-move fw-bold" >Amortization </span> <span class="text12-design">
->>>>>>> ef7d53790f4d460711f0f3542e9f996d42f28fd0
+                                                                        <span class="text11-design text11-move fw-bold">Amortization </span> <span class="text12-design">
                                                                             @if($loan->amortization)
                                                                                 Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
                                                                             @else
@@ -122,8 +116,8 @@
                                                                             @endif
                                                                         </span>
                                                                     </div>
-                                                                    <div class="col-3 text-dark text-end" style="font-size: 10px">
-                                                                        <span class="fw-bold" >{{$loan->remainingMonths}}</span>  <span class="">months to pay</span>
+                                                                    <div class="col-3  text-endszzz">
+                                                                        <span class="text11-design fw-bold">{{$loan->remainingMonths}}</span>  <span class="text12-design">months to pay</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
