@@ -1480,7 +1480,19 @@ tbody tr:nth-child(odd) td {
 
 /* New Homepage */
 
-@media screen and (max-width: 992px) {
+
+/* Large */
+
+@media screen and (min-width: 992px) {
+    .text11-move {
+        padding-left: 66px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .transactions {
+        margin-top: 20px;
+    }
     .home-landing-page {
         padding-top: 70px;
     }
@@ -1489,14 +1501,42 @@ tbody tr:nth-child(odd) td {
     }
 }
 
+
+/* Medium */
+
 @media screen and (max-width: 767px) {
+    .card-border2 {
+        margin-top: 20px;
+    }
+    .app-status-box {
+        width: 80%;
+    }
     .home-blue-bg {
-        height: 60% !important;
+        height: 70% !important;
     }
     .landing-info-text {
         font-size: 1rem !important;
     }
+    .landing-page-height {
+        height: 75vh !important;
+    }
+    .timeline-div {
+        padding: 0 50px !important;
+    }
+    .retirement-savings {
+        margin-top: 20px;
+    }
 }
+
+@media screen and (min-width: 768px) {
+    .mpl-card {
+        margin-left: 190px;
+        margin-top: -15px;
+    }
+}
+
+
+/* Small */
 
 @media screen and (max-width: 600px) {
     .membership-card-container {
@@ -1513,34 +1553,6 @@ tbody tr:nth-child(odd) td {
     }
     .see-membership-button {
         font-size: 0.8rem !important;
-    }
-}
-
-@media screen and (min-width: 992px) {
-    .text11-move {
-        padding-left: 66px;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .mpl-card {
-        margin-left: 190px;
-        margin-top: -15px;
-    }
-}
-
-@media screen and (max-width: 991px) {
-    .transactions {
-        margin-top: 20px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .card-border2 {
-        margin-top: 20px;
-    }
-    .app-status-box {
-        width: 80%;
     }
 }
 
@@ -1600,15 +1612,15 @@ tbody tr:nth-child(odd) td {
 }
 
 .active.fade-bottom {
-    animation: fade-bottom 1s ease-in;
+    animation: fade-bottom 0.5s ease-in;
 }
 
 .active.fade-left {
-    animation: fade-left 0.9s ease-in;
+    animation: fade-left 0.5s ease-in;
 }
 
 .active.fade-right {
-    animation: fade-right 1s ease-in;
+    animation: fade-right 0.5s ease-in;
 }
 
 @keyframes fade-bottom {
@@ -1642,4 +1654,99 @@ tbody tr:nth-child(odd) td {
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+.retirement-savings {
+    border-radius: 25px;
+    border: 1px solid rgba(30, 30, 30, 0.13);
+    background: rgba(255, 111, 25, 0.06);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    min-height: 18rem;
+    max-width: auto;
+}
+
+.content-border {
+    border-bottom: #FF6F19 10px solid;
+}
+
+.timeline-div {
+    padding: 0 100px;
+}
+
+.timeline {
+    position: relative;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeline-step {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 2px solid #00638D;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00638D;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.step-number {
+    color: #000000;
+}
+
+.timeline-line {
+    position: absolute;
+    width: calc(100% - 20px);
+    height: 5px;
+    background-color: #00638D;
+    top: 50%;
+    left: 10px;
+    z-index: 1;
+}
+
+.timeline-content {
+    text-align: center;
+}
+
+.timeline-text {
+    font-size: 12px;
+    color: #FF6F19;
+    width: 100%;
+}
+
+.timeline-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    margin-bottom: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeline-step:nth-child(1) {
+    left: 0%;
+}
+
+.timeline-step:nth-child(2) {
+    left: 25%;
+}
+
+.timeline-step:nth-child(3) {
+    left: 50%;
+}
+
+.timeline-step:nth-child(4) {
+    left: 75%;
+}
+
+.timeline-step:nth-child(5) {
+    left: 98%;
 }
