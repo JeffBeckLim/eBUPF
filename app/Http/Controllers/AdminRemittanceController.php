@@ -124,7 +124,7 @@ class AdminRemittanceController extends Controller
 
         if ($payment) {
             //record the payment to the PaymentLog table
-            PaymentLog::create([
+            $log_id =  PaymentLog::create([
                 'primary_key_log' => $payment->id,
                 'or_number_log' => $payment->or_number,
                 'payment_date_log' => $payment->payment_date,
@@ -134,17 +134,23 @@ class AdminRemittanceController extends Controller
                 'member_id_log' => $payment->member_id,
             ]);
 
-            // Delete the payment record from the original table
-            $payment->delete();
+            $query_log = PaymentLog::findOrFail($log_id->id);
 
-            // Redirect back with a success message
-            return redirect()->back()->with('success', 'Payment deleted and moved to PaymentLog successfully');
+            if($query_log){
+                // Delete the payment record from the original table
+                $payment->delete();
+
+                // Redirect back with a success message
+                return redirect()->back()->with('success', 'Payment deleted successfully. The record is saved in the logs.');
+            }else{
+                return redirect()->back()->with('error', 'Payment not deleted.');
+            }
+
         } else {
             // Payment not found, return an error message
             return redirect()->back()->with('error', 'Payment not found');
         }
     }
-
 
 }
 
