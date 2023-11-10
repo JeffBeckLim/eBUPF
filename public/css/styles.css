@@ -618,7 +618,8 @@ input.invalid {
 }
 
 .text14-design {
-    font-size: 1rem;
+    /* font-size: 1rem; */
+    font-size: 0.9rem;
     color: #0D3546;
     font-weight: 600;
 }

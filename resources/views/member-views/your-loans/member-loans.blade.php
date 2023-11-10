@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-12 border mb-3 rounded" style="padding:10px 0 2px 5px;">
-                        <h6 class="text-secondary fs-7">
+                        <h6 class="text-secondary fs-7 ps-2">
                             <i class="bi bi-lightbulb-fill"></i>
                             Here are the loans with the checks you've already claimed.
                         </h6>
@@ -58,16 +58,16 @@
                                                 <div class="row g-0 p-3">
                                                     <div class="col m-0 d-flex justify-content-center">
                                                         @if ($loan->loan_type_id == 1)
-                                                        <img src="{{asset('icons/MPL-mini.svg')}}" alt="mini mpl icon" style="width: 40%">
+                                                        <img src="{{asset('icons/MPL-mini.svg')}}" alt="mini mpl icon" style="width: 40px">
                                                         @elseif ($loan->loan_type_id == 2)
-                                                        <img src="{{asset('icons/HSL-mini.svg')}}" alt="mini hsl icon" style="width: 40%">
+                                                        <img src="{{asset('icons/HSL-mini.svg')}}" alt="mini hsl icon" style="width: 40px">
                                                         @endif
 
                                                     </div>
                                                     <div class="col-lg-6 col-5 ">
-                                                        <p style="font-size: 95%;" class="fw-bold m-0">
+                                                        <p style="font-size: 14px" class="fw-bold m-0">
                                                             {{$loan->LoanType->loan_type_description}}
-                                                            <span class="fw-light" style="font-size: small">
+                                                            <span class="fw-light" style="font-size: 12px">
                                                             {{$loan->term_years}}
                                                             @if ($loan->term_years > 1)
                                                                 years
@@ -86,14 +86,14 @@
 
                                                         <p class="m-0" style="font-size: x-small;">
                                                             @if($loan->amortization)
-                                                            {{date("F Y", strtotime($loan->amortization->amort_start))}}
+                                                            {{date("M Y", strtotime($loan->amortization->amort_start))}}
                                                             <span>
-                                                                -  {{date("F Y", strtotime($loan->amortization->amort_end))}} </span>
+                                                                -  {{date("M Y", strtotime($loan->amortization->amort_end))}} </span>
                                                             @else
                                                                 No amortization period yet
                                                             @endif
                                                         </p>
-                                                        <p class="m-0 fw-bold mt-4" style="font-size:   small;">
+                                                        <p class="m-0 fw-bold mt-4" style="font-size: 10px;">
                                                             Monthly Payable
                                                             <span class="fw-normal">
                                                                 @if($loan->amortization)
@@ -105,19 +105,21 @@
                                                         </p>
                                                     </div>
 
-                                                    <div class="col-4 text-end ">
+                                                    <div class="col-4 text-end">
                                                         <p  class="text3-1-design m-0">Outstanding Balance</p>
                                                         @if($paid)
                                                             <span class="fs-7 fw-bold text-success">
                                                                 Fully Paid <img src="{{asset('icons/check-icon.svg')}}" alt="check-icon">
                                                             </span>
                                                         @else
-                                                            <p class="fw-bold" ><span class="fw-light" style="font-size: small;">Php</span>
+                                                            <p class="fw-bold" style="font-size: 14px"><span class="fw-light" style="font-size: 10px;">Php</span>
                                                                 {{
                                                                     number_format($loan->principal_amount + $loan->interest - $loan->totalPayment, 2, '.',',')
                                                                 }}
                                                             </p>
                                                         @endif
+
+                                                        
                                                     </div>
 
                                                 

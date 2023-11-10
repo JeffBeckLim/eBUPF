@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
         <div class="col pt-3">
-            <div class="card border col-lg-6 col-sm-12 mx-auto shadow-sm p-4">
+            <div class="card border col-lg-6 col-sm-12 mx-auto shadow-sm p-lg-4 p-3">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-12  d-flex justify-content-center">
@@ -67,7 +67,7 @@
                                                     <p class="fs-7 fw-bold m-0">Applied a loan</p>
                                                     <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                 </div>
-                                                <div class="col-3 my-1">
+                                                <div class="col-4 text-center my-1">
                                                     <p class="fs-7 fw-bold m-0">
                                                         @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
                                                             MPL
@@ -76,9 +76,9 @@
                                                         @endif
                                                     </p>
                                                 </div>
-                                                <div class="col-1 my-1">
+                                                {{-- <div class="col-1 my-1">
                                                     <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     @endif

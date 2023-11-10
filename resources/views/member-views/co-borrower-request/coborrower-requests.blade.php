@@ -73,12 +73,11 @@
                                                     <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
-                                                <p class="fs-7 fw-bold mb-0 mt-1">{{$loan->loan->loanType->loan_type_name}} 
-                                                
-                                                <span class="fw-light"> {{$loan->loan->loanType->loan_type_description}}</span>
+                                                <p class="fs-7 fw-bold mb-0 mt-1">
+                                                <span class="fw-bold"> {{$loan->loan->loanType->loan_type_description}}</span>
                                                 </p>
                                                 <p class="fs-7 mb-0">Php {{number_format($loan->loan->principal_amount, 2, '.',',')}}</p>
-                                                <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
+                                                <p class="m-0" style="font-size: 10px">{{date('M d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
                                             </div>
                                         </td>
                                         <td>
