@@ -33,7 +33,7 @@
                 <div class="col-12 mb-2">
                     <label for="password" class="form-label text-dark">Password</label>
                     <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" required>
-                    <small class="text-muted">Your password must be at least 8 characters long and include at least 1 number and 1 special character.</small>
+                    <small class="text-muted" style="font-size: 12px">Your password must be at least 8 characters long and include at least 1 number and 1 special character.</small>
                 </div>
                 @error('password')
                     <p class="text-danger mt-1">{{$message}}</p>
