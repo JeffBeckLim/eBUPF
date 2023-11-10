@@ -428,20 +428,16 @@ input.invalid {
     background-color: #0082BA;
     border: none;
     color: white;
-    /* border-radius: 20px;
-    margin-top: 7px;
-    padding-bottom: 2px; */
 }
 
 .login-button:hover {
     background-color: #016793;
     border: none;
     color: white;
-    /* border-radius: 20px;
-    /* margin-top: 7px;
-    padding-bottom: 2px; */
 }
 
+
+/*
 .navbar-toggler-icon-custom {
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='7' y2='7'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='15' y2='15'/%3E%3Cline stroke='black' stroke-width='2' stroke-linecap='round' x1='0' x2='30' y1='23' y2='23'/%3E%3C/svg%3E");
     width: 30px;
@@ -449,7 +445,6 @@ input.invalid {
 }
 
 .text5-design {
-    /* Bicol University Provident Fund Inc. */
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -501,33 +496,7 @@ input.invalid {
     margin: 10px 20px;
 }
 
-#core-feature {
-    height: 17rem;
-    /* background-image: url("assets/core-feature-bg.png"); */
-    width: 100%;
-}
-
-.line {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.icon2 {
-    font-size: 3rem;
-    color: white;
-}
-
-.text8-design {
-    color: white;
-    font-size: 1rem;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-
-
-/* offers */
+/* offers
 
 .card-border {
     border-radius: 10px;
@@ -542,9 +511,13 @@ input.invalid {
     font-weight: 700;
 }
 
+*/
+
 
 /* Responsiveness */
 
+
+/*
 @media screen and (min-width: 992px) {
     .card-border2 {
         margin-left: 100px;
@@ -552,13 +525,6 @@ input.invalid {
     .text11-move {
         padding-left: 66px;
     }
-    /* .request-to-coborrower {
-        width: 70%;
-        margin: 20px;
-    } */
-    /* .loan-application-box {
-        margin-left: -80px;
-    } */
     .app-status-box {
         width: 50%;
     }
@@ -631,6 +597,7 @@ input.invalid {
         justify-content: flex-start;
     }
 }
+ */
 
 
 /* Member dashboard */
@@ -793,6 +760,7 @@ input.invalid {
     margin-bottom: 25px;
     color: #000000;
 }
+
 .pl-50-plus {
     font-size: 0.7rem;
     border: 1px solid #226d33;
@@ -1507,4 +1475,171 @@ tbody tr:nth-child(odd) td {
 
 .loan-container::-webkit-scrollbar-track {
     background: #f1f1f1;
+}
+
+
+/* New Homepage */
+
+@media screen and (max-width: 992px) {
+    .home-landing-page {
+        padding-top: 70px;
+    }
+    .amico {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .home-blue-bg {
+        height: 60% !important;
+    }
+    .landing-info-text {
+        font-size: 1rem !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .membership-card-container {
+        top: 30% !important;
+    }
+    .membership-card-greetings {
+        font-size: 0.9rem !important;
+    }
+    .membership-card-greetings2 {
+        font-size: 0.8rem !important;
+    }
+    .review-text-button {
+        font-size: 0.8rem !important;
+    }
+    .see-membership-button {
+        font-size: 0.8rem !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .text11-move {
+        padding-left: 66px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .mpl-card {
+        margin-left: 190px;
+        margin-top: -15px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .transactions {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .card-border2 {
+        margin-top: 20px;
+    }
+    .app-status-box {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .text11-design {
+        padding-left: 15px;
+    }
+    .text12-design {
+        padding-left: 15px;
+    }
+    .row .col .button {
+        margin-bottom: 20px;
+    }
+    .app-status-box {
+        width: 100%;
+    }
+}
+
+@media (min-width: 575px) {
+    .filter-group {
+        display: flex;
+        gap: 2px;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+}
+
+#core-feature {
+    height: auto;
+}
+
+.line {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.icon2 {
+    font-size: 3rem;
+    color: white;
+}
+
+.text8-design {
+    color: white;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.reveal {
+    position: relative;
+    opacity: 0;
+}
+
+.reveal.active {
+    opacity: 1;
+}
+
+.active.fade-bottom {
+    animation: fade-bottom 1s ease-in;
+}
+
+.active.fade-left {
+    animation: fade-left 0.9s ease-in;
+}
+
+.active.fade-right {
+    animation: fade-right 1s ease-in;
+}
+
+@keyframes fade-bottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-left {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-right {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
