@@ -106,9 +106,15 @@
                                                                         </p>
                                                                     </div>
                                                                 </div>
+<<<<<<< HEAD
                                                                 <div class="row mt-2 mb-2 g-0 ">
                                                                     <div class="col ">
                                                                         <span class="text11-design fw-bold">Amortization </span> <span class="text12-design">
+=======
+                                                                <div class="row mt-2 mb-2">
+                                                                    <div class="col-sm-7">
+                                                                        <span class="text11-design text11-move fw-bold" >Amortization </span> <span class="text12-design">
+>>>>>>> ef7d53790f4d460711f0f3542e9f996d42f28fd0
                                                                             @if($loan->amortization)
                                                                                 Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
                                                                             @else
