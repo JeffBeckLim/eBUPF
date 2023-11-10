@@ -42,11 +42,11 @@
 
               </div>
             </div>
-            <div class="col" style="padding: 3rem;">
+            <div class="col" style="padding: 2rem;">
 
               @if(request()->route()->getName() === 'login')
 
-              <div class="col-12  mb-5 pt-md-2">
+              <div class="col-12  mb-5">
                 <h4 class="fw-bolder ">
                   Sign In to <span class="bu-text-orange">e</span>BUPF!
                 </h4>
@@ -66,7 +66,7 @@
               </div>
               @endif
 
-              <div class="col-12  ">
+              <div class="col-12 ">
                 @yield('form')
               </div>
 

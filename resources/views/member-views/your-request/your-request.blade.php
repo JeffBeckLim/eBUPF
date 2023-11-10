@@ -8,11 +8,11 @@
         
         <div class="row  d-flex justify-content-center">
 
-            <div class="col-lg-8 col-md-10 ">
+            <div class="col-lg-8 ms-2">
 
                 
 
-                <div class="bg-white rounded border mx-1 mt-2 p-2">
+                <div class="bg-white rounded border mt-2 p-2">
 
                     @if (session('fail'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -65,7 +65,7 @@
                         
                         <table class="table">
                             <thead>
-                                <tr>
+                                <tr style="font-size: 14px">
                                     <th scope="col">Loan</th>
                                     <th scope="col">Co-Borrower</th>
                                     <th scope="col">Status</th>
@@ -77,8 +77,8 @@
                                 @foreach ($cb_withLoans as $cb_withLoan )
                                 <tr>
                                     <td class="align-middle" style="width: 20%">
-                                        <div class="p-1">
-                                            <p class="fs-7 fw-bold mb-0">{{$cb_withLoan->loan->loanType->loan_type_description}}</p>
+                                        <div class="p-1" >
+                                            <p class=" fw-bold mb-0" style="font-size: 12px">{{$cb_withLoan->loan->loanType->loan_type_name}}</p>
                                             <p class="fs-7 mb-0"> Php {{number_format($cb_withLoan->loan->principal_amount, 2, '.',',')}}</p>
                                             @php
                                             

@@ -161,7 +161,7 @@
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
 
-                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                        <button style="padding-left: 13px   !important;" class="accordion-button collapsed mb-1 {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
                                     <img src="{{asset('icons/loan-options.svg')}}" alt="">

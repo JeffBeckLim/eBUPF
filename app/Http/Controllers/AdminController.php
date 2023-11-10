@@ -98,13 +98,10 @@ class AdminController extends Controller
         $pie_hsl = [$performing_hsl, $closed_hsl, $unevaluated_hsl];
 
 
-        // used in bar chart
-        $mpl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 1)->get();
-        $hsl_loans = Loan::with('loanApplicationStatus')->where('loan_type_id', 2)->get();
-
         $loans = Loan::with('loanApplicationStatus')->get();
 
         // bar chart
+        $no_status_mpl = 0;
         $staff_mpl = 0;
         $analyst_mpl=0;
         $approved_mpl=0;
@@ -112,6 +109,7 @@ class AdminController extends Controller
         $picked_mpl=0;
         $rejected_mpl=0;
 
+        $no_status_hsl = 0;
         $staff_hsl = 0;
         $analyst_hsl=0;
         $approved_hsl=0;
@@ -119,31 +117,47 @@ class AdminController extends Controller
         $picked_hsl=0;
         $rejected_hsl=0;
 
+        $count_application_mpl = 0;
+        $count_application_hsl = 0;
+
         foreach($loans as $loan){
-            foreach($loan->loanApplicationStatus as $status){                
-                if($status->loan_application_state_id == 1){
-                    $loan->loan_type_id == 1 ? $staff_mpl+=1 : $staff_hsl+=1;
-                }
-                else if($status->loan_application_state_id == 2){
-                    $loan->loan_type_id == 1 ? $analyst_mpl+=1 : $analyst_hsl+=1;
-                }
-                else if($status->loan_application_state_id == 3){
-                    $loan->loan_type_id == 1 ? $approved_mpl=1 : $approved_hsl+=1;
-                }
-                else if($status->loan_application_state_id == 4){
-                    $loan->loan_type_id == 1 ? $check_mpl=1 : $check_hsl+=1;
-                }
-                else if($status->loan_application_state_id == 5){
-                    $loan->loan_type_id == 1 ? $picked_mpl=1 : $picked_hsl+=1;
-                }
-                else if($status->loan_application_state_id == 6){
-                    $loan->loan_type_id == 1 ? $rejected_mpl=1 : $rejected_hsl+=1;
+            $loan->loan_type_id == 1 ? $count_application_mpl+=1 : $count_application_hsl+=1;
+            if(count($loan->loanApplicationStatus)==0){
+                $loan->loan_type_id == 1 ? $no_status_mpl+=1 : $no_status_hsl+=1;
+            }else{
+            foreach($loan->loanApplicationStatus as $status){
+                
+               
+                    if($status->loan_application_state_id == 1){
+                        $loan->loan_type_id == 1 ? $staff_mpl+=1 : $staff_hsl+=1;
+                    }
+                    else if($status->loan_application_state_id == 2){
+                        $loan->loan_type_id == 1 ? $analyst_mpl+=1 : $analyst_hsl+=1;
+                    }
+                    else if($status->loan_application_state_id == 3){
+                        $loan->loan_type_id == 1 ? $approved_mpl=1 : $approved_hsl+=1;
+                    }
+                    else if($status->loan_application_state_id == 4){
+                        $loan->loan_type_id == 1 ? $check_mpl=1 : $check_hsl+=1;
+                    }
+                    else if($status->loan_application_state_id == 5){
+                        $loan->loan_type_id == 1 ? $picked_mpl=1 : $picked_hsl+=1;
+                    }
+                    else if($status->loan_application_state_id == 6){
+                        $loan->loan_type_id == 1 ? $rejected_mpl=1 : $rejected_hsl+=1;
+                    }
+                
                 }
             }
         }
         
         $bar_mpl = [$staff_mpl, $analyst_mpl, $approved_mpl, $check_mpl, $picked_mpl, $rejected_mpl,];
         $bar_hsl = [$staff_hsl, $analyst_hsl, $approved_hsl, $check_hsl, $picked_hsl, $rejected_hsl,];
+
+        $latest_user = User::latest('id')->first();
+        $latest_member_app = MembershipApplication::latest('id')->first();
+        $latest_loan_app = CoBorrower::latest('id')->whereNotNull('accept_request')->first();
+        $latest_active_loan = Loan::latest('id')->where('is_active',1)->first();
 
 
         return view('admin-views.admin-dashboard', compact(
@@ -170,7 +184,18 @@ class AdminController extends Controller
             'pie_hsl',
 
             'bar_mpl',
-            'bar_hsl'
+            'bar_hsl',
+
+            'no_status_mpl',
+            'no_status_hsl',
+
+            'count_application_mpl',
+            'count_application_hsl',
+
+            'latest_user',
+            'latest_member_app',
+            'latest_loan_app',
+            'latest_active_loan',
         ));
 
     }

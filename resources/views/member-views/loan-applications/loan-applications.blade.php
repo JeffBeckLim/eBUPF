@@ -53,7 +53,7 @@
                                 {{-- CARD --}}
                                 <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                     <div class="row  mt-2 g-0 ">
-                                        <div class="col-4 border rounded ps-3 pt-2">
+                                        <div class="col-lg-4 border mb-2 rounded ps-3 py-2">
 
                                             @if ($loan->loan->is_active == 1)
                                                 <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
@@ -81,22 +81,22 @@
 
                                             <p class="fw-bold text m-0" style="font-size: small">{{$loan->loan->loanType->loan_type_description}}</p>
                                         </div>
-                                        <div class="col-2 text-center">
-                                            <p class="text16-design">{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</p>
+                                        <div class="col-lg-2 col-3  ">
+                                            <p class="text16-design ps-2">{{ date("M Y, g:i A", strtotime($loan->loan->created_at))}}</p>
                                         </div>
 
 
-                                        <div class="col-4">
-                                            <p class=" text15-design m-0">Request</p>
+                                        <div class="col-lg-4 col-5 ">
+                                            <p class=" text15-design m-0 ps-1">Request</p>
                                             <p class="text17-design ">
-                                                <span class="fw-light fw-bold">
+                                                <span class="fw-light fw-bold ps-1">
                                                     Php{{number_format($loan->loan->principal_amount, 2, '.',',')}}
                                                 </span>
                                             </p>
                                         </div>
 
 
-                                        <div class="col-2">
+                                        <div class="col-lg-2 col-4 ">
                                             <p class="text15-design m-0"> Year{{$loan->loan->term_years > 1 ? 's': ''}} to Pay</p>
                                             <p class="text17-design">{{$loan->loan->term_years}} Year{{$loan->loan->term_years > 1 ? 's': ''}}</p>
                                         </div>
