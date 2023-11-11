@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class=" mt-lg-4 mt-2 me-lg-4 mx-md-4 mx-2">
+    <div class="mt-lg-5 mt-2 ms-3 me-lg-4 mt-lg-4">
             <!-- Main Content -->
                 <div class="row g-2">
                     <div class="col-lg-8">
@@ -64,7 +64,7 @@
                                                                 <div class="row mt-2 g-0">
                                                                     <div class="col-8  g-0">
                                                                         <div class="row h-100 g-0">
-                                                                            <div class="col-3 ps-2 d-flex justify-content-center">
+                                                                            <div class="col-3 ps-2 d-flex justify-content-center align-items-start pe-2">
                                                                                 @if ($loan->loan_type_id == 1)
                                                                                 <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
                                                                                 @else 
@@ -95,8 +95,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-4 text-end">
-                                                                        <p class="text13-design m-0">Outstanding Balance</p>
-                                                                        <p class="text14-design"><span class="text12-design">Php </span>
+                                                                        <p style="font-size: 10px" class=" m-0 text-dark ">Outstanding Balance</p>
+                                                                        <p style="font-size: 14px" class=" m-0 text-dark fw-bold"><span> Php </span>
                                                                         {{-- Check if theres a loan payment [isset/empty] --}}
                                                                         @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
                                                                         {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
@@ -106,9 +106,9 @@
                                                                         </p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row mt-2 mb-2 g-0 ">
-                                                                    <div class="col ">
-                                                                        <span class="text11-design text11-move fw-bold">Amortization </span> <span class="text12-design">
+                                                                <div class="row mb-2 g-0">
+                                                                    <div class="col-6 ">
+                                                                        <span class="text11-design fw-bold p-0">Amortization </span> <span class="text12-design p-0">
                                                                             @if($loan->amortization)
                                                                                 Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
                                                                             @else
@@ -116,8 +116,8 @@
                                                                             @endif
                                                                         </span>
                                                                     </div>
-                                                                    <div class="col-3  text-endszzz">
-                                                                        <span class="text11-design fw-bold">{{$loan->remainingMonths}}</span>  <span class="text12-design">months to pay</span>
+                                                                    <div class="col-6  text-end" style="line-height: 90%">
+                                                                        <span class="text11-design fw-bold p-0">{{$loan->remainingMonths}}</span>  <span class="text12-design p-0">months to pay</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -240,7 +240,7 @@
                                                 </div>
 
                                             @else
-                                                <div class="w-100 border bg-white rounded pt-5 pb-5 mb-2 shadow-sm d-flex justify-content-center align-items-center">
+                                                <div class="w-100 border bg-white rounded pt-5 pb-5 mb-2 shadow-sm d-flex justify-content-center align-items-center" style="font-size: 12px">
                                                     You currently don't have pending loan.
                                                 </div>
                                             @endif
@@ -267,14 +267,14 @@
                                                 <div class="row" style="padding: 0 30px 0 10px;">
                                                     <div class="col-8 my-1">
                                                         <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                        <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                        <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                     </div>
-                                                    <div class="col-3 my-1">
+                                                    <div class="col-4 text-center my-1">
                                                         <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                     </div>
-                                                    <div class="col-1 my-1">
+                                                    {{-- <div class="col-1 my-1">
                                                         <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                             @elseif($transaction instanceof \App\Models\Loan)
@@ -282,9 +282,9 @@
                                                     <div class="row" style="padding: 0 30px 0 10px;">
                                                         <div class="col-8 my-1">
                                                             <p class="fs-7 fw-bold m-0" style="font-size: 14px">Applied a loan</p>
-                                                            <p class="m-0" style="font-size: 12px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                            <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                         </div>
-                                                        <div class="col-3 my-1">
+                                                        <div class="col-3 my-1 text-center">
                                                             <p class="fs-7 fw-bold m-0">
                                                                 @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
                                                                     MPL
@@ -310,11 +310,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5 transactions mb-5">
+                    {{-- <div class="col-md-5 transactions mb-5">
                         <div class="container mt-3 ">
 
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
     </div>
