@@ -1527,6 +1527,14 @@ tbody tr:nth-child(odd) td {
     .retirement-savings {
         margin-top: 20px;
     }
+    .faq {
+        height: auto !important;
+        margin-bottom: 30px;
+    }
+    .footer-set-col {
+        justify-content: flex-start !important;
+        padding-left: 50px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -1660,10 +1668,14 @@ tbody tr:nth-child(odd) td {
 .retirement-savings {
     border-radius: 25px;
     border: 1px solid rgba(30, 30, 30, 0.13);
-    background: rgba(255, 111, 25, 0.06);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     min-height: 18rem;
     max-width: auto;
+}
+
+.retirement-savings:hover {
+    background: rgba(255, 111, 25, 0.06);
+    transition: all 0.8s ease;
 }
 
 .content-border {
@@ -1750,4 +1762,95 @@ tbody tr:nth-child(odd) td {
 
 .timeline-step:nth-child(5) {
     left: 98%;
+}
+
+.faq {
+    height: 95vh;
+    margin-bottom: 30px;
+}
+
+.accordion-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.accordion {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 8px;
+}
+
+.accordion:last-child {
+    margin-bottom: 0;
+}
+
+.accordion-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-bottom: #000 1px solid;
+    cursor: pointer;
+    font-size: 20px;
+    color: #00638D;
+}
+
+.accordion-label:hover {
+    background: #00000015;
+}
+
+.accordion-label::after {
+    content: "\276F";
+    background-color: #c3c3c3;
+    border-radius: 50%;
+    color: #ffffff;
+    height: 30px !important;
+    width: 30px !important;
+    text-align: center;
+    transition: all 0.5s ease;
+    /* Updated transition property */
+}
+
+.accordion-content {
+    max-height: 0;
+    padding: 0 16px;
+    color: #000;
+    background: #00000015;
+    transition: all ease 0.5s;
+}
+
+.accordion-content p {
+    margin: 0;
+    color: rgba(4, 57, 94, 0.7);
+    font-size: 16px;
+}
+
+input:checked+.accordion-label {
+    border-bottom: #000 1px dashed;
+    background: #00000015;
+}
+
+input:checked+.accordion-label::after {
+    transform: rotate(90deg);
+    background-color: #FF6F19;
+    box-shadow: 1px 3px 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+input:checked~.accordion-content {
+    max-height: 100vh;
+    padding: 16px;
+}
+
+.hover-to-white:hover {
+    color: white !important;
+}
+
+.footer-set-col {
+    display: flex;
+    justify-content: center;
 }

@@ -94,7 +94,7 @@
         </div>
         <div class="row d-flex justify-content-center align-items-center reasons-gap">
             <div class="col-md-4 reveal fade-left">
-                <div class="retirement-savings bg-white content-border">
+                <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
                         <img src="{{asset('icons/loans-savings.svg')}}" alt="Retirement Savings" width="60px">
                     </div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="col-md-4 reveal fade-right">
-                <div class="retirement-savings bg-white content-border">
+                <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
                         <img src="{{asset('icons/life-insurance.svg')}}" alt="Retirement Savings" width="60px">
                     </div>
@@ -278,7 +278,7 @@
     </div>
 </section>
 
-<section class="faq">
+<section class="faq" style="height: 95vh">
     <div class="container mt-5">
         <div class="text-center fs-4 fw-bold" style="color: #00638D;">
             Frequently Asked Questions
@@ -288,36 +288,164 @@
                 Explore Our Top FAQs: Your Common Question Answered!
             </div>
         </div>
-
+        <div class="faq-container mt-5">
+            <div class="row">
+                <div class="col-md-6 reveal fade-left">
+                    <div class="accordion-wrapper">
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check1" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check1">
+                                <div style="width: 90%;">
+                                    What are the requirements to apply as a member?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>I hope you are enjoying the video; don't forget to give your feedback in the comment section.</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check2" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check2">
+                                <div style="width: 90%;">
+                                    How much is the initial payment for membership?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>The membership fee cost  ₱ 100.00 , you can either choose to pay the membership fee through salary deduction or make a cash payment.</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check3" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check3">
+                                <div style="width: 90%">
+                                    Who can apply for a loan?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam harum nesciunt tenetur quas, accusantium numquam, dignissimos doloremque alias ullam debitis fugit quis modi? Rem ducimus natus nulla dicta autem vero. </p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check4" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check4">
+                                <div style="width: 90%;">
+                                    What is a Co-Borrower?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem asperiores ducimus illum quas, sit dicta tenetur. Impedit dolores quisquam earum nihil enim alias, magnam velit, dolorem voluptate ex necessitatibus corporis.</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check5" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check5">
+                                <div style="width: 90%;">
+                                    What is Interest Rate?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur eius magnam porro tempora? Inventore, consequatur dignissimos? Alias, consequuntur, aspernatur omnis ratione, eum dicta voluptatum reiciendis voluptatem rem incidunt perspiciatis ea!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 reveal fade-right">
+                    <div class="accordion-wrapper">
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check6" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check6">
+                                <div style="width:90%;">
+                                    What is Interest
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ex vitae illum dignissimos atque esse eligendi nemo suscipit! Ratione tenetur fuga dolores maxime repellendus repellat quia rem ad ducimus perferendis.</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check7" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check7">
+                                <div style="width: 90%;">
+                                    What is Additional Loan?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed officiis suscipit voluptatibus harum aliquam, sunt at quod consequatur, saepe voluptas quis mollitia ducimus non itaque dignissimos commodi distinctio iusto repellat?</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check8" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check8">
+                                <div style="width: 90%;">
+                                    How do I pay the monthly amortization of my dept?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia debitis adipisci beatae quisquam facere reprehenderit, dolores illum veritatis recusandae repudiandae quas cumque. Doloremque quibusdam fugiat possimus distinctio quos sequi consectetur!</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check9" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check9">
+                                <div style="width: 90%;">
+                                    What will happen if I miss a loan payment?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis expedita deserunt vel hic provident nihil consequatur voluptate culpa, excepturi laborum sunt nam ullam nostrum magni soluta ex? Eos, ullam quos.</p>
+                            </div>
+                        </div>
+                        <div class="accordion">
+                            <input type="radio" name="radio-a" id="check10" style="position: absolute; opacity: 0; z-index: -1;">
+                            <label class="accordion-label" for="check10">
+                                <div style="width: 90%;">
+                                    Is it possible to make a partial or full payment of the loan balance?
+                                </div>
+                            </label>
+                            <div class="accordion-content">
+                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, odit harum nesciunt eveniet cum error aliquam culpa illo fugit nam modi nulla cupiditate minima ipsa sunt, delectus blanditiis excepturi voluptate!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<div class="my-5">
-
-    {{-- MEMBERSHIP CARD --}}
-{{--     <div class="border border-danger">
-        <h5 class="text-center text-danger">TEMPORARY DIV - REMOVE AFTER DEVELOPMENT</h5>
-        <h6>LOGIN TO DEVELOPER ACCOUNT</h6>
-        <h6>email: developer@ebupf.com</h6>
-        <h6>password: qwerty123</h6>
-        <h5 class="text-center text-danger">TEMPORARY DIV - REMOVE AFTER DEVELOPMENT</h5>
-    </div> --}}
-
-    <div class="border border-danger">
-        <div class="fs-4 text-center text-danger">TEMPORARY DIV - REMOVE AFTER DEVELOPMENT</div>
-        <div class="fs-5 text-center text-danger">LOGIN TO DEVELOPER ACCOUNT</div>
-        <div class="fs-5 text-center text-danger">email:
-            <span class="text-dark">
-                developer@ebupf.com
-            </span>
-        </div>
-        <div class="fs-5 text-center text-danger">password:
-            <span class="text-dark">
-                qwerty123
-            </span>
+<section class="hear-from-you">
+    <div class="container mb-5">
+        <div style="background-color: #0092D1; border-radius: 50px;">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="fs-1 fw-bold text-light" style="padding: 30px 0 20px 45px">
+                        We'd love to hear from you.
+                    </div>
+                    <div style="padding: 0 0 30px 45px" class="text-light fw-6">
+                        Got a query? Contact us using any of the details below and we will be happy to answer your questions!
+                    </div>
+                    <div style="margin: 0 0 0 100px;" class="d-flex">
+                        <i class="bi bi-send-fill text-white"></i>
+                        <div style="margin-left: 15px;">
+                            <a href="mailto:bupf@bicol-u.edu.ph" style="color: white;">
+                                bupf@bicol-u.edu.ph
+                            </a>
+                        </div>
+                    </div>
+                    <div style="margin: 20px 0 20px 100px;" class="text-white d-flex">
+                        <i class="bi bi-telephone-fill"></i>
+                        <div style="margin-left: 15px;">
+                            (209) 555-0104
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 fade-right reveal">
+                    <img src="{{asset('assets/girl-computer.svg')}}" alt="Computer" width="80%">
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
 <script>
     function reveal() {
