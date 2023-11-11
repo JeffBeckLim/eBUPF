@@ -56,14 +56,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" d-flex align-items-center mx-2">
+                    <div class=" d-flex align-items-center mx-2 mb-4">
                         <label for="search" class="pe-2">Search</label>
-                        <input id="search" type="text" class="search-box" placeholder="Enter your search query">
+                        <input id="myInput" type="text" class="search-box " placeholder="Enter your search query">
                     </div>
-                    <div class="row g-0">
+                    <div class="row g-0 table-responsive">
                         @if (count($cb_withLoans) != 0)
                         
-                        <table class="table">
+                        <table id="outgoing-request-table" class="table table-borderless">
                             <thead>
                                 <tr style="font-size: 14px">
                                     <th scope="col">Loan</th>
@@ -167,7 +167,28 @@
             </div>
         </div>
     </div>
-    
 </main>
+<style>
+    #outgoing-request-table_filter{
+        display: none;
+    }
+
+    input[type="text"]
+    {
+        font-size:12px;
+    }
+</style>
+<script>
+   var table = $('#outgoing-request-table').DataTable({
+    info: false,
+    ordering: false,
+    paging: false
+   });
+ 
+ // #myInput is a <input type="text"> element
+ $('#myInput').on( 'keyup', function () {
+     table.search( this.value ).draw();
+ } );
+</script>
 
 @endsection

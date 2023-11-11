@@ -2,10 +2,10 @@
 
 @section('content')
 
-<main >
+<main class=" ms-2">
     <div class="container-fluid">
         <div class="row mt-2">
-            <div class="col">
+            <div class="col p-0">
                 <div class="card border col-lg-7 col-sm-12 mx-auto p-lg-4 p-3 pt-4 my-2">
                     <div class="col-12">
                         <p class="text-center fw-bold fs-5">Your Loans</p>

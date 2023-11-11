@@ -4,9 +4,9 @@
 
 <main>
     
-        <div class=" mx-1 mt-2 d-flex justify-content-center">
+        <div class=" mx-1 mt-2 d-flex justify-content-center ">
             <div class="bg-white p-2 col-lg-9 rounded border">
-                <div class="row">
+                <div class="row ">
                     <div class="col-12">
                         @if(session('message'))
                         <div style="background-color: rgb(255, 231, 200) " class="alert border alert-dismissible fade show" role="alert">
@@ -41,34 +41,36 @@
                             <label for="searh-input">Search</label>
                         </div>
                         <div class="col flex-grow-1">
-                            <input type="text" class="search-input form-control" placeholder="enter your search query">
+                            <input id="myInput" type="text" class="search-input form-control" placeholder="enter your search query">
                         </div>    
                     </div>
                 </div>
                 {{-- CHECK IF THEIR ARE CB REQUEST --}}
                 @if (count($loans) != 0)
-                    <table class="table mt-4" style=" background-color: white;">
-                        <thead>
-                            <tr>
+                    <table id="incoming-request-table" class="table table-borderless mt-4" style=" background-color: white;">
+                        <thead >
+                            <tr style="font-size: 12px">
                                 <th class="text-center"  scope="col">Loan</th>
                                 {{-- THIS WILL SHOW ONLY ON SMALL SCREENS  --}}
-                                <th class="text-center d-md-none"  style="font-size: small" scope="col">Principal Borrower</th>
+                                
                                 {{-- THIS WILL SHOW ONLY ON MEDIUM TO LARGE SCREENS  --}}
-                                <th class="text-center d-none d-md-block"  scope="col">Principal Borrower</th>
-                                <th></th>
-                                <th></th>
+                                <th class="text-center"  scope="col">Principal Borrower</th>
+                                <th class="text-center">...</th>
+                                <th class="text-center">...</th>
+                            
+                                
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                             @foreach ($loans as $loan)
                                     {{-- USED ON COLUMN 1 -NEW indicator and COLUMN 3 --}}
                                     @php
                                         $try = App\Models\CoBorrower::findorfail($loan->loan->id)
                                     @endphp
 
-                                    <tr class="align-middle">
+                                    <tr class="align-middle" >
                                         <td > 
-                                            <div>
+                                            
                                                 @if (is_null($loan->loan->is_viewed && $try->accept_request >= 0))
                                                     <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
@@ -78,20 +80,20 @@
                                                 </p>
                                                 <p class="fs-7 mb-0">Php {{number_format($loan->loan->principal_amount, 2, '.',',')}}</p>
                                                 <p class="m-0" style="font-size: 10px">{{date('M d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
-                                            </div>
+                                            
                                         </td>
                                         <td>
-                                            <div class="row  g-0">
+                                            <div class="row  g-0"  >
 
                                                 <div class="col-lg-4 m-0 g-0 d-flex justify-content-center align-items-center">
                                                     <img src="{{ asset(($loan->loan->member->profile_picture ? 'storage/'.$loan->loan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture" 
                                                     style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle">
 
                                                 </div>
-                                                <div class="col">
-                                                    <p class="mb-0 fs-7 fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>
-                                                    <p class="mb-0 fs-7">{{($loan->loan->member->units->unit_code)}}</p>
-                                                    <p class="fs-7">ID: {{$loan->loan->id}}</p>
+                                                <div class="col" style="font-size: 12px">
+                                                    <p class="mb-0  fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>
+                                                    <p class="mb-0 ">{{($loan->loan->member->units->unit_code)}}</p>
+                                                    <p class="">ID: {{$loan->loan->id}}</p>
                                                 </div>
                                             
                                             </div>
@@ -100,7 +102,7 @@
                                         <td class="text-center">
 
                                             @if ($try->accept_request == '0')
-                                                <h6 style="font-size: 14px">You <strong>Declined</strong></h6>
+                                                <h6 style="font-size: 12px">You <strong>Declined</strong></h6>
                                                     @php
                                                 
                                                     $time = \Carbon\Carbon::parse($try->updated_at);
@@ -108,12 +110,12 @@
                                                     $diff = $now->shortAbsoluteDiffForHumans($time); 
                                                                                                 
                                                     @endphp
-                                                    <h6 style="font-size: 12px">
+                                                    <h6 style="font-size: 10px">
                                                     {{$diff}} ago
                                                     </h6>
 
                                             @elseif ($try->accept_request == '1')
-                                                    <h6  style="font-size: 14px" class="text-success">You <strong>Accepted</strong></h6>
+                                                    <h6  style="font-size: 12px" class="text-success">You <strong>Accepted</strong></h6>
                                                     @php
                                                     
                                                     $time = \Carbon\Carbon::parse($try->updated_at);
@@ -121,7 +123,7 @@
                                                     $diff = $now->shortAbsoluteDiffForHumans($time); 
                                                                                                 
                                                     @endphp
-                                                    <h6 style="font-size: 12px">
+                                                    <h6 style="font-size: 10px">
                                                     {{$diff}} ago
                                                     </h6>                                             
                                             @else
@@ -145,11 +147,12 @@
 
                                         </td>
                         
-                                        <td style="width: 4rem;" class="text-center">
+                                        <td style="" class="text-center ">
                                             @if ($try->accept_request != '0')
                                                 <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                             @endif
                                         </td>
+                                        
                                         
                                     </tr>     
 
@@ -167,5 +170,27 @@
         </div>
     
 </main>
+<style>
+    #incoming-request-table_filter{
+        display: none;
+    }
+
+    input[type="text"]
+    {
+        font-size:12px;
+    }
+</style>
+<script>
+   var table = $('#incoming-request-table').DataTable({
+    info: false,
+    ordering: false,
+    paging: false
+   });
+ 
+ // #myInput is a <input type="text"> element
+ $('#myInput').on( 'keyup', function () {
+     table.search( this.value ).draw();
+ } );
+</script>
 
 @endsection

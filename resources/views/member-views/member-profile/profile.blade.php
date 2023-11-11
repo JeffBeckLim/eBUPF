@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main style="margin: 25px 20px 20px 20px;">
+<main class="m-md-3 mt-2">
 
     <div class="bg-white rounded pt-3 border">
         @if($member->is_editable == 1)

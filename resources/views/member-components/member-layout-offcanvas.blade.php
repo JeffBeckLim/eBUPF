@@ -15,9 +15,17 @@
         offcanvasElement.addEventListener('hidden.bs.offcanvas', closeOffcanvasOnLargeScreens);
     });
 </script>
+<style> 
+/* Ensure that backdrop covers all screen for offcanvas sidebar */
+    .offcanvas-backdrop {
+      width: 100%;
+      height: 100%; /* Ensure a higher z-index than the navbar or other elements */
+    }
+</style>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
 {{-- OFFCANVAS --}}
-<div class="row d-block d-lg-none p-3 border-bottom" style="background-color: #ffffff;">
+
+<div class="row d-block d-lg-none p-3 shad bg-white" >
     <div class="nav">
         <div class="col">
             <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
@@ -86,7 +94,7 @@
             </a>
 
 
-            {{-- <li class="nav-item grow-on-hover">
+            <li class="nav-item grow-on-hover mb-2">
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
 
@@ -132,7 +140,7 @@
                       </div>
                     </div>
                 </div>
-            </li> --}}
+            </li>
 
 
             <li class="nav-item grow-on-hover">
