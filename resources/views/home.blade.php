@@ -439,7 +439,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 fade-right reveal">
+                <div class="col-md-5 fade-right reveal mt-3">
                     <img src="{{asset('assets/girl-computer.svg')}}" alt="Computer" width="80%">
                 </div>
             </div>
@@ -447,24 +447,5 @@
     </div>
 </section>
 
-<script>
-    function reveal() {
-        var reveals = document.querySelectorAll(".reveal");
-
-        for (var i = 0; i < reveals.length; i++) {
-            var windowHeight = window.innerHeight;
-            var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
-
-            if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
-            } else {
-                reveals[i].classList.remove("active");
-            }
-        }
-    }
-
-    window.addEventListener("scroll", reveal);
-</script>
 
 @endsection

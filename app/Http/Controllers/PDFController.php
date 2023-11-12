@@ -39,11 +39,16 @@ class PDFController extends controller{
             }
             $encodedImage = $orientedImage->encode('data-url')->encoded;
 
+            //get the first letter of the middle name in the members middlename column
+            $middlename = $member->middlename;
+            $middle_initial = substr($middlename, 0, 1);
+            $initial = strtoupper($middle_initial);
+
             $data = [
                 'currentdate' => date('Y-m-d'),
                 'firstname' => $member->firstname,
                 'lastname' => $member->lastname,
-                'middle_initial' => $member->middle_initial,
+                'middle_initial' => $initial,
                 'contact_num' => $member->contact_num,
                 'address' => $member->address,
                 'date_of_birth' => $member->date_of_birth,
@@ -113,11 +118,16 @@ class PDFController extends controller{
              $witnessNames[] = $witness->witness_name;
          }
 
+        //get the first letter of the middle name in the members middlename column
+        $middlename = $member->middlename;
+        $middle_initial = substr($middlename, 0, 1);
+        $initial = strtoupper($middle_initial);
+
         $data = [
             'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
             'firstname' => $member->firstname,
-            'middle_initial' => $member->middle_initial,
+            'middle_initial' => $initial,
             'date_of_birth' => $member->date_of_birth,
             'age' => $age,
             'tin' => $member->tin_num,
@@ -187,11 +197,16 @@ class PDFController extends controller{
             $witnessNames[] = $witness->witness_name;
         }
 
+        //get the first letter of the middle name in the members middlename column
+        $middlename = $member->middlename;
+        $middle_initial = substr($middlename, 0, 1);
+        $initial = strtoupper($middle_initial);
+
         $data = [
             'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
             'firstname' => $member->firstname,
-            'middle_initial' => $member->middle_initial,
+            'middle_initial' => $initial,
             'date_of_birth' => $member->date_of_birth,
             'age' => $age,
             'tin' => $member->tin_num,
@@ -241,7 +256,7 @@ class PDFController extends controller{
             'currentdate' => date('Y-m-d'),
             'firstname' => $member->firstname,
             'lastname' => $member->lastname,
-            'middlename' => $member->middle_initial,
+            'middlename' => $member->middlename,
             'sex' => $member->sex,
             'civilStatus' => $member->civil_status,
             'birthPlace' => $member->place_of_birth,

@@ -28,6 +28,7 @@ use App\Http\Controllers\PenaltyController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AdminReceivablesPDFController;
 use App\Http\Controllers\AdminUpdateMemberController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LedgerFilterController;
 use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
@@ -301,3 +302,7 @@ Auth::routes(['verify' => true]);
 // Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
 
+// About eBUPF
+Route::get('/about-ebupf', function () {
+    return view('about-ebupf');
+})->middleware('verified.access')->name('about-ebupf');

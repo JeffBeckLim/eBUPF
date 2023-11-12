@@ -26,4 +26,9 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function ebupf(){
+
+        return view('about-ebupf');
+    }
+
 }

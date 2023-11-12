@@ -1535,6 +1535,9 @@ tbody tr:nth-child(odd) td {
         justify-content: flex-start !important;
         padding-left: 50px;
     }
+    .get-to-know {
+        height: auto !important;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -1853,4 +1856,25 @@ input:checked~.accordion-content {
 .footer-set-col {
     display: flex;
     justify-content: center;
+}
+
+
+/* Go to top button */
+
+#goToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #00638D;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#goToTopBtn:hover {
+    background-color: #004e70;
 }
