@@ -99,6 +99,7 @@ class CalculatorController extends Controller
             'totalMonths' => $totalMonths,
             'beginningBalance' => $beginningBalance,
             'endingBalance' => $endingBalance,
+            'loanCategory'=>$loanCategory
         ]);
     }
 }
