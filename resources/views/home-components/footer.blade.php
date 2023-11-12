@@ -26,20 +26,16 @@
                     <p class="fw-bold">Office Hours</p>
                     <h6 style="color:rgb(165, 165, 165);">Monday to Friday</h6>
                     <h6 style="color:rgb(165, 165, 165);">8AM - 5PM</h6>
-
                 </div>
-
             </div>
             <div class="col-md-3 footer-set-col">
                 <div class="pt-5">
                     <p class="fw-bold">Links</p>
-                    <a href="#" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">About eBUPF</a> <br>
+                    <a href="{{ route('about-ebupf') }}" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">About eBUPF</a> <br>
                     <a href="#" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">FAQs</a> <br>
                     <a href="#" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">Privacy Policy</a> <br>
                     <a href="#" style="text-decoration: none; color:rgb(165, 165, 165);" class="hover-to-white">Terms and Conditions</a>
-
                 </div>
-
             </div>
             <div class="col-md-3 footer-set-col">
                 <div class="pt-5 pb-5">
@@ -62,5 +58,4 @@
             </div>
         </div>
     </div>
-
 </footer>
