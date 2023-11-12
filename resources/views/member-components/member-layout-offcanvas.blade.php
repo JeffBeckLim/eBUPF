@@ -17,10 +17,10 @@
 </script>
 <style> 
 /* Ensure that backdrop covers all screen for offcanvas sidebar */
-    .offcanvas-backdrop {
+    /* .offcanvas-backdrop {
       width: 100%;
-      height: 100%; /* Ensure a higher z-index than the navbar or other elements */
-    }
+      height: 100%; 
+      } */
 </style>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
 {{-- OFFCANVAS --}}

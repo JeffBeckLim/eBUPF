@@ -192,9 +192,10 @@
                             }
                         </style>
                         <tr>
-                            <th>Loan ID</th>
-                            <th>Loan Type</th>
                             <th>State</th>
+                            <th>Loan ID</th>
+                            <th >LOAN CODE</th>
+                            <th>Loan Type</th>
                             <th>Principal Borrower</th>
                             <th>Unit</th>
                             <th>Date Requested</th>
@@ -215,7 +216,23 @@
                     @endphp
                     @foreach ($loans as $loan)
                           <tr class="table-row" data-status="approved">
+                            <td>
+                                @if ($loan->loan->is_active == 2)
+                                    <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
+                                
+                                @elseif ($loan->loan->is_active == 1)
+                                    <i data-bs-toggle="tooltip" data-bs-placement="top" title="Permforming Loan" style="font-size: 9px;" class="bi bi-circle-fill text-primary"></i>
+                                @else
+                                    <i data-bs-toggle="tooltip" data-bs-placement="top" title="No state set" style="font-size: 9px;" class="bi bi-circle text-dark"></i>
+                                @endif
+                                
+                            </td>
                             <td class="fw-bold">{{$loan->loan->id}}</td>
+
+                            <td class="border-end">
+                                {{$loan->loan->loan_code}}
+                            </td>
+
                             @php $color = '' @endphp
                             @if ($loan->loan->loanCategory)
                                     @if ($loan->loan->loanCategory->loan_category_name == 'New')
@@ -239,16 +256,8 @@
                                 @endif
                             
                             </td>
-                            <td>
-                                
-                                @if ($loan->loan->is_active == 1)
-                                    <span class="text-primary">Performing</span>
-                                @elseif($loan->loan->is_active == 2)
-                                    <span class="text-dark">Closed</span>
-                                @elseif($loan->loan->is_active == null)
-                                    <i>n/a</i>
-                                @endif    
-                            </td>
+                            
+                            
                            
 
                             <td>
@@ -381,6 +390,10 @@
     </div>
 </div>
 <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
     // Generate days of the month
     var daySelect = document.getElementById("daySelect");
     var option = document.createElement("option");

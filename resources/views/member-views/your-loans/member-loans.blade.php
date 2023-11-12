@@ -53,9 +53,11 @@
                                     @endphp
                                     <!-- Status Card -->
                                     <a href="{{route('loan.details', ['id' => $loan->id])}}" class="text-decoration-none text-dark">
+                                        
                                         <div class="col-12 pb-3">
                                             <div class="card {{ $paid ? 'bg-bugreen' : '' }} rounded-4 shadow-sm loan_card">
                                                 <div class="row g-0 p-3">
+                                                   
                                                     <div class="col m-0 d-flex justify-content-center">
                                                         @if ($loan->loan_type_id == 1)
                                                         <img src="{{asset('icons/MPL-mini.svg')}}" alt="mini mpl icon" style="width: 40px">
@@ -93,7 +95,7 @@
                                                                 No amortization period yet
                                                             @endif
                                                         </p>
-                                                        <p class="m-0 fw-bold mt-4" style="font-size: 10px;">
+                                                        <p class="m-0 fw-bold mt-4" style="font-size: 12px;">
                                                             Monthly Payable
                                                             <span class="fw-normal">
                                                                 @if($loan->amortization)
@@ -120,6 +122,9 @@
                                                         @endif
 
                                                         
+                                                    </div>
+                                                    <div class="col-12 mb-1 text-end text-secondary" style="font-size: 10px">
+                                                        Code: <span class="fw-bold">{{$loan->loan_code}}</span>
                                                     </div>
 
                                                 
@@ -151,7 +156,12 @@
         </div>
     </div>
 </main>
-
+<style>
+      input[type="text"]
+    {
+        font-size:12px;
+    }
+</style>
 <script>
      
     document.addEventListener('DOMContentLoaded', function () {

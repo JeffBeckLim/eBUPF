@@ -53,6 +53,9 @@
                                 {{-- CARD --}}
                                 <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                     <div class="row  mt-2 g-0 ">
+                                        <div class="col-12 mb-1" style="font-size: 12px">
+                                            Code: <span class="fw-bold">{{$loan->loan->loan_code}}</span>
+                                        </div>
                                         <div class="col-lg-4 border mb-2 rounded ps-3 py-2">
 
                                             @if ($loan->loan->is_active == 1)

@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            //Unique Serial Number
+            $table->string('loan_code')->unique();
+
+
             $table->foreignId('member_id')->constrained('members');
 
             //nullable for now but this has to be filled

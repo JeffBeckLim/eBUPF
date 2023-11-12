@@ -49,8 +49,10 @@
                             
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
-                                    <th style="width: 5%">ID</th>
-                                    <th  style="width: 10%">Status</th>
+                                    <th  style="width: 5%">State</th>
+                                    <th>Loan ID</th>
+                                    <th >LOAN CODE</th>
+                                   
                                     <th>Details</th>
                                     <th class="text-center">. . .</th>
                                 </tr>
@@ -58,18 +60,23 @@
                             <tbody>
                                 @foreach ($loans as $loan)
                                     <tr>
-                                        <td style="width: 5%">
+                                        <td style="width: 5%" class="text-center">
+                                            @if ($loan->is_active == 2)
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
+                                        
+                                        @elseif ($loan->is_active == 1)
+                                            <i data-bs-toggle="tooltip" data-bs-placement="top" title="Permforming Loan" style="font-size: 9px;" class="bi bi-circle-fill text-primary"></i>
+                                        @else
+                                            <i data-bs-toggle="tooltip" data-bs-placement="top" title="No state set" style="font-size: 9px;" class="bi bi-circle text-dark"></i>
+                                        @endif
+                                        </td>
+                                        <td>
                                             {{$loan->id}}
                                         </td>
-                                        <td style="width: 10%">
-                                            @if ($loan->is_active == 2)
-                                            <h6 class="text-dark" style="font-size: small"> <i style="font-size: x-small" class="bi bi-stop-circle"></i> Closed </h6>
-                                            @elseif ($loan->is_active == 1)
-                                             <h6 class="text-primary" style="font-size: small"> <i style="font-size: xx-small" class="bi bi-circle-fill"></i> Performing </h6>
-                                            @else
-                                                Not specified
-                                            @endif
+                                        <td>
+                                            {{$loan->loan_code}}
                                         </td>
+                                        
                                         <td>
                                             <h6 class="fw-bold" style="font-size: 14px">
                                                 @if ($loan->loanCategory)

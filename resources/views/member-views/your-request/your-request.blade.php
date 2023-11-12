@@ -66,19 +66,27 @@
                         <table id="outgoing-request-table" class="table table-borderless">
                             <thead>
                                 <tr style="font-size: 14px">
+                                    <th>Info</th>
                                     <th scope="col">Loan</th>
                                     <th scope="col">Co-Borrower</th>
                                     <th scope="col">Status</th>
                                     <th></th>
-                                    <th></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($cb_withLoans as $cb_withLoan )
                                 <tr>
-                                    <td class="align-middle" style="width: 20%">
+                                    <td class="align-middle text-center" style="width: 10%">
+                                        <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}">
+                                            <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                        </a>
+                                    </td>
+                                    
+                                    <td class="align-middle" style="width: 25%">
                                         <div class="p-1" >
                                             <p class=" fw-bold mb-0" style="font-size: 12px">{{$cb_withLoan->loan->loanType->loan_type_name}}</p>
+                                            <p class=" mb-1" style="font-size: 12px">Code: <span class="fw-bold">{{$cb_withLoan->loan->loan_code}}</span></p>
                                             <p class="fs-7 mb-0"> Php {{number_format($cb_withLoan->loan->principal_amount, 2, '.',',')}}</p>
                                             @php
                                             
@@ -91,7 +99,7 @@
                                             {{-- <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($cb_withLoan->loan->created_at))}}</p> --}}
                                         </div>
                                     </td>
-                                    <td class="align-middle" style="width: 30%">
+                                    <td class="align-middle" style="width: 25%">
                                         <div class="d-flex align-items-center">
                                             <div class="row  w-100 m-0 p-0">
                                                 <div class="col-lg-3  m-0 p-0 text-center">
@@ -142,11 +150,7 @@
                                         @endif
                                         
                                     </td>
-                                    <td class="align-middle text-center" style="width: 15%">
-                                        <a href="/member/loan-application-details/{{$cb_withLoan->loan->id}}">
-                                            <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
-                                        </a>
-                                    </td>
+                                   
                                 </tr>
                                 @include('member-views.your-request.modal-cancel-request')
 

@@ -19,8 +19,11 @@
 
         <div class="border bg-white rounded-4 p-4 mt-2 " >
             <p class="text-center m-0 mt-4 fw-bold fs-5">{{$loan->LoanType->loan_type_description}} Application</p>
-            <p class="text-center pb-4 mb-5 fw-bold fs-7" style="border-bottom: 1px solid #DBDBDB; color: #00638D">Application Details</p>
+            <p class="text-center pb-4 mb-3 fw-bold fs-7" style="border-bottom: 1px solid #DBDBDB; color: #00638D">Application Details</p>
             <div class="row">
+                <div class="col-12 text-center border-bottom mb-3">
+                    <p class="appdetails-text">Loan code: <span class="text-dark fw-light">{{$loan->loan_code}}</span></p>
+                </div>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-6">

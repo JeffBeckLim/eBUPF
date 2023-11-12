@@ -50,13 +50,11 @@
                     <table id="incoming-request-table" class="table table-borderless mt-4" style=" background-color: white;">
                         <thead >
                             <tr style="font-size: 12px">
-                                <th class="text-center"  scope="col">Loan</th>
-                                {{-- THIS WILL SHOW ONLY ON SMALL SCREENS  --}}
-                                
-                                {{-- THIS WILL SHOW ONLY ON MEDIUM TO LARGE SCREENS  --}}
+                                <th class="text-center">Info</th>
+                                <th class="text-start"  scope="col">Loan</th>
                                 <th class="text-center"  scope="col">Principal Borrower</th>
                                 <th class="text-center">...</th>
-                                <th class="text-center">...</th>
+                                
                             
                                 
                             </tr>
@@ -68,16 +66,24 @@
                                         $try = App\Models\CoBorrower::findorfail($loan->loan->id)
                                     @endphp
 
-                                    <tr class="align-middle" >
-                                        <td > 
-                                            
+                                    <tr class="align-middle">
+                                        <td style="" class="text-center ">
+                                            @if ($try->accept_request != '0')
+                                                <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                            @endif
+                                        </td>
+                                        
+                                        <td class="text-start">  
                                                 @if (is_null($loan->loan->is_viewed && $try->accept_request >= 0))
                                                     <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
                                                 <p class="fs-7 fw-bold mb-0 mt-1">
-                                                <span class="fw-bold"> {{$loan->loan->loanType->loan_type_description}}</span>
+                                                 {{$loan->loan->loanType->loan_type_description}}
                                                 </p>
+                                                <p class=" mb-1" style="font-size: 12px">
+                                                    Code: <span class="fw-bold">{{$loan->loan->loan_code}}</span>
+                                                   </p>
                                                 <p class="fs-7 mb-0">Php {{number_format($loan->loan->principal_amount, 2, '.',',')}}</p>
                                                 <p class="m-0" style="font-size: 10px">{{date('M d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
                                             
@@ -147,12 +153,7 @@
 
                                         </td>
                         
-                                        <td style="" class="text-center ">
-                                            @if ($try->accept_request != '0')
-                                                <a href="/member/loan-application-details/{{$loan->loan->id}}"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                            @endif
-                                        </td>
-                                        
+                                       
                                         
                                     </tr>     
 

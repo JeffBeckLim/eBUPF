@@ -114,8 +114,10 @@
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
-                            <th class="sticky-header"></th>
+                            <th class="sticky-header">State</th>
                             <th class="sticky-header">Loan ID</th>
+                            <th class="sticky-header">LOAN CODE</th>
+
                             <th class="sticky-header">Loan Type</th>
                             <th class="sticky-header">Name</th>
                             <th class="sticky-header">Unit</th>
@@ -184,6 +186,9 @@
                                 {{-- loan ID --}}
                                 <td>
                                     {{$loan->id}}
+                                </td>
+                                <td class="border-end">
+                                    {{$loan->loan_code}}
                                 </td>
 
                                 {{-- loan Type --}}

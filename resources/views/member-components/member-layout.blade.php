@@ -127,22 +127,10 @@
 
 </head>
 <style>
-
-#content {
-    animation: fadeInAnimation ease 0.2s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-}
- 
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
+    .modal-backdrop{
+        width: 100%;
+        height: 100%;
     }
-    100% {
-        opacity: 1;
-     }
-}
-
 </style>
 
 <body class="p-0 m-0 border-0 overflow-x-hidden">

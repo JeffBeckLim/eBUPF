@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CoBorrower;
 use App\Models\Loan;
-use App\Models\LoanApplicationState;
-use App\Models\LoanApplicationStatus;
 use App\Models\User;
 use App\Models\Payment;
 use App\Models\Witness;
+use App\Models\CoBorrower;
 use GuzzleHttp\Psr7\Query;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\LoanApplicationState;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\LoanApplicationStatus;
 use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
@@ -271,16 +272,23 @@ class LoanApplicationController extends Controller
         return view('member-views.loan-applications.loan-applications', compact('loans'));
     }
 
+    // generate unique loan ID
+    public function generateId(){
+        do {
+            $currentDateTime = now();
+            // Format date and time to create a string
+            $dateTimeString = $currentDateTime->format('Y-j-');
+            $randomString = strtoupper(Str::random(3));
+            $randomString1 = strtoupper(Str::random(3));
+            // Combine the formatted date/time and the random string to create a unique ID
+            $uniqueId = $dateTimeString . $randomString . "-" . $randomString1;
+        } while (Loan::where('loan_code', $uniqueId)->exists());
 
-
-
-
-
-
+        return($uniqueId);
+    }
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
-    public function storeRequest(Request $request, $loanTypeId){
-        // dd($request);
+    public function storeRequest(Request $request, $loanTypeId){ 
         if($loanTypeId > 2){
             abort(404);
         }
@@ -290,40 +298,29 @@ class LoanApplicationController extends Controller
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
             'witness_name_1'=>'required',
             'witness_name_2'=>'required',
-            // 'email_witness_1'=> 'required|email|exists:users,email',
-            // 'email_witness_2'=> 'required|email|exists:users,email',
         ]);
 
-        // check if the email inputs are the same with the User's logged in email
-        // -- I COMMENTED THIS OUT FIRST FOR TESTING PURPOSES SO DEVELOPERS CAN TEST THE CO-BORROWER FUNCTIONALITY
-        // -- WITH THE LOGGED IN EMAIL
-        // if(
-        //     $request->email_co_borrower == Auth::user()->email ||
-        //     $request->email_witness_1 == Auth::user()->email ||
-        //     $request->email_witness_2 == Auth::user()->email)
+        // check if co borrower email is the same with user logged in 
+        // COMMENTED OUT FOR TESTING
+        // if($request->email_co_borrower == Auth::user()->email )
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
-        // if($request->email_witness_1 == $request->email_witness_2 ||
-        //     $request->email_witness_1 == $request->email_co_borrower ||
-        //     $request->email_witness_2 == $request->email_co_borrower
-        // ){
-        //     return back()->with('email_error', 'Make sure all emails are unique');
-        // }
-
+        
+        // check if co borrower is verified and is a member
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
-        // $witness_1 = User::where('email', $request->email_witness_1)->with('member')->first();
-        // $witness_2 = User::where('email', $request->email_witness_2)->with('member')->first();
-
+        
         if(
-            !$co_borrower->member->verified_at
-            // || !$witness_1->member->verified_at
-            // || !$witness_2->member->verified_at
+            !$co_borrower->member->verified_at ||
+            $co_borrower->user_type != 'member'
         ){
-            return back()->with('email_error', 'Make sure that all emails are from verified eBUPF members');
+            return back()->with('email_error', 'Make sure that co-borrower email is a verified eBUPF member');
         }
 
+        $uniqueId=$this->generateId();
+
         $loan = Loan::create([
+            'loan_code'=> $this->generateId(),
             'member_id'=>Auth::user()->id,
             'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
@@ -346,6 +343,7 @@ class LoanApplicationController extends Controller
             'loan_id'=>$loan->id,
         ]);
 
+        // check for additional loans
         $user = Auth::user();
         if($user->member->additional_loan > 0){
             $user->member->additional_loan = 0;
