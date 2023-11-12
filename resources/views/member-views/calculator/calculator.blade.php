@@ -2,44 +2,54 @@
 
 @section('content')
 
-    <div class="bg-white rounded px-3 pt-2 pb-4 m-3 shadow-sm">
+    <div class="bg-white rounded px-3 pt-2 pb-4 mt-3 ms-2 border">
         <div class="d-flex align-items-center p-3 gap-3">
             <img src="{{asset('icons/calculator.svg')}}" alt="calculator logo" width="30px" height="50px">
             <span style="font-size: 20px; font-weight: bold; color: #000834;">Loan Calculator</span>
         </div>
-        <div style="margin-left: 100px; margin-top: -15px; font-size: 0.9rem;">
-           proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit
-        </div>
-        <div class="row gap-md-5 mx-4 mt-3">
-            <div class="col-md-4 bg-white rounded-3 border bg-white px-2 pt-2 pb-2 mb-2 shadow-sm">
+        <div class="row mx-lg-4 mx-2" style="font-size: 12px">
+            Choose loan type, enter your principal amount, and loan term to calculate your monthly amortization. Get clear and quick insights into your payments.
+         </div>
+        <div class="row gap-md-5 mx-lg-4 mx-1 mt-3">
+            
+            <div class="col-md-4 bg-white rounded-3 border px-2 pt-2 pb-3 mb-2 shadow-sm ">
                 <form action="{{route('calculate')}}" method="post">
                     @csrf
                     <div style="padding: 10px 10px 0 10px;">
                         <span class="fw-bold fs-6">Loan Category </span><span class="text-danger fw-bold">*</span> <br>
                         <div style="padding: 5px 0 0 13px;">
-                            <div class="row pt-1">
-                                <div class="col-lg-6">
-                                    <input type="radio" id="mpl" name="loan_category" value="mpl" required>
-                                    <label for="mpl" class="fs-7">Multi-Purpose</label>
+                            <span style="font-size: 12px" class="text-secondary">Multi-purpose (MPL) or Housing (HsL) loan</span>
+                            <div class="row pt-1 d">
+                                <div class="col-6">
+                                    {{-- <input type="radio" id="mpl" name="loan_category" value="mpl" required>
+                                    <label for="mpl" class="fs-7">Multi-Purpose</label> --}}
+                                    <input type="radio" class="btn-check" name="loan_category" id="option1" autocomplete="off" value="mpl" checked>
+                                    <label class="btn btn-outline-dark w-100" for="option1">MPL <span style="font-size: 10px">6% INT.</span></label>
                                 </div>
-                                <div class="col-lg-5">
-                                    <input type="radio" id="hsl" name="loan_category" value="hsl">
-                                    <label for="hsl" class="fs-7">Housing</label>
+                                <div class="col-6">
+                                    {{-- <input type="radio" id="hsl" name="loan_category" value="hsl">
+                                    <label for="hsl" class="fs-7">Housing</label> --}}
+                                    <input type="radio" class="btn-check" name="loan_category" id="option2" autocomplete="off" value="hsl">
+                                    <label class="btn btn-outline-dark w-100" for="option2">HsL <span style="font-size: 10px">9% INT.</span></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-2 pt-2">
                             <div class="col-md-8">
+                                
                                 <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
+                                <h6 style="font-size: 12px" class="text-secondary">Loan Amount (min: 50k)</h6>
                                 <div class="d-flex align-items-center">
-                                    <input type="number"  name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="1" max="200000" required>
-                                    <span style="margin-left: 5px;">
+                                    <input type="number"  name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="50000" max="200000" required>
+                                    {{-- <span style="margin-left: 5px;">
                                         <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The principal amount you want to calculate"></i>
-                                    </span>
+                                    </span> --}}
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <label for="term" class="fw-bold">Year/s <span class="text-danger fw-bold">*</span></label>
+                                
+                                <h6 style="font-size: 12px" class="text-secondary">Loan Term</h6>
                                 <select name="term" id="term" class="form-control" required>
                                     <option value="" disabled selected>0</option>
                                     <option value="1">1</option>
@@ -52,6 +62,7 @@
                         </div>
                         <div class="mt-2 pt-2">
                             <label for="prevLoan" class="fw-bold fs-6">Add Previous Loan</label>
+                            <h6 style="font-size: 12px">Loan balance from a currently active loan</h6>
                             <input type="number" name="prevLoan" id="prevLoan" class="form-control" placeholder="Enter previous loan">
                         </div>
                         <div class="d-flex justify-content-end mt-3 pt-2">
@@ -67,8 +78,17 @@
                         Result
                     </div>
                     <div class="row">
+                        
                         <div class="col-md-7">
                             <div class="row mt-3">
+                                <div class="col-7 fs-7">
+                                    Loan Category
+                                </div>
+                                <div class="col-5 fs-7 fw-bold">
+                                    {{ isset($loanCategory)? strtoupper($loanCategory) : '' }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
                                 <div class="col-7 fs-7">
                                     Loan Amount
                                 </div>
@@ -126,7 +146,7 @@
                             </div>
                         </div>
                         <div class="col-md-5">
-                            <canvas id="myPieChart" style="max-width: 225px; height: 225px; margin: 0 auto;"></canvas>
+                            <canvas id="myPieChart" style="max-height: 225px; max-width: 225px; height: 225px; margin: 0 auto;"></canvas>
                         </div>
                         <div class="pt-2">
                                 <a href="#" class="btn d-flex justify-content-center align-items-center fs-7 text-white"
@@ -200,22 +220,22 @@
                 Loan Categories
             </div>
             <div class="fs-7 mt-2" style="margin-left: 25px;">
-                <span class="fw-bold">Multi-Purpose Loan </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold" style="color: orange">Multi-Purpose Loan </span> 6% interest - Unrestricted funds for various personal needs, with no specified purpose. Typically unsecured, based on creditworthiness.
             </div>
             <div class="fs-7 mt-2" style="margin-left: 25px;">
-                <span class="fw-bold">Housing Loan </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold" style="color: rgb(65, 160, 198)">Housing Loan </span> 9% interest -  Exclusive financing for housing-related expenses like buying or renovating a home. Secured by the property, with competitive interest rates.
             </div>
             <div class="fs-7 mt-2">
-                <span class="fw-bold">Monthly Principal and Monthly Interest</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold">Monthly Principal and Monthly Interest</span> The monthly principal refers to the portion of a loan payment that goes towards repaying the original amount borrowed. Monthly interest represents the cost of borrowing for a specific period. In a loan payment, it is the portion allocated to compensating the lender for providing the funds.
             </div>
             <div class="fs-7 mt-2">
-                <span class="fw-bold">Monthly Payable</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold">Monthly Payable</span> =  Monthly Principal + Monthly Intrest
             </div>
             <div class="fs-7 mt-2">
-                <span class="fw-bold">Total Amount</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold">Total Amount</span> = Monthly payable * Loan term - refers to the overall sum that a borrower will repay over the entire duration of the loan. It includes both the original amount borrowed (the principal) and the interest accrued during the repayment period. 
             </div>
             <div class="fs-7 mt-2">
-                <span class="fw-bold">Total Months</span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ipsum suspendisse ultrices gravida dictum fusce ut.
+                <span class="fw-bold">Total Months</span> - Months in the loan term (Loan Term Years * 12).
             </div>
         </div>
     </div>

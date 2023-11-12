@@ -169,14 +169,14 @@
           </li>
 
           <li class="hover-menu">
-            <a class="d-flex align-items-center {{$loanType == 1 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}">
+            <a class="d-flex align-items-center {{$loanType == 1 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table'])}}">
               <i style="font-size: 20px; color: #0038FF" class="bi bi-layers{{$loanType == 1? '-fill' : ''}} me-2"></i> 
               Multi-purpose Loans
             </a>
           </li>
 
           <li class="hover-menu">
-            <a class="d-flex align-items-center {{$loanType == 2 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}">
+            <a class="d-flex align-items-center {{$loanType == 2 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table'])}}">
               <i style="font-size: 20px; color: #FF0000" class="bi bi-house{{$loanType == 2 ? '-fill' : ''}} me-2"></i> 
               Housing Loans
             </a>

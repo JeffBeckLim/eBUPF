@@ -98,6 +98,7 @@
             th, td{
                 font-size: 12px !important;
             }
+
         </style>
 
         <a class="btn mt-2" style="font-size: 12px; color:#36276b"
@@ -113,6 +114,7 @@
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
+                            <th class="sticky-header"></th>
                             <th class="sticky-header">Loan ID</th>
                             <th class="sticky-header">Loan Type</th>
                             <th class="sticky-header">Name</th>
@@ -167,7 +169,18 @@
                     <tbody>
                         @foreach ($loans as $loan)
                             <tr class="table-row" data-status="">
-
+                                {{-- loan stats --}}
+                                <td>
+                                    @if ($loan->is_active == 2)
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
+                                    
+                                    @elseif ($loan->is_active == 1)
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Permforming Loan" style="font-size: 9px;" class="bi bi-circle-fill text-primary"></i>
+                                    @else
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="No state set" style="font-size: 9px;" class="bi bi-circle text-dark"></i>
+                                    @endif
+                                    
+                                </td>
                                 {{-- loan ID --}}
                                 <td>
                                     {{$loan->id}}
