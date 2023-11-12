@@ -105,6 +105,7 @@
                                                                         @endif
                                                                         </p>
                                                                     </div>
+                                                                    
                                                                 </div>
                                                                 <div class="row mb-2 g-0">
                                                                     <div class="col-6 ">
@@ -119,6 +120,9 @@
                                                                     <div class="col-6  text-end" style="line-height: 90%">
                                                                         <span class="text11-design fw-bold p-0">{{$loan->remainingMonths}}</span>  <span class="text12-design p-0">months to pay</span>
                                                                     </div>
+                                                                    <div class="col-12  mt-1 text-end text-secondary" style="font-size: 12px">
+                                                                        Code: <span class="fw-bold">{{$loan->loan_code}}</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </a>
@@ -131,6 +135,7 @@
                                 <div style="background: white; border-radius: 10px; border: 0.50px #ACACAC solid;">
                                     <div class="container">
                                         <div class="row mt-2 mx-lg-2">
+                                            
                                             <div class="col-md-4 pt-2">
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
@@ -169,6 +174,9 @@
                                                 {{-- CARD --}}
                                                 <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                                     <div class="row  mt-2 g-0 ">
+                                                        <div class="col-12 mb-1" style="font-size: 12px">
+                                                            Code: <span class="fw-bold">{{$inActiveLoan->loan->loan_code}}</span>
+                                                        </div>
                                                         <div class="col-lg-3 col-12   border rounded px-2 pt-2 pb-2">
                                                             @php
                                                                 $status_array=[];

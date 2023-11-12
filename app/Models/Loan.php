@@ -12,6 +12,9 @@ class Loan extends Model
     protected $fillable = [
         'member_id',
         'loan_type_id',
+
+        'loan_code', //secondary unique identifier
+
         'amortization_id',
         'adjustment_id',
         'loan_category_id',
@@ -24,6 +27,10 @@ class Loan extends Model
         'is_visible',
         'is_active',
         'is_viewed',
+
+        'penalty_id',
+        'deleted_at',
+        'last_edited_by'
     ];
     //belongs to one member
     public function member()
