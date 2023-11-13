@@ -26,6 +26,13 @@
             <label for="term_years">Loan Term</label>
             <input class="form-control" type="number" name="term_years" id="term_years" value="{{$loan->term_years}}">
             
+            <label for="loan_category">Loan Type</label>
+            <select id="loan_category" class="form-select form-control" aria-label="Default select example" name='loan_category'>
+              <option value="" {{$loan->loan_category_id == null? 'selected' : ''}}>None</option>
+              @foreach ($loan_categories as $loan_category)
+                  <option value="{{$loan_category->id}}" {{$loan->loan_category_id == $loan_category->id? 'selected' : ''}}>{{$loan->loan_category_id == $loan_category->id? '✔️' : ''}}{{$loan_category->loan_category_name}}</option>
+              @endforeach
+            </select>
             {{-- @if ($loan->amortization == null)
               <label class="pt-3"  for="term_years">Start of Amortization</label>
               <h6 style="font-size: x-small">To add 'interest' start of amortization is requried</h6>

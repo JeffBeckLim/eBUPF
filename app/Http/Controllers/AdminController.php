@@ -100,6 +100,15 @@ class AdminController extends Controller
 
         $loans = Loan::with('loanApplicationStatus')->get();
 
+        // count loan applications accepted by CB
+        $count_application_mpl = 0;
+        $count_application_hsl = 0;
+        $loan_apps_accepted = CoBorrower::whereNotNull('accept_request')->with('loan')->get();
+        
+        foreach($loan_apps_accepted as $accepted){
+            $accepted->loan->loan_type_id == 1 ? $count_application_mpl+=1 : $count_application_hsl+=1;
+        }   
+
         // bar chart
         $no_status_mpl = 0;
         $staff_mpl = 0;
@@ -117,36 +126,35 @@ class AdminController extends Controller
         $picked_hsl=0;
         $rejected_hsl=0;
 
-        $count_application_mpl = 0;
-        $count_application_hsl = 0;
+        
 
         foreach($loans as $loan){
-            $loan->loan_type_id == 1 ? $count_application_mpl+=1 : $count_application_hsl+=1;
-            if(count($loan->loanApplicationStatus)==0){
-                $loan->loan_type_id == 1 ? $no_status_mpl+=1 : $no_status_hsl+=1;
-            }else{
-            foreach($loan->loanApplicationStatus as $status){
-                
-               
-                    if($status->loan_application_state_id == 1){
-                        $loan->loan_type_id == 1 ? $staff_mpl+=1 : $staff_hsl+=1;
+            $temp = CoBorrower::where('loan_id', $loan->id)->first();
+            if($temp->accept_request != null){ 
+                if(count($loan->loanApplicationStatus)==0){
+                    $loan->loan_type_id == 1 ? $no_status_mpl+=1 : $no_status_hsl+=1;
+                }else{
+                foreach($loan->loanApplicationStatus as $status){
+                        
+                        if($status->loan_application_state_id == 1){
+                            $loan->loan_type_id == 1 ? $staff_mpl+=1 : $staff_hsl+=1;
+                        }
+                        else if($status->loan_application_state_id == 2){
+                            $loan->loan_type_id == 1 ? $analyst_mpl+=1 : $analyst_hsl+=1;
+                        }
+                        else if($status->loan_application_state_id == 3){
+                            $loan->loan_type_id == 1 ? $approved_mpl=1 : $approved_hsl+=1;
+                        }
+                        else if($status->loan_application_state_id == 4){
+                            $loan->loan_type_id == 1 ? $check_mpl=1 : $check_hsl+=1;
+                        }
+                        else if($status->loan_application_state_id == 5){
+                            $loan->loan_type_id == 1 ? $picked_mpl=1 : $picked_hsl+=1;
+                        }
+                        else if($status->loan_application_state_id == 6){
+                            $loan->loan_type_id == 1 ? $rejected_mpl=1 : $rejected_hsl+=1;
+                        }      
                     }
-                    else if($status->loan_application_state_id == 2){
-                        $loan->loan_type_id == 1 ? $analyst_mpl+=1 : $analyst_hsl+=1;
-                    }
-                    else if($status->loan_application_state_id == 3){
-                        $loan->loan_type_id == 1 ? $approved_mpl=1 : $approved_hsl+=1;
-                    }
-                    else if($status->loan_application_state_id == 4){
-                        $loan->loan_type_id == 1 ? $check_mpl=1 : $check_hsl+=1;
-                    }
-                    else if($status->loan_application_state_id == 5){
-                        $loan->loan_type_id == 1 ? $picked_mpl=1 : $picked_hsl+=1;
-                    }
-                    else if($status->loan_application_state_id == 6){
-                        $loan->loan_type_id == 1 ? $rejected_mpl=1 : $rejected_hsl+=1;
-                    }
-                
                 }
             }
         }

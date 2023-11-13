@@ -101,7 +101,7 @@
                                                                 @if($loan->amortization)
                                                                 Php {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
                                                                 @else
-                                                                No amortization yet.
+                                                                <h6 class="text-primary" style="font-size: 10px">Awaiting for updates...</h6>
                                                                 @endif
                                                             </span>
                                                         </p>
@@ -123,7 +123,7 @@
 
                                                         
                                                     </div>
-                                                    <div class="col-12 mb-1 text-end text-secondary" style="font-size: 10px">
+                                                     <div class="col-12 mb-1 text-end text-secondary" style="font-size: 10px">
                                                         Code: <span class="fw-bold">{{$loan->loan_code}}</span>
                                                     </div>
 
