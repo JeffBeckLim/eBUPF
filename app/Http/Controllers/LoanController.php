@@ -35,6 +35,19 @@ class LoanController extends Controller
         ->orderBy('created_at', 'desc') // Sort by created_at in descending order
         ->get();
 
+        $i=0;
+        foreach($loans as $loan){
+            $loanStatus = [];
+            foreach($loan->loanApplicationStatus as $status){
+                array_push($loanStatus, $status->loan_application_state_id);
+            }
+            if(!in_array(5,$loanStatus)){
+                unset($loans[$i]);
+            }
+            $i += 1;
+        }
+        // dd($loans);
+
         // Get all payments of the member
         $payments = Payment::where('member_id', $memberID)
             ->get();

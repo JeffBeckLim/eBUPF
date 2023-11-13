@@ -264,7 +264,7 @@
                      @endif   
                   </h6>
                   <span>
-                     <h6 style="font-size: 10px">Num of loan applications</h6>
+                     <h6 style="font-size: 10px">Num of loan applications (Accepted By Co-borrower)</h6>
                      <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="btn btn-outline-primary">
                         @if($count_application_mpl > 0)
                            {{$count_application_mpl}}  

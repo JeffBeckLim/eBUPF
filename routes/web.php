@@ -32,6 +32,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LedgerFilterController;
 use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
+use App\Http\Controllers\LoanLogController;
 use App\Models\Penalty;
 
 /*
@@ -234,6 +235,10 @@ use App\Models\Penalty;
     Route::get('/admin/remittance/view/logs', [AdminRemittanceController::class, 'showLogsRemittance'])/* ->middleware('auth','admin.access') */->name('logs.remittance');
     //delete payment
     Route::delete('/admin/remittance/view/payment/delete/{id}', [AdminRemittanceController::class, 'deletePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('delete.payment.remittance');
+
+    Route::get('/admin/logs/loan', [LoanLogController::class, 'show'])->name('loan.logs');
+
+
 
  //ADMIN ======================================================================================================
 

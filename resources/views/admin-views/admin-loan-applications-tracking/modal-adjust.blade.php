@@ -15,7 +15,7 @@
         <form action="{{route('update.principalAmount',$loan->loan->id)}}" method="POST">
             @csrf
             <label for="principal_amount">Amount Requested / Principal Amount</label>
-            <input class="form-control" type="number" name="principal_amount" id="principal_amount" value="{{$loan->loan->principal_amount}}">
+            <input class="form-control" type="decimal" name="principal_amount" id="principal_amount" value="{{$loan->loan->principal_amount}}" step=".01">
              
         </div>
             <div class="modal-footer">

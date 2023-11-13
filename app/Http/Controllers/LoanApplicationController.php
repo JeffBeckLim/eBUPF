@@ -14,6 +14,9 @@ use App\Models\LoanApplicationState;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\LoanApplicationStatus;
+use App\Models\LoanLog;
+use App\Models\LoanType;
+
 use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
@@ -342,8 +345,7 @@ class LoanApplicationController extends Controller
             return back()->with('email_error', 'Make sure that co-borrower email is a verified eBUPF member');
         }
 
-        $uniqueId=$this->generateId();
-
+        
         $loan = Loan::create([
             'loan_code'=> $this->generateId(),
             'member_id'=>Auth::user()->id,
@@ -351,6 +353,21 @@ class LoanApplicationController extends Controller
             'principal_amount'=>$formFields['principal_amount'],
             'original_principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
+        ]);
+
+        // create log
+        $loan_type = LoanType::find($loanTypeId);
+        LoanLog::create([
+            'loan_id_log'=>$loan->id,
+            'loan_code_log'=>$loan->loan_code,
+            'loan_type_log'=>$loan_type->loan_type_name,
+            // 'loan_category_log',
+            'principal_amount_log'=>$loan->principal_amount,
+            // 'interest_log',
+            // 'is_active_log',
+            'term_years_log'=>$loan->term_years,
+            'create_update_or_delete'=>'create',
+            'updated_by'=>Auth::user()->member->id,
         ]);
 
         CoBorrower::create([
@@ -389,16 +406,26 @@ class LoanApplicationController extends Controller
                 return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
             }
             else{
-                // $witnesses = Witness::where('loan_id' , $id)->with('loan')->get();
                 $loan = Loan::find($id);
-
-                // foreach ($witnesses as $witness) {
-                //     $witness->delete();
-                // }
-                // $co_borrower->delete();
                 $loan->deleted_at = now();
                 $loan->is_active = 2;
                 $loan->save();
+
+                // create log
+                $loan_type = LoanType::find($loan->loan_type_id);
+                LoanLog::create([
+                    'loan_id_log'=>$loan->id,
+                    'loan_code_log'=>$loan->loan_code,
+                    'loan_type_log'=>$loan_type->loan_type_name,
+                    // 'loan_category_log',
+                    'principal_amount_log'=>$loan->principal_amount,
+                    // 'interest_log',
+                    'is_active_log'=>$loan->is_active,
+                    'term_years_log'=>$loan->term_years,
+                    'deleted_at_log'=>$loan->deleted_at,
+                    'create_update_or_delete'=>'delete',
+                    'updated_by'=>Auth::user()->member->id,
+                ]);
 
                 return back()->with('passed' ,'Loan Application Cancelled.');
             }
