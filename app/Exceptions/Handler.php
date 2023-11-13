@@ -32,7 +32,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof HttpException && $exception->getStatusCode() == 403) {
-            $customMessage = 'Oops! You are not allowed to access this page. You may have a pending loan application.';
+            $customMessage = 'Oops! You cannot access this page.';
             $default = 'Cannot Access';
             return response()->view('member-views.errors.403',  compact('customMessage', 'default'), 403);
         }
