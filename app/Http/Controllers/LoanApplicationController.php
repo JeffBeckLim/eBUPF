@@ -288,10 +288,35 @@ class LoanApplicationController extends Controller
     }
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
-    public function storeRequest(Request $request, $loanTypeId){ 
+    public function storeRequest(Request $request, $loanTypeId){
         if($loanTypeId > 2){
             abort(404);
         }
+        // check if there is a pending/inactive loan
+        $inActiveLoan = CoBorrower::with(
+            'member.units.campuses',
+            'loan.member.units.campuses',
+            'loan.loanApplicationStatus.loanApplicationState',
+            'loan.loanType'
+        )
+        ->whereHas('loan', function ($query) {
+            $query->where(function ($query) {
+                $query->where('member_id', Auth::user()->member->id)
+                    ->orWhereNull('member_id')
+                    ->orWhere('member_id', 0);
+            })
+            ->where(function ($query) {
+                $query->where('is_active', 0)
+                    ->orWhereNull('is_active')
+                    ->orWhere('is_active', 0);
+            });
+        })->first();
+
+        // if there is a pending/inactive loan, return abort 403
+        if(!empty($inActiveLoan)){
+            abort(403);
+        }
+
         $formFields = $request->validate([
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
@@ -300,16 +325,16 @@ class LoanApplicationController extends Controller
             'witness_name_2'=>'required',
         ]);
 
-        // check if co borrower email is the same with user logged in 
+        // check if co borrower email is the same with user logged in
         // COMMENTED OUT FOR TESTING
         // if($request->email_co_borrower == Auth::user()->email )
         // {
         //     return back()->with('email_error', 'You cannot enter your own email');
         // }
-        
+
         // check if co borrower is verified and is a member
         $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
-        
+
         if(
             !$co_borrower->member->verified_at ||
             $co_borrower->user_type != 'member'
