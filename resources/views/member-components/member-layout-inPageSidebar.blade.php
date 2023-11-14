@@ -112,7 +112,7 @@
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
 
-                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('loan.applications','outgoing.request') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoanApplications" aria-expanded="false" aria-controls="collapseLoanApplications">
+                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('loan.applications','loan.applications.all','loan.applications.evaluated','outgoing.request') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoanApplications" aria-expanded="false" aria-controls="collapseLoanApplications">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
                                     <i style="font-size: 23px; color: #FF6F19;" class="bi bi-file-earmark-check-fill"></i>
@@ -128,7 +128,7 @@
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications')}}">Loan Applications</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications.all')}}">Loan Applications</a>
                                 </div>
 
                                 <div class="co-12  p-2">
