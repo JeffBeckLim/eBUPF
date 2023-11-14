@@ -315,3 +315,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->midd
 Route::get('/about-ebupf', function () {
     return view('about-ebupf');
 })->middleware('verified.access')->name('about-ebupf');
+
+
+// About MPL
+Route::get('/about/multi-purpose-loan', function () {
+    return view('about-mpl');
+})->middleware('verified.access')->name('about-mpl');
+
+
+// About HL
+Route::get('/about/housing-loan', function () {
+    return view('about-hsl');
+})->middleware('verified.access')->name('about-hsl');

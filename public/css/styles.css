@@ -456,12 +456,6 @@ input.invalid {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.278);
 }
 
-.orange-tag {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
 .icon1 {
     color: white;
     font-size: 28px;
@@ -1538,6 +1532,11 @@ tbody tr:nth-child(odd) td {
     .get-to-know {
         height: auto !important;
     }
+    .remove-border {
+        border-right: none !important;
+        text-align: center;
+        padding-top: 10px;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -1689,7 +1688,7 @@ tbody tr:nth-child(odd) td {
     padding: 0 100px;
 }
 
-.timeline {
+.timeline-1 {
     position: relative;
     height: 200px;
     display: flex;
@@ -1877,4 +1876,125 @@ input:checked~.accordion-content {
 
 #goToTopBtn:hover {
     background-color: #004e70;
+}
+
+.more-details-btn:hover {
+    color: #a1430d !important;
+}
+
+.timeline {
+    margin: 10px;
+    position: relative !important;
+}
+
+.timeline li {
+    display: flex !important;
+    line-height: 1;
+}
+
+.timeline--date {
+    flex: 0 0 50px;
+    color: #999;
+    font-size: 90%;
+    text-align: right !important;
+    margin-right: 50px;
+    font-weight: bold;
+}
+
+.timeline--circle {
+    flex: 0 0 30px;
+    position: relative !important;
+    text-align: center !important;
+}
+
+.timeline--circle:before {
+    content: "";
+    position: absolute !important;
+    height: 100%;
+    width: 4px;
+    background: #00638D;
+    margin: auto;
+    right: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.timeline--circle i {
+    transition: all 0.4s ease-in-out;
+    position: relative !important;
+    display: inline-block !important;
+    background: #00638D;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    z-index: 3;
+}
+
+.timeline--description {
+    margin-left: 50px;
+    margin-top: -20px;
+    padding-bottom: 40px;
+}
+
+
+/*For the first timeline item*/
+
+.timeline li .timeline--date,
+.timeline li {
+    margin-top: 15px;
+}
+
+.timeline li .timeline--circle:before {
+    margin-top: 15px;
+}
+
+.timeline li .timeline--circle:after {
+    content: "";
+    background: transparent;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #00638D;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timeline li i {
+    background: transparent;
+    width: 40px;
+    height: 40px;
+}
+
+.timeline li i:after {
+    content: "";
+    background: #00638D;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute !important;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/*Now let us start do the hover effects*/
+
+.timeline li:hover .timeline--date {
+    color: #555;
+}
+
+.orange-tag {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 60px;
 }
