@@ -68,8 +68,8 @@
                                 <tr style="font-size: 14px">
                                     <th>Info</th>
                                     <th scope="col">Loan</th>
-                                    <th scope="col">Co-Borrower</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Co-Borrower (CB)</th>
+                                    <th scope="col">CB Status</th>
                                     <th></th>
                                     
                                 </tr>

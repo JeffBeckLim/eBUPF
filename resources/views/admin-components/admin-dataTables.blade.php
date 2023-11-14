@@ -68,7 +68,7 @@
 
         new DataTable('#loanApplicationTable', {
             fixedColumns: {
-            left: 6,
+            left: 7,
         },
         order: [[0, 'desc']],
         paging: true,

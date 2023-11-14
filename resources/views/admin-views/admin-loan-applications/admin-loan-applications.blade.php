@@ -96,7 +96,7 @@
         </form>
         <style>
             th, td{
-                font-size: 12px !important;
+                font-size: 11px !important;
             }
 
         </style>
@@ -184,10 +184,10 @@
                                     
                                 </td>
                                 {{-- loan ID --}}
-                                <td>
+                                <td class="fw-bold">
                                     {{$loan->id}}
                                 </td>
-                                <td class="border-end">
+                                <td class="border-end fw-bold">
                                     {{$loan->loan_code}}
                                 </td>
 

@@ -35,7 +35,7 @@ return new class extends Migration
 
             $table->integer('term_years');
 
-            $table->integer('is_visible')->nullable();
+            // $table->integer('is_visible')->nullable();
 
             $table->integer('is_active')->nullable();
 

@@ -188,7 +188,7 @@
                     <thead style="border-bottom: 2px solid black">
                         <style>
                             th, td{
-                                font-size: 12px !important;
+                                font-size: 11px !important;
                             }
                         </style>
                         <tr>
@@ -200,11 +200,11 @@
                             <th>Unit</th>
                             <th>Date Requested</th>
                             <th>Amt. Requested</th>
-                            <th class="text-secondary">Staff</th>
-                            <th class="text-secondary">Loan Analyst</th>
-                            <th class="text-secondary">Exe. Director</th>
-                            <th class="text-secondary">Check</th>
-                            <th class="text-secondary">Chk. Picked Up</th>
+                            <th class="text-secondary"><i class="bi bi-1-circle"></i> Staff</th>
+                            <th class="text-secondary"><i class="bi bi-2-circle"></i> Loan Analyst</th>
+                            <th class="text-secondary"><i class="bi bi-3-circle"></i> Exe. Director</th>
+                            <th class="text-secondary"><i class="bi bi-4-circle"></i> Check</th>
+                            <th class="text-secondary"><i class="bi bi-5-circle"></i> Chk. Picked Up</th>
                             <th>Final</th>
                             <th>Edit Standing</th>
                             <th>More..</th>
@@ -216,7 +216,7 @@
                     @endphp
                     @foreach ($loans as $loan)
                           <tr class="table-row" data-status="approved">
-                            <td>
+                            <td class="text-center">
                                 @if ($loan->loan->is_active == 2)
                                     <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
                                 
@@ -229,7 +229,7 @@
                             </td>
                             <td class="fw-bold">{{$loan->loan->id}}</td>
 
-                            <td class="border-end">
+                            <td class="border-end fw-bold">
                                 {{$loan->loan->loan_code}}
                             </td>
 
@@ -269,13 +269,13 @@
 
                             <td>{{$loan->loan->member->units->unit_code}}</td>
 
-                            <td>{{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}</td>
+                            <td>{{ date("M j, Y", strtotime($loan->loan->created_at))}}</td>
 
                             <td class="fw-bold">
                                 <a type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"  style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
                                 {{number_format($loan->loan->principal_amount, 2, '.',',')}}    
                             </td>
-                            <td class="text-center">
+                            <td class="text-center border-start" >
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                     @if ($status->loan_application_state_id == 1)
                                         <i class="bi bi-check-circle-fill text-primary"></i>
@@ -309,7 +309,7 @@
                                 @endforeach
                             </td>
 
-                            <td class="text-center">
+                            <td class="text-center border-end">
                                 
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                     @if ($status->loan_application_state_id == 5)

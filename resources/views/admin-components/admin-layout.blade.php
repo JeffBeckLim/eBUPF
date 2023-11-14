@@ -202,6 +202,15 @@
               Receivables
             </a>
           </li>
+          
+          <li class="border-bottom hover-menu">
+            <a class="d-flex align-items-center {{Route::is('admin.loan.logs')? 'fw-bold' : ''}}" href="{{ route('loan.logs') }}">
+              {{-- <img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2">  --}}
+              <i style="font-size: 20px; color: #612882;" class="bi bi-clock{{Route::is('loan.logs')? '-fill' : ''}} me-2"></i>
+              Logs
+            </a>
+          </li>
+
           <li class="mt-4 hover-menu py-2">
             <div class="dropup-center dropup">
               <button class="btn btn-block text-start w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #868686">
