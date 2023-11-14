@@ -17,63 +17,30 @@
         </style>
         <div class="row g-0">
             <div class="col-12" id="menu-bar">
-                <a class="btn mx-1 {{Route::is('loan.logs')? 'fw-bold text-dark':''}}" href="" style="font-size: 12px"><i class="bi bi-bank"></i> Loan</a>
-                <a class="btn me-1" href="" style="font-size: 12px"><i class="bi bi-pen"></i> Adjustments</a>
-                <a class="btn me-1" href="" style="font-size: 12px"><i class="bi bi-calendar-week"></i> Amortization</a>
-                <a class="btn me-1" href="" style="font-size: 12px"><i class="bi bi-envelope-paper"></i> Check</a>
+                <a class="btn mx-1 {{Route::is('loan.logs')? 'fw-bold text-dark':''}}" href="{{route('loan.logs')}}" style="font-size: 12px"><i class="bi bi-bank"></i> Loan</a>
+
+                <a class="btn me-1 {{Route::is('adjustment.logs')? 'fw-bold text-dark':''}}" href="{{route('adjustment.logs')}}" style="font-size: 12px"><i class="bi bi-pen"></i> Adjustments</a>
+                
+                <a class="btn me-1 {{Route::is('amortization.logs')? 'fw-bold text-dark':''}}" href="{{route('amortization.logs')}}" style="font-size: 12px"><i class="bi bi-calendar-week"></i> Amortization</a>
+
+                {{-- <a class="btn me-1" href="" style="font-size: 12px"><i class="bi bi-envelope-paper"></i> Check</a> --}}
+
                 <a class="btn me-1" href="{{route('logs.remittance')}}" style="font-size: 12px"><i class="bi bi-coin"></i> Remittance</a>
             </div>
         </div>
-       
-        <div class="table-responsive">
-            <div class="custom-table-for-admin">
-                <table class="table table-borderless  table-striped " id="logs-table" style="font-size: 12px">
-                    <thead style="border-bottom: 2px solid black" >
-                        <tr>
-                            <th>ID</th>
-                            <th>Time Updated</th>
-                            <th>Loan ID</th>
-                            <th>LOAN CODE</th>
-                            <th>Loan Type</th>
-                            <th>MPL/HSL</th>
-                            <th>Principal</th>
-                            <th>Interest</th>
-                            <th>Term</th>
-                            <th>State</th>
-                            <th>Time Deleted</th>
-                            <th>Changes</th>
-                            <th>Updated by</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($loan_logs as $log)
-                        <tr>
-                            <td>{{$log->id}}</td>
-                            <td>{{$log->created_at->format('M-d-Y (h:i:s A)')}}</td>
-                            <td>{{$log->loan_id_log}}</td>
-                            <td>{{$log->loan_code_log}}</td>
-                            <td>{{$log->loan_category_log}}</td>
-                            <td>{{$log->loan_type_log}}</td>
-                            <td>{{ number_format($log->principal_amount_log, 2, ".",",")}}</td>
-                            <td>{{ $log->interest_log? number_format($log->interest_log,  2, ".",",") : '' }}</td>
-                            <td>{{$log->term_years_log}}</td>
-                            <td>
-                                {{$log->is_active_log == 1 ?  "active" : ''}}
-                                {{$log->is_active_log == 2 ?  "closed" : ''}}
-                            </td>
-                            <td>{{$log->deleted_at_log}}</td>
-                            <td class="fw-bold">{{strtoupper($log->create_update_or_delete)}}</td>
-                            <td>
-                                @php
-                                    $updated_by = App\Models\Member::find($log->updated_by);
-                                @endphp
-                                {{"ID: ".$updated_by->id." ".$updated_by->firstname." ".$updated_by->lastname}}
-                            </td>
-                          </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            @if (Route::is('loan.logs'))
+                @include('admin-views.admin-logs.loan_logs');
+
+            @elseif (Route::is('adjustment.logs'))
+
+                @include('admin-views.admin-logs.adjustment_logs');
+            @elseif (Route::is('amortization.logs'))
+
+                @include('admin-views.admin-logs.amortization_logs');
+            @endif
+            
+        
 
         </div>
 

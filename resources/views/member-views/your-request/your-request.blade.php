@@ -132,7 +132,9 @@
 
                                     </td>
                                     <td class="align-middle  text-center" style="width: 20%">
-                                        @if ($cb_withLoan->accept_request == 1)
+                                        @if($cb_withLoan->loan->deleted_at != null)
+                                             <p style="font-size: 12px">Loan Application Cancelled.</p>
+                                        @elseif ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}
                                             @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
                                                 <a style="font-size: 14px" href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange text-light rounded-4 fw-bold {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}">  Print</a>
@@ -141,6 +143,18 @@
                                                     Print
                                                 </a>
                                             @endif
+                                            <div class="dropdown mt-2 ">
+                                                <button class="btn  rounded-5 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                >
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
+                                                    Cancel Application</a>
+                                                </li>
+
+                                                </ul>
+                                              </div>
                                         @elseif($cb_withLoan->loan->deleted_at)
                                             <p style="font-size: 12px">Loan Application Cancelled.</p>
                                         @else 

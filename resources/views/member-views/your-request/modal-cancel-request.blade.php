@@ -9,7 +9,7 @@
             <h1><i style="color: orange" class="bi bi-cone-striped"></i></i></h1>
             <p class="fw-bold fs-5">You are about to cancel the request.</p>
             <p style="font-size: 15px">Are you sure you want to cancel your request?</p>
-            <p  class="text-secondary" style="font-size: 15px">This will permanently delete data associated with the loan application request.</p>
+            <p  class="text-secondary" style="font-size: 15px">This will cancel your loan application request, and cannot be reverted</p>
         </div>
         
             <div class="row g-0 px-4 py-3 bg-light rounded">

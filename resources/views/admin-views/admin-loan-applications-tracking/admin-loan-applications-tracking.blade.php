@@ -192,8 +192,9 @@
                             }
                         </style>
                         <tr>
-                            <th>State</th>
                             <th>Loan ID</th>
+                            <th>State</th>
+                           
                             <th >LOAN CODE</th>
                             <th>Loan Type</th>
                             <th>Principal Borrower</th>
@@ -216,6 +217,7 @@
                     @endphp
                     @foreach ($loans as $loan)
                           <tr class="table-row" data-status="approved">
+                            <td class="fw-bold">{{$loan->loan->id}}</td>
                             <td class="text-center">
                                 @if ($loan->loan->is_active == 2)
                                     <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
@@ -227,7 +229,7 @@
                                 @endif
                                 
                             </td>
-                            <td class="fw-bold">{{$loan->loan->id}}</td>
+                            
 
                             <td class="border-end fw-bold">
                                 {{$loan->loan->loan_code}}
@@ -272,7 +274,7 @@
                             <td>{{ date("M j, Y", strtotime($loan->loan->created_at))}}</td>
 
                             <td class="fw-bold">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"  style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
+                                <a class="{{$loan->loan->deleted_at ? 'disabled' : ''}}" type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"   style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
                                 {{number_format($loan->loan->principal_amount, 2, '.',',')}}    
                             </td>
                             <td class="text-center border-start" >
@@ -320,35 +322,39 @@
                             </td>
 
                             <td class="text-center">
-                                @php
-                                $array = [];
-                                foreach ($loan->loan->LoanApplicationStatus as $status) {
-                                    array_push($array, $status->loan_application_state_id);
-                                }
-                                @endphp  
-                                @if(count($array)==0)
-                                    <p class="text-secondary">Pending</p>
-                                @elseif (in_array(6,$array))
-                                    <span class="final-denied">Denied</span>
-                                @elseif(in_array(5,$array))
-                                    <p class="fw-bold text-primary">Picked up</p>  
-                                @elseif(in_array(3,$array))
-                                    <span class="final-approved">Approved</span>
+                                @if ($loan->loan->deleted_at)
+                                    <span class="final-denied">Cancelled</span>
                                 @else
-                                    <p class="">Being Processed</p>
+                                    @php
+                                    $array = [];
+                                    foreach ($loan->loan->LoanApplicationStatus as $status) {
+                                        array_push($array, $status->loan_application_state_id);
+                                    }
+                                    @endphp  
+                                    @if(count($array)==0)
+                                        <p class="text-secondary">Pending</p>
+                                    @elseif (in_array(6,$array))
+                                        <span class="final-denied">Denied</span>
+                                    @elseif(in_array(5,$array))
+                                        <p class="fw-bold text-primary">Picked up</p>  
+                                    @elseif(in_array(3,$array))
+                                        <span class="final-approved">Approved</span>
+                                    @else
+                                        <p class="">Being Processed</p>
+                                    @endif
                                 @endif
                      
                             </td>
 
                             <td>
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}">
+                                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#statusModal{{$loan->loan->id}}" {{$loan->loan->deleted_at ? 'disabled' : ''}}>
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                             </td>
                             <td class="text-center">
                                 
-                                <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{$loan->loan->deleted_at ? 'disabled' : ''}}>
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                   </button>
                                   <ul class="dropdown-menu">
@@ -458,5 +464,17 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 
 </script>
+<style>
+    .disabled {
+    cursor: not-allowed; /* Change cursor to indicate not allowed */
+    opacity: 0.6; /* Reduce opacity to indicate disabled state */
+    pointer-events: none; /* Ignore pointer events - doesn't receive mouse clicks */
+    /* Additional styling to visually indicate the disabled state */
+    
+    color: #999; /* Change text color */
+    
+}
+
+</style>
 @include('admin-components.admin-dataTables')
 @endsection

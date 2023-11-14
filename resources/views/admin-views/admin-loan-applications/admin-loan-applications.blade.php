@@ -114,8 +114,9 @@
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
-                            <th class="sticky-header">State</th>
+                           
                             <th class="sticky-header">Loan ID</th>
+                            <th class="sticky-header">State</th>
                             <th class="sticky-header">LOAN CODE</th>
 
                             <th class="sticky-header">Loan Type</th>
@@ -172,6 +173,9 @@
                         @foreach ($loans as $loan)
                             <tr class="table-row" data-status="">
                                 {{-- loan stats --}}
+                                <td class="fw-bold">
+                                    {{$loan->id}}
+                                </td>
                                 <td>
                                     @if ($loan->is_active == 2)
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
@@ -184,9 +188,7 @@
                                     
                                 </td>
                                 {{-- loan ID --}}
-                                <td class="fw-bold">
-                                    {{$loan->id}}
-                                </td>
+                                
                                 <td class="border-end fw-bold">
                                     {{$loan->loan_code}}
                                 </td>
