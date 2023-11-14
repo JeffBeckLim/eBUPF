@@ -155,7 +155,7 @@
         </div>
 
         <div class="mt-5 timeline-div">
-            <div class="timeline">
+            <div class="timeline-1">
                 <div class="timeline-line"></div>
                 <div class="timeline-step">
                     <div class="timeline-content">
@@ -240,7 +240,7 @@
                                 Horem ipsum dolor sit amet, consectetur adipiscing elit.
                             </div>
                         </div>
-                        <a href="#" type="button" class="btn fw-bold" style="color:rgb(255, 131, 29); border: none;">More Details</a>
+                        <a href="{{ route('about-mpl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
                     </div>
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
@@ -267,7 +267,7 @@
                                 Horem ipsum dolor sit amet, consectetur adipiscing elit.
                             </div>
                         </div>
-                        <a href="#" type="button" class="btn fw-bold" style="color:rgb(255, 131, 29); border: none;">More Details</a>
+                        <a href="{{ route('about-hsl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
                     </div>
                 </div>
             </div>
