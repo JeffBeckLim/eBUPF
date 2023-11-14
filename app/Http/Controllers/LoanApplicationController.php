@@ -399,7 +399,13 @@ class LoanApplicationController extends Controller
 
     public function cancelApplication($id){
         $co_borrower = CoBorrower::where('loan_id',$id)->with('loan')->first();
-
+        
+        // abort cancel if loan has status (submitted)
+        $statuses_confirm = LoanApplicationStatus::where('loan_id',$co_borrower->loan->id)->get();
+        if (count($statuses_confirm) != null) {
+            abort(404);
+        }
+    
         if($co_borrower == null){
             abort(404);
         }else{
