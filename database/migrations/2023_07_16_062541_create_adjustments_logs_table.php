@@ -15,10 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('adjustments_id')->constrained('adjustments');
+            $table->integer('loan_id_log',)->nullable();
+            $table->string('loan_code_log',)->nullable();
 
-            $table->string('log_col_name');
-            $table->string('changes');
+            $table->integer('adjustments_id_log')->nullable();
+
+            $table->string('log_col_name')->nullable();
+            $table->string('changes')->nullable();
+
+            $table->integer('updated_by')->nullable();
+
         });
     }
 
