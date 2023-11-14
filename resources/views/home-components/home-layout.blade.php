@@ -32,21 +32,21 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="loansDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loans</a>
                     <div class="dropdown-menu" aria-labelledby="loansDropdown">
-                        <a class="dropdown-item" href="#">Multi-Purpose Loan</a>
-                        <a class="dropdown-item" href="#">Housing Loan</a>
+                        <a class="dropdown-item" href="{{ route('about-mpl') }}">Multi-Purpose Loan</a>
+                        <a class="dropdown-item" href="{{ route('about-hsl') }}">Housing Loan</a>
                     </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="">Contact Us</a>
                 </li>
                 @guest
                     @if (Route::has('login'))
