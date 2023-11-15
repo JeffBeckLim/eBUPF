@@ -13,7 +13,7 @@
                     @error('firstname')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                      @enderror
-                    
+
                     <div class="col ">
                         <div><label for="middlename">Middlename</label></div>
                         <input type="text" class="form-control w-100" name="middlename" value="{{Auth::user()->member->middlename}}">
@@ -34,7 +34,7 @@
                 </div>
                 @php
                     $address_arr = explode(",", Auth::user()->member->address);
-                    
+
                 @endphp
 
                 <div class="row g-0 ">
@@ -51,14 +51,14 @@
 
 
                 <button type="button" class="btn btn-outline-dark mb-3" onclick="showEditAddress()" id="show_btn">
-                    Edit Address 
+                    Edit Address
                 </button>
                 <button type="button" class="btn btn-outline-dark d-none mb-3" onclick="HideEditAddress()" id="hide_btn">
                     Cancel
                 </button>
 
                 <div class="row  g-0 d-none" id="edit_address">
-                            
+
                     <div class="col-sm-6 mb-3 pe-1" >
                         <label class="form-label">Region *</label>
                         <select name="region" class="form-control form-control-md " id="region">
@@ -91,15 +91,15 @@
                         @error('<barangay_text></barangay_text>')
                             <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
-                    </div> 
+                    </div>
 
                 </div>
-                
 
 
 
 
-                
+
+
 
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="birthday"> Date of Birth
@@ -109,7 +109,7 @@
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
                 </div>
-            
+
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
                     <input class="form-control validate" name="place_of_birth" value="{{Auth::user()->member->place_of_birth}}">
@@ -166,13 +166,13 @@
                     <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                 @enderror
 
-                
+
             </div>
 
-            
-<button class="btn" type="submit">
+
+{{-- <button class="btn" type="submit">
     submit
-    </button>
+    </button> --}}
 </div>
 <script>
 
