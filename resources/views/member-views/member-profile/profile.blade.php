@@ -49,7 +49,7 @@
             <div class="col-12 p-2 rounded shadow" style="background-image: url({{ asset('assets/core-feature-bg.png') }}); filter: saturate(200%);">
                 <div class="row">
                     <div class="col-3 text-end">
-                        <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid m-2" style="object-fit:cover; width: 8rem; height: auto; border: 4px solid white;">
+                        <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid m-2" style="object-fit:cover; width: 8rem; height: 8rem; border: 4px solid white;">
                     </div>
                     <div class="col-9 my-auto text-white p-2" style="text-shadow: 1px 1px 4px rgb(46, 46, 46);">
                         <span>

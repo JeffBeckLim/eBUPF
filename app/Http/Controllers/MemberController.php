@@ -177,7 +177,7 @@ class MemberController extends Controller
     }
 
     public function updateMembership(Request $request, Member $member){
-       
+
        $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
        if($member->user_id != auth()->id()) {
@@ -311,7 +311,7 @@ class MemberController extends Controller
     }
     public function createMembership(Request $request, Member $member){
         $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
-       
+
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -378,12 +378,12 @@ class MemberController extends Controller
 
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $address = $formFields['barangay_text'].", ".$formFields['city_text'].", ".$formFields['province_text'].", ".$formFields['region_text'];
         $formFields['address'] = $address;
 
         $member->update($formFields);
-        
+
 
         if($formFields['middlename'] != null){
             $member->middle_initial = ucfirst($formFields['middlename'][0]);
@@ -472,7 +472,10 @@ class MemberController extends Controller
             ],
             'contact_num' => 'required',
             'address' => 'required',
+            'monthly_salary' => 'required',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png|max:2048',
         ]);
+
         if ($validator->fails()) {
             $errors = $validator->errors()->all();
             return redirect('/member/profile')->withErrors($errors);
@@ -493,9 +496,20 @@ class MemberController extends Controller
         // $user->member->middle_initial = ucfirst($request->middlename[0]);
         $user->member->unit_id = $request->unit_id;
         $user->member->position = $request->position;
-        $user->member->contact_num = $request->contact_num;
+        $user->member->contact_num = '+63' . $request->contact_num;
         $user->member->address = $request->address;
-        $user->member->is_editable = 0;
+        $user->member->monthly_salary = $request->monthly_salary;
+
+        //for profile pic validation
+        if ($request->hasFile('profile_picture')) {
+            $user->member->profile_picture = $request->file('profile_picture')->store('profile_picture', 'public');
+        }
+
+        // Only set is_editable to 0 if the profile picture is not being updated
+        if (!$request->hasFile('profile_picture')) {
+            $user->member->is_editable = 0;
+        }
+
         $user->member->save();
 
         // return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');

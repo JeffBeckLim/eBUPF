@@ -4,14 +4,14 @@
                 <div class="row g-0 ">
                     <div class="col pe-1">
                         <label for="lname" >
-                             First name 
+                             First name
                         </label>
                         <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}">
                         @error('firstname')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
                     </div>
-                   
+
 
                     <div class="col ">
                         <div class="">
@@ -21,7 +21,7 @@
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
                     </div>
-                 
+
 
                     <div class="col-12  pe-1 pb-3">
                         <label for="lname">
@@ -32,12 +32,12 @@
                             <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
                     </div>
-                  
+
                 </div>
-                
 
 
-                
+
+
                 {{-- Adress Selector --}}
                 <div class="row g-0 border-bottom" id="edit_address">
                     {{-- <div class="col-12 pb-1 pb-3">
@@ -51,7 +51,7 @@
                     </div> --}}
                     <label class="fw-bold" for="address">
                         Address
-                    </label>                    
+                    </label>
                         <div class="col-sm-6 mb-3 pe-1" >
                             <label class="form-label">Region *</label>
                             <select name="region" class="form-control form-control-md validate" id="region"></select>
@@ -83,9 +83,9 @@
                             @error('<barangay_text></barangay_text>')
                                 <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                             @enderror
-                        </div>  
+                        </div>
                 </div> {{-- last row tag for address--}}
-              
+
 
 
 
@@ -98,7 +98,7 @@
                         <p class="text-danger mt-1 text-wrap"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
                 </div>
-                
+
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
                     <input class="form-control" name="place_of_birth" value="{{old('place_of_birth')}}">
@@ -128,21 +128,21 @@
                 </div>
                 <div class="col-6 pe-1">
                     <label class="fw-bold" for="contact_num">
-                        
+
                         Contact Number
                     </label>
-                    
+
                     <div class="input-group ">
                     <span class="input-group-text" id="inputGroupPrepend" style="background-color: #ffffff">+63</span>
 
                     <input type="number" placeholder="ex. 9150012457" class="form-control validate" name="contact_num" value="{{old('contact_num')}}" id="contact_num" pattern="9[0-9]{10}" title="Please enter 10 digits starting with '9'." aria-describedby="inputGroupPrepend">
-                    
+
                     @error('contact_num')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
                     </div>
                 </div>
-               
+
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="sex">Sex</label>
                     <select class="form-select form-control validate" aria-label="Default select example" name="sex">
@@ -159,17 +159,17 @@
                 @enderror
 
                 {{-- TESTING ADRESSs --}}
-                
+
     </div>{{-- row - last tag --}}
-            
 
 
 
+{{--
  <button class="btn" type="submit">
     submit
     </button>
-
-</div> {{-- Last Tag --}}  
+ --}}
+</div> {{-- Last Tag --}}
 <script>
 const regionSelector = document.getElementById('region');
 const provinceSelector = document.getElementById('province');

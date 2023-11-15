@@ -48,7 +48,7 @@ use App\Models\Penalty;
 
 
 //🛠️TESTING ===================================================================================================
-    Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
+    //Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
     Route::get('member/loan/your-loans/{loan_status}', [LoanController::class, 'show'])->name('member.loans');
 
@@ -57,8 +57,6 @@ use App\Models\Penalty;
     Route::get('member/loan/loan-applications/evaluated', [LoanApplicationController::class, 'showLoanApplicationsEvaluated'])->name('loan.applications.evaluated');
 
     Route::get('member/loan/loan-applications/all', [LoanApplicationController::class, 'showLoanApplicationsAll'])->name('loan.applications.all');
-
-
 
     Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
 
@@ -231,8 +229,8 @@ use App\Models\Penalty;
 
     Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
 
-/*     Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') ->name('update.payment.remittance');
- */
+    //Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') ->name('update.payment.remittance');
+
     //View Logs
     Route::get('/admin/remittance/view/logs', [AdminRemittanceController::class, 'showLogsRemittance'])/* ->middleware('auth','admin.access') */->name('logs.remittance');
     //delete payment
@@ -291,7 +289,8 @@ use App\Models\Penalty;
 //MEMBER ======================================================================================================
 
 
-// Show Home or Landing Page
+// Show Home or Landing Page ====================================================================================
+
 Route::get('/', function () {
     return view('home');
 })->middleware('verified.access');
@@ -310,6 +309,12 @@ Auth::routes(['verify' => true]);
 
 // Show Home Page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
+
+// About BUPF
+Route::get('/about/buprovidentfund', function () {
+    return view('about-bupf');
+})->middleware('verified.access')->name('about-bupf');
+
 
 // About eBUPF
 Route::get('/about-ebupf', function () {
