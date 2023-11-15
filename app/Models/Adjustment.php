@@ -23,9 +23,9 @@ class Adjustment extends Model
     }
 
     // can have many logs
-    public function adjustments_log(){
-        return $this->hasMany(AdjustmentLog::class);
-    }
+    // public function adjustments_log(){
+    //     return $this->hasMany(AdjustmentLog::class);
+    // }
 
 
 }

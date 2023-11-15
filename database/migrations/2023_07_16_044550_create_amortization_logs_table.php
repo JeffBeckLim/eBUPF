@@ -15,10 +15,19 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('amortization_id')->constrained('amortizations');
+            $table->integer('loan_id_log')->nullable();
+            $table->string('loan_code_log')->nullable();
+
+            $table->integer('amortization_id_log')->nullable();
             
-            $table->decimal('log_amort_principal', 20, 2);
-            $table->decimal('log_amort_interest', 20, 2);
+            $table->decimal('amort_principal_log', 20, 2)->nullable();
+            $table->decimal('amort_interest_log', 20, 2)->nullable();
+
+            $table->date('amort_start_log')->nullable();
+            $table->date('amort_end_log')->nullable();
+
+            $table->string('changes')->nullable();
+            $table->integer('updated_by')->nullable();
         });
     }
 

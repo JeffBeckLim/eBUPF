@@ -7,6 +7,8 @@ use App\Models\Loan;
 use App\Models\Amortization;
 use Illuminate\Http\Request;
 use GuzzleHttp\Promise\Create;
+use App\Models\AmortizationLog;
+use Illuminate\Support\Facades\Auth;
 
 class AdminAmortizationController extends Controller
 {
@@ -60,11 +62,22 @@ class AdminAmortizationController extends Controller
 
             ]);
             $loan->amortization_id = $amortization->id;
+
+            $changes = "Create";
             $loan->save();
         }
         // for updating amortizations
         elseif($loan->amortization_id != null){
             $loan_amortization = Amortization::findOrFail($loan->amortization_id);
+
+            if(
+                $request->amort_start == $loan_amortization->amort_start&&
+                $request->amort_end == $loan_amortization->amort_end&&
+                $request->amort_principal == $loan_amortization->amort_principal&&
+                $request->amort_interest == $loan_amortization->amort_interest
+            ){
+                return back();
+            }
             
 
             // if loan has amortization for interest and principal but period of term is null
@@ -85,8 +98,25 @@ class AdminAmortizationController extends Controller
                 $loan_amortization->amort_end = $request->amort_end;
                 $loan_amortization->save();
             }
+
+            $changes = "Update";
             
         }
+        $loan_amortization_new = Amortization::findOrFail($loan->amortization_id);
+        AmortizationLog::create([
+            'loan_id_log'=>$loan->id,
+            'loan_code_log'=>$loan->loan_code,
+    
+            'amort_principal_log'=>$loan_amortization_new->amort_principal, 
+            'amort_interest_log'=>$loan_amortization_new->amort_interest, 
+    
+            'amort_start_log'=>$loan_amortization_new->amort_start, 
+            'amort_end_log'=>$loan_amortization_new->amort_end, 
+    
+            'changes'=>$changes,
+            'updated_by'=>Auth::user()->member->id,
+        ]);
+
 
         if($dateError == 1 && $dateMatchError == 1){
             return back()->with('amort_success', 'Amortization Added!')

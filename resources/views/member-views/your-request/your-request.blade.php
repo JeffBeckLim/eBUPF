@@ -48,7 +48,7 @@
                                         <li><strong>If co-borrower accepts</strong>: You will be able to print the loan application form with the co-borrowers detail ready for them to sign</li>
                                         <li><strong>If co-borrower denies</strong>: You cannot print the form</li>
 
-                                        <li><strong>Accepted request can not be cancelled</strong></li>
+                                        {{-- <li><strong>Accepted request can not be cancelled</strong></li> --}}
                                     </ul>
                                     <p>Your decision ensures transparency and consent in the loan application process.</p>
                                 </div>
@@ -132,7 +132,12 @@
 
                                     </td>
                                     <td class="align-middle  text-center" style="width: 20%">
-                                        @if ($cb_withLoan->accept_request == 1)
+                                        @php
+                                            $statuses_confirm = App\Models\LoanApplicationStatus::where('loan_id',$cb_withLoan->loan->id)->get();
+                                        @endphp
+                                        @if($cb_withLoan->loan->deleted_at != null)
+                                             <p style="font-size: 12px">Loan Application Cancelled.</p>
+                                        @elseif ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}
                                             @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
                                                 <a style="font-size: 14px" href="{{route('generateMulti-PurposeLoanApplicationForm', ['id' => $cb_withLoan->loan->id])}}" type="button" class=" btn w-100 bu-orange text-light rounded-4 fw-bold {{$cb_withLoan->accept_request != '1' ? 'disabled' : ''}}">  Print</a>
@@ -141,8 +146,23 @@
                                                     Print
                                                 </a>
                                             @endif
-                                        @elseif($cb_withLoan->loan->deleted_at)
-                                            <p style="font-size: 12px">Loan Application Cancelled.</p>
+                                            @if(count($statuses_confirm) == null)
+                                                <div class="dropdown mt-2 ">
+                                                    <button class="btn  rounded-5 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                    >
+                                                        <i class="bi bi-three-dots"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
+                                                        Cancel Application</a>
+                                                    </li>
+
+                                                    </ul>
+                                                </div>
+                                            @else 
+                                                <h6 class="mt-2" style=" font-size: 11px">Loan Submitted</h6>
+                                            @endif
+                                            
                                         @else 
                                             <a style="font-size: 14px" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
                                                 Cancel

@@ -276,7 +276,8 @@ class LoanApplicationController extends Controller
     }
 
     // generate unique loan ID
-    public function generateId(){
+    public function generateId($loanTypeId){
+        $loanType = LoanType::find($loanTypeId);
         do {
             $currentDateTime = now();
             // Format date and time to create a string
@@ -284,7 +285,7 @@ class LoanApplicationController extends Controller
             $randomString = strtoupper(Str::random(3));
             $randomString1 = strtoupper(Str::random(3));
             // Combine the formatted date/time and the random string to create a unique ID
-            $uniqueId = $dateTimeString . $randomString . "-" . $randomString1;
+            $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $randomString . "-" . $randomString1;
         } while (Loan::where('loan_code', $uniqueId)->exists());
 
         return($uniqueId);
@@ -347,7 +348,7 @@ class LoanApplicationController extends Controller
 
         
         $loan = Loan::create([
-            'loan_code'=> $this->generateId(),
+            'loan_code'=> $this->generateId($loanTypeId),
             'member_id'=>Auth::user()->id,
             'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
@@ -398,14 +399,20 @@ class LoanApplicationController extends Controller
 
     public function cancelApplication($id){
         $co_borrower = CoBorrower::where('loan_id',$id)->with('loan')->first();
-
+        
+        // abort cancel if loan has status (submitted)
+        $statuses_confirm = LoanApplicationStatus::where('loan_id',$co_borrower->loan->id)->get();
+        if (count($statuses_confirm) != null) {
+            abort(404);
+        }
+    
         if($co_borrower == null){
             abort(404);
         }else{
-            if($co_borrower->accept_request == 1){
-                return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
-            }
-            else{
+            // if($co_borrower->accept_request == 1){
+            //     return back()->with('fail' ,'Cannot be cancelled: Loan is already accepted');
+            // }
+            // else{
                 $loan = Loan::find($id);
                 $loan->deleted_at = now();
                 $loan->is_active = 2;
@@ -429,7 +436,7 @@ class LoanApplicationController extends Controller
 
                 return back()->with('passed' ,'Loan Application Cancelled.');
             }
-        }
+        // }
 
 
     }

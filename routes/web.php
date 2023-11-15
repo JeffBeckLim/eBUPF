@@ -133,6 +133,8 @@ use App\Models\Penalty;
     Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
     // cancel loan application
     Route::get('/member/coBorrower/cancel-application/{id}', [LoanApplicationController::class, 'cancelApplication'])->name('cancel.application');
+    // cancel application that has been accepted by CB
+    // Route::get('/member/coBorrower/cancel-application-confirmed/{id}', [LoanApplicationController::class, 'cancelApplicationConfirmed'])->name('cancel.application.confirmed');
 
     // Verify email
     Route::get('/verify/email', function(){
@@ -235,6 +237,8 @@ use App\Models\Penalty;
     Route::delete('/admin/remittance/view/payment/delete/{id}', [AdminRemittanceController::class, 'deletePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('delete.payment.remittance');
 
     Route::get('/admin/logs/loan', [LoanLogController::class, 'show'])->name('loan.logs');
+    Route::get('/admin/logs/loan-adjustments', [LoanLogController::class, 'showAdjustments'])->name('adjustment.logs');
+    Route::get('/admin/logs/amortization', [LoanLogController::class, 'showAmortization'])->name('amortization.logs');
 
 
 

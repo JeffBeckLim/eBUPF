@@ -9,13 +9,20 @@ class AdjustmentLog extends Model
 {
     use HasFactory;
 
+    protected $table = "adjustments_logs";
+
     protected $fillable = [
-        'mri', 
-        'interest_rebate', 
-        'housing_service_fee', 
+
+        'loan_id_log',
+        'loan_code_log',
+        
+        'adjustments_id_log',
+        'log_col_name',
+        'changes',
+        'updated_by'
     ];
 
-    public function adjustment(){
-        return $this->belongsTo(Adjustment::class);
-    }
+    // public function adjustment(){
+    //     return $this->belongsTo(Adjustment::class);
+    // }
 }

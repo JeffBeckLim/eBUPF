@@ -9,6 +9,7 @@ use App\Models\LoanLog;
 use App\Models\LoanType;
 use App\Models\CoBorrower;
 use App\Models\Amortization;
+use App\Models\AmortizationLog;
 use App\Models\LoanCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -62,10 +63,21 @@ class AdminLoanApplicationController extends Controller
             $amortization = Amortization::create([
                 'amort_principal' => $amort_principal,
                 'amort_interest' => $amort_interest,
-                // 'amort_start' => $request->amort_start,
-                // 'amort_end' => $request->amort_end,
             ]);
             
+            AmortizationLog::create([
+                'loan_id_log'=>$loan->id,
+                'loan_code_log'=>$loan->loan_code,
+        
+                'amort_principal_log'=>$amortization->amort_principal, 
+                'amort_interest_log'=>$amortization->amort_interest, 
+        
+                // 'amort_start_log', 
+                // 'amort_end_log', 
+        
+                'changes'=>"Create",
+                'updated_by'=>Auth::user()->member->id,
+            ]);
 
             $loan->amortization_id = $amortization->id;
             $loan->save();
@@ -82,6 +94,20 @@ class AdminLoanApplicationController extends Controller
             $amortization->amort_principal = $amort_principal;
             $amortization->amort_interest = $amort_interest;
             $amortization->save();
+
+            AmortizationLog::create([
+                'loan_id_log'=>$loan->id,
+                'loan_code_log'=>$loan->loan_code,
+        
+                'amort_principal_log'=>$amortization->amort_principal, 
+                'amort_interest_log'=>$amortization->amort_interest, 
+        
+                'amort_start_log'=>$amortization->amort_start, 
+                'amort_end_log'=>$amortization->amort_end, 
+        
+                'changes'=>"Update",
+                'updated_by'=>Auth::user()->member->id,
+            ]);
 
             return back()->with('success', 'Loan and Amortization Updated!');
         }
