@@ -86,22 +86,22 @@ function validateForm() {
         // If a field is empty...
         if (y[i].type === "checkbox" && !y[i].checked) {
             // For checkboxes, check if it's not checked
-            y[i].classList.add("invalid"); // Add "invalid" class
+            y[i].classList.add("is-invalid"); // Add "is-invalid" class
             valid = false;
         } 
         else if (y[i].value == "") {
             // For other input fields, if empty...
-            y[i].classList.add("invalid"); // Add "invalid" class
+            y[i].classList.add("is-invalid"); // Add "is-invalid" class
             valid = false;
 
-            // Add the "shake" class to the invalid input
+            // Add the "shake" class to the is-invalid input
             y[i].classList.add("shake");
             setTimeout(function() {
                 y[i].classList.remove("shake");
             }, 500);
         } else {
-            // Remove the "invalid" class and shake animation if the field has a value
-            y[i].classList.remove("invalid");
+            // Remove the "is-invalid" class and shake animation if the field has a value
+            y[i].classList.remove("is-invalid");
             y[i].classList.remove("shake");
         }
     }
@@ -111,16 +111,16 @@ function validateForm() {
     const value = contactNumberInput.value;
     
         if (value.length != 10 || value[0] != 9) {    
-            contactNumberInput.classList.add("invalid");
+            contactNumberInput.classList.add("is-invalid");
             contactNumberInput.setCustomValidity('Please enter valid PH sim number format');
             contactNumberInput.reportValidity();
             valid = false;
         } else {
-            contactNumberInput.classList.remove("invalid");
+            contactNumberInput.classList.remove("is-invalid");
             contactNumberInput.setCustomValidity('');
-            
         }
 
+    // CHECK ADDRESS
         if(!editAddress.classList.contains("d-none")){
             const regionSelector = document.getElementById('region');
             const provinceSelector = document.getElementById('province');
@@ -130,51 +130,70 @@ function validateForm() {
             console.log(barangaySelector.value);
 
             if(regionSelector.value === 'Choose Region'){
-                regionSelector.classList.add("invalid","shake");
+                regionSelector.classList.add("is-invalid","shake");
                 valid = false;
             }
             else{
-                regionSelector.classList.remove("invalid","shake");
+                regionSelector.classList.remove("is-invalid","shake");
             }
 
             if(provinceSelector.value === 'Choose State/Province' || provinceSelector.value === '' ){
-                provinceSelector.classList.add("invalid","shake");
+                provinceSelector.classList.add("is-invalid","shake");
                 valid = false;
             }
             else{
-                provinceSelector.classList.remove("invalid","shake");
+                provinceSelector.classList.remove("is-invalid","shake");
             }
 
 
             if(citySelector.value === 'Choose city/municipality' || citySelector.value === '' ){
-                citySelector.classList.add("invalid","shake");
+                citySelector.classList.add("is-invalid","shake");
                 valid = false;
             }
             else{
-                citySelector.classList.remove("invalid","shake");
+                citySelector.classList.remove("is-invalid","shake");
             }
 
             if(barangaySelector.value === 'Choose barangay' || barangaySelector.value === '' ){
-                barangaySelector.classList.add("invalid","shake");
+                barangaySelector.classList.add("is-invalid","shake");
                 valid = false;
             }
             else{
-                barangaySelector.classList.remove("invalid","shake");
+                barangaySelector.classList.remove("is-invalid","shake");
             }
          }
 
+         const dobInput = document.getElementById('date_of_birth');
+         // Get the value from the input field
+         const dob = new Date(dobInput.value);
+         const today = new Date();
+         
+         // Calculate the difference in years
+         const age = today.getFullYear() - dob.getFullYear();
+         const monthsDiff = today.getMonth() - dob.getMonth();
+        
+         // Check if the user is at least 18 years old (considering month difference)
+         if (age > 18 || (age === 18 && monthsDiff >= 0)) {
+            console.log('yes');
+            dobInput.classList.remove("is-invalid");
+            dobInput.setCustomValidity('');
+
+         } else {
+            console.log('no');
+            dobInput.classList.add("is-invalid");
+            dobInput.setCustomValidity('You need to be at least 18');
+            dobInput.reportValidity();
+            valid = false;
+         }
+    
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
 
         document.getElementsByClassName("step")[currentTab].className += " finish";
-    } else {
-        window.scrollTo(0, 0); // Scroll to the top of the page
     }
 
     return valid; // return the valid status
 }
-
-
 
 function fixStepIndicator(n) {
     // This function removes the "active" class of all steps...

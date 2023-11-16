@@ -13,13 +13,13 @@
                 <section class="w-100  h-100">
                   <img style="pointer-events: none;" class="overlay-image" src="assets/BUBG.jpg" alt="bicol university">
                    <div class="row g-0  d-flex justify-content-center pb-lg-3 pt-lg-1 px-lg-5 px-md-2">
-                        <div class=" d-flex justify-content-center pt-3">
-                            <img src="assets/BU-pill.svg" alt="BUPF" style="width: 95%">
+                        <div class="d-flex justify-content-center pt-3 fade-in">
+                            <img src="assets/BU-pill.svg" alt="BUPF" style="width: 95%; pointer-events: none">
                         </div>
                    </div>
                       
                   <div class="d-flex justify-content-center">
-                    <section class="mt-5">
+                    <section class="mt-5 fade-in">
                       <div class="d-flex justify-content-center">
                         <div class="col-8 text-center">
                           <h2 class="text-center text-light fw-bolder">PROVIDENT FUND INC.</h2>
@@ -27,7 +27,7 @@
                         
                       </div>
                       
-                      <div class=" border-top border-3 mx-5">
+                      <div class=" border-top border-3 mx-5 ">
                         <p class="mt-1 text-center text-light fw-bold">LOAN MANAGEMENT SYSTEM</p>
                       </div>
                     </section>  

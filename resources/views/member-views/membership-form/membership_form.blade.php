@@ -17,8 +17,8 @@
             <!-- CAPSULE -->
             <div class="row  bu-low-gradient-x d-flex justify-content-center p-3 rounded-2">
                 <div class="col-9" style="width: 15rem;">
-                    <div class="row d-flex ">
-                        <img src="{{asset('assets/BU-pill.svg')}}" alt="Bicol University" oncontextmenu="return false;">
+                    <div class="row d-flex fade-in-left">
+                        <img src="{{asset('assets/BU-pill.svg')}}" alt="Bicol University" oncontextmenu="return false;" style="pointer-events: none">
                     </div>
                 </div>
             </div>
