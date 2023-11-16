@@ -1,12 +1,12 @@
 <div class="tab g-0">
     <div class="row g-0" >
-                <p class="m-0 fw-bold">Your Name</p>
+                <label class="m-0 fw-bold">Your Name</label>
                 <div class="row g-0 ">
                     <div class="col pe-1">
                         <label for="lname" >
                              First name
                         </label>
-                        <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}">
+                        <input class="form-control mb-1 validate rounded-0 rounded-start" name="firstname" value="{{Auth::user()->member->firstname}}">
                         @error('firstname')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
@@ -15,8 +15,8 @@
 
                     <div class="col ">
                         <div class="">
-                            <label for="middlename" >Middle Name</label></div>
-                        <input type="text" class="form-control w-100 " name="middlename" value="{{old('middlename')}}" >
+                        <label for="middlename" >Middle Name</label></div>
+                        <input type="text" class="form-control w-100 rounded-0 rounded-end" name="middlename" value="{{old('middlename')}}" >
                         @error('middlename')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
@@ -93,7 +93,7 @@
                     <label class="fw-bold" for="birthday">
                          Date of Birth
                     </label>
-                    <input class="form-control  validate" type="date" name="date_of_birth" value="{{old('date_of_birth')}}">
+                    <input class="form-control  validate" type="date" name="date_of_birth" value="{{old('date_of_birth')}}" id="date_of_birth">
                     @error('date_of_birth')
                         <p class="text-danger mt-1 text-wrap"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
@@ -128,7 +128,6 @@
                 </div>
                 <div class="col-6 pe-1">
                     <label class="fw-bold" for="contact_num">
-
                         Contact Number
                     </label>
 
