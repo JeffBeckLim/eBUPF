@@ -10,11 +10,11 @@
     @endif
   <div class="card border p-4" style="width: 35rem">
     <div class="row d-flex">
-        <div class="col-8">
-            <img src="{{asset('assets/MPL-loanapp-logo.png')}}" alt="Logo" height="57px">
+        <div class="col">
+            <img src="{{asset('assets/MPL-loanapp-logo.png')}}" alt="Logo" style="height: 55px;">
         </div>
-        <div class="col-4 d-flex align-items-end justify-content-end">
-            <img src="{{asset('icons/MPL-mini.svg')}}" alt="Mini Logo" width="57px">
+        <div class="col-2 d-md-block d-none">
+            <img src="{{asset('icons/MPL-mini.svg')}}" alt="Mini Logo" style="height: 55px;">
         </div>
         
          <!-- Tooltip -->
