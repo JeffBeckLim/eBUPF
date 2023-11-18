@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
@@ -30,5 +31,9 @@ class DatabaseSeeder extends Seeder
         $this->call(LoanApplicationStatesSeeder::class);
         $this->call(LoanCategorySeeder::class);
         $this->call(DeveloperAccountSeeder::class);
+
+        // Loan and CoBorrower seeder mus always be equal count
+        \App\Models\Loan::factory(150)->create();
+        \App\Models\CoBorrower::factory(150)->create();
     }
 }
