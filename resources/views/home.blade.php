@@ -96,7 +96,7 @@
             <div class="col-md-4 reveal fade-left">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('icons/loans-savings.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/loans-savings.svg')}}" alt="Retirement Savings" width="60px">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -110,7 +110,7 @@
             <div class="col-md-4 reveal fade-bottom">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('icons/retirement-savings.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/retirement-savings.svg')}}" alt="Retirement Savings" width="60px">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -125,7 +125,7 @@
             <div class="col-md-4 reveal fade-right">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('icons/life-insurance.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/life-insurance.svg')}}" alt="Retirement Savings" width="60px">
                     </div>
                     <div>
                         <div class="fs-6 fw-bold text-center">
@@ -141,7 +141,7 @@
     </div>
 </section>
 
-<section class="how-to-be-part">
+<section class="how-to-be-part d-none d-sm-block">
     <div class="container">
         <div class="d-flex justify-content-center align-items-center pt-5" style="margin-top: 20px;">
             <div style="width: 50%; color:#00638D;" class="fs-3 fw-semibold text-center">
@@ -160,7 +160,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('icons/accomplish-membership-form.svg')}}" alt="Accomplish form">
+                            <img src="{{asset('assets/accomplish-membership-form.svg')}}" alt="Accomplish form">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Accomplish Membership Form</div>
                     </div>
@@ -168,7 +168,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('icons/download-print.svg')}}" alt="Download And Print">
+                            <img src="{{asset('assets/download-print.svg')}}" alt="Download And Print">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Download and Print</div>
                     </div>
@@ -176,7 +176,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('icons/sign-submit.svg')}}" alt="Sign and submit">
+                            <img src="{{asset('assets/sign-submit.svg')}}" alt="Sign and submit">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Sign and Submit</div>
                     </div>
@@ -185,7 +185,7 @@
                     <div class="timeline-content">
 
                         <div class="timeline-image">
-                            <img src="{{asset('icons/wait-approval.svg')}}" alt="Wait for Approval">
+                            <img src="{{asset('assets/wait-approval.svg')}}" alt="Wait for Approval">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Wait for Approval</div>
                     </div>
@@ -194,7 +194,7 @@
 
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('icons/create-account.svg')}}" alt="create account">
+                            <img src="{{asset('assets/create-account.svg')}}" alt="create account">
                         </div>
                         <div class="timeline-text reveal fade-bottom" style="margin-top: px;">Create Account</div>
                     </div>
@@ -217,7 +217,7 @@
                 <div class="row mt-4">
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('icons/MPL-mini.svg')}}" alt="" width="30px"> &nbsp;
+                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="" width="30px"> &nbsp;
                             Multi-Purpose Loan
                         </div>
                         <div class="row">
@@ -244,7 +244,7 @@
                     </div>
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('icons/HSL-mini.svg')}}" alt="" width="30px"> &nbsp;
+                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="" width="30px"> &nbsp;
                             Housing Loan
                         </div>
                         <div class="row">
