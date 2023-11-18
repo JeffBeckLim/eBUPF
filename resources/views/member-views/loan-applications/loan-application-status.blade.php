@@ -8,8 +8,8 @@
             <div class="col mt-3 mb-5">
                 <div class="d-flex flex-column align-items-center justify-content-center ">
                     <div class="app-status-box bg-white pt-5 border rounded">
-                        <p class="fs-4 fw-bold mb-4 text-center">Loan Application Status</p>
-                        <div class="lh-1  ">
+                        <p class="fs-5 fw-bold mb-4 text-center">Loan Application Status</p>
+                        <div class="lh-1">
                             <p><span class="fs-6 fw-bold">{{$loan->loanType->loan_type_description}}</span> <span class="fs-7">{{$loan->created_at}}</span></p>
                             <div class="row g-0">
                                 <div class="col-6 ">
@@ -23,6 +23,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- {{dd($loan_status)}} --}}
                         @if (count($loan_status) != 0)
                                 
                             {{-- =================================================================== --}}
@@ -45,13 +46,19 @@
                                 @else
                                 <div class="status-box border shadow-sm mb-3">
                                     <div class="row p-3">
-                                        <div class="col-2 d-flex justify-content-center align-items-center">
-                                            <img src="{{asset($status->loanApplicationState->asset_path)}}" alt="check logo" style="max-width: 90%; min-width: 50px">
+                                        <div class="col-lg-2 col-3 d-flex justify-content-center align-items-center">
+                                            <img class="img-fluid" src="{{asset($status->loanApplicationState->asset_path)}}" alt="check logo" style="max-width: 50px; min-width: 40px">
                                         </div>
-                                        <div class="col-10">
-                                            <p class="mb-2 fs-7">{{$status->loanApplicationState->date_evaluated}}</p>
-                                            <p class="mb-2 fw-bold">{{$status->loanApplicationState->state_name}}</p>
-                                            <p class="fs-7">{{$status->loanApplicationState->state_description}}</p>
+                                        <div class="col-lg-10 col-9">
+                                            <p class="mb-2 fs-7 text-secondary " style="font-size: 12px">Date Evaluted: {{$status->date_evaluated}}</p>
+                                            <p class="mb-2 fw-bold" style="font-size: 14px;">{{$status->loanApplicationState->state_name}}</p>
+                                            <p class="fs-7" style="font-size: 12px;">{{$status->loanApplicationState->state_description}}</p>
+                                            @if ($status->remarks != null)
+                                                <div class="fs-7 border-top">
+                                                    <p class="mt-2 fw-bold">Remarks</p>
+                                                    {{$status->remarks}}
+                                                </div>    
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
