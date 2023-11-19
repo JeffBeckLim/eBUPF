@@ -113,7 +113,7 @@ class AdminRemittanceController extends Controller
     public function showLogsRemittance(){
         $paymentLogs = PaymentLog::with('member')->get();
 
-        return view('admin-views\admin-loan-remittance\admin-remittance-log', [
+        return view('admin-views.admin-loan-remittance.admin-remittance-log', [
             'paymentLogs' => $paymentLogs,
         ]);
     }

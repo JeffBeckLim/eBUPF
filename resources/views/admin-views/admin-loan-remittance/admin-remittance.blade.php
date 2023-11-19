@@ -5,7 +5,7 @@
         <div class="adminbox" style="margin: 10px 20px">
             <div class="d-flex">
                 <div class="d-flex membership-app-header1">
-                    <img src="{{asset('icons/admin-icons/remittance.svg')}}" alt="" width="50px" height="58px">
+                    <img src="{{asset('assets/admin-icons/remittance.svg')}}" alt="" width="50px" height="58px">
                     <p style="padding-left: 10px; padding-top: 5px;" class="d-flex justify-content-center align-items-center"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Loan Remittance</span></p>
                 </div>
             </div>
