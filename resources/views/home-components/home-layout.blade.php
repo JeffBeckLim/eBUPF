@@ -147,6 +147,7 @@
     });
     </script>
 
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e99da14ff9a345488d601843145f614f"}'></script><!-- End Cloudflare Web Analytics -->
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4656121e282044cfa51c0e64127f7c3a"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 
