@@ -17,15 +17,15 @@
 </script>
 <style>
 /* Ensure that backdrop covers all screen for offcanvas sidebar */
-    /* .offcanvas-backdrop {
+     .offcanvas-backdrop {
       width: 100%;
       height: 100%;
-      } */
+      } 
 </style>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
 {{-- OFFCANVAS --}}
 
-<div class="row d-block d-lg-none p-3 shad bg-white" >
+<div class="row d-block d-lg-none p-3 border-bottom bg-white" >
     <div class="nav">
         <div class="col">
             <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
@@ -38,7 +38,7 @@
 
     </div>
 </div>
-<div class="offcanvas offcanvas-start d-block d-lg-none rounded-end-4" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
+<div class="offcanvas offcanvas-start d-block d-lg-none rounded-end-4 overflow-auto" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px" data-bs-scroll="true">
     <div class="offcanvas-header">
         <a href="{{route('home')}}">
             <img class="img-fluid" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 12rem;">
