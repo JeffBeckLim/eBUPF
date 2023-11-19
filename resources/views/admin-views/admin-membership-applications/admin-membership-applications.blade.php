@@ -5,34 +5,34 @@
 <div class="container-fluid">
     <div class="adminbox mt-2">
 
-        
+
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {!! session('success') !!}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>    
+            </div>
         @endif
 
-        
+
         @if (session('warning'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 {!! session('warning') !!}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>    
+            </div>
         @endif
-         
+
         @if (session('reject'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {!! session('reject') !!}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>    
+            </div>
         @endif
-    
+
 
 
         <div class="d-flex w-100">
             <div class="d-flex membership-app-header1 text-dark">
-                <img src="{{asset('admin-icons/membership-application-icon.svg')}}" alt="" width="50px">
+                <img src="{{asset('assets/admin-icons/membership-application-icon.svg')}}" alt="" width="50px">
                 <p class="text-break" style="padding-left: 10px; padding-top: 5px d-flex"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Membership</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
 
@@ -53,10 +53,10 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="table-responsive">
             <div class="custom-table-for-admin">
-                
+
                 <table class="table admin-table table-striped " id="myTable">
                     <thead style="border-bottom: 2px solid black">
                         <tr>
@@ -74,7 +74,7 @@
                     <tbody>
                         @if (count($memberApplications) > 0)
                             @foreach ($memberApplications as $memberApplication)
-                                    
+
                                 <tr>
                                     <td>{{$memberApplication->member->id}}</td>
                                     <td>
@@ -97,25 +97,25 @@
                                         @elseif($memberApplication->status==1)
                                             <span class="text-success">Approved</span>
                                         @elseif($memberApplication->status==2)
-                                            <span class="text-danger">Denied</span> 
+                                            <span class="text-danger">Denied</span>
                                         @endif
                                     </td>
                                     <td>
                                         @if ($memberApplication->member->user->user_type == 'member' || $memberApplication->member->user->user_type == 'admin' )
                                             Already approved
-                                        @else 
+                                        @else
                                         <h5>
                                             <a href="#" style="color: #00D186" class="me-3"><i class="bi bi-check-circle-fill" data-bs-toggle="modal" data-bs-target="#approveModal{{$memberApplication->member->id}}"></i></a>
-                                        
+
                                             <a href="#" style="color: #FF0000" data-bs-toggle="modal" data-bs-target="#denyModal{{$memberApplication->member->id}}"><i class="bi bi-x-circle-fill"></i></a>
                                         </h5>
                                         @endif
-                                        
+
 
                                         @include('admin-views.admin-membership-applications.accept-deny-modal')
-                                        
 
-                                        
+
+
                                     </td>
                                     <td>
                                         <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,15 +128,15 @@
                                                     Download Membership Application
                                                     <p class="" style="font-size: x-small">PDF of Membership Application</p>
                                                 </a>
-                                                
+
                                             </li>
                                           </ul>
                                     </td>
-                                </tr>   
-                            
+                                </tr>
+
                             @endforeach
                         @else
-                            
+
                         @endif
                     </tbody>
                 </table>

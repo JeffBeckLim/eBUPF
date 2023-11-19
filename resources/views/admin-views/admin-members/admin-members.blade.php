@@ -9,18 +9,18 @@
 <div class="container-fluid">
     <div class="row g-0">
         <div class="container-fluid">
-            
+
             @if(session('additional_primary'))
                 <div class="alert alert-primary alert-dismissible fade show text-dark" role="alert" style="font-size: small">
                     {{session('additional_primary')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-           
+
             <div class="adminbox m-2 mb-5">
                 <div class="d-flex mb-3">
                     <div class="d-flex membership-app-header1 ">
-                        <img src="{{asset('icons/admin-icons/members.svg')}}" alt="" width="50px" height="58px">
+                        <img src="{{asset('assets/admin-icons/members.svg')}}" alt="" width="50px" height="58px">
                         <p style="padding-left: 10px; padding-top: 5px;" class="d-flex justify-content-center align-items-center"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Members</span></p>
                     </div>
                     <div class=" px-2 pt-1 rounded border me-2" style="width: 7rem">
@@ -32,7 +32,7 @@
                     </div>
 
                 </div>
-                 
+
                 <form action="{{route('admin.members.filter')}}">
                     <div class="filter-group gap-3">
                         <div class="form-group fg-admin " style="width: 150px; position: relative;">
@@ -43,7 +43,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+
                         <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
                         <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.members')}}">Clear Filter</a>
                     </div>
@@ -102,9 +102,9 @@
                                                 <i class="bi bi-house"></i>
                                             </a>
                                         @else
-                                            
+
                                         @endif
-                                        
+
                                         </h5>
 
                                         {{-- @if($user->member->additional_loan == null)
@@ -134,9 +134,9 @@
 
                                     </td>
                                 </tr>
-                                @include('admin-views.admin-members.modal-additional-loan')    
+                                @include('admin-views.admin-members.modal-additional-loan')
                                 @endforeach
-                                
+
                                 @else
                                     <td>
                                         no member found.
@@ -149,26 +149,26 @@
                                     <td></td>
                                     <td></td>
                                 @endif
-                                
-                               
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    
+
         {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
         <script>
             $(document).ready(function() {
                 $("#applyFilterBtn").click(function() {
                     var campusValue = $("#campusSelect").val();
                     var unitValue = $("#unitSelect").val();
-    
+
                     $(".admin-table tbody tr").each(function() {
                         var campus = $(this).find("td:nth-child(4)").text();
                         var unit = $(this).find("td:nth-child(5)").text();
-    
+
                         if ((campusValue === "All" || campusValue === campus) && (unitValue === "All" || unitValue === unit)) {
                             $(this).show();
                         } else {
@@ -178,8 +178,8 @@
                 });
             });
         </script>
-       
-       
+
+
     </div>
 </div>
 

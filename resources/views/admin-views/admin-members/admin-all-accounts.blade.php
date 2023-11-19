@@ -8,7 +8,7 @@
             <div class="adminbox">
                 <div class=" d-flex text-dark">
                         <div >
-                            <img src="{{asset('admin-icons/magnifying-glass.svg')}}" alt="" width="50px" height="58px">
+                            <img src="{{asset('assets/admin-icons/magnifying-glass.svg')}}" alt="" width="50px" height="58px">
                         </div>
                         <div class="g-0 ps-2 my-auto">
                             <div class="m-0 fw-bold fs-5" >User Accounts</div>
@@ -16,27 +16,27 @@
                         </div>
                 </div>
 
-    
+
 
                 <div class="table-responsive ">
                     <div class="custom-table-for-admin">
-    
+
                         <table class="table admin-table table-striped border-top" id="myTable">
-                            
+
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
                                     <th><h6 class="fw-bold" style="font-size: 12px">MEMBER</h6> ID</th>
                                     <th>Name</th>
                                     <th>Membership Application</th>
                                     <th>Email</th>
-                                    
+
                                     <th>Role</th>
-                                    
+
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                             
+
                                 @foreach ($users as $user)
                                 <tr>
                                         <td>{{$user->member->id}}</td>
@@ -84,10 +84,10 @@
                                             </h5>
                                             {{-- @if ($user->user_type == 'restricted')
                                                 <span class="text-danger">{{$user->user_type}}</span>
-                                                
+
                                             @else
-                                            {{$user->user_type}}    
-                                            
+                                            {{$user->user_type}}
+
                                             @endif --}}
                                         </td>
 
@@ -98,15 +98,15 @@
                                             </button>
                                         </td>
                                 </tr>
-                                
+
                                  <!-- Modal in views/admin-compinents/admin-modalAllUsers -->
                                 @include('admin-views.admin-members.modal-change-role')
-                                
+
                             @endforeach
                             </tbody>
                         </table>
 
-                        
+
 
                     </div>
                 </div>

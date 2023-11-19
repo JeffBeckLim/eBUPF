@@ -27,12 +27,12 @@
         <div class="d-flex">
             @if ($loanType == 1)
             <div class="d-flex membership-app-header1-mpl">
-                <img src="{{asset('/icons/MPL-mini.svg')}}" alt="" width="50px">
+                <img src="{{asset('assets/MPL-mini.svg')}}" alt="" width="50px">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
             @elseif ($loanType == 2)
             <div class="d-flex membership-app-header1-mpl">
-                <img src="{{asset('/icons/HSL-mini.svg')}}" alt="" width="50px">
+                <img src="{{asset('assets/HSL-mini.svg')}}" alt="" width="50px">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Housing Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
             @endif
@@ -54,9 +54,9 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
 
-        
+
         <form action="{{route('admin.loan.applications.filter' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">
             <p class="ms-2 pt-2 text-secondary" style="font-size: 12px">Filter by date requested and Unit</p>
         <div class="filter-group gap-2 mt-4">
@@ -80,7 +80,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select id="unit-filter" class="form-control bg-white border-0 fw-semibold" name="unit_filter">
                     <option value="0" {{$unit_selected == 0 ? 'selected' : ''}}>All Units</option>
@@ -91,7 +91,7 @@
             </div>
             <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
             <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">Clear Filter</a>
-            
+
         </div>
         </form>
         <style>
@@ -114,7 +114,7 @@
                 <table class="table admin-table table-striped border" id="{{$table_freeze == 'table-freeze' ? 'loanApplicationTable' : 'myTable'}}">
                     <thead style="border-bottom: 2px solid black">
                         <tr class="border">
-                           
+
                             <th class="sticky-header">Loan ID</th>
                             <th class="sticky-header">State</th>
                             <th class="sticky-header">LOAN CODE</th>
@@ -134,9 +134,9 @@
 
                             {{-- for Housing --}}
                             @if ($loanType == 2)
-                                <th class="text-primary">Service Fee</th>    
+                                <th class="text-primary">Service Fee</th>
                             @endif
-                        
+
                             <th>Interest <h6 style="font-size: small">1st YR</h6></th>
                             <th>MRI</th>
                             <th>Prev. Loan Balance/Refund</th>
@@ -178,17 +178,17 @@
                                 </td>
                                 <td>
                                     @if ($loan->is_active == 2)
-                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
-                                    
+                                        <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>
+
                                     @elseif ($loan->is_active == 1)
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="Permforming Loan" style="font-size: 9px;" class="bi bi-circle-fill text-primary"></i>
                                     @else
                                         <i data-bs-toggle="tooltip" data-bs-placement="top" title="No state set" style="font-size: 9px;" class="bi bi-circle text-dark"></i>
                                     @endif
-                                    
+
                                 </td>
                                 {{-- loan ID --}}
-                                
+
                                 <td class="border-end fw-bold">
                                     {{$loan->loan_code}}
                                 </td>
@@ -274,7 +274,7 @@
                                     @if ($loan->adjustment != null && $loan->adjustment->housing_service_fee != null)
                                         {{number_format($loan->adjustment->housing_service_fee, 2, '.',',')}}
                                     @endif
-                                </td>    
+                                </td>
                                  @endif
 
 
@@ -305,7 +305,7 @@
                                 {{-- Penalty --}}
                                 <td>
                                     @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
-                                        {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}    
+                                        {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}
                                     @endif
                                 </td>
                                 {{-- Net Proceeds --}}
@@ -313,11 +313,11 @@
                                     @if ($loan->adjustment != null)
                                     {{
                                         number_format(
-                                            $loan->principal_amount -$loan->adjustment->interest_first_yr-$loan->adjustment->housing_service_fee-$loan->adjustment->mri - $loan->adjustment->previous_loan_balance + $loan->adjustment->interest_rebate -$loan->adjustment->previous_penalty 
+                                            $loan->principal_amount -$loan->adjustment->interest_first_yr-$loan->adjustment->housing_service_fee-$loan->adjustment->mri - $loan->adjustment->previous_loan_balance + $loan->adjustment->interest_rebate -$loan->adjustment->previous_penalty
                                         , 2, '.',',')
-                                    }}  
+                                    }}
                                     @endif
-                                    
+
                                 </td>
                                 {{-- ... --}}
                                 <td>
@@ -441,7 +441,7 @@
     // for Tool Tips
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    
+
 
 </script>
 

@@ -13,7 +13,7 @@
     }
 @endphp
 <div class="container-fluid mt-2">
-    
+
     <div class="adminbox p-0 pb-3 mb-5">
         <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
             <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
@@ -82,17 +82,17 @@
             </style>
             <div class="col-6">
                 <a class="btn border rounded-end-0 w-100 h-100 bg-white
-                {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}} 
+                {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}}
                 " href="{{route('admin.loan.applications.tracking', 'mpl')}}">
-                <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 20px;">
+                <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 20px;">
                 MPL Applications Tracking</a>
             </div>
             <div class="col-6">
-                <a 
+                <a
                 class="btn border rounded-start-0 w-100 h-100 bg-white
-                {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}" 
+                {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}"
                 href="{{route('admin.loan.applications.tracking', 'hsl')}}">
-                <img src="{{asset('icons/HSL-mini.svg')}}" alt="" style="width: 20px;">
+                <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 20px;">
                 HSL Applications Tracking
             </a>
             </div>
@@ -100,20 +100,20 @@
 
 
         <div class="d-flex px-3 pt-4">
-            
+
             @if ($loan_type == 'hsl')
                 <div class="d-flex membership-app-header1-mpl text-dark">
-                    <img src="{{asset('icons/HSL-mini.svg')}}" alt="" style="width: 50px;">
+                    <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 50px;">
                     <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 20px;">Housing Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
                 </div>
-            
+
             @elseif ($loan_type == 'mpl')
                 <div class="d-flex membership-app-header1-mpl text-dark">
-                    <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 50px;">
+                    <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 50px;">
                     <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
                 </div>
             @endif
-            
+
 
             <div class="membership-app-header2">
                 <div class="lh-1" style="padding: 15px 0 0 15px;">
@@ -156,7 +156,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
             <div class="form-group fg-admin" style="width: 150px; position: relative;">
                 <select name="unit_filter" id="typeSelect" class="form-control bg-white border-0 fw-semibold">
                     <option value="0">All Units</option>
@@ -165,7 +165,7 @@
                     @endforeach
                 </select>
             </div>
-            
+
             {{-- <div class="form-group fg-admin" style="width: 175px; position: relative;">
                 <select id="typeSelect" class="form-control bg-white border-0 fw-semibold">
                     <option value="">All Applications</option>
@@ -179,8 +179,8 @@
         </form>
         </div>
 
-        
-    
+
+
         <div class="table-responsive border m-3 rounded">
             {{-- <div class="custom-table-for-admin"> --}}
 
@@ -194,7 +194,7 @@
                         <tr>
                             <th>Loan ID</th>
                             <th>State</th>
-                           
+
                             <th >LOAN CODE</th>
                             <th>Loan Type</th>
                             <th>Principal Borrower</th>
@@ -220,16 +220,16 @@
                             <td class="fw-bold">{{$loan->loan->id}}</td>
                             <td class="text-center">
                                 @if ($loan->loan->is_active == 2)
-                                    <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>    
-                                
+                                    <i data-bs-toggle="tooltip" data-bs-placement="top" title="Closed" style="font-size: 9px;" class="bi bi-circle-fill text-dark"></i>
+
                                 @elseif ($loan->loan->is_active == 1)
                                     <i data-bs-toggle="tooltip" data-bs-placement="top" title="Permforming Loan" style="font-size: 9px;" class="bi bi-circle-fill text-primary"></i>
                                 @else
                                     <i data-bs-toggle="tooltip" data-bs-placement="top" title="No state set" style="font-size: 9px;" class="bi bi-circle text-dark"></i>
                                 @endif
-                                
+
                             </td>
-                            
+
 
                             <td class="border-end fw-bold">
                                 {{$loan->loan->loan_code}}
@@ -243,9 +243,9 @@
                                         @php $color = '#26de8c;' @endphp
                                     @elseif ($loan->loan->loanCategory->loan_category_name == 'Additional')
                                         @php $color = '#ce6bbf;'@endphp
-                                    @endif 
+                                    @endif
                                 @endif
-                            
+
                             <td style="background-color: {{$color}} font-size: 10px;" class="fw-bold">
                                 @if ($loan->loan->loanCategory)
                                     @if ($loan->loan->loanCategory->loan_category_name == 'New')
@@ -254,13 +254,13 @@
                                         {{$loan->loan->loanCategory->loan_category_name}}
                                     @elseif ($loan->loan->loanCategory->loan_category_name == 'Additional')
                                         {{$loan->loan->loanCategory->loan_category_name}}
-                                    @endif 
+                                    @endif
                                 @endif
-                            
+
                             </td>
-                            
-                            
-                           
+
+
+
 
                             <td>
                                 <a href="#" class="fw-bold text-dark text-decoration-none">
@@ -275,7 +275,7 @@
 
                             <td class="fw-bold">
                                 <a class="{{$loan->loan->deleted_at ? 'disabled' : ''}}" type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"   style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
-                                {{number_format($loan->loan->principal_amount, 2, '.',',')}}    
+                                {{number_format($loan->loan->principal_amount, 2, '.',',')}}
                             </td>
                             <td class="text-center border-start" >
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
@@ -292,7 +292,7 @@
                                     @break
                                 @endif
                             @endforeach
-                            
+
                             </td>
                             <td class="text-center">
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
@@ -312,7 +312,7 @@
                             </td>
 
                             <td class="text-center border-end">
-                                
+
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
                                     @if ($status->loan_application_state_id == 5)
                                         <i class="bi bi-check-circle-fill text-primary"></i>
@@ -330,20 +330,20 @@
                                     foreach ($loan->loan->LoanApplicationStatus as $status) {
                                         array_push($array, $status->loan_application_state_id);
                                     }
-                                    @endphp  
+                                    @endphp
                                     @if(count($array)==0)
                                         <p class="text-secondary">Pending</p>
                                     @elseif (in_array(6,$array))
                                         <span class="final-denied">Denied</span>
                                     @elseif(in_array(5,$array))
-                                        <p class="fw-bold text-primary">Picked up</p>  
+                                        <p class="fw-bold text-primary">Picked up</p>
                                     @elseif(in_array(3,$array))
                                         <span class="final-approved">Approved</span>
                                     @else
                                         <p class="">Being Processed</p>
                                     @endif
                                 @endif
-                     
+
                             </td>
 
                             <td>
@@ -353,7 +353,7 @@
                                 </button>
                             </td>
                             <td class="text-center">
-                                
+
                                 <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{$loan->loan->deleted_at ? 'disabled' : ''}}>
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                   </button>
@@ -364,7 +364,7 @@
                                             Edit State
                                             <p class="" style="font-size: x-small">Make Loan performing or closed.</p>
                                         </a>
-                                        
+
                                     </li>
                                     <li>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#categoryModal{{$loan->loan->id}}" class="dropdown-item">
@@ -381,17 +381,17 @@
                                   </ul>
                             </td>
                         </tr>
-                        
+
                         @include('admin-views.admin-loan-applications-tracking.modal-loan-category')
                         @include('admin-views.admin-loan-applications-tracking.modal-add-status')
                         @include('admin-views.admin-loan-applications-tracking.modal-change-state')
                         @include('admin-views.admin-loan-applications-tracking.modal-adjust')
                     @endforeach
-                   
+
                     </tbody>
                 </table>
             {{-- </div> --}}
-            
+
         </div>
     </div>
 </div>
@@ -470,9 +470,9 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     opacity: 0.6; /* Reduce opacity to indicate disabled state */
     pointer-events: none; /* Ignore pointer events - doesn't receive mouse clicks */
     /* Additional styling to visually indicate the disabled state */
-    
+
     color: #999; /* Change text color */
-    
+
 }
 
 </style>
