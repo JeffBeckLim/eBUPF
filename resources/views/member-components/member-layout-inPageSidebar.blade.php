@@ -35,7 +35,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected fade-in  rounded-4':' '}} ">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img src="{{asset('icons/home.svg')}}" alt="">
+                            <img src="{{asset('assets/home.svg')}}" alt="">
                         </div>
                         <div class="col-9">
                             <span class="fw-bold fs-7 text-secondary">Home</span>
@@ -66,7 +66,7 @@
                         <button style="padding-left: 13px   !important;" class="accordion-button collapsed mb-1 {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
-                                    <img src="{{asset('icons/loan-options.svg')}}" alt="">
+                                    <img src="{{asset('assets/loan-options.svg')}}" alt="">
                                 </div>
                                 <div class="col-9 ">
                                     <span class="fw-bold fs-7 text-secondary">Loan Options</span>
@@ -162,7 +162,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('member.transactions') ? 'bg-selected fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img class="mb-1" src="{{asset('icons/receipt.svg')}}" alt="">
+                            <img class="mb-1" src="{{asset('assets/receipt.svg')}}" alt="">
                         </div>
                         <div class="col-9  ">
                             <span class="fw-bold fs-7  text-secondary">Transactions</span>
@@ -175,7 +175,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center  ">
-                            <img src="{{asset('icons/calculator.svg')}}" alt="">
+                            <img src="{{asset('assets/calculator.svg')}}" alt="">
                         </div>
                         <div class="col-9  ">
                             <span class=" fw-bold fs-7 text-secondary">Calculator</span>

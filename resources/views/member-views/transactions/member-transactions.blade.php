@@ -9,7 +9,7 @@
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-12  d-flex justify-content-center">
-                            <img src="{{asset('icons/receipt-history.svg')}}" alt="history" style="width: 3rem;">
+                            <img src="{{asset('assets/receipt-history.svg')}}" alt="history" style="width: 3rem;">
                             <p class="text-center fw-bolder m-0">
                                 Transaction
                                 <br>
@@ -86,7 +86,7 @@
                             </div>
                         @else
                             <div class="d-flex justify-content-center align-content-center">
-                                <img src="{{asset('icons/no-transaction.svg')}}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                <img src="{{asset('assets/no-transaction.svg')}}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                             </div>
                             <p class="text-center">No transaction</p>
                         @endif

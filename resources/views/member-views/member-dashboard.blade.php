@@ -66,9 +66,9 @@
                                                                         <div class="row h-100 g-0">
                                                                             <div class="col-3 ps-2 d-flex justify-content-center align-items-start pe-2">
                                                                                 @if ($loan->loan_type_id == 1)
-                                                                                <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="40px">
-                                                                                @else 
-                                                                                <img class="img-fluid" src="icons/HSL-mini.svg" alt="hsl mini" width="40px">
+                                                                                <img class="img-fluid" src="assets/MPL-mini.svg" alt="mpl mini" width="40px">
+                                                                                @else
+                                                                                <img class="img-fluid" src="assets/HSL-mini.svg" alt="hsl mini" width="40px">
                                                                                 @endif
                                                                             </div>
                                                                             <div class="col-9">
@@ -76,11 +76,11 @@
                                                                                     @if ($loan->loan_type_id == 1)
                                                                                     <span class="text14-design">Multi-Purpose Loan
                                                                                     </span>
-                                                                                    @else 
+                                                                                    @else
                                                                                     <span class="text14-design">Housing Loan
                                                                                     </span>
                                                                                     @endif
-                                                                                    
+
                                                                                     <br>
                                                                                     @if($loan->amortization)
                                                                                         <span class="text13-design">
@@ -105,7 +105,7 @@
                                                                         @endif
                                                                         </p>
                                                                     </div>
-                                                                    
+
                                                                 </div>
                                                                 <div class="row mb-2 g-0">
                                                                     <div class="col-6 ">
@@ -135,7 +135,7 @@
                                 <div style="background: white; border-radius: 10px; border: 0.50px #ACACAC solid;">
                                     <div class="container">
                                         <div class="row mt-2 mx-lg-2">
-                                            
+
                                             <div class="col-md-4 pt-2">
                                                 <p class="fs-6 fw-bold ">Loan Application</p>
                                             </div>
@@ -147,7 +147,7 @@
                                                        style="pointer-events: none; opacity: 0.6;"
                                                     @endif
                                                 >
-                                                    <img class="img-fluid" src="icons/MPL-mini.svg" alt="mpl mini" width="30px">
+                                                    <img class="img-fluid" src="assets/MPL-mini.svg" alt="mpl mini" width="30px">
                                                     <div class="ps-2">
                                                         <h6 style="font-size: 10px">Apply</h6>
                                                         <strong style="font-size: 12px">Multi-Purpose Loan</strong>
@@ -160,7 +160,7 @@
                                                        style="pointer-events: none; opacity: 0.6;"
                                                    @endif
                                                 >
-                                                    <img class="img-fluid" src="icons/HSL-mini.svg" alt="mpl mini" width="30px">
+                                                    <img class="img-fluid" src="assets/HSL-mini.svg" alt="mpl mini" width="30px">
                                                     <div class="ps-2">
                                                         <h6 style="font-size: 10px">Apply</h6>
                                                         <strong style="font-size: 12px">Housing Loan</strong>
@@ -263,7 +263,7 @@
                         <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%">
                             <div class="container">
                                 <div class="mt-3">
-                                    <img src="icons/history.svg" alt="history icon" width="35px">
+                                    <img src="assets/history.svg" alt="history icon" width="35px">
                                     <span class="fw-bold fs-6">Transactions</span>
                                 </div>
 
@@ -311,7 +311,7 @@
                                     </div>
                                 @else
                                     <div class="d-flex justify-content-center align-content-center">
-                                        <img src="icons/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                        <img src="assets/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                                     </div>
                                     <p class="text-center">No transaction</p>
                                 @endif
@@ -326,5 +326,5 @@
 
                 </div>
     </div>
-    
+
 @endsection

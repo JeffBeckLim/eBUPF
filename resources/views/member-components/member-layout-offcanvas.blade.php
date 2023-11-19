@@ -15,11 +15,11 @@
         offcanvasElement.addEventListener('hidden.bs.offcanvas', closeOffcanvasOnLargeScreens);
     });
 </script>
-<style> 
+<style>
 /* Ensure that backdrop covers all screen for offcanvas sidebar */
     /* .offcanvas-backdrop {
       width: 100%;
-      height: 100%; 
+      height: 100%;
       } */
 </style>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
@@ -29,13 +29,13 @@
     <div class="nav">
         <div class="col">
             <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
-                <img src="{{asset('icons/bars.svg')}}" alt="">
+                <img src="{{asset('assets/bars.svg')}}" alt="">
               </button>
 
             <a href="#"><img class="img-fluid ps-2" src="{{asset('assets/bu-provident.svg')}}" alt="BU Provident" style="width: 11rem;"></a>
         </div>
 
-        
+
     </div>
 </div>
 <div class="offcanvas offcanvas-start d-block d-lg-none rounded-end-4" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" style="width: 320px">
@@ -70,7 +70,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected fade-in  rounded-4':' '}} ">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img src="{{asset('icons/home.svg')}}" alt="">
+                            <img src="{{asset('assets/home.svg')}}" alt="">
                         </div>
                         <div class="col-9">
                             <span class="fw-bold fs-7 text-secondary">Home</span>
@@ -101,7 +101,7 @@
                         <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
-                                    <img src="{{asset('icons/loan-options.svg')}}" alt="">
+                                    <img src="{{asset('assets/loan-options.svg')}}" alt="">
                                 </div>
                                 <div class="col-9 ">
                                     <span class="fw-bold fs-7 text-secondary">Loan Options</span>
@@ -197,7 +197,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('member.transactions') ? 'bg-selected fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img class="mb-1" src="{{asset('icons/receipt.svg')}}" alt="">
+                            <img class="mb-1" src="{{asset('assets/receipt.svg')}}" alt="">
                         </div>
                         <div class="col-9  ">
                             <span class="fw-bold fs-7  text-secondary">Transactions</span>
@@ -210,7 +210,7 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center  ">
-                            <img src="{{asset('icons/calculator.svg')}}" alt="">
+                            <img src="{{asset('assets/calculator.svg')}}" alt="">
                         </div>
                         <div class="col-9  ">
                             <span class=" fw-bold fs-7 text-secondary">Calculator</span>
