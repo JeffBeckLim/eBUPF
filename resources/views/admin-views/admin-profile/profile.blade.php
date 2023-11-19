@@ -52,10 +52,10 @@
         {{Auth::user()->member->sex}}
     </div>
 
-    <div class="col-2  fw-bold">
+    <div class="col-3  fw-bold">
         Contact
     </div>
-    <div class="col-4 ">
+    <div class="col-3 ">
         {{Auth::user()->member->contact_num}}
     </div>
     <div class="col-12 pt-2 text-secondary pt-3">

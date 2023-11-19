@@ -102,13 +102,13 @@
         <div class="d-flex px-3 pt-4">
 
             @if ($loan_type == 'hsl')
-                <div class="d-flex membership-app-header1-mpl text-dark">
+                <div class="d-flex membership-app-header1-mpl text-dark d-none d-md-block">
                     <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 50px;">
                     <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 20px;">Housing Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
                 </div>
 
             @elseif ($loan_type == 'mpl')
-                <div class="d-flex membership-app-header1-mpl text-dark">
+                <div class="d-flex membership-app-header1-mpl text-dark d-none d-md-block">
                     <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 50px;">
                     <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
                 </div>
@@ -175,7 +175,7 @@
             </div> --}}
 
             <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
-            <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications.tracking', $loan_type)}}">Clear Filter</a>
+            <a class="btn btn-outline-primary rounded-5 d-md-flex align-items-center" style="font-size: 12px;" href="{{route('admin.loan.applications.tracking', $loan_type)}}">Clear Filter</a>
         </form>
         </div>
 
