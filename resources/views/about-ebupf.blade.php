@@ -4,9 +4,9 @@
 <div class="container mt-5">
     <div style="height: 90vh" class="get-to-know">
         <div class="row">
-            <div class="col-md-6 fs-3 fw-bold mb-3" style="color: #00638D;">
+            <h1 class="col-md-6 fs-3 fw-bold mb-3" style="color: #00638D;">
                 Get to know how <span style="color: #FF6F18;">e</span>BUPF system started and had been developed.
-            </div>
+            </h1>
         </div>
         <div class="row">
             <div class="col-md-6">

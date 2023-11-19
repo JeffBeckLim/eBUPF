@@ -5,16 +5,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="fw-bold my-4 fs-1" style="color: #00638D;">
+                    <h1 class="fw-bold my-4 fs-1" style="color: #00638D;">
                         Discover more about our Organization
-                    </div>
+                    </h1>
                     <div style="border-bottom: 2px solid black;text-align:justify;" class="fs-6 pb-3">
                         Bicol University Provident Fund Inc. is a reputable financial institution dedicated to empowering the Bicol University Faculty Members and with their financial goals. With a steadfast commitment, they offer a comprehensive range of financial solutions, prominently featuring multipurpose and housing loans. With a customer-centric approach, they provide accessible and flexible loan options, ensuring that dreams of homeownership, education, and other financial aspirations become a reality. Bicol University Provident Fund Inc. stands as a trusted partner in the journey towards financial stability and prosperity.
                     </div>
                     <div class="row mt-4 reveal fade-bottom active">
                         <div class="col-6">
                             <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                                <img src="{{asset('assets/check-icon.svg')}}" alt="" width="32px"> &nbsp;
+                                <img src="{{asset('assets/check-icon.svg')}}" alt="Check Icon" width="32px"> &nbsp;
                                 Mission
                             </div>
                             <div class="fs-6">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-6">
                             <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                                <img src="{{asset('assets/check-icon.svg')}}" alt="" width="32px"> &nbsp;
+                                <img src="{{asset('assets/check-icon.svg')}}" alt="Check Icon" width="32px"> &nbsp;
                                 Vision
                             </div>
                             <div class="fs-6">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 mt-5">
-                    <img src="{{asset('assets/BUBG-new.png')}}" alt="" width="100%">
+                    <img src="{{asset('assets/BUBG-new.png')}}" alt="Check Icon" width="100%">
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="{{asset('assets/about-bupf-man.svg')}}" alt="" width="80%">
+            <img src="{{asset('assets/about-bupf-man.svg')}}" alt="Check Icon" width="80%">
         </div>
         <div class="col-md-6">
             <p style="color:#00638D;" class="fs-5 fw-bold">Why Choose Us</p>

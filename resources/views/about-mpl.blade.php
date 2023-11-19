@@ -175,13 +175,13 @@
 
     <section class="faq" style="height: 95vh; margin-top: 100px;">
         <div class="container mt-5">
-            <div class="text-center fs-4 fw-bold" style="color: #00638D;">
+            <div class="text-center fs-4 fw-bold mb-2" style="color: #00638D;">
                 Frequently Asked Questions
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <div style="width: 60%;" class="text-center fs-2 fw-bold">
+                <h1 style="width: 60%;" class="text-center fs-2 fw-bold">
                     Explore Our Top FAQs: Your Common Question Answered!
-                </div>
+                </h1>
             </div>
             <div class="faq-container mt-5">
                 <div class="row">

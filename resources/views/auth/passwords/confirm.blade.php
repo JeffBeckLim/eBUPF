@@ -6,7 +6,7 @@
         <div style="width: 33%; min-width:335px;">
             <div class="card mt-5 p-3">
                 <div class="d-flex justify-content-center align-items-center mt-4">
-                    <img src="{{asset('icons/confirm-password.svg')}}" alt="confirm password logo" width="65px">
+                    <img src="{{asset('assets/confirm-password.svg')}}" alt="confirm password logo" width="65px">
                 </div>
                 <div class="card-header border-0 bg-white text-center fw-bold fs-5 pt-2 mb-0">{{ __('Confirm Password') }}</div>
 
