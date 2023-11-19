@@ -8,7 +8,7 @@
 
                 <div class=" d-flex text-dark mt-3">
                     <div class="g-0 ps-2 my-auto d-flex align-items-center">
-                        <img src="{{asset('icons/admin-icons/receivables-big.svg')}}" alt="Receivables Big Icon" width="40px" height="40px"  style="margin-right: 5px;">
+                        <img src="{{asset('assets/admin-icons/receivables-big.svg')}}" alt="Receivables Big Icon" width="40px" height="40px"  style="margin-right: 5px;">
                         <div style="line-height: 0.6;">
                             <div class="m-0 fw-bold fs-5"> Schedule of Receivables</div> <br>
                             <div class="fs-7 text-secondary">Monthly Remit</div>
@@ -26,7 +26,7 @@
                         <a class="btn border rounded-end-0 w-100 h-100 bg-white
                         {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}}
                         " href="{{route('admin.receivables.remit', ['report' => $report, 'loan_type' => 'mpl'])}}">
-                        <img src="{{asset('icons/MPL-mini.svg')}}" alt="" style="width: 20px;">
+                        <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 20px;">
                         Multi-Purpose Loan Receivables</a>
                     </div>
                     <div class="col-6">
@@ -34,7 +34,7 @@
                         class="btn border rounded-start-0 w-100 h-100 bg-white
                         {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}"
                         href="{{route('admin.receivables.remit', ['report' => $report, 'loan_type' => 'hsl'])}}">
-                        <img src="{{asset('icons/HSL-mini.svg')}}" alt="" style="width: 20px;">
+                        <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 20px;">
                         Housing Loan Receivables
                     </a>
                     </div>

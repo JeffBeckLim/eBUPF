@@ -9,7 +9,7 @@
 
 <div class="container-fluid px-2" >
     <div class="row mt-2">
-    
+
         <div class="container-fluid">
             <div class="adminbox">
                 <div class="row mx-3 mt-1 mb-2 pb-1 border-bottom g-0">
@@ -17,14 +17,14 @@
                 </div>
                 <div class=" d-flex text-dark">
                         <div >
-                            <img src="{{asset('icons/book.svg')}}" alt="" width="50px" height="58px">
+                            <img src="{{asset('assets/book.svg')}}" alt="" width="50px" height="58px">
                         </div>
                         <div class="g-0 ps-2 my-auto">
                             <div class="m-0 fw-bold fs-5" >Member Ledgers</div>
                             <div style="font-size: small" class="fw-bold">Ledgers in eBUPF</div>
                         </div>
                 </div>
-                
+
                 <form action="{{route('admin.ledgers.filter')}}">
                     <div class="filter-group gap-3">
                         <div class="form-group fg-admin " style="width: 150px; position: relative;">
@@ -42,9 +42,9 @@
 
                 <div class="table-responsive ">
                     <div class="custom-table-for-admin">
-    
+
                         <table class="table admin-table table-striped border-top" id="myTable">
-                            
+
                             <thead style="border-bottom: 2px solid black">
                                 <tr>
                                     <th style="width:5%">ID</th>
@@ -55,7 +55,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($members) != 0)    
+                                @if (count($members) != 0)
                                     @foreach ($members as $member)
                                     <tr>
                                         <td>
@@ -72,7 +72,7 @@
                                                 foreach ($member->loans as $loan) {
                                                     if($loan->loanType->id == 1 && $loan->amortization != null){
                                                         if (count($loan->loanApplicationStatus)==5 ) {
-                                                            $mpl_count++;   
+                                                            $mpl_count++;
                                                         }
                                                     }
                                                 }
@@ -85,7 +85,7 @@
                                                 foreach ($member->loans as $loan) {
                                                     if($loan->loanType->id == 2 && $loan->amortization != null){
                                                         if (count($loan->loanApplicationStatus)==5  ) {
-                                                            $hsl_count++;   
+                                                            $hsl_count++;
                                                         }
                                                     }
                                                 }
@@ -96,14 +96,14 @@
                                             <a href="/admin/ledgers/member/mpl/{{$member->id}}" style="font-size: small" class="btn bu-orange text-light fw-bold  me-4 my-1">View Ledgers</a>
                                         </td>
                                     </tr>
-                                    @endforeach 
+                                    @endforeach
                                 @endif
 
-                             
+
                             </tbody>
                         </table>
 
-                        
+
 
                     </div>
                 </div>

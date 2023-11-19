@@ -2,34 +2,34 @@
 
 @section('content')
 <div class="container-fluid px-2" style="scale: 0.95;">
-   
+
     <div class="row">
         <div class="col-12 mb-3">
             @if (session('passed'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    {{session('passed')}}                
+                    {{session('passed')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>    
+                </div>
             @endif
             @error('penalty_total')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{$message}}                
+                    {{$message}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>                
+                </div>
             @enderror
 
             @error('penalty_payment_amount')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{$message}}                
+                    {{$message}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>                
+                </div>
             @enderror
 
             @error('payment_date')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{$message}}                
+                    {{$message}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>                
+                </div>
             @enderror
 
             <div class="mb-2">
@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="d-flex">
-                
+
                 <div>
                     <img src="{{$loan->member->profile_picture != null ?asset('storage/'.$loan->member->profile_picture) : asset('assets/no_profile_picture.jpg') }}" alt="" style="height: 50px; width: 50px; object-fit: cover;" class="border rounded-circle">
                 </div>
@@ -50,7 +50,7 @@
                     {{$loan->member->units->unit_code}}
                 </div>
             </div>
-            
+
         </div>
         <h6 class="text-secondary" style="font-size: small">Personal Ledger</h6>
         <div class="col-md-6 d-flex gap-2">
@@ -61,36 +61,36 @@
                 <span>{{$loan->id}}</span>
             </h3>
             @if (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) < 0.5)
-                <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger"> 
-                    Paid 
+                <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger">
+                    Paid
                     {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
                 </p>
             @elseif (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) > 0.5)
-                <p class="pl-50-plus d-flex justify-content-center align-items-center py-1 "> 
-                    Paid 
+                <p class="pl-50-plus d-flex justify-content-center align-items-center py-1 ">
+                    Paid
                     {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
                 </p>
             @endif
-           
-            
+
+
         </div>
         <div class="col-md-6">
             <div class="d-flex justify-content-end">
-                
+
                 @if ($loan->penalty)
                     <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
-                        <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
-                    </a>                    
+                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
+                    </a>
                 @endif
                 {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
-                
+
                     @php
                         if ($loan->is_active == 1){
                             $color = "0092D1";
                         }
                         elseif ($loan->is_active == 2){
                             $color = "6a9577";
-                        } 
+                        }
                         else{
                             $color = "dd5858";
                         }
@@ -99,26 +99,26 @@
                         @if ($loan->is_active == 1)
                             Performing
                         @elseif ($loan->is_active == 2)
-                            Closed 
+                            Closed
                         @else
-                            Not Specified    
+                            Not Specified
                         @endif
                     </span>
-                
-                
+
+
 
                 <div class="dropdown ms-2">
                     <button  class="btn ps-4  fw-bold bu-orange text-white rounded-pill h-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="font-size: 12px;">{{$loan->loanType->loan_type_description}} {{$loan->id}}<img class="ms-3"  src="{{asset('icons/caret-down-white.svg')}}" style="width: 10px;" ></span>
+                            <span style="font-size: 12px;">{{$loan->loanType->loan_type_description}} {{$loan->id}}<img class="ms-3"  src="{{asset('assets/caret-down-white.svg')}}" style="width: 10px;" ></span>
                     </button>
                     <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton" style="font-size: 14px">
                         @foreach ($memberLoans as $memberLoan)
                         @php
                             $amort_start_here = \Carbon\Carbon::parse($memberLoan->amortization->amort_start);
-                        @endphp 
+                        @endphp
                             <a class="dropdown-item" href="/admin/ledgers/personal-ledger/{{$memberLoan->id}}">{{$memberLoan->loanType->loan_type_description}} {{$memberLoan->id}}
                             <p>{{$amort_start_here->format('M Y')}}</p>
-                            </a>    
+                            </a>
                         @endforeach
                         {{-- <a class="dropdown-item" href="#">Multi-Purpose 2</a>
                         <a class="dropdown-item" href="#">Housing loan 1</a>
@@ -173,7 +173,7 @@
                         {{-- if naka base sa loan --}}
                         {{-- @foreach ($loan->loanApplicationStatus as $status)
                             @if ($status->loan_application_state_id == 5)
-                                <p class="pl-text-size">{{ $status->created_at->format('M Y') }}</p>        
+                                <p class="pl-text-size">{{ $status->created_at->format('M Y') }}</p>
                             @endif
                         @endforeach --}}
                         @php
@@ -182,7 +182,7 @@
 
                             // Subtract one month
                             $oneMonthAgo = $date->subMonth();
-                            
+
                             // You can format and display the result
                             // echo $oneMonthAgo->format('Y-m-d'); // Format as 'YYYY-MM-DD' or any format you prefer
                         @endphp
@@ -194,7 +194,7 @@
                     @php
                         $amort_start = \Carbon\Carbon::parse($loan->amortization->amort_start);
                         $amort_end = \Carbon\Carbon::parse($loan->amortization->amort_end);
-                    @endphp 
+                    @endphp
                     <div class="col-4">
                         <p class="pl-text-size">{{$amort_start->format('M Y')}} | {{$amort_end->format('M Y')}}</p>
                     </div>
@@ -286,7 +286,7 @@
                         <p class="pl-text-size">
                             {{
                                 number_format(
-                              ($loan->interest - $interest_paid)  + 
+                              ($loan->interest - $interest_paid)  +
                               ($loan->principal_amount - $principal_paid)
                               , 2, '.', ',')
                             }}
@@ -313,18 +313,18 @@
                 <tr class="pl-tr">
                     <th class="text-center">
                         @if($loan->loanCategory)
-                            <span style="color: #a01a1a; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>   
+                            <span style="color: #a01a1a; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>
                         @else
-                            <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6> 
+                            <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6>
                         @endif
-                        
-                    
+
+
                     </th>
-                    
+
                     @for ($x = $loan->term_years; $x != 0; $x--)
                         <th colspan="2">{{$amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
                     @endfor
-                    
+
                     <th colspan="2">{{$amort_start->format(' Y')}}</th>
                     {{-- <th colspan="2">2027</th>
                     <th colspan="2">2026</th>
@@ -337,9 +337,9 @@
                     <th>Month</th>
                     @for ( $i=-1; $i < $loan->term_years; $i++)
                         <th class="fw-normal">Principal</th>
-                        <th class="fw-normal">Interest</th>    
+                        <th class="fw-normal">Interest</th>
                     @endfor
-                    
+
                     {{-- <th class="fw-normal">Principal</th>
                     <th class="fw-normal">Interest</th>
                     <th class="fw-normal">Principal</th>
@@ -354,20 +354,20 @@
             </thead>
             <tbody>
                 @for ($x = 0; $x < count($months); $x++)
-                     
+
                     <tr class="pl-tr">
                         <td>{{$months[$x]}}</td>
                         @for($i = $loan->term_years; $i != -1; $i--)
                             @php
                                 $targetMonth = $x+1;
                                 $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                                
+
                                 $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
                                 ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
                                 ->get();
                             @endphp
                             <td>
-                                @if ($amortStartSubMonth->month == $targetMonth 
+                                @if ($amortStartSubMonth->month == $targetMonth
                                 && $amortStartSubMonth->year == $targetYear)
                                     <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
                                 @endif
@@ -386,8 +386,8 @@
                                     @endphp
                                     @if ($totalPrincipal != 0)
                                         @if ($num_payments > 1)
-                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalPrincipal, 2, '.',',')}}</a> 
-                                        @else 
+                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalPrincipal, 2, '.',',')}}</a>
+                                        @else
                                             <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalPrincipal, 2, '.',',')}}</a>
                                         @endif
                                     @endif
@@ -401,13 +401,13 @@
                                     foreach ($filteredPayments as $filteredPayment){
                                         $totalInterest += $filteredPayment->interest;
                                         $num_payments++;
-                                        
+
                                     }
                                 @endphp
                                 @if ($totalInterest != 0)
                                     @if ($num_payments > 1)
-                                        <a class=" text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalInterest, 2, '.',',')}}</a> 
-                                    @else 
+                                        <a class=" text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalInterest, 2, '.',',')}}</a>
+                                    @else
                                         <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalInterest, 2, '.',',')}}</a>
                                     @endif
                                 @endif
@@ -436,14 +436,14 @@
                     @endphp
                     <td style="border-top: 2px solid black">
                         @if ($principalTotal)
-                        {{ number_format($principalTotal, 2,'.' , ',') }}     
+                        {{ number_format($principalTotal, 2,'.' , ',') }}
                         @endif
                     </td>
                     <td style="border-top: 2px solid black">
                         @if ($interestTotal)
-                        {{ number_format($interestTotal, 2, '.' , ',') }}     
+                        {{ number_format($interestTotal, 2, '.' , ',') }}
                         @endif
-                       
+
                     </td>
                     @endfor
                 </tr>
@@ -453,8 +453,8 @@
     </div>
         {{-- FOR PENALTY --}}
         @include('admin-views.admin-ledgers.card-penalty')
-        
-        
+
+
 </div>
 @include('admin-views.admin-ledgers.modal-edit-penalty-payment')
 
