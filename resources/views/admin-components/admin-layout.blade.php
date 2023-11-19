@@ -56,7 +56,7 @@
 
   @php
       if(!isset($loanType)){
-        $loanType = 0; 
+        $loanType = 0;
       }
   @endphp
   {{-- HIDE NAV BAR WHEN SCROLLING UP --}}
@@ -65,12 +65,12 @@
     <div id="fixedTopElement" class=" row  py-3 bg-white vw-100 fixed-top ">
       <span class="d-flex">
         <button type="button" id="sidebarCollapse" class="btn ms-3 d-none d-sm-block" style="background-color: #EEF6F8;">
-          <img src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
+          <img src="{{asset('assets/admin-icons/bars.svg')}}" alt="menu" style="width: 1rem">
         </button>
 
         {{-- THE OFF CANVAS BUTTON ---- Show only on small screen --}}
         <button class="btn ms-3 d-block d-sm-none border" style="background-color: #EEF6F8;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-          <img src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
+          <img src="{{asset('assets/admin-icons/bars.svg')}}" alt="menu" style="width: 1rem">
         </button>
 
 
@@ -93,18 +93,18 @@
          .accordion-sidebar p{
           font-size: 14px ;
           color: rgb(48, 28, 98) !important ;
-          
+
          }
-  
+
          .hover-menu{
           transition: background-color 500ms ease
-          
+
          }
           .hover-menu:hover{
             background-color: #eef2ff !important;
-          
+
           }
-          
+
       </style>
       <nav id="sidebar" style="padding-top: 60px" class="d-none d-sm-block">
         <ul class="list-unstyled components mb-5 " style="scale: 0.93;" >
@@ -114,10 +114,10 @@
               <img style="width: 2rem; height: 2rem; object-fit: cover" class="me-1 rounded-circle" src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="icon">
               {{ Auth::user()->member->firstname }}
               {{-- {{ Auth::user()->member->lastname }}--}}
-            </a> 
+            </a>
 
           </li>
-          
+
           <li class="active hover-menu">
             <a class="{{Route::is('admin-dashboard')? 'fw-bold' : ''}}" href="{{route('admin-dashboard')}}">
               <i style="font-size: 18px; color: #0082BA" class="bi bi-grid-1x2{{Route::is('admin-dashboard')? '-fill' : ''}} me-1"></i>
@@ -159,7 +159,7 @@
 
           <li class="hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.loan.applications.tracking')? 'fw-bold' : ''}}" href="{{route('admin.loan.applications.tracking', 'mpl')}}">
-              <i style="font-size: 20px; color: #FF6F19" class="bi bi-compass{{Route::is('admin.loan.applications.tracking')? '-fill' : ''}} me-2"></i> 
+              <i style="font-size: 20px; color: #FF6F19" class="bi bi-compass{{Route::is('admin.loan.applications.tracking')? '-fill' : ''}} me-2"></i>
               Tracking Loans
             </a>
           </li>
@@ -170,14 +170,14 @@
 
           <li class="hover-menu">
             <a class="d-flex align-items-center {{$loanType == 1 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table'])}}">
-              <i style="font-size: 20px; color: #0038FF" class="bi bi-layers{{$loanType == 1? '-fill' : ''}} me-2"></i> 
+              <i style="font-size: 20px; color: #0038FF" class="bi bi-layers{{$loanType == 1? '-fill' : ''}} me-2"></i>
               Multi-purpose Loans
             </a>
           </li>
 
           <li class="hover-menu">
             <a class="d-flex align-items-center {{$loanType == 2 ? 'fw-bold' : ''}}" href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table'])}}">
-              <i style="font-size: 20px; color: #FF0000" class="bi bi-house{{$loanType == 2 ? '-fill' : ''}} me-2"></i> 
+              <i style="font-size: 20px; color: #FF0000" class="bi bi-house{{$loanType == 2 ? '-fill' : ''}} me-2"></i>
               Housing Loans
             </a>
           </li>
@@ -202,7 +202,7 @@
               Receivables
             </a>
           </li>
-          
+
           <li class="border-bottom hover-menu">
             <a class="d-flex align-items-center {{Route::is('admin.loan.logs')? 'fw-bold' : ''}}" href="{{ route('loan.logs') }}">
               {{-- <img src="{{asset('../icons/admin-icons/receivables.svg')}}" style="width: 1rem;"  class="me-2">  --}}
@@ -214,7 +214,7 @@
           <li class="mt-4 hover-menu py-2">
             <div class="dropup-center dropup">
               <button class="btn btn-block text-start w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #868686">
-                <img class=" me-2 ms-3" src="{{asset('../icons/bars.svg')}}" alt="menu" style="width: 1rem">
+                <img class=" me-2 ms-3" src="{{asset('assets/admin-icons/bars.svg')}}" alt="menu" style="width: 1rem">
                 More
               </button>
               <ul class="dropdown-menu w-100 mb-1 border border-dark">
