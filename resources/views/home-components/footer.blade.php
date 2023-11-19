@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4 p-5">
                 <div class="d-flex">
-                    <img style="width: 40px; height: 40px;" src="{{asset('assets/BU-logo.png')}}" alt="Bicol University">
+                    <img src="{{asset('assets/BU-logo.png')}}" alt="Bicol University" width="40px" height="40px">
 
                     <div class="ms-2">
                         <p class="fw-light m-0 fw-bold" style="color: #ffffff; font-size: 14px;">

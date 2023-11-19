@@ -29,7 +29,7 @@
     <div class="nav">
         <div class="col">
             <button class="navbar-toggler ms-3 border p-2 rounded" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
-                <img src="{{asset('assets/bars.svg')}}" alt="">
+                <img src="{{asset('assets/admin-icons/bars.svg')}}" alt="">
               </button>
 
             <a href="#"><img class="img-fluid ps-2" src="{{asset('assets/bu-provident.svg')}}" alt="BU Provident" style="width: 11rem;"></a>
