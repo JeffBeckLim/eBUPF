@@ -48,7 +48,7 @@
                     <a class="nav-link" href="{{route('about-bupf')}}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Contact Us</a>
+                    <a class="nav-link scrollToSection" data-section=".hear-from-you" style="cursor: pointer;">Contact Us</a>
                 </li>
                 @guest
                     @if (Route::has('login'))
@@ -121,7 +121,7 @@
         for (var i = 0; i < reveals.length; i++) {
             var windowHeight = window.innerHeight;
             var elementTop = reveals[i].getBoundingClientRect().top;
-            var elementVisible = 150;
+            var elementVisible = 50;
 
             if (elementTop < windowHeight - elementVisible) {
                 reveals[i].classList.add("active");
@@ -132,6 +132,19 @@
     }
 
     window.addEventListener("scroll", reveal);
+
+    $(document).ready(function() {
+        $('.scrollToSection').on('click', function() {
+            var section = $(this).data('section');
+            var windowHeight = $(window).height();
+            var sectionHeight = $(section).outerHeight();
+            var offset = Math.max(0, (windowHeight - sectionHeight) / 2);
+
+            $('html, body').animate({
+                scrollTop: $(section).offset().top - offset
+            }, 'slow', 'swing');
+        });
+    });
     </script>
 </body>
 

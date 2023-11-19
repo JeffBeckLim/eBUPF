@@ -14,16 +14,16 @@
                                 <div class="col-12 pb-3" style="margin: 10px 0 0 10px">
                                     <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
                                     <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
-                                    
+
                                 </div>
-                                
+
                                 <div class="col-12 " style=" scale: 0.9;">
                                     <div class="row">
                                         <div class="col-2">
                                             @if($loan->loan_type_id == 1)
-                                                <img class="img-fluid" src="{{asset('icons/MPL-mini.svg')}}" alt="mpl mini" width="50px">
+                                                <img class="img-fluid" src="{{asset('assets/MPL-mini.svg')}}" alt="mpl mini" width="50px">
                                             @elseif($loan->loan_type_id == 2)
-                                                <img class="img-fluid" src="{{asset('icons/HSL-mini.svg')}}" alt="HSL mini" width="50px">
+                                                <img class="img-fluid" src="{{asset('assets/HSL-mini.svg')}}" alt="HSL mini" width="50px">
                                             @endif
                                         </div>
                                         <div class="col-6">
@@ -53,17 +53,17 @@
                                                     @endif
                                                 </span>
                                             </p>
-                                            
+
                                             @if ($loan->penalty != null)
                                                 <h6 class="">
                                                     <span style="font-size: 14px" class="text-danger">
-                                                        <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
+                                                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
                                                             Loan Penalized, Balance:
                                                     </span>
                                                     <h6 class="text-danger fw-bold">
                                                         Php {{number_format($loan->penalty->penalty_total - $sumPenaltyPayments, 2,',','.')}}
                                                     </h6>
-                                                </h6>                                          
+                                                </h6>
                                             @endif
 
                                         </div>
@@ -239,7 +239,7 @@
                             @if ($payments->isEmpty())
                             <div style="height: 660px;">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img src="{{ asset('icons/no-transaction.svg') }}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                    <img src="{{ asset('assets/no-transaction.svg') }}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                                 </div>
                                 <p class="text-center">No transaction</p>
                             </div>

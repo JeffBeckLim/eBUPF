@@ -61,7 +61,7 @@ use App\Models\Penalty;
     Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
 
     // Delete status of loan
-    Route::get('admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status');
+    Route::get('admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status')->middleware('auth','admin.access');
 
     // Show Transactions
     Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
@@ -71,34 +71,34 @@ use App\Models\Penalty;
     Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
 
     // Toggle Additional Loan
-    Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan');
+    Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan')->middleware('auth','admin.access');
 
     // Update Check details
-    Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update');
+    Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update')->middleware('auth','admin.access');
 
 
 
     // RECEIVABLES
-    Route::get('/admin/receivables/{report}/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables');
-    Route::get('/admin/receivables/yearly/summary/{report}/{loan_type}', [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary');
-    Route::get('/admin/receivables/yearly/remit/{report}/{loan_type}' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit');
+    Route::get('/admin/receivables/{report}/{loan_type}' , [AdminReceivablesController::class, 'show'])->name('admin.receivables')->middleware('auth','admin.access');
+    Route::get('/admin/receivables/yearly/summary/{report}/{loan_type}', [AdminReceivablesController::class, 'summary'])->name('admin.receivables.summary')->middleware('auth','admin.access');
+    Route::get('/admin/receivables/yearly/remit/{report}/{loan_type}' , [AdminReceivablesController::class, 'remit'])->name('admin.receivables.remit')->middleware('auth','admin.access');
 
     // For generating PDF in the receivables
-    Route::get('/admin/receivables/summary/generated-pdf/{year}/{loan_type}', [AdminReceivablesPDFController::class, 'generateReceivablesSummary'])->name('generate.receivables.summary.report');
+    Route::get('/admin/receivables/summary/generated-pdf/{year}/{loan_type}', [AdminReceivablesPDFController::class, 'generateReceivablesSummary'])->name('generate.receivables.summary.report')->middleware('auth','admin.access');
 
     // LEDGER
-    Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers');
-    Route::get('/admin/ledgers/filter' , [LedgerFilterController::class, 'show'])->name('admin.ledgers.filter');
-    Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers');
-    Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger');
+    Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers')->middleware('auth','admin.access');
+    Route::get('/admin/ledgers/filter' , [LedgerFilterController::class, 'show'])->name('admin.ledgers.filter')->middleware('auth','admin.access');
+    Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers')->middleware('auth','admin.access');
+    Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger')->middleware('auth','admin.access');
 
     // PENALTY
-    Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate');
+    Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate')->middleware('auth','admin.access');
         //penalty payment
         // createPenaltyPayment
-    Route::post('/admin/ledgers/personal-ledger-penalty-payment/{penalty_id}', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment');
+    Route::post('/admin/ledgers/personal-ledger-penalty-payment/{penalty_id}', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment')->middleware('auth','admin.access');
         // updatePenaltyPayment
-    Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment');
+    Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment')->middleware('auth','admin.access');
 
 
 
@@ -148,97 +148,97 @@ use App\Models\Penalty;
 //🔴ADMIN ==================================================================================================
 
     // Show Admin Profile
-    Route::get('admin/my-profile' , [AdminProfileController:: class, 'show'])->name('admin.profile');
+    Route::get('admin/my-profile' , [AdminProfileController:: class, 'show'])->name('admin.profile')->middleware('auth','admin.access');
     // Show profile update page
-    Route::get('admin/my-profile/update' , [AdminProfileController:: class, 'update'])->name('admin.update.profile');
+    Route::get('admin/my-profile/update' , [AdminProfileController:: class, 'update'])->name('admin.update.profile')->middleware('auth','admin.access');
     // save profile updates
-    Route::post('admin/my-profile/save-updates/{member_id}', [AdminProfileController::class, 'saveUpdate'])->name('admin.update.profile.save');
+    Route::post('admin/my-profile/save-updates/{member_id}', [AdminProfileController::class, 'saveUpdate'])->name('admin.update.profile.save')->middleware('auth','admin.access');
     // save password change
-    Route::put('admin/my-profile/change-password/{member_id}', [AdminProfileController::class, 'changePassword'])->name('admin.change.password');
+    Route::put('admin/my-profile/change-password/{member_id}', [AdminProfileController::class, 'changePassword'])->name('admin.change.password')->middleware('auth','admin.access');
 
     // Show loan Applications
-    Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications');
+    Route::get('/admin/loan-applications/{loanType}/{freeze}', [AdminLoanApplicationController::class, 'showLoanApplications'])->name('admin.loan.applications')->middleware('auth','admin.access');
 
     // Show loan Applications
-    Route::get('/admin/loan-applications/{loanType}/{freeze}/filter', [LoanApplicationsFilterController::class, 'show'])->name('admin.loan.applications.filter');
+    Route::get('/admin/loan-applications/{loanType}/{freeze}/filter', [LoanApplicationsFilterController::class, 'show'])->name('admin.loan.applications.filter')->middleware('auth','admin.access');
 
 
 
     // Add Amortization
-    Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization');
+    Route::post('/admin/loan-applications/amortization/{id}', [AdminAmortizationController::class, 'createAmortization'])->name('create.amortization')->middleware('auth','admin.access');
 
     // Edit Loan
-    Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan');
+    Route::post('/admin/loan-applications/update-loan/{id}', [AdminLoanApplicationController::class, 'updateLoan'])->name('update.loan')->middleware('auth','admin.access');
 
 
     // Show MPL or HSL Applications
-    Route::get('/admin/loan-applications-tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking');
+    Route::get('/admin/loan-applications-tracking/{loan_type}', [AdminLoanApplicationController::class, 'showLoanApplicationsTracking'])->name('admin.loan.applications.tracking')->middleware('auth','admin.access');
 
-    Route::get('/admin/loan-applications-tracking/{loan_type}/filter', [LoanApplicationTrackingFilterController::class, 'show'])->name('admin.loan.applications.tracking.filter');
+    Route::get('/admin/loan-applications-tracking/{loan_type}/filter', [LoanApplicationTrackingFilterController::class, 'show'])->name('admin.loan.applications.tracking.filter')->middleware('auth','admin.access');
 
 
     // add status in regards to the application process
-    Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status');
+    Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status')->middleware('auth','admin.access');
 
     // add a state to a loan of active closed or null
-    Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationState'])->name('create.state');
+    Route::post('admin/loan-application/state/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationState'])->name('create.state')->middleware('auth','admin.access');
 
     // add category to the loan NEW ADD RENEW
-    Route::post('admin/loan-application/category/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationCategory'])->name('create.category');
+    Route::post('admin/loan-application/category/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationCategory'])->name('create.category')->middleware('auth','admin.access');
 
     // update principal amount by admin
-    Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount');
+    Route::post('admin/loan-application/adjust/{loan_id}', [AdminLoanApplicationController::class, 'updateLoanApplicationAmount'])->name('update.principalAmount')->middleware('auth','admin.access');
 
     // create / update adjustments
-    Route::post('admin/loan-application/adjustments/{loan_id}', [AdjustmentsController::class, 'updateLoanAdjustments'])->name('update.adjustments');
+    Route::post('admin/loan-application/adjustments/{loan_id}', [AdjustmentsController::class, 'updateLoanAdjustments'])->name('update.adjustments')->middleware('auth','admin.access');
 
     // Show Admin Dashboard
-    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard'); //->middleware('auth','admin.access');
+    Route::get('/admin/dashboard/', [AdminController::class, 'index'])->name('admin-dashboard')->middleware('auth','admin.access');
 
     //Show All Accounts View
-    Route::get('/admin/all-users', [AdminController::class, 'allUsers'])->name('admin.all.users'); //->middleware('auth','admin.access');
+    Route::get('/admin/all-users', [AdminController::class, 'allUsers'])->name('admin.all.users')->middleware('auth','admin.access');
+
     //Show all members
-    Route::get('/admin/members', [AdminController::class, 'showMembers'])->name('admin.members');
+    Route::get('/admin/members', [AdminController::class, 'showMembers'])->name('admin.members')->middleware('auth','admin.access');
     //Show filter members
-    Route::get('/admin/members/filter', [AdminController::class, 'showMembersFilter'])->name('admin.members.filter');
+    Route::get('/admin/members/filter', [AdminController::class, 'showMembersFilter'])->name('admin.members.filter')->middleware('auth','admin.access');
     // Show Create Member Page
-    Route::get('/admin/members/create-member', [AdminCreateMemberController::class, 'show'])->name('admin.members.create');
-    Route::post('/admin/members/create-member', [AdminCreateMemberController::class, 'create'])->name('admin.members.save');
+    Route::get('/admin/members/create-member', [AdminCreateMemberController::class, 'show'])->name('admin.members.create')->middleware('auth','admin.access');
+    Route::post('/admin/members/create-member', [AdminCreateMemberController::class, 'create'])->name('admin.members.save')->middleware('auth','admin.access');
 
     // Show Update Member Page
-    Route::get('/admin/members/update-member/{member_id}', [AdminUpdateMemberController::class, 'show'])->name('admin.members.update');
-    Route::post('/admin/members/update-member/{member_id}/update', [AdminUpdateMemberController::class, 'update'])->name('admin.members.update.save');
+    Route::get('/admin/members/update-member/{member_id}', [AdminUpdateMemberController::class, 'show'])->name('admin.members.update')->middleware('auth','admin.access');
+    Route::post('/admin/members/update-member/{member_id}/update', [AdminUpdateMemberController::class, 'update'])->name('admin.members.update.save')->middleware('auth','admin.access');
 
 
 
     //Show membership Applications
-    Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show'])->name('admin.membership-application');
+    Route::get('/admin/membership-applications', [MembershipApplicationController::class, 'show'])->name('admin.membership-application')->middleware('auth','admin.access');
 
     //Accept membership application
-    Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept');
+    Route::get('/admin/membership/accept/{id}', [MembershipApplicationController::class, 'acceptMembership'])->name('membership.accept')->middleware('auth','admin.access');
     //Reject membership application
-    Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject');
+    Route::get('/admin/membership/reject/{id}', [MembershipApplicationController::class, 'rejectMembership'])->name('membership.reject')->middleware('auth','admin.access');
 
     // Show Admin Ledger
     // Route::get('/ledger/test-me', [AdminController::class, 'memberLedger']); //->middleware('auth','admin.access');
 
-    Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole');
+    Route::put('/admin/update-role/{user}', [UserController::class, 'updateUserRole'])->name('users.updateRole')->middleware('auth','admin.access');
 
-    Route::get('/admin/remittance/view', [AdminRemittanceController::class, 'showRemittance'])->name('admin.remittance');
-    // ->middleware('auth','admin.access')
+    Route::get('/admin/remittance/view', [AdminRemittanceController::class, 'showRemittance'])->name('admin.remittance')->middleware('auth','admin.access');
 
-    Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])/* ->middleware('auth','admin.access') */->name('add.payment.remittance');
+    Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])->name('add.payment.remittance')->middleware('auth','admin.access');
 
     //Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') ->name('update.payment.remittance');
 
     //View Logs
-    Route::get('/admin/remittance/view/logs', [AdminRemittanceController::class, 'showLogsRemittance'])/* ->middleware('auth','admin.access') */->name('logs.remittance');
+    Route::get('/admin/remittance/view/logs', [AdminRemittanceController::class, 'showLogsRemittance'])/* ->middleware('auth','admin.access') */->name('logs.remittance')->middleware('auth','admin.access');
     //delete payment
-    Route::delete('/admin/remittance/view/payment/delete/{id}', [AdminRemittanceController::class, 'deletePaymentRemittance'])/* ->middleware('auth','admin.access') */->name('delete.payment.remittance');
+    Route::delete('/admin/remittance/view/payment/delete/{id}', [AdminRemittanceController::class, 'deletePaymentRemittance'])->name('delete.payment.remittance')->middleware('auth','admin.access');
 
-    Route::get('/admin/logs/loan', [LoanLogController::class, 'show'])->name('loan.logs');
-    Route::get('/admin/logs/loan-adjustments', [LoanLogController::class, 'showAdjustments'])->name('adjustment.logs');
-    Route::get('/admin/logs/amortization', [LoanLogController::class, 'showAmortization'])->name('amortization.logs');
+    Route::get('/admin/logs/loan', [LoanLogController::class, 'show'])->name('loan.logs')->middleware('auth','admin.access');
+    Route::get('/admin/logs/loan-adjustments', [LoanLogController::class, 'showAdjustments'])->name('adjustment.logs')->middleware('auth','admin.access');
+    Route::get('/admin/logs/amortization', [LoanLogController::class, 'showAmortization'])->name('amortization.logs')->middleware('auth','admin.access');
 
 
 
