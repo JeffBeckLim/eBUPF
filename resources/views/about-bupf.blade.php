@@ -14,7 +14,7 @@
                     <div class="row mt-4 reveal fade-bottom active">
                         <div class="col-6">
                             <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                                <img src="{{asset('icons/check-icon.svg')}}" alt="" width="32px"> &nbsp;
+                                <img src="{{asset('assets/check-icon.svg')}}" alt="" width="32px"> &nbsp;
                                 Mission
                             </div>
                             <div class="fs-6">
@@ -23,7 +23,7 @@
                         </div>
                         <div class="col-6">
                             <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                                <img src="{{asset('icons/check-icon.svg')}}" alt="" width="32px"> &nbsp;
+                                <img src="{{asset('assets/check-icon.svg')}}" alt="" width="32px"> &nbsp;
                                 Vision
                             </div>
                             <div class="fs-6">
@@ -48,7 +48,7 @@
             <p class="fs-4">BUPF: Your Trusted Partner for Financial Stability and Success</p>
             <div class="row">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     BUPF commits to help BU employee maximize their hard-earned salary.
@@ -56,7 +56,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     We empower our members to invest for their future.
@@ -64,7 +64,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     All with the goal of helping BUPF Members achieve a life of financial support.
@@ -72,7 +72,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     Low interest rate and borrow up to ₱50,000
@@ -80,7 +80,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     Be able to re-loan after paying a minimum of three (3) months. MPL  Amortization
@@ -88,7 +88,7 @@
             </div>
             <div class="row mt-3">
                 <div class="col-1 text-end">
-                    <img src="{{asset('icons/check-icon.svg')}}" alt="check" width="32px">
+                    <img src="{{asset('assets/check-icon.svg')}}" alt="check" width="32px">
                 </div>
                 <div class="col-11 reveal fade-right">
                     Access to BUPF Loan Products

@@ -17,19 +17,19 @@
                 <div class="row">
                     <div class="col-md-6 text-light d-flex justify-content-center align-items-center pb-5">
                         <div>
-                            <div class="fs-1 fw-semibold" style="line-height: 1.2;">
+                            <h1 class="fs-1 fw-semibold" style="line-height: 1.2;">
                                 Find the Perfect <span style="color: rgb(255, 131, 29)">Loan</span> <br> for your needs
-                            </div>
-                            <div class="fs-5 mt-3 landing-info-text" style="padding-right: 20px;">
+                            </h1>
+                            <h5 class="fs-5 mt-3 landing-info-text" style="padding-right: 20px;">
                                 Welcome to eBUPF, your trusted resource for financial services.
-                            </div>
+                            </h5>
                             <div class="mt-4 reveal fade-left active">
                                 <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-                        <img src="{{ asset('assets/home-computer.svg') }}" alt="Human" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
+                        <img src="{{ asset('assets/home-computer.svg') }}" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
                     </div>
                 </div>
             </div>

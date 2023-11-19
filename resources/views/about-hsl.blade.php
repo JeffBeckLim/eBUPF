@@ -138,15 +138,15 @@
             </div>
             <div style="margin: 20px 50px 0 30px;">
                 <div class="d-flex" style="margin-top: -15px;">
-                    <img src="{{asset('icons/tick-box.svg')}}" alt="Check" width="30px">
+                    <img src="{{asset('assets/tick-box.svg')}}" alt="Check" width="30px">
                     <p class="mt-3 fs-6">Principal Borrower ( Member of BU Provident Fund )</p>
                 </div>
                 <div class="d-flex" style="margin-top: -15px;">
-                    <img src="{{asset('icons/tick-box.svg')}}" alt="Check" width="30px">
+                    <img src="{{asset('assets/tick-box.svg')}}" alt="Check" width="30px">
                     <p class="mt-3 fs-6">Co-borrower ( Member of BU Provident Fund )</p>
                 </div>
                 <div class="d-flex" style="margin-top: -15px;">
-                    <img src="{{asset('icons/tick-box.svg')}}" alt="Check" width="30px">
+                    <img src="{{asset('assets/tick-box.svg')}}" alt="Check" width="30px">
                     <p class="mt-3 fs-6">2 Witnesses ( Member of BU Provident Fund )</p>
                 </div>
                 <div class="fs-6 fw-bold mt-2" style="text-align:justify;">
@@ -156,11 +156,11 @@
                     Attachment of Latest Payslip:
                 </div>
                 <div class="d-flex" style="margin-top: -15px;">
-                    <img src="{{asset('icons/tick-box.svg')}}" alt="Check" width="30px">
+                    <img src="{{asset('assets/tick-box.svg')}}" alt="Check" width="30px">
                     <p class="mt-3 fs-6">Principal Borrower</p>
                 </div>
                 <div class="d-flex" style="margin-top: -15px;">
-                    <img src="{{asset('icons/tick-box.svg')}}" alt="Check" width="30px">
+                    <img src="{{asset('assets/tick-box.svg')}}" alt="Check" width="30px">
                     <p class="mt-3 fs-6">Co-Borrower</p>
                 </div>
                 <div class="fw-bold fs-6 mb-4">
