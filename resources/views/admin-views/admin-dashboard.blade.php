@@ -1,7 +1,7 @@
 @extends('admin-components.admin-layout')
 
 @section('content')
-<div class="container px-5 pb-4">
+<div class="container px-lg-5 pb-4">
 
    <style>
       .row{
@@ -24,7 +24,7 @@
                Hello, {{Auth::user()->member->firstname}}!
             </h4>
          </div>
-         <h6 class="mt-2 pb-3" style="font-size: 14px">
+         <h6 class="mt-2 pb-3 d-none d-md-block" style="font-size: 14px">
             Welcome to eBUPF, your online website for managing BUPF loans.
          </h6>
       </div>
@@ -34,7 +34,7 @@
          </button>
       </div>
    </div>
-    <div class="row">
+    <div class="row mt-3">
       <div class="col-6 mb-2" style="font-size: 12px">
          @if ($latest_user)
             @php
@@ -129,7 +129,7 @@
             </div>
          </div>
        </div>
-       <div class="col-lg-6  ">
+       <div class="col-lg-6 m-lg-0 mt-2">
          <div class="bg-white border h-100 rounded">
             <div class="row  g-0 mx-3 pt-3">
                <div class="col-6"> 
@@ -310,7 +310,7 @@
             <i class="bi bi-info-circle"></i> Latest performing loan was applied <span class="fw-bold">{{$diff_loan_active}} ago</span> 
          @endif
       </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 ">
             <div class="bg-white border rounded">
                
                <h6 class="m-0 fw-bold ps-3 pt-3">
@@ -356,7 +356,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 m-lg-0 mt-2">
             <div class="bg-white border rounded">
                <div class="row  g-0">
                   <div class="col-6">

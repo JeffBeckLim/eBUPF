@@ -24,9 +24,9 @@
         @include('admin-views.admin-loan-applications.error-displays')
         {{-- ERROR MESSAGES --}}
 
-        <div class="d-flex">
+        <div class="d-flex row mx-2 m-md-0 ">
             @if ($loanType == 1)
-            <div class="d-flex membership-app-header1-mpl">
+            <div class="d-flex membership-app-header1-mpl ">
                 <img src="{{asset('assets/MPL-mini.svg')}}" alt="" width="50px">
                 <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Applications</span></p>
             </div>
@@ -90,7 +90,7 @@
                 </select>
             </div>
             <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
-            <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">Clear Filter</a>
+            <a class="btn btn-outline-primary rounded-5 d-md-flex align-items-center" style="font-size: 12px" href="{{route('admin.loan.applications' , ['loanType' => $loanType, 'freeze' => $table_freeze])}}">Clear Filter</a>
 
         </div>
         </form>

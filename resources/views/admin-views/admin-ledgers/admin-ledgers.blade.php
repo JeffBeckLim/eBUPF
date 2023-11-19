@@ -36,7 +36,7 @@
                             </select>
                         </div>
                         <button type="submit"  class="btn btn-outline-dark fw-bold rounded-5 px-4" style="font-size: 12px">Apply Filter</button>
-                        <a class="btn btn-outline-primary rounded-5 d-flex align-items-center" style="font-size: 12px" href="{{route('admin.ledgers')}}">Clear Filter</a>
+                        <a class="btn btn-outline-primary rounded-5 d-md-flex align-items-center" style="font-size: 12px" href="{{route('admin.ledgers')}}">Clear Filter</a>
                     </div>
                 </form>
 

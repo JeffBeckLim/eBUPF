@@ -47,8 +47,8 @@
                         Member ID {{ Auth::user()->member->id}}
                     </div>
                     <div class="row">        
-                        <div class="col-3  text-center">
-                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid" style="object-fit:cover; width: 9rem; height: 9rem; border: 4px solid white;">
+                        <div class="col-lg-4 col-12 text-center">
+                            <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid" style="object-fit:cover; width: 9rem; height: 9rem; border: 4px solid white; max-width: 9rem">
                         </div>
                         <div class="col  my-auto text-white p-2" style="text-shadow: 1px 1px 4px rgb(46, 46, 46);">
                             <span>
