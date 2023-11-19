@@ -29,7 +29,7 @@
                 <div class="col-lg-10 col-md-9 col-sm-9 ">
                     <div class="row ">
                         <div class="col-2 ">
-                            <img src="{{asset('icons/pencil.svg')}}" alt="" style="width: 3rem;">
+                            <img src="{{asset('assets/pencil.svg')}}" alt="" style="width: 3rem;">
                         </div>
                         <div class="col">
                             <h5 class="text-start fw-bold "> Edit Provident Fund, Inc. Membership Form</h5>
@@ -74,7 +74,7 @@
                         <button style="width: 11rem;" class="btn bu-orange text-light fw-bold" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
 
                     </div>
-                    
+
             </form>
 
             <script src="{{asset('js/formWizard.js')}}"></script>

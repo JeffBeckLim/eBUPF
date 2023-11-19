@@ -14,13 +14,13 @@
             <img src="{{asset('assets/MPL-loanapp-logo.png')}}" alt="Logo" style="height: 55px;">
         </div>
         <div class="col-2 d-md-block d-none">
-            <img src="{{asset('icons/MPL-mini.svg')}}" alt="Mini Logo" style="height: 55px;">
+            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Mini Logo" style="height: 55px;">
         </div>
-        
+
          <!-- Tooltip -->
-         
+
             <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="A multi-purpose loan is a versatile financial product that provides borrowers with the flexibility to use the funds for various personal needs, such as debt consolidation, home improvements, education, or medical expenses."><i class="bi bi-info-circle"></i> What is a Multi-Purpose Loan?</a>
-        
+
         <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
@@ -39,10 +39,10 @@
 
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>
-                    
+
                     <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
 
-                    
+
                     {{-- min="50000" max="200000" --}}
                     @error('principal_amount')
                         <h6 class="text-danger">{{$message}}</h6>
@@ -51,7 +51,7 @@
 
 
                 <div class="form-group">
-                    {{-- 
+                    {{--
                     <input type="number" class="form-control" id="loanTerm" name="term_years" > --}}
                     <label for="loanTerm" class="text2-design">Years to Pay</label>
                     <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
@@ -59,11 +59,11 @@
                         @for ($years = 1; $years < 6; $years++)
                             @if ($years == 1)
                                 <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} year</option>
-                            @else 
+                            @else
                                 <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} years</option>
                             @endif
                         @endfor
-                    
+
                       </select>
                       @error('term_years')
                         <h6 class="text-danger">{{$message}}</h6>
@@ -99,21 +99,21 @@
                     <p class="warning">Based on the information you have provided in your profile, we will use that as your personal details such as your name, age, and other relevant information.</p>
                 </div>
                 <button  id="proceedButton" type="button" class="btn bu-orange text-light fw-bold w-100" onclick="validateForm()">Proceed</button>
-                
+
 
             </div>
-            
-            
-        {{--------------------------------------------------------- 
-            this includes the next tab which has the details of the loan application for members to review and send request to co-borrower. 
-        --------------------------------------------------------}}    
+
+
+        {{---------------------------------------------------------
+            this includes the next tab which has the details of the loan application for members to review and send request to co-borrower.
+        --------------------------------------------------------}}
             @include('member-views.mpl-application-form.mpl-details')
-            
+
         {{-- ------------------------------------------------------- --}}
         </form>
-        
-        
-       
+
+
+
 
     </div>
   </div>
@@ -128,7 +128,7 @@
         // Trigger a click on the button
         proceedButton.click();
         event.preventDefault(); // Prevent the form from submitting on Enter key press
-        
+
     }
 });
 </script>

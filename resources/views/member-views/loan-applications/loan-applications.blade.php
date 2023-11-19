@@ -142,7 +142,7 @@
                         <div class="row">
                             <div class="col-12 p-5 text-center">
 
-                                <img src="{{asset('icons/no-transaction.svg')}}" alt="" style="width: 200px">
+                                <img src="{{asset('assets/no-transaction.svg')}}" alt="" style="width: 200px">
                                 <p class="pt-3" style="font-size: small">You have no new loan application yet</p>
                                 {{-- <p class="mt-5" style="font-size: small">
                                     Apply for a <a class="text-decoration-none" href="/member/mpl-application-form">Multi-purpose</a> or a <a class="text-decoration-none" href="/member/hsl-application-form">Housing Loan</a> loan today!</p> --}}
@@ -150,7 +150,7 @@
                         </div>
 
                     @endif
-                    
+
                 </div>
         </div>
 

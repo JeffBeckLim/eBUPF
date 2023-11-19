@@ -173,9 +173,9 @@
         </div>
     </div>
 
-    <section class="faq" style="height: 95vh; margin-top: 100px;">
+    <section class="faq" style="height: 95vh">
         <div class="container mt-5">
-            <div class="text-center fs-4 fw-bold mb-2" style="color: #00638D;">
+            <div class="text-center fs-4 fw-bold" style="color: #00638D;">
                 Frequently Asked Questions
             </div>
             <div class="d-flex justify-content-center align-items-center">
@@ -185,9 +185,9 @@
             </div>
             <div class="faq-container mt-5">
                 <div class="row">
-                    <div class="col-md-6 reveal fade-left">
+                    <div class="col-md-6">
                         <div class="accordion-wrapper">
-                            <div class="accordion">
+                            <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check1" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check1">
                                     <div style="width: 90%;">
@@ -198,7 +198,7 @@
                                     <p>I hope you are enjoying the video; don't forget to give your feedback in the comment section.</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check2" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check2">
                                     <div style="width: 90%;">
@@ -209,7 +209,7 @@
                                     <p>The membership fee cost  ₱ 100.00 , you can either choose to pay the membership fee through salary deduction or make a cash payment.</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check3" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check3">
                                     <div style="width: 90%">
@@ -220,7 +220,7 @@
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam harum nesciunt tenetur quas, accusantium numquam, dignissimos doloremque alias ullam debitis fugit quis modi? Rem ducimus natus nulla dicta autem vero. </p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check4" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check4">
                                     <div style="width: 90%;">
@@ -231,7 +231,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem asperiores ducimus illum quas, sit dicta tenetur. Impedit dolores quisquam earum nihil enim alias, magnam velit, dolorem voluptate ex necessitatibus corporis.</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check5" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check5">
                                     <div style="width: 90%;">
@@ -244,9 +244,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 reveal fade-right">
+                    <div class="col-md-6">
                         <div class="accordion-wrapper">
-                            <div class="accordion">
+                            <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check6" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check6">
                                     <div style="width:90%;">
@@ -257,7 +257,7 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ex vitae illum dignissimos atque esse eligendi nemo suscipit! Ratione tenetur fuga dolores maxime repellendus repellat quia rem ad ducimus perferendis.</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check7" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check7">
                                     <div style="width: 90%;">
@@ -268,7 +268,7 @@
                                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed officiis suscipit voluptatibus harum aliquam, sunt at quod consequatur, saepe voluptas quis mollitia ducimus non itaque dignissimos commodi distinctio iusto repellat?</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check8" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check8">
                                     <div style="width: 90%;">
@@ -279,7 +279,7 @@
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia debitis adipisci beatae quisquam facere reprehenderit, dolores illum veritatis recusandae repudiandae quas cumque. Doloremque quibusdam fugiat possimus distinctio quos sequi consectetur!</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check9" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check9">
                                     <div style="width: 90%;">
@@ -290,7 +290,7 @@
                                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis expedita deserunt vel hic provident nihil consequatur voluptate culpa, excepturi laborum sunt nam ullam nostrum magni soluta ex? Eos, ullam quos.</p>
                                 </div>
                             </div>
-                            <div class="accordion">
+                            <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check10" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check10">
                                     <div style="width: 90%;">

@@ -53,16 +53,16 @@
                                     @endphp
                                     <!-- Status Card -->
                                     <a href="{{route('loan.details', ['id' => $loan->id])}}" class="text-decoration-none text-dark">
-                                        
+
                                         <div class="col-12 pb-3">
                                             <div class="card {{ $paid ? 'bg-bugreen' : '' }} rounded-4 shadow-sm loan_card">
                                                 <div class="row g-0 p-3">
-                                                   
+
                                                     <div class="col m-0 d-flex justify-content-center">
                                                         @if ($loan->loan_type_id == 1)
-                                                        <img src="{{asset('icons/MPL-mini.svg')}}" alt="mini mpl icon" style="width: 40px">
+                                                        <img src="{{asset('assets/MPL-mini.svg')}}" alt="mini mpl icon" style="width: 40px">
                                                         @elseif ($loan->loan_type_id == 2)
-                                                        <img src="{{asset('icons/HSL-mini.svg')}}" alt="mini hsl icon" style="width: 40px">
+                                                        <img src="{{asset('assets/HSL-mini.svg')}}" alt="mini hsl icon" style="width: 40px">
                                                         @endif
 
                                                     </div>
@@ -79,12 +79,12 @@
                                                             </span>
                                                             @if ($loan->penalty != null)
                                                             <span style="font-size: 12px" class="text-danger">
-                                                                <img style="height: 30px ;" src="{{asset('icons/penalty.svg')}}" alt="">
-                                                            </span>    
+                                                                <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
+                                                            </span>
                                                             @endif
                                                         </p>
 
-                                                       
+
 
                                                         <p class="m-0" style="font-size: x-small;">
                                                             @if($loan->amortization)
@@ -111,7 +111,7 @@
                                                         <p  class="text3-1-design m-0">Outstanding Balance</p>
                                                         @if($paid)
                                                             <span class="fs-7 fw-bold text-success">
-                                                                Fully Paid <img src="{{asset('icons/check-icon.svg')}}" alt="check-icon">
+                                                                Fully Paid <img src="{{asset('assets/check-icon.svg')}}" alt="check-icon">
                                                             </span>
                                                         @else
                                                             <p class="fw-bold" style="font-size: 14px"><span class="fw-light" style="font-size: 10px;">Php</span>
@@ -121,13 +121,13 @@
                                                             </p>
                                                         @endif
 
-                                                        
+
                                                     </div>
                                                      <div class="col-12 mb-1 text-end text-secondary" style="font-size: 10px">
                                                         Code: <span class="fw-bold">{{$loan->loan_code}}</span>
                                                     </div>
 
-                                                
+
                                                 </div>
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@
                                         @else
                                         <p>You don't have loans yet</p>
                                         @endif
-                                        <img src="{{asset('icons/no-transaction.svg')}}" alt="" style="width: 200px">
+                                        <img src="{{asset('assets/no-transaction.svg')}}" alt="" style="width: 200px">
                                         <p class="mt-5" style="font-size: small;">
                                             Apply for a <a class="text-decoration-none" href="/member/mpl-application-form">Multi-purpose</a> or a <a class="text-decoration-none" href="/member/hsl-application-form">Housing Loan</a> loan today!</p>
                                     </div>
@@ -163,7 +163,7 @@
     }
 </style>
 <script>
-     
+
     document.addEventListener('DOMContentLoaded', function () {
         const searchInput = document.getElementById('search-input');
         const cards = document.querySelectorAll('.loan_card');
