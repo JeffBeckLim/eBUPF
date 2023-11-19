@@ -6,7 +6,7 @@
         <div style="width: 30%; min-width:335px;">
             <div class="card">
                 <div class="d-flex justify-content-center align-items-center mt-5">
-                    <img src="{{asset('icons/reset-password.svg')}}" alt="logo" width="65px">
+                    <img src="{{asset('assets/reset-password.svg')}}" alt="logo" width="65px">
                 </div>
                 <div class="card-header border-0 bg-white text-center fw-bold fs-5 pt-2 pb-2">{{ __('Reset Password') }}</div>
 

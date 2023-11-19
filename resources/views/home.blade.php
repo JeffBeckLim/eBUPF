@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-                        <img src="{{ asset('assets/home-computer.svg') }}" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
+                        <img src="{{ asset('assets/home-computer.svg') }}" alt="Landing Page Character" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
                 <div class="row mt-4">
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="" width="30px"> &nbsp;
+                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Multi-Purpose Loan Mini Logo" width="30px"> &nbsp;
                             Multi-Purpose Loan
                         </div>
                         <div class="row">
@@ -244,7 +244,7 @@
                     </div>
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="" width="30px"> &nbsp;
+                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="Housing Loan Mini Logo" width="30px"> &nbsp;
                             Housing Loan
                         </div>
                         <div class="row">
@@ -272,7 +272,7 @@
                 </div>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center">
-                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="" width="70%">
+                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" width="70%">
             </div>
         </div>
     </div>
