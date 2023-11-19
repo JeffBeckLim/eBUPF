@@ -4,14 +4,14 @@
 
     <div class="bg-white rounded px-3 pt-2 pb-4 mt-3 ms-2 border">
         <div class="d-flex align-items-center p-3 gap-3">
-            <img src="{{asset('icons/calculator.svg')}}" alt="calculator logo" width="30px" height="50px">
+            <img src="{{asset('assets/calculator.svg')}}" alt="calculator logo" width="30px" height="50px">
             <span style="font-size: 20px; font-weight: bold; color: #000834;">Loan Calculator</span>
         </div>
         <div class="row mx-lg-4 mx-2" style="font-size: 12px">
             Choose loan type, enter your principal amount, and loan term to calculate your monthly amortization. Get clear and quick insights into your payments.
          </div>
         <div class="row gap-md-5 mx-lg-4 mx-1 mt-3">
-            
+
             <div class="col-md-4 bg-white rounded-3 border px-2 pt-2 pb-3 mb-2 shadow-sm ">
                 <form action="{{route('calculate')}}" method="post">
                     @csrf
@@ -36,7 +36,7 @@
                         </div>
                         <div class="row mt-2 pt-2">
                             <div class="col-md-8">
-                                
+
                                 <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
                                 <h6 style="font-size: 12px" class="text-secondary">Loan Amount (min: 50k)</h6>
                                 <div class="d-flex align-items-center">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="term" class="fw-bold">Year/s <span class="text-danger fw-bold">*</span></label>
-                                
+
                                 <h6 style="font-size: 12px" class="text-secondary">Loan Term</h6>
                                 <select name="term" id="term" class="form-control" required>
                                     <option value="" disabled selected>0</option>
@@ -78,7 +78,7 @@
                         Result
                     </div>
                     <div class="row">
-                        
+
                         <div class="col-md-7">
                             <div class="row mt-3">
                                 <div class="col-7 fs-7">
@@ -232,7 +232,7 @@
                 <span class="fw-bold">Monthly Payable</span> =  Monthly Principal + Monthly Intrest
             </div>
             <div class="fs-7 mt-2">
-                <span class="fw-bold">Total Amount</span> = Monthly payable * Loan term - refers to the overall sum that a borrower will repay over the entire duration of the loan. It includes both the original amount borrowed (the principal) and the interest accrued during the repayment period. 
+                <span class="fw-bold">Total Amount</span> = Monthly payable * Loan term - refers to the overall sum that a borrower will repay over the entire duration of the loan. It includes both the original amount borrowed (the principal) and the interest accrued during the repayment period.
             </div>
             <div class="fs-7 mt-2">
                 <span class="fw-bold">Total Months</span> - Months in the loan term (Loan Term Years * 12).
