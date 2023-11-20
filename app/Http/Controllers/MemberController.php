@@ -285,6 +285,12 @@ class MemberController extends Controller
 
     //show membership form
     public function membershipForm(){
+
+        $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
+        if($membership_application != null){
+            abort(404);
+        }
+
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
@@ -299,6 +305,12 @@ class MemberController extends Controller
 
     //SHOW form view for editing membership
     public function membershipFormEdit(){
+
+        $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
+        if($membership_application == null){
+            abort(404);
+        }
+
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
@@ -310,12 +322,21 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
-        $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
 
+        $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
+        if($membership_application != null){
+            abort(404);
+        }
+
+        
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
+
+
+        $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
+
         $formFields = $request->validate([
 
             // 'campus_id'=> 'required', // naka comment out muna - - need pa seeders

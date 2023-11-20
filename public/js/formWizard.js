@@ -127,8 +127,6 @@ function validateForm() {
             const citySelector = document.getElementById('city');
             const barangaySelector = document.getElementById('barangay');
 
-            console.log(barangaySelector.value);
-
             if(regionSelector.value === 'Choose Region'){
                 regionSelector.classList.add("is-invalid","shake");
                 valid = false;
@@ -174,12 +172,12 @@ function validateForm() {
         
          // Check if the user is at least 18 years old (considering month difference)
          if (age > 18 || (age === 18 && monthsDiff >= 0)) {
-            console.log('yes');
+            // console.log('yes');
             dobInput.classList.remove("is-invalid");
             dobInput.setCustomValidity('');
 
          } else {
-            console.log('no');
+            // console.log('no');
             dobInput.classList.add("is-invalid");
             dobInput.setCustomValidity('You need to be at least 18');
             dobInput.reportValidity();
