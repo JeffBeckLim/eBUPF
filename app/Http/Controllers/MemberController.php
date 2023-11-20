@@ -305,6 +305,12 @@ class MemberController extends Controller
 
     //SHOW form view for editing membership
     public function membershipFormEdit(){
+
+        $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
+        if($membership_application == null){
+            abort(404);
+        }
+
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
@@ -328,7 +334,7 @@ class MemberController extends Controller
             abort(403, 'Unauthorized Action');
         }
 
-        
+
         $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
 
         $formFields = $request->validate([
