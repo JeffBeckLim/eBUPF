@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class PDFController extends controller{
+class PDFController extends Controller{
 
     public function generateMembershipForm($id)
     {
