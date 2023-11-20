@@ -4,16 +4,16 @@
                     <p class="fw-bold m-0">Department</p>
                 </div>
                 <div class="col-12 mb-3">
-                    <label  for="">College / Unit AND Campus</label>
-                    <select name="unit_id" class="form-select form-control validate" > 
+                    <label  for="">College/Unit and Campus</label>
+                    <select name="unit_id" class="form-select form-control validate" >
                         <option class="text-secondary" value="" selected disabled>Choose Your College</option>
-                        
+
                         @foreach ($units as $unit)
                             <option value="{{$unit->id}}"  {{ old('unit_id') == $unit->id ? 'selected' : '' }}>{{$unit->unit_code}} : {{$unit->campuses->campus_code}}</option>
                         @endforeach
 
                     </select>
-                    
+
                 </div>
                 @error('unit_id')
                     <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-6">
-            <label class="fw-bold" for="position">Position</label>
+            <label class="fw-normal" for="position">Position</label>
             <input class="form-control validate" name="position" value="{{old('position')}}">
 
             {{-- <label   for="">Position</label>
@@ -33,7 +33,7 @@
                 <option value="faculty" {{ old('positon') == 'faculty' ? 'selected' : '' }}>faculty</option>
                 <option value="dept. head" {{ old('sex') == 'dept. head' ? 'selected' : '' }}>dept. head</option>
                 <option value="chairman" {{ old('sex') == 'chairman' ? 'selected' : '' }}>chairman</option>
-                
+
             </select> --}}
         </div>
         @error('position')
@@ -74,15 +74,15 @@
         <div class="col-6">
             <label for="salary">Date of Appointment in BU.</label>
             <input class="form-control validate" type="date" name="bu_appointment_date" value="{{old('bu_appointment_date')}}">
-        </div>   
+        </div>
         @error('bu_appointment_date')
             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
         @enderror
     </div>
-    <div class="col-12  mt-2">  
+    <div class="col-12  mt-2">
         <div class="col-12">
             <p class="fw-bold m-0">Contribution</p>
-        </div> 
+        </div>
         <label for="salary">Fixed Monthly Contribution</label>
         <input class="form-control validate" type="number" name="monthly_contribution" value="{{old('monthly_contribution')}}">
     </div>

@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <span class="d-flex justify-content-center align-items-center">
                             <a href="{{route('member.loans', 1)}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 1 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}"  style="color: rgb(55, 55, 55);">
-                                Permorning
+                                Performing
                             </a>
                             <a href="{{route('member.loans', 2)}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 2 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}" style="color: rgb(55, 55, 55);">
                                 Paid

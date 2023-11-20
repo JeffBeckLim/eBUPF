@@ -9,6 +9,7 @@ use App\Models\Unit;
 use App\Models\Loan;
 use App\Models\Campus;
 use App\Models\Witness;
+use App\Models\CoBorrower;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -95,17 +96,19 @@ class PDFController extends Controller{
         //Loan table
         $loan = Loan::find($loanId);
         //Co Borrower details
-        $co_borrower = $loan->co_borrower;
-        //find the details of the co borrower
-        $co_borrower_details = Member::find($co_borrower);
+
+        // fetch Co-Borrower Data
+        $coBorrower = CoBorrower::where('loan_id', $loanId)->first();
+        $coBorrowerId = $coBorrower->member_id;
+        $co_borrower_details = Member::find($coBorrowerId);
 
         //co-borrower age
-        $co_borrower_dateOfBirth = Carbon::parse($co_borrower_details->first()->date_of_birth);
+        $co_borrower_dateOfBirth = Carbon::parse($co_borrower_details->date_of_birth);
         $co_borrower_currentDate = Carbon::now();
         $co_borrower_age = $co_borrower_currentDate->diffInYears($co_borrower_dateOfBirth);
 
         //co-borrower unit
-        $co_borrower_unit = Unit::where('id', $co_borrower_details->first()->unit_id)->first();
+        $co_borrower_unit = Unit::where('id', $co_borrower_details->unit_id)->first();
         //co-borrower campus
         $co_borrower_campus = Campus::where('id', $co_borrower_unit->campus_id)->first();
 
@@ -138,17 +141,17 @@ class PDFController extends Controller{
             'monthly_net_pay' => $member->monthly_salary,
             'amount_requested' => $loan->principal_amount,
 
-            'co_lastname' => $co_borrower_details->first()->lastname,
-            'co_firstname' => $co_borrower_details->first()->firstname,
-            'co_middle_initial' => $co_borrower_details->first()->middle_initial,
-            'co_date_of_birth' => $co_borrower_details->first()->date_of_birth,
+            'co_lastname' => $co_borrower_details->lastname,
+            'co_firstname' => $co_borrower_details->firstname,
+            'co_middle_initial' => $co_borrower_details->middle_initial,
+            'co_date_of_birth' => $co_borrower_details->date_of_birth,
             'co_age' => $co_borrower_age,
-            'co_tin' => $co_borrower_details->first()->tin_num,
-            'co_address' => $co_borrower_details->first()->address,
+            'co_tin' => $co_borrower_details->tin_num,
+            'co_address' => $co_borrower_details->address,
             'co_unit' => $co_borrower_unit->unit_code,
-            'co_contact_number' => $co_borrower_details->first()->contact_num,
+            'co_contact_number' => $co_borrower_details->contact_num,
             'co_office' => $co_borrower_campus->campus_code,
-            'co_monthly_net_pay' => $co_borrower_details->first()->monthly_salary,
+            'co_monthly_net_pay' => $co_borrower_details->monthly_salary,
             'co_amount_requested' => $loan->principal_amount,
 
             'witnesses' => $witnessNames,
@@ -174,12 +177,15 @@ class PDFController extends Controller{
         //Loan table
         $loan = Loan::find($loanId);
         //Co Borrower details
-        $co_borrower = $loan->co_borrower;
-        //find the details of the co borrower
-        $co_borrower_details = Member::find($co_borrower);
+
+        // fetch Co-Borrower Data
+        $coBorrower = CoBorrower::where('loan_id', $loanId)->first();
+        $coBorrowerId = $coBorrower->member_id;
+        $co_borrower_details = Member::find($coBorrowerId);
+
 
         //co-borrower age
-        $co_borrower_dateOfBirth = Carbon::parse($co_borrower_details->first()->date_of_birth);
+        $co_borrower_dateOfBirth = Carbon::parse($co_borrower_details->date_of_birth);
         $co_borrower_currentDate = Carbon::now();
         $co_borrower_age = $co_borrower_currentDate->diffInYears($co_borrower_dateOfBirth);
 
@@ -218,17 +224,17 @@ class PDFController extends Controller{
             'amount_requested' => $loan->principal_amount,
             'payment_period' => $loan->term_years,
 
-            'co_lastname' => $co_borrower_details->first()->lastname,
-            'co_firstname' => $co_borrower_details->first()->firstname,
-            'co_middle_initial' => $co_borrower_details->first()->middle_initial,
-            'co_date_of_birth' => $co_borrower_details->first()->date_of_birth,
+            'co_lastname' => $co_borrower_details->lastname,
+            'co_firstname' => $co_borrower_details->firstname,
+            'co_middle_initial' => $co_borrower_details->middle_initial,
+            'co_date_of_birth' => $co_borrower_details->date_of_birth,
             'co_age' => $co_borrower_age,
-            'co_tin' => $co_borrower_details->first()->tin_num,
-            'co_address' => $co_borrower_details->first()->address,
+            'co_tin' => $co_borrower_details->tin_num,
+            'co_address' => $co_borrower_details->address,
             'co_unit' =>  $co_borrower_unit->unit_code,
-            'co_contact_number' => $co_borrower_details->first()->contact_num,
+            'co_contact_number' => $co_borrower_details->contact_num,
             'co_office' => $co_borrower_campus->campus_code,
-            'co_monthly_net_pay' => $co_borrower_details->first()->monthly_salary,
+            'co_monthly_net_pay' => $co_borrower_details->monthly_salary,
             'co_amount_requested' => $loan->principal_amount,
             'co_payment_period' => $loan->term_years,
 

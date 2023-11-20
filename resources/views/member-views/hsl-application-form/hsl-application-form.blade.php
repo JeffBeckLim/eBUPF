@@ -19,7 +19,7 @@
 
          <!-- Tooltip -->
 
-            <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="More detials here..."><i class="bi bi-info-circle"></i> What is a Multi-Purpose Loan?</a>
+            <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="More detials here..."><i class="bi bi-info-circle"></i> What is a Housing Loan?</a>
 
         <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

@@ -23,7 +23,7 @@
                             <h5 class="fs-5 mt-3 landing-info-text" style="padding-right: 20px;">
                                 Welcome to eBUPF, your trusted resource for financial services.
                             </h5>
-                            <div class="mt-4 reveal fade-left active">
+                            <div class="mt-4 reveal fade-left active {{ Auth::check() ? 'd-none' : 'active' }}">
                                 <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                     Discover a world of financial possibilities with Bicol University Provident Fund Inc. where every guest is a potential member on the path to securing a brighter future. Explore our offerings today and embark on your journey toward financial security!"
                 </div>
                 <div class="pt-2 reveal fade-bottom">
-                    <a href="#" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Read More <i class="bi bi-chevron-right"></i></a>
+                    <a href="{{route('about-bupf')}}" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Read More <i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
         </div>
