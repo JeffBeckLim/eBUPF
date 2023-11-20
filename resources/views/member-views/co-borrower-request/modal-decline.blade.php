@@ -7,7 +7,7 @@
         <div class="modal-body border-0 px-5 pt-0 text-center">
             <h1><i style="color: #5a619e;" class="bi bi-question-circle"></i></h1>
             <p class="fw-bold fs-5">You are about to decline the request.</p>
-            <p class="text-secondary" style="font-size: 15px">Are you sure you want to decline <strong>{{$loan->member->firstname}}'s</strong> request be their co-borrower?</p>
+            <p class="text-secondary" style="font-size: 15px">Are you sure you want to decline <strong>{{$loan->loan->member->firstname}}'s</strong> request be their co-borrower?</p>
             
         </div>
         

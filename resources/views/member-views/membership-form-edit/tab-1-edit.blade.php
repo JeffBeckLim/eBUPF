@@ -104,7 +104,7 @@
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="birthday"> Date of Birth
                     </label>
-                    <input class="form-control  validate" type="date" name="date_of_birth" value="{{Auth::user()->member->date_of_birth}}">
+                    <input id="date_of_birth" class="form-control  validate" type="date" name="date_of_birth" value="{{Auth::user()->member->date_of_birth}}">
                     @error('date_of_birth')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror

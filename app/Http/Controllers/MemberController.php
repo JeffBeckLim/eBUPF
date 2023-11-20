@@ -285,6 +285,12 @@ class MemberController extends Controller
 
     //show membership form
     public function membershipForm(){
+
+        $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
+        if($membership_application != null){
+            abort(404);
+        }
+
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
