@@ -261,22 +261,22 @@ use App\Models\Penalty;
     Route::post('/member/profile/change-password/{id}', [MemberController::class, 'changePassword'])->middleware('auth','member.access')->name('member.change.password');
 
     //Show Membership Form
-    Route::get('/member/membership-form', [MemberController::class,'membershipForm']);
+    Route::get('/member/membership-form', [MemberController::class,'membershipForm'])->middleware('verified');
 
     //Show Membership Download or Edit
-    Route::get('/member/membership-form/edit-download', [MemberController::class,'membershipFormEditDownload']);
+    Route::get('/member/membership-form/edit-download', [MemberController::class,'membershipFormEditDownload'])->middleware('verified');
 
     //Show Membership Form for Editing
-    Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit']);
+    Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit'])->middleware('verified');
 
     //Update Membership Form
-    Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership']);
+    Route::put('/member/application/edit/{member}', [MemberController::class, 'updateMembership'])->middleware('verified');
 
     //Check Membership Application
-    Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication']);
+    Route::get('/member/membership-application/check/{member_id}', [MemberController::class,'checkMembershipApplication'])->middleware('verified');
 
     //Generate Membership Application Form
-    Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm');
+    Route::get('/generateMembershipForm/{id}',[PDFController::class,'generateMembershipForm'])->middleware('auth')->name('generateMembershipForm')->middleware('verified');
 
     //Generate MPL Application Form
     Route::get('/member/generateMulti-PurposeLoanApplicationForm/{id}',[PDFController::class,'generateMPL'])->middleware('auth')->name('generateMulti-PurposeLoanApplicationForm');
