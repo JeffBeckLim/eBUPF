@@ -4,7 +4,7 @@
                     <p class="fw-bold m-0">Department</p>
                 </div>
                 <div class="col-12 mb-3">
-                    <label  for="">College/Unit and Campus</label>
+                    <label  for="">College/Unit & Campus</label>
                     <select name="unit_id" class="form-select form-control validate" >
                         <option class="text-secondary" value="" selected disabled>Choose Your College</option>
 
