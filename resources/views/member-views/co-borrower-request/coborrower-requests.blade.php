@@ -78,12 +78,15 @@
                                                     <span style="font-size: x-small; background-color: #fccad2;" class=" text-danger fw-bold fade-in p-1 rounded"><i class="bi bi-circle-fill"></i> NEW</span>    
                                                 @endif
                                                 
-                                                <p class="fs-7 fw-bold mb-0 mt-1">
+                                                <p class=" fw-bold mb-0 mt-1" style="font-size: 14px">
                                                  {{$loan->loan->loanType->loan_type_description}}
                                                 </p>
                                                 <p class=" mb-1" style="font-size: 12px">
                                                     Code: <span class="fw-bold">{{$loan->loan->loan_code}}</span>
-                                                   </p>
+                                                </p>
+
+                                                <p style="font-size: 12px">ID: {{$loan->loan->id}}</p>
+
                                                 <p class="fs-7 mb-0">Php {{number_format($loan->loan->principal_amount, 2, '.',',')}}</p>
                                                 <p class="m-0" style="font-size: 10px">{{date('M d, Y - h:i:s A', strtotime($loan->loan->created_at))}}</p>
                                             
@@ -99,7 +102,7 @@
                                                 <div class="col" style="font-size: 12px">
                                                     <p class="mb-0  fw-bold">{{$loan->loan->member->firstname}} {{$loan->loan->member->lastname}}</p>
                                                     <p class="mb-0 ">{{($loan->loan->member->units->unit_code)}}</p>
-                                                    <p class="">ID: {{$loan->loan->id}}</p>
+                                                    
                                                 </div>
                                             
                                             </div>
