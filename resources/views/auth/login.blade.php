@@ -24,15 +24,31 @@
         @enderror
     </div>
 
-    <div class="mb-3">
-        <label for="password" class="form-label text-dark">Password</label>
-        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+    <label for="password" class="form-label text-dark">Password</label>
+    <div class="mb-3 input-group">
+        
+        <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+        <span class="input-group-text border-start-0" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>
         @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
         @enderror
     </div>
+    <script>
+      const passwordField = document.getElementById('password');
+        const toggleButton = document.getElementById('password-toggle');
+
+        toggleButton.addEventListener('click', function() {
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleButton.innerHTML = '<i class="bi bi-eye-fill"></i>'; // Change button icon to show the password
+            } else {
+                passwordField.type = 'password';
+                toggleButton.innerHTML = '<i class="bi bi-eye-slash-fill"></i>'; // Change button icon to hide the password
+            }
+        });
+    </script>
 
     <div class="row mb-3">
         <div class="col-md-6 offset-md-4">

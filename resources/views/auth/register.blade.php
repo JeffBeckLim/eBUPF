@@ -30,14 +30,33 @@
                     @enderror
                 </div>
 
-                <div class="col-12 mb-2">
-                    <label for="password" class="form-label text-dark">Password</label>
+                <label for="password" class="form-label text-dark mt-2">Password</label>
+                <div class="col-12 mb-2 input-group">
                     <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" required>
-                    <small class="text-muted" style="font-size: 12px">Your password must be at least 8 characters long and include at least 1 number and 1 special character.</small>
+                    <span class="input-group-text border-start-0 rounded-end" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>
+                    <small class="text-muted" style="font-size: 12px">Your password must be at least 8 characters long, include at least 1 number, 1 special character, and at least 1 capital letter.</small>
                 </div>
                 @error('password')
                     <p class="text-danger mt-1">{{$message}}</p>
                 @enderror
+
+
+                <script>
+                    const passwordField = document.getElementById('password');
+                      const toggleButton = document.getElementById('password-toggle');
+              
+                      toggleButton.addEventListener('click', function() {
+                          if (passwordField.type === 'password') {
+                              passwordField.type = 'text';
+                              toggleButton.innerHTML = '<i class="bi bi-eye-fill"></i>'; // Change button icon to show the password
+                          } else {
+                              passwordField.type = 'password';
+                              toggleButton.innerHTML = '<i class="bi bi-eye-slash-fill"></i>'; // Change button icon to hide the password
+                          }
+                      });
+                  </script>
+
+
 
                 <div class="col-12">
                     <label for="password_confirmation" class="form-label text-dark">Confirm Password</label>
@@ -61,8 +80,21 @@
                     </div>
                 </div>
 
+            <style>
+                .btn-outline{
+                    border-width: 2px;
+                    border-color: rgb(64, 132, 235) !important;
+                    color: rgb(64,132, 235) !important;
+                }
+                .btn-outline:hover{
+                    background-color: rgb(64, 132, 235) !important;
+                    border-width: 2px;
+                    border-color: rgb(64, 132, 235) !important;
+                    color: rgb(255, 255, 255) !important;
+                }
+            </style>
             <div class="col-12 borders d-flex justify-content-center pt-3">
-                <button type="submit" class="btn btn-outline-bu rounded-pill w-100 fw-bold  grow-on-hover">Sign Up</button>
+                <button type="submit" class="btn btn-outline rounded-pill w-100 fw-bold">Sign Up</button>
             </div>
 
         </div>
