@@ -20,7 +20,7 @@
                             <label for="email" class="col-form-label fs-7">{{ __('Email Address') }}</label>
 
                             <div class="col-12">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" readonly>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="row mb-1">
-                            <label for="password" class="col-form-label fs-7">{{ __('Password') }}</label>
+                            <label for="password" class="col-form-label fs-7">{{ __('New Password') }}</label>
 
                             <div class="col-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
