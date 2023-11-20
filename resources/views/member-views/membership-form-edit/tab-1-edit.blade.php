@@ -97,10 +97,6 @@
 
 
 
-
-
-
-
                 <div class="col-6 pe-1 pb-3">
                     <label class="fw-bold" for="birthday"> Date of Birth
                     </label>
