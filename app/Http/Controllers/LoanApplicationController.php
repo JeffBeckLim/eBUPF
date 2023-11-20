@@ -116,7 +116,13 @@ class LoanApplicationController extends Controller
             abort(403);
         }
 
-        return view('member-views.mpl-application-form.mpl-application-form');
+        $members = User::where('user_type', 'member')->get();
+        $member_emails = [];
+        foreach($members as $member){
+            array_push($member_emails, $member->email);
+        }
+    
+        return view('member-views.mpl-application-form.mpl-application-form', compact('member_emails'));
     }
 
     // SHOW HSL APPLICATION FORM
@@ -189,7 +195,13 @@ class LoanApplicationController extends Controller
             abort(403);
         }
 
-        return view('member-views.hsl-application-form.hsl-application-form');
+        $members = User::where('user_type', 'member')->get();
+        $member_emails = [];
+        foreach($members as $member){
+            array_push($member_emails, $member->email);
+        }
+
+        return view('member-views.hsl-application-form.hsl-application-form', compact('member_emails'));
     }
 
 
@@ -330,14 +342,14 @@ class LoanApplicationController extends Controller
         ]);
 
         // check if co borrower email is the same with user logged in
-        // COMMENTED OUT FOR TESTING
-        // if($request->email_co_borrower == Auth::user()->email )
-        // {
-        //     return back()->with('email_error', 'You cannot enter your own email');
-        // }
+        // COMMENT OUT FOR TESTING
+        if(strtolower($request->email_co_borrower) == Auth::user()->email )
+        {
+            return back()->with('email_error', 'You cannot enter your own email');
+        }
 
         // check if co borrower is verified and is a member
-        $co_borrower = User::where('email', $request->email_co_borrower)->with('member')->first();
+        $co_borrower = User::where('email', strtolower($request->email_co_borrower))->with('member')->first();
 
         if(
             !$co_borrower->member->verified_at ||

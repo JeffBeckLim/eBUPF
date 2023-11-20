@@ -42,6 +42,9 @@
 
                     <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
 
+                    <div id="validationLoanAmountFeedBack" class="invalid-feedback">
+                        Loan amount must be at least 50,000 Php or max value of 200,000 Php
+                      </div>
 
                     {{-- min="50000" max="200000" --}}
                     @error('principal_amount')
@@ -65,6 +68,10 @@
                         @endfor
 
                       </select>
+
+                      <div id="validationLoanTermFeedBack" class="invalid-feedback">
+                            Please choose a loan term
+                      </div>
                       @error('term_years')
                         <h6 class="text-danger">{{$message}}</h6>
                       @enderror
@@ -72,10 +79,14 @@
                 </div>
 
                 <p class="text1-design pt-4">Co-Borrower</p>
-
                 <div class="form-group">
-                    <label for="myCoBorrower" class="text2-design">Enter BU email of your Co-Borrower</label>
-                    <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. Juanjose.delacruz@bicol-u.edu.ph">
+                    <label for="myCoBorrower" style="font-size: 12px">Please enter the BU email of your Co-Borrower. Your co-borrower must be a registered member of BUPF Online</label>
+                    <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. juanjose.delacruz@bicol-u.edu.ph">
+
+                
+                    <div style="font-size: 12px" class="ms-1 mt-2" id="result"></div>
+                 
+
                     @error('email_co_borrower')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
@@ -114,23 +125,11 @@
 
 
 
-
+       
     </div>
   </div>
 </div>
-<script>
-    // Get the button element by its id
-    var proceedButton = document.getElementById("proceedButton");
-    var targetButton = document.getElementById("submitButton");
-
-    document.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        // Trigger a click on the button
-        proceedButton.click();
-        event.preventDefault(); // Prevent the form from submitting on Enter key press
-
-    }
-});
-</script>
+{{-- scripts used in validation --}}
+@include('member-views.mpl-application-form.js_in_form_script')
 
 @endsection
