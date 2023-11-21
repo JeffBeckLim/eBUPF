@@ -332,3 +332,13 @@ Route::get('/about/multi-purpose-loan', function () {
 Route::get('/about/housing-loan', function () {
     return view('about-hsl');
 })->middleware('verified.access')->name('about-hsl');
+
+// Terms and Conditions
+Route::get('/terms-and-conditions', function () {
+    return view('terms-and-conditions');
+})->middleware('verified.access')->name('terms-and-conditions');
+
+// Privacy Policy
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->middleware('verified.access')->name('privacy-policy');

@@ -131,7 +131,7 @@
     </div>
 
     <div class="row mb-5">
-        <div class="col-md-6 text-light" style="background-color: #0082BA; border-radius: 10px; position: relative;">
+        <div class="col-md-6 text-light pb-4" style="background-color: #0082BA; border-radius: 10px; position: relative;">
             <img src="{{asset('assets/orange-tag.svg')}}" alt="Tag" class="orange-tag">
             <div class="fw-bold fs-6" style="margin: 30px 50px 0 30px;">
                 Two (2) Sets of Application Forms Filled out and Signed By:
@@ -165,6 +165,9 @@
                 </div>
                 <div class="fw-bold fs-6 mb-4">
                     BU ID# of Principal Borrower and Co-borrower
+                </div>
+                <div>
+                    <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Apply Loan <i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
         </div>
@@ -308,30 +311,7 @@
         </div>
     </section>
 
-    <section class="hear-from-you">
-        <div class="container mb-5">
-            <div style="background-color: #0092D1; border-radius: 50px;">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="fs-1 fw-bold text-light" style="padding: 30px 0 20px 45px">
-                            Ready to get Started?
-                        </div>
-                        <div style="padding: 0 0 30px 45px" class="text-light fw-6">
-                            Unlock your financial aspirations today with eBUPF – take the first step towards your goals by applying for a loan and securing the resources you need for a brighter tomorrow.
-                        </div>
-                        <div style="margin: 0 0 0 35px;" class="d-flex">
-                            <div style="margin-left: 15px;">
-                                <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Apply Loan <i class="bi bi-chevron-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-5 fade-right reveal mt-3">
-                        <img src="{{asset('assets/girl-computer.svg')}}" alt="Computer" width="80%">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('home-components.contact')
 
 </div>
 @endsection

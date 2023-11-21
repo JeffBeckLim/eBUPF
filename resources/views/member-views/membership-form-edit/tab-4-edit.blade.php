@@ -17,7 +17,7 @@
                 <input class="form-check-input checkbox-input validate" type="checkbox" value="1" id="defaultCheck1" name="agree_to_certify" {{ (Auth::user()->member->agree_to_certify) ? 'checked' : '' }}
                 >
                 <label class="form-check-label fs-6" for="defaultCheck1" >
-                    I hereby certify that all the information given  are true and correct <span class="fw-bold">and agree to terms of collecting and using my data</span>
+                    I hereby certify that all the information given are true and correct <span class="fw-bold">and agree to terms of collecting and using my data</span>
                 </label>
             </div>
             @error('agree_to_certify')
