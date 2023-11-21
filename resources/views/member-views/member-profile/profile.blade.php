@@ -46,7 +46,7 @@
         @endif
 
         <div style="padding: 10px 15px 0 15px;">
-            <div class="col-12 p-2 rounded shadow" style="background-image: url({{ asset('assets/core-feature-bg.png') }}); filter: saturate(200%);">
+            <div class="col-12 p-2 rounded shadow" style="background-image: url({{ asset('assets/core-feature-bg.png') }}); filter: saturate(130%);">
                 <div class="row">
                     <div class="col-lg-3 col-6  text-center">
                         <img src="{{Auth::user()->member->profile_picture != null ? asset('storage/' . Auth::user()->member->profile_picture) : asset('assets/no_profile_picture.jpg')}}" alt="profile picture" class="rounded-circle shadow img-fluid m-2" style="object-fit:cover; width: 8rem; height: 8rem; border: 4px solid white;">
