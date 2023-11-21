@@ -12,7 +12,7 @@
     </div>
 
     <div style="height: 90vh;" class="landing-page-height">
-        <div style="background-image: url('{{ asset('assets/home-blue-bg.svg') }}'); background-size: cover; background-position: center; height: 85%;" class="home-blue-bg">
+        <div style="background-image: url('{{ asset('assets/home-blue-bg.webp') }}'); background-size: cover; background-position: center; height: 85%;" class="home-blue-bg">
             <div class="container home-landing-page">
                 <div class="row">
                     <div class="col-md-6 text-light d-flex justify-content-center align-items-center pb-5">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-                        <img src="{{ asset('assets/home-computer.svg') }}" alt="Landing Page Character" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
+                        <img src="{{ asset('assets/home-computer.webp') }}" alt="Landing Page Character" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
     </div>
 </section>
 
-<section id="core-feature" class="mb-5 pt-lg-3 border p-3" style="background-image: url({{asset('assets/core-feature.svg')}})">
+<section id="core-feature" class="mb-5 pt-lg-3 border p-3" style="background-image: url({{asset('assets/core-feature.webp')}})">
     <div id="core-feature-container" class="container justify-content-center border-top border-light mt-2">
         <h6 class="text-center text-light mt-2 fw-bold">Core Features</h6>
         <div class="row mt-4 mb-sm-5 d-flex justify-content-center align-items-center">
