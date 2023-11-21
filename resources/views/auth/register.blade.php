@@ -44,7 +44,7 @@
                 <script>
                     const passwordField = document.getElementById('password');
                       const toggleButton = document.getElementById('password-toggle');
-              
+
                       toggleButton.addEventListener('click', function() {
                           if (passwordField.type === 'password') {
                               passwordField.type = 'text';
@@ -71,7 +71,7 @@
                         <div class="form-check ">
                             <input class="form-check-input" style="color: black" type="checkbox" value="1" id="flexCheckDefault" name="agree_to_terms" @if(old('agree_to_terms')==1) checked @endif >
                             <label class="form-check-label" for="flexCheckDefault">
-                                <span> Agree to <a class="text-decoration-none fw-bold bu-text-light-blue" href="#">Terms and Conditions</a>  of BUPF </span>
+                                <span> Agree to <a class="text-decoration-none fw-bold bu-text-light-blue" href="{{ route('terms-and-conditions') }}">Terms and Conditions</a>  of BUPF </span>
                             </label>
                             @error('agree_to_terms')
                                 <p class="text-danger mt-1">{{$message}}</p>

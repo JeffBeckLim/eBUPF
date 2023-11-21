@@ -24,11 +24,11 @@
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; overflow: hidden;">
         <div class="text-center">
             <p class="lead">
-                
+
                 @if(!is_null($customMessage))
                     <div class="d-flexbox justify-content-center align-items-center">
                         <div>
-                            <a href="{{ route('home') }}" class="bu-orange btn text-white fw-bold" style="border-radius: 20px;">Go to dashboard</a>
+                            <a href="{{ URL::previous() }}" class="bu-orange btn text-white fw-bold" style="border-radius: 20px;">Go back</a>
                         </div>
                         <img src="{{asset('assets/403-error.svg')}}" alt="Error 403" width="75%" height="75%" style="min-width: 350px; min-height: 300px;">
                         <div>

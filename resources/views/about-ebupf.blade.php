@@ -79,6 +79,9 @@
         </div>
     </div>
 </div>
+
+@include('home-components.contact')
+
 <script>
     // Activate the carousel and set the interval for sliding
     $(document).ready(function(){
