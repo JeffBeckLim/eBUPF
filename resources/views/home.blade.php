@@ -20,11 +20,11 @@
                             <h1 class="fs-1 fw-semibold" style="line-height: 1.2;">
                                 Find the Perfect <span style="color: rgb(255, 131, 29)">Loan</span> <br> for your needs
                             </h1>
-                            <h5 class="fs-5 mt-3 landing-info-text" style="padding-right: 20px;">
+                            <p class="fs-5 mt-4 landing-info-text" style="padding-right: 20px;">
                                 Welcome to eBUPF, your trusted resource for financial services.
-                            </h5>
+                            </p>
                             <div class="mt-4 reveal fade-left active {{ Auth::check() ? 'd-none' : 'active' }}">
-                                <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
+                                <a href="/login" type="button" class="btn bu-orange text-light fw-bold" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,8 @@
                             Loans
                         </div>
                         <div class="fs-7 fw-normal text-center text-justify" style="padding: 0 30px 10px 30px;">
-                            Take the first step towards achieving your goals by becoming a member of our financial institution with exclusive loan benefits. Join us to access a wide range of loan options tailored to your needs, offering competitive rates and flexible repayment terms. Let us be your partner in turning your aspirations into reality.                        </div>
+                            Take the first step towards achieving your goals by becoming a member of our financial institution with exclusive loan benefits. Join us to access a wide range of loan options tailored to your needs, offering competitive rates and flexible repayment terms. Let us be your partner in turning your aspirations into reality.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,7 +133,7 @@
                             Life Insurance
                         </div>
                         <div class="fs-7 fw-normal text-center text-justify" style="padding: 0 30px 10px 30px;">
-                            Empower yourself and ensure your peace of mind by becoming a member of our financial institution with exclusive life insurance benefits tailored for you. Join us to secure your financial future, knowing that you have a safety net in place for any unforeseen circumstances. Your membership with us signifies a commitment to your own well-being and financial security.
+                            Empower yourself and ensure your peace of mind by becoming a member of our financial institution with exclusive life insurance benefits tailored for you. Join us to secure your financial future, knowing that you have a safety net in place for any unforeseen circumstances.
                         </div>
                     </div>
                 </div>
@@ -225,19 +226,19 @@
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                6% Interest Rate up to 5 years
                             </div>
                             <div class="col-2 text-end">
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Borrow up to ₱200,000
                             </div>
                             <div class="col-2 text-end">
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Loan Proceeds released in less than a month
                             </div>
                         </div>
                         <a href="{{ route('about-mpl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
@@ -252,19 +253,19 @@
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Active member with least 24 months savings
                             </div>
                             <div class="col-2 text-end">
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                9% Interest Rate up to 1 year
                             </div>
                             <div class="col-2 text-end">
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                Horem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Basic requirement: Latest Payslip
                             </div>
                         </div>
                         <a href="{{ route('about-hsl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
@@ -284,7 +285,7 @@
             Frequently Asked Questions
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <div style="width: 60%;" class="text-center fs-2 fw-bold">
+            <div style="width: 60%; min-width: 450px" class="text-center fs-2 fw-bold">
                 Explore Our Top FAQs: Your Common Question Answered!
             </div>
         </div>
@@ -296,22 +297,22 @@
                             <input type="radio" name="radio-a" id="check1" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check1">
                                 <div style="width: 90%;">
-                                    What are the requirements to apply as a member?
+                                    How much is the Initial Payment for Membership?
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>I hope you are enjoying the video; don't forget to give your feedback in the comment section.</p>
+                                <p>The membership fee cost ₱ 300.00 for teaching staff and ₱ 100.00 for non-teaching staff, you can either choose to pay the membership fee through salary deduction or make a cash payment.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-left">
                             <input type="radio" name="radio-a" id="check2" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check2">
                                 <div style="width: 90%;">
-                                    How much is the initial payment for membership?
+                                    What are the requirements to apply as a member
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>The membership fee cost  ₱ 100.00 , you can either choose to pay the membership fee through salary deduction or make a cash payment.</p>
+                                <p>Submit the fully accomplished membership form and pay the initial payment for membership.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-left">
@@ -322,7 +323,7 @@
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam harum nesciunt tenetur quas, accusantium numquam, dignissimos doloremque alias ullam debitis fugit quis modi? Rem ducimus natus nulla dicta autem vero. </p>
+                                <p>Only active members of BUPF with  capacity to pay are eligible to apply for a loan.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-left">
@@ -333,7 +334,7 @@
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem asperiores ducimus illum quas, sit dicta tenetur. Impedit dolores quisquam earum nihil enim alias, magnam velit, dolorem voluptate ex necessitatibus corporis.</p>
+                                <p>A co-borrower is an individual who shares equal responsibility with the primary borrower for repaying a loan and is typically equally liable for the debt.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-left">
@@ -344,7 +345,7 @@
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur eius magnam porro tempora? Inventore, consequatur dignissimos? Alias, consequuntur, aspernatur omnis ratione, eum dicta voluptatum reiciendis voluptatem rem incidunt perspiciatis ea!</p>
+                                <p> The interest rate represents the percentage of the loan amount that a borrower pays in addition to the principal as the cost of borrowing.</p>
                             </div>
                         </div>
                     </div>
@@ -355,22 +356,24 @@
                             <input type="radio" name="radio-a" id="check6" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check6">
                                 <div style="width:90%;">
-                                    What is Interest
+                                    What is Additional Loan?
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ex vitae illum dignissimos atque esse eligendi nemo suscipit! Ratione tenetur fuga dolores maxime repellendus repellat quia rem ad ducimus perferendis.</p>
+                                <p>An additional loan is an extra borrowing obtained on top of an existing loan to address increased financial needs or unforeseen expenses.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-right">
                             <input type="radio" name="radio-a" id="check7" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check7">
                                 <div style="width: 90%;">
-                                    What is Additional Loan?
+                                    Is there a service fee or any other deduction from the loan proceeds?
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed officiis suscipit voluptatibus harum aliquam, sunt at quod consequatur, saepe voluptas quis mollitia ducimus non itaque dignissimos commodi distinctio iusto repellat?</p>
+                                <p>
+                                    Yes,  1% service fee applicable only to Housing Loan.
+                                </p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-right">
@@ -381,29 +384,29 @@
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia debitis adipisci beatae quisquam facere reprehenderit, dolores illum veritatis recusandae repudiandae quas cumque. Doloremque quibusdam fugiat possimus distinctio quos sequi consectetur!</p>
+                                <p>An additional loan is an extra borrowing obtained on top of an existing loan to address increased financial needs or unforeseen expenses.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-right">
                             <input type="radio" name="radio-a" id="check9" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check9">
                                 <div style="width: 90%;">
-                                    What will happen if I miss a loan payment?
+                                    Can I temporarily terminate my membership?
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis expedita deserunt vel hic provident nihil consequatur voluptate culpa, excepturi laborum sunt nam ullam nostrum magni soluta ex? Eos, ullam quos.</p>
+                                <p>Yes, if you withdraw all your personal contributions and dividends will automatically considered inactive.</p>
                             </div>
                         </div>
                         <div class="accordion reveal fade-right">
                             <input type="radio" name="radio-a" id="check10" style="position: absolute; opacity: 0; z-index: -1;">
                             <label class="accordion-label" for="check10">
                                 <div style="width: 90%;">
-                                    Is it possible to make a partial or full payment of the loan balance?
+                                    Can a member with a loan balance in BUPF make a withdrawal?
                                 </div>
                             </label>
                             <div class="accordion-content">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, odit harum nesciunt eveniet cum error aliquam culpa illo fugit nam modi nulla cupiditate minima ipsa sunt, delectus blanditiis excepturi voluptate!</p>
+                                <p>Yes, if you withdraw all your personal contributions and dividends will automatically considered inactive.</p>
                             </div>
                         </div>
                     </div>
