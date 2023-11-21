@@ -50,7 +50,7 @@
                                             <img class="img-fluid" src="{{asset($status->loanApplicationState->asset_path)}}" alt="check logo" style="max-width: 50px; min-width: 40px">
                                         </div>
                                         <div class="col-lg-10 col-9">
-                                            <p class="mb-2 fs-7 text-secondary " style="font-size: 12px">Date Evaluted: {{$status->date_evaluated}}</p>
+                                            <p class="mb-2 fs-7 text-secondary " style="font-size: 12px">Date Evaluated: {{$status->date_evaluated}}</p>
                                             <p class="mb-2 fw-bold" style="font-size: 14px;">{{$status->loanApplicationState->state_name}}</p>
                                             <p class="fs-7" style="font-size: 12px;">{{$status->loanApplicationState->state_description}}</p>
                                             @if ($status->remarks != null)
