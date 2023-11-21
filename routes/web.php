@@ -342,3 +342,8 @@ Route::get('/terms-and-conditions', function () {
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->middleware('verified.access')->name('privacy-policy');
+
+// Access sitemap.xml this is not a blade file
+Route::get('ebupf-sitemap.xml', function () {
+    return response()->file(public_path('ebupfSiteMap.xml'));
+});

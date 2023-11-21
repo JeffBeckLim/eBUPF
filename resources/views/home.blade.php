@@ -65,7 +65,7 @@
     <div class="container my-5">
         <div class="row d-flex align-items-center">
             <div class="col-md-6">
-                <img src="{{asset('assets/freepik-characters.svg')}}" alt="Characters" width="100%">
+                <img src="{{asset('assets/freepik-characters.svg')}}" alt="Characters" width="100%" loading="lazy">
             </div>
             <div class="col-md-6 p-4">
                 <div style="color: #00638D;" class="fs-5 fw-bold pb-3">
@@ -96,7 +96,7 @@
             <div class="col-md-4 reveal fade-left">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/loans-savings.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/loans-savings.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -111,7 +111,7 @@
             <div class="col-md-4 reveal fade-bottom">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/retirement-savings.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/retirement-savings.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -126,7 +126,7 @@
             <div class="col-md-4 reveal fade-right">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/life-insurance.svg')}}" alt="Retirement Savings" width="60px">
+                        <img src="{{asset('assets/life-insurance.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
                     </div>
                     <div>
                         <div class="fs-6 fw-bold text-center">
@@ -218,7 +218,7 @@
                 <div class="row mt-4">
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Multi-Purpose Loan Mini Logo" width="30px"> &nbsp;
+                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Multi-Purpose Loan Mini Logo" width="30px" loading="lazy"> &nbsp;
                             Multi-Purpose Loan
                         </div>
                         <div class="row">
@@ -245,7 +245,7 @@
                     </div>
                     <div class="col-6 reveal fade-bottom">
                         <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="Housing Loan Mini Logo" width="30px"> &nbsp;
+                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="Housing Loan Mini Logo" width="30px" loading="lazy"> &nbsp;
                             Housing Loan
                         </div>
                         <div class="row">
@@ -273,7 +273,7 @@
                 </div>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center">
-                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" width="70%">
+                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" width="70%" loading="lazy">
             </div>
         </div>
     </div>

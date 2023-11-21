@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-md-5 fade-right reveal mt-3">
-                    <img src="{{asset('assets/girl-computer.svg')}}" alt="Computer" width="80%">
+                    <img src="{{asset('assets/girl-computer.svg')}}" alt="Computer" width="80%" loading="lazy">
                 </div>
             </div>
         </div>

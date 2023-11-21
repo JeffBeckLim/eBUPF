@@ -8,13 +8,13 @@
     <title>eBicol University Provident Fund Inc.</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" defer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <link rel="icon" href="{{ asset('assets/BU-logo.png') }}" type="image/png" alt="Icon">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" async>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" async>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" defer>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" async/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" async>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" defer/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" defer>
 
     <meta name="msvalidate.01" content="E66E32D5A8DFCEEB5E1FE5F122741231" />
     <meta name="description" content="eBicol University Provident Fund (eBUPF) - Your trusted financial services resource. Explore now for financial security!">
@@ -22,12 +22,14 @@
     {{-- test --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <link rel="preload" href="{{ asset('assets/home-blue-bg.webp') }}" as="image">
+    <link rel="preload" as="image" href="{{ asset('assets/home-computer.webp') }}">
+    <link rel="preload" as="image" href="{{ asset('assets/bu-provident.svg') }}">
 </head>
 
 <body class="bg-default">
     <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
         <a class="navbar-brand" href="/">
-            <img loading="lazy" style="width: 15rem;" src="{{ asset('assets/bu-provident.svg')}}" alt="Logo">
+            <img style="width: 15rem;" src="{{ asset('assets/bu-provident.svg')}}" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
