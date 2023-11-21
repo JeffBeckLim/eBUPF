@@ -12,6 +12,11 @@
     padding: 2%;
 }
 
+html,
+body {
+    overflow-x: hidden;
+}
+
 .bg-default {
     background-color: #f7f9fc;
 }
