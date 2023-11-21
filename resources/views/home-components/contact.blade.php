@@ -12,15 +12,15 @@
                     <div style="margin: 0 0 0 100px;" class="d-flex">
                         <i class="bi bi-send-fill text-white"></i>
                         <div style="margin-left: 15px;">
-                            <a href="mailto:bupf@bicol-u.edu.ph" style="color: white;">
-                                bupf@bicol-u.edu.ph
+                            <a href="mailto:buprovidentfund@gmail.com" style="color: white; text-decoration: none;">
+                                buprovidentfund@gmail.com
                             </a>
                         </div>
                     </div>
                     <div style="margin: 20px 0 20px 100px;" class="text-white d-flex">
                         <i class="bi bi-telephone-fill"></i>
                         <div style="margin-left: 15px;">
-                            (209) 555-0104
+                            <a href="tel:+639270256413" style="color: white; text-decoration: none;">(+63) 927-0256-413</a>
                         </div>
                     </div>
                 </div>

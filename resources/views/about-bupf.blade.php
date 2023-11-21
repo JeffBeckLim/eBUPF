@@ -9,7 +9,7 @@
                         Discover more about our Organization
                     </h1>
                     <div style="border-bottom: 2px solid black;text-align:justify;" class="fs-6 pb-3">
-                        Bicol University Provident Fund Inc. is a reputable financial institution dedicated to empowering the Bicol University Faculty Members and with their financial goals. With a steadfast commitment, they offer a comprehensive range of financial solutions, prominently featuring multipurpose and housing loans. With a customer-centric approach, they provide accessible and flexible loan options, ensuring that dreams of homeownership, education, and other financial aspirations become a reality. Bicol University Provident Fund Inc. stands as a trusted partner in the journey towards financial stability and prosperity.
+                        The <i><b>Bicol University Provident Fund Inc.</b> </i>is a microfinance  institution established in 2008 by the Bicol University with a mandate to provide BU employees with supplementary benefits. As of 2023, a total of 557 employees teaching and non-teaching staff of BU have become members of BU Provident Fund. With BUPF they offer a comprehensive range of financial solutions, prominently featuring multipurpose and housing loans. Bicol University Provident Fund Inc. stands as a trusted partner in the journey towards financial stability and prosperity.
                     </div>
                     <div class="row mt-4 reveal fade-bottom active">
                         <div class="col-6">
@@ -98,11 +98,11 @@
     </div>
 </div>
 
-<div class="text-center mb-5">
-    <span style="color: #0092D1;" class="fs-3 fw-bold">
+<div class="text-center mb-5 mt-4">
+    <span style="color: #0092D1;" class="fs-2 fw-bold">
         BICOL
     </span>
-    <span style="color: #FF6F19;" class="fs-3 fw-bold">
+    <span style="color: #FF6F19;" class="fs-2 fw-bold">
         UNIVERSITY
     </span>
     <div>

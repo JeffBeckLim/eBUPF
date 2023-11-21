@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <div class="text-center mt-5 mb-4">
+    <div class="text-center mt-4">
         <img src="{{asset('assets/about-mpl.svg')}}" alt="MPL" width="300px">
     </div>
     <div class="row mb-5">
@@ -12,29 +12,29 @@
         </div>
         <div class="col-md-7 d-flex justify-content-center align-items-center">
             <p style="font-size: 1.4rem;">
-                Experience the freedom to use the funds as you  fit with our Multipurpose Loan – your gateway to achieving your financial goals and dreams. The financial solution is designed to meet all your diverse needs and aspirations, offering flexible terms, competitive interest rates, and a streamlined application process for planning vacations, covering medical expenses, renovating your home, or consolidating existing debts.
+                Your gateway to achieving your financial goals and dreams. The financial solution is designed to meet all your diverse needs and aspirations, offering flexible terms, competitive interest rates, and a streamlined application process for covering medical expenses, renovating your home, or consolidating existing debts.
             </p>
         </div>
     </div>
     <div class="mb-5 p-2" style="background-color: #0092D1; border-radius: 20px;">
         <div class="row my-3">
-            <div class="col-md-4">
-                <div style="border-right: 2px dashed rgba(255, 255, 255, 0.812);" class="remove-border">
+            <div class="col-md-4" style="border-right: 2px dashed rgba(255, 255, 255, 0.812);" class="remove-border">
+                <div class="text-center">
                     <div class="fs-5 text-light fw-bold text-md-center">
                         Interest Rate
                     </div>
                     <div class="fs-7 fw-bold text-md-center" style="color: #ffffffcb;">
-                        6%
+                        Enjoy 6% interest rate up to 5 years, ensuring that your financial needs are met with a cost-effective and convenient solution.
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div style="border-right: 2px dashed rgba(255, 255, 255, 0.812);" class="remove-border">
+            <div class="col-md-4"  style="border-right: 2px dashed rgba(255, 255, 255, 0.812);" class="remove-border">
+                <div class="text-center">
                     <div class="fs-5 text-light fw-bold text-md-center" >
                         Loan Amount Range
                     </div>
                     <div class="fs-7 fw-bold text-md-center" style="color: #ffffffcb;">
-                        Php 50,000.00 - Php 200,000.00
+                        Borrow up to ₱50,000 to ₱200,000, providing the financial support you need to turn aspirations into reality.
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         Fees
                     </div>
                     <div class="fs-7 fw-bold text-md-center" style="color: #ffffffcb;">
-                        Php 0.00
+                        Our multipurpose loan comes with zero fees for processing your loan application.
                     </div>
                 </div>
             </div>
@@ -127,7 +127,13 @@
     </div>
 
     <div class="text-center mt-5" style="margin-bottom: 40px;">
-        <p class="fs-4 fw-bold" style="color: #00638D;">Summary of  Requirements for your Loan Application</p>
+        <p class="fs-3 fw-bold" style="color: #00638D;">Loan Application Requirements </p>
+        <div class="d-flex justify-content-center align-items-center">
+            <p class="fs-5" style="width: 80%">
+                Unlock your financial aspirations today with eBUPF – take the first step towards your goals by applying for a loan and securing the resources you need for a brighter tomorrow.
+            </p>
+        </div>
+
     </div>
 
     <div class="row mb-5">
@@ -166,23 +172,23 @@
                 <div class="fw-bold fs-6 mb-4">
                     BU ID# of Principal Borrower and Co-borrower
                 </div>
-                <div>
+                <div class="reveal fade-left">
                     <a href="/login" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Apply Loan <i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img src="{{asset('assets/man.svg')}}" alt="Man" width="50%" class="d-none d-md-block" style="min-height: 100%; min-width: 200px">
+            <img src="{{asset('assets/mpl-girl-dress.svg')}}" alt="Bicol University Multi-Purpose Loan" width="60%" class="d-none d-md-block" style="min-height: 100%; min-width: 200px">
         </div>
     </div>
 
-    <section class="faq" style="height: 95vh">
+    <section class="faq mt-5" style="height: 95vh">
         <div class="container mt-5">
             <div class="text-center fs-4 fw-bold" style="color: #00638D;">
                 Frequently Asked Questions
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <h1 style="width: 60%;" class="text-center fs-2 fw-bold">
+                <h1 style="width: 60%; min-width: 450px" class="text-center fs-2 fw-bold">
                     Explore Our Top FAQs: Your Common Question Answered!
                 </h1>
             </div>
@@ -194,55 +200,55 @@
                                 <input type="radio" name="radio-a" id="check1" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check1">
                                     <div style="width: 90%;">
-                                        What are the requirements to apply as a member?
+                                        I am new member, can I apply for loan?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>I hope you are enjoying the video; don't forget to give your feedback in the comment section.</p>
+                                    <p>Yes, all new members can now apply for a loan. The loanable amount depends on the value of their Member’s Equity, years of service in BU, and the amount of their net pay.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check2" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check2">
                                     <div style="width: 90%;">
-                                        How much is the initial payment for membership?
+                                        What is Loan Renewal?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>The membership fee cost  ₱ 100.00 , you can either choose to pay the membership fee through salary deduction or make a cash payment.</p>
+                                    <p>Loan renewal is the extension or continuation of an existing loan agreement, typically following the repayment of the initial loan term.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check3" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check3">
                                     <div style="width: 90%">
-                                        Who can apply for a loan?
+                                        Who can apply for loan renewal ?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam harum nesciunt tenetur quas, accusantium numquam, dignissimos doloremque alias ullam debitis fugit quis modi? Rem ducimus natus nulla dicta autem vero. </p>
+                                    <p>Members with an existing loan in the provident fund, with three (3) months or more of payments settled on their loan.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check4" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check4">
                                     <div style="width: 90%;">
-                                        What is a Co-Borrower?
+                                        How can I qualify for Loan Renewal?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem asperiores ducimus illum quas, sit dicta tenetur. Impedit dolores quisquam earum nihil enim alias, magnam velit, dolorem voluptate ex necessitatibus corporis.</p>
+                                    <p>Payment of at least 50% of your total loan balance is required; if you do not meet the eligibility criteria, they will provide information on when you can qualify or suggest paying the necessary minimum amount for eligibility.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-left">
                                 <input type="radio" name="radio-a" id="check5" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check5">
                                     <div style="width: 90%;">
-                                        What is Interest Rate?
+                                        Can I apply for loan renewal if I am nearing retirement?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur eius magnam porro tempora? Inventore, consequatur dignissimos? Alias, consequuntur, aspernatur omnis ratione, eum dicta voluptatum reiciendis voluptatem rem incidunt perspiciatis ea!</p>
+                                    <p>Yes, but the loanable amount will no longer be at full equity. If you are applying for a re-loan, you are allowed to apply for the same amount as your previous loan.</p>
                                 </div>
                             </div>
                         </div>
@@ -253,55 +259,55 @@
                                 <input type="radio" name="radio-a" id="check6" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check6">
                                     <div style="width:90%;">
-                                        What is Interest
+                                        What is Additional Loan?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus ex vitae illum dignissimos atque esse eligendi nemo suscipit! Ratione tenetur fuga dolores maxime repellendus repellat quia rem ad ducimus perferendis.</p>
+                                    <p>Additional loan refers to obtaining supplementary funds, either as an extension of an existing loan or as a separate borrowing, to meet additional financial needs.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check7" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check7">
                                     <div style="width: 90%;">
-                                        What is Additional Loan?
+                                        What are the requirements for Additional Loan?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sed officiis suscipit voluptatibus harum aliquam, sunt at quod consequatur, saepe voluptas quis mollitia ducimus non itaque dignissimos commodi distinctio iusto repellat?</p>
+                                    <p>Approval of letter request  and a recent copy of payslip</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check8" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check8">
                                     <div style="width: 90%;">
-                                        How do I pay the monthly amortization of my dept?
+                                        What is Amortization
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia debitis adipisci beatae quisquam facere reprehenderit, dolores illum veritatis recusandae repudiandae quas cumque. Doloremque quibusdam fugiat possimus distinctio quos sequi consectetur!</p>
+                                    <p>The amount of principal and interest paid over the  course of the loan term.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check9" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check9">
                                     <div style="width: 90%;">
-                                        What will happen if I miss a loan payment?
+                                        What is a Co-borrower
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis expedita deserunt vel hic provident nihil consequatur voluptate culpa, excepturi laborum sunt nam ullam nostrum magni soluta ex? Eos, ullam quos.</p>
+                                    <p>A co-borrower is an individual who shares equal responsibility with the primary borrower for repaying a loan and is typically equally liable for the debt.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-right">
                                 <input type="radio" name="radio-a" id="check10" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check10">
                                     <div style="width: 90%;">
-                                        Is it possible to make a partial or full payment of the loan balance?
+                                        What happens if the remaining term for loan repayment is higher than the remaining service at BU before retirement?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, odit harum nesciunt eveniet cum error aliquam culpa illo fugit nam modi nulla cupiditate minima ipsa sunt, delectus blanditiis excepturi voluptate!</p>
+                                    <p>The balance, including any interest and surcharge if applicable, will be deducted from the benefit claim (equity) to be received.</p>
                                 </div>
                             </div>
                         </div>
