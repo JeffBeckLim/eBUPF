@@ -77,4 +77,7 @@
 
       </section>
     </main>
+
+    @include('home-components.contact')
+
 @endsection
