@@ -18,24 +18,32 @@
         </div>
 
          <!-- Tooltip -->
-
+{{-- 
             <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="More detials here..."><i class="bi bi-info-circle"></i> What is a Housing Loan?</a>
 
         <script>
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        </script>
+        </script> --}}
          <!-- Tooltip -->
+         
 
          @if (session('email_error'))
             <div class="alert alert-danger">
                 <i class="bi bi-exclamation-circle"></i> {{ session('email_error') }}
             </div>
         @endif
+
+        <p class="text1-design mt-2">Loan Details</p>
+        
+        <div class="my-2">
+            @include('member-views.mpl-application-form.accordion-entity-definition')
+        </div>
+
         <form action="/member/loan-application/2" method="POST" >
             @csrf
             <div id="loanForm">
-                <p class="text1-design">Loan Details</p>
+              
 
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>

@@ -29,12 +29,15 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <p class="text-secondary" style="font-size: 12px">
+                            Make sure your password is atleast 8 characters, has a number, a special character, and a capital letter.
+                          </p>
                         <div class="row mb-1">
                             <label for="password" class="col-form-label fs-7">{{ __('New Password') }}</label>
 
-                            <div class="col-12">
+                            <div class="col-12 input-group">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" autofocus>
+                                <span class="input-group-text border-start-0" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle-new" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -65,4 +68,25 @@
         </div>
     </div>
 </div>
+<script>
+
+    togglePasswordField('password', 'password-toggle-new');
+
+
+   function togglePasswordField(inputFieldId, toggleButtonId) {
+    const passwordField = document.getElementById(inputFieldId);
+    const toggleButton = document.getElementById(toggleButtonId);
+
+    toggleButton.addEventListener('click', function() {
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleButton.innerHTML = '<i class="bi bi-eye-fill"></i>'; // Change button icon to show the password
+        } else {
+            passwordField.type = 'password';
+            toggleButton.innerHTML = '<i class="bi bi-eye-slash-fill"></i>'; // Change button icon to hide the password
+        }
+    });
+}
+</script>
+
 @endsection

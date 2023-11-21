@@ -40,7 +40,7 @@
                                 <label for="amount" class="fw-bold">Amount <span class="text-danger fw-bold">*</span></label>
                                 <h6 style="font-size: 12px" class="text-secondary">Loan Amount (min: 50k)</h6>
                                 <div class="d-flex align-items-center">
-                                    <input type="number"  name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="50000" max="200000" required>
+                                    <input type="number"   name="amount" id="amount" class="form-control" placeholder="Enter Amount" min="50000" max="200000" required>
                                     {{-- <span style="margin-left: 5px;">
                                         <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="The principal amount you want to calculate"></i>
                                     </span> --}}
@@ -98,7 +98,7 @@
                             </div>
                             <div class="row mt-2">
                                 <div class="col-7 fs-7">
-                                    Monthly principal
+                                    Monthly Principal
                                 </div>
                                 <div class="col-5 fs-7 fw-bold">
                                     {{ number_format($monthlyPrincipalAmort ?? '0.00', 2, '.', ',') }}
