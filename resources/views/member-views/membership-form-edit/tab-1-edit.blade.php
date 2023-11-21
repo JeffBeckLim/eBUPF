@@ -8,7 +8,7 @@
                         <label for="lname"></label>
                             First name
                         </label>
-                        <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}">
+                        <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}" id="firstname">
                     </div>
                     @error('firstname')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
@@ -16,7 +16,7 @@
 
                     <div class="col ">
                         <div><label for="middlename">Middlename</label></div>
-                        <input type="text" class="form-control w-100" name="middlename" value="{{Auth::user()->member->middlename}}">
+                        <input type="text" class="form-control w-100" name="middlename" value="{{Auth::user()->member->middlename}}" id="middlename">
                     </div>
                     @error('middle_initial')
                         <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
@@ -26,7 +26,7 @@
                         <label for="lname">
                             Last name
                         </label>
-                        <input id="myForm" class="form-control validate"  name="lastname" value="{{Auth::user()->member->lastname}}">
+                        <input  class="form-control validate"  name="lastname" value="{{Auth::user()->member->lastname}}" id="lastname">
                     </div>
                     @error('lastname')
                         <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
@@ -108,7 +108,7 @@
 
                 <div class="col-6 pb-1">
                     <label class="fw-bold" for="placeOfBirth">Place of Birth</label>
-                    <input class="form-control validate" name="place_of_birth" value="{{Auth::user()->member->place_of_birth}}">
+                    <input class="form-control" name="place_of_birth" value="{{Auth::user()->member->place_of_birth}}">
                 </div>
                 @error('place_of_birth')
                     <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
