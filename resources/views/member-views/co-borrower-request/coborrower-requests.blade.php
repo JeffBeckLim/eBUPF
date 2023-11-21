@@ -15,7 +15,7 @@
                         </div>
                         @endif
                         <p class="fs-5 fw-bold my-3 p-3">Incoming Requests</p>
-                        <div class="accordion mb-3" id="accordionExample">
+                        <div class="accordion mb-3 border p-1" id="accordionExample">
                             <div class="accordion-item border-0">
                               <h5 class="accordion-header">
                                 <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">

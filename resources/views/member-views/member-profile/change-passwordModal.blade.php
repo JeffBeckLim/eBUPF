@@ -11,11 +11,19 @@
             <form action="{{ route('member.change.password', ['id' => Auth::user()->member->id]) }}"  method="post">
                 @csrf
                 <label for="current_password" class="mt-3">Current Password</label>
-                <input required class="form-control" type="password" name="old_password" id="old_password">
+                <div class="input-group">
+                  <input required class="form-control" type="password" name="old_password" id="old_password">
+                  <span class="input-group-text border-start-0" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle-old" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>    
+                </div>
+                
+              
                 <div class="border-top mt-4">
-                    <label for="new_password">New Password</label>
+                  <label for="new_password">New Password</label>
+                  <div class="input-group">
                     <input required class="form-control" type="password" name="password" id="password">
-
+                    <span class="input-group-text border-start-0" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle-new" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>
+                  </div>  
+                  
                     <label for="confirm_password">Confirm New Password</label>
                     <input required class="form-control" type="password" name="password_confirmation" id="password_confirmation">
                 </div>
@@ -28,3 +36,24 @@
       </div>
     </div>
   </div>
+
+  <script>
+    togglePasswordField('old_password', 'password-toggle-old');
+    togglePasswordField('password', 'password-toggle-new');
+
+
+   function togglePasswordField(inputFieldId, toggleButtonId) {
+    const passwordField = document.getElementById(inputFieldId);
+    const toggleButton = document.getElementById(toggleButtonId);
+
+    toggleButton.addEventListener('click', function() {
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleButton.innerHTML = '<i class="bi bi-eye-fill"></i>'; // Change button icon to show the password
+        } else {
+            passwordField.type = 'password';
+            toggleButton.innerHTML = '<i class="bi bi-eye-slash-fill"></i>'; // Change button icon to hide the password
+        }
+    });
+}
+</script>
