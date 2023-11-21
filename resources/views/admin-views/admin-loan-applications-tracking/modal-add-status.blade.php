@@ -51,21 +51,27 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
             </button>
           </h2>
           <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample" style="">
-              <div class="row border g-0 p-2">
+              <div class="row  g-0 p-2">
                 {{-- this sorts from largest id to smallest --}}
-                @foreach ($loan->loan->LoanApplicationStatus->sort(function($a, $b) {
-                  return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
-                    }) as $status)
-                        <div class="col-12 d-flex gap-1 mb-2">
-                            <a class="btn border text-danger grow-on-hover" href="
-                            {{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')">
-                            
-                            <i class="bi bi-trash-fill"></i></a>
-                            <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
-                                {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
-                            </p>
-                        </div>
-                @endforeach
+                @if (count($loan->loan->LoanApplicationStatus)==0)
+
+                  <p class="mx-auto">No Status Yet</p>
+                
+                  @else 
+                  @foreach ($loan->loan->LoanApplicationStatus->sort(function($a, $b) {
+                    return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
+                      }) as $status)
+                          <div class="col-12 d-flex gap-1 mb-2">
+                              <a class="btn border text-danger grow-on-hover" href="
+                              {{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')">
+                              
+                              <i class="bi bi-trash-fill"></i></a>
+                              <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
+                                  {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
+                              </p>
+                          </div>
+                  @endforeach
+                @endif
               </div>
           </div>
         </div>
