@@ -86,7 +86,7 @@ function validateForm() {
         // If a field is empty...
         if (y[i].type === "checkbox" && !y[i].checked) {
             // For checkboxes, check if it's not checked
-            y[i].classList.add("is-invalid"); // Add "is-invalid" class
+            y[i].classList.add("invalid"); // Add "is-invalid" class
             valid = false;
         } 
         else if (y[i].value == "") {
@@ -105,6 +105,44 @@ function validateForm() {
             y[i].classList.remove("shake");
         }
     }
+      // name validation
+     
+        // name validation
+        const firstname = document.getElementById('firstname');
+        const middlename = document.getElementById('middlename'); 
+        const lastname = document.getElementById('lastname');
+        if (validateName(firstname.value)){
+            firstname.classList.remove("is-invalid");
+            firstname.setCustomValidity('');
+        } else {
+            firstname.classList.add("is-invalid");
+            firstname.setCustomValidity('Name should contain only letters and single spaces.');
+            firstname.reportValidity();
+            valid = false;   
+        }
+
+        
+
+        if(middlename.value != ''){
+            if (validateName(middlename.value)) {
+                middlename.classList.remove("is-invalid");
+                middlename.setCustomValidity('');
+            } else {
+                middlename.classList.add("is-invalid");
+                middlename.setCustomValidity('Name should contain only letters and single spaces.');
+                middlename.reportValidity();
+                valid = false;   
+            }
+        }
+        if (validateName(lastname.value)) {
+            lastname.classList.remove("is-invalid");
+            lastname.setCustomValidity('');
+        } else {
+            lastname.classList.add("is-invalid");
+            lastname.setCustomValidity('Name should contain only letters and single spaces.');
+            lastname.reportValidity();
+            valid = false;   
+        }
 
     // CHECK CONTACT NUMBER
     const contactNumberInput = document.getElementById('contact_num');
@@ -183,6 +221,105 @@ function validateForm() {
             dobInput.reportValidity();
             valid = false;
          }
+
+       
+        //  name validation for beneficiary\
+        const beneficiary0_name = document.getElementById('beneficiary0');              
+
+        if(beneficiary0_name.value != ''){
+            if ( validateName(beneficiary0_name.value)) {
+                beneficiary0_name.classList.remove("is-invalid");
+                beneficiary0_name.setCustomValidity('');
+            } else {
+
+                beneficiary0_name.classList.add("is-invalid");
+                beneficiary0_name.setCustomValidity('Name should contain only letters and single spaces.');
+                beneficiary0_name.reportValidity();
+                valid = false;   
+            }
+        }      
+        
+        const beneficiary1_name = document.getElementById('beneficiary1');
+        if(beneficiary1_name.value.trim() !== ''){
+
+                if ( validateName(beneficiary1_name.value)) {
+                    beneficiary1_name.classList.remove("is-invalid");
+                    beneficiary1_name.setCustomValidity('');
+                } else {
+    
+                    beneficiary1_name.classList.add("is-invalid");
+                    beneficiary1_name.setCustomValidity('Name should contain only letters and single spaces.');
+                    beneficiary1_name.reportValidity();
+                    valid = false;   
+                }
+ 
+        }else if(beneficiary1_name.value.trim() === '')
+        {
+            beneficiary1_name.classList.remove("is-invalid");
+            beneficiary1_name.setCustomValidity('');
+        }
+
+        const beneficiary2_name = document.getElementById('beneficiary2');
+        if(beneficiary2_name.value.trim() !== ''){
+
+                if ( validateName(beneficiary2_name.value)) {
+                    beneficiary2_name.classList.remove("is-invalid");
+                    beneficiary2_name.setCustomValidity('');
+                } else {
+    
+                    beneficiary2_name.classList.add("is-invalid");
+                    beneficiary2_name.setCustomValidity('Name should contain only letters and single spaces.');
+                    beneficiary2_name.reportValidity();
+                    valid = false;   
+                }
+ 
+        }else if(beneficiary2_name.value.trim() === '')
+        {
+            beneficiary2_name.classList.remove("is-invalid");
+            beneficiary2_name.setCustomValidity('');
+        }
+
+
+        const beneficiary3_name = document.getElementById('beneficiary3');
+        if(beneficiary3_name.value.trim() !== ''){
+
+                if ( validateName(beneficiary3_name.value)) {
+                    beneficiary3_name.classList.remove("is-invalid");
+                    beneficiary3_name.setCustomValidity('');
+                } else {
+    
+                    beneficiary3_name.classList.add("is-invalid");
+                    beneficiary3_name.setCustomValidity('Name should contain only letters and single spaces.');
+                    beneficiary3_name.reportValidity();
+                    valid = false;   
+                }
+ 
+        }else if(beneficiary3_name.value.trim() === '')
+        {
+            beneficiary3_name.classList.remove("is-invalid");
+            beneficiary3_name.setCustomValidity('');
+        }
+
+         const beneficiary4_name = document.getElementById('beneficiary4');
+        if(beneficiary4_name.value.trim() !== ''){
+
+                if ( validateName(beneficiary4_name.value)) {
+                    beneficiary4_name.classList.remove("is-invalid");
+                    beneficiary4_name.setCustomValidity('');
+                } else {
+    
+                    beneficiary4_name.classList.add("is-invalid");
+                    beneficiary4_name.setCustomValidity('Name should contain only letters and single spaces.');
+                    beneficiary4_name.reportValidity();
+                    valid = false;   
+                }
+ 
+        }else if(beneficiary4_name.value.trim() === '')
+        {
+            beneficiary4_name.classList.remove("is-invalid");
+            beneficiary4_name.setCustomValidity('');
+        }
+   
     
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
@@ -214,7 +351,7 @@ function enableSpouseInput() {
     } else {
         spouseInput.disabled = true;
         spouseInput.value = ""; // Clear the input value when disabled
-        spouseInput.classList.remove("validate"); // Remove "validate" class
+        spouseInput.classList.remove("validate", "is-invalid"); // Remove "validate" class
     }
 }
 
@@ -223,4 +360,11 @@ document.addEventListener("DOMContentLoaded", function() {
     selectElement.selectedIndex = -1;
 });
 
+
+function validateName(name) {
+    // Regular expression to match only letters (uppercase and lowercase) and spaces
+    const nameRegex = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*\s*$/;
+    // Test if the name matches the regex pattern
+    return nameRegex.test(name);
+}
 
