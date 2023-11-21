@@ -21,7 +21,7 @@
 
     {{-- test --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-    <link rel="preload" href="{{ asset('assets/home-blue-bg.webp') }}" as="image">
+    <link rel="preload" as="image" href="{{ asset('assets/home-blue-bg.webp') }}" >
     <link rel="preload" as="image" href="{{ asset('assets/home-computer.webp') }}">
     <link rel="preload" as="image" href="{{ asset('assets/bu-provident.svg') }}">
 </head>
@@ -29,7 +29,7 @@
 <body class="bg-default">
     <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
         <a class="navbar-brand" href="/">
-            <img style="width: 15rem;" src="{{ asset('assets/bu-provident.svg')}}" alt="Logo">
+            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="240" height="auto">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -88,13 +88,13 @@
         @include('home-components.footer')
     </div>
     {{-- DO NOT TOUCH --}}
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        crossorigin="anonymous" defer></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" defer></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     {{-- DO NOT TOUCH --}}
 
     <script>
@@ -149,8 +149,8 @@
     });
     </script>
 
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e99da14ff9a345488d601843145f614f"}'></script><!-- End Cloudflare Web Analytics -->
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4656121e282044cfa51c0e64127f7c3a"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e99da14ff9a345488d601843145f614f"}' defer></script><!-- End Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "4656121e282044cfa51c0e64127f7c3a"}' defer></script><!-- End Cloudflare Web Analytics -->
 </body>
 
 </html>
