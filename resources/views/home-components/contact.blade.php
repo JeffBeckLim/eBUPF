@@ -9,7 +9,7 @@
                     <div style="padding: 0 0 30px 45px" class="text-light fw-6">
                         Got a query? Contact us using any of the details below and we will be happy to answer your questions!
                     </div>
-                    <div style="margin: 0 0 0 100px;" class="d-flex">
+                    <div style="margin: 0 0 0 100px;" class="d-flex remove-margin-contact">
                         <i class="bi bi-send-fill text-white"></i>
                         <div style="margin-left: 15px;">
                             <a href="mailto:buprovidentfund@gmail.com" style="color: white; text-decoration: none;">
@@ -17,7 +17,7 @@
                             </a>
                         </div>
                     </div>
-                    <div style="margin: 20px 0 20px 100px;" class="text-white d-flex">
+                    <div style="margin: 20px 0 20px 100px;" class="text-white d-flex remove-margin-contact">
                         <i class="bi bi-telephone-fill"></i>
                         <div style="margin-left: 15px;">
                             <a href="tel:+639270256413" style="color: white; text-decoration: none;">(+63) 927-0256-413</a>

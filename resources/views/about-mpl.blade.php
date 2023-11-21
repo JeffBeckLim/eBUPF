@@ -188,7 +188,7 @@
                 Frequently Asked Questions
             </div>
             <div class="d-flex justify-content-center align-items-center">
-                <h1 style="width: 60%; min-width: 450px" class="text-center fs-2 fw-bold">
+                <h1 style="width: 60%; min-width: 250px" class="text-center fs-2 fw-bold">
                     Explore Our Top FAQs: Your Common Question Answered!
                 </h1>
             </div>

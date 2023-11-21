@@ -29,7 +29,7 @@
 <body class="bg-default">
     <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
         <a class="navbar-brand" href="/">
-            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="240" height="auto">
+            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="200px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
