@@ -6,7 +6,7 @@
                         <label for="lname" >
                              First name
                         </label>
-                        <input class="form-control mb-1 validate rounded-0 rounded-start" name="firstname" value="{{Auth::user()->member->firstname}}">
+                        <input class="form-control mb-1 validate rounded-0 rounded-start" id="firstname" name="firstname" value="{{Auth::user()->member->firstname}}" title="Please enter a valid name">
                         @error('firstname')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
@@ -16,7 +16,7 @@
                     <div class="col ">
                         <div class="">
                         <label for="middlename" >Middle Name</label></div>
-                        <input type="text" class="form-control w-100 rounded-0 rounded-end" name="middlename" value="{{old('middlename')}}" >
+                        <input type="text" class="form-control w-100 rounded-0 rounded-end" name="middlename" value="{{old('middlename')}}" id="middlename">
                         @error('middlename')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
@@ -27,7 +27,7 @@
                         <label for="lname">
                              Last Name
                         </label>
-                        <input id="myForm" class="form-control validate"  name="lastname" value="{{Auth::user()->member->lastname}}">
+                        <input class="form-control validate"  name="lastname" value="{{Auth::user()->member->lastname}}" id="lastname">
                         @error('lastname')
                             <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror

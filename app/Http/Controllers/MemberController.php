@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\LoanApplicationStatus;
 use App\Models\MembershipApplication;
 use App\Models\BeneficiaryRelationship;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class MemberController extends Controller
@@ -240,7 +241,10 @@ class MemberController extends Controller
         else {
             continue; // Skip iteration if no beneficiary data present
         }
-        if($request->input("beneficiary{$i}")){
+        if($i > 0 && $request->input("beneficiary{$i}") == null){
+            $beneficiary->delete();
+        }
+        else if($request->input("beneficiary{$i}")){
             $beneficiary->beneficiary_name = $request->input("beneficiary{$i}");
             $beneficiary->birthday = $request->input("beneficiary_birthday{$i}");
             $beneficiary->relationship = $request->input("beneficiary_relationship{$i}");
@@ -271,7 +275,7 @@ class MemberController extends Controller
                 $member->save();
             }
 
-
+        Session::forget('_previous');
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Saved');
     }
 
@@ -291,6 +295,10 @@ class MemberController extends Controller
             abort(404);
         }
 
+        if(Auth::user()->user_type != 'non-member'){
+             abort(404);
+         }
+
         //gets all the units along with the related campus
         $units = Unit::with('campuses')->get();
 
@@ -305,7 +313,7 @@ class MemberController extends Controller
 
     //SHOW form view for editing membership
     public function membershipFormEdit(){
-
+        // dd(Session::get('_previous'));
         $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
         if($membership_application == null){
             abort(404);
@@ -322,7 +330,7 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
-
+    
         $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
         if($membership_application != null){
             abort(404);
@@ -451,7 +459,7 @@ class MemberController extends Controller
             ]);
         }
 
-
+        Session::forget('_previous');
         return redirect('/member/membership-form/edit-download')->with('message', 'Membership Form Created');
 
     }
@@ -539,6 +547,7 @@ class MemberController extends Controller
 
     public function checkMembershipApplication($member_id){
         $member = MembershipApplication::where('member_id', $member_id)->get();
+        
         if(count($member)===0){
            return redirect('/member/membership-form');
         }

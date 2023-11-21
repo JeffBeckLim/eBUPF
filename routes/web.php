@@ -50,25 +50,25 @@ use App\Models\Penalty;
 //🛠️TESTING ===================================================================================================
     //Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
-    Route::get('member/loan/your-loans/{loan_status}', [LoanController::class, 'show'])->name('member.loans');
+    Route::get('member/loan/your-loans/{loan_status}', [LoanController::class, 'show'])->name('member.loans')->middleware('auth','member.access');
 
-    Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications');
+    Route::get('member/loan/loan-applications', [LoanApplicationController::class, 'showLoanApplications'])->name('loan.applications')->middleware('auth','member.access');
 
-    Route::get('member/loan/loan-applications/evaluated', [LoanApplicationController::class, 'showLoanApplicationsEvaluated'])->name('loan.applications.evaluated');
+    Route::get('member/loan/loan-applications/evaluated', [LoanApplicationController::class, 'showLoanApplicationsEvaluated'])->name('loan.applications.evaluated')->middleware('auth','member.access');
 
-    Route::get('member/loan/loan-applications/all', [LoanApplicationController::class, 'showLoanApplicationsAll'])->name('loan.applications.all');
+    Route::get('member/loan/loan-applications/all', [LoanApplicationController::class, 'showLoanApplicationsAll'])->name('loan.applications.all')->middleware('auth','member.access');
 
-    Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status');
+    Route::get('member/loan/loan-applications/status/{id}', [LoanApplicationController::class, 'showLoanStatus'])->name('loan.application.status')->middleware('auth','member.access');
 
     // Delete status of loan
     Route::get('admin/loan-application/status/delete/{id}', [AdminLoanApplicationController::class, 'deleteLoanStatus'])->name('delete.status')->middleware('auth','admin.access');
 
     // Show Transactions
-    Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions');
+    Route::get('/member/transactions', [TransactionController::class, 'show'])->name('member.transactions')->middleware('auth','member.access');
 
     // For Calculator
-    Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator');
-    Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate');
+    Route::get('/member/calculator', [CalculatorController::class, 'show'])->name('calculator')->middleware('auth','member.access');
+    Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate')->middleware('auth','member.access');
 
     // Toggle Additional Loan
     Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan')->middleware('auth','admin.access');
@@ -104,35 +104,35 @@ use App\Models\Penalty;
 
 // 💸======================== ** LOAN APPLICATION MPL and HSL **  ==================================
     //show mpl application
-    Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->middleware('auth')->name('mpl.application');//add middleware for verified members only
+    Route::get('/member/mpl-application-form/', [LoanApplicationController::class, 'show'])->name('mpl.application')->middleware('auth','member.access');
 
 
     //create MPL and HSL application and Co-Borrower request
-    Route::post('/member/loan-application/{loanTypeId}', [LoanApplicationController::class, 'storeRequest']);
+    Route::post('/member/loan-application/{loanTypeId}', [LoanApplicationController::class, 'storeRequest'])->middleware('auth','member.access');
 
     //Show hsl form
-    Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->middleware('auth')->name('hsl.application');//add middleware for verified members only
+    Route::get('/member/hsl-application-form/', [LoanApplicationController::class, 'showHsl'])->name('hsl.application')->middleware('auth','member.access');//add middleware for verified members only
 
     //show loan application details
-    Route::get('/member/view/loan-details/{id}', [LoanController::class, 'displayLoanDetails'])->name('loan.details');
+    Route::get('/member/view/loan-details/{id}', [LoanController::class, 'displayLoanDetails'])->name('loan.details')->middleware('auth','member.access');
 // ======================== ** LOAN APPLICATION MPL and HSL **  ==================================
 //
 //
 //
 // 📬======================== ** LOAN APPLICATION REQUESTS **  ====================================
     //show requests for co-borrower
-    Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request');
+    Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request')->middleware('auth','member.access');
      //Show auth users request
-    Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest'])->name('outgoing.request');
+    Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest'])->name('outgoing.request')->middleware('auth','member.access');
     // -----------------------------------------------------------------------------------
     // show loan application details of the principal borrower
-    Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan']);
+    Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan'])->middleware('auth','member.access');
     //update accept request co-borrower
-    Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept']);
+    Route::get('/member/coBorrower/accept/{id}', [CoBorrowerController::class, 'requestAccept'])->middleware('auth','member.access');
     //update decline request co-borrower
-    Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline']);
+    Route::get('/member/coBorrower/decline/{id}', [CoBorrowerController::class, 'requestDecline'])->middleware('auth','member.access');
     // cancel loan application
-    Route::get('/member/coBorrower/cancel-application/{id}', [LoanApplicationController::class, 'cancelApplication'])->name('cancel.application');
+    Route::get('/member/coBorrower/cancel-application/{id}', [LoanApplicationController::class, 'cancelApplication'])->name('cancel.application')->middleware('auth','member.access');
     // cancel application that has been accepted by CB
     // Route::get('/member/coBorrower/cancel-application-confirmed/{id}', [LoanApplicationController::class, 'cancelApplicationConfirmed'])->name('cancel.application.confirmed');
 
@@ -249,7 +249,7 @@ use App\Models\Penalty;
     // Route::get('/member/profile/{id}', [MemberController::class, 'viewProfile'])->middleware('auth','member.access');
 
     //create membership create form
-    Route::put('/member/application/{member}', [MemberController::class,'createMembership']);
+    Route::put('/member/application/{member}', [MemberController::class,'createMembership'])->middleware('verified');
 
     // Show Member Profile
     Route::get('/member/profile', [MemberController::class, 'viewProfile'])->middleware('auth','member.access')->name('member.profile');
