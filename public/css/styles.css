@@ -2019,11 +2019,3 @@ input:checked~.accordion-content {
     top: 0;
     width: 60px;
 }
-
-.font-to-white {
-    color: white;
-}
-
-.font-to-orange {
-    color: #FF6F19;
-}

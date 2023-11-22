@@ -24,7 +24,7 @@
                                 Welcome to eBUPF, your trusted resource for financial services.
                             </p>
                             <div class="mt-4 reveal fade-left active {{ Auth::check() ? 'd-none' : 'active' }}">
-                                <a href="/login" type="button" class="btn bu-orange fw-bold font-to-white" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
+                                <a href="/login" type="button" class="btn text-white bu-orange fw-bold" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
