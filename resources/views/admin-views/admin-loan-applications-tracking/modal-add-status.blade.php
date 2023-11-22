@@ -57,7 +57,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
 
                   <p class="mx-auto">No Status Yet</p>
                 
-                  @else 
+                @else 
                   @foreach ($loan->loan->LoanApplicationStatus->sort(function($a, $b) {
                     return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
                       }) as $status)
@@ -78,7 +78,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
       </div>
   
       <div class="modal-body">
-        <form method="POST" action="{{route('create.status',$loan->loan->id)}}" >
+        <form id="addStatusForm" method="POST" action="{{route('create.status',$loan->loan->id)}}" >
           @csrf
           <div class="mb-3">
             <label for="statusDropdown" class="col-form-label">Select Status</label>
@@ -127,29 +127,30 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
     </div>
   </div>
 </div>
-
-
-
-{{-- TESTING SERVER SIDE ADD --}}
 {{-- <script>
-  $(document).on('click', '.update_student' function (e) {
-    e.preventDefault();
-    var loan_id = {{$loan->loan->id}}
-    var data = {
-      'loan_application_state_id' : $('#statusDropdown').val();
-      'date_evaluated' : $('#date_evaluated').val();
-      'date_evaluated' : $('#remarks').val();
+  document.getElementById('addStatusForm').addEventListener('submit', function(event) {
+    const inputDate = document.getElementById('date_evaluated').value;
+
+    console.log(inputDate);
+    if (!validateDateInput(inputDate)) {
+        event.preventDefault(); // Prevent form submission if date is invalid
+        console.log('Invalid date. Form submission prevented.');
+    } else {
+        console.log('Valid date. Form submitted.');
     }
+});
 
-    $.ajax({
-      type: 'PUT',
-        url: '/admin/loan-application/status/'+loan_id,
-        data: data,
-        dataType: "json",
-        success: function(response){
-          console.log(response);
-        }
-    })
+function validateDateInput(dateString) {
+      // Split the date string into day, month, and year
+      const [year, month, day] = dateString.split('-');
 
-  });
+      // Create a new Date object using the provided values
+      const date = new Date(year, month - 1, day);
+
+      // Check if the date components are valid and complete
+      const isValidDate = !isNaN(date) && date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == day;
+
+      return isValidDate;
+}
+
 </script> --}}

@@ -93,13 +93,18 @@ class CoBorrowerController extends Controller
     public function requestDecline($id){
 
         $coBorrower=CoBorrower::findorfail($id);
+        $loan=Loan::where('id',$coBorrower->loan_id)->first();
+        
         if($coBorrower->accept_request == '0'){
             return redirect('/member/coBorrower/requests/')->with('message', 'You have already declined this request');    
         }
         else{
             $coBorrower->update(['accept_request' => '0']);
+
+            $loan->is_active = 2;
+            $loan->save();
         
-            return redirect('/member/coBorrower/requests/')->with('message', 'Request <strong>Declined</strong>');
+            return redirect('/member/coBorrower/requests/')->with('message', 'Request Declined');
         }
     }
 }
