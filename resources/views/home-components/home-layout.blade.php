@@ -20,7 +20,7 @@
     <meta name="description" content="eBicol University Provident Fund (eBUPF) - Your trusted financial services resource. Explore now for financial security!">
 
     {{-- test --}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" async></script>
     <link rel="preload" as="image" href="{{ asset('assets/home-blue-bg.webp') }}" >
     <link rel="preload" as="image" href="{{ asset('assets/home-computer.webp') }}">
     <link rel="preload" as="image" href="{{ asset('assets/bu-provident.svg') }}">
@@ -29,7 +29,7 @@
 <body class="bg-default">
     <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
         <a class="navbar-brand" href="/">
-            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="200px">
+            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="230px">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -147,6 +147,14 @@
             }, 'slow', 'swing');
         });
     });
+    </script>
+
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "jsxoah6b55");
     </script>
 
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "e99da14ff9a345488d601843145f614f"}' defer></script><!-- End Cloudflare Web Analytics -->

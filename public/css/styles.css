@@ -12,10 +12,13 @@
     padding: 2%;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
     .remove-margin-contact {
         margin: 0 0 0 45px !important;
         font-size: 13px !important;
+    }
+    .to-minimize-font {
+        font-size: 17px !important;
     }
 }
 
@@ -1890,20 +1893,18 @@ input:checked~.accordion-content {
 }
 
 .timeline {
-    margin: 10px;
     position: relative !important;
 }
 
 .timeline li {
     display: flex !important;
-    line-height: 1;
+    line-height: 1.2;
 }
 
 .timeline--date {
     flex: 0 0 50px;
     color: #999;
     font-size: 90%;
-    text-align: right !important;
     margin-right: 50px;
     font-weight: bold;
 }
@@ -1942,6 +1943,19 @@ input:checked~.accordion-content {
     margin-left: 50px;
     margin-top: -20px;
     padding-bottom: 40px;
+}
+
+@media screen and (max-width: 500px) {
+    .timeline--date {
+        font-size: 13px;
+        margin-right: 10px !important;
+    }
+    .timeline--description {
+        margin-left: 13px;
+    }
+    .timeline--circle:before {
+        width: 3px;
+    }
 }
 
 
