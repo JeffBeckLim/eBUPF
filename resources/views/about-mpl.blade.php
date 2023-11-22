@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <div class="text-center mt-4">
+    <div class="text-center mt-4 mb-4">
         <img src="{{asset('assets/about-mpl.svg')}}" alt="MPL" width="300px">
     </div>
     <div class="row mb-5">

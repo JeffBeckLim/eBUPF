@@ -39,7 +39,7 @@
 
 <section id="core-feature" class="mb-5 pt-lg-3 border p-3" style="background-image: url({{asset('assets/core-feature.webp')}})">
     <div id="core-feature-container" class="container justify-content-center border-top border-light mt-2">
-        <h6 class="text-center text-light mt-2 fw-bold">Core Features</h6>
+        <p class="fs-5 text-center text-light mt-2 fw-bold">Core Features</p>
         <div class="row mt-4 mb-sm-5 d-flex justify-content-center align-items-center">
             <div class="col-md-3 d-flex align-items-center reveal fade-bottom">
                 <i class="bi bi-person-lines-fill icon2 d-flex "></i>
@@ -96,7 +96,7 @@
             <div class="col-md-4 reveal fade-left">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/loans-savings.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
+                        <img src="{{asset('assets/loans-savings.svg')}}" alt="Retirement Savings" width="60" height="60" loading="lazy">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -111,7 +111,7 @@
             <div class="col-md-4 reveal fade-bottom">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/retirement-savings.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
+                        <img src="{{asset('assets/retirement-savings.svg')}}" alt="Retirement Savings" width="60" height="60" loading="lazy">
                     </div>
                     <div style="">
                         <div class="fs-6 fw-bold text-center">
@@ -126,7 +126,7 @@
             <div class="col-md-4 reveal fade-right">
                 <div class="retirement-savings content-border">
                     <div class="d-flex justify-content-center align-items-center my-3">
-                        <img src="{{asset('assets/life-insurance.svg')}}" alt="Retirement Savings" width="60px" loading="lazy">
+                        <img src="{{asset('assets/life-insurance.svg')}}" alt="Retirement Savings" width="60" height="60" loading="lazy">
                     </div>
                     <div>
                         <div class="fs-6 fw-bold text-center">
@@ -215,11 +215,13 @@
                 <div style="border-bottom: 4px solid black;" class="fs-5 pb-3">
                     Lending that doesn’t weigh you down. We know how hard is it to start something new, that’s why we have the perfect plan for you.
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-3">
                     <div class="col-6 reveal fade-bottom">
-                        <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Multi-Purpose Loan Mini Logo" width="30px" loading="lazy"> &nbsp;
-                            Multi-Purpose Loan
+                        <div class="d-flex fw-bold fs-6 my-2" style="height: auto; min-height: 45px;">
+                            <img src="{{asset('assets/MPL-mini.svg')}}" alt="Multi-Purpose Loan Mini Logo" width="30" height="30" loading="lazy"> &nbsp;
+                            <div style="padding-left: 10px;">
+                                Multi-Purpose Loan
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-2 text-end">
@@ -241,12 +243,17 @@
                                 Loan Proceeds released in less than a month
                             </div>
                         </div>
-                        <a href="{{ route('about-mpl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
+                        <div>
+                            <a href="{{ route('about-mpl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none; width: 100%; max-width: 200px;">More Details</a>
+                        </div>
+
                     </div>
                     <div class="col-6 reveal fade-bottom">
-                        <div class="d-flex fw-bold fs-6 my-2 align-items-center">
-                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="Housing Loan Mini Logo" width="30px" loading="lazy"> &nbsp;
-                            Housing Loan
+                        <div class="d-flex fw-bold fs-6 my-2" style="height: auto; min-height: 45px;">
+                            <img src="{{asset('assets/HSL-mini.svg')}}" alt="Housing Loan Mini Logo" width="30" height="30px" loading="lazy"> &nbsp;
+                            <div style="padding-left: 10px;">
+                                Housing Loan
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-2 text-end">
@@ -259,7 +266,7 @@
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
                             </div>
                             <div class="col-10">
-                                9% Interest Rate up to 1 year
+                                9% Interest Rate up to 5 years
                             </div>
                             <div class="col-2 text-end">
                                 <i class="bi bi-check-all ml-3 fs-4 fw-bold" style="color: #00638D"></i>
@@ -268,11 +275,14 @@
                                 Basic requirement: Latest Payslip
                             </div>
                         </div>
-                        <a href="{{ route('about-hsl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none;">More Details</a>
+                        <div>
+                            <a href="{{ route('about-hsl') }}" type="button" class="btn fw-bold more-details-btn" style="color:rgb(255, 131, 29); border: none; width: 100%; max-width: 200px;">More Details</a>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 d-flex justify-content-center align-items-center">
+            <div class="col-md-5 d-flex justify-content-center align-items-center d-none d-md-block mb-3">
                 <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" width="70%" loading="lazy">
             </div>
         </div>
@@ -285,7 +295,7 @@
             Frequently Asked Questions
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <div style="width: 60%; min-width: 250px" class="text-center fs-2 fw-bold">
+            <div style="width: 60%; min-width: 250px" class="text-center fs-2 fw-bold to-minimize-font">
                 Explore Our Top FAQs: Your Common Question Answered!
             </div>
         </div>
