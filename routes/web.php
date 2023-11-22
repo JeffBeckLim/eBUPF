@@ -311,7 +311,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified.access')->name('home');
 
 // About BUPF
-Route::get('/about/bupf', function () {
+Route::get('/about-bupf', function () {
     return view('about-bupf');
 })->middleware('verified.access')->name('about-bupf');
 

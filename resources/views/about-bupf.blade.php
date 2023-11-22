@@ -110,9 +110,27 @@
             Provident Fund Inc. Organizational Structure
         </span>
     </div>
-    <div class="row">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 border border-1">
+                <div class="text-center">
+                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
+                </div>
+            </div>
+            <div class="col-md-4 border border-1">
+                <div class="text-center">
+                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
 
+                </div>
+            </div>
+            <div class="col-md-4 border border-1">
+                <div class="text-center">
+                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 @include('home-components.contact')
 
