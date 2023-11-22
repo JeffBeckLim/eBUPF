@@ -24,12 +24,12 @@
                                 Welcome to eBUPF, your trusted resource for financial services.
                             </p>
                             <div class="mt-4 reveal fade-left active {{ Auth::check() ? 'd-none' : 'active' }}">
-                                <a href="/login" type="button" class="btn bu-orange text-light fw-bold" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
+                                <a href="/login" type="button" class="btn bu-orange fw-bold font-to-white" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Get Started <i class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 d-flex justify-content-center align-items-center d-none d-md-block">
-                        <img src="{{ asset('assets/home-computer.webp') }}" alt="Landing Page Character" class="amico" style="min-width: 80%; max-width: 95%; height: 100%;">
+                        <img src="{{ asset('assets/home-computer.webp') }}" alt="BUPF Landing Page Image" class="amico" style="width: 90%; min-width: 350px; height: auto;">
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
     <div class="container my-5">
         <div class="row d-flex align-items-center">
             <div class="col-md-6">
-                <img src="{{asset('assets/freepik-characters.svg')}}" alt="Characters" width="100%" loading="lazy">
+                <img src="{{asset('assets/freepik-characters.svg')}}" alt="BUPF Characters" loading="lazy" style="width: 99%; min-width: 300px;height: auto;">
             </div>
             <div class="col-md-6 p-4">
                 <div style="color: #00638D;" class="fs-5 fw-bold pb-3">
@@ -73,7 +73,7 @@
                 </div>
                 <div class="fs-1 fw-bold" style="line-height: 1.2;">
                     <span style="color: #0092D1;">Bicol </span>
-                    <span style="color: #FF6F19;">University</span> <br>
+                    <span class="font-to-orange">University</span> <br>
                     <span style="color: #000;">Provident Fund Inc.</span>
                 </div>
                 <div class="fs-6 fw-normal py-4">
@@ -161,7 +161,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('assets/accomplish-membership-form.svg')}}" alt="Accomplish form">
+                            <img src="{{asset('assets/accomplish-membership-form.svg')}}" alt="Accomplish form" width="75" height="85">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Accomplish Membership Form</div>
                     </div>
@@ -169,7 +169,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('assets/download-print.svg')}}" alt="Download And Print">
+                            <img src="{{asset('assets/download-print.svg')}}" alt="Download And Print" width="75" height="85">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Download and Print</div>
                     </div>
@@ -177,7 +177,7 @@
                 <div class="timeline-step">
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('assets/sign-submit.svg')}}" alt="Sign and submit">
+                            <img src="{{asset('assets/sign-submit.svg')}}" alt="Sign and submit" width="75" height="85">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Sign and Submit</div>
                     </div>
@@ -186,7 +186,7 @@
                     <div class="timeline-content">
 
                         <div class="timeline-image">
-                            <img src="{{asset('assets/wait-approval.svg')}}" alt="Wait for Approval">
+                            <img src="{{asset('assets/wait-approval.svg')}}" alt="Wait for Approval" width="75" height="85">
                         </div>
                         <div class="timeline-text reveal fade-bottom">Wait for Approval</div>
                     </div>
@@ -195,7 +195,7 @@
 
                     <div class="timeline-content">
                         <div class="timeline-image">
-                            <img src="{{asset('assets/create-account.svg')}}" alt="create account">
+                            <img src="{{asset('assets/create-account.svg')}}" alt="Create Account" width="75" height="85">
                         </div>
                         <div class="timeline-text reveal fade-bottom" style="margin-top: px;">Create Account</div>
                     </div>
@@ -283,7 +283,7 @@
                 </div>
             </div>
             <div class="col-md-5 d-flex justify-content-center align-items-center d-none d-md-block mb-3">
-                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" width="70%" loading="lazy">
+                <img src="{{asset('assets/plan-finance-img.svg')}}" alt="Plan Finance Image" style="width: 70%; min-width: 300px;" loading="lazy">
             </div>
         </div>
     </div>

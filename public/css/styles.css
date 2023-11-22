@@ -14,8 +14,8 @@
 
 @media screen and (max-width: 500px) {
     .remove-margin-contact {
-        margin: 0 0 0 45px !important;
-        font-size: 13px !important;
+        margin: 0 0 5px 45px !important;
+        font-size: 15px !important;
     }
     .to-minimize-font {
         font-size: 17px !important;
@@ -2018,4 +2018,12 @@ input:checked~.accordion-content {
     right: 0;
     top: 0;
     width: 60px;
+}
+
+.font-to-white {
+    color: white;
+}
+
+.font-to-orange {
+    color: #FF6F19;
 }

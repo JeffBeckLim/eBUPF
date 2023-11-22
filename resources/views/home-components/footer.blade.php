@@ -14,7 +14,7 @@
                                 University
                             </span>
                         </p>
-                        <h6 class="fw-bold fs-6" style="color: #ffffff;">Provident Fund Inc.</h6>
+                        <p class="fw-bold fs-6" style="color: #ffffff;">Provident Fund Inc.</p>
                     </div>
                 </div>
                 <div class="fw-normal fs-6 pt-3" style="color:rgb(165, 165, 165) !important;">
