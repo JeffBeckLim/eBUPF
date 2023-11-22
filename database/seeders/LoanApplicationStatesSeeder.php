@@ -20,7 +20,7 @@ class LoanApplicationStatesSeeder extends Seeder
     {
         LoanApplicationState::create([
             'state_name' => 'Received by our BUPF Staff',
-            'state_description' =>'Your Loan Application now being forwarded to our Loan Analyst',
+            'state_description' =>'Your Loan Application is now being forwarded to our Loan Analyst',
 
             'asset_path'=>'assets/status-staff.svg',
             'flag'=>'1',
@@ -41,7 +41,7 @@ class LoanApplicationStatesSeeder extends Seeder
         ]);
         LoanApplicationState::create([
             'state_name' => 'Your Check is Ready',
-            'state_description' =>'Your LPB check is ready for pick-up at BUPF. See requirements Here.',
+            'state_description' =>'Your LPB check is ready for pick-up at BUPF.',
 
             'asset_path'=>'assets/status-check-ready.svg',
             'flag'=>'4',

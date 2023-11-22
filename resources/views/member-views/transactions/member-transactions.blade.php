@@ -31,8 +31,12 @@
 
                             </span>
                         </div>
-
-                        @if($transactions->isEmpty() == false)
+                        @if (count($transactions) == 0)
+                            <div class="d-flex justify-content-center align-content-center">
+                                <img src="{{asset('assets/no-transaction.svg')}}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                            </div>
+                            <p class="text-center">No transaction</p>
+                        @elseif($transactions->isEmpty() == false)
                             <div class="mt-3 transaction-container" id="transaction-container" style="height:500px; pointer-events: none;">
                                 @foreach($transactions as $transaction)
                                     @if($transaction instanceof \App\Models\Payment)

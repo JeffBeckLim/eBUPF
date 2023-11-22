@@ -66,7 +66,7 @@
             <div class="col-3">
                <div class="bg-white rounded border text-center h-100" style="border-color: #00D186 !important">
                   <h6 class="text-end m-0 fw-bold pb-1 pt-3 mx-3">
-                     <a href="" class="btn btn-outline">
+                     <a href="{{route('admin.members')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="Members">
                         <i class="bi bi-person-check-fill "></i>
                      </a>
                   </h6>
@@ -93,7 +93,7 @@
                         </button>
                      </div>  
                      <div class="col-3 text-end"> 
-                        <a href="{{route('admin.all.users')}}" class="btn btn-outline-dark">
+                        <a href="{{route('admin.all.users')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="All Users">
                            <i class="bi bi-people-fill" style="font-size:12px"></i>
                         </a>
                      </div>  
@@ -138,7 +138,7 @@
                   </h6>
                </div>  
                <div class="col-6 text-end"> 
-                  <a href="{{route('admin.membership-application')}}" class="btn btn-outline-dark">
+                  <a href="{{route('admin.membership-application')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="Membership Applications">
                      <i class="bi bi-file-person-fill"></i>
                   </a>
                </div>  
@@ -208,7 +208,7 @@
                      <div class="col-8 ps-3 pt-3"> 
                         <h6 class=" fw-bold">
                            Loan Applications
-                           <button class="btn mx-2 rounded-5" style="font-size: 12px"  disabled>
+                           <button class="btn btn-outline-secondary mx-2 rounded-5" style="font-size: 12px" data-bs-toggle="tooltip" data-bs-title="Total Approved Applications by Exe.">
                               Total Approved {{array_sum($pie_mpl) + array_sum($pie_hsl) }}
                            </button>
                           
@@ -222,13 +222,13 @@
                            Num. of Approved Application   
                         </h6> 
                         <span>
-                           <a href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-primary">
+                           <a href="{{route('admin.loan.applications' , ['loanType' => 1, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="MPL Applications">
                               @if(array_sum($pie_mpl) != 0)
                                  {{array_sum($pie_mpl)}}    
                               @endif
                               <i class="bi bi-layers"></i>
                            </a>
-                           <a href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-danger">
+                           <a href="{{route('admin.loan.applications' , ['loanType' => 2, 'freeze' => 'table-freeze'])}}" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="HL Applications">
                               @if(array_sum($pie_hsl) != 0)
                                  {{array_sum($pie_hsl)}}    
                               @endif
@@ -253,25 +253,25 @@
                   <h6 class=" fw-bold">
                      Tracking Applications
                      @if ($no_status_mpl > 0)
-                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px"  disabled>
+                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px"  data-bs-toggle="tooltip" data-bs-title="MPL Applications With No Status Yet">
                         {{$no_status_mpl}} Null status <i class="bi bi-layers"></i>
                      </button>    
                      @endif   
                      @if ($no_status_hsl > 0)
-                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px;"  disabled>
+                     <button class="btn rounded-5 btn-outline-danger" style="font-size: 12px;"  data-bs-toggle="tooltip" data-bs-title="HL Applications With No Status Yet">
                         {{$no_status_hsl}} Null status <i class="bi bi-house"></i>
                      </button>    
                      @endif   
                   </h6>
                   <span>
                      <h6 style="font-size: 10px">Num of loan applications (Accepted By Co-borrower)</h6>
-                     <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="btn btn-outline-primary">
+                     <a href="{{route('admin.loan.applications.tracking', 'mpl')}}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="MPL Tracking">
                         @if($count_application_mpl > 0)
                            {{$count_application_mpl}}  
                         @endif
                         <i class="bi bi-layers"></i>
                      </a>
-                     <a href="{{route('admin.loan.applications.tracking', 'hsl')}}" class="btn btn-outline-danger">
+                     <a href="{{route('admin.loan.applications.tracking', 'hsl')}}" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-title="HL Tracking">
                         @if($count_application_hsl > 0)
                            {{$count_application_hsl}}  
                         @endif
@@ -282,7 +282,7 @@
                </div>  
                <div class="col-2 text-end pe-3 pt-3"> 
                   <span>
-                     <a class="btn bu-orange text-light" href="{{route('admin.loan.applications.tracking', 'mpl')}}">
+                     <a class="btn bu-orange text-light" href="{{route('admin.loan.applications.tracking', 'mpl')}}" data-bs-toggle="tooltip" data-bs-title="Tracking Loan Applications">
                         <i class="bi bi-compass"></i>
                      </a>
                   </span>
@@ -365,7 +365,7 @@
                      </h6>
                   </div>
                   <div class="col-6 mt-3 px-3 text-end">
-                     <a href="{{route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl'])}}" class="btn btn-outline-primary">
+                     <a href="{{route('admin.receivables', ['report' => 'quarterly', 'loan_type' => 'mpl'])}}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-title="Receivables">
                         <i class="bi bi-hourglass"></i>
                      </a>
                   </div>
@@ -425,6 +425,8 @@
 
 
 <script>
+   const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
       // PIE CHART 1
    var xValues = [ "Performing", "Closed", "Unevaluated"];
