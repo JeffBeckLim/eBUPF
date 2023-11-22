@@ -33,7 +33,7 @@
                         <p class="fs-5 fw-bold">Outgoing Requests</p>
                     </div>
                     <div class="mx-2">
-                        <div class="accordion mb-3" id="accordionExample">
+                        <div class="accordion mb-3 border rounded p-1" id="accordionExample">
                             <div class="accordion-item border-0">
                               <h5 class="accordion-header">
                                 <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -60,7 +60,7 @@
                         <label for="search" class="pe-2">Search</label>
                         <input id="myInput" type="text" class="search-box " placeholder="Enter your search query">
                     </div>
-                    <div class="row g-0 table-responsive">
+                    <div class="row g-0 table-responsive ">
                         @if (count($cb_withLoans) != 0)
                         
                         <table id="outgoing-request-table" class="table table-borderless">
@@ -137,6 +137,8 @@
                                         @endphp
                                         @if($cb_withLoan->loan->deleted_at != null)
                                              <p style="font-size: 12px">Loan Application Cancelled.</p>
+                                        @elseif ($cb_withLoan->accept_request == 0 || $cb_withLoan->accept_request == null)
+                                            <p style="font-size: 12px">Declined by Co-borrower.</p>
                                         @elseif ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}
                                             @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
@@ -181,7 +183,7 @@
                         
 
                         @else
-                        <div class="border text-center p-5 mt-3 m-3 text-secondary">
+                        <div class="border text-center p-5 mt-3  text-secondary">
                             No Requests Found.
                        </div>
                         @endif
