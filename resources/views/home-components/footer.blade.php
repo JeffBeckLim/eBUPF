@@ -24,8 +24,8 @@
             <div class="col-md-2 footer-set-col">
                 <div class="pt-5">
                     <p class="fw-bold">Office Hours</p>
-                    <h6 style="color:rgb(165, 165, 165);">Monday to Friday</h6>
-                    <h6 style="color:rgb(165, 165, 165);">8AM - 5PM</h6>
+                    <p style="color:rgb(165, 165, 165);">Monday to Friday</p>
+                    <p style="color:rgb(165, 165, 165);">8AM - 5PM</p>
                 </div>
             </div>
             <div class="col-md-3 footer-set-col">
@@ -40,17 +40,17 @@
             <div class="col-md-3 footer-set-col">
                 <div class="pt-5 pb-5">
                     <p class="fw-bold">Contacts</p>
-                    <h6>
+                    <p>
                         <a href="tel:+0528217939" style="color:rgb(165, 165, 165); text-decoration:none;" class="hover-to-white">(052)- 821- 7939</a>
-                    </h6>
-                    <h6>
+                    </p>
+                    <p>
                         <a href="mailto:bupf@bicol-u.edu.ph" style="color:rgb(165, 165, 165); text-decoration: none;" class="hover-to-white">
                             bupf@bicol-u.edu.ph
                         </a>
-                    </h6>
-                    <h6 style="color:rgb(165, 165, 165) !important;">
+                    </p>
+                    <p style="color:rgb(165, 165, 165) !important;">
                         Rizal Street, Legazpi City, Albay, Legazpi, Philippines
-                    </h6>
+                    </p>
                 </div>
             </div>
             <div class="col-12 text-center pt-4" style="border-top: 1px solid #3F3F3F;">
