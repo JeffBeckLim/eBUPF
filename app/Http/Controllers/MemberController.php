@@ -491,14 +491,14 @@ class MemberController extends Controller
             'unit_id' => 'required',
             'position' => 'required',
             // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER
-            'email' => [
-                'required',
-                'string',
-                'email:rfc,dns',
-                'max:255',
-                Rule::unique('users')->ignore(Auth::user()->id),
-                new EmailDomain('bicol-u.edu.ph')
-            ],
+            // 'email' => [
+            //     'required',
+            //     'string',
+            //     'email:rfc,dns',
+            //     'max:255',
+            //     Rule::unique('users')->ignore(Auth::user()->id),
+            //     new EmailDomain('bicol-u.edu.ph')
+            // ],
             'contact_num' => 'required',
             'address' => 'required',
             'monthly_salary' => 'required',
@@ -512,14 +512,14 @@ class MemberController extends Controller
 
         $user = User::with('member')->find($id);
 
-        if ($user->email != $request->email) {
-            $user->email = $request->input('email');
-            // Reset Email to verify it again
-            $user->email_verified_at = null;
-            $user->sendEmailVerificationNotification();
-        }
+        // if ($user->email != $request->email) {
+        //     $user->email = $request->input('email');
+        //     // Reset Email to verify it again
+        //     $user->email_verified_at = null;
+        //     $user->sendEmailVerificationNotification();
+        // }
 
-        $user->save();
+        // $user->save();
 
         // $user->member->middlename = $request->middlename;
         // $user->member->middle_initial = ucfirst($request->middlename[0]);

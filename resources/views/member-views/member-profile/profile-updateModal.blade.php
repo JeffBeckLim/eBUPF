@@ -5,7 +5,7 @@
         <div class="profile-note" style="margin: 10px 0">
             Note that you will only be allowed to update your profile once
         </div>
-        <form action="{{ route('member.profile.update', ['id' => Auth::user()->member->id]) }}" id="profile-update-form" method="POST" enctype="multipart/form-data">
+        <form id="updateForm" action="{{ route('member.profile.update', ['id' => Auth::user()->member->id]) }}" id="profile-update-form" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="col-12 mb-4 ">
                 <div class="text-center mb-2">
@@ -33,20 +33,17 @@
 
               <div class="form-group">
                 <label for="position" class="fw-bold fs-7" style="color:#595959;">Position</label>
-                <input type="text" class="form-control" name="position" id="position" value="{{$member->position}}">
-              </div>
-              <div class="form-group">
-                <label for="email" class="fw-bold fs-7" style="color:#595959;">Email</label>
-                <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
+                <input required type="text" class="form-control" name="position" id="position" value="{{$member->position}}">
               </div>
               {{-- <div class="form-group">
-                <label for="contact_num" class="fw-bold fs-7" style="color:#595959;">Contact Number</label>
-                <input type="number" name="contact_num" class="form-control" id="contact_num" value="{{ $member->contact_num }}">
+                <label for="email" class="fw-bold fs-7" style="color:#595959;">Email</label>
+                <input required type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
               </div> --}}
+              
               <div class="row">
                 <div class="col-6 form-group">
                     <label for="monthly_salary" class="fw-bold fs-7" style="color:#595959;">Monthly Salary</label>
-                    <input type="number" name="monthly_salary" class="form-control" id="monthly_salary" value="{{ $member->monthly_salary }}">
+                    <input required type="number" name="monthly_salary" class="form-control" id="monthly_salary" value="{{ $member->monthly_salary }}">
                   </div>
                 <div class="col-6">
                     <label class="fw-bold fs-7" style="color:#595959;" for="contact_num">Contact Number
@@ -57,14 +54,14 @@
                         @php
                             $contact = (int)substr(Auth::user()->member->contact_num,3);
                         @endphp
-                        <input type="number" placeholder="ex. 9150012457" class="form-control validate" name="contact_num" value="{{$contact }}" id="contact_num">
+                        <input required type="number" placeholder="ex. 9150012457" class="form-control validate" name="contact_num" value="{{$contact }}" id="contact_num">
                     </div>
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="address" class="fw-bold fs-7" style="color:#595959;">Address</label>
-                <input type="text" name="address" class="form-control" id="address" value="{{ $member->address }}">
+                <input required type="text" name="address" class="form-control" id="address" value="{{ $member->address }}">
               </div>
 
               <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
@@ -74,3 +71,24 @@
         </form>
     </div>
 </div>
+<script>
+
+  const contactNumberInput = document.getElementById('contact_num');
+  contactNumberInput.addEventListener('input', function(event) {
+  const newValue = event.target.value;
+  console.log(newValue); // Logs the new value as it changes
+
+    if (newValue.length != 10 || newValue[0] != 9) {    
+            contactNumberInput.classList.add("is-invalid");
+            contactNumberInput.setCustomValidity('Please enter valid PH sim number format');
+            contactNumberInput.reportValidity();
+            event.preventDefault();
+        } else {
+            contactNumberInput.classList.remove("is-invalid");
+            contactNumberInput.setCustomValidity('');
+        }
+  });
+
+       
+
+</script>
