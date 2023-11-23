@@ -40,10 +40,10 @@
                                 @endphp
                                 @if(in_array(4,$status_array) && !in_array(5,$status_array) && !in_array(6,$status_array))
                                     <div class="border w-100 rounded mb-2 p-2 row">
-                                        <i class="bi bi-circle-fill my-3" style="color: #b700ff"></i>
+                                        <span class="m-0 p-2" style="font-size: 12px; color: #b700ff"><i class="bi bi-circle-fill pb-1" ></i> Check Ready</span>
                                         <span class="fw-bold" style="font-size: 12px">{{$loan->loan->loanType->loan_type_description}} | {{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}   </span>
                                         <div class="col-12 " style="font-size: 12px">
-                                            Since your check is now ready for claiming, you can proceed to print the insurance form. This form is one of the necessary documents you'll need when claiming your check
+                                            Your check is now ready for claiming. you can proceed to print the insurance form. This form is one of the necessary documents you'll need when claiming your check.
                                         </div>
                                         <div class="col-12 pt-3 text-end p-0">
                                             <a href="{{route('generateInsuranceForm')}}" class="btn text-light fw-bold grow-on-hover" style="background-color: #b700ff; font-size: 14px">Print Insurance Form</a>
@@ -58,7 +58,9 @@
                                         </div>
                                         <div class="col-lg-4 border mb-2 rounded ps-3 py-2">
 
-                                            @if ($loan->loan->is_active == 1)
+                                            @if ($loan->loan->deleted_at != null)
+                                                <span style="font-size: small;" class="fw-bold text-danger">Cancelled</span>
+                                            @elseif ($loan->loan->is_active == 1)
                                                 <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
                                             @elseif($loan->loan->is_active == 2)
                                                 <span style="font-size: small;" class="fw-bold">Non-performing</span>
