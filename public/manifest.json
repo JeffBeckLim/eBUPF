@@ -2,12 +2,12 @@
     "name": "eBU Provident Fund",
     "short_name": "eBUPF",
     "start_url": "/index.php",
-    "background_color": "#6777ef",
+    "background_color": "#0092D1",
     "description": "eBicol University Provident Fund (eBUPF) - Your trusted financial services resource. Explore now for financial security!",
-    "display": "fullscreen",
-    "theme_color": "#6777ef",
+    "display": "standalone",
+    "theme_color": "#0092D1",
     "icons": [{
-        "src": "logo.PNG",
+        "src": "logo.png",
         "sizes": "512x560",
         "type": "image/png",
         "purpose": "any maskable"

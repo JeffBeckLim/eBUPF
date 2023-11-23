@@ -111,26 +111,136 @@
         </span>
     </div>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4 border border-1">
-                <div class="text-center">
-                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
+        <div class="row mb-4">
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/president.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start" style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Chairman</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Dr. Baby Boy Benjamin  D. Nebres III</span> <br>
+                            <span class="text-white" style="font-size: 12px;">SUC President IV</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 border border-1">
-                <div class="text-center">
-                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
-
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start" style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Executive Director</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Atty. Loyd P. Casasis</span> <br>
+                            <span class="text-white" style="font-size: 12px;">Chief Administrative Officer</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 border border-1">
-                <div class="text-center">
-                    <img src="{{asset('assets/organisation-blue-bg.svg')}}" alt="">
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start" style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Board of Director</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Atty. Eduardo Loria</span> <br>
+                            <span class="text-white" style="font-size: 12px;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Board of Director</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Cyrus A. Barrameda</span> <br>
+                            <span class="text-white" style="font-size: 12px;">Chief, Internal Audit Services
+                                Internal Audit Services</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Board of Directors</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Dr. Arnulfo P. Malinis</span> <br>
+                            <span class="text-white" style="font-size: 12px;">Director</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Board of Directors</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Evelyn Q. Mira</span> <br>
+                            <span class="text-white" style="font-size: 12px;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Loan Analyst</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Mary Jane A. Vicuña</span> <br>
+                            <span class="text-white" style="font-size: 12px;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Treasurer</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Jocelyn L. Corre</span> <br>
+                            <span class="text-white" style="font-size: 12px;"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Board Secretary</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Michelle B. Andes</span> <br>
+                            <span class="text-white" style="font-size: 12px;">Administrative Officer, BU Cluster II</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-md-4 reveal fade-bottom">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
+                        <img src="{{asset('assets/no-pic-org.png')}}" alt="BUPF" width="213" height="168" style="margin-top: -15px; margin-left: 7px;">
+                        <div class="text-start " style="line-height: 1.1; margin: 10px 20px 20px 20px;">
+                            <span class="text-white">Accounting Clerk</span><br>
+                            <span style="font-size: 12px; color: #FF6F19; font-weight: bold; text-shadow: 1px 1px 2px #000000;">Kathy Mae D. Galicia</span> <br>
+                            <span class="text-white" style="font-size: 12px;"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 @include('home-components.contact')
 
