@@ -18,13 +18,13 @@
                         <div class="accordion mb-3 border p-1" id="accordionExample">
                             <div class="accordion-item border-0">
                               <h5 class="accordion-header">
-                                <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIncomingRequest" aria-expanded="false" aria-controls="collapseIncomingRequest">
                                     <p style="font-size: small" class="m-auto text-secondary">
                                         <i class="bi bi-lightbulb"></i> You've received a co-borrower loan application request. Please review the details before accepting or denying.
                                     </p>
                                 </button>
                               </h5>
-                              <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div id="collapseIncomingRequest" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                 <div class="accordion-body text-secondary" style="font-size: small">
                                     <ul>
                                         <li>Accept: If you're comfortable, click "Accept" to allow them to use your information for their loan application.</li>

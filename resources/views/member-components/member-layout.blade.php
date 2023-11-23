@@ -180,7 +180,30 @@
             }
         };
 
+        
+
     </script>
 </body>
 
 </html>
+<script>
+    // Get all accordion buttons
+const accordionButtons = document.querySelectorAll('.accordion-button');
+
+// Add event listeners to each button
+accordionButtons.forEach(button => {
+button.addEventListener('click', () => {
+const target = document.querySelector(button.getAttribute('data-bs-target'));
+const collapses = document.querySelectorAll('.accordion-collapse');
+
+// Close all collapsible elements except the one being opened
+collapses.forEach(collapse => {
+  if (collapse !== target && collapse.classList.contains('show')) {
+    const bsCollapse = new bootstrap.Collapse(collapse);
+    bsCollapse.hide();
+  }
+});
+});
+});
+
+</script>
