@@ -115,7 +115,9 @@
                                         </div>
                                     </td>
                                     <td class="align-middle" style="width: 15%">
-                                        @if ($cb_withLoan->accept_request == '1')
+                                        @if ($cb_withLoan->loan->deleted_at != null)
+                                            <p style="color: #9a9a9a;" class="fs-7 fw-bold">Closed</p>
+                                        @elseif ($cb_withLoan->accept_request == '1')
                                             <p style="color: #00B733;" class="fs-7 fw-bold">Accepted</p>
                                         @elseif($cb_withLoan->accept_request == '0')
                                             <p style="color: #ff4141;" class="fs-7 fw-bold">Declined</p>
@@ -135,9 +137,12 @@
                                         @php
                                             $statuses_confirm = App\Models\LoanApplicationStatus::where('loan_id',$cb_withLoan->loan->id)->get();
                                         @endphp
+                                        
                                         @if($cb_withLoan->loan->deleted_at != null)
                                              <p style="font-size: 12px">Loan Application Cancelled.</p>
-                                        @elseif ($cb_withLoan->accept_request == 0 || $cb_withLoan->accept_request == null)
+                                        @elseif ($cb_withLoan->accept_request == '')
+                                             <p style="font-size: 12px">Pending</p>
+                                        @elseif ($cb_withLoan->accept_request == 0)
                                             <p style="font-size: 12px">Declined by Co-borrower.</p>
                                         @elseif ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}

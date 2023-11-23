@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <div class="mt-2">
+        <div class="mt-2 mx-3">
             @if (session('fail'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{session('fail')}}
@@ -39,11 +39,11 @@
             @endif
         </div>
 
-        @if (Auth::user()->email_verified_at == null)
+        {{-- @if (Auth::user()->email_verified_at == null)
             <div class="alert alert-warning mt-3" style="font-size: small">
                 Your Email <strong>{{Auth::user()->email}}</strong> is not yet verified. Go to <a href="/verify/email">Verify Email</a>
             </div>
-        @endif
+        @endif --}}
 
         <div style="padding: 10px 15px 0 15px;">
             <div class="col-12 p-2 rounded shadow" style="background-image: url({{ asset('assets/core-feature-bg.png') }}); filter: saturate(130%);">
