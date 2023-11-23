@@ -1,7 +1,7 @@
-@extends('home-components.verify-layout')
+@extends('home-components.home-layout')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div style="width: 30%; min-width:335px;">
             <div class="card rounded-0 shadow-sm p-4">

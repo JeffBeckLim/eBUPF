@@ -52,9 +52,9 @@
     </div>
 
     <div class="mb-5">
-        <div class="fs-5 fw-bold" style="color: #00638D;">
+        <h1 class="fs-5 fw-bold" style="color: #00638D;">
             Begin your Online Application Process with these Simple Steps:
-        </div>
+        </h1>
         <ul class="timeline timeline-vertical" style="margin-top: 60px;">
             <li>
                 <span class="timeline--date reveal fade-left">Step 1</span>
