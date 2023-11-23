@@ -73,14 +73,14 @@
                 </div>
                 <div class="fs-1 fw-bold" style="line-height: 1.2;">
                     <span style="color: #0092D1;">Bicol </span>
-                    <span class="font-to-orange">University</span> <br>
+                    <span style="color: #FF6F19">University</span> <br>
                     <span style="color: #000;">Provident Fund Inc.</span>
                 </div>
                 <div class="fs-6 fw-normal py-4">
                     Discover a world of financial possibilities with Bicol University Provident Fund Inc. where every guest is a potential member on the path to securing a brighter future. Explore our offerings today and embark on your journey toward financial security!"
                 </div>
                 <div class="pt-2 reveal fade-bottom">
-                    <a href="{{route('about-bupf')}}" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">Read More <i class="bi bi-chevron-right"></i></a>
+                    <a href="{{route('about-bupf')}}" type="button" class="btn bu-orange text-light" style="filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.25));">About BUPF <i class="bi bi-chevron-right"></i></a>
                 </div>
             </div>
         </div>

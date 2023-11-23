@@ -1,4 +1,4 @@
-@extends('home-components.verify-layout')
+@extends('home-components.home-layout')
 
 @section('content')
 <div class="container">

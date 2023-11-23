@@ -20,7 +20,7 @@
                     <div style="margin: 20px 0 20px 100px;" class="text-white d-flex remove-margin-contact">
                         <i class="bi bi-telephone-fill"></i>
                         <div style="margin-left: 15px;">
-                            <a href="tel:+639270256413" style="text-decoration: none; colo: #fff;">(+63) 927-0256-413</a>
+                            <a href="tel:+639270256413" style="text-decoration: none; color: #fff;">(+63) 927-0256-413</a>
                         </div>
                     </div>
                 </div>

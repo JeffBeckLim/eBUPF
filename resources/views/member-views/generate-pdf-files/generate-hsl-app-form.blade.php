@@ -68,7 +68,7 @@
             BICOL UNIVERSITY PROVIDENT FUND <br>Bicol University <br> Legazpi City
         </div>
         <div class="right-corner">
-            BU PFI Form No. 05 <br><span>February 2012</span>
+            BU PFI Form No. 05 <br><span>July 2012</span>
         </div>
     </div>
 
