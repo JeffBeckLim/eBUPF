@@ -63,7 +63,7 @@
                 <div class="accordion" id="accordionRequests">
                     <div class="accordion-item  border-0">
 
-                        <button style="padding-left: 13px   !important;" class="accordion-button collapsed mb-1 {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans" aria-expanded="false" aria-controls="collapseLoans">
+                        <button id="btn-loan-options" style="padding-left: 13px   !important;" class="accordion-button accordion-btn-sidebar collapsed mb-1 {{ Route::is('mpl.application','hsl.application') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoans " aria-expanded="false" aria-controls="collapseLoans">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
                                     <img src="{{asset('assets/loan-options.svg')}}" alt="">
@@ -74,7 +74,7 @@
                             </div>
                         </button>
 
-                      <div id="collapseLoans" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
+                      <div id="collapseLoans" class="accordion-collapse collapse-custom collapse p-0" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
 
@@ -109,10 +109,10 @@
 
 
             <li class="nav-item grow-on-hover">
-                <div class="accordion" id="accordionRequests">
+                <div class="accordion" id="accordionRequests2">
                     <div class="accordion-item  border-0">
 
-                        <button style="padding-left: 13px  !important;" class="accordion-button collapsed {{ Route::is('loan.applications','loan.applications.all','loan.applications.evaluated','outgoing.request') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoanApplications" aria-expanded="false" aria-controls="collapseLoanApplications">
+                        <button id="btn-loan-applications" style="padding-left: 13px  !important;" class="accordion-button accordion-btn-sidebar collapsed {{ Route::is('loan.applications','loan.applications.all','loan.applications.evaluated','outgoing.request') ? 'bg-selected fade-in  rounded-4':' '}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLoanApplications" aria-expanded="false" aria-controls="collapseLoanApplications">
                             <div class="row g-0 w-100">
                                 <div class="col-3 text-center pe-2">
                                     <i style="font-size: 23px; color: #FF6F19;" class="bi bi-file-earmark-check-fill"></i>
@@ -123,7 +123,7 @@
                             </div>
                         </button>
 
-                      <div id="collapseLoanApplications" class="accordion-collapse collapse p-0" data-bs-parent="#accordionExample">
+                      <div id="collapseLoanApplications" class="accordion-collapse collapse-custom collapse p-0" data-bs-parent="#accordionRequests2">
                         <div class="accordion-body">
                             <div class="row ms-3 rounded">
 
