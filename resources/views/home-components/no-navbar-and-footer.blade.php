@@ -32,66 +32,12 @@
 </head>
 
 <body class="bg-default">
-    <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
-        <a class="navbar-brand" href="/">
-            <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="230px">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="loansDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Loans</a>
-                    <div class="dropdown-menu" aria-labelledby="loansDropdown">
-                        <a class="dropdown-item" href="{{ route('about-mpl') }}">Multi-Purpose Loan</a>
-                        <a class="dropdown-item" href="{{ route('about-hsl') }}">Housing Loan</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('about-bupf')}}">About</a>
-                </li>
-                <li class="nav-item">
-                    <div class="nav-link scrollToSection" data-section=".hear-from-you" style="cursor: pointer;">Contact Us</div>
-                </li>
-                @guest
-                    @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="login-button btn rounded-pill my-1" href="{{route('login')}}" type="button" style="color: white;">{{ __('Login') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->member->firstname }}
-                            {{ Auth::user()->member->lastname }}
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
-        </div>
-    </nav>
     <div>
         <button id="goToTopBtn" title="Go to Top"><i class="bi bi-chevron-up"></i></button>
         @yield('content')
     </div>
-    <div>
-        @include('home-components.footer')
-    </div>
+
     {{-- DO NOT TOUCH --}}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

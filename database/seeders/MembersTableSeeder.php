@@ -7,6 +7,7 @@ use App\Models\Member;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\Hash;
+use App\Models\MembershipApplication;
 
 class MembersTableSeeder extends Seeder
 {
@@ -50,6 +51,52 @@ class MembersTableSeeder extends Seeder
             'user_type' => 'member',
         ]);
 
+        $dummy = User::create([
+            'email' => 'harrypotter@bicol-u.edu.ph',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password123'),
+            'user_type' => 'member',
+        ]);
+
+        $harry  = Member::create([
+            'user_id' => $dummy->id,
+            'unit_id'=> '1',
+            'firstname'=> 'Harry',
+            'lastname'=> 'Potter',
+
+            'date_of_birth'=> now(),
+
+            'agree_to_terms'=> '1',
+
+            'middlename'=> 'James',
+
+            'contact_num'=> '09123456780',
+
+            'address'=> 'BUCS / IT DEPT., LEGAZPI, ALBAY, PH',
+            'verified_at'=>now(),
+
+            'tin_num' =>  1111,
+            'position' => 'Employee',
+            'employee_num' => 1111,
+            'bu_appointment_date'=>now(),
+
+            'place_of_birth'=>'BUCS - LEGAZPI, ALBAY, PH',
+            'civil_status' => 'single',
+            'spouse'=>'',
+            'sex'=>'male',
+            'monthly_salary'=> 1111,
+            'monthly_contribution'=> 300,
+            'appointment_status'=> 'regular',
+            'profile_picture'=>'',
+            'agree_to_certify' => 1,
+            'agree_to_authorize' => 1,
+        ]);
+
+        MembershipApplication::create([
+                'member_id'=>$harry->id,
+                'ref_number'=>'000000',
+                'status'=>'1',
+        ]);
 
         Member::create([
             'user_id' => $user1->id,
