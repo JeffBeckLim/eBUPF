@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 return [
 
 
-       'lifetime' => env('SESSION_LIFETIME', 120), // Session lifetime in minutes
+       'lifetime' => env('SESSION_LIFETIME', 3), // Session lifetime in minutes
        'expire_on_close' => true, // Session expires when the browser is closed
 
 
@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    'lifetime' => env('SESSION_LIFETIME', 3),
 
     'expire_on_close' => false,
 

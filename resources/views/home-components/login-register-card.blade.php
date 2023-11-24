@@ -1,8 +1,9 @@
-@extends('home-components.home-layout')
+@extends('home-components.no-navbar-and-footer')
 
 @section('content')
 
-    <main class="container mt-2 pb-5" >
+    <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+    <main class="container mt-2 pb-5">
       <section class="d-flex justify-content-center align-items-center">
 
         <div class="card rounded-4 shadow-sm" style="width: 60rem;">
@@ -14,7 +15,7 @@
                   <img style="pointer-events: none;" class="overlay-image" src="assets/BUBG.jpg" alt="bicol university">
                    <div class="row g-0  d-flex justify-content-center pb-lg-3 pt-lg-1 px-lg-5 px-md-2">
                         <div class="d-flex justify-content-center pt-3 fade-in">
-                            <img src="assets/BU-pill.svg" alt="BUPF" style="width: 95%; pointer-events: none">
+                            <a href="/"><img src="assets/BU-pill.svg" alt="BUPF" style="width: 95%; pointer-events: none"></a>
                         </div>
                    </div>
 
@@ -77,7 +78,5 @@
 
       </section>
     </main>
-
-    @include('home-components.contact')
-
+</div>
 @endsection

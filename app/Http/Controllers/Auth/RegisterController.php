@@ -53,6 +53,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'firstname' => ['required', 'string', 'max:255'],
+            'middlename' => ['nullable', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users', new EmailDomain('bicol-u.edu.ph')],
             'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
@@ -68,7 +69,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-    
+
         $user=User::create([
             // 'firstname' => $data['firstname'],
             // 'lastname' => $data['lastname'],
@@ -80,6 +81,7 @@ class RegisterController extends Controller
         Member::create([
             'user_id'=>$user->id,
             'firstname' => $data['firstname'],
+            'middlename' => $data['middlename'],
             'lastname' => $data['lastname'],
             'agree_to_terms' =>$data['agree_to_terms'],
         ]);

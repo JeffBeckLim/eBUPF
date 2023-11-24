@@ -16,7 +16,7 @@
                     <div class="col ">
                         <div class="">
                         <label for="middlename" >Middle Name</label></div>
-                        <input type="text" class="form-control w-100 rounded-0 rounded-end" name="middlename" value="{{old('middlename')}}" id="middlename">
+                        <input type="text" class="form-control w-100 rounded-0 rounded-end" name="middlename" value="{{Auth::user()->member->middlename}}" id="middlename">
                         @error('middlename')
                             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                         @enderror
