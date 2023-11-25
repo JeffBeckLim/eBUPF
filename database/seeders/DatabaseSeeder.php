@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(LoanCategorySeeder::class);
         $this->call(DeveloperAccountSeeder::class);
 
-        // Loan and CoBorrower seeder mus always be equal count
+       /*  // Loan and CoBorrower seeder mus always be equal count
         \App\Models\Loan::factory(150)->create();
-        \App\Models\CoBorrower::factory(150)->create();
+        \App\Models\CoBorrower::factory(150)->create(); */
     }
 }

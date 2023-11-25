@@ -330,13 +330,13 @@ class MemberController extends Controller
         return view('member-views.membership-form-edit.membership_form', compact('units', 'relationship_types', 'beneficiaries'));
     }
     public function createMembership(Request $request, Member $member){
-    
+
         $membership_application = MembershipApplication::where('member_id', Auth::user()->member->id)->first();
         if($membership_application != null){
             abort(404);
         }
 
-        
+
         //Ensure that user is logged in
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
@@ -466,8 +466,8 @@ class MemberController extends Controller
 
     public function viewProfile(){
         $id = Auth::user()->member->id;
-        $user = User::find($id);
-        $member = Member::where('user_id', $id)->first();
+        $user = Auth::user();
+        $member = Auth::user()->member;
         // dd($member);
         $unit = Unit::where('id', $member->unit_id)->first();
 
@@ -547,7 +547,7 @@ class MemberController extends Controller
 
     public function checkMembershipApplication($member_id){
         $member = MembershipApplication::where('member_id', $member_id)->get();
-        
+
         if(count($member)===0){
            return redirect('/member/membership-form');
         }

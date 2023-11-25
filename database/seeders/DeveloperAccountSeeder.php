@@ -17,17 +17,17 @@ class DeveloperAccountSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'email' => 'developer@ebupf.com',
+            'email' => 'harrypotter@bicol-u.edu.ph',
             'email_verified_at' => now(),
-            'password' => Hash::make('qwerty123'),
+            'password' => Hash::make('password123'),
             'user_type' => 'member',
         ]);
 
         $member  = Member::create([
             'user_id' => $user->id,
             'unit_id'=> '1', // naka comment out muna - - need pa seederss
-            'firstname'=> 'Developer',
-            'lastname'=> 'Account',
+            'firstname'=> 'Harry',
+            'lastname'=> 'Potter',
 
             'date_of_birth'=> now(),
 
@@ -39,8 +39,8 @@ class DeveloperAccountSeeder extends Seeder
 
             'address'=> 'BUCS / IT DEPT., LEGAZPI, ALBAY, PH',
             'verified_at'=>now(),
-            // 'campus_id', 
-        
+            // 'campus_id',
+
             'tin_num' =>  1111,
             'position' => 'Developer',
             'employee_num' => 1111,
@@ -51,8 +51,8 @@ class DeveloperAccountSeeder extends Seeder
             'spouse'=>'',
             'sex'=>'male',
             'monthly_salary'=> 1111,
-            'monthly_contribution'=> 300, 
-            'appointment_status'=> 'regular', 
+            'monthly_contribution'=> 300,
+            'appointment_status'=> 'regular',
             'profile_picture'=>'',
             'agree_to_certify' => 1,
             'agree_to_authorize' => 1,
@@ -88,8 +88,8 @@ class DeveloperAccountSeeder extends Seeder
 
             'address'=> 'BUCS / IT DEPT., LEGAZPI, ALBAY, PH',
             'verified_at'=>now(),
-            // 'campus_id', 
-        
+            // 'campus_id',
+
             'tin_num' =>  1111,
             'position' => 'Developer',
             'employee_num' => 1111,
@@ -100,8 +100,8 @@ class DeveloperAccountSeeder extends Seeder
             'spouse'=>'',
             'sex'=>'male',
             'monthly_salary'=> 1111,
-            'monthly_contribution'=> 300, 
-            'appointment_status'=> 'regular', 
+            'monthly_contribution'=> 300,
+            'appointment_status'=> 'regular',
             'profile_picture'=>'',
             'agree_to_certify' => 1,
             'agree_to_authorize' => 1,
@@ -112,8 +112,6 @@ class DeveloperAccountSeeder extends Seeder
                 'ref_number'=>'000000',
                 'status'=>'1',
         ]);
-
-
 
     }
 }

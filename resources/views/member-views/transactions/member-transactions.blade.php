@@ -6,9 +6,9 @@
 
         <div class="col pt-3">
             <div class="card border col-lg-6 col-sm-12 mx-auto shadow-sm p-lg-4 p-3">
-                <div class="card-body ">
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-12  d-flex justify-content-center">
+                        <div class="col-12 d-flex justify-content-center">
                             <img src="{{asset('assets/receipt-history.svg')}}" alt="history" style="width: 3rem;">
                             <p class="text-center fw-bolder m-0">
                                 Transaction
@@ -37,7 +37,7 @@
                             </div>
                             <p class="text-center">No transaction</p>
                         @elseif($transactions->isEmpty() == false)
-                            <div class="mt-3 transaction-container" id="transaction-container" style="height:500px; pointer-events: none;">
+                            <div class="mt-3 transaction-container" id="transaction-container" style="height:500px;">
                                 @foreach($transactions as $transaction)
                                     @if($transaction instanceof \App\Models\Payment)
                                         <div class="col-12 border-bottom border-top" >
