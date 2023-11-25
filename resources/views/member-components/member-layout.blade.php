@@ -139,7 +139,7 @@
     {{---------------------------------------
         MAke sure that this two components have identical links and assets being used.
      -------------------------------------}}
-    
+
     @include('member-components.member-layout-offcanvas')
     <div class="row">
 
@@ -148,13 +148,14 @@
 
     <!-- MAIN CONTENT GOES HERE -->
     <div id="content" class="col m-0 scrollable-content">
+        @include('member-components.session-timeout-modal')
         @yield('content')
     </div>
-    
+
     </div>
 
     <script>
-     
+
 
 
         var modal = document.getElementById("profileMyModal");
@@ -179,31 +180,44 @@
                 modal.style.display = "none";
             }
         };
-
-        
-
     </script>
 </body>
 
 </html>
 <script>
     // Get all accordion buttons
-const accordionButtons = document.querySelectorAll('.accordion-button');
+    const accordionButtons = document.querySelectorAll('.accordion-button');
 
-// Add event listeners to each button
-accordionButtons.forEach(button => {
-button.addEventListener('click', () => {
-const target = document.querySelector(button.getAttribute('data-bs-target'));
-const collapses = document.querySelectorAll('.accordion-collapse');
+    // Add event listeners to each button
+    accordionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const target = document.querySelector(button.getAttribute('data-bs-target'));
+        const collapses = document.querySelectorAll('.accordion-collapse');
 
-// Close all collapsible elements except the one being opened
-collapses.forEach(collapse => {
-  if (collapse !== target && collapse.classList.contains('show')) {
-    const bsCollapse = new bootstrap.Collapse(collapse);
-    bsCollapse.hide();
-  }
-});
-});
-});
+        // Close all collapsible elements except the one being opened
+        collapses.forEach(collapse => {
+            if (collapse !== target && collapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(collapse);
+                bsCollapse.hide();
+                }
+            });
+        });
+    });
+
+    // Timer function to show the modal before session timeout
+    function startSessionTimer() {
+       // const sessionTimeout = 3 * 60 * 1000; // 3 minutes in milliseconds
+        const sessionTimeout = {{ config('session.lifetime') }} * 60 * 1000;
+
+        setTimeout(function () {
+            // Show the modal before the session expires
+            $('#sessionTimeoutModal').modal('show');
+        }, sessionTimeout);
+    }
+
+    // Start the timer when the page loads or user logs in
+    document.addEventListener('DOMContentLoaded', function () {
+        startSessionTimer();
+    });
 
 </script>

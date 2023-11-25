@@ -69,5 +69,8 @@ class Kernel extends HttpKernel
         'admin.access' => \App\Http\Middleware\AdminAccess::class,
         'member.access' => \App\Http\Middleware\MemberAccess::class,
         'verified.access'=>\App\Http\Middleware\VerifiedAccess::class,
+
+        // Session Timeout
+        'checkSessionTimeout' => \App\Http\Middleware\CheckSessionTimeout::class,
     ];
 }

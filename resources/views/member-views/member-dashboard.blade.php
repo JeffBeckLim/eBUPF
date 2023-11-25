@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="mt-lg-5 mt-2 ms-3 me-lg-4 mt-lg-4">
+    <div class="mt-lg-5 mt-2 ms-3 me-lg-4 mt-lg-4 mb-5">
             <!-- Main Content -->
                 <div class="row g-2">
                     <div class="col-lg-8">
@@ -260,31 +260,32 @@
                     </div>
 
                     <div class="col-lg-4 transactions">
-                        <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%">
-                            <div class="container">
-                                <div class="mt-3">
-                                    <img src="assets/history.svg" alt="history icon" width="35px">
-                                    <span class="fw-bold fs-6">Transactions</span>
-                                </div>
 
-                                @if($transactions->isEmpty() == false)
-                                    <div class="mt-3 transaction-container" id="transaction-container" style="height:550px;">
+                        @if($transactions->isEmpty() == false)
+                            <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%; ">
+                                <div class="container">
+                                    <div class="mt-3">
+                                        <img src="assets/history.svg" alt="history icon" width="35px">
+                                        <span class="fw-bold fs-6">Transactions</span>
+                                    </div>
+
+                                    <div class="mt-3 transaction-container" id="transaction-container" style="min-height: 550px; max-height: 670px;">
                                         @foreach($transactions as $transaction)
                                             @if($transaction instanceof \App\Models\Payment)
-                                            <div class="col-12 border-bottom border-top">
-                                                <div class="row" style="padding: 0 30px 0 10px;">
-                                                    <div class="col-8 my-1">
-                                                        <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                        <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                <div class="col-12 border-bottom border-top">
+                                                    <div class="row" style="padding: 0 30px 0 10px;">
+                                                        <div class="col-8 my-1">
+                                                            <p class="fs-7 fw-bold m-0">Loan Payment</p>
+                                                            <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                        </div>
+                                                        <div class="col-4 text-center my-1">
+                                                            <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
+                                                        </div>
+                                                        {{-- <div class="col-1 my-1">
+                                                            <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                        </div> --}}
                                                     </div>
-                                                    <div class="col-4 text-center my-1">
-                                                        <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
-                                                    </div>
-                                                    {{-- <div class="col-1 my-1">
-                                                        <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                    </div> --}}
                                                 </div>
-                                            </div>
                                             @elseif($transaction instanceof \App\Models\Loan)
                                                 <div class="col-12 border-bottom border-top">
                                                     <div class="row" style="padding: 0 30px 0 10px;">
@@ -309,21 +310,28 @@
                                             @endif
                                         @endforeach
                                     </div>
-                                @else
+                                </div>
+                            </div>
+                        @else
+                            <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%; ">
+                                <div class="container">
+                                    <div class="mt-3">
+                                        <img src="assets/history.svg" alt="history icon" width="35px">
+                                        <span class="fw-bold fs-6">Transactions</span>
+                                    </div>
                                     <div class="d-flex justify-content-center align-content-center">
                                         <img src="assets/no-transaction.svg" alt="no transaction icon" width="150px" style="margin-top: 80px;">
                                     </div>
                                     <p class="text-center">No transaction</p>
-                                @endif
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     {{-- <div class="col-md-5 transactions mb-5">
                         <div class="container mt-3 ">
 
                         </div>
                     </div> --}}
-
                 </div>
     </div>
 

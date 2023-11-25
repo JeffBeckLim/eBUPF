@@ -55,7 +55,9 @@
                         <span>
                             <div class="fw-bold" style="font-size: 1rem; ">
                                 {{ Auth::user()->member->firstname}}
-                                {{ Auth::user()->member->middle_initial}}.
+                                @if(Auth::user()->member->middle_initial != null)
+                                    {{ Auth::user()->member->middle_initial}}.
+                                @endif
                                 {{ Auth::user()->member->lastname}}
                                 @if ($member->is_editable == 1)
                                     <a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a>
