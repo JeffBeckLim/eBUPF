@@ -38,20 +38,20 @@
         @enderror
         <div class="col-6">
             <label  for="salary">Monthly Salary</label>
-            <input class="form-control validate" type="number" name="monthly_salary" value="{{Auth::user()->member->monthly_salary}}">
+            <input id="monthly_salary" class="form-control validate" type="number" name="monthly_salary" value="{{Auth::user()->member->monthly_salary}}">
         </div>
     </div>
     <div class="row g-1 mb-3">
         <div class="col-6">
             <label   for="tin">TIN number</label>
-            <input class="form-control validate" type="number" name="tin_num" value="{{Auth::user()->member->tin_num}}">
+            <input id="tin_num" class="form-control validate" type="text" name="tin_num" value="{{Auth::user()->member->tin_num}}">
         </div>
         @error('tin_num')
              <p class="text-danger mt-1">{{$message}}</p>
         @enderror
         <div class="col-6">
             <label for="salary">Employee Number</label>
-            <input class="form-control validate" type="number" name="employee_num" value="{{Auth::user()->member->employee_num}}">
+            <input id="employee_num" class="form-control validate" type="text" name="employee_num" value="{{Auth::user()->member->employee_num}}">
         </div>
         @error('employee_num')
                 <p class="text-danger mt-1">{{$message}}</p>
@@ -81,9 +81,37 @@
             <p class="fw-bold m-0">Contribution</p>
         </div> 
         <label for="salary">Fixed Monthly Contribution</label>
-        <input class="form-control validate" type="number" name="monthly_contribution" value="{{Auth::user()->member->monthly_contribution}}">
+        <input  id="monthly_contribution" class="form-control validate" type="number" name="monthly_contribution" value="{{Auth::user()->member->monthly_contribution}}">
     </div>
     @error('monthly_contribution')
     <p class="text-danger mt-1">{{$message}}</p>
 @enderror
 </div>
+<script>
+const employee_num = document.getElementById('employee_num');
+const employee_num_value = employee_num.value;
+
+employee_num.addEventListener('input', function(event) {
+let employee_num_event = event.target.value.replace(/\D/g, ''); // Remove non-digits
+
+// Add dashes after every 3 digits
+employee_num_event = employee_num_event.replace(/^(\d{4})(\d{3})(\d{1})/, '$1-$2-$3');
+
+// Update the input value with the formatted phone number
+event.target.value = employee_num_event;
+});
+
+const tin_num = document.getElementById('tin_num');
+const tin_num_value = tin_num.value;
+
+tin_num.addEventListener('input', function(event) {
+let tin_num_event = event.target.value.replace(/\D/g, ''); // Remove non-digits
+
+// Add dashes after every 3 digits
+tin_num_event = tin_num_event.replace(/(\d{3})(?=\d)/g, '$1-');
+
+// Update the input value with the formatted phone number
+event.target.value = tin_num_event;
+});
+
+</script>

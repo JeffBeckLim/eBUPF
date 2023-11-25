@@ -33,7 +33,7 @@ class DeveloperAccountSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'X',
+            // 'middle_initial'=> 'X',
 
             'contact_num'=> '09123456780',
 
@@ -82,7 +82,7 @@ class DeveloperAccountSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'X',
+            // 'middle_initial'=> 'X',
 
             'contact_num'=> '09123456780',
 

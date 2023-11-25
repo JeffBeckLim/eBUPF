@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('agree_to_terms')->nullable();
                    
             // Membership form data
-            $table->string('middle_initial')->nullable();
+            // $table->string('middle_initial')->nullable();
             $table->string('middlename')->nullable();
             
             $table->string('contact_num')->nullable();

@@ -18,6 +18,9 @@ class BeneficiaryRelationshipTableSeeder extends Seeder
         BeneficiaryRelationship::create([
             'relationship_type' => 'Father',
         ]);
+        BeneficiaryRelationship::create([
+            'relationship_type' => 'Mother',
+        ]);
         // Create the 'Spouse' relationship
         BeneficiaryRelationship::create([
             'relationship_type' => 'Spouse',
@@ -67,11 +70,5 @@ class BeneficiaryRelationshipTableSeeder extends Seeder
         BeneficiaryRelationship::create([
             'relationship_type' => 'Colleague',
         ]);
-
-        // Create the 'Other' relationship
-        BeneficiaryRelationship::create([
-            'relationship_type' => 'Other',
-        ]);
-
     }
 }

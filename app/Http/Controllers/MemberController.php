@@ -193,7 +193,7 @@ class MemberController extends Controller
 
             'agree_to_terms'=> 'nullable',
 
-            'middle_initial'=> 'nullable',
+            // 'middle_initial'=> 'nullable',
             'middlename'=> 'nullable',
 
             'contact_num'=> 'required',
@@ -259,11 +259,15 @@ class MemberController extends Controller
         $formFields['contact_num'] = $temp;
 
         $member->update($formFields);
+        $member->firstname = ucwords($formFields['firstname']);
+        $member->middlename = ucwords($formFields['middlename']);
+        $member->lastname = ucwords($formFields['lastname']);
+        $member->save();
 
-        if($formFields['middlename'] != null){
-            $member->middle_initial = ucfirst($formFields['middlename'][0]);
-            $member->save();
-        }
+        // if($formFields['middlename'] != null){
+        //     $member->middle_initial = ucfirst($formFields['middlename'][0]);
+        //     $member->save();
+        // }
 
         // check if all fields for new address exist, save if yes
         if($request->region_text != null &&
@@ -355,7 +359,7 @@ class MemberController extends Controller
             'agree_to_terms'=> 'nullable',
 
             'middlename'=> 'nullable',
-            'middle_initial'=> 'nullable',
+            // 'middle_initial'=> 'nullable',
 
             'contact_num'=> 'required',
 
@@ -412,12 +416,17 @@ class MemberController extends Controller
         $formFields['address'] = $address;
 
         $member->update($formFields);
+        
+        // Make sure first letters are caputalized
+        $member->firstname = ucwords($formFields['firstname']);
+        $member->middlename = ucwords($formFields['middlename']);
+        $member->lastname = ucwords($formFields['lastname']);
+        $member->save();
 
-
-        if($formFields['middlename'] != null){
-            $member->middle_initial = ucfirst($formFields['middlename'][0]);
-            $member->save();
-        }
+        // if($formFields['middlename'] != null){
+        //     $member->middle_initial = ucfirst($formFields['middlename'][0]);
+        //     $member->save();
+        // }
 
 
         Beneficiary::create([

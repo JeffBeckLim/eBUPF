@@ -21,7 +21,7 @@ class Member extends Model
         'agree_to_terms',
 
         'middlename',
-        'middle_initial',
+        // 'middle_initial',
         'contact_num',
         'address',
         'date_of_birth',
