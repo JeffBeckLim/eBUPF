@@ -1,4 +1,4 @@
-console.log("PH Address Selector is now running");
+// console.log("PH Address Selector is now running");
 
 
 var my_handlers = {
@@ -11,6 +11,7 @@ var my_handlers = {
         var region_text = $(this).find("option:selected").text();
         let region_input = $('#region-text');
         region_input.val(region_text);
+
         //clear province & city & barangay input
         $('#province-text').val('');
         $('#city-text').val('');
@@ -41,6 +42,7 @@ var my_handlers = {
                 return value.region_code == region_code;
             });
 
+            
             result.sort(function(a, b) {
                 return a.province_name.localeCompare(b.province_name);
             });

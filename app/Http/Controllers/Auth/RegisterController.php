@@ -80,9 +80,9 @@ class RegisterController extends Controller
 
         Member::create([
             'user_id'=>$user->id,
-            'firstname' => $data['firstname'],
-            'middlename' => $data['middlename'],
-            'lastname' => $data['lastname'],
+            'firstname' => ucwords($data['firstname']),
+            'middlename' => ucwords($data['middlename']),
+            'lastname' => ucwords($data['lastname']),
             'agree_to_terms' =>$data['agree_to_terms'],
         ]);
         return $user;

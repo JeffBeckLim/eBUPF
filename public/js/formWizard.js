@@ -319,8 +319,84 @@ function validateForm() {
             beneficiary4_name.classList.remove("is-invalid");
             beneficiary4_name.setCustomValidity('');
         }
-   
-    
+        
+        // FOR TAB 2 
+        if(currentTab == 1){
+            // validate tin num
+            const tin_num = document.getElementById('tin_num');
+            const tin_num_value = tin_num.value;
+
+            if ( validateTin(tin_num_value)) {  
+                tin_num.classList.add("is-valid");
+                tin_num.setCustomValidity('');
+             } 
+             else {
+                tin_num.classList.add("is-invalid");
+                tin_num.setCustomValidity('Invalid Tin Format');
+                tin_num.reportValidity();
+                valid = false;   
+            }
+
+            const employee_num = document.getElementById('employee_num');
+            const employee_num_value = employee_num.value;
+            if ( validateEmployeeNum(employee_num_value)) {  
+                employee_num.classList.add("is-valid");
+                employee_num.setCustomValidity('');
+             } 
+             else {
+                employee_num.classList.add("is-invalid");
+                employee_num.setCustomValidity('Invalid BU employee number Format');
+                employee_num.reportValidity();
+                valid = false;   
+            }
+
+
+            const monthly_salary = document.getElementById('monthly_salary');
+            const monthly_salary_value = monthly_salary.value;
+            if ( monthly_salary_value >=1 ) {
+
+                monthly_salary.classList.add("is-valid");
+                monthly_salary.setCustomValidity('');
+             } 
+             else {
+                
+                monthly_salary.classList.add("is-invalid");
+                monthly_salary.setCustomValidity('Must have a value');
+                monthly_salary.reportValidity();
+                valid = false;   
+            }
+
+            const  monthly_contribution = document.getElementById('monthly_contribution');
+            const  monthly_contribution_value =  monthly_contribution.value;
+            if (  monthly_contribution_value >= 1 ) {
+
+                 monthly_contribution.classList.add("is-valid");
+                 monthly_contribution.setCustomValidity('');
+             } 
+             else {
+                 monthly_contribution.classList.add("is-invalid");
+                 monthly_contribution.setCustomValidity('Must have a value');
+                 monthly_contribution.reportValidity();
+                 valid = false;   
+            }
+
+
+        }
+        function validateTin(input) {
+            const cleanNumber = input.replace(/-/g, ''); // Remove dashes
+            const isValidFormat = /^(\d{3}-\d{3}-\d{3}-\d{3}|\d{3}-\d{3}-\d{3})$/.test(input); // Validate format
+            const isValidLength = cleanNumber.length >= 9 && cleanNumber.length <= 12; // Validate length
+            
+            return isValidFormat && isValidLength;
+          }
+        function validateEmployeeNum(input) {
+            const cleanNumber = input.replace(/-/g, ''); // Remove dashes
+            const isValidFormat = /^\d{4}-\d{3}-\d$/.test(input);// Validate format
+            const isValidLength = cleanNumber.length == 8; // Validate length
+            
+            return isValidFormat && isValidLength;
+          }
+        
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
 
