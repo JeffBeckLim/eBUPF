@@ -66,7 +66,7 @@
             <div class="col-3">
                <div class="bg-white rounded border text-center h-100" style="border-color: #00D186 !important">
                   <h6 class="text-end m-0 fw-bold pb-1 pt-3 mx-3">
-                     <a href="{{route('admin.members')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="Members">
+                     <a href="{{route('admin.members')}}" class="btn " data-bs-toggle="tooltip" data-bs-title="Members">
                         <i class="bi bi-person-check-fill "></i>
                      </a>
                   </h6>
@@ -93,7 +93,7 @@
                         </button>
                      </div>  
                      <div class="col-3 text-end"> 
-                        <a href="{{route('admin.all.users')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="All Users">
+                        <a href="{{route('admin.all.users')}}" class="btn " data-bs-toggle="tooltip" data-bs-title="All Users">
                            <i class="bi bi-people-fill" style="font-size:12px"></i>
                         </a>
                      </div>  
@@ -138,7 +138,7 @@
                   </h6>
                </div>  
                <div class="col-6 text-end"> 
-                  <a href="{{route('admin.membership-application')}}" class="btn btn-outline-dark" data-bs-toggle="tooltip" data-bs-title="Membership Applications">
+                  <a href="{{route('admin.membership-application')}}" class="btn " data-bs-toggle="tooltip" data-bs-title="Membership Applications">
                      <i class="bi bi-file-person-fill"></i>
                   </a>
                </div>  

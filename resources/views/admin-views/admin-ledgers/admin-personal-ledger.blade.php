@@ -60,15 +60,16 @@
                 <span style="font-size: 14px">ID</span>
                 <span>{{$loan->id}}</span>
             </h3>
-            @if (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) < 0.5)
+            
+            @if (($principal_paid + $interest_paid)/($loan->principal_amount + $loan->interest) < 0.5)
                 <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger">
                     Paid
-                    {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
+                    {{number_format(($principal_paid + $interest_paid)/($loan->principal_amount + $loan->interest)*100, 2 ,'.',',')}}%
                 </p>
-            @elseif (($principal_paid + $interest_paid)/($loan->principal + $loan->interest) > 0.5)
+            @elseif (($principal_paid + $interest_paid)/($loan->principal_amount + $loan->interest) > 0.5)
                 <p class="pl-50-plus d-flex justify-content-center align-items-center py-1 ">
                     Paid
-                    {{number_format(($principal_paid + $interest_paid)/($loan->principal + $loan->interest), 2, '.', ',')*100}}%
+                    {{number_format(($principal_paid + $interest_paid)/($loan->principal_amount + $loan->interest)*100, 2 ,'.',',')}}%
                 </p>
             @endif
 

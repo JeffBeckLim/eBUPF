@@ -25,14 +25,14 @@
             {{number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.',',')}}
         </div>
 
-        <div class="col-3">
+        {{-- <div class="col-3">
             Penalty Rate
         </div>
         <div class="col-9">
             @if ($loan->penalty)
             {{$loan->penalty->penalty_rate}}
             @endif
-        </div>
+        </div> --}}
 
         <div class="col-3">
             Total Penalty for <strong>{{$loan->loanType->loan_type_name}}</strong>

@@ -59,7 +59,7 @@ class MembersTableSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'J',
+            // 'middle_initial'=> 'J',
 
             'contact_num'=> '',
 
@@ -74,7 +74,7 @@ class MembersTableSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'M',
+            // 'middle_initial'=> 'M',
 
             'address'=> 'Liverpool England',
             'verified_at'=>now(),
@@ -88,7 +88,7 @@ class MembersTableSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'L',
+            // 'middle_initial'=> 'L',
 
             'address'=> 'Huston Texas',
             'verified_at'=>now(),
@@ -102,7 +102,7 @@ class MembersTableSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'F',
+            // 'middle_initial'=> 'F',
 
             'address'=> 'Mars',
             'verified_at'=>now(),
@@ -115,7 +115,7 @@ class MembersTableSeeder extends Seeder
 
             'agree_to_terms'=> '1',
 
-            'middle_initial'=> 'S',
+            // 'middle_initial'=> 'S',
 
             'address'=> 'Yellow Brick Road',
             'verified_at'=>now(),
