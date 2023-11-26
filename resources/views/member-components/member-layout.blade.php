@@ -210,7 +210,6 @@
         const sessionTimeout = {{ config('session.lifetime') }} * 60 * 1000;
 
         setTimeout(function () {
-            // Show the modal before the session expires
             $('#sessionTimeoutModal').modal('show');
         }, sessionTimeout);
     }

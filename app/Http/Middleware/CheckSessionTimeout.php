@@ -19,7 +19,7 @@ class CheckSessionTimeout
         $lastActivity = session('last_activity');
 
         if ($lastActivity && time() - $lastActivity > config('session.lifetime') * 60) {
-            // Session expired, perform necessary actions
+            // Session expired
             Session::flush(); // Clear the session data
 
             // Redirect the user with a message or display an expired session view
