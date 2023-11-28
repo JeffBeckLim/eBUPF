@@ -1,7 +1,7 @@
 @extends('home-components.home-layout')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-7 col-sm-10">
             <div class="card rounded-0 shadow-sm">
