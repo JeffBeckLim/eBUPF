@@ -206,7 +206,7 @@
 
     // Timer function to show the modal before session timeout
     function startSessionTimer() {
-       // const sessionTimeout = 3 * 60 * 1000; // 3 minutes in milliseconds
+       // const sessionTimeout = session.lifetime * 60 * 1000;
         const sessionTimeout = {{ config('session.lifetime') }} * 60 * 1000;
 
         setTimeout(function () {

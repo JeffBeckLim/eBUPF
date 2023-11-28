@@ -341,6 +341,11 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->middleware('verified.access')->name('privacy-policy');
 
+// Privacy Policy
+Route::get('/membership/requirements-and-instructions', function () {
+    return view('membership-instructions');
+})->middleware('verified.access')->name('requirements.and.instructions');
+
 // Access sitemap.xml this is not a blade file
 Route::get('ebupf-sitemap.xml', function () {
     return response()->file(public_path('ebupfSiteMap.xml'));

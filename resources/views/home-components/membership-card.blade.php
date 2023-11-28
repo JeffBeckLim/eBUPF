@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="col-lg-7">
-                    <a style="color: #0092D1" class="btn btn-link text-start review-text-button" href="">Please review the requirements and the instructions</a>
+                    <a style="color: #0092D1" class="btn btn-link text-start review-text-button" href="{{route('requirements.and.instructions')}}">Please review the requirements and the instructions</a>
                 </div>
             </div>
 
