@@ -336,6 +336,12 @@ Route::get('/terms-and-conditions', function () {
     return view('terms-and-conditions');
 })->middleware('verified.access')->name('terms-and-conditions');
 
+// Terms and Conditions
+Route::get('/faqs/bupf', function () {
+    return view('faqs');
+})->middleware('verified.access')->name('faqs.bupf');
+
+
 // Privacy Policy
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');

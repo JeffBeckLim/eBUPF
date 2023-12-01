@@ -32,7 +32,7 @@
                 <div class="pt-5">
                     <p class="fw-bold">Links</p>
                     <a href="{{ route('about-ebupf') }}" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">About eBUPF</a> <br>
-                    <a href="#" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">FAQs</a> <br>
+                    <a href="{{route('faqs.bupf')}}" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">FAQs</a> <br>
                     <a href="{{ route('privacy-policy') }}" style="text-decoration: none; color:rgb(165, 165, 165) ;" class="hover-to-white">Privacy Policy</a> <br>
                     <a href="{{ route('terms-and-conditions') }}" style="text-decoration: none; color:rgb(165, 165, 165);" class="hover-to-white">Terms and Conditions</a>
                 </div>
