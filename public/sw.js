@@ -5,6 +5,12 @@ const preLoad = function() {
     });
 };
 
+workbox.routing.registerRoute(
+    '/assets/ghost.svg',
+    new workbox.strategies.CacheFirst()
+);
+
+
 self.addEventListener("install", function(event) {
     event.waitUntil(preLoad());
 });
