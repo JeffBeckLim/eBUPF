@@ -6,63 +6,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="title" content="InfyBonus">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>No Internet</title>
     <style>
-        .error_body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            height: 100vh;
-            width: 100%;
-            background: #f9f9f9;
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F7F9FC;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
         }
-
-        .error_container .error_heading {
-            color: transparent;
-            font-size: 160px;
-            margin: 0;
-            font-weight: 900;
-            letter-spacing: 20px;
-            background-size: 100% 100%;
-            background: linear-gradient(90deg, #6b719b 38%, #9da3cc 53%, #979dce 65%);
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            -ms-background-clip: text;
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
         }
-
-        @media (max-width: 540px) {
-            .error_container .error_heading {
-                font-size: 120px;
-                letter-spacing: 10px;
+        
+        p {
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .offline-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .bu-orange {
+            background-color: #FF6F19 !important;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin-top: 80px;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .bu-orange:hover {
+            background-color: #ed600e !important;
+            outline: 2px solid #ed600e;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            body {
+                padding-top: 20px;
             }
-        }
-
-        .error_container .error_btn {
-            background-color: #6e749e !important;
-            border: none;
-            outline: none;
-        }
-
-        .error_container .error_btn:focus {
-            box-shadow: none !important;
-        }
-
-        .error_container .error_message,
-        .error_container .error_paragraph {
-            color: #787878;
+            h1 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="error_body">
-        <div class="container error_container d-flex justify-content-center align-items-center flex-column w-100 h-100 p-5 text-center">
-            <h2 class="error_message text-center mb-3">Boo! You don't have an internet connection</h2>
-            <p class="error_paragraph text-center mb-5">
-                Please check your network connection and try again.
-            </p>
-            <a href="/" class="btn btn-primary error_btn">Back to Home Page</a>
-        </div>
+    <h1><span style="color: #FF6F19;">BOO!</span> <span style="color: #00638D; font-weight: normal;">you don’t have an Internet Connection.</span></h1>
+    <p style="margin-top: -10px;">Please Check your Network Connection and try again.</p>
+    <div class="offline-image">
+        <img src="/assets/ghost.svg" alt="Offline Image" style="min-width: 300px; max-width: 30% !important;">
+    </div>
+    <div class="button">
+        <a href="/" class="bu-orange text-white fw-bold" style="border-radius: 20px;">Home</a>
     </div>
 </body>
 
