@@ -31,7 +31,7 @@
         <div class="col-6">
             <label   for="">Position</label>
             
-            <input class="form-control validate" name="position" value="{{Auth::user()->member->position}}">
+            <input id="position" class="form-control validate" name="position" value="{{Auth::user()->member->position}}">
         </div>
         @error('position')
             <p class="text-danger mt-1">{{$message}}</p>
@@ -51,7 +51,7 @@
         @enderror
         <div class="col-6">
             <label for="salary">Employee Number</label>
-            <input id="employee_num" class="form-control validate" type="text" name="employee_num" value="{{Auth::user()->member->employee_num}}">
+            <input id="employee_num" class="form-control " type="text" name="employee_num" value="{{Auth::user()->member->employee_num}}">
         </div>
         @error('employee_num')
                 <p class="text-danger mt-1">{{$message}}</p>
@@ -70,7 +70,7 @@
         @enderror
         <div class="col-6">
             <label for="salary">Date of Appointment in BU.</label>
-            <input class="form-control validate" type="date" name="bu_appointment_date" value="{{Auth::user()->member->bu_appointment_date}}">
+            <input id="bu_appointment_date" class="form-control validate" type="date" name="bu_appointment_date" value="{{Auth::user()->member->bu_appointment_date}}">
         </div>   
         @error('bu_appointment_date')
             <p class="text-danger mt-1">{{$message}}</p>

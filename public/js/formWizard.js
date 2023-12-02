@@ -207,14 +207,21 @@ function validateForm() {
          // Calculate the difference in years
          const age = today.getFullYear() - dob.getFullYear();
          const monthsDiff = today.getMonth() - dob.getMonth();
-        
+      
          // Check if the user is at least 18 years old (considering month difference)
-         if (age > 18 || (age === 18 && monthsDiff >= 0)) {
+         if(age > 65){
+            console.log('age is old');
+            dobInput.classList.add("is-invalid");
+            dobInput.setCustomValidity('You need to be at least below the retirement age of 65');
+            dobInput.reportValidity();
+            valid = false;
+         }
+         else if (age > 18 || (age === 18 && monthsDiff >= 0)) {
             // console.log('yes');
             dobInput.classList.remove("is-invalid");
             dobInput.setCustomValidity('');
-
-         } else {
+         } 
+         else {
             // console.log('no');
             dobInput.classList.add("is-invalid");
             dobInput.setCustomValidity('You need to be at least 18');
@@ -332,24 +339,25 @@ function validateForm() {
              } 
              else {
                 tin_num.classList.add("is-invalid");
-                tin_num.setCustomValidity('Invalid Tin Format');
+                tin_num.setCustomValidity('Valid tin format is xxx-xxx-xxx-xxx or xxx-xxx-xxx');
                 tin_num.reportValidity();
                 valid = false;   
             }
 
             const employee_num = document.getElementById('employee_num');
             const employee_num_value = employee_num.value;
-            if ( validateEmployeeNum(employee_num_value)) {  
-                employee_num.classList.add("is-valid");
-                employee_num.setCustomValidity('');
-             } 
-             else {
-                employee_num.classList.add("is-invalid");
-                employee_num.setCustomValidity('Invalid BU employee number Format');
-                employee_num.reportValidity();
-                valid = false;   
+            if(employee_num_value != ''){
+                if ( validateEmployeeNum(employee_num_value)) {  
+                    employee_num.classList.add("is-valid");
+                    employee_num.setCustomValidity('');
+                } 
+                else {
+                    employee_num.classList.add("is-invalid");
+                    employee_num.setCustomValidity('Invalid format, format is YEAR-xxx-x');
+                    employee_num.reportValidity();
+                    valid = false;   
+                }
             }
-
 
             const monthly_salary = document.getElementById('monthly_salary');
             const monthly_salary_value = monthly_salary.value;
@@ -379,6 +387,51 @@ function validateForm() {
                  monthly_contribution.reportValidity();
                  valid = false;   
             }
+
+            
+            // validate appointment date must not be in the future
+            var appointment_date = document.getElementById('bu_appointment_date');           
+            if (isDateNotGreaterThanToday(appointment_date.value)) {
+                appointment_date.classList.add("is-valid");
+                 appointment_date.setCustomValidity('');
+            } else {
+                appointment_date.classList.add("is-invalid");
+                appointment_date.setCustomValidity('Invalid date');
+                appointment_date.reportValidity();
+                valid = false;   
+            }
+            function isDateNotGreaterThanToday(inputDate) {
+                // Get the current date
+                var currentDate = new Date();
+              
+                // Parse the input date
+                var inputDateObj = new Date(inputDate);
+              
+                // Check if the input date is not greater than the current date
+                return inputDateObj <= currentDate;
+              }
+
+
+              function containsLetter(input) {
+                    // Regular expression to check for at least one letter
+                    const letterPattern = /[a-zA-Z]/;
+                
+                    // Check if the input string contains at least one letter
+                    return letterPattern.test(input);
+                }
+                
+                // Must contain at least a letter
+                const positionInput = document.getElementById('position'); // Get the input value from an input field
+                if (containsLetter(positionInput.value)) {
+                    // positionInput.classList.add("is-valid");
+                    positionInput.classList.remove("is-invalid");
+                    positionInput.setCustomValidity('');
+                } else {
+                    positionInput.classList.add("is-invalid");
+                    positionInput.setCustomValidity('Invalid Value / Must contain a letter');
+                    positionInput.reportValidity();
+                    valid = false;   
+                }
 
 
         }

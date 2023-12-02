@@ -9,8 +9,8 @@
         <div class="modal-body">
 
             <div class="border rounded p-3" style="font-size: small">
-              <h5 style="color: #838383"><span class="fw-bold" style="font-size: small">LEGIBLE ADDTIONAL LOAN?</span></h5>
-              <span class="fw-bold">Select what type of additional loans {{$user->member->firstname}} {{$user->member->lastname}}</span> is legible for...
+              <h5 style="color: #838383"><span class="fw-bold" style="font-size: small">LEGIBLE FOR ADDTIONAL LOAN?</span></h5>
+              <span class="fw-bold">Select what type of additional loans {{$user->member->firstname}} {{$user->member->lastname}}</span> is legible for: 
             </div>
             
             <div class="row pt-3 mx-3">

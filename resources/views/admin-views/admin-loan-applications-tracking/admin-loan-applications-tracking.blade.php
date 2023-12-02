@@ -16,7 +16,7 @@
 
     <div class="adminbox p-0 pb-3 mb-5">
         <div class="row mx-3 mt-3 pb-3 border-bottom g-0">
-            <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid uncessesarry applications being displayed.</p>
+            <p class="m-0 text-secondary" style="font-size: 12px">Note: The loan applications you see here are those only approved by the co-borrower. This is to avoid unnecessary applications being displayed.</p>
             @error('loan_application_state_id')
             <div class="alert alert-warning alert-dismissible fade show mt-3 border border-warning" role="alert">
                 <p style="font-size: 12px" class="m-0">Please select a status, it can't be empty.</p>

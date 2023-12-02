@@ -44,7 +44,7 @@
                     <p style="font-size: 12px" class="text-danger">{{$incomplete_amort}} Incomplete Amort. info</p>
                     <div class="d-flex">
                         <div class="row  g-0 w-100">
-                            <div class="col-sm-6 ">
+                            <div class="col-12 ">
                                 <p style="margin-right: 20px; font-size: 0.7rem; width: 100%;">{{$no_loanType}} w/o Loan Type</p>
                             </div>
                             {{-- <div class="col-sm-6">

@@ -26,7 +26,7 @@
 
         <div class="col-6">
             <label class="fw-normal" for="position">Position</label>
-            <input class="form-control validate" name="position" value="{{old('position')}}">
+            <input id="position" class="form-control validate" name="position" value="{{old('position')}}">
 
             {{-- <label   for="">Position</label>
             <select name="position" class="form-select form-control validate" >
@@ -57,7 +57,7 @@
         @enderror
         <div class="col-6">
             <label for="salary">Employee Number</label>
-            <input id="employee_num" class="form-control validate" type="text" name="employee_num" value="{{old('employee_num')}}">
+            <input id="employee_num" class="form-control" type="text" name="employee_num" value="{{old('employee_num')}}">
         </div>
         @error('employee_num')
                 <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
@@ -76,7 +76,7 @@
         @enderror
         <div class="col-6">
             <label for="salary">Date of Appointment in BU.</label>
-            <input class="form-control validate" type="date" name="bu_appointment_date" value="{{old('bu_appointment_date')}}">
+            <input id="bu_appointment_date" class="form-control validate" type="date" name="bu_appointment_date" value="{{old('bu_appointment_date')}}">
         </div>
         @error('bu_appointment_date')
             <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>

@@ -37,6 +37,7 @@ var my_handlers = {
 
         // filter & fill
         var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json';
+        
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
                 return value.region_code == region_code;
@@ -137,7 +138,6 @@ var my_handlers = {
         let barangay_input = $('#barangay-text');
         barangay_input.val(barangay_text);
     },
-
 };
 
 
@@ -164,3 +164,9 @@ $(function() {
     });
 
 });
+
+// reload if any variable is undefined. 
+// if (typeof jQuery === 'undefined') {
+//     // jQuery is not defined, reload the page
+//     window.location.reload();
+// }
