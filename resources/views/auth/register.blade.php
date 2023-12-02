@@ -29,7 +29,7 @@
 
                 <div class="col-12">
                     <label for="email" class="form-label text-dark">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     <span id="emailDomainValidation" class="invalid-feedback" style="display: none;">
                         <strong>Please use the domain @bicol-u.edu.ph</strong>
                     </span>
@@ -42,9 +42,6 @@
                         </span>
                     @enderror
                 </div>
-
-
-
                 <label for="password" class="form-label text-dark mt-2">Password</label>
                 <div class="col-12 mb-2 input-group pass-field">
                     <input type="password" class="form-control" id="password" name="password" value="{{ old('password')}}" required>

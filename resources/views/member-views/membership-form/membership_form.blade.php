@@ -10,14 +10,6 @@
         margin: 0px;
     }
 
-
-    /* Hide the spinner arrows for number input */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 </style>
 <main class="container">
     <div class="row d-flex justify-content-center">
@@ -70,7 +62,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                     </div>
                     <!-- Circles which indicates the steps of the form: -->
-                  
+
             </form>
 
             <script src="{{asset('js/formWizard.js')}}"></script>

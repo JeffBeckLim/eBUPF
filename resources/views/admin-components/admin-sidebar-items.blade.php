@@ -109,6 +109,7 @@
           More
         </button>
         <ul class="dropdown-menu w-100 mb-1 border border-dark">
+            <li><a class="dropdown-item" href="{{route('admin.import.data')}}">Import Data</a></li>
           <li><a class="dropdown-item" href="/logout">Log Out</a></li>
         </ul>
       </div>
