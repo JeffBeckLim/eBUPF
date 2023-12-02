@@ -5,12 +5,6 @@ const preLoad = function() {
     });
 };
 
-workbox.routing.registerRoute(
-    '/assets/ghost.svg',
-    new workbox.strategies.CacheFirst()
-);
-
-
 self.addEventListener("install", function(event) {
     event.waitUntil(preLoad());
 });
@@ -31,13 +25,28 @@ const checkResponse = function(request) {
         }, reject);
     });
 };
-
 const addToCache = function(request) {
-    return caches.open("offline").then(function(cache) {
-        return fetch(request).then(function(response) {
-            return cache.put(request, response);
+    if (request.url.includes('/assets/ghost.svg')) {
+        return caches.open("offline").then(function(cache) {
+            return fetch(request).then(function(response) {
+                return cache.put(request, response.clone());
+            });
         });
-    });
+    } else {
+        // For other resources, use the default caching behavior
+        return caches.open("offline").then(function(cache) {
+            return fetch(request).then(function(response) {
+                // Cache other resources using the default behavior
+                if (!response || response.status !== 200 || response.type !== 'basic') {
+                    return response;
+                }
+
+                const clonedResponse = response.clone();
+                cache.put(request, clonedResponse);
+                return response;
+            });
+        });
+    }
 };
 
 const returnFromCache = function(request) {
