@@ -33,6 +33,7 @@ use App\Http\Controllers\LedgerFilterController;
 use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
 use App\Http\Controllers\LoanLogController;
+use App\Http\Controllers\AdminImportData;
 use App\Models\Penalty;
 
 /*
@@ -100,7 +101,9 @@ use App\Models\Penalty;
         // updatePenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment')->middleware('auth','admin.access');
 
-
+    // Import data (users) on database
+    Route::get('/admin/import-data', [AdminImportData::class, 'importData'])->name('admin.import.data')->middleware('auth','admin.access');
+    Route::post('/admin/import-data/execute', [AdminImportData::class, 'executeImportData'])->name('admin.import.data.execute')->middleware('auth','admin.access');
 
 // 💸======================== ** LOAN APPLICATION MPL and HSL **  ==================================
     //show mpl application
