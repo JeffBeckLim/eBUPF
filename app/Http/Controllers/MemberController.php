@@ -203,7 +203,7 @@ class MemberController extends Controller
             'tin_num'=> 'required',
             'position'=> 'required',
 
-            'employee_num'=> 'required',
+            'employee_num'=> 'nullable',
             'bu_appointment_date'=> 'required',
 
             'place_of_birth'=> 'nullable',
@@ -375,7 +375,7 @@ class MemberController extends Controller
             'tin_num'=> 'required',
             'position'=> 'required',
 
-            'employee_num'=> 'required',
+            'employee_num'=> 'nullable',
             'bu_appointment_date'=> 'required',
 
             'place_of_birth'=> 'nullable',

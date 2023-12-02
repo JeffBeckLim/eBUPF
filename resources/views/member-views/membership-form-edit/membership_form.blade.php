@@ -10,6 +10,13 @@
         margin: 0px;
     }
 
+    input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    /* -webkit-appearance: none;
+    margin: 0; */
+    visibility: hidden;
+}
+
 </style>
 <main class="container">
     <div class="row d-flex justify-content-center ">

@@ -9,6 +9,15 @@
         font-size: 14px;
         margin: 0px;
     }
+
+
+    /* Hide the spinner arrows for number input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 </style>
 <main class="container">
     <div class="row d-flex justify-content-center">

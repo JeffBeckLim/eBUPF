@@ -31,7 +31,7 @@
                     </h5>
 
                     <h6 class="ms-3 text-secondary pb-3" style="font-size: 12px">
-                        By creating an account here, the account will automatically become a member of BUPF. The account will be ready to use by any client member in BUPF. 
+                        Please make sure any changes is valid and true as this will be seen by the member.
                     </h6>
                     <form action="{{route('admin.members.update.save', $member->id)}}" method="POST">
                         @csrf
@@ -189,9 +189,9 @@
                             </div>
                         </div>
                         <div class="col-12 my-4 text-end">
-                            <p style="font-size: 12px" class="text-secondary text-start">
+                            {{-- <p style="font-size: 12px" class="text-secondary text-start">
                                 By clicking Create, this member account created agrees to the terms and conditions of Bicol University Provident Fund and online terms of use of eBUPF website.
-                            </p>
+                            </p> --}}
                             <a class="btn btn-outline-secondary rounded-3" style="font-size: 14px" href="{{route('admin.members')}}">
                                 Back
                             </a>
