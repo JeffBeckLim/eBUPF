@@ -73,7 +73,8 @@ class PDFController extends Controller{
 
             $pdf = PDF::loadView('member-views.generate-pdf-files.generate-membership-form', $data)->setPaper('letter', 'portrait');
 
-            return $pdf->download('Membership Application Form.pdf');
+            $fileName = "{$member->lastname} Membership Application Form.pdf";
+            return $pdf->download($fileName);
 
         } else {
             return redirect()->back()->with('error', 'Member not found.');
@@ -159,8 +160,8 @@ class PDFController extends Controller{
         ];
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
-
-        return $pdf->download('MPL Application Form.pdf');
+        $fileName = "{$member->lastname} MPL Application Form.pdf";
+        return $pdf->download($fileName);
     }
 
     public function generateHL($loanId){
@@ -244,7 +245,8 @@ class PDFController extends Controller{
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
 
-        return $pdf->download('Housing Loan Application Form.pdf');
+        $fileName = "{$member->lastname} HL Application Form.pdf";
+        return $pdf->download($fileName);
     }
 
     public function generateInsuranceForm(){
@@ -280,7 +282,8 @@ class PDFController extends Controller{
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-insurance-form', $data)->setPaper('legal', 'portrait');
 
-        return $pdf->download('Insurance Form.pdf');
+        $fileName = "{$member->lastname} Insurance Form.pdf";
+        return $pdf->download($fileName);
     }
 
 }

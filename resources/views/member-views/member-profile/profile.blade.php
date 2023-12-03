@@ -55,15 +55,14 @@
                         <span>
                             <div class="fw-bold" style="font-size: 1rem; ">
                                 {{ Auth::user()->member->firstname}}
-                                @if(Auth::user()->member->middle_initial != null)
-                                    {{ Auth::user()->member->middle_initial}}.
+                                @if(Auth::user()->member->middlename != null)
+                                    @php
+                                        $middle_initial = substr(Auth::user()->member->middlename, 0, 1);
+                                    @endphp
+                                    {{ $middle_initial}}.
                                 @endif
                                 {{ Auth::user()->member->lastname}}
-                                @if ($member->is_editable == 1)
-                                    <a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a>
-                                @else
-                                    <a href="#" id="profileOpenModalLink" style="pointer-events: none; cursor: not-allowed; color: #ffffff;"><i class="bi bi-pencil-square fs-6" style="color: #dddddd;"></i></a>
-                                @endif
+                                <a href="#" id="profileOpenModalLink"><i class="bi bi-pencil-square fs-6" style="color: white;"></i></a>
                             </div>
                         </span>
                         <div><i class="bi bi-person-fill"></i>
@@ -136,7 +135,14 @@
                         <p><span class="fw-bold">Name :</span></p>
                     </div>
                     <div class="col-7">
-                        <p><span>{{ $member->firstname }} {{ $member->middle_initial }}. {{ $member->lastname }}</span></p>
+                        <p><span>{{ $member->firstname }}
+                            @if(Auth::user()->member->middlename != null)
+                                @php
+                                    $middle_initial = substr(Auth::user()->member->middlename, 0, 1);
+                                @endphp
+                                {{ $middle_initial}}.
+                            @endif
+                            {{ $member->lastname }}</span></p>
                     </div>
 
                     <div class="col-5">
@@ -204,6 +210,17 @@
     closeButton.addEventListener("click", function () {
         modal.style.display = "none";
     });
+
+    $(document).ready(function () {
+    // Function to hide alerts after 3 seconds
+    function hideAlerts() {
+      $(".alert").delay(3000).slideUp(500, function () {
+        $(this).alert("close");
+      });
+    }
+
+    hideAlerts();
+  });
 </script>
 
 

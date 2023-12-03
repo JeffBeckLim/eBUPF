@@ -17,7 +17,7 @@ class AdminImportData extends Controller
     public function executeImportData(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'csv_file' => 'required|mimes:csv', // Add validation rules for file
+            'csv_file' => 'required|mimes:csv', // validation rules for file
         ]);
 
         if ($validator->fails()) {
@@ -65,13 +65,13 @@ class AdminImportData extends Controller
                         'middlename' => $row[3] ?? null,
                         'lastname' => $row[4] ?? null,
                         'agree_to_terms' => '1',
-                        'contact_no' => $row[5] ?? null,
+                        'contact_num' => $row[5] ?? null,
                         'address' => $row[6] ?? null,
                         'date_of_birth' => $row[7] ?? null,
                         'tin_num' => $row[8] ?? null,
                         'position' => $row[9] ?? null,
                         'verified_at' => now(),
-                        'employee_no' => $row[10] ?? null,
+                        'employee_num' => $row[10] ?? null,
                         'bu_appointment_date' => $row[11] ?? null,
                         'place_of_birth' => $row[12] ?? null,
                         'civil_status' => $row[13] ?? null,
