@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use App\Models\MembershipApplication;
 use Illuminate\Http\Request;
+use App\Mail\MembershipAccepted;
+use Illuminate\Support\Facades\Mail;
 
 class MembershipApplicationController extends Controller
 {
@@ -12,13 +14,13 @@ class MembershipApplicationController extends Controller
 
         $memberApplications = MembershipApplication::with('member.units.campuses', 'member.user')->orderBy('created_at', 'desc')->get();
 
-        
+
         $pending = count(MembershipApplication::where('status', 0)->get());
         $approved = count(MembershipApplication::where('status', 1)->get());
         $denied = count(MembershipApplication::where('status', 2)->get());
-    
+
         return view(
-            'admin-views.admin-membership-applications.admin-membership-applications', 
+            'admin-views.admin-membership-applications.admin-membership-applications',
             compact('memberApplications', 'approved', 'denied', 'pending')
         );
     }
@@ -26,24 +28,25 @@ class MembershipApplicationController extends Controller
 
     public function acceptMembership($id){
         $member = Member::with('user', 'membershipApplication')->where('id',$id)->first();
-        
+
         // If the member being updated exists
         if($member == null){
             abort(403,'No Data Found');
         }
 
         if($member->user->user_type == 'member'){
-            return redirect('/admin/membership-applications')->with('warning', '<strong>'.$member->firstname.'</strong> is already a member!'); 
+            return redirect('/admin/membership-applications')->with('warning', '<strong>'.$member->firstname.'</strong> is already a member!');
         }
-
         // Save each model and its nested relations
         $member->user->user_type = 'member';
-            $member->user->save();
+        $member->user->save();
         $member->membershipApplication->status = 1;
-            $member->membershipApplication->save();
+        $member->membershipApplication->save();
         $member->verified_at = now();
-            $member->save();
+        $member->save();
 
+        // Send an email to the user
+        Mail::to($member->user->email)->send(new MembershipAccepted($member));
         // return with the name of the Member
         return redirect('/admin/membership-applications')->with('success', '<strong>'.$member->firstname.'</strong> is now a member!');
     }
@@ -51,17 +54,17 @@ class MembershipApplicationController extends Controller
     public function rejectMembership($id){
 
         $member = Member::with('user', 'membershipApplication')->where('id',$id)->first();
-        
+
         // If the member being updated exists
         if($member == null){
             abort(403,'No Data Found');
         }
         if($member->membershipApplication->status == 2){
-            return redirect('/admin/membership-applications')->with('reject', '<strong>'.$member->firstname.'</strong> membership application is already been declined!'); 
+            return redirect('/admin/membership-applications')->with('reject', '<strong>'.$member->firstname.'</strong> membership application is already been declined!');
         }
 
         if($member->user->user_type == 'member'){
-            return redirect('/admin/membership-applications')->with('warning', '<strong>'.$member->firstname.'</strong> is already a member!'); 
+            return redirect('/admin/membership-applications')->with('warning', '<strong>'.$member->firstname.'</strong> is already a member!');
         }
 
         // Save each model and its nested relations
