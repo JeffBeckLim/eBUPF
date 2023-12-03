@@ -9,12 +9,15 @@
         </div>
         <div class="modal-body text-center">
              <h3><i class="text-warning bi bi-exclamation-circle"></i></h3>
-             <p class="fs-6">Are you sure you want to approve 
+             <p class="fs-6">Are you sure you want to approve
                 <strong>
-                {{$memberApplication->member->firstname}} 
-                 {{$memberApplication->member->lastname}} 
+                {{$memberApplication->member->firstname}}
+                 {{$memberApplication->member->lastname}}
                 </strong>
-                 membership in eBUPF?
+                 membership in eBUPF? <br>
+                <span class="text-danger">
+                    This will automatically send an email to the applicant.
+                </span>
             </p>
         </div>
         <div class="modal-footer">
@@ -36,10 +39,10 @@
         </div>
         <div class="modal-body text-center">
             <h3><i class="text-danger bi bi-exclamation-circle"></i></h3>
-            <p class="fs-6">Are you sure you want to reject 
+            <p class="fs-6">Are you sure you want to reject
                <strong>
-               {{$memberApplication->member->firstname}} 
-                {{$memberApplication->member->lastname}} 
+               {{$memberApplication->member->firstname}}
+                {{$memberApplication->member->lastname}}
                </strong>
                 membership in eBUPF?
            </p>

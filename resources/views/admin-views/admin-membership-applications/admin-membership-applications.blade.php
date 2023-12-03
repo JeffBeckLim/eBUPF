@@ -147,4 +147,16 @@
     </div>
 </div>
 @include('admin-components.admin-dataTables')
+<script>
+    $(document).ready(function () {
+    // Function to hide alerts after 3 seconds
+    function hideAlerts() {
+      $(".alert").delay(3000).slideUp(500, function () {
+        $(this).alert("close");
+      });
+    }
+
+    hideAlerts();
+  });
+</script>
 @endsection
