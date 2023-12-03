@@ -416,7 +416,7 @@ class MemberController extends Controller
         $formFields['address'] = $address;
 
         $member->update($formFields);
-        
+
         // Make sure first letters are caputalized
         $member->firstname = ucwords($formFields['firstname']);
         $member->middlename = ucwords($formFields['middlename']);
@@ -496,59 +496,68 @@ class MemberController extends Controller
 
     public function profileUpdate(Request $request, $id){
 
-        $validator = Validator::make($request->all(), [
-            'unit_id' => 'required',
-            'position' => 'required',
-            // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER
-            // 'email' => [
-            //     'required',
-            //     'string',
-            //     'email:rfc,dns',
-            //     'max:255',
-            //     Rule::unique('users')->ignore(Auth::user()->id),
-            //     new EmailDomain('bicol-u.edu.ph')
-            // ],
-            'contact_num' => 'required',
-            'address' => 'required',
-            'monthly_salary' => 'required',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            return redirect('/member/profile')->withErrors($errors);
+        if($id != Auth::user()->member->id){
+            abort(403, 'Unauthorized Action');
         }
 
-        $user = User::with('member')->find($id);
+        if(Auth::user()->member->is_editable == 0 || Auth::user()->member->is_editable == null){
+            $user = User::with('member')->find($id);
 
-        // if ($user->email != $request->email) {
-        //     $user->email = $request->input('email');
-        //     // Reset Email to verify it again
-        //     $user->email_verified_at = null;
-        //     $user->sendEmailVerificationNotification();
-        // }
+            $validator = Validator::make($request->all(), [
+                'profile_picture' => 'nullable|image|mimes:jpeg,png|max:2048',
+            ]);
 
-        // $user->save();
-
-        // $user->member->middlename = $request->middlename;
-        // $user->member->middle_initial = ucfirst($request->middlename[0]);
-        $user->member->unit_id = $request->unit_id;
-        $user->member->position = $request->position;
-        $user->member->contact_num = '+63' . $request->contact_num;
-        $user->member->address = $request->address;
-        $user->member->monthly_salary = $request->monthly_salary;
-
-        //for profile pic validation
-        if ($request->hasFile('profile_picture')) {
-            $user->member->profile_picture = $request->file('profile_picture')->store('profile_picture', 'public');
-        }
-
-        // Only set is_editable to 0 if the profile picture is not being updated
-        if (!$request->hasFile('profile_picture')) {
+            if ($request->hasFile('profile_picture')) {
+                $user->member->profile_picture = $request->file('profile_picture')->store('profile_picture', 'public');
+            }
             $user->member->is_editable = 0;
-        }
+            $user->member->save();
 
-        $user->member->save();
+        }
+        else{
+            $validator = Validator::make($request->all(), [
+                'unit_id' => 'required',
+                'position' => 'required',
+                // IGNORE THE EMAIL ASSOCIATED WITH THE LOGGED IN USER
+                // 'email' => [
+                //     'required',
+                //     'string',
+                //     'email:rfc,dns',
+                //     'max:255',
+                //     Rule::unique('users')->ignore(Auth::user()->id),
+                //     new EmailDomain('bicol-u.edu.ph')
+                // ],
+                'contact_num' => 'required',
+                'address' => 'required',
+                'monthly_salary' => 'required',
+                'profile_picture' => 'nullable|image|mimes:jpeg,png|max:2048',
+            ]);
+
+            if ($validator->fails()) {
+                $errors = $validator->errors()->all();
+                return redirect('/member/profile')->withErrors($errors);
+            }
+
+            $user = User::with('member')->find($id);
+
+            $user->member->unit_id = $request->unit_id;
+            $user->member->position = $request->position;
+            $user->member->contact_num = '+63' . $request->contact_num;
+            $user->member->address = $request->address;
+            $user->member->monthly_salary = $request->monthly_salary;
+
+            //for profile pic validation
+            if ($request->hasFile('profile_picture')) {
+                $user->member->profile_picture = $request->file('profile_picture')->store('profile_picture', 'public');
+            }
+
+            // Only set is_editable to 0 if the profile picture is not being updated
+            if (!$request->hasFile('profile_picture')) {
+                $user->member->is_editable = 0;
+            }
+
+            $user->member->save();
+        }
 
         // return redirect('/member/profile/'.Auth::user()->id)->with('message', 'Profile Saved!');
         return back()->with('message', 'Profile Saved!');
