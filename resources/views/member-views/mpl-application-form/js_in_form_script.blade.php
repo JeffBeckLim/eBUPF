@@ -2,6 +2,14 @@
 $user_email = Auth::user()->email;
 @endphp
 <script>
+
+// avoid decimal input
+document.getElementById('loanAmount').addEventListener('input', function() {
+      // Remove any decimal points entered by the user
+      this.value = this.value.replace(/[.,]/g, '');
+    });
+
+
     // Get the button element by its id
     var proceedButton = document.getElementById("proceedButton");
     var targetButton = document.getElementById("submitButton");
@@ -58,6 +66,66 @@ function validateEmail() {
 // Listen for both 'input' and 'keyup' events
 emailInput.addEventListener('input', validateEmail);
 emailInput.addEventListener('keyup', validateEmail);
+
+function validateLoanAmount() {
+  const loanInput = document.getElementById('loanAmount');
+
+  function validateInput() {
+    const inputValue = parseInt(loanInput.value);
+    if (inputValue >= 50000 && inputValue <= 200000) {
+      loanInput.classList.add('is-valid');
+      loanInput.classList.remove('is-invalid');
+    } else {
+      loanInput.classList.remove('is-valid');
+      loanInput.classList.add('is-invalid');
+    }
+  }
+
+  loanInput.addEventListener('input', validateInput);
+  loanInput.addEventListener('keyup', validateInput);
+}
+
+// Call the function to add event listeners
+validateLoanAmount();
+
+
+// Validate Witness Name
+    document.getElementById('myWitness1').addEventListener('input', function() {
+      const nameValue = this.value.trim();
+
+      if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
+        
+        this.classList.add('is-valid')
+        this.classList.remove('is-invalid')
+      } else {
+        this.classList.remove('is-valid')
+        this.classList.add('is-invalid')
+        
+      }
+    });
+    
+
+
+    document.getElementById('myWitness2').addEventListener('input', function() {
+      const nameValue = this.value.trim();
+
+      if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
+        
+        this.classList.add('is-valid')
+        this.classList.remove('is-invalid')
+      } else {
+        this.classList.remove('is-valid')
+        this.classList.add('is-invalid')
+      }
+    });
+    
+
+
+
+
+
+
+
 
 
 </script>

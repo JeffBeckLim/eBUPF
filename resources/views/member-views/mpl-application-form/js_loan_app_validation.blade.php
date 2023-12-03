@@ -55,7 +55,8 @@
       });
    
 
-      if(witness1.value != ''){
+      var witness1Value = witness1.value; 
+      if(witness1.value != '' && witness1Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness1Value)){
           witness1.classList.remove('is-invalid');
       }
       else{
@@ -64,8 +65,8 @@
           
       }
 
-      
-      if(witness2.value != ''){
+      var witness2Value = witness2.value; 
+      if(witness2.value != '' && witness2Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness2Value)){
           witness2.classList.remove('is-invalid');
       }
       else{
@@ -74,6 +75,7 @@
           
       }
 
+      
       if (isValid) {
           showNextStep(); // Call your showNextStep function here
       }

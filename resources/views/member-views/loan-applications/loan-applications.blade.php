@@ -38,7 +38,7 @@
                                     }
 
                                 @endphp
-                                @if(in_array(4,$status_array) && !in_array(5,$status_array) && !in_array(6,$status_array))
+                                @if(in_array(4,$status_array) && !in_array(5,$status_array) && !in_array(6,$status_array) && $loan->loan->deleted_at == null)
                                     <div class="border w-100 rounded mb-2 p-2 row">
                                         <span class="m-0 p-2" style="font-size: 12px; color: #b700ff"><i class="bi bi-circle-fill pb-1" ></i> Check Ready</span>
                                         <span class="fw-bold" style="font-size: 12px">{{$loan->loan->loanType->loan_type_description}} | {{ date("F j, Y, g:i A", strtotime($loan->loan->created_at))}}   </span>
@@ -64,6 +64,10 @@
                                                 <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
                                             @elseif($loan->loan->is_active == 2)
                                                 <span style="font-size: small;" class="fw-bold">Non-performing</span>
+                                            @endif
+                                            
+                                            @if(in_array(6, $status_array))
+                                                <span style="font-size: small;" class="fw-bold text-danger">Declined</span>                                     
                                             @endif
 
                                             @if ($loan->loan->is_active == null)
@@ -125,11 +129,17 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-6 d-flex justify-content-end align-items-end">
+                                        <div class="col-6 d-flex justify-content-end align-items-end gap-1">
+                                            @if(!in_array(5,$status_array) && $loan->loan->deleted_at == '' && !in_array(6,$status_array) && count($status_array)!=null)
+                                                <a style="font-size: 14px;"  type="button" class="btn btn-outline-secondary m-0 rounded-3"  data-bs-toggle="modal" data-bs-target="#cancelLoanAppModal{{$loan->loan->id}}">Cancel Application</a>
+                                            @endif
+                                            
+
                                             <a href="{{route('loan.application.status', $loan->loan->id)}}" type="button" class="btn status-btn bu-orange text-light">View Status</a>
                                         </div>
                                     </div>
                                 </div>
+                                @include('member-views.loan-applications.modal-cancel-loan-app')
                             @endforeach
 
                         {{-- CARD --}}
