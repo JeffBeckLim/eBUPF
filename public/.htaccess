@@ -25,3 +25,21 @@
         Header set Cache-Control "max-age=604800, public"   # Cache for 7 days (adjust as needed)
     </FilesMatch>
 </IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "province\.json$">
+        Header set Access-Control-Allow-Origin "https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json"
+    </FilesMatch>
+
+    <FilesMatch "city\.json$">
+        Header set Access-Control-Allow-Origin "https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/city.json"
+    </FilesMatch>
+
+    <FilesMatch "barangay\.json$">
+        Header set Access-Control-Allow-Origin "https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/barangay.json"
+    </FilesMatch>
+
+    <FilesMatch "region\.json$">
+        Header set Access-Control-Allow-Origin "https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json"
+    </FilesMatch>
+</IfModule>

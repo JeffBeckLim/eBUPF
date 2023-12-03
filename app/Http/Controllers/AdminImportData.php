@@ -65,7 +65,7 @@ class AdminImportData extends Controller
                         'middlename' => $row[3] ?? null,
                         'lastname' => $row[4] ?? null,
                         'agree_to_terms' => '1',
-                        'contact_num' => $row[5] ?? null,
+                        'contact_num' => '+63' . $row[5] ?? null,
                         'address' => $row[6] ?? null,
                         'date_of_birth' => $row[7] ?? null,
                         'tin_num' => $row[8] ?? null,

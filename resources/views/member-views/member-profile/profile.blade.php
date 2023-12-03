@@ -7,11 +7,11 @@
     <div class="bg-white rounded pt-3 border">
         @if($member->is_editable == 1)
             <div class="profile-note" style="text-align: justify;">
-                <strong>Note:</strong> you will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF (BUPF Office) for verification purposes.
+                <strong>Note:</strong> You will only be allowed to update your profile once. Subsequent changes can only be made in person at the BUPF Office for verification purposes.
             </div>
         @else
             <div class="profile-note" style="text-align: justify;">
-                If you want to update your profile, please go to the BUPF (BUPF Office) for verification purposes.
+                If you want to update your profile, please go to the BUPF Office for verification purposes.
             </div>
         @endif
 
