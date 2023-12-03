@@ -61,7 +61,7 @@
                     <input type="number" class="form-control" id="loanTerm" name="term_years" > --}}
                     <label for="loanTerm" class="text2-design">Years to Pay</label>
                     <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
-                        <option value="" selected disabled>Choose loan term: 1-5 years</option>
+                        {{-- <option value="" selected disabled>Choose loan term: 1-5 years</option> --}}
                         @for ($years = 1; $years < 6; $years++)
                             @if ($years == 1)
                                 <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} year</option>
@@ -97,7 +97,9 @@
 
                 <p class="text1-design pt-4">Witnesses</p>
                 <p class="text-secondary" style="font-size: 12px">Please enter the names of your witnesses, these are required.</p>
-
+                <p style="font-size: 12px">
+                    Note: Names should be at least 2 characters long and contain no numbers.
+                </p>
                 <div class="form-group">
                     <input type="text" class="form-control {{ $errors->has('witness_name_1') ? 'invalid' : '' }}" id="myWitness1" name="witness_name_1" placeholder="ex. Jeff Beck M. Lim" value="{{old('witness_name_1')}}">
                     @error('witness_name_1')

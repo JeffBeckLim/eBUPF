@@ -324,6 +324,11 @@
                             <td class="text-center">
                                 @if ($loan->loan->deleted_at)
                                     <span class="final-denied">Cancelled</span>
+                                    @if ($loan->loan->reason_for_cancel != null)
+                                        <a type="button" data-bs-toggle="modal" data-bs-target="#reasonModal{{$loan->loan->id}}" style="font-size: 11px" href="" class="btn btn-link">See Reason</a>
+                                    @endif
+
+                                    @include('admin-views.admin-loan-applications-tracking.modal-reason')
                                 @else
                                     @php
                                     $array = [];
