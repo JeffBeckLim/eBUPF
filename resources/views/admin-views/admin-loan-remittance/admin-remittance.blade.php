@@ -10,6 +10,11 @@
                 </div>
             </div>
             <div class="filter-group gap-3">
+                <div class="row">
+                    <div class="col-9">
+
+                    </div>
+                </div>
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                     <select id="quarterSelect" class="form-control bg-white border-0">
                         <option value="All">Quarter</option>
@@ -33,6 +38,9 @@
                 </div>
                 <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
                 <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
+                <div>
+                    <a href="{{route('import.csv.payment')}}" class="btn text-white rounded-4 bu-orange">Batch Payment</a>
+                </div>
             </div>
 
             <div class="text-add-payment">
@@ -79,6 +87,7 @@
                             @endforeach
                         </select>
                     </div>
+
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>

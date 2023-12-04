@@ -9,7 +9,7 @@
                   @endif
             </div>
             <label for="formFile" class="fw-bold mb-3">Upload Your Profile Picture</label>
-            <input class="form-upload" type="file" id="formFile" name="profile_picture">
+            <input class="form-upload" type="file" id="formFile" name="profile_picture" accept=".png, .jpg, .jpeg">
         </div>
 
         <div class="col-12 mb-5">

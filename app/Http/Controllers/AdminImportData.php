@@ -97,4 +97,8 @@ class AdminImportData extends Controller
         }
         return redirect()->back()->with('error', 'No file was imported.');
     }
+
+    public function importRemittanceView(){
+        return view('admin-views.admin-loan-remittance.admin-import-csv-payment');
+    }
 }
