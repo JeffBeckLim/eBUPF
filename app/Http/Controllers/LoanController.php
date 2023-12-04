@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loan;
+use App\Models\LoanApplicationState;
+use App\Models\LoanApplicationStatus;
 use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\PenaltyPayment;
@@ -11,24 +13,17 @@ use Illuminate\Support\Facades\Auth;
 class LoanController extends Controller
 {
     public function show($loan_status){
-       /*  //if loan status is 1, show performing
-        $raw_loans = Loan::where('member_id', Auth::user()->member->id)
-            ->with('loanType' , 'payment','amortization', 'loanApplicationStatus')
-            ->get();
 
-        $loans = [];
-        foreach($raw_loans as $raw_loan){
-            $loanStatus = [];
-            foreach($raw_loan->loanApplicationStatus as $status){
-                array_push($loanStatus, $status->loan_application_state_id);
-            }
-            if(in_array(5,$loanStatus)){
-                array_push($loans, $raw_loan);
-            }
-        } */
+        if($loan_status == 'performing'){
+            $loan_status = 1;
+        }elseif($loan_status == 'paid'){
+            $loan_status = 2;
+        }else{
+            $loan_status = 3;
+        }
 
         $memberID = Auth::user()->member->id;
-
+    
         // Get all loans of the member with related data
         $loans = Loan::where('member_id', $memberID)
         ->with('loanType', 'payment', 'amortization', 'loanApplicationStatus' , 'penalty')
@@ -90,6 +85,22 @@ class LoanController extends Controller
 
     public function displayLoanDetails($id){
         $loan = Loan::where('id', $id)->with('penalty')->first();
+        
+        if($loan == null){
+            abort(403);
+        }
+
+        // check if  user is the owner of the loan
+        if(Auth::user()->member->id != $loan->member_id){
+            abort(403);
+        }
+
+        // check if loan has check picked up status
+        $loan_app_status = LoanApplicationStatus::where('loan_id', $loan->id)->where('loan_application_state_id' , 5)->first();
+        if($loan_app_status == null){
+            abort(403);
+        }
+
         $payments = $loan->payment;
 
         // get sum of penalty payment

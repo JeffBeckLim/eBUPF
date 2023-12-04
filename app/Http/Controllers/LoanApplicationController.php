@@ -22,26 +22,23 @@ use function PHPUnit\Framework\isNull;
 class LoanApplicationController extends Controller
 {
 
-
     public function showLoanStatus($loan_id){
         $loan = Loan::with('loanType')->where('id',$loan_id)->first();
+
+        // check if loan exist
         if($loan==null){
-            abort(404);
+            abort(403);
+        // check loan belongs to member
         }elseif ($loan->member_id != Auth::user()->member->id) {
-            abort(404);
+            abort(403);
         }
+      
 
         $loan_status=LoanApplicationStatus::with('LoanApplicationState')
         ->where('loan_id', $loan_id)
         ->whereNull('is_deleted') //get status that are not deleted
         ->orderBy('loan_application_state_id', 'desc')
         ->get();
-
-        // if loan has no status abort
-        // if(count($loan_status)==null){
-        //     abort(404);
-        // }
-
 
         return view('member-views.loan-applications.loan-application-status', compact('loan_status', 'loan'));
     }
@@ -216,7 +213,7 @@ class LoanApplicationController extends Controller
             'loan.loanType',
             //get loans with status
             )
-            ->where('accept_request', '1') //get loans accepted by coBorrower
+            // ->where('accept_request', '1') //get loans accepted by coBorrower
             ->whereHas('loan', function ($query){
                 $query->where('member_id', Auth::user()->member->id)
                         ->whereNull('is_active');
@@ -278,7 +275,7 @@ class LoanApplicationController extends Controller
             'loan.loanType',
             //get loans with status
             )
-            ->where('accept_request', '1') //get loans accepted by coBorrower
+            // ->where('accept_request', '1') //get loans accepted by coBorrower
             ->whereHas('loan', function ($query){
                 $query->where('member_id', Auth::user()->member->id);
             })->orderBy('id','desc')->get();

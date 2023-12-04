@@ -80,7 +80,7 @@
             </a>
 
 
-            <a class="text-decoration-none" href="{{route('member.loans', 1)}}">
+            <a class="text-decoration-none" href="{{route('member.loans', 'all')}}">
                 <li class="nav-item  py-3 grow-on-hover {{ Route::is('member.loans') ? 'bg-selected fade-in  rounded-4':' '}} ">
                     <div class="row g-0">
                         <div class="col-3 text-center ">

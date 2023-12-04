@@ -63,7 +63,7 @@
                                             @elseif ($loan->loan->is_active == 1)
                                                 <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
                                             @elseif($loan->loan->is_active == 2)
-                                                <span style="font-size: small;" class="fw-bold">Non-performing</span>
+                                                <span style="font-size: small;" class="fw-bold {{$loan->loan->deleted_at == null ? 'd-none' : ''}}">Non-performing</span>
                                             @endif
                                             
                                             @if(in_array(6, $status_array))
@@ -71,8 +71,12 @@
                                             @endif
 
                                             @if ($loan->loan->is_active == null)
-
-                                                @if(in_array(6,$status_array))
+                                            @php
+                                                $co_borrower = App\Models\CoBorrower::where('loan_id', $loan->id)->first();
+                                            @endphp
+                                                @if ($co_borrower->accept_request  != 1)
+                                                    <h6 class="me-1" style="font-size: 12px">No approval from co-borrower</h6>
+                                                @elseif(in_array(6,$status_array))
                                                     <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
                                                 @elseif(in_array(5,$status_array))
                                                     <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #0092D1"></i><span class="text-primary">Check Picked Up</span></p>
