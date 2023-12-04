@@ -56,7 +56,7 @@
 
         <p>Login now to access your member dashboard and start your journey with us!</p>
 
-        <a href="{{ url('/') }}">Login Now!</a>
+        <a href="{{ url('/login') }}">Login Now!</a>
 
         <p>If you have any questions, feel free to contact us.</p>
 

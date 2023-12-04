@@ -507,6 +507,10 @@ class MemberController extends Controller
                 'profile_picture' => 'nullable|image|mimes:jpeg,png|max:2048',
             ]);
 
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
             if ($request->hasFile('profile_picture')) {
                 $user->member->profile_picture = $request->file('profile_picture')->store('profile_picture', 'public');
             }

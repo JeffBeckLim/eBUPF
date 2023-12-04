@@ -20,7 +20,7 @@
      .offcanvas-backdrop {
       width: 100%;
       height: 100%;
-      } 
+      }
 </style>
 <!-- AUTOMATICALLY CLOSE OFFCANVAS ON MEDIUM-UP SCREEN -->
 {{-- OFFCANVAS --}}

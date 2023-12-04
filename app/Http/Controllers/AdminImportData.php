@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Member;
+use App\Models\Payment;
+use App\Models\Loan;
 use App\Models\User;
 use SplFileObject;
 
@@ -94,6 +96,70 @@ class AdminImportData extends Controller
                 }
             }
             return redirect()->back()->with('success', 'Members data was imported successfully.');
+        }
+        return redirect()->back()->with('error', 'No file was imported.');
+    }
+
+    public function importRemittanceView(){
+        return view('admin-views.admin-loan-remittance.admin-import-csv-payment');
+    }
+
+    public function importRemittancePayment(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required|mimes:csv', // validation rules for file
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        if ($request->hasFile('csv_file')) {
+            $file = $request->file('csv_file');
+            $csv = new SplFileObject($file->getRealPath());
+            $csv->setFlags(SplFileObject::READ_CSV);
+
+            $headerSkipped = false;
+            $lineNumber = 0;
+
+            foreach ($csv as $row) {
+                if (!$headerSkipped) {
+                    $headerSkipped = true;
+                    continue; // Skip the header row
+                }
+
+                if($row[0] == null){
+                    break;
+                }
+                $lineNumber++;
+
+                $loanID = $row[1];
+                $loan = Loan::find($loanID);
+
+                if($loan){
+                    $memberID = $loan->member_id;
+
+                    $payment = [
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                        'member_id' => $memberID,
+                        'or_number' => $row[0],
+                        'loan_id' => $row[1],
+                        'principal' => $row[2],
+                        'interest' => $row[3],
+                        'payment_date' => $row[4],
+                    ];
+                    //save payment to an array
+                    $paymentTable[] = $payment;
+                }
+                else{
+                    return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The loan ID does not exist.');
+                }
+            }
+            //save all payments to the database
+            Payment::insert($paymentTable);
+
+            return redirect()->back()->with('success', 'Successfully imported batch payment.');
         }
         return redirect()->back()->with('error', 'No file was imported.');
     }

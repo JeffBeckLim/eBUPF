@@ -10,6 +10,11 @@
                 </div>
             </div>
             <div class="filter-group gap-3">
+                <div class="row">
+                    <div class="col-9">
+
+                    </div>
+                </div>
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                     <select id="quarterSelect" class="form-control bg-white border-0">
                         <option value="All">Quarter</option>
@@ -33,6 +38,9 @@
                 </div>
                 <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
                 <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
+                <div>
+                    <a href="{{route('import.csv.payment')}}" class="btn text-white rounded-4 bu-orange">Batch Payment</a>
+                </div>
             </div>
 
             <div class="text-add-payment">
@@ -79,6 +87,7 @@
                             @endforeach
                         </select>
                     </div>
+
 
                     <div class="col-md-2 pe-1">
                         <label for="principal" class="fw-bold">Principal</label>
@@ -139,13 +148,19 @@
                             <tr class="table-row" data-status="" data-loan-year="@getYearFromDate($payment->payment_date)">
                                 <td>{{ $payment->id }}</td>
                                 <td>{{ $payment->or_number }}</td>
-                                <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">{{ $payment->member->firstname }} {{ $payment->member->middle_initial }}. {{ $payment->member->lastname }}</a></td>
+                                <td><a href="#" class="fw-bold text-dark" style="text-decoration: none;">
+                                    {{ $payment->member->firstname }}
+                                    @if($payment->member->middle_initial != null)
+                                    {{ $payment->member->middle_initial }}.
+                                    @endif
+                                    {{ $payment->member->lastname }}
+                                </a></td>
                                 <td>BU{{ $payment->member->units->unit_code }}</td>
-                                <td>{{ $payment->payment_date }}</td>
-                                <td>{{ $payment->principal }}</td>
-                                <td>{{ $payment->interest }}</td>
+                                <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('F d, Y') }}</td>
+                                <td>₱{{ number_format($payment->principal, 2) }}</td>
+                                <td>₱{{ number_format($payment->interest, 2) }}</td>
                                 <td></td>
-                                <td>{{ $payment->principal + $payment->interest }}</td>
+                                <td>₱{{ number_format($payment->principal + $payment->interest, 2) }}</td>
                                 <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
                                 <td>
                                     <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#editPayment{{$payment->id}}">

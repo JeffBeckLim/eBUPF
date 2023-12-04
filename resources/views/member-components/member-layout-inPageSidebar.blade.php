@@ -10,12 +10,12 @@
     <div class=" d-none  d-lg-block  position-fixed h-100 " style="background-color: #ffffff; width: 20%;">
         <div class="row d-flex py-3  m-0">
             <a href="{{route('home')}}">
-                <img class="img-fluid ps-3 pt-2" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 14rem;">
+                <img class="img-fluid ps-3 pt-2" src="{{asset('assets/bu-provident.svg')}}" alt="" style="width: 15rem;">
             </a>
         </div>
 
 
-        <ul class="nav flex-column" style=" scale: .9" >
+        <ul class="nav flex-column" style=" scale: .93" >
 
             <a class="text-decoration-none" href="{{ route('member.profile') }}">
                 <li class="nav-items py-3 grow-on-hover {{ Route::is('member.profile') ? 'bg-selected fade-in  rounded-4':' '}}  ">
