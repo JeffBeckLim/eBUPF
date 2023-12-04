@@ -184,8 +184,27 @@
                                                                     array_push($status_array, $status->loan_application_state_id);
                                                                 }
                                                             @endphp
-                                                            @if(in_array(6,$status_array))
-                                                            <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
+                                                            
+                                                            @if ($inActiveLoan->loan->deleted_at != null)
+                                                            <span style="font-size: small;" class="fw-bold text-danger">Cancelled</span>
+                                                        @elseif ($inActiveLoan->loan->is_active == 1)
+                                                            <span style="font-size: small;" class="fw-bold text-primary">Performing</span>
+                                                        @elseif($inActiveLoan->loan->is_active == 2)
+                                                            <span style="font-size: small;" class="fw-bold {{$inActiveLoan->loan->deleted_at == null ? 'd-none' : ''}}">Non-performing</span>
+                                                        @endif
+                                                        
+                                                        @if(in_array(6, $status_array))
+                                                            <span style="font-size: small;" class="fw-bold text-danger">Declined</span>                                     
+                                                        @endif
+            
+                                                        @if ($inActiveLoan->loan->is_active == null)
+                                                        @php
+                                                            $co_borrower = App\Models\CoBorrower::where('loan_id', $inActiveLoan->id)->first();
+                                                        @endphp
+                                                            @if ($co_borrower->accept_request  != 1)
+                                                                <h6 class="me-1" style="font-size: 12px">No approval from co-borrower</h6>
+                                                            @elseif(in_array(6,$status_array))
+                                                                <p class="text16-design m-0"><i class="bi bi-circle-fill me-1"  style="color: red"></i><span class="text-danger">Denied</span></p>
                                                             @elseif(in_array(5,$status_array))
                                                                 <p class="text16-design m-0"><i class="bi bi-circle-fill me-1" style="color: #0092D1"></i><span class="text-primary">Check Picked Up</span></p>
                                                             @elseif(in_array(4,$status_array))
@@ -197,6 +216,8 @@
                                                             @else
                                                                 <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
                                                             @endif
+            
+                                                        @endif
                                                             <p class="fw-bold text m-0" style="font-size: small">{{$inActiveLoan->loan->loanType->loan_type_description}}</p>
                                                         </div>
                                                         <div class="col-lg-3 col-3 text-center">
