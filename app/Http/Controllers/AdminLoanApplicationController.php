@@ -119,6 +119,7 @@ class AdminLoanApplicationController extends Controller
 
         $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check', 'penalty')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
+        ->whereNull('deleted_at')
         ->get();
 
         $loans = [];

@@ -454,5 +454,13 @@ class LoanApplicationController extends Controller
     }
 
 
+    public function cancelSubmittedLoanApp(Request $request, $id){
+        $loan = Loan::findOrFail($id);
+        $loan->deleted_at = now();
+        $loan->is_active = 2;
+        $loan->reason_for_cancel = $request->reason_for_cancel;
+        $loan->save();
+        return back()->with('message', 'Loan Application Cancelled.');
+    }
 
 } // THIS IS THE LAST TAG

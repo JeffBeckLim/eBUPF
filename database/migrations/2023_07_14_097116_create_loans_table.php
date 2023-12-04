@@ -48,6 +48,8 @@ return new class extends Migration
 
             $table->integer('last_edited_by')->nullable();
 
+            $table->string('reason_for_cancel')->nullable();
+
             // campus_id_index not added 
             // units_id_index not added 
         });

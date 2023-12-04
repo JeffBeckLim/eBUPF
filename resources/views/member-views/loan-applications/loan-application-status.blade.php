@@ -5,6 +5,13 @@
 <main >      
     <div class="container-fluid">
         <div class="row">
+            
+            @if (session('message'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{session('message')}}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+             </div>    
+            @endif
             <div class="col mt-3 mb-5">
                 <div class="d-flex flex-column align-items-center justify-content-center ">
                     <div class="app-status-box bg-white pt-5 border rounded">
@@ -24,6 +31,16 @@
                                 </div>
                             </div>
                             {{-- {{dd($loan_status)}} --}}
+                            @if ( $loan->deleted_at != '')
+                            <div class="status-box-dennied mb-3 ">
+                                <div style="padding-left: 40px;">
+                                    <p class="mb-1 fs-7 text-white pt-3">{{
+                                        $loan->deleted_at
+                                        }}</p>
+                                    <p class="fw-bold text-white fs-7 pb-3">Cancelled loan application.</p>
+                                </div>
+                            </div>
+                            @endif
                         @if (count($loan_status) != 0)
                                 
                             {{-- =================================================================== --}}
@@ -34,7 +51,7 @@
                                         <p class="mb-1 fs-7 text-white pt-3">{{
                                             $status->created_at
                                             }}</p>
-                                        <p class="fw-bold text-white fs-7 pb-3">Your Loan Application was Declined </p>
+                                        <p class="fw-bold text-white fs-7 pb-3">Your Loan Application was Declined. </p>
                                     </div>
                                 </div>
                                 @endif    

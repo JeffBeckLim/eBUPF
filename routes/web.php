@@ -139,6 +139,8 @@ use App\Models\Penalty;
     // cancel application that has been accepted by CB
     // Route::get('/member/coBorrower/cancel-application-confirmed/{id}', [LoanApplicationController::class, 'cancelApplicationConfirmed'])->name('cancel.application.confirmed');
 
+    Route::put('/member/loan-application/cancel-on-submit/{loan_id}', [LoanApplicationController::class, 'cancelSubmittedLoanApp'])->name('cancel.on.submitted')->middleware('auth','member.access', 'checkSessionTimeout');
+
     // Verify email
     Route::get('/verify/email', function(){
         return view('auth.verify');
