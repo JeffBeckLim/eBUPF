@@ -234,6 +234,10 @@ use App\Models\Penalty;
 
     Route::post('/admin/remittance/view/payment/add', [AdminRemittanceController::class, 'addPaymentRemittance'])->name('add.payment.remittance')->middleware('auth','admin.access');
 
+    Route::get('/admin/remittance/view/payment/import-csv/add', [AdminImportData::class, 'importRemittanceView'])->name('import.csv.payment')->middleware('auth','admin.access');
+
+    Route::post('/admin/remittance/payment/import-payment-data', [AdminImportData::class, 'importRemittancePayment'])->name('admin.import.csv.payment')->middleware('auth','admin.access');
+
     //Route::put('/admin/remittance/view/payment/update/{id}', [AdminRemittanceController::class, 'updatePaymentRemittance'])/* ->middleware('auth','admin.access') ->name('update.payment.remittance');
 
     //View Logs
