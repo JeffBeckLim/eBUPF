@@ -12,13 +12,13 @@
                     </div>
                     <div class="col-12">
                         <span class="d-flex justify-content-center align-items-center">
-                            <a href="{{route('member.loans', 1)}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 1 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}"  style="color: rgb(55, 55, 55);">
+                            <a href="{{route('member.loans', 'performing')}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 1 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}"  style="color: rgb(55, 55, 55);">
                                 Performing
                             </a>
-                            <a href="{{route('member.loans', 2)}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 2 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}" style="color: rgb(55, 55, 55);">
+                            <a href="{{route('member.loans', 'paid')}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 2 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}" style="color: rgb(55, 55, 55);">
                                 Paid
                             </a>
-                            <a href="{{route('member.loans', 3)}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 3 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}" style="color: rgb(55, 55, 55);">
+                            <a href="{{route('member.loans', 'all')}}" class="fs-7 px-3 text-decoration-none fw-bold {{$loan_status == 3 ? 'fs-7 btn bu-orange text-light fw-bold rounded-pill' : ''}}" style="color: rgb(55, 55, 55);">
                                 All Loans
                             </a>
                         </span>

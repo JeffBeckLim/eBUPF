@@ -58,11 +58,11 @@ class CoBorrowerController extends Controller
 
         // check if the loan detail being accessed is associated with the Auth User as
         // the co borrower
-    if(Auth::user()->member->id != $co_borrower->member->id
-        && $loan->member_id != Auth::user()->member->id
-    ){
-        abort(404);
-    }
+        if(Auth::user()->member->id != $co_borrower->member->id
+            && $loan->member_id != Auth::user()->member->id
+        ){
+            abort(403);
+        }
 
         $witnesses=Witness::where('loan_id', $id)->get();
        

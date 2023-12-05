@@ -41,11 +41,11 @@ class AdminUpdateMemberController extends Controller
         $member = Member::findOrFail($member_id);
         $member->update($formFields);
         
-        if($formFields['middlename'] != null){
-            $member->middle_initial = ucfirst($formFields['middlename'][0]);
-            $member->contact_num = '+63'.$formFields['contact_num'];
-            $member->save();
-        }
+        // if($formFields['middlename'] != null){
+        //     $member->middle_initial = ucfirst($formFields['middlename'][0]);
+        //     $member->contact_num = '+63'.$formFields['contact_num'];
+        //     $member->save();
+        // }
 
         return back()->with('passed', 'Member Details Successfully Updated!');
     }
