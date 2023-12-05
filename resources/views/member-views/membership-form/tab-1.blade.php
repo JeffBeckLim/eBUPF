@@ -168,12 +168,24 @@
     submit
     </button>
  --}}
+ @php
+    $region = asset('js/ph-json/region.json');
+    $province = asset('js/ph-json/province.json');
+    $city = asset('js/ph-json/city.json');
+    $barangay = asset('js/ph-json/barangay.json');
+@endphp
 </div> {{-- Last Tag --}}
 <script>
 const regionSelector = document.getElementById('region');
 const provinceSelector = document.getElementById('province');
 const citySelector = document.getElementById('city');
 const barangaySelector = document.getElementById('barangay');
+
+
+var region_link =  @json($region);
+var province_link =  @json($province);
+var city_link =  @json($city);
+var barangay_link =  @json($barangay);
 
 regionSelector.addEventListener('change', function() {
 
