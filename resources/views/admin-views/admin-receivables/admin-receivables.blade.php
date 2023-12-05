@@ -55,7 +55,6 @@
                                     </select>
                                 </div>
 
-
                                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                                     <select name="yearSelect" class="form-control bg-white border-0">
                                         @if($distinctYears == null)

@@ -36,14 +36,14 @@
         <div class="my-2">
             @include('member-views.mpl-application-form.accordion-entity-definition')
         </div>
-        <form action="/member/loan-application/1" method="POST" >
+        <form action="/member/loan-application/1" method="POST" onsubmit='disableButtonMPL()'>
             @csrf
             <div id="loanForm">
-               
+
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>
 
-                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
+                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}" min="50000" max="200000">
 
                     <div id="validationLoanAmountFeedBack" class="invalid-feedback">
                         Loan amount must be at least 50,000 Php or max value of 200,000 Php
@@ -86,9 +86,9 @@
                     <label for="myCoBorrower" style="font-size: 12px">Please enter the BU email of your Co-Borrower. Your co-borrower must be a registered member of BUPF Online</label>
                     <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. juanjose.delacruz@bicol-u.edu.ph">
 
-                
+
                     <div style="font-size: 12px" class="ms-1 mt-2" id="result"></div>
-                 
+
 
                     @error('email_co_borrower')
                         <h6 class="text-danger">{{$message}}</h6>
@@ -128,9 +128,14 @@
         {{-- ------------------------------------------------------- --}}
         </form>
 
+        <script>
+            function disableButtonMPL() {
+                var btn = document.getElementById('confirmRequestMPL');
+                btn.disabled = true;
+                btn.innerText = 'Sending your request'
+            }
+        </script>
 
-
-       
     </div>
   </div>
 </div>

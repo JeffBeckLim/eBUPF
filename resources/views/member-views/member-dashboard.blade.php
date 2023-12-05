@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="mt-lg-5 mt-2 ms-3 me-lg-4 mt-lg-4 mb-5">
+    <div class="mt-3 mx-1 me-lg-2 mb-5">
             <!-- Main Content -->
                 <div class="row g-2">
                     <div class="col-lg-8">
@@ -269,7 +269,13 @@
                                         <span class="fw-bold fs-6">Transactions</span>
                                     </div>
 
-                                    <div class="mt-3 transaction-container" id="transaction-container" style="min-height: 550px; max-height: 670px;">
+                                    <div class="mt-3 transaction-container" id="transaction-container"
+                                        @if($inActiveLoan)
+                                            style="height: 670px;"
+                                        @else
+                                            style="height: 550px;"
+                                        @endif
+                                    >
                                         @foreach($transactions as $transaction)
                                             @if($transaction instanceof \App\Models\Payment)
                                                 <div class="col-12 border-bottom border-top">

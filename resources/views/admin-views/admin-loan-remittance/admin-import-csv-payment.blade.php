@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="container">
-    <h1 class="fs-2">Remittance Batch Payment</h1>
+    <h1 class="fs-3 fw-bold" style="color: #00638D;">Remittance Batch Payment</h1>
     <form action="{{ route('admin.import.csv.payment') }}" method="POST" enctype="multipart/form-data" class="mt-4" onsubmit="return handleFormSubmission(this);">
         @csrf
-        <label for="csv_file" class="form-label fs-5 fw-bold">Choose a CSV file: </label>
+        <label for="csv_file" class="form-label fs-6 fw-bold">Choose a CSV file: </label>
         <div class="mb-3 d-flex">
             <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" style="width: 50%; min-width: 300px;" onchange="previewCSV(event)" required>
             <button type="submit" class="btn btn-primary" id="importButton" style="margin-left: 15px;">Import</button>
@@ -24,7 +24,7 @@
     @endif
 
 
-    <div class="table-responsive border m-3 rounded">
+    <div class="table-responsive border rounded">
         <table class="table admin-table table-striped table-hover" id="csvTable">
             <thead style="border-bottom: 2px solid black">
                 <tr>

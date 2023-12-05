@@ -40,12 +40,6 @@ class AdminRemittanceController extends Controller
          // Replace null 'principal' with 0
         $data['principal'] = $data['principal'] ?? 0;
 
-        //The OR Number must be unique
-        $existingPayment = Payment::where('or_number', $data['or_number'])->first();
-        if ($existingPayment) {
-            return redirect()->back()->with('error', 'Duplicate OR Number. Please use a different one.');
-        }
-
         // Get the loan based on the loan_id
         $loan = Loan::find($data['loan_id']);
         if (!$loan) {

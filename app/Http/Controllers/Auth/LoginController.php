@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -28,14 +29,17 @@ class LoginController extends Controller
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $maxAttempts = 5; // Max Attemps
+    protected $decayMinutes = 5;  // Decay Minutes
+
     protected function redirectTo()
     {
         // Check user_type and redirect based on the user type
         $user = auth()->user();
         if ($user->user_type === 'admin') {
-            return '/admin/dashboard'; 
+            return '/admin/dashboard';
         } elseif ($user->user_type === 'member') {
-            return '/member'; 
+            return '/member';
         } else {
             return '/home'; // Default redirection for other user types
         }
