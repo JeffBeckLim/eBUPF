@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group fg-admin" style="width: 150px; position: relative;">
                     <select id="quarterSelect" class="form-control bg-white border-0">
-                        <option value="All">Quarter</option>
+                        <option value="All">All Quarter</option>
                         <option value="1st Quarter">1st Quarter</option>
                         <option value="2nd Quarter">2nd Quarter</option>
                         <option value="3rd Quarter">3rd Quarter</option>
@@ -270,12 +270,6 @@
         $("#total_modal").text(parseFloat(total).toFixed(2));
     });
 });
-
-    function hideAlert() {
-        var alert = document.getElementById('myAlert');
-        alert.style.display = 'none';
-    }
-    setTimeout(hideAlert, 7000);
 
     function getQuarterFromDate(dateStr) {
         const date = new Date(dateStr);

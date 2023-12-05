@@ -67,7 +67,7 @@
               </div>
               @endif
 
-              <div class="col-12 ">
+              <div class="col-12">
                 @yield('form')
               </div>
 

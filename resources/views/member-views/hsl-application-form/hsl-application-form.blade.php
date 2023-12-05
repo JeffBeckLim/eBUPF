@@ -18,7 +18,7 @@
         </div>
 
          <!-- Tooltip -->
-{{-- 
+{{--
             <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="More detials here..."><i class="bi bi-info-circle"></i> What is a Housing Loan?</a>
 
         <script>
@@ -26,7 +26,7 @@
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script> --}}
          <!-- Tooltip -->
-         
+
 
          @if (session('email_error'))
             <div class="alert alert-danger">
@@ -35,20 +35,20 @@
         @endif
 
         <p class="text1-design mt-2">Loan Details</p>
-        
+
         <div class="my-2">
             @include('member-views.mpl-application-form.accordion-entity-definition')
         </div>
 
-        <form action="/member/loan-application/2" method="POST" >
+        <form action="/member/loan-application/2" method="POST" onsubmit='disableButton()'>
             @csrf
             <div id="loanForm">
-              
+
 
                 <div class="form-group">
                     <label for="loanAmount" class="text2-design">Amount Requested</label>
 
-                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}">
+                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}" min="50000" max="200000">
 
                     <div id="validationLoanAmountFeedBack" class="invalid-feedback">
                         Loan amount must be at least 50,000 Php or max value of 200,000 Php
@@ -135,6 +135,13 @@
 
         </form>
 
+        <script>
+            function disableButton() {
+                var btn = document.getElementById('confirmRequest');
+                btn.disabled = true;
+                btn.innerText = 'Sending your request'
+            }
+        </script>
     </div>
   </div>
 </div>
