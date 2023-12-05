@@ -1,5 +1,5 @@
 // console.log("PH Address Selector is now running");
-
+console.log(region_link);
 
 var my_handlers = {
     // fill province
@@ -36,7 +36,8 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json';
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json';
+        var url = province_link;
         
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
@@ -80,7 +81,10 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/city.json';
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/city.json';
+
+        var url = city_link;
+
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
                 return value.province_code == province_code;
@@ -115,7 +119,8 @@ var my_handlers = {
         dropdown.prop('selectedIndex', 0);
 
         // filter & Fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/barangay.json';
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/barangay.json';
+        var url = barangay_link;
         $.getJSON(url, function(data) {
             var result = data.filter(function(value) {
                 return value.city_code == city_code;
@@ -155,7 +160,8 @@ $(function() {
 
     dropdown.append('<option selected="true" disabled>Choose Region</option>');
     dropdown.prop('selectedIndex', 0);
-    const url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json';
+    // const url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json';
+    const url = region_link;
     // Populate dropdown with list of regions
     $.getJSON(url, function(data) {
         $.each(data, function(key, entry) {
