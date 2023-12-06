@@ -217,4 +217,5 @@ citySelector.addEventListener('change', function() {
         barangaySelector.disabled = false;
 });
 </script>
-<script src="{{asset('js/ph_address_selector.js')}}" defer></script>
+@include('member-views.membership-form.ph-address-selector')
+{{-- <script src="{{asset('js/ph_address_selector.js')}}" defer></script> --}}
