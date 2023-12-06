@@ -1,7 +1,13 @@
 @extends('member-components.member-layout')
 
 @section('content')
-
+<style>
+    .download-ledger:hover {
+        color: #fff !important;
+        background: #005749 !important;
+        transition: all 0.5s ease;
+    }
+</style>
 <main >
     <div class="container-fluid">
         <div class="col pt-1 m-2">
@@ -12,9 +18,19 @@
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-12 pb-3" style="margin: 10px 0 0 10px">
-                                    <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
-                                    <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
+                                        </div>
+                                        <div class="col-6 text-end" style="margin-top: -12px;">
+                                            <a href="{{route('generateLedger', ['id' => $loan->id])}}" class="btn download-ledger p-1" style="border: 1px solid #008f77; color:#005e4e; @if ($payments->isEmpty())
+                                                pointer-events: none; color: grey; border: 1px solid grey;
+                                             @endif"
 
+                                            >Download Ledger</a>
+                                        </div>
+                                    </div>
+                                    <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
                                 </div>
 
                                 <div class="col-12 " style=" scale: 0.9;">
@@ -68,7 +84,7 @@
 
                                         </div>
                                         <div class="col-4">
-                                            <p  class="text3-1-design m-0">Outstanding Balance</p>
+                                            <p  class="fs-7 fw-bold m-0" style="color: #00638D;">Outstanding Balance</p>
                                             <p class="fs-5 fw-bold"><span class="fw-light" style="font-size: small;">Php</span> {{
                                                 number_format(
                                                     $loan->principal_amount + $loan->interest -
@@ -128,7 +144,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                        <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{number_format($loan->principal_amount, 2, '.', ',')}}
+                                        <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{number_format($loan->principal_amount, 2, '.', ',')}}
                                     </p>
                                 </div>
 
@@ -139,7 +155,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                        <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{number_format($loan->interest, 2, '.', ',')}}
+                                        <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{number_format($loan->interest, 2, '.', ',')}}
                                     </p>
                                 </div>
 
@@ -150,7 +166,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                      <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{number_format($loan->principal_amount + $loan->interest, 2, '.', ',')}}
+                                      <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{number_format($loan->principal_amount + $loan->interest, 2, '.', ',')}}
                                     </p>
                                 </div>
 
@@ -200,7 +216,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                      <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_principal, 2, '.', ',') : '0.00'}}
+                                      <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_principal, 2, '.', ',') : '0.00'}}
                                     </p>
                                 </div>
                                 <div class="col-6 mb-3 ">
@@ -210,7 +226,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                      <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_interest, 2, '.', ',') : '0.00'}}
+                                      <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_interest, 2, '.', ',') : '0.00'}}
                                     </p>
                                 </div>
                                 <div class="col-12 border-dotted-top" >
@@ -222,7 +238,7 @@
                                 </div>
                                 <div class="col-6 mb-3 ">
                                     <p class="m-0">
-                                      <span class="bu-text-light-blue fw-bold" style="font-size: small;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.', ',') : '0.00'}}
+                                      <span class="fw-bold" style="font-size: small; color: #00638D;">Php</span> {{$loan->amortization ? number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.', ',') : '0.00'}}
                                     </p>
                                 </div>
                             </div>
