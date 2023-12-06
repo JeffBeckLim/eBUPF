@@ -172,16 +172,16 @@
 </div>
 @php
  
-$jsonContents = Illuminate\Support\Facades\File::get(resource_path('ph-json\region.json'));
+$jsonContents = Illuminate\Support\Facades\File::get(resource_path('ph-json/region.json'));
 $regions = json_decode($jsonContents, true);
 
-$jsonContentsProv = Illuminate\Support\Facades\File::get(resource_path('ph-json\province.json'));
+$jsonContentsProv = Illuminate\Support\Facades\File::get(resource_path('ph-json/province.json'));
 $provinces = json_decode($jsonContentsProv, true);
 
-$jsonContentsCity = Illuminate\Support\Facades\File::get(resource_path('ph-json\city.json'));
+$jsonContentsCity = Illuminate\Support\Facades\File::get(resource_path('ph-json/city.json'));
 $cities = json_decode($jsonContentsCity, true);
 
-$jsonContentsBarangay = Illuminate\Support\Facades\File::get(resource_path('ph-json\barangay.json'));
+$jsonContentsBarangay = Illuminate\Support\Facades\File::get(resource_path('ph-json/barangay.json'));
 $barangays = json_decode($jsonContentsBarangay, true);
 
 // $region = asset('js/ph-json/region.json');
