@@ -7,7 +7,7 @@
                         Hello {{Auth::user()->member->firstname}}, thank you for signing Up!
                     </h4>
                     <p class="membership-card-greetings2 fs-6">
-                        Congratulations! You are now registered and can access our membership application form. Simply fill it up and submit it to BUPF Legazpi Main Campus. For more details, please continue reading below.
+                        Congratulations! You are now registered and can access our membership application form. Simply fill it up and submit it to BUPF Legazpi Main Campus. For more details, click the link below.
                     </p>
                 </div>
                 <div class="col-lg-5 d-flex align-items-center">

@@ -15,13 +15,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoanApplicationApproved;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LoanApplicationStatus;
 
 class AdminLoanApplicationController extends Controller
 {
     public function updateLoan(Request $request , $id){
-        
+
         $loan=Loan::findOrFail($id);
 
         // check for changes
@@ -40,7 +42,7 @@ class AdminLoanApplicationController extends Controller
             'term_years'=> 'required|numeric|min:1|max:5',
             'loan_category'=> 'nullable|numeric',
         ]);
-        
+
         // check changes first and create logs
         $check_changes = [];
         if($request->principal_amount != $loan->principal_amount){array_push($check_changes, "PRIN");}
@@ -64,17 +66,17 @@ class AdminLoanApplicationController extends Controller
                 'amort_principal' => $amort_principal,
                 'amort_interest' => $amort_interest,
             ]);
-            
+
             AmortizationLog::create([
                 'loan_id_log'=>$loan->id,
                 'loan_code_log'=>$loan->loan_code,
-        
-                'amort_principal_log'=>$amortization->amort_principal, 
-                'amort_interest_log'=>$amortization->amort_interest, 
-        
-                // 'amort_start_log', 
-                // 'amort_end_log', 
-        
+
+                'amort_principal_log'=>$amortization->amort_principal,
+                'amort_interest_log'=>$amortization->amort_interest,
+
+                // 'amort_start_log',
+                // 'amort_end_log',
+
                 'changes'=>"Create",
                 'updated_by'=>Auth::user()->member->id,
             ]);
@@ -98,20 +100,20 @@ class AdminLoanApplicationController extends Controller
             AmortizationLog::create([
                 'loan_id_log'=>$loan->id,
                 'loan_code_log'=>$loan->loan_code,
-        
-                'amort_principal_log'=>$amortization->amort_principal, 
-                'amort_interest_log'=>$amortization->amort_interest, 
-        
-                'amort_start_log'=>$amortization->amort_start, 
-                'amort_end_log'=>$amortization->amort_end, 
-        
+
+                'amort_principal_log'=>$amortization->amort_principal,
+                'amort_interest_log'=>$amortization->amort_interest,
+
+                'amort_start_log'=>$amortization->amort_start,
+                'amort_end_log'=>$amortization->amort_end,
+
                 'changes'=>"Update",
                 'updated_by'=>Auth::user()->member->id,
             ]);
 
             return back()->with('success', 'Loan and Amortization Updated!');
         }
-        
+
         return back()->with('success', 'Loan Updated!');
     }
 
@@ -133,7 +135,7 @@ class AdminLoanApplicationController extends Controller
             }
             if(in_array(3,$status_array) && !in_array(6,$status_array)){
                 if($raw_loan->id > $latest_id){
-                    // get latest id 
+                    // get latest id
                     $latest_id = $raw_loan->id;
                 }
                 array_push($loans, $raw_loan);
@@ -153,9 +155,9 @@ class AdminLoanApplicationController extends Controller
                 $incomplete_amort += 1;
             }
             elseif($loan->amortization->amort_start == null ||
-                $loan->amortization->amort_end == null || 
-                $loan->amortization->amort_principal == null || 
-                $loan->amortization->amort_interest == null 
+                $loan->amortization->amort_end == null ||
+                $loan->amortization->amort_principal == null ||
+                $loan->amortization->amort_interest == null
             ){
                 $incomplete_amort += 1;
             }
@@ -166,7 +168,7 @@ class AdminLoanApplicationController extends Controller
 
 
         }
-        
+
 
         $loan_categories = LoanCategory::all();
 
@@ -187,19 +189,19 @@ class AdminLoanApplicationController extends Controller
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
 
-        return view('admin-views.admin-loan-applications.admin-loan-applications', 
+        return view('admin-views.admin-loan-applications.admin-loan-applications',
         compact(
-            'loans' , 
-            'loan_categories', 
-            'table_freeze', 
-            'loanType', 
-            'incomplete_amort' , 
-            'null_interest', 
-            'no_loanType' , 
-            'latest_id', 
+            'loans' ,
+            'loan_categories',
+            'table_freeze',
+            'loanType',
+            'incomplete_amort' ,
+            'null_interest',
+            'no_loanType' ,
+            'latest_id',
             'units',
             'years',
-            'months',            
+            'months',
             )
             ) ;
     }
@@ -221,13 +223,13 @@ class AdminLoanApplicationController extends Controller
         $loan->principal_amount = $request->principal_amount;
         $loan->save();
 
-        // Add positive value if positive difference, and convert to string value. 
+        // Add positive value if positive difference, and convert to string value.
         $difference_principal =  $loan->principal_amount - $old_principal ;
         $difference_principal = number_format($difference_principal, 2, ".",",");
         if($difference_principal > 0){
             $difference_principal_str = strval("+".$difference_principal);
         }else{
-            $difference_principal_str = strval($difference_principal); 
+            $difference_principal_str = strval($difference_principal);
         }
         // create log
         $this->createLog($loan->id, 'Principal '.$difference_principal_str);
@@ -246,13 +248,13 @@ class AdminLoanApplicationController extends Controller
 
 
         $old_principal = $loan->principal_amount;
-        // Add positive value if positive difference, and convert to string value. 
+        // Add positive value if positive difference, and convert to string value.
         $difference_principal =  $loan->principal_amount - $old_principal ;
         $difference_principal = number_format($difference_principal, 2, ".",",");
         if($difference_principal > 0){
             $difference_principal_str = strval("+".$difference_principal);
         }else{
-            $difference_principal_str = strval($difference_principal); 
+            $difference_principal_str = strval($difference_principal);
         }
         // create log
         $this->createLog($loan->id, 'Loan Type');
@@ -264,9 +266,9 @@ class AdminLoanApplicationController extends Controller
 
 
     public function createLoanApplicationState(Request $request, $id){
-        
+
         $loan = Loan::where('id',$id)->with('loanApplicationStatus')->first();
-        
+
         // check for change
         if($loan->is_active == $request->is_active){
             return back();
@@ -306,7 +308,7 @@ class AdminLoanApplicationController extends Controller
             array_push($status_array, $item->loan_application_state_id);
         }
 
-        
+
 
         if($status->loan_application_state_id ==  1 || $status->loan_application_state_id ==  2){
             if(in_array(5 , $status_array) || in_array(4 , $status_array) ||  in_array(3 , $status_array)){
@@ -321,7 +323,7 @@ class AdminLoanApplicationController extends Controller
         elseif($status->loan_application_state_id ==  3){
             if(in_array(5 , $status_array) || in_array(4 , $status_array)){
             return back()->with('deleted_status', 'Cannot delete status 3 (Approved by exe.), if status 4 or 5 exists');}
-            
+
             else{
                 $this->createLog($loan->id, '- STATUS'."(".$status->loan_application_state_id.")");
                 $status->delete();
@@ -337,7 +339,7 @@ class AdminLoanApplicationController extends Controller
         }
         elseif($status->loan_application_state_id ==  5){
 
-            $loan->is_active = null; 
+            $loan->is_active = null;
             $loan->save();
             $status->delete();
 
@@ -391,25 +393,25 @@ class AdminLoanApplicationController extends Controller
             }
         }
         $years = array_unique($years);
-    
+
         $units = Unit::all();
 
-        
+
         // dd($years);
         // initialize months for select filter
         $months = [
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
-        
-    
+
+
 
         return view('admin-views.admin-loan-applications-tracking.admin-loan-applications-tracking', compact(
-            'loans', 
-            'loan_app_states', 
-            'loan_categories', 
-            'approved' , 
-            'denied', 
+            'loans',
+            'loan_app_states',
+            'loan_categories',
+            'approved' ,
+            'denied',
             'pending' ,
             'loan_type',
             'months',
@@ -422,12 +424,19 @@ class AdminLoanApplicationController extends Controller
 
 
     public function createLoanApplicationStatus(Request $request, $loan_id){
-        
+        //get the member using the loan id
+        $member = Loan::where('id', $loan_id)->with('member.user')->first();
+        // get member info
+        $member = $member->member;
+
         //Validate if loan exists
-        $loan = Loan::findOrFail($loan_id);    
+        $loan = Loan::findOrFail($loan_id);
+        $loan_type = $loan->loanType->loan_type_name;
+        $loan_code = $loan->loan_code;
+
         $amortization = Amortization::find($loan->amortization_id);
         $loan_app_status = LoanApplicationStatus::where('loan_id', $loan->id)->get();
-        
+
         // Validate Make sure Adding Status are in squence
         $statuses = [];
         foreach($loan_app_status as $loan_status){
@@ -465,8 +474,8 @@ class AdminLoanApplicationController extends Controller
                 return back()->with('status_danger', 'Please add the interest value of this loan first.');
             }
         }
-        
-     
+
+
         $formFields = $request->validate([
             'loan_application_state_id' => 'required',
             'remarks'=>'nullable',
@@ -484,7 +493,7 @@ class AdminLoanApplicationController extends Controller
         if(count($status) != 0){
             return back()->with('status_error', 'The loan already has that status.');
         }
-        
+
         // create state
         $new_loan_status = LoanApplicationStatus::create([
             'loan_id' => $loan->id,
@@ -493,8 +502,10 @@ class AdminLoanApplicationController extends Controller
             'remarks'=>$formFields['remarks'],
         ]);
 
-       
-    
+       if($new_loan_status->loan_application_state_id == 4){
+            Mail::to($member->user->email)->send(new LoanApplicationApproved($member, $loan_type, $loan_code));
+        }
+
         if($new_loan_status->loan_application_state_id == 5){
             $loan->is_active = 1;
             $loan->save();
