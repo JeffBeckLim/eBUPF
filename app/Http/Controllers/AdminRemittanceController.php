@@ -139,6 +139,16 @@ class AdminRemittanceController extends Controller
                 // Delete the payment record from the original table
                 $payment->delete();
 
+                // Make the loan active if the loan balance is greater than 0
+                $loan = Loan::find($payment->loan_id);
+                $totalLoanPayment = Payment::where('loan_id', $payment->loan_id)->sum('principal') + Payment::where('loan_id', $payment->loan_id)->sum('interest');
+                $loanBalance = ($loan->principal_amount + $loan->interest) - $totalLoanPayment;
+
+                if($loanBalance > 0){
+                    $loan->is_active = 1;
+                    $loan->save();
+                }
+
                 // Redirect back with a success message
                 return redirect()->back()->with('success', 'Payment deleted successfully. The record is saved in the logs.');
             }else{

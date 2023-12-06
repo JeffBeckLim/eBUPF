@@ -348,7 +348,7 @@ input.invalid {
 
 .download-ledger:hover {
     color: #fff !important;
-    background: #005749;
+    background: #005749 !important;
 }
 
 .text4-design {
