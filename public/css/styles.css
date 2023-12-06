@@ -343,7 +343,12 @@ input.invalid {
 
 .text3-1-design {
     color: #00638D;
-    font-size: x-small;
+    font-size: 15px;
+}
+
+.download-ledger:hover {
+    color: #fff !important;
+    background: #005749;
 }
 
 .text4-design {
