@@ -50,9 +50,9 @@
     <div>
         <div style="width: 100%; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 5px;">{{ $member->lastname }}, {{ $member->firstname }}</div>
         @if($loan->loanType->loan_type_name == 'MPL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Multi-Purpose Loan {{ $loan->id }}</div>
-        @elseif($loan->loanType->loan_type_name == 'HL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Housing Loan {{ $loan->id }}</div>
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Multi-Purpose Loan {{-- {{ $loan->id }} --}}</div>
+        @elseif($loan->loanType->loan_type_name == 'HSL')
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Housing Loan {{-- {{ $loan->id }} --}}</div>
         @endif
     </div>
     <table>
@@ -85,8 +85,7 @@
                 <td class="to-bold">Interest Bal.:</td>
                 <td>{{
                     number_format(
-                  ($loan->interest - $interest_paid)  +
-                  ($loan->principal_amount - $principal_paid)
+                  ($loan->interest - $interest_paid)
                   , 2, '.', ',')
                 }}</td>
             </tr>
