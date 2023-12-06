@@ -1,4 +1,6 @@
 @php
+    use App\Models\Payment;
+
     $dateString = $loan->amortization->amort_start;
     $date = \Carbon\Carbon::parse($dateString);
 
@@ -113,17 +115,11 @@
                 <td>{{$monthsDifference}}</td>
                 <td class="to-bold">Months Paid:</td>
                 <td>
-                    @if ($latest_payment != null)
-                        {{$monthsDifferencePayment}}
-                    @endif
+                    {{$totalUniquePayments}}
                 </td>
                 <td class="to-bold">Months Left:</td>
                 <td>
-                    @if ($latest_payment != null)
-                        {{$monthsDifferencePayment = $latestPayment->diffInMonths($carbonEndDate)}}
-                    @else
-                        {{$monthsDifference}}
-                    @endif
+                    {{$monthsDifference - $totalUniquePayments}}
                 </td>
             </tr>
         </tbody>

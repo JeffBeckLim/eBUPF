@@ -96,13 +96,29 @@ class LedgerController extends Controller
 
          // Get all payments
          $paymentsMade = Payment::where('loan_id', $loan->id)->get();
-         //Filter the payments by year and month
+
+
+        // Get unique year and month combinations to get the total number of payments
+        $uniquePayments = [];
+
+        foreach ($paymentsMade as $payment) {
+            $paymentDate = Carbon::parse($payment->payment_date);
+            $yearMonth = $paymentDate->format('Y-m'); // Get year and month format
+
+            // Check if the year and month combination already exists
+            if (!isset($uniquePayments[$yearMonth])) {
+                $uniquePayments[$yearMonth] = true; // Add if it doesn't exist
+            }
+        }
+
+        $totalUniquePayments = count($uniquePayments);
+
+        //Filter the payments by year and month
          $filteredPayments = [];
          foreach($paymentsMade as $payment){
              $paymentDate = Carbon::parse($payment->payment_date);
              $filteredPayments[$paymentDate->format('Y')][$paymentDate->format('F')][] = $payment;
          }
-
 
         // check if has any payments if none, no latest payment returned
         if(count($payment_ids) != null){
@@ -145,7 +161,6 @@ class LedgerController extends Controller
             ];
 
 
-
         return view('admin-views.admin-ledgers.admin-personal-ledger',
         compact(
             'loan' ,
@@ -156,7 +171,8 @@ class LedgerController extends Controller
             'months' ,
             'penalty_payments',
             'sumPenaltyPayments',
-            'filteredPayments'
+            'filteredPayments',
+            'totalUniquePayments'
         ));
     }
 
