@@ -170,12 +170,36 @@
     submit
     </button> --}}
 </div>
-<script>
+@php
+ 
+$jsonContents = Illuminate\Support\Facades\File::get(resource_path('ph-json\region.json'));
+$regions = json_decode($jsonContents, true);
 
+$jsonContentsProv = Illuminate\Support\Facades\File::get(resource_path('ph-json\province.json'));
+$provinces = json_decode($jsonContentsProv, true);
+
+$jsonContentsCity = Illuminate\Support\Facades\File::get(resource_path('ph-json\city.json'));
+$cities = json_decode($jsonContentsCity, true);
+
+$jsonContentsBarangay = Illuminate\Support\Facades\File::get(resource_path('ph-json\barangay.json'));
+$barangays = json_decode($jsonContentsBarangay, true);
+
+// $region = asset('js/ph-json/region.json');
+// $province = asset('js/ph-json/province.json');
+// $city = asset('js/ph-json/city.json');
+// $barangay = asset('js/ph-json/barangay.json');
+@endphp
+<script>
 const regionSelector = document.getElementById('region');
 const provinceSelector = document.getElementById('province');
 const citySelector = document.getElementById('city');
 const barangaySelector = document.getElementById('barangay');
+
+var regions =  @json($regions);
+var provinces =  @json($provinces);
+var cities =  @json($cities);
+var barangays =  @json($barangays);
+
 
 regionSelector.addEventListener('change', function() {
 

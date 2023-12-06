@@ -178,7 +178,7 @@
                             @endif
                         @endforeach --}}
                         @php
-                            $dateString = $loan->amortization->amort_start; // Assuming this is a date string in 'YYYY-MM-DD' format
+                            $dateString = $loan->amortization->amort_start;
                             $date = \Carbon\Carbon::parse($dateString); // Parse the date string into a Carbon date object
 
                             // Subtract one month
@@ -218,6 +218,7 @@
                         // Calculate the difference in months
                         $monthsDifference = $carbonStartDate->diffInMonths($carbonEndDate);
                     @endphp
+
                     <div class="col-4">
                         <p class="pl-text-size">{{$monthsDifference}}</p>
                     </div>
@@ -321,18 +322,22 @@
 
 
                     </th>
-
+                    
                     @for ($x = $loan->term_years; $x != 0; $x--)
                         <th colspan="2">{{$amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
                     @endfor
-
                     <th colspan="2">{{$amort_start->format(' Y')}}</th>
-                    {{-- <th colspan="2">2027</th>
-                    <th colspan="2">2026</th>
-                    <th colspan="2">2025</th>
-                    <th colspan="2">2024</th>
-                    <th colspan="2">2023</th>
-                    <th colspan="2">2022</th> --}}
+
+                    {{-- check if the amort start is on january, to determine if the loan granted was last year DEC --}}
+                    @php
+                        $granted_december = false;
+                    @endphp
+                    @if ($amort_start->format('m') == '1')
+                        <th colspan="2">{{$amort_start->copy()->subMonths($loan->term_years * 12)->format('Y');}}</th>
+                        @php
+                            $granted_december = true;
+                        @endphp
+                    @endif
                 </tr>
                 <tr class="pl-tr" style="border-bottom: 1px solid black">
                     <th>Month</th>
@@ -340,17 +345,6 @@
                         <th class="fw-normal">Principal</th>
                         <th class="fw-normal">Interest</th>
                     @endfor
-
-                    {{-- <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
-                    <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
-                    <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
-                    <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th>
-                    <th class="fw-normal">Principal</th>
-                    <th class="fw-normal">Interest</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -358,7 +352,16 @@
 
                     <tr class="pl-tr">
                         <td>{{$months[$x]}}</td>
-                        @for($i = $loan->term_years; $i != -1; $i--)
+                        @php
+                        // check to start on december
+                            if ($granted_december) {
+                                $y = -2;
+                            }
+                            else {
+                                $y = -1;
+                            }
+                        @endphp
+                        @for($i = $loan->term_years; $i != $y; $i--)
                             @php
                                 $targetMonth = $x+1;
                                 $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
@@ -423,7 +426,7 @@
 
                 <tr class="pl-tr-last">
                     <td style="border-top: 2px solid black">Total</td>
-                    @for($i = $loan->term_years; $i != -1; $i--)
+                    @for($i = $loan->term_years; $i != $y; $i--)
                     @php
                         // $targetMonth = 12;
                         $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
