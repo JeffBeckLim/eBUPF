@@ -9,6 +9,7 @@ use App\Models\Payment;
 use App\Models\PaymentLog;
 use App\Models\Adjustment;
 use App\Models\Amortization;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Form;
 
@@ -49,7 +50,11 @@ class AdminRemittanceController extends Controller
 
         // Check if the payment is within the range of the amort_end and amort_start in the amortization table
         $amortization = $loan->amortization;
-        if ($data['payment_date'] < $amortization->amort_start || $data['payment_date'] > $amortization->amort_end) {
+        $paymentDate = Carbon::parse($data['payment_date']);
+        $amortStartDate = Carbon::parse($amortization->amort_start);
+        $amortEndDate = Carbon::parse($amortization->amort_end);
+
+        if ($paymentDate->format('Y-m') < $amortStartDate->format('Y-m') || $paymentDate->format('Y-m') > $amortEndDate->format('Y-m')) {
             return redirect()->back()->with('error', 'Payment date is not within the range of the amortization.');
         }
 

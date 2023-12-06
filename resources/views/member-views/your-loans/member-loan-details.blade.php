@@ -12,9 +12,19 @@
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-12 pb-3" style="margin: 10px 0 0 10px">
-                                    <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
-                                    <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
+                                        </div>
+                                        <div class="col-6 text-end" style="margin-top: -12px;">
+                                            <a href="{{route('generateLedger', ['id' => $loan->id])}}" class="btn download-ledger p-1" style="border: 1px solid #008f77; color:#005e4e; @if ($payments->isEmpty())
+                                                pointer-events: none; color: grey; border: 1px solid grey;
+                                             @endif"
 
+                                            >Download Ledger</a>
+                                        </div>
+                                    </div>
+                                    <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
                                 </div>
 
                                 <div class="col-12 " style=" scale: 0.9;">

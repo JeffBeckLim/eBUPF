@@ -295,6 +295,9 @@ use App\Models\Penalty;
 
     //Generate Insurance Form
     Route::get('/member/this/generateInsuranceForm',[PDFController::class,'generateInsuranceForm'])->middleware('auth')->name('generateInsuranceForm');
+
+    //Generate Ledger
+    Route::get('/member/this/generateLedger/{id}',[PDFController::class,'generateLedger'])->middleware('auth')->name('generateLedger');
 //MEMBER ======================================================================================================
 
 

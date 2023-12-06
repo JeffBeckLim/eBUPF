@@ -8,13 +8,11 @@ use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\Loan;
 use App\Models\Campus;
-use App\Models\Witness;
 use App\Models\CoBorrower;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\PenaltyPayment;
+use App\Models\Payment;
 
 class PDFController extends Controller{
 
@@ -284,6 +282,120 @@ class PDFController extends Controller{
 
         $fileName = "{$member->lastname} Insurance Form.pdf";
         return $pdf->download($fileName);
+    }
+
+    public function generateLedger($id){
+
+        if(Payment::where('loan_id', $id)->count() == 0){
+            return abort(401, 'Oops! This loan has no payments yet.');
+        }
+
+        $loan = Loan::find($id);
+
+        //for filename - lastname, firstname - loan type - loan id
+        $member = Member::find($loan->member_id);
+        $loanType = $loan->loanType->loan_type_name;
+        $loanId = $loan->id;
+        $filename = "{$member->lastname}, {$member->firstname} - {$loanType} - {$loanId} Insurance Form.pdf";
+
+        // add error catcher here to make sure that loang being retrieved is valid
+        $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();
+
+        $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
+
+        // if loan has missing amortization
+        if($loan->amortization == null){
+            return abort(401, 'Oops! This loan has some field missing.');
+        }
+
+        if($loan->amortization != null){
+            if($loan->amortization->amort_start == null || $loan->amortization->amort_end == null ){
+                return abort(403, 'Oops! This loan has some field missing in amortization period.');
+            }
+        }
+        // get principal and interest PAID
+        $principal_paid = 0;
+        $interest_paid = 0;
+        $payment_ids = [];
+
+        // get total payments
+        foreach($loan->payment as $payment){
+            $principal_paid += $payment->principal;
+            $interest_paid += $payment->interest;
+
+            array_push($payment_ids, $payment->id);
+        }
+
+        // Get all payments
+        $paymentsMade = Payment::where('loan_id', $loan->id)->get();
+        //Filter the payments by year and month
+        $filteredPayments = [];
+        foreach($paymentsMade as $payment){
+            $paymentDate = Carbon::parse($payment->payment_date);
+            $filteredPayments[$paymentDate->format('Y')][$paymentDate->format('F')][] = $payment;
+        }
+
+
+        if(count($payment_ids) != null){
+            $latest_payment = Payment::find(max($payment_ids));
+        }else{
+            $latest_payment = null;
+        }
+
+        $amort_start_parsed = Carbon::parse($loan->amortization->amort_start);
+        for ($x = $loan->term_years; $x != 0; $x--){
+
+            $targetMonth = 1;
+            $targetYear = $amort_start_parsed->copy()->addMonths($x * 12)->format('Y');
+
+
+            $filteredPaymentModes = Payment::whereYear('payment_date', $targetYear)
+            ->whereMonth('payment_date', $targetMonth)
+            ->get();
+        }
+
+        $raw_loans = Loan::where('member_id' , $loan->member_id)->where('loan_type_id' , $loan->loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')->whereHas('amortization')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        // get the loans of the member for the dropdown
+        $memberLoans = [];
+        foreach($raw_loans as $raw_loan){
+            $status_array = [];
+            foreach($raw_loan->loanApplicationStatus as $status){
+                    array_push($status_array, $status->loan_application_state_id);
+                }
+                if(in_array(5, $status_array)){
+                    array_push($memberLoans, $raw_loan);
+                }
+            }
+
+            $months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            $data = [
+                'loan' => $loan,
+                'member' => $member,
+                'principal_paid' => $principal_paid,
+                'interest_paid' => $interest_paid,
+                'filteredPayments' => $filteredPayments,
+                'latest_payment' => $latest_payment,
+                'months' => $months,
+                'memberLoans' => $memberLoans,
+                'penalty_payments' => $penalty_payments,
+                'sumPenaltyPayments' => $sumPenaltyPayments,
+            ];
+
+
+        $pdf = PDF::loadView('member-views.generate-pdf-files.generate-ledger', $data)->setPaper('legal', 'landscape');
+        return $pdf->download($filename);
+
     }
 
 }

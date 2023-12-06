@@ -190,12 +190,14 @@
                 <div class="col-12 border-top">
                     {{--  <i class="bi bi-list pe-4" style="color: #1030DA"></i> --}}
                     <div class="dropdown">
-                    <a class="btn dropdown w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-list pe-4" style="color: #1030DA"></i>More
-                    </a>
+                        <a class="btn dropdown w-100 text-start" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-list pe-4" style="color: #1030DA"></i>More
+                        </a>
 
-                    <ul class="dropdown-menu border p-2" style="width: 110%">
-                        <li><a class="dropdown-item rounded" href="/logout">Log out</a></li>
+                        <ul class="dropdown-menu border p-2" style="width: 110%">
+                            <li><a class="dropdown-item rounded" href="#">FAQs</a></li>
+                            <li><a class="dropdown-item rounded" href="/logout">Log out</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
