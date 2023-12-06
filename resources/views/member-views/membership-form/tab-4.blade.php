@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 mb-4 ">
             <label for="formFile" class="fw-bold mb-3">Upload Your Profile Picture</label>
-            <input class="form-upload" type="file" id="formFile" name="profile_picture" accept=".png, .jpg, .jpeg">
+            <input class="form-upload form-control" type="file" id="formFile" name="profile_picture" accept=".png, .jpg, .jpeg">
 
             <label class="mt-1 text-secondary"> If you are unable to upload a profile picture, please ensure that you paste a 2x2 photo on the physical document.</label>
         </div>

@@ -257,7 +257,7 @@ class MemberController extends Controller
         // for adding +63 in contact number
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-
+        
         $member->update($formFields);
         $member->firstname = ucwords($formFields['firstname']);
         $member->middlename = ucwords($formFields['middlename']);

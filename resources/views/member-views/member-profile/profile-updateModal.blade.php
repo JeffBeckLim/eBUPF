@@ -19,7 +19,7 @@
             @if($member->is_editable == 1)
             <div class="form-group">
                 <label for="campus-unit" class="fw-bold fs-7" style="color:#595959;">Campus & Unit</label>
-                <select name="unit_id" class="form-select form-control validate" >
+                <select name="unit_id" class="form-select form-control validate" id="unit_selector">
 
                     @foreach ($units as $units_item)
                         @if($unit->id == $units_item->id)
@@ -70,7 +70,7 @@
               @endif
               <div class="d-flex justify-content-end align-items-end mt-4 gap-3">
                     <button type="button" id="modal-profile-close-button" class="btn btn-outline-secondary">Close</button>
-                    <button type="submit" class="btn bu-orange text-light">Update Profile</button>
+                    <button id=submitBtn type="submit" class="btn bu-orange text-light">Update Profile</button>
               </div>
         </form>
     </div>
@@ -80,7 +80,7 @@
   const contactNumberInput = document.getElementById('contact_num');
   contactNumberInput.addEventListener('input', function(event) {
   const newValue = event.target.value;
-  console.log(newValue); // Logs the new value as it changes
+  // console.log(newValue); // Logs the new value as it changes
 
     if (newValue.length != 10 || newValue[0] != 9) {
             contactNumberInput.classList.add("is-invalid");
@@ -92,4 +92,59 @@
             contactNumberInput.setCustomValidity('');
         }
   });
+
+
+
+  // Get the form element and all input/select elements within it
+const form = document.getElementById('updateForm');
+const formElements = form.querySelectorAll('input, select');
+
+const old_unit_val = document.getElementById('unit_selector').value;
+
+// Function to check if any input has changed
+function checkChanges() {
+    let changed = false;
+
+    // Loop through each input/select element
+    formElements.forEach(element => {
+        if(element.type === 'select-one'){
+          if(element.value !== old_unit_val){
+            changed = true;
+          }
+        }
+        else if(element.type == 'file'){
+          if(element.value !== ''){
+            changed = true;
+          }
+        }
+        else if(element.type === 'hidden' || element.type === 'file'){
+          return;
+        }
+        else if (element.type !== 'submit' && element.value !== element.defaultValue) {
+            // If value is different from defaultValue, changes detected
+            changed = true;
+        }
+    });
+    // Get the submit button
+    const submitButton = document.getElementById('submitBtn');
+
+    // Enable or disable the submit button based on changes
+    if (changed) {
+        submitButton.removeAttribute('disabled');
+        submitButton.classList.remove('disabled');
+
+    } else {
+        submitButton.setAttribute('disabled', 'disabled');
+        submitButton.classList.add('disabled');
+    }
+}
+
+// Add change event listeners to all form elements
+formElements.forEach(element => {
+    element.addEventListener('change', checkChanges);
+});
+
+// Initially check for changes (in case of pre-filled fields)
+checkChanges();
+
   </script>

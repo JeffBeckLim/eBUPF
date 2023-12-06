@@ -5,7 +5,7 @@
                 <p class="m-0 fw-bold">Your Name</p>
                 <div class="row g-0 ">
                     <div class="col pe-1">
-                        <label for="lname"></label>
+                        <label for="firstname">
                             First name
                         </label>
                         <input class="form-control mb-1 validate" name="firstname" value="{{Auth::user()->member->firstname}}" id="firstname">
@@ -214,4 +214,5 @@ citySelector.addEventListener('change', function() {
         barangaySelector.disabled = false;
 });
 </script>
-<script src="{{asset('js/ph_address_selector.js')}}" defer></script>
+@include('member-views.membership-form.ph-address-selector')
+{{-- <script src="{{asset('js/ph_address_selector.js')}}" defer></script> --}}

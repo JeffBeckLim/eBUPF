@@ -451,6 +451,40 @@ function validateForm() {
             
             return isValidFormat && isValidLength;
           }
+
+        //   validate IMAGE
+          if(currentTab == 3){
+            const fileInput = document.getElementById('formFile');
+            const file = fileInput.files[0]; // Get the selected file
+            if(file != undefined){
+                if (!file) {
+                    alert('Please select an image.');
+                    fileInput.classList.add('is-invalid');
+                    valid = false;  
+                    return;
+                }
+
+                // Check file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file.');
+                    fileInput.classList.add('is-invalid');
+                    valid = false;  
+                    return;
+                }
+
+                // Check file size (in bytes)
+                const maxSize = 2 * 1024 * 1024; // 5MB in bytes
+                if (file.size > maxSize) {
+                    alert('Image size exceeds 2MB.');
+                    fileInput.classList.add('is-invalid');
+                    valid = false;  
+                    return;
+                }
+                else{
+                    fileInput.classList.remove('is-invalid');
+                }
+            }
+          }
         
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
