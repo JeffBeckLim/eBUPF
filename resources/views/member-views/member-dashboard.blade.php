@@ -45,7 +45,7 @@
                                                 <span class="fw-bold fs-5">&nbsp;|&nbsp;</span> HSL ₱<span class="fw-bold">{{ number_format($hslTotalBalance, 2) }}</span>
 
                                             </p>
-                                            <p class="text-white" style="position: absolute; top: 65%; left: 50%; transform: translate(-50%, -50%); font-size: 10px;">Total Outstanding Balance</p>
+                                            <p class="text-white" style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); font-size: 13px;">Total Outstanding Balance</p>
                                         </div>
                                         <div class="mb-2 " style="min-height: 270px; max-height: 300px; overflow-y: auto;">
                                             @if ($loans->isEmpty())
@@ -100,6 +100,8 @@
                                                                         {{-- Check if theres a loan payment [isset/empty] --}}
                                                                         @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
                                                                         {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
+                                                                        @elseif(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
+                                                                        {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentHSL[$loan->id], 2) }}
                                                                         @else
                                                                             {{ number_format(($loan->principal_amount + $loan->interest), 2) }}
                                                                         @endif
@@ -184,7 +186,7 @@
                                                                     array_push($status_array, $status->loan_application_state_id);
                                                                 }
                                                             @endphp
-                                                            
+
                                                             @if ($inActiveLoan->loan->deleted_at != null)
                                                             <span style="font-size: small;" class="fw-bold text-danger">Cancelled</span>
                                                         @elseif ($inActiveLoan->loan->is_active == 1)
@@ -192,11 +194,11 @@
                                                         @elseif($inActiveLoan->loan->is_active == 2)
                                                             <span style="font-size: small;" class="fw-bold {{$inActiveLoan->loan->deleted_at == null ? 'd-none' : ''}}">Non-performing</span>
                                                         @endif
-                                                        
+
                                                         @if(in_array(6, $status_array))
-                                                            <span style="font-size: small;" class="fw-bold text-danger">Declined</span>                                     
+                                                            <span style="font-size: small;" class="fw-bold text-danger">Declined</span>
                                                         @endif
-            
+
                                                         @if ($inActiveLoan->loan->is_active == null)
                                                         @php
                                                             $co_borrower = App\Models\CoBorrower::where('loan_id', $inActiveLoan->id)->first();
@@ -216,7 +218,7 @@
                                                             @else
                                                                 <p class="text16-design m-0 text-secondary"><i class="bi bi-circle-fill me-1"></i><span class="text-secondary">Being Processed</span></p>
                                                             @endif
-            
+
                                                         @endif
                                                             <p class="fw-bold text m-0" style="font-size: small">{{$inActiveLoan->loan->loanType->loan_type_description}}</p>
                                                         </div>
@@ -325,7 +327,7 @@
                                                                 @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
                                                                     MPL
                                                                 @elseif($transaction->loanType->loan_type_description == 'Housing Loan')
-                                                                    HSL
+                                                                    HL
                                                                 @endif
                                                             </p>
                                                         </div>

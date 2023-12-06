@@ -76,7 +76,7 @@
                                                         @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
                                                             MPL
                                                         @elseif($transaction->loanType->loan_type_description == 'Housing Loan')
-                                                            HSL
+                                                            HL
                                                         @endif
                                                     </p>
                                                 </div>
