@@ -1,6 +1,4 @@
 // console.log("PH Address Selector is now running");
-
-
 var my_handlers = {
     // fill province
     fill_provinces: function() {
@@ -36,10 +34,11 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json';
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/province.json';
+        // var url = province_link;
         
-        $.getJSON(url, function(data) {
-            var result = data.filter(function(value) {
+        // $.getJSON(url, function(data) {
+            var result = provinces.filter(function(value) {
                 return value.region_code == region_code;
             });
 
@@ -52,7 +51,7 @@ var my_handlers = {
                 dropdown.append($('<option></option>').attr('value', entry.province_code).text(entry.province_name));
             })
 
-        });
+        // });
     },
     // fill city
     fill_cities: function() {
@@ -80,9 +79,12 @@ var my_handlers = {
         barangay.prop('selectedIndex', 0);
 
         // filter & fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/city.json';
-        $.getJSON(url, function(data) {
-            var result = data.filter(function(value) {
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/city.json';
+
+        // var url = city_link;
+
+        // $.getJSON(url, function(data) {
+            var result = cities.filter(function(value) {
                 return value.province_code == province_code;
             });
 
@@ -94,7 +96,7 @@ var my_handlers = {
                 dropdown.append($('<option></option>').attr('value', entry.city_code).text(entry.city_name));
             })
 
-        });
+        // });
     },
     // fill barangay
     fill_barangays: function() {
@@ -115,9 +117,10 @@ var my_handlers = {
         dropdown.prop('selectedIndex', 0);
 
         // filter & Fill
-        var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/barangay.json';
-        $.getJSON(url, function(data) {
-            var result = data.filter(function(value) {
+        // var url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/barangay.json';
+        // var url = barangay_link;
+        // $.getJSON(url, function(data) {
+            var result = barangays.filter(function(value) {
                 return value.city_code == city_code;
             });
 
@@ -129,7 +132,7 @@ var my_handlers = {
                 dropdown.append($('<option></option>').attr('value', entry.brgy_code).text(entry.brgy_name));
             })
 
-        });
+        // });
     },
 
     onchange_barangay: function() {
@@ -155,18 +158,19 @@ $(function() {
 
     dropdown.append('<option selected="true" disabled>Choose Region</option>');
     dropdown.prop('selectedIndex', 0);
-    const url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json';
+    // const url = 'https://raw.githubusercontent.com/wilfredpine/philippine-address-selector/main/ph-json/region.json';
+    
+    // const url = region_link;
     // Populate dropdown with list of regions
-    $.getJSON(url, function(data) {
-        $.each(data, function(key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
-        })
+    // $.getJSON(url, function(data) {
+    //     $.each(data, function(key, entry) {
+    //         dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
+    //     })
+    // });    
+
+
+    // Populate dropdown with list of regions
+    regions.forEach(entry => {
+        dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
     });
-
 });
-
-// reload if any variable is undefined. 
-// if (typeof jQuery === 'undefined') {
-//     // jQuery is not defined, reload the page
-//     window.location.reload();
-// }

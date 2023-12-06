@@ -349,10 +349,12 @@ function validateForm() {
             if(employee_num_value != ''){
                 if ( validateEmployeeNum(employee_num_value)) {  
                     employee_num.classList.add("is-valid");
+                    employee_num.classList.remove("is-invalid");
                     employee_num.setCustomValidity('');
                 } 
                 else {
                     employee_num.classList.add("is-invalid");
+                    employee_num.classList.remove("is-valid");
                     employee_num.setCustomValidity('Invalid format, format is YEAR-xxx-x');
                     employee_num.reportValidity();
                     valid = false;   
@@ -444,8 +446,8 @@ function validateForm() {
           }
         function validateEmployeeNum(input) {
             const cleanNumber = input.replace(/-/g, ''); // Remove dashes
-            const isValidFormat = /^\d{4}-\d{3}-\d$/.test(input);// Validate format
-            const isValidLength = cleanNumber.length == 8; // Validate length
+            const isValidFormat = /^\d{4}-\d{3}-\d{1,4}$/.test(input);// Validate format
+            const isValidLength = cleanNumber.length >= 8 && cleanNumber.length <= 16; // Validate length
             
             return isValidFormat && isValidLength;
           }
