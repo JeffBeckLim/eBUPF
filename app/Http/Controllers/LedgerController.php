@@ -19,9 +19,9 @@ class LedgerController extends Controller
         // CHECK IF A MEMBER HAS A CHECK picked up Status
         // Remember that check pick up status id == 5
         $members=[];
-        foreach($raw_members as $raw_member){   
+        foreach($raw_members as $raw_member){
             foreach($raw_member->loans as $loan){
-                
+
                     $status_array=[];
                     foreach($loan->loanApplicationStatus as $status){
                         array_push($status_array, $status->loan_application_state_id);
@@ -56,7 +56,7 @@ class LedgerController extends Controller
                     array_push($loans, $raw_loan);
                 }
             }
-        
+
         // dd($loans);
         return view('admin-views.admin-ledgers.admin-members-ledgers' , compact('loans' , 'loan_type' ,'member'));
     }
@@ -68,10 +68,10 @@ class LedgerController extends Controller
         $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
         ->orderBy('created_at', 'desc')
         ->get();
-        
+
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
-        
-        // if loan has missing amortization 
+
+        // if loan has missing amortization
         if($loan->amortization == null){
             return abort(401, 'Oops! This loan has some field missing.');
         }
@@ -85,14 +85,24 @@ class LedgerController extends Controller
         $principal_paid = 0;
         $interest_paid = 0;
         $payment_ids = [];
-        
+
         // get total payments
         foreach($loan->payment as $payment){
             $principal_paid += $payment->principal;
             $interest_paid += $payment->interest;
-            
+
             array_push($payment_ids, $payment->id);
         }
+
+         // Get all payments
+         $paymentsMade = Payment::where('loan_id', $loan->id)->get();
+         //Filter the payments by year and month
+         $filteredPayments = [];
+         foreach($paymentsMade as $payment){
+             $paymentDate = Carbon::parse($payment->payment_date);
+             $filteredPayments[$paymentDate->format('Y')][$paymentDate->format('F')][] = $payment;
+         }
+
 
         // check if has any payments if none, no latest payment returned
         if(count($payment_ids) != null){
@@ -104,10 +114,10 @@ class LedgerController extends Controller
         $amort_start_parsed = Carbon::parse($loan->amortization->amort_start);
         for ($x = $loan->term_years; $x != 0; $x--){
 
-            $targetMonth = 1; 
-            $targetYear = $amort_start_parsed->copy()->addMonths($x * 12)->format('Y'); 
+            $targetMonth = 1;
+            $targetYear = $amort_start_parsed->copy()->addMonths($x * 12)->format('Y');
 
-            
+
             $filteredPaymentModes = Payment::whereYear('payment_date', $targetYear)
             ->whereMonth('payment_date', $targetMonth)
             ->get();
@@ -128,15 +138,26 @@ class LedgerController extends Controller
                     array_push($memberLoans, $raw_loan);
                 }
             }
-        
+
             $months = [
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
-            
-        
 
-        return view('admin-views.admin-ledgers.admin-personal-ledger', compact('loan' , 'principal_paid', 'interest_paid', 'latest_payment' , 'memberLoans', 'months' , 'penalty_payments', 'sumPenaltyPayments'));
+
+
+        return view('admin-views.admin-ledgers.admin-personal-ledger',
+        compact(
+            'loan' ,
+            'principal_paid',
+            'interest_paid',
+            'latest_payment' ,
+            'memberLoans',
+            'months' ,
+            'penalty_payments',
+            'sumPenaltyPayments',
+            'filteredPayments'
+        ));
     }
 
 }

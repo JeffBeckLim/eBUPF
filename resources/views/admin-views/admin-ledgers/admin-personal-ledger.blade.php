@@ -60,7 +60,7 @@
                 <span style="font-size: 14px">ID</span>
                 <span>{{$loan->id}}</span>
             </h3>
-            
+
             @if (($principal_paid + $interest_paid)/($loan->principal_amount + $loan->interest) < 0.5)
                 <p class="pl-50 d-flex justify-content-center align-items-center py-1 text-danger">
                     Paid
@@ -257,7 +257,7 @@
                             // Parse the start and end dates as Carbon objects
                             $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
                             // Calculate the difference in months
-                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate) - 1;
+                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate);
                          @endphp
                         <p class="pl-text-size">{{$monthsDifferencePayment}}</p>
                         @endif
@@ -322,22 +322,14 @@
 
 
                     </th>
-                    
-                    @for ($x = $loan->term_years; $x != 0; $x--)
-                        <th colspan="2">{{$amort_start->copy()->addMonths($x * 12)->format('Y');}}</th>
-                    @endfor
-                    <th colspan="2">{{$amort_start->format(' Y')}}</th>
 
-                    {{-- check if the amort start is on january, to determine if the loan granted was last year DEC --}}
                     @php
-                        $granted_december = false;
+                        $recordStart = $amort_start->copy()->subMonth()->format('Y');
+                        $recordEnd = $amort_end->format('Y');
                     @endphp
-                    @if ($amort_start->format('m') == '1')
-                        <th colspan="2">{{$amort_start->copy()->subMonths($loan->term_years * 12)->format('Y');}}</th>
-                        @php
-                            $granted_december = true;
-                        @endphp
-                    @endif
+                    @for ($x = $recordEnd; $x >= $recordStart; $x--)
+                        <th colspan="2" style="text-align: center;">{{{$x}}}</th>
+                    @endfor
                 </tr>
                 <tr class="pl-tr" style="border-bottom: 1px solid black">
                     <th>Month</th>
@@ -349,110 +341,67 @@
             </thead>
             <tbody>
                 @for ($x = 0; $x < count($months); $x++)
-
-                    <tr class="pl-tr">
-                        <td>{{$months[$x]}}</td>
-                        @php
-                        // check to start on december
-                            if ($granted_december) {
-                                $y = -2;
-                            }
-                            else {
-                                $y = -1;
-                            }
-                        @endphp
-                        @for($i = $loan->term_years; $i != $y; $i--)
-                            @php
-                                $targetMonth = $x+1;
-                                $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-
-                                $filteredPayments =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                                ->whereMonth('payment_date', $targetMonth)->where('loan_id', $loan->id)
-                                ->get();
-                            @endphp
-                            <td>
-                                @if ($amortStartSubMonth->month == $targetMonth
-                                && $amortStartSubMonth->year == $targetYear)
-                                    <h6 class="fw-bold text-primary" style="font-size: 14px">Loan Granted</h6>
-                                @endif
-
-                                @if ($filteredPayments != null)
+                            <tr>
+                                <td>{{$months[$x]}}</td>
+                                @for ($i = $recordEnd; $i >= $recordStart; $i--)
                                     @php
-                                        $totalPrincipal = null;
-                                        $num_payments = null;
-                                        foreach ($filteredPayments as $filteredPayment){
-                                            $totalPrincipal += $filteredPayment->principal;
+                                        $targetMonth = $months[$x];
+                                        $targetYear = $i;
+                                        $amortStartYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                                        $paymentCount = isset($filteredPayments[$targetYear][$targetMonth]) ? count($filteredPayments[$targetYear][$targetMonth]) : 0;
+                                        $principal = 0;
+                                        $interest = 0;
 
-                                            if ($filteredPayment->principal > 0) {
-                                                $num_payments++;
+                                        if(isset($filteredPayments[$targetYear][$targetMonth])){
+                                            foreach($filteredPayments[$targetYear][$targetMonth] as $payment){
+                                                $principal += $payment->principal;
+                                                $interest += $payment->interest;
                                             }
                                         }
                                     @endphp
-                                    @if ($totalPrincipal != 0)
-                                        @if ($num_payments > 1)
-                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalPrincipal, 2, '.',',')}}</a>
-                                        @else
-                                            <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalPrincipal, 2, '.',',')}}</a>
-                                        @endif
-                                    @endif
-                                @endif
-                            </td>
-                            <td >
-                                @if ($filteredPayments != null)
-                                @php
-                                    $totalInterest = null;
-                                    $num_payments = null;
-                                    foreach ($filteredPayments as $filteredPayment){
-                                        $totalInterest += $filteredPayment->interest;
-                                        $num_payments++;
 
+                                    @if($paymentCount > 0)
+                                        <td style="text-align: center;">{{ number_format($principal, 2, '.', ',') }}</td>
+                                        <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
+                                    @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
+                                        <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
+                                    @else
+                                        <td colspan="2"></td> {{-- Empty cell, No Payment--}}
+                                    @endif
+                                @endfor
+                            </tr>
+                        @endfor
+
+                        <tr>
+                            <td style="border-top: 2px solid black; font-weight: bold;">Total</td>
+                            @for ($i = $recordEnd; $i >= $recordStart; $i--)
+                                @php
+                                    $targetYear = $i;
+                                    $principalTotal = 0;
+                                    $interestTotal = 0;
+                                    //get the totals
+                                    if(isset($filteredPayments[$targetYear])){
+                                        foreach($filteredPayments[$targetYear] as $month){
+                                            foreach($month as $payment){
+                                                $principalTotal += $payment->principal;
+                                                $interestTotal += $payment->interest;
+                                            }
+                                        }
                                     }
                                 @endphp
-                                @if ($totalInterest != 0)
-                                    @if ($num_payments > 1)
-                                        <a class=" text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} separate payments">{{number_format($totalInterest, 2, '.',',')}}</a>
-                                    @else
-                                        <a class="text-dark text-decoration-none" data-bs-toggle="tooltip" data-bs-title="{{$num_payments}} payment">{{number_format($totalInterest, 2, '.',',')}}</a>
+                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
+                                    @if ($principalTotal)
+                                    {{ number_format($principalTotal, 2,'.' , ',') }}
                                     @endif
-                                @endif
-                                @endif
-                            </td>
-                        @endfor
-                    </tr>
-
-
-                @endfor
-                {{-- TOTAL row --}}
-
-                <tr class="pl-tr-last">
-                    <td style="border-top: 2px solid black">Total</td>
-                    @for($i = $loan->term_years; $i != $y; $i--)
-                    @php
-                        // $targetMonth = 12;
-                        $targetYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                        $principalTotal =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->where('loan_id', $loan->id)
-                        ->sum('principal');
-
-                        $interestTotal =  App\Models\Payment::whereYear('payment_date', $targetYear)
-                        ->where('loan_id', $loan->id)
-                        ->sum('interest');
-                    @endphp
-                    <td style="border-top: 2px solid black">
-                        @if ($principalTotal)
-                        {{ number_format($principalTotal, 2,'.' , ',') }}
-                        @endif
-                    </td>
-                    <td style="border-top: 2px solid black">
-                        @if ($interestTotal)
-                        {{ number_format($interestTotal, 2, '.' , ',') }}
-                        @endif
-
-                    </td>
-                    @endfor
-                </tr>
-
-            </tbody>
+                                </td>
+                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
+                                    @if ($interestTotal)
+                                    {{ number_format($interestTotal, 2, '.' , ',') }}
+                                    @endif
+                                </td>
+                            @endfor
+                        </tr>
+                    </tbody>
         </table>
     </div>
         {{-- FOR PENALTY --}}
