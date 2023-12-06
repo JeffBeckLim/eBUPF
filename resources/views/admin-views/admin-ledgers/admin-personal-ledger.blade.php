@@ -251,16 +251,8 @@
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Months Paid: </span></p>
                     </div>
-                    <div class="col-4">
-                        @if ($latest_payment != null)
-                        @php
-                            // Parse the start and end dates as Carbon objects
-                            $latestPayment = Carbon\Carbon::parse($latest_payment->payment_date);
-                            // Calculate the difference in months
-                            $monthsDifferencePayment = $monthsDifference - $latestPayment->diffInMonths($carbonEndDate);
-                         @endphp
-                        <p class="pl-text-size">{{$monthsDifferencePayment}}</p>
-                        @endif
+                    <div class="col-4 pl-text-size">
+                        {{$totalUniquePayments}}
                     </div>
                 </div>
             </div>
@@ -297,12 +289,8 @@
                     <div class="col-8">
                         <p class="pl-text-size"><span class="fw-bold">Months Left: </span></p>
                     </div>
-                    <div class="col-4">
-                        @if ($latest_payment != null)
-                        <p class="pl-text-size">{{$monthsDifferencePayment = $latestPayment->diffInMonths($carbonEndDate)}}</p>
-                        @else
-                        {{$monthsDifference}}
-                        @endif
+                    <div class="col-4 pl-text-size">
+                        {{$monthsDifference - $totalUniquePayments}}
                     </div>
                 </div>
             </div>
