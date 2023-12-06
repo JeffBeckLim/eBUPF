@@ -76,7 +76,10 @@
     </div>
 </div>
 <script>
+var is_editable = @json($member->is_editable);
 
+// validate phone number if editable
+ if(is_editable == 1){ 
   const contactNumberInput = document.getElementById('contact_num');
   contactNumberInput.addEventListener('input', function(event) {
   const newValue = event.target.value;
@@ -92,14 +95,16 @@
             contactNumberInput.setCustomValidity('');
         }
   });
-
+}
 
 
   // Get the form element and all input/select elements within it
 const form = document.getElementById('updateForm');
 const formElements = form.querySelectorAll('input, select');
 
-const old_unit_val = document.getElementById('unit_selector').value;
+if (is_editable == 1) {
+  const old_unit_val = document.getElementById('unit_selector').value;
+}
 
 // Function to check if any input has changed
 function checkChanges() {
