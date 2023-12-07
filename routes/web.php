@@ -298,6 +298,11 @@ use App\Models\Penalty;
 
     //Generate Ledger
     Route::get('/member/this/generateLedger/{id}',[PDFController::class,'generateLedger'])->middleware('auth')->name('generateLedger');
+
+    // Memberside faqs
+    Route::get('/member/queries/faqs', function () {
+        return view('member-views.faqs');
+    })->middleware('auth','member.access', 'checkSessionTimeout')->name('member.faqs');
 //MEMBER ======================================================================================================
 
 

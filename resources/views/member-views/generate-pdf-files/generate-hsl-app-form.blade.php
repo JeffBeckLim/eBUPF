@@ -82,7 +82,10 @@
     <div class="new-roman" style="font-size: 15px; font-weight: bold; margin-bottom: 18px;">PRINCIPAL BORROWER</div>
 
     <div style="width: 100%; font-size: 15px; line-height: ">
-        <span class="toBold">Name: </span> {{$lastname}}, {{$firstname}} {{$middle_initial}}.
+        <span class="toBold">Name: </span> {{$lastname}}, {{$firstname}}
+        @if($middle_initial != null)
+        {{$middle_initial}}.
+        @endif
     </div>
 
     <div style="display: table; width: 100%; font-size: 15px;margin-bottom: 12px;margin-top: 8px;">
@@ -136,8 +139,8 @@
         <div style="display: table-cell; width: 50%;">
 
         </div>
-        <div style="text-align: center; display: table-cell; width: 50%;">
-            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        <div style="text-align: center; display: table-cell; width: 50%; text-transform: uppercase;">
+            {{$firstname}} @if($middle_initial != null) {{$middle_initial}}. @endif {{$lastname}}
         </div>
     </div>
 
@@ -153,7 +156,10 @@
     <div class="new-roman" style="font-size: 15px; font-weight: bold; margin-bottom: 18px; border-top: 2px solid black; margin-top: 12px;">CO-BORROWER</div>
 
     <div style="width: 100%; font-size: 15px; line-height: ">
-        <span class="toBold">Name: </span> {{$co_lastname}}, {{$co_firstname}} {{$co_middle_initial}}.
+        <span class="toBold">Name: </span> {{$co_lastname}}, {{$co_firstname}}
+        @if($co_middle_initial != null)
+        {{$co_middle_initial}}.
+        @endif
     </div>
 
     <div style="display: table; width: 100%; font-size: 15px;margin-bottom: 12px;margin-top: 8px;">
@@ -207,8 +213,12 @@
         <div style="display: table-cell; width: 50%;">
 
         </div>
-        <div style="text-align: center; display: table-cell; width: 50%;">
-            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        <div style="text-align: center; display: table-cell; width: 50%; text-transform: uppercase;">
+            {{$co_firstname}}
+            @if($co_middle_initial != null)
+            {{$co_middle_initial}}.
+            @endif
+            {{$co_lastname}}
         </div>
     </div>
 
@@ -654,13 +664,21 @@
     <div style="display: table; width: 100%; margin-top: 35px;">
         <div style="display: table-cell; width: 5%; font-weight: bold; font-size: 14px;">
         </div>
-        <div style="display: table-cell; width: 45%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center;">
-            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        <div style="display: table-cell; width: 45%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center; text-transform: uppercase;">
+            {{$firstname}}
+            @if($middle_initial != null)
+            {{$middle_initial}}.
+            @endif
+            {{$lastname}}
         </div>
         <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
         </div>
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center;">
-            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 20px; font-size: 14px; text-align:center; text-transform: uppercase;">
+            {{$co_firstname}}
+            @if($co_middle_initial != null)
+            {{$co_middle_initial}}.
+            @endif
+            {{$co_lastname}}
         </div>
         <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
         </div>
@@ -711,7 +729,11 @@ bottom: 0;">
     </div>
 
     <div style="margin-top: 15px; font-size: 14px;text-align: justify;">
-        For value received, I <u>{{$firstname}} {{$middle_initial}}. {{$lastname}}</u>, an employee of Bicol University and a member of the BU Provident Fund, promise to pay to the BUPF the sum of _____________________________________________________ (Php ______________________) in monthly installments of Php ________________ each starting on ____________________ and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of _______% per annum until fully paid, subject to the terms and conditions prescribed by the BUPF.
+        For value received, I <u>{{$firstname}}
+            @if($middle_initial != null)
+            {{$middle_initial}}.
+            @endif
+            {{$lastname}}</u>, an employee of Bicol University and a member of the BU Provident Fund, promise to pay to the BUPF the sum of _____________________________________________________ (Php ______________________) in monthly installments of Php ________________ each starting on ____________________ and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of _______% per annum until fully paid, subject to the terms and conditions prescribed by the BUPF.
     </div>
 
     <div style="margin-top: 10px; font-size: 14px;text-align: justify;">
@@ -723,8 +745,12 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 14px; margin-top: 25px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
-            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center; text-transform: uppercase;">
+            {{$firstname}}
+            @if($middle_initial != null)
+            {{$middle_initial}}.
+            @endif
+            {{$lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -786,7 +812,11 @@ bottom: 0;">
     </div>
 
     <div style="margin-top: 15px; font-size: 14px;">
-        I, <u>{{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}</u>, an employee of Bicol University, and a member of the BU provident Fund, do hereby promise, in the event of default or non-payment by the Principal Borrower abovementioned, to pay the BUPF, the whole sum remaining unpaid under this Promissory Note, inclusive of interests, penalties or surcharges, in accordance with the terms and conditions hereof and of the Implementing Guidelines/Rules and Regulations for the Loan.
+        I, <u>{{$co_firstname}}
+            @if($co_middle_initial != null)
+            {{$co_middle_initial}}.
+            @endif
+            {{$co_lastname}}</u>, an employee of Bicol University, and a member of the BU provident Fund, do hereby promise, in the event of default or non-payment by the Principal Borrower abovementioned, to pay the BUPF, the whole sum remaining unpaid under this Promissory Note, inclusive of interests, penalties or surcharges, in accordance with the terms and conditions hereof and of the Implementing Guidelines/Rules and Regulations for the Loan.
     </div>
 
     <div style="margin-top: 15px; font-size: 14px;">
@@ -794,8 +824,12 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 14px; margin-top: 25px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
-            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center; text-transform: uppercase;">
+            {{$co_firstname}}
+            @if($co_middle_initial != null)
+            {{$co_middle_initial}}.
+            @endif
+            {{$co_lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -858,13 +892,13 @@ bottom: 0;">
     </div>
 
     <div style="display: table; width: 100%; font-size: 14px; margin-top: 15px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
             {{ $witnesses[0] }}
         </div>
         <div style="display: table-cell; width: 20%;">
 
         </div>
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
             {{ $witnesses[1] }}
         </div>
     </div>

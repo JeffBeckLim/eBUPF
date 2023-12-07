@@ -35,7 +35,7 @@ class DeveloperAccountSeeder extends Seeder
 
             // 'middle_initial'=> 'X',
 
-            'contact_num'=> '09123456780',
+            'contact_num'=> '+639123456780',
 
             'address'=> 'BUCS / IT DEPT., LEGAZPI, ALBAY, PH',
             'verified_at'=>now(),
