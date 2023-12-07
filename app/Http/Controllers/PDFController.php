@@ -296,7 +296,7 @@ class PDFController extends Controller{
         $member = Member::find($loan->member_id);
         $loanType = $loan->loanType->loan_type_name;
         $loanId = $loan->id;
-        $filename = "{$member->lastname}, {$member->firstname} - {$loanType} - {$loanId} Insurance Form.pdf";
+        $filename = "{$member->lastname}, {$member->firstname} - {$loanType} - {$loanId} Ledger.pdf";
 
         // add error catcher here to make sure that loang being retrieved is valid
         $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();

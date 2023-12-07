@@ -303,16 +303,16 @@
                                             @if($transaction instanceof \App\Models\Payment)
                                                 <div class="col-12 border-bottom border-top">
                                                     <div class="row" style="padding: 0 30px 0 10px;">
-                                                        <div class="col-8 my-1">
+                                                        <div class="col-7 my-1">
                                                             <p class="fs-7 fw-bold m-0">Loan Payment</p>
                                                             <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                         </div>
                                                         <div class="col-4 text-center my-1">
                                                             <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                         </div>
-                                                        {{-- <div class="col-1 my-1">
+                                                        <div class="col-1 my-1">
                                                             <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                        </div> --}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @elseif($transaction instanceof \App\Models\Loan)
@@ -331,9 +331,9 @@
                                                                 @endif
                                                             </p>
                                                         </div>
-                                                        {{-- <div class="col-1 my-1">
+                                                        <div class="col-1 my-1">
                                                             <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                        </div> --}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             @endif

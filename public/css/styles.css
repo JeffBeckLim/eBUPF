@@ -418,6 +418,10 @@ input.invalid {
     border-bottom: 2px solid #FF6F19;
 }
 
+.navbar-nav .nav-item .nav-link:hover {
+    color: #004a6a;
+}
+
 .nav-item .nav-button {
     background-color: #0082BA;
     width: 100px;
@@ -1777,8 +1781,8 @@ tbody tr:nth-child(odd) td {
 }
 
 .faq {
-    height: 95vh;
-    margin-bottom: 30px;
+    height: 100vh;
+    margin-bottom: 100px;
 }
 
 .accordion-wrapper {
