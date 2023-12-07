@@ -1,9 +1,28 @@
-<div class="card p-3">
+<style>
+    .btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0.25rem 0.5rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close::before {
+    font-size: 1.25rem;
+    color: #000;
+}
+
+</style>
+
+<div class="card p-3 close-the-card">
+    <button class="btn-close" aria-label="Close" onclick="closeMembershipCard()"></button>
     <div class="row" style="margin: 20px 10px 0 10px;">
         <div class="col">
             <div class="row">
                 <div class="col-12">
-                    <h4 class="fw-bolder  membership-card-greetings">
+                    <h4 class="fw-bolder membership-card-greetings">
                         Hello {{Auth::user()->member->firstname}}, thank you for signing Up!
                     </h4>
                     <p class="membership-card-greetings2 fs-6">
@@ -27,3 +46,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function closeMembershipCard() {
+    const membershipCard = document.querySelector('.close-the-card');
+    membershipCard.style.display = 'none';
+}
+
+</script>

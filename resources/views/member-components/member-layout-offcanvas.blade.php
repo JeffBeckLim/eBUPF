@@ -230,6 +230,7 @@
                     </a>
 
                     <ul class="dropdown-menu border p-2" style="width: 110%">
+                        <li><a class="dropdown-item rounded" href="{{route('member.faqs')}}">FAQs</a></li>
                         <li><a class="dropdown-item rounded" href="/logout">Log out</a></li>
                     </div>
                 </div>

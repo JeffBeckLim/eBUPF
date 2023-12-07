@@ -121,7 +121,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
 </head>
 <style>
     .modal-backdrop{
@@ -216,6 +216,37 @@
     // Start the timer when the page loads or user logs in
     document.addEventListener('DOMContentLoaded', function () {
         startSessionTimer();
+    });
+
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 50;
+
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            } else {
+                reveals[i].classList.remove("active");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", reveal);
+
+    $(document).ready(function() {
+        $('.scrollToSection').on('click', function() {
+            var section = $(this).data('section');
+            var windowHeight = $(window).height();
+            var sectionHeight = $(section).outerHeight();
+            var offset = Math.max(0, (windowHeight - sectionHeight) / 2);
+
+            $('html, body').animate({
+                scrollTop: $(section).offset().top - offset
+            }, 'slow', 'swing');
+        });
     });
 
 </script>

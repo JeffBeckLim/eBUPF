@@ -259,8 +259,12 @@
         <div style="display: table-cell; width: 60%;">
 
         </div>
-        <div style="text-align: center; display: table-cell; width: 40%;">
-            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        <div style="text-align: center; display: table-cell; width: 40%; text-transform: uppercase;">
+            {{$firstname}}
+            @if($middle_initial != null)
+            {{$middle_initial}}.
+            @endif
+            {{$lastname}}
         </div>
     </div>
 
@@ -322,8 +326,12 @@
         <div style="display: table-cell; width: 60%;">
 
         </div>
-        <div style="text-align: center; display: table-cell; width: 40%;">
-           {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        <div style="text-align: center; display: table-cell; width: 40%; text-transform: uppercase;">
+           {{$co_firstname}}
+           @if($co_middle_initial != null)
+           {{$co_middle_initial}}.
+           @endif
+           {{$co_lastname}}
         </div>
     </div>
 
@@ -911,13 +919,21 @@
         <div style="display: table; width: 100%; margin-top: 35px;">
             <div style="display: table-cell; width: 5%; font-weight: bold; font-size: 14px;">
             </div>
-            <div style="display: table-cell; width: 45%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
-
+            <div style="display: table-cell; width: 45%; text-align:center; border-bottom: 1px solid black; height: 20px; text-transform: uppercase;">
+                {{$firstname}}
+                @if($middle_initial != null)
+                {{$middle_initial}}.
+                @endif
+                {{$lastname}}
             </div>
             <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
             </div>
-            <div style="display: table-cell; width: 40%; font-weight: bold; border-bottom: 1px solid black; height: 20px;">
-
+            <div style="display: table-cell; width: 40%; text-align: center; border-bottom: 1px solid black; height: 20px; text-transform: uppercase;">
+                {{$co_firstname}}
+                @if($co_middle_initial != null)
+                {{$co_middle_initial}}.
+                @endif
+                {{$co_lastname}}
             </div>
             <div style="display: table-cell; width: 5%; font-size: 14px; font-weight: bold;">
             </div>
@@ -980,8 +996,12 @@
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 13px; margin-top: 20px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center;">
-            {{$firstname}} {{$middle_initial}}. {{$lastname}}
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px; text-align: center; text-transform: uppercase;">
+            {{$firstname}}
+            @if($middle_initial != null)
+            {{$middle_initial}}.
+            @endif
+            {{$lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -1052,8 +1072,12 @@
     </div>
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 13px; margin-top: 20px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;  text-align: center;">
-            {{$co_firstname}} {{$co_middle_initial}}. {{$co_lastname}}
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; height: 18px;  text-align: center; text-transform: uppercase;">
+            {{$co_firstname}}
+            @if($co_middle_initial != null)
+            {{$co_middle_initial}}.
+            @endif
+            {{$co_lastname}}
         </div>
         <div style="display: table-cell; width: 15%;">
 
@@ -1116,13 +1140,13 @@
     </div>
 
     <div style="display: table; width: 100%; font-size: 14px; margin-top: 15px;">
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
             {{ $witnesses[0] }}
         </div>
         <div style="display: table-cell; width: 20%;">
 
         </div>
-        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center;">
+        <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
             {{ $witnesses[1] }}
         </div>
     </div>

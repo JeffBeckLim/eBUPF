@@ -406,7 +406,7 @@
             <td width="50%" style="padding-left: 10px; vertical-align: top;">Your Signature <span style="font-weight: bold; color: red;">*</span></td>
             <td width="50%"  style="padding-left: 10px;">Printed Name <br>
                 <div style="margin: 7px 10px;">
-                    <span style="font-size: 14px;">{{$firstname}} {{$lastname}}</span>
+                    <span style="font-size: 14px;">{{$firstname}} {{$middlename}} {{$lastname}}</span>
                 </div>
             </td>
         </tr>
@@ -512,7 +512,7 @@
             <td width="50%"  style="padding-left: 10px;">
                 Printed Name <br>
                 <div style="margin: 7px 10px;">
-                    <span style="font-size: 14px;">{{$firstname}} {{$lastname}}</span>
+                    <span style="font-size: 14px;">{{$firstname}} {{$middlename}} {{$lastname}}</span>
                 </div>
             </td>
         </tr>

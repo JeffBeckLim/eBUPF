@@ -32,6 +32,7 @@
 </head>
 
 <body class="bg-default">
+
     <nav class="navbar border-bottom border-2 navbar-expand-lg navbar-light px-2">
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets/bu-provident.svg')}}" alt="Bicol University Provident Fund Logo" width="230px">

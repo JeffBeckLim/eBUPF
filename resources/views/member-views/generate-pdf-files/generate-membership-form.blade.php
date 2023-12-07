@@ -263,7 +263,13 @@
 
     <div class="clear-float">
         <div class="name">
-            <span class="toBold">NAME:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
+            <span class="toBold">NAME:</span>
+            <span>
+                {{$lastname}}, {{$firstname}}
+                @if($middle_initial != null)
+                    {{$middle_initial}}.
+                @endif
+            </span>
         </div>
         <div class="sex">
             <span class="toBold">SEX:</span> <span>{{ucfirst($sex)}}</span>
