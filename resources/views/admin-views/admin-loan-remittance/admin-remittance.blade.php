@@ -134,7 +134,6 @@
                                 <th>Date</th>
                                 <th>Principal</th>
                                 <th>Interest</th>
-                                <th class="text-danger">MRI Adj</th>
                                 <th>Total</th>
                                 <th>Loan Particular</th>
                                 <th>Action</th>
@@ -159,9 +158,14 @@
                                 <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('F d, Y') }}</td>
                                 <td>₱{{ number_format($payment->principal, 2) }}</td>
                                 <td>₱{{ number_format($payment->interest, 2) }}</td>
-                                <td></td>
                                 <td>₱{{ number_format($payment->principal + $payment->interest, 2) }}</td>
-                                <td><span class="fw-bold">{{ $payment->loan->loanType->loan_type_name }}</span> {{ $payment->loan_id }}</td>
+                                <td><span class="fw-bold">
+                                    @if($payment->loan->loanType->loan_type_name == 'MPL')
+                                        MPL
+                                    @elseif($payment->loan->loanType->loan_type_name)
+                                        HL
+                                    @endif
+                                    </span> {{ $payment->loan_id }}</td>
                                 <td>
                                     <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#editPayment{{$payment->id}}">
                                        {{--  <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5> --}}

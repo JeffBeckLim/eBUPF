@@ -12,6 +12,9 @@ use App\Models\Amortization;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Form;
+use App\Mail\SuccessfulPayment;
+use App\Mail\PaidLoan;
+use Illuminate\Support\Facades\Mail;
 
 class AdminRemittanceController extends Controller
 {
@@ -29,7 +32,6 @@ class AdminRemittanceController extends Controller
     }
 
     public function addPaymentRemittance(Request $request){
-
         $data = $request->validate([
             'or_number' => 'required',
             'payment_date' => 'required|date',
@@ -37,6 +39,9 @@ class AdminRemittanceController extends Controller
             'principal' => 'nullable|numeric',
             'interest' => 'numeric',
         ]);
+
+        // Get member details
+        $member = Loan::find($data['loan_id'])->member;
 
          // Replace null 'principal' with 0
         $data['principal'] = $data['principal'] ?? 0;
@@ -62,21 +67,34 @@ class AdminRemittanceController extends Controller
         $totalLoanPayment = Payment::where('loan_id', $data['loan_id'])->sum('principal') + Payment::where('loan_id', $data['loan_id'])->sum('interest');
         $loanBalance = ($loan->principal_amount + $loan->interest) - $totalLoanPayment;
 
-       /*  // Check if the payment exceeds the loan balance
+        // Check if the payment exceeds the loan balance
         if($loanBalance - ($data['principal'] + $data['interest']) < 0){
             return redirect()->back()->with('error', 'Payment exceeds loan balance.');
-        } */
+        }
 
-        // If the payment is equal to the loan balance, set the loan to non-performing
+        $principal_amount = $data['principal'];
+        $interest = $data['interest'];
+        $loan = Loan::find($data['loan_id']);
+        $date = Carbon::parse($data['payment_date'])->format('F d, Y');
+        $OR_number = $data['or_number'];
+        $loan_type = $loan->loanType->loan_type_name;
+
         if($loanBalance - ($data['principal'] + $data['interest']) <= 0){
+            Mail::to($member->user->email)->send(new PaidLoan($member, $loan_type, $loan, $date));
             $loan->is_active = 2;
             $loan->save();
         }
 
+
         $memberId = $loan->member_id;
         $data['member_id'] = $memberId;
         //save payment
+
+        Mail::to($member->user->email)->send(new SuccessfulPayment($member, $principal_amount, $interest, $loan, $date, $OR_number));
         Payment::create($data);
+
+        // If the payment is equal to the loan balance, set the loan to non-performing
+
 
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }

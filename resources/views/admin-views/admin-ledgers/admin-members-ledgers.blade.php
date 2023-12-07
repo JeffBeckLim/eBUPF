@@ -17,7 +17,7 @@
                         {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}}
                         " href="/admin/ledgers/member/mpl/{{$member->id}}">
                         <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 20px;">
-                        MPL Applications Tracking</a>
+                        MPL Personal Ledgers</a>
                     </div>
                     <div class="col-6">
                         <a
@@ -25,7 +25,7 @@
                         {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}"
                         href="/admin/ledgers/member/hsl/{{$member->id}}">
                         <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 20px;">
-                        HSL Applications Tracking
+                        HL Personal Ledgers
                     </a>
                     </div>
                 </div>
