@@ -23,7 +23,7 @@
             </div>
             <div class="row ">
                 <div class="col-12 d-flex justify-content-center">
-                    <img class="img-fluid" src="{{asset('assets/check.png')}}" alt="check" style="width: 5rem;">
+                    <img class="img-fluid" src="{{asset('assets/check.png')}}" alt="check" style="width: 5rem; height: 5rem; max-height: 5rem; max-width: 5rem">
                 </div>
                 <div class="col-12  text-center">
                     <p class="fw-bolder fs-5">Thank You!</p>

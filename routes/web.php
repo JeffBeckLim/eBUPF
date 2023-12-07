@@ -34,7 +34,9 @@ use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
 use App\Http\Controllers\LoanLogController;
 use App\Http\Controllers\AdminImportData;
+use App\Http\Controllers\SessionLogController;
 use App\Models\Penalty;
+use App\Models\SessionLog;
 
 /*
 |--------------------------------------------------------------------------
@@ -249,7 +251,7 @@ use App\Models\Penalty;
     Route::get('/admin/logs/loan-adjustments', [LoanLogController::class, 'showAdjustments'])->name('adjustment.logs')->middleware('auth','admin.access');
     Route::get('/admin/logs/amortization', [LoanLogController::class, 'showAmortization'])->name('amortization.logs')->middleware('auth','admin.access');
 
-
+    Route::get('/admin/logs/sessions', [SessionLogController::class, 'show'])->name('session.logs')->middleware('auth','admin.access');
 
  //ADMIN ======================================================================================================
 
