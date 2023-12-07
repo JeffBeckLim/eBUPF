@@ -1,5 +1,6 @@
 <script>
 // console.log("PH Address Selector is now running");
+$(document).ready(function() {
 var my_handlers = {
     // fill province
     fill_provinces: function() {
@@ -174,5 +175,6 @@ $(function() {
     regions.forEach(entry => {
         dropdown.append($('<option></option>').attr('value', entry.region_code).text(entry.region_name));
     });
+});
 });
 </script>
