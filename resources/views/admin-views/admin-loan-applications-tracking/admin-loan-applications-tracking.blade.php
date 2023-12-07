@@ -93,7 +93,7 @@
                 {{$loan_type == 'hsl' ? 'fw-bold shadow-sm scale-1-active' : ''}}"
                 href="{{route('admin.loan.applications.tracking', 'hsl')}}">
                 <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 20px;">
-                HSL Applications Tracking
+                HL Applications Tracking
             </a>
             </div>
         </div>

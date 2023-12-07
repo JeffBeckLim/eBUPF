@@ -31,23 +31,19 @@
 
 <body>
     <div class="container">
-        <h3>Hello {{ $member->firstname }},</h3>
-
-        <p>
-            We're delighted to inform you that your
-            @if($loan_type == 'MPL')
+        <p><span style="font-weight: bold;">Congratulations {{ $member->firstname }}!</span> You have successfully paid off your
+            @if($loan_type == "MPL")
                 Multi-Purpose Loan
-            @elseif($loan_type == 'HSL')
+            @elseif($loan_type == "HSL")
                 Housing Loan
             @endif
-            , bearing code <span style="color: green;">{{$loan_code}}</span>, has been approved.
-        </p>
-        <p>
-            You're now eligible to collect your check from the BUPF Office. Prior to claiming your check, we kindly request you to access and print your insurance form available on the <a href="{{ url('/login') }}"><u>eBUPF</u></a> website. Simply log in to your account on the website and select 'Your Applications' from the sidebar menu.
+            , bearing code <span style="color: green;">{{$loan->loan_code}}</span> on {{$date}}.
         </p>
 
+        <p>If you wish to apply for another loan, visit our <a href="{{ url('/login') }}"><u>eBUPF</u></a> website now!</p>
+
        <p style="color: grey;">
-        Note: You will be required to present your insurance form and valid IDs upon claiming your check.
+        Note: If you have any questions, please contact us at (+63) 927-0256-413 or email us at ebupf.lms@gmail.com
        </p>
     </div>
 </body>

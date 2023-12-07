@@ -9,6 +9,8 @@ use App\Models\Payment;
 use App\Models\Loan;
 use App\Models\User;
 use SplFileObject;
+use App\Mail\ImportedMember;
+use Illuminate\Support\Facades\Mail;
 
 class AdminImportData extends Controller
 {
@@ -51,7 +53,7 @@ class AdminImportData extends Controller
                     $userData = [
                         'email' => $row[0] ?? null,
                         'email_verified_at' => now(),
-                        'password' => bcrypt('password123'), // default password for all users
+                        'password' => bcrypt('Ch@ngeMe123'), // default password for all users
                         'user_type' => 'member', // all users are members
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -87,7 +89,9 @@ class AdminImportData extends Controller
                         'additional_loan' => null,
                         'is_editable' => '1',
                     ];
-                    Member::create($memberData);
+                    $member = Member::create($memberData);
+
+                    Mail::to($user->email)->send(new ImportedMember($member, $user));
                     $userTable[] = $userData;
                     $memberTable[] = $memberData;
                 }
