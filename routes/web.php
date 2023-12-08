@@ -89,6 +89,11 @@ use App\Models\SessionLog;
     // For generating PDF in the receivables
     Route::get('/admin/receivables/summary/generated-pdf/{year}/{loan_type}', [AdminReceivablesPDFController::class, 'generateReceivablesSummary'])->name('generate.receivables.summary.report')->middleware('auth','admin.access');
 
+    Route::get('/admin/receivables/quarterly/generated-pdf/{loan_type}', [
+        AdminReceivablesPDFController::class,
+        'generateReceivablesQuarterly'
+    ])->name('generate.receivables.quarterly.report')->middleware('auth','admin.access');
+
     // LEDGER
     Route::get('/admin/ledgers' , [LedgerController::class, 'show'])->name('admin.ledgers')->middleware('auth','admin.access');
     Route::get('/admin/ledgers/filter' , [LedgerFilterController::class, 'show'])->name('admin.ledgers.filter')->middleware('auth','admin.access');

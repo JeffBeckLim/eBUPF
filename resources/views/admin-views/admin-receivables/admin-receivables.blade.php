@@ -5,17 +5,26 @@
     <div class="row mt-2">
         <div class="container-fluid">
             <div class="adminbox">
-
-                <div class=" d-flex text-dark mt-3">
-                    <div class="g-0 ps-2 my-auto d-flex align-items-center">
-                        <img src="{{asset('assets/admin-icons/receivables-big.svg')}}" alt="Receivables Big Icon" width="40px" height="40px"  style="margin-right: 5px;">
+                <div class="row d-flex text-dark mt-3">
+                    <div class="col-7 g-0 ps-2 my-auto d-flex align-items-center">
+                        <img src="{{ asset('assets/admin-icons/receivables-big.svg') }}" alt="Receivables Big Icon" width="40px" height="40px" style="margin-right: 5px;">
                         <div style="line-height: 0.6;">
-                            <div class="m-0 fw-bold fs-5"> Schedule of Receivables</div> <br>
+                            <div class="m-0 fw-bold fs-5">Schedule of Receivables</div>
+                            <br>
                             <div class="fs-7 text-secondary">Quarterly</div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-5 text-end">
+                        <div class="btn-group" style="margin-right: 20px;">
+                            <!-- Use data-bs-toggle and data-bs-target to specify the modal -->
+                            <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#downloadReportModal">
+                                Download Report
+                            </button>
+                        </div>
+                    </div>
 
+                </div>
+                @include('admin-views.admin-receivables.admin-quarterly-modal')
                 <div class="row mt-3 g-0 mx-3">
                     <style>
                         .scale-1-active{

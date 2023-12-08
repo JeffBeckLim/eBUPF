@@ -191,5 +191,29 @@ class AdminReceivablesPDFController extends Controller{
         return $quarterlyPayments;
     }
 
+    public function generateReceivablesQuarterly(Request $request, $loan_type) {
+
+        $lastMonth = 'December';
+        $lastDay = '31';
+        $pdfName = $lastMonth . ' ' . $lastDay . ', ' . 2023 . ' Summary.pdf';
+
+        $currentYear = Carbon::now()->year;
+        // Set the default selected year and unit
+        $selectedYear = $request->input('yearSelect');
+        $selectedUnit = $request->input('unitSelect');
+        dd($selectedUnit, $selectedYear);
+
+        $data = [
+            'title' => 'Quarterly Receivables Summary',
+            'quarter' => 'Quarter ',
+        ];
+
+
+        $pdf = PDF::loadView('admin-views.admin-receivables.receivables-pdf-report.quarterly', $data)->setPaper('legal', 'landscape');
+
+        // download PDF file
+        return $pdf->download($pdfName);
+    }
+
 }
 

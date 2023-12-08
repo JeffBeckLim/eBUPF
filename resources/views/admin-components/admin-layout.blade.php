@@ -169,6 +169,16 @@
             $('.select2-selection--single').css('border', 'none');
             $('.select2-selection--single').css('padding-top', '5px');
         });
+        window.addEventListener("pageshow", function(event) {
+            var historyTraversal = event.persisted ||
+                (typeof window.performance != "undefined" &&
+                window.performance.navigation.type === 2);
+            if (historyTraversal) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
+
     </script>
       {{-- HIDE ON SCROLL EVENT --}}
 

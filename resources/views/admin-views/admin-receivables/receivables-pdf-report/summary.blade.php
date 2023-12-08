@@ -25,7 +25,7 @@
             font-weight: bold;
             text-align: center;
             width: 40%;
-            font-size: 14px;
+            font-size: 12px;
             line-height: 1.6;
         }
 
@@ -47,6 +47,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo">
@@ -63,14 +64,14 @@
         <div class="logo">
         </div>
         <div class="center-text">
-            <span style="font-size: 18px;">SUMMARY LOANS RECEIVABLE <br> {{$type}}</span> <br> <span style="font-size: 12px;">As of {{$lastMonth}} {{$lastDay}}, {{$year}}</span>
+            <span style="font-size: 12px;">SUMMARY LOANS RECEIVABLE <br> {{$type}}</span> <br> <span style="font-size: 12px;">As of {{$lastMonth}} {{$lastDay}}, {{$year}}</span>
         </div>
         <div class="right-corner">
 
         </div>
     </div>
 
-    <table style="margin-top: 30px; font-size: 13px;">
+    <table style="margin-top: 30px; font-size: 12px;">
         <thead>
             <tr>
                 <th width="15%" rowspan="2" style="text-align: center;">Unit</th>
@@ -124,7 +125,7 @@
         </div>
         <div class="right-corner">
             <span style="font-size: 12px;">Certified True and Correct:</span> <br><br><br>
-            <span style="font-weight: bold; font-size: 13px;">ATTY. LOYD P. CASASIS</span> <br>
+            <span style="font-weight: bold; font-size: 12px;">ATTY. LOYD P. CASASIS</span> <br>
             <div  style="margin-left: 30px;">
                 <span style="font-size: 12px;">Executive Director</span>
             </div>
