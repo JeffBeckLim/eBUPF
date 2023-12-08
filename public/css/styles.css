@@ -1104,8 +1104,8 @@ tbody tr:nth-child(odd) td {
 .profile-note {
     padding: 5px 20px;
     border-radius: 10px;
-    background-color: #E6F9FF;
-    font-size: 12px;
+    background-color: #fff3d1;
+    font-size: 13px;
     margin: 0 10px 0 10px;
 }
 

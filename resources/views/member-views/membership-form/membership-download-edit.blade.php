@@ -41,7 +41,7 @@
                     <a class="btn btn-block  btn-outline-bu fw-bold grow-on-hover" href="/member/membership-form/edit">Edit Submission</a>
                 </div>
                 <div class="col-12 d-grid">
-                    <a class="btn btn-block  bu-orange text-white grow-on-hover" href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}">Download File</a>
+                    <a class="btn btn-block  bu-orange text-white grow-on-hover fw-bold" href="{{ route('generateMembershipForm', ['id' => Auth::user()->member->id]) }}">Download File</a>
                 </div>
             </div>
 

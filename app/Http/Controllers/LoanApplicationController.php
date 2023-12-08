@@ -302,7 +302,7 @@ class LoanApplicationController extends Controller
 
     // ============================VALIDATE AND STORE MPL APPLICATION==============================
     public function storeRequest(Request $request, $loanTypeId){
-        if($loanTypeId > 2){
+        if($loanTypeId > 2 || $loanTypeId <= 0){
             abort(404);
         }
         // check if there is a pending/inactive loan
@@ -334,8 +334,8 @@ class LoanApplicationController extends Controller
             'email_co_borrower' => 'required|email|exists:users,email',
             'principal_amount'=> ['required', 'numeric', 'min:50000', 'max:200000'],
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
-            'witness_name_1'=>'required',
-            'witness_name_2'=>'required',
+            'witness_name_1'=>'nullable',
+            'witness_name_2'=>'nullable',
         ]);
 
         // check if co borrower email is the same with user logged in
@@ -385,16 +385,18 @@ class LoanApplicationController extends Controller
             'loan_id'=>$loan->id,
         ]);
 
-        Witness::create([
-            'witness_name'=>$formFields['witness_name_1'],
-            'loan_id'=>$loan->id,
-        ]);
-
-        Witness::create([
-            'witness_name'=>$formFields['witness_name_2'],
-            'loan_id'=>$loan->id,
-        ]);
-
+        if($formFields['witness_name_1'] != ''){        
+            Witness::create([
+                'witness_name'=>$formFields['witness_name_1'],
+                'loan_id'=>$loan->id,
+            ]);
+        }
+        if($formFields['witness_name_2'] != ''){      
+            Witness::create([
+                'witness_name'=>$formFields['witness_name_2'],
+                'loan_id'=>$loan->id,
+            ]);
+        }
         // check for additional loans
         $user = Auth::user();
         if($user->member->additional_loan > 0){

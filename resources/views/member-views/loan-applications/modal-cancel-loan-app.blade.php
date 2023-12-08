@@ -32,21 +32,3 @@
       </div>
     </div>
   </div>
-<script>
-    const textarea = document.getElementById('reason_for_cancel');
-const button = document.getElementById('submitCancelApp');
-
-// limit textarea
-textarea.addEventListener('input', function() {
-    this.value = this.value.slice(0, 200); // Truncate the text to the maximum length
-  if (this.value.trim() === '') {
-    button.classList.add('disabled');
-  } else {
-    button.classList.remove('disabled');
-  }
-});
-
-
-
-
-</script>

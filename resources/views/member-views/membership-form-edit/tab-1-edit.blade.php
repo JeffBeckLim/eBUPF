@@ -2,7 +2,7 @@
     <div class="row g-0" >
         <div id="edit_page" value="1">
         </div>
-                <p class="m-0 fw-bold">Your Name</p>
+                <label class="m-0 fw-bold">Your Name</label>
                 <div class="row g-0 ">
                     <div class="col pe-1">
                         <label for="firstname">
@@ -32,12 +32,24 @@
                         <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                     @enderror
                 </div>
+
+                <div class="col-12 pb-1 pb-3 d-none" id="manual_address">
+                    <label class="fw-bold" for="address">
+                        Address
+                    </label>
+                    <input id="manual_address_input" class="form-control" name="address" value="{{Auth::user()->member->address}}"
+                    placeholder="Barangay 307 Quiapo, City of Manila, Metro Manila 1001"
+                    >
+                    @error('address')
+                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                    @enderror
+                </div>
                 @php
                     $address_arr = explode(",", Auth::user()->member->address);
 
                 @endphp
 
-                <div class="row g-0 ">
+                <div class="row g-0 " id="address_readonly">
                     <div class="col-12 pb-1 pb-3">
                         <label class="fw-bold" for="address">
                             Your Current Address
@@ -164,12 +176,11 @@
 
 
             </div>
-
-
-{{-- <button class="btn" type="submit">
+{{-- 
+<button class="btn" type="submit">
     submit
     </button> --}}
-</div>
+</div>  {{-- last tag --}}
 @php
  
 $jsonContents = Illuminate\Support\Facades\File::get(resource_path('ph-json/region.json'));
@@ -213,6 +224,33 @@ provinceSelector.addEventListener('change', function() {
 citySelector.addEventListener('change', function() {
         barangaySelector.disabled = false;
 });
+
+
+ // Function to check if the user is using iOS
+ function isiOS() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+    }
+if (isiOS()) {   
+        var editAddressReadOnly =  document.getElementById("address_readonly");
+        editAddressReadOnly.remove();
+        
+        var showBtnEdit =  document.getElementById("show_btn");
+        showBtnEdit.remove();
+
+        var manualAddressInput =  document.getElementById("manual_address_input");
+        var manualAddress =  document.getElementById("manual_address");
+
+        manualAddressInput.classList.add('validate');
+        manualAddress.classList.remove('d-none');
+        
+
+    } else {
+        console.log('manual address selector for iOS');
+    }
+
+
+
 </script>
 @include('member-views.membership-form.ph-address-selector')
 {{-- <script src="{{asset('js/ph_address_selector.js')}}" defer></script> --}}

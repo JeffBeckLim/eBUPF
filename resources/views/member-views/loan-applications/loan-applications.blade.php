@@ -6,13 +6,13 @@
     <div class="container-fluid">
             <div class="row  d-flex justify-content-center p-2">
                 <div class="col-lg-7 bg-white rounded border  mt-2 pb-5">
-                    <div class="mx-lg-3 m-1 my-4">
+                    <div class="mx-lg-3 m-1 my-4 text-center">
                         <p class=" fs-5 fw-bold">Loan <br> Applications</p>
                     </div>
 
                     <div class="border rounded mx-3 mb-3 p-2">
                         <p class="m-0 text-secondary" style="font-size: small">
-                            <i class="bi bi-lightbulb-fill"></i>
+                            <i class="bi bi-lightbulb"></i>
                             Below, you'll find a list of loan applications that have been accepted by co-borrowers.
                         </p>
                     </div>
@@ -174,5 +174,23 @@
 
 
 </main>
+<script>
+    const textarea = document.getElementById('reason_for_cancel');
+    const button = document.getElementById('submitCancelApp');
+    
+    // limit textarea
+    textarea.addEventListener('input', function() {
+        this.value = this.value.slice(0, 200); // Truncate the text to the maximum length
+      if (this.value.trim() === '') {
+        button.classList.add('disabled');
+      } else {
+        button.classList.remove('disabled');
+      }
+    });
+    
+    
+    
+    
+    </script>
 
 @endsection
