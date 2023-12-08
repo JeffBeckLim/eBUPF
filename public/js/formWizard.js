@@ -51,6 +51,12 @@ function showTab(n) {
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
     }
+    // Scrolls to the top of the page instantly
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Use 'smooth' for smooth scrolling (not supported in all browsers)
+    });
+
     //... and run a function that will display the correct step indicator:
     fixStepIndicator(n)
 }
@@ -378,14 +384,14 @@ function validateForm() {
 
             const  monthly_contribution = document.getElementById('monthly_contribution');
             const  monthly_contribution_value =  monthly_contribution.value;
-            if (  monthly_contribution_value >= 1 ) {
+            if (  monthly_contribution_value >= 100 ) {
 
                  monthly_contribution.classList.add("is-valid");
                  monthly_contribution.setCustomValidity('');
              } 
              else {
                  monthly_contribution.classList.add("is-invalid");
-                 monthly_contribution.setCustomValidity('Must have a value');
+                 monthly_contribution.setCustomValidity('Must be at least 100 for teaching staff and 300 for teaching staff');
                  monthly_contribution.reportValidity();
                  valid = false;   
             }

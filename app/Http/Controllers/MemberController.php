@@ -178,12 +178,28 @@ class MemberController extends Controller
     }
 
     public function updateMembership(Request $request, Member $member){
-
+        
        $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
        if($member->user_id != auth()->id()) {
         abort(403, 'Unauthorized Action');
         }
+
+
+        if($request->address == null && $request->region_text == null){ //ensure at least one address field is included
+            $validation = 'required';
+            $validation_not = 'required';
+        }
+        else if($request->address == null){
+            // $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
+            $validation = 'nullable';
+            $validation_not = 'required';
+        }else{
+            $validation = 'required';
+            $validation_not = 'nullable';
+        }
+
+
         $formFields = $request->validate([
 
             // 'campus_id'=> 'required', // naka comment out muna - - need pa seeders
@@ -198,7 +214,12 @@ class MemberController extends Controller
 
             'contact_num'=> 'required',
 
-            'address'=> 'required',
+            'address'=> $validation,
+            'region_text'=> $validation_not,
+            'province_text'=>$validation_not,
+            'city_text'=>$validation_not,
+            'barangay_text'=>$validation_not,
+
             'date_of_birth'=> 'required',
             'tin_num'=> 'required',
             'position'=> 'required',
@@ -264,10 +285,6 @@ class MemberController extends Controller
         $member->lastname = ucwords($formFields['lastname']);
         $member->save();
 
-        // if($formFields['middlename'] != null){
-        //     $member->middle_initial = ucfirst($formFields['middlename'][0]);
-        //     $member->save();
-        // }
 
         // check if all fields for new address exist, save if yes
         if($request->region_text != null &&
@@ -345,10 +362,20 @@ class MemberController extends Controller
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
-
-
-        $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
-
+        
+        if($request->address == null && $request->region_text == null){ //ensure at least one address field is included
+            $validation = 'required';
+            $validation_not = 'required';
+        }
+        else if($request->address == null){
+            // $address = $request->barangay_text.", ".$request->city_text.", ".$request->province_text.", ".$request->region_text;
+            $validation = 'nullable';
+            $validation_not = 'required';
+        }else{
+            $validation = 'required';
+            $validation_not = 'nullable';
+        }
+        
         $formFields = $request->validate([
 
             // 'campus_id'=> 'required', // naka comment out muna - - need pa seeders
@@ -364,11 +391,11 @@ class MemberController extends Controller
             'contact_num'=> 'required',
 
             // for address
-            'address'=> 'nullable',
-            'region_text'=>'required',
-            'province_text'=>'required',
-            'city_text'=>'required',
-            'barangay_text'=>'required',
+            'address'=> $validation,
+            'region_text'=> $validation_not,
+            'province_text'=>$validation_not,
+            'city_text'=>$validation_not,
+            'barangay_text'=>$validation_not,
 
 
             'date_of_birth'=> 'required',

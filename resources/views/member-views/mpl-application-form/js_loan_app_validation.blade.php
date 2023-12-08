@@ -56,24 +56,46 @@
    
 
       var witness1Value = witness1.value; 
-      if(witness1.value != '' && witness1Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness1Value)){
+      if(witness1.value != ''){
+        if(witness1Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness1Value)){
           witness1.classList.remove('is-invalid');
-      }
+        }
+        else{
+            witness1.classList.add('is-invalid');
+           isValid = false;
+        }
+      } 
       else{
-          witness1.classList.add('is-invalid');
-          isValid = false;
-          
+        witness2.classList.remove('is-invalid');
       }
-
       var witness2Value = witness2.value; 
-      if(witness2.value != '' && witness2Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness2Value)){
+      if(witness2.value != ''){
+        if(witness2Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness2Value)){
           witness2.classList.remove('is-invalid');
-      }
+        }
+        else{
+            witness2.classList.add('is-invalid');
+           isValid = false;
+        }
+      } 
       else{
-          witness2.classList.add('is-invalid');
-          isValid = false;
-          
+        witness2.classList.remove('is-invalid');
       }
+    //   else{
+    //       witness1.classList.add('is-invalid');
+    //       isValid = false;
+          
+    //   }
+
+    //   var witness2Value = witness2.value; 
+    //   if(witness2.value != '' && witness2Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness2Value)){
+    //       witness2.classList.remove('is-invalid');
+    //   }
+    //   else{
+    //       witness2.classList.add('is-invalid');
+    //       isValid = false;
+          
+    //   }
 
       
       if (isValid) {
@@ -89,7 +111,7 @@
       const witness1 = document.getElementById('myWitness1').value;
       const witness2 = document.getElementById('myWitness2').value;
 
-      if (!loanAmount || !loanTerm || !coBorrower || !witness1 || !witness2) {
+      if (!loanAmount || !loanTerm || !coBorrower) {
           alert('Please fill out all the required fields.');
           return;
       }

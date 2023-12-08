@@ -14,7 +14,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         @endif
-                        <p class="fs-5 fw-bold my-3 p-3">Incoming Requests</p>
+                        <p class="fs-5 fw-bold my-3 p-3 text-center">Incoming Requests</p>
                         <div class="accordion mb-3 border p-1" id="accordionExample">
                             <div class="accordion-item border-0">
                               <h5 class="accordion-header">

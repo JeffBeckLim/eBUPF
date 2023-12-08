@@ -288,7 +288,7 @@
                             <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%; ">
                                 <div class="container">
                                     <div class="mt-3">
-                                        <img src="assets/history.svg" alt="history icon" width="35px">
+                                        {{-- <img src="assets/history.svg" alt="history icon" width="35px"> --}}
                                         <span class="fw-bold fs-6">Transactions</span>
                                     </div>
 
