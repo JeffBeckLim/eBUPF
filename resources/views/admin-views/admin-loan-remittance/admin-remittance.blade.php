@@ -33,7 +33,7 @@
                     <select id="loanTypeSelect" class="form-control bg-white border-0">
                         <option value="All">All</option>
                         <option value="MPL">MPL</option>
-                        <option value="HSL">HSL</option>
+                        <option value="HL">HL</option>
                     </select>
                 </div>
                 <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
@@ -201,6 +201,17 @@
 </div>
 
 <script>
+    const formInputs = document.querySelectorAll('form input');
+    formInputs.forEach(input => {
+        input.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
+<script>
    $(document).ready(function() {
     //get the value of the form field
     var orNumberInput = $("#or_number_input");
@@ -312,8 +323,7 @@
     });
 
     // Function to update the year options
-    function updateYearOptions() {
-        var min = new Date().getFullYear();
+    function updateYearOptions(years) {
         var select = document.getElementById('yearSelect');
         select.innerHTML = ''; // Clear existing options
 
@@ -323,20 +333,19 @@
         allYearsOption.innerHTML = 'All Years';
         select.appendChild(allYearsOption);
 
-        // Populate the dropdown with years from the current year down to 2021
-        for (var i = min; i >= 2021; i--) {
+        // Populate the dropdown with years from the controller
+        years.forEach(function (year) {
             var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
+            opt.value = year;
+            opt.innerHTML = year;
             select.appendChild(opt);
-        }
+        });
     }
 
     // Initial population of the dropdown
-    updateYearOptions();
+    var initialYears = {!! json_encode($years) !!}; // Pass the PHP array to JavaScript
+    updateYearOptions(initialYears);
 
-    // Set up an interval to update the dropdown every year
-    setInterval(updateYearOptions, 60 * 1000);
 
     $(document).ready(function () {
     // Function to add a "data-quarter" attribute to each table row
@@ -356,7 +365,7 @@
         $(".table-row").each(function () {
             var quarterData = $(this).data("quarter");
              var dateData = $(this).find("td:eq(4)").text();
-            var loanTypeData = $(this).find("td:eq(9)").text();
+            var loanTypeData = $(this).find("td:eq(8)").text();
 
             var shouldShowRow =
                 (selectedQuarter === "All" || quarterData === selectedQuarter)  &&

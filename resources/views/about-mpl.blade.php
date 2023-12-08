@@ -222,11 +222,13 @@
                                 <input type="radio" name="radio-a" id="check3" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check3">
                                     <div style="width: 90%">
-                                        Who can apply for loan renewal ?
+                                        What are the requirements for Additional Loan?
+
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Members with an existing loan in the provident fund, with three (3) months or more of payments settled on their loan.</p>
+                                    <p>Approval of letter request  and a recent copy of payslip</p>
+
                                 </div>
                             </div>
                             <div class="accordion reveal fade-left">
@@ -248,7 +250,7 @@
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Yes, but the loanable amount will no longer be at full equity. If you are applying for a re-loan, you are allowed to apply for the same amount as your previous loan.</p>
+                                    <p>Yes, but the years left in service will be a factor to consider in assessing the loanable amount and term of payment that can be availed by the borrower.</p>
                                 </div>
                             </div>
                         </div>
@@ -270,11 +272,11 @@
                                 <input type="radio" name="radio-a" id="check7" style="position: absolute; opacity: 0; z-index: -1;">
                                 <label class="accordion-label" for="check7">
                                     <div style="width: 90%;">
-                                        What are the requirements for Additional Loan?
+                                        Who can apply for loan renewal?
                                     </div>
                                 </label>
                                 <div class="accordion-content">
-                                    <p>Approval of letter request  and a recent copy of payslip</p>
+                                    <p>Members with an existing loan in the provident fund,  paid half (50%) of the outstanding balance of the loan.</p>
                                 </div>
                             </div>
                             <div class="accordion reveal fade-right">

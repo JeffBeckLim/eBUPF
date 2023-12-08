@@ -160,6 +160,7 @@ class AdminImportData extends Controller
                     return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The loan ID does not exist.');
                 }
             }
+
             //save all payments to the database
             Payment::insert($paymentTable);
 

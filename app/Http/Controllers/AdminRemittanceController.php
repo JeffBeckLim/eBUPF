@@ -24,10 +24,22 @@ class AdminRemittanceController extends Controller
         $adjustments = Adjustment::all();
         $loans = Loan::where('is_active', 1)->whereHas('amortization')->get();
 
+        //get all the years of the payments, from the oldest to the latest payment
+        $years = [];
+        foreach ($payments as $payment) {
+            $year = Carbon::parse($payment->payment_date)->format('Y');
+            if (!in_array($year, $years)) {
+                array_push($years, $year);
+            }
+        }
+
+        $years = range(min($years), max($years));
+
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
             'loans' => $loans,
             'adjustments' => $adjustments,
+            'years' => $years,
         ]);
     }
 
