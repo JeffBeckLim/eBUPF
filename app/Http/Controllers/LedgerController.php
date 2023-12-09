@@ -7,6 +7,7 @@ use App\Models\Loan;
 use App\Models\Unit;
 use App\Models\Member;
 use App\Models\Payment;
+use App\Models\Penalty;
 use Illuminate\Http\Request;
 use App\Models\PenaltyPayment;
 
@@ -44,7 +45,7 @@ class LedgerController extends Controller
         }
         $member = Member::with('units.campuses')->where('id' , $id)->first();
 
-        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization', 'penalty')->has('amortization')->get();
+        $raw_loans = Loan::where('member_id' , $id)->where('loan_type_id' , $loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')->has('amortization')->get();
 
         $loans = [];
         foreach($raw_loans as $raw_loan){
@@ -64,10 +65,20 @@ class LedgerController extends Controller
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
         $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();
+        
+        if($loan == null){
+            abort('403');
+        }
 
-        $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
+        // $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
+        // ->orderBy('created_at', 'desc')
+        // ->get();
+
+        $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
         ->orderBy('created_at', 'desc')
         ->get();
+
+        // dd($penalty_payments);
 
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
 

@@ -42,7 +42,7 @@ return new class extends Migration
             $table->timestamp('is_viewed')->nullable();
             
 
-            $table->foreignId('penalty_id')->nullable()->constrained('penalties');
+            // $table->foreignId('penalty_id')->nullable()->constrained('penalties');
 
             $table->timestamp('deleted_at')->nullable();
 

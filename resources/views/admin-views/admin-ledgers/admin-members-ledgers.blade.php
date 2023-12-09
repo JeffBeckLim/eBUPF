@@ -110,11 +110,11 @@
                                                         NaN
                                                     @endif
                                                 </a>
-                                                @if ($loan->penalty != null)
+                                                {{-- @if ($loan->penalty != null)
                                                 <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has been penalized" >
                                                     <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
                                                 </a>
-                                                @endif
+                                                @endif --}}
                                                 @php
                                                 $disable_incomplete = 0;
                                             @endphp

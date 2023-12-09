@@ -104,8 +104,12 @@ class LoanController extends Controller
         $payments = $loan->payment;
 
         // get sum of penalty payment
-        $penalty_payments = PenaltyPayment::where('penalty_id', $loan->penalty_id)->get();
+        $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
+        ->orderBy('created_at', 'desc')
+        ->get();
+        
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
+        
 
         return view('member-views.your-loans.member-loan-details',
             compact(

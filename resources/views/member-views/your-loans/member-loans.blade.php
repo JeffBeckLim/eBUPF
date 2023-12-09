@@ -81,6 +81,7 @@
                                                             <span style="font-size: 12px" class="text-danger">
                                                                 <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
                                                             </span>
+                                                            
                                                             @endif
                                                         </p>
 

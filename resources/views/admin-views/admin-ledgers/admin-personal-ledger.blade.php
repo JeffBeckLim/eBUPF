@@ -211,6 +211,7 @@
                     @php
                         // Parse the start and end dates as Carbon objects
                         $carbonStartDate = Carbon\Carbon::parse($loan->amortization->amort_start);
+                        
                         $carbonEndDate = Carbon\Carbon::parse($loan->amortization->amort_end);
 
                         $amortStartSubMonth = Carbon\Carbon::parse($carbonStartDate->subMonth());
@@ -329,67 +330,120 @@
             </thead>
             <tbody>
                 @for ($x = 0; $x < count($months); $x++)
-                            <tr>
-                                <td>{{$months[$x]}}</td>
-                                @for ($i = $recordEnd; $i >= $recordStart; $i--)
+                    <tr>
+                        <td class="border-start border">{{$months[$x]}}</td>
+                        @for ($i = $recordEnd; $i >= $recordStart; $i--)
+                            @php
+                                $targetMonth = $months[$x];
+                                $targetYear = $i;
+                                $amortStartYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
+                                $paymentCount = isset($filteredPayments[$targetYear][$targetMonth]) ? count($filteredPayments[$targetYear][$targetMonth]) : 0;
+                                $principal = 0;
+                                $interest = 0;
+
+                                if(isset($filteredPayments[$targetYear][$targetMonth])){
+                                    foreach($filteredPayments[$targetYear][$targetMonth] as $payment){
+                                        $principal += $payment->principal;
+                                        $interest += $payment->interest;
+                                    }
+                                }
+                            @endphp
+
+                            @if($paymentCount > 0)
+                                <td style="text-align: center;">
+                                    {{ number_format($principal, 2, '.', ',') }}
+                                
+                                    @foreach ($loan->penalty as $penalty)
                                     @php
-                                        $targetMonth = $months[$x];
-                                        $targetYear = $i;
-                                        $amortStartYear = $amort_start->copy()->addMonths($i * 12)->format('Y');
-                                        $paymentCount = isset($filteredPayments[$targetYear][$targetMonth]) ? count($filteredPayments[$targetYear][$targetMonth]) : 0;
-                                        $principal = 0;
-                                        $interest = 0;
 
-                                        if(isset($filteredPayments[$targetYear][$targetMonth])){
-                                            foreach($filteredPayments[$targetYear][$targetMonth] as $payment){
-                                                $principal += $payment->principal;
-                                                $interest += $payment->interest;
-                                            }
-                                        }
+                                          $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
                                     @endphp
+                                        @if ($penalty->penalized_month == $x+1 &&
+                                            $penalty->penalized_year == $i)
+                                            <h6 style="font-size: 12px" class="{{$penalty_payment_instance >= $penalty->penalty_total ? 'd-none' : 'text-danger'}} text-start">Penalty 
+                                            
+                                            @if ($penalty_payment_instance >= $penalty->penalty_total)
+                                                (Paid)
+                                            @else
+                                                ( {{$penalty->penalty_total}} )
+                                                {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
+                                                @if ($penalty_payment_instance > 0)
+                                                , Paid {{$penalty_payment_instance}}    
+                                                @endif
+                                            @endif
+                                               
+                                            
+                                            </h6>
+                                            
+                                        @endif
+                                    @endforeach
+                                
+                                </td>
+                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
+                            @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
+                                <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
+                            @else
+                                <td colspan="2">
+                                    @foreach ($loan->penalty as $penalty)
+                                    @php
 
-                                    @if($paymentCount > 0)
-                                        <td style="text-align: center;">{{ number_format($principal, 2, '.', ',') }}</td>
-                                        <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
-                                    @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
-                                        <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
-                                    @else
-                                        <td colspan="2"></td> {{-- Empty cell, No Payment--}}
-                                    @endif
-                                @endfor
-                            </tr>
+                                          $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
+                                    @endphp
+                                        @if ($penalty->penalized_month == $x+1 &&
+                                            $penalty->penalized_year == $i)
+                                            <h6 style="font-size: 12px" class="text-danger">No payment w/ penalty 
+                                            
+                                            @if ($penalty_payment_instance >= $penalty->penalty_total)
+                                                (Paid)
+                                            @else
+                                                ( {{$penalty->penalty_total}} )
+                                                {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
+                                                @if ($penalty_payment_instance > 0)
+                                                , Paid {{$penalty_payment_instance}}    
+                                                @endif
+                                            @endif
+                                               
+                                            
+                                            </h6>
+                                            
+                                        @endif
+                                    @endforeach
+                                </td> {{-- Empty cell, No Payment--}}
+                            @endif
                         @endfor
+                    </tr>
+                @endfor
 
-                        <tr>
-                            <td style="border-top: 2px solid black; font-weight: bold;">Total</td>
-                            @for ($i = $recordEnd; $i >= $recordStart; $i--)
-                                @php
-                                    $targetYear = $i;
-                                    $principalTotal = 0;
-                                    $interestTotal = 0;
-                                    //get the totals
-                                    if(isset($filteredPayments[$targetYear])){
-                                        foreach($filteredPayments[$targetYear] as $month){
-                                            foreach($month as $payment){
-                                                $principalTotal += $payment->principal;
-                                                $interestTotal += $payment->interest;
-                                            }
+                    <tr>
+                        <td style="border-top: 2px solid black; font-weight: bold;">Total</td>
+                        @for ($i = $recordEnd; $i >= $recordStart; $i--)
+                            @php
+                                $targetYear = $i;
+                                $principalTotal = 0;
+                                $interestTotal = 0;
+                                //get the totals
+                                if(isset($filteredPayments[$targetYear])){
+                                    foreach($filteredPayments[$targetYear] as $month){
+                                        foreach($month as $payment){
+                                            $principalTotal += $payment->principal;
+                                            $interestTotal += $payment->interest;
                                         }
                                     }
-                                @endphp
-                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
-                                    @if ($principalTotal)
-                                    {{ number_format($principalTotal, 2,'.' , ',') }}
-                                    @endif
-                                </td>
-                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
-                                    @if ($interestTotal)
-                                    {{ number_format($interestTotal, 2, '.' , ',') }}
-                                    @endif
-                                </td>
-                            @endfor
-                        </tr>
-                    </tbody>
+                                }
+                            @endphp
+                            <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
+                                @if ($principalTotal)
+                                {{ number_format($principalTotal, 2,'.' , ',') }}
+                                @endif
+                            </td>
+                            <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
+                                @if ($interestTotal)
+                                {{ number_format($interestTotal, 2, '.' , ',') }}
+                                @endif
+                            </td>
+                        @endfor
+                    </tr>
+                </tbody>
         </table>
     </div>
         {{-- FOR PENALTY --}}
@@ -400,9 +454,9 @@
 @include('admin-views.admin-ledgers.modal-edit-penalty-payment')
 
   <!-- Penalty Modal -->
-@include('admin-views.admin-ledgers.modal-penalty')
+{{-- @include('admin-views.admin-ledgers.modal-penalty') --}}
 
-@if ($loan->penalty_id != null)
+@if ($loan->penalty != null)
     @include('admin-views.admin-ledgers.modal-penalty-payment')
 @endif
 

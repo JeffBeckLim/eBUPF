@@ -32,9 +32,10 @@ class AdminRemittanceController extends Controller
                 array_push($years, $year);
             }
         }
-
-        $years = range(min($years), max($years));
-
+        if (count($years) == 0) {
+            array_push($years, Carbon::now()->format('Y'));
+        }
+        
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
             'loans' => $loans,
