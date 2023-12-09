@@ -28,11 +28,11 @@
             <div class="row justify-content-center pb-1 pt-3 " >
                 <div class="col-lg-10 col-md-9 col-sm-9 ">
                     <div class="row ">
-                        <div class="col-2 ">
+                        {{-- <div class="col-2 ">
                             <img src="{{asset('assets/pencil.svg')}}" alt="" style="width: 3rem;">
-                        </div>
+                        </div> --}}
                         <div class="col">
-                            <h5 class="text-start fw-bold "> Edit Provident Fund, Inc. Membership Form</h5>
+                            <h5 class="text-center fw-bold "> Edit Provident Fund, Inc. Membership Form</h5>
                         </div>
                     </div>
                 </div>

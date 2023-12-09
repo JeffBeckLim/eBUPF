@@ -34,21 +34,21 @@
                     </div>
 
                 </div>
-
-
-
+                <div class="col-12 pb-1 pb-3 d-none" id="manual_address">
+                    <label class="fw-bold" for="address">
+                        Address
+                    </label>
+                    <input id="manual_address_input" class="form-control" name="address" value="{{old('address')}}"
+                    placeholder="Barangay 307 Quiapo, City of Manila, Metro Manila 1001"
+                    >
+                    @error('address')
+                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
+                    @enderror
+                </div>
 
                 {{-- Adress Selector --}}
                 <div class="row g-0 border-bottom" id="edit_address">
-                    {{-- <div class="col-12 pb-1 pb-3">
-                        <label class="fw-bold" for="address">
-                            Address
-                        </label>
-                        <input class="form-control validate" name="address" value="{{old('address')}}">
-                        @error('address')
-                        <p class="text-danger mt-1"><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
-                    @enderror
-                    </div> --}}
+                  
                     <label class="fw-bold" for="address">
                         Address
                     </label>
@@ -80,7 +80,7 @@
                             <label class="form-label">Barangay *</label>
                             <select name="barangay" class="form-control form-control-md validate" id="barangay" disabled></select>
                             <input type="hidden" class="form-control form-control-md" name="barangay_text" id="barangay-text" required>
-                            @error('<barangay_text></barangay_text>')
+                            @error('barangay_text')
                                 <p class="text-danger mt-1 "><i class="bi bi-exclamation-circle"></i> {{$message}}</p>
                             @enderror
                         </div>
@@ -165,11 +165,11 @@
 
 
 
-{{--
- <button class="btn" type="submit">
+
+ {{-- <button class="btn" type="submit">
     submit
-    </button>
- --}}
+    </button> --}}
+
  
 </div> {{-- Last Tag --}}
 
@@ -216,6 +216,38 @@ provinceSelector.addEventListener('change', function() {
 citySelector.addEventListener('change', function() {
         barangaySelector.disabled = false;
 });
+
+
+
+    // Function to check if the user is using iOS
+    function isiOS() {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    return /iphone|ipad|ipod/.test(userAgent);
+    }
+
+    if (isiOS()) {
+        // console.log(isiOS());
+        regionSelector.classList.remove('validate');
+        provinceSelector.classList.remove('validate');
+        citySelector.classList.remove('validate');
+        barangaySelector.classList.remove('validate');
+        
+        var editAddress =  document.getElementById("edit_address");
+        editAddress.classList.add('d-none');
+        
+        var manualAddress =  document.getElementById("manual_address");
+        var manualAddressInput =  document.getElementById("manual_address_input");
+
+        manualAddress.classList.remove('d-none');
+        manualAddressInput.classList.add('validate');
+        
+
+    } else {
+        console.log('manual address selector for iOS');
+    }
+
+
+
 </script>
 @include('member-views.membership-form.ph-address-selector')
 {{-- <script src="{{asset('js/ph_address_selector.js')}}" defer></script> --}}

@@ -3,10 +3,8 @@
 @section('content')
 
     <div class="bg-white rounded px-3 pt-2 pb-4 mt-3 ms-2 border">
-        <div class="d-flex align-items-center p-3 gap-3">
-            <img src="{{asset('assets/calculator.svg')}}" alt="calculator logo" width="30px" height="50px">
-            <span style="font-size: 20px; font-weight: bold; color: #000834;">Loan Calculator</span>
-        </div>
+        <h6 class="fs-5 text-center fw-bold p-3">Loan Calculator</h6>
+        
         <div class="row mx-lg-4 mx-2" style="font-size: 12px">
             Choose loan type, enter your principal amount, and loan term to calculate your monthly amortization. Get clear and quick insights into your payments.
          </div>
@@ -17,9 +15,9 @@
                     @csrf
                     <div style="padding: 10px 10px 0 10px;">
                         <span class="fw-bold fs-6">Loan Category </span><span class="text-danger fw-bold">*</span> <br>
-                        <div style="padding: 5px 0 0 13px;">
+                        <div>
                             <span style="font-size: 12px" class="text-secondary">Multi-purpose (MPL) or Housing (HsL) loan</span>
-                            <div class="row pt-1 d">
+                            <div class="row d-flex align-items-center">
                                 <div class="col-6">
                                     {{-- <input type="radio" id="mpl" name="loan_category" value="mpl" required>
                                     <label for="mpl" class="fs-7">Multi-Purpose</label> --}}

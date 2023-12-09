@@ -96,7 +96,7 @@
                 </div>
 
                 <p class="text1-design pt-4">Witnesses</p>
-                <p class="text-secondary" style="font-size: 12px">Please enter the names of your witnesses, these are required.</p>
+                <p class="text-dark" style="font-size: 14px">You may leave this blank for now, but it will be required in the printed form for submission.</p>
                 <p style="font-size: 12px">
                     Note: Names should be at least 2 characters long and contain no numbers.
                 </p>

@@ -81,6 +81,7 @@
             <p class="fw-bold m-0">Contribution</p>
         </div>
         <label for="salary">Fixed Monthly Contribution</label>
+        <label for="salary"><i>For non-teaching staff, the minimum contribution is Php 100. Teaching staff are required to contribute a minimum of Php 300.</i></label>
         <input  id="monthly_contribution" class="form-control validate" type="number" name="monthly_contribution" value="{{Auth::user()->member->monthly_contribution}}">
     </div>
     @error('monthly_contribution')

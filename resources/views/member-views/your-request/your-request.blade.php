@@ -29,7 +29,7 @@
                     @endif
                     
 
-                    <div class="row my-3 g-0 p-3">
+                    <div class="row my-3 g-0 p-3 text-center">
                         <p class="fs-5 fw-bold">Outgoing Requests</p>
                     </div>
                     <div class="mx-2">
@@ -142,6 +142,18 @@
                                              <p style="font-size: 12px">Loan Application Cancelled.</p>
                                         @elseif ($cb_withLoan->accept_request == '')
                                              <p style="font-size: 12px">Pending</p>
+                                             <div class="dropdown mt-2 ">
+                                                <button class="btn  rounded-5 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                >
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
+                                                    Cancel Application</a>
+                                                </li>
+
+                                                </ul>
+                                            </div>
                                         @elseif ($cb_withLoan->accept_request == 0)
                                             <p style="font-size: 12px">Declined by Co-borrower.</p>
                                         @elseif ($cb_withLoan->accept_request == 1)

@@ -128,7 +128,7 @@
                             <div class="row ms-3 rounded">
 
                                 <div class="co-12  p-2">
-                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications') ? 'fw-bold' : ''}} " href="{{ route('loan.applications.all')}}">Loan Applications</a>
+                                    <a class="text-decoration-none text-secondary {{Route::is('loan.applications.all','loan.applications','loan.applications.evaluated') ? 'fw-bold' : ''}} " href="{{ route('loan.applications.all')}}">Loan Applications</a>
                                 </div>
 
                                 <div class="co-12  p-2">

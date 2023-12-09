@@ -9,8 +9,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center">
-                            <img src="{{asset('assets/receipt-history.svg')}}" alt="history" style="width: 3rem;">
-                            <p class="text-center fw-bolder m-0">
+                            {{-- <img src="{{asset('assets/receipt-history.svg')}}" alt="history" style="width: 3rem;"> --}}
+                            <p class="text-center fw-bolder m-0 fs-5">
                                 Transaction
                                 <br>
                                 History

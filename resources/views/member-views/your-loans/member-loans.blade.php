@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-12 border mb-3 rounded" style="padding:10px 0 2px 5px;">
                         <h6 class="text-secondary fs-7 ps-2">
-                            <i class="bi bi-lightbulb-fill"></i>
+                            <i class="bi bi-lightbulb"></i>
                             Here are the loans with the checks you've already claimed.
                         </h6>
                     </div>
