@@ -63,13 +63,17 @@
         <div>
         </div>
         <div class="center-text">
-            <span style="font-size: 12px;">SCHEDULE OF RECEIVABLES </span> <br> <span style="font-size: 12px; font-weight: normal;">As of Month Day, Year</span>
+            <span style="font-size: 12px;">SCHEDULE OF RECEIVABLES </span> <br> <span style="font-size: 12px; font-weight: normal; text-transform:uppercase;">As of December {{$selectedYear}}</span>
         </div>
         <div class="right-corner">
 
         </div>
     </div>
-    <table style="margin-top: 20px; font-size: 12px;">
+    <div style="margin-top: 12px;">
+        <span style="font-size: 12px; font-weight: bold;">UNIT: </span> <span style="font-size: 12px; font-weight: bold; text-transform: uppercase;">{{ $unitName }}</span>
+    </div>
+    <table style="margin-top: 8px; font-size: 12px;">
+
         <thead>
             <tr>
                 <th width="3%" rowspan="3" style="text-align: center;">No.</th>
@@ -78,12 +82,12 @@
                 <th colspan="6" style="text-align: center; color: rgb(162, 0, 0);">INTEREST RECEIVABLE</th>
             </tr>
             <tr>
-                <th rowspan="2" style="text-align: center;">Balances as of 12/31/2022</th>
+                <th rowspan="2" style="text-align: center;">Balances as of {{$lastDayPreviousYear}}</th>
                 <th colspan="4" style="text-align: center;">Payments</th>
-                <th rowspan="2" style="text-align: center;">Balances as of 12/31/2023</th>
-                <th rowspan="2" style="text-align: center;">Balances as of 12/31/2022</th>
+                <th rowspan="2" style="text-align: center;">Balances as of {{$lastDayThisYear}}</th>
+                <th rowspan="2" style="text-align: center;">Balances as of {{$lastDayPreviousYear}}</th>
                 <th colspan="4" style="text-align: center;">Payments</th>
-                <th rowspan="2" style="text-align: center;">Balances as of 12/31/2023</th>
+                <th rowspan="2" style="text-align: center;">Balances as of {{$lastDayThisYear}}</th>
             </tr>
             <tr>
 
@@ -98,22 +102,46 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Aaron Labini</td>
-                <td>200,000.00</td>
-                <td>20,000.00</td>
-                <td>20,000.00</td>
-                <td>20,000.00</td>
-                <td>20,000.00</td>
-                <td>120,000.00</td>
-                <td>36,0000.00</td>
-                <td>3,000.00</td>
-                <td>3,000.00</td>
-                <td>3,000.00</td>
-                <td>3,000.00</td>
-                <td>24,000.00</td>
-            </tr>
+            @php $count = 1; @endphp
+            @if($loans->count() > 0)
+                @foreach($loans as $loan)
+                    <tr>
+                        <td style="text-align: center;">{{ $count++ }}</td>
+                        <td>{{ $loan->member->firstname }} {{ $loan->member->lastname }}</td>
+                        <td>{{ isset($yearBalance[$loan->id]['beginning_balance_principal']) ? number_format($yearBalance[$loan->id]['beginning_balance_principal'], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPayments[$loan->id][$selectedYear][1]) ? number_format($quarterlyPayments[$loan->id][$selectedYear][1], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPayments[$loan->id][$selectedYear][2]) ? number_format($quarterlyPayments[$loan->id][$selectedYear][2], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPayments[$loan->id][$selectedYear][3]) ? number_format($quarterlyPayments[$loan->id][$selectedYear][3], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPayments[$loan->id][$selectedYear][4]) ? number_format($quarterlyPayments[$loan->id][$selectedYear][4], 2) : '' }}</td>
+                        <td>{{ isset($yearBalance[$loan->id]['ending_balance_principal']) ? number_format($yearBalance[$loan->id]['ending_balance_principal'], 2) : '' }}</td>
+                        <td>{{ isset($yearBalance[$loan->id]['beginning_balance_interest']) ? number_format($yearBalance[$loan->id]['beginning_balance_interest'], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPaymentsForInterest[$loan->id][$selectedYear][1]) ? number_format($quarterlyPaymentsForInterest[$loan->id][$selectedYear][1], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPaymentsForInterest[$loan->id][$selectedYear][2]) ? number_format($quarterlyPaymentsForInterest[$loan->id][$selectedYear][2], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPaymentsForInterest[$loan->id][$selectedYear][3]) ? number_format($quarterlyPaymentsForInterest[$loan->id][$selectedYear][3], 2) : '' }}</td>
+                        <td>{{ isset($quarterlyPaymentsForInterest[$loan->id][$selectedYear][4]) ? number_format($quarterlyPaymentsForInterest[$loan->id][$selectedYear][4], 2) : '' }}</td>
+                        <td>{{ isset($yearBalance[$loan->id]['ending_balance_interest']) ? number_format($yearBalance[$loan->id]['ending_balance_interest'], 2) : '' }}</td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td colspan="2" style="text-align: center; font-weight: bold;">TOTAL</td>
+                    <td style="font-weight: bold;">{{ number_format($totalBeginningBalancePrincipal, 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalPrincipalPayments[$selectedYear][1], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalPrincipalPayments[$selectedYear][2], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalPrincipalPayments[$selectedYear][3], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalPrincipalPayments[$selectedYear][4], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalEndingBalancePrincipal, 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalBeginningBalanceInterest, 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalInterestPayments[$selectedYear][1], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalInterestPayments[$selectedYear][2], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalInterestPayments[$selectedYear][3], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalInterestPayments[$selectedYear][4], 2) }}</td>
+                    <td style="font-weight: bold;">{{ number_format($totalEndingBalanceInterest, 2) }}</td>
+                </tr>
+            @else
+                <tr>
+                    <td colspan="14" style="text-align: center;">No Data</td>
+                </tr>
+            @endif
         </tbody>
     </table>
 </body>
