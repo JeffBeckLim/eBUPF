@@ -12,9 +12,9 @@
     <div class="container-fluid">
         <div class="col pt-1 m-2">
             <div class="row px-lg-1">
-                <div class="col-lg-6">
+                <div class="col-lg-6 ">
                     <!-- LOAN DETAILS CARD -->
-                    <div class="card shadow-sm rounded-4" style="border-color: #32BEA6; border-width: 2px;">
+                    <div class="card shadow-sm rounded-4 " style="border-color: #32BEA6; border-width: 2px;">
                         <div class="card-body p-3">
                             <div class="row">
                                 <div class="col-12 pb-3" style="margin: 10px 0 0 10px">
@@ -74,10 +74,21 @@
                                                 <h6 class="">
                                                     <span style="font-size: 14px" class="text-danger">
                                                         <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
-                                                            Loan Penalized, Balance:
+                                                            Penalty Balance:
                                                     </span>
                                                     <h6 class="text-danger fw-bold">
-                                                        Php {{number_format($loan->penalty->penalty_total - $sumPenaltyPayments, 2,',','.')}}
+                                                        @php
+                                                        $sum = 0;
+                                                            foreach ($loan->penalty as $penalty) {
+                                                               $sum += $penalty->penalty_total;
+                                                            }
+                                                        @endphp
+                                                        @if ($sum - $sumPenaltyPayments < 1)
+                                                            No Remaining Balance
+                                                        @else 
+                                                        {{number_format($sum - $sumPenaltyPayments, 2, '.',',')}} 
+                                                        @endif
+                                                        
                                                     </h6>
                                                 </h6>
                                             @endif
@@ -203,7 +214,7 @@
                     </div>
 
                     <!-- LOAN AMORTIZATION  -->
-                    <div class="card mt-2 shadow-sm mb-2" style="border-radius: 0">
+                    <div class="card mt-2 shadow-sm" style="border-radius: 0">
                         <div class="card-body mx-4">
                             <div class="row g-0 fs-7">
                                 <div class="col-12 text-center">
@@ -246,8 +257,8 @@
                     </div>
                 </div>
                 {{-- History Card --}}
-                <div class="col-lg-6 col-sm-12 pb-2">
-                    <div class="card shadow-sm" style="border-radius: 15px">
+                <div class="col-lg-6 col-sm-12  ">
+                    <div class="card shadow-sm h-100" style="border-radius: 15px">
                         <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
                             <p class="fw-bold m-1 text-center">Payment History</p>
                         </div>
@@ -260,7 +271,7 @@
                                 <p class="text-center">No transaction</p>
                             </div>
                             @else
-                            <div style="min-height: 660px; max-height: 661px; overflow-y: auto;">
+                            <div style=" overflow-y: auto;">
                                 <div class="table-responsive">
                                     <table class="table fs-7">
                                         <thead>

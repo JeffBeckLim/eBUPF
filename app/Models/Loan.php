@@ -28,7 +28,7 @@ class Loan extends Model
         'is_active',
         'is_viewed',
 
-        'penalty_id',
+        // 'penalty_id',
         'deleted_at',
         'last_edited_by',
 
@@ -93,7 +93,7 @@ class Loan extends Model
     // loan can has one penalty
     public function penalty()
      {
-         return $this->hasOne(Penalty::class, 'id', 'penalty_id');
+         return $this->hasMany(Penalty::class, 'loan_id', 'id');
      } 
 
 }

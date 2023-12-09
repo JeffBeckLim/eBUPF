@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
+            $table->foreignId('loan_id')->nullable()->constrained('loans');
+
             $table->decimal('penalty_total', 20, 2)->nullable();
-            $table->integer('penalized_months')->nullable();
+            $table->integer('penalized_month')->nullable();
+            $table->integer('penalized_year')->nullable();
+
             $table->decimal('penalty_rate', 20, 2)->nullable();
         });
     }

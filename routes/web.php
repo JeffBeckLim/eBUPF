@@ -100,13 +100,18 @@ use App\Models\SessionLog;
     Route::get('/admin/ledgers/member/{loanTypeId}/{id}' , [LedgerController::class, 'showMemberLedgers'])->name('admin.members.ledgers')->middleware('auth','admin.access');
     Route::get('/admin/ledgers/personal-ledger/{id}' , [LedgerController::class, 'showPersonalLedger'])->name('admin.personal.ledger')->middleware('auth','admin.access');
 
+
+
     // PENALTY
     Route::post('/admin/ledgers/personal-ledger-penalty/update-create/{id}', [PenaltyController::class, 'updatePenalty'])->name('admin.penalty.updateOrCreate')->middleware('auth','admin.access');
         //penalty payment
         // createPenaltyPayment
-    Route::post('/admin/ledgers/personal-ledger-penalty-payment/{penalty_id}', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment')->middleware('auth','admin.access');
+    Route::post('/admin/ledgers/personal-ledger-penalty-payment', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment')->middleware('auth','admin.access');
         // updatePenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment')->middleware('auth','admin.access');
+
+
+
 
     // Import data (users) on database
     Route::get('/admin/import-data', [AdminImportData::class, 'importData'])->name('admin.import.data')->middleware('auth','admin.access');

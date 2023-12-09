@@ -13,45 +13,45 @@ class PenaltyController extends Controller
     public function updatePenalty(Request $request, $id){
 
         $loan = Loan::findOrFail($id);
-        $penalty = Penalty::find($loan->penalty_id);
 
         $formFields = $request->validate([
             'penalty_total'=> 'required|numeric|min:1',
+            'penalized_month'=> 'required|integer|min:1',
+            'penalized_year'=> 'required|integer|min:1'
         ]);
-        if($penalty == null){
-            $new_penalty = Penalty::create([
+        
+         $mandatory = Penalty::create([
+                'loan_id'=>$loan->id,
                 'penalty_total' => $formFields['penalty_total'],
+                'penalized_month' => $formFields['penalized_month'],
+                'penalized_year' => $formFields['penalized_year']
             ]);
 
-            $loan->penalty_id = $new_penalty->id;
-            $loan->save();
-
-            return back()->with('passed', 'Penalty successfully added! ');
-
-        }elseif($penalty != null){
-            $penalty->penalty_total =  $formFields['penalty_total'];
-            $penalty->save();
-            return back()->with('passed', 'Penalty successfully updated! ');
-        }
+            
+        return back()->with('passed', 'Penalty successfully added! ');
     }
 
-    public function createPenaltyPayment(Request $request, $penalty_id){
-        $penalty = Penalty::find($penalty_id);
-        $loan = Loan::where('penalty_id', $penalty_id)->first();
-        
+    public function createPenaltyPayment(Request $request){
         $formFields = $request->validate([
             'penalty_payment_amount'=> 'required|numeric|min:1',
-            'payment_date'=>'required|date',
+            'penalty_id'=>'required',
             'or_number'=>'nullable',
+            'payment_date'=>'nullable'
         ]);
 
+        $penalty = Penalty::where('id', $formFields['penalty_id'])->first();
+        $loan = Loan::where('id',$penalty->loan_id)->first();
+        if($penalty == null && $loan == null){
+            abort(403);
+        }
         // check if penalty table exist
         if($penalty != null){
             $new_penalty_payment = PenaltyPayment::create([
-                'penalty_payment_amount'=> $formFields['penalty_payment_amount'],
-                'payment_date'=> $formFields['payment_date'],
                 'member_id'=>$loan->member_id,
                 'penalty_id'=>$penalty->id,
+                'penalty_payment_amount'=> $formFields['penalty_payment_amount'],
+                
+                'payment_date'=> $formFields['payment_date'],
                 'or_number'=>$formFields['or_number'],
             ]);
             

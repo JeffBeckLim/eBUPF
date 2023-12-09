@@ -119,7 +119,7 @@ class AdminLoanApplicationController extends Controller
 
     public function showLoanApplications(Request $request, $loanType ,$table_freeze){
 
-        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check', 'penalty')->has('loanApplicationStatus')
+        $raw_loans = Loan::with('member.units' , 'loanApplicationStatus.loanApplicationState' , 'loanCategory', 'amortization', 'adjustment', 'check')->has('loanApplicationStatus')
         ->where('loan_type_id', $loanType)
         ->whereNull('deleted_at')
         ->get();

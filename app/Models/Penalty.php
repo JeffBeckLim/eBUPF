@@ -10,14 +10,17 @@ class Penalty extends Model
     use HasFactory;
 
     protected $fillable = [
+        'loan_id',
         'penalty_total',
-        'penalized_months',
+        'penalized_month',
+        'penalized_year',
+
         'penalty_rate', 
     ];
 
     // penalty belongs to a loan
     public function loan(){
-        return $this->belongsTo(Loan::class, 'penalty_id', 'id');
+        return $this->belongsTo(Loan::class, 'id', 'loan_id');
     }
 
     // penalty has many penalty payments
