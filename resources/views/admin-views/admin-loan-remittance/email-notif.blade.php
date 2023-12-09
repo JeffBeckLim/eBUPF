@@ -35,18 +35,18 @@
 
         <p>This is to inform you that your
             @if($loan->loanType->loan_type_name == 'MPL')
-                Multi-Purpose Loan
+                Multi-Purpose Loan,
             @elseif($loan->loanType->loan_type_name == 'HSL')
-                Housing Loan
+                Housing Loan,
             @endif
-            , bearing code <span style="color: green;">{{$loan->loan_code}}</span> has received a payment on {{$date}}.
+             bearing code <span style="color: green;">{{$loan->loan_code}}</span> has received a payment on {{$date}}.
         </p>
 
         <p>
             Payment Details: <br>
             <strong>OR Number:</strong> {{ $OR_number }} <br>
-            <strong>Principal:</strong> {{ $principal_amount }} <br>
-            <strong>Interest:</strong> {{ $interest }} <br>
+            <strong>Principal:</strong> ₱ {{ number_format($principal_amount, 2) }} <br>
+            <strong>Interest:</strong> ₱ {{ number_format($interest, 2) }} <br>
         </p>
 
         <p>

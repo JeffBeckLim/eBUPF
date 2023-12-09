@@ -178,7 +178,7 @@ class MemberController extends Controller
     }
 
     public function updateMembership(Request $request, Member $member){
-        
+
        $beneficiaries=Beneficiary::where('member_id', Auth::user()->id)->orderBy('id', 'asc')->get();
 
        if($member->user_id != auth()->id()) {
@@ -278,7 +278,7 @@ class MemberController extends Controller
         // for adding +63 in contact number
         $temp = '+63'.$formFields['contact_num'];
         $formFields['contact_num'] = $temp;
-        
+
         $member->update($formFields);
         $member->firstname = ucwords($formFields['firstname']);
         $member->middlename = ucwords($formFields['middlename']);
@@ -362,7 +362,7 @@ class MemberController extends Controller
         if($member->user_id != auth()->id()) {
             abort(403, 'Unauthorized Action');
         }
-        
+
         if($request->address == null && $request->region_text == null){ //ensure at least one address field is included
             $validation = 'required';
             $validation_not = 'required';
@@ -375,7 +375,7 @@ class MemberController extends Controller
             $validation = 'required';
             $validation_not = 'nullable';
         }
-        
+
         $formFields = $request->validate([
 
             // 'campus_id'=> 'required', // naka comment out muna - - need pa seeders

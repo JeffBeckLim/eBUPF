@@ -132,7 +132,6 @@
 
 <body class="p-0 m-0 border-0 overflow-x-hidden">
 
-
     {{---------------------------------------
         MAke sure that this two components have identical links and assets being used.
      -------------------------------------}}
@@ -140,20 +139,17 @@
     @include('member-components.member-layout-offcanvas')
     <div class="row">
 
-    @include('member-components.member-layout-inPageSidebar')
+        @include('member-components.member-layout-inPageSidebar')
 
-
-    <!-- MAIN CONTENT GOES HERE -->
-    <div id="content" class="col m-0 scrollable-content">
-        @include('member-components.session-timeout-modal')
-        @yield('content')
-    </div>
+        <!-- MAIN CONTENT GOES HERE -->
+        <div id="content" class="col m-0 scrollable-content">
+            @include('member-components.session-timeout-modal')
+            @yield('content')
+        </div>
 
     </div>
 
     <script>
-
-
 
         var modal = document.getElementById("profileMyModal");
         var link = document.getElementById("profileOpenModalLink");

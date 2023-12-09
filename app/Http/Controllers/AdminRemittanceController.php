@@ -91,22 +91,19 @@ class AdminRemittanceController extends Controller
         $OR_number = $data['or_number'];
         $loan_type = $loan->loanType->loan_type_name;
 
+        // If the payment is equal to the loan balance, set the loan to non-performing
         if($loanBalance - ($data['principal'] + $data['interest']) <= 0){
             Mail::to($member->user->email)->send(new PaidLoan($member, $loan_type, $loan, $date));
             $loan->is_active = 2;
             $loan->save();
         }
 
-
         $memberId = $loan->member_id;
         $data['member_id'] = $memberId;
-        //save payment
 
+        // Send email to the member and save the payment to the database
         Mail::to($member->user->email)->send(new SuccessfulPayment($member, $principal_amount, $interest, $loan, $date, $OR_number));
         Payment::create($data);
-
-        // If the payment is equal to the loan balance, set the loan to non-performing
-
 
         return redirect()->route('admin.remittance')->with('success', 'Payment saved successfully.');
     }

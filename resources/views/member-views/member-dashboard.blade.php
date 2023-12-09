@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="mt-3 mx-1 me-lg-2 mb-5">
-            <!-- Main Content -->
                 <div class="row g-2">
                     <div class="col-lg-8">
                         <div class="row">
@@ -95,9 +94,8 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-4 text-end">
-                                                                        <p style="font-size: 10px" class=" m-0 text-dark ">Outstanding Balance</p>
+                                                                        <p style="font-size: 13px" class=" m-0 text-dark ">Outstanding Balance</p>
                                                                         <p style="font-size: 14px" class=" m-0 text-dark fw-bold"><span> Php </span>
-                                                                        {{-- Check if theres a loan payment [isset/empty] --}}
                                                                         @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
                                                                         {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
                                                                         @elseif(isset($totalPaymentHSL) && isset($totalPaymentHSL[$loan->id]))
@@ -143,7 +141,6 @@
                                             </div>
                                             <div class="col-md-8 gap-2 d-flex justify-content-end">
                                                 <a href="/member/mpl-application-form/" type="button" class="btn border text-start d-flex shadow-sm grow-on-hover"
-                                                   {{-- disable the button if there is inactive loan, if the total balance is less than or equal to 50% of the principal amount and if the balance is not equal to 0 --}}
                                                    @if ($mplDisabled)
                                                        disabled
                                                        style="pointer-events: none; opacity: 0.6;"
@@ -173,7 +170,6 @@
                                         </div>
                                         <div class="d-flex flex-column align-items-center justify-content-center mt-4 mx-lg-3 m-1">
                                             @if ($inActiveLoan)
-                                                {{-- CARD --}}
                                                 <div class="w-100 border bg-white rounded px-3 pt-2 pb-4 mb-2 shadow-sm">
                                                     <div class="row  mt-2 g-0 ">
                                                         <div class="col-12 mb-1" style="font-size: 12px">
@@ -271,8 +267,8 @@
                                                 </div>
 
                                             @else
-                                                <div class="w-100 border bg-white rounded pt-5 pb-5 mb-2 shadow-sm d-flex justify-content-center align-items-center" style="font-size: 12px">
-                                                    You currently don't have pending loan.
+                                                <div class="w-100 border bg-white rounded pt-5 pb-5 mb-2 shadow-sm d-flex justify-content-center align-items-center text-center" style="font-size: 16px">
+                                                    You currently don't have pending loan application.
                                                 </div>
                                             @endif
                                         </div>
@@ -288,7 +284,6 @@
                             <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%; ">
                                 <div class="container">
                                     <div class="mt-3">
-                                        {{-- <img src="assets/history.svg" alt="history icon" width="35px"> --}}
                                         <span class="fw-bold fs-6">Transactions</span>
                                     </div>
 
@@ -311,11 +306,14 @@
                                                             <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                         </div>
                                                         <div class="col-1 my-1">
-                                                            <a href="#"  data-bs-toggle="modal" data-bs-target="#downloadReportModal"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction{{$transaction->id}}">
+                                                                <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @elseif($transaction instanceof \App\Models\Loan)
+
                                                 <div class="col-12 border-bottom border-top">
                                                     <div class="row" style="padding: 0 30px 0 10px;">
                                                         <div class="col-8 my-1">
@@ -332,7 +330,9 @@
                                                             </p>
                                                         </div>
                                                         <div class="col-1 my-1">
-                                                            <a href="#"  data-bs-toggle="modal" data-bs-target="#downloadReportModal"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#loanTransaction{{$transaction->id}}">
+                                                                <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -356,7 +356,21 @@
                             </div>
                         @endif
                     </div>
-                    @include('member-views.transaction-modal')
+                    @foreach($transactions as $transaction)
+                        @include('member-views.payment-transaction-modal')
+                    @endforeach
+
+                    {{-- foreach transaction on loan --}}
+                    @foreach ($transactions as $transaction)
+                        @if($transaction instanceof \App\Models\Loan)
+                            @if($transaction->co_borrower)
+                                @foreach ($transaction->co_borrower as $co_borrower)
+                                    @include('member-views.loan-transaction-modal')
+                                @endforeach
+                            @endif
+                        @endif
+                    @endforeach
+
                     {{-- <div class="col-md-5 transactions mb-5">
                         <div class="container mt-3 ">
 
