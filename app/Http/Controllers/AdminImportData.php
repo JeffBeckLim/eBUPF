@@ -11,6 +11,9 @@ use App\Models\User;
 use SplFileObject;
 use App\Mail\ImportedMember;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\SuccessfulPayment;
+use App\Mail\PaidLoan;
+use Carbon\Carbon;
 
 class AdminImportData extends Controller
 {
@@ -118,6 +121,32 @@ class AdminImportData extends Controller
             return redirect()->back()->withErrors($validator);
         }
 
+        $validator = Validator::make($request->all(), [
+            'csv_file' => 'required|mimes:csv', // validation rules for file
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        $file = $request->file('csv_file'); // Adjusted to use 'csv_file' instead of 'file'
+        $filePath = $file->getPathname();
+
+        $handle = fopen($filePath, 'r');
+        $firstRow = fgetcsv($handle);
+
+        $expectedColumnCount = 5;
+
+        if (count($firstRow) > $expectedColumnCount) {
+            fclose($handle);
+            return redirect()->back()->with('error', 'Uploaded file has more columns than expected.');
+        }
+
+
+        // Process the file further if it passes the column count check
+
+        fclose($handle);
+
         if ($request->hasFile('csv_file')) {
             $file = $request->file('csv_file');
             $csv = new SplFileObject($file->getRealPath());
@@ -125,6 +154,8 @@ class AdminImportData extends Controller
 
             $headerSkipped = false;
             $lineNumber = 0;
+            $LoanBalance = 0;
+            $totalLoanPayment = 0;
 
             foreach ($csv as $row) {
                 if (!$headerSkipped) {
@@ -155,14 +186,50 @@ class AdminImportData extends Controller
                     ];
                     //save payment to an array
                     $paymentTable[] = $payment;
+
+                    foreach($paymentTable as $payment){
+                        $totalLoanPayment = Payment::where('loan_id', $payment['loan_id'])->sum('principal') + Payment::where('loan_id', $payment['loan_id'])->sum('interest') + $payment['principal'] + $payment['interest'];
+                        $loanBalance = ($loan->principal_amount + $loan->interest) - $totalLoanPayment;
+
+                        // If the payment is greater than the loan balance, return an error
+                        if($payment['principal'] + $payment['interest'] > $loanBalance){
+                            return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The payment is greater than the loan balance.');
+                        }
+                    }
                 }
                 else{
                     return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The loan ID does not exist.');
                 }
             }
 
-            //save all payments to the database
-            Payment::insert($paymentTable);
+
+        foreach($paymentTable as $payment){
+
+                $totalPayment = Payment::where('loan_id', $payment['loan_id'])->sum('principal') + Payment::where('loan_id', $payment['loan_id'])->sum('interest');
+                $loanBalance = ($loan->principal_amount + $loan->interest) - $totalPayment;
+
+                // get the totall  oanpayment and loanbalance
+                $member = Member::find($payment['member_id']);
+                $loan = Loan::find($payment['loan_id']);
+                $principal_amount = $payment['principal'];
+                $interest = $payment['interest'];
+                $date = Carbon::parse($payment['payment_date'])->format('F d, Y');
+                $OR_number = $payment['or_number'];
+                $loan_type = $loan->loanType->loan_type_name;
+
+                //if the loan balance is 0, set the loan to non-performing
+                if($loanBalance - ($payment['principal'] + $payment['interest']) <= 0){
+                    Mail::to($member->user->email)->send(new PaidLoan($member, $loan_type, $loan, $date));
+                    $loan->is_active = 2;
+                    $loan->save();
+                }
+
+                //save payment
+                Payment::create($payment);
+
+                //send email to the member
+                Mail::to($member->user->email)->send(new SuccessfulPayment($member, $principal_amount, $interest, $loan, $date, $OR_number));
+            }
 
             return redirect()->back()->with('success', 'Successfully imported batch payment.');
         }
