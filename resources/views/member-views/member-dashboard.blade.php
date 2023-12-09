@@ -311,7 +311,7 @@
                                                             <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                         </div>
                                                         <div class="col-1 my-1">
-                                                            <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                            <a href="#"  data-bs-toggle="modal" data-bs-target="#downloadReportModal"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -332,7 +332,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="col-1 my-1">
-                                                            <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
+                                                            <a href="#"  data-bs-toggle="modal" data-bs-target="#downloadReportModal"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -356,6 +356,7 @@
                             </div>
                         @endif
                     </div>
+                    @include('member-views.transaction-modal')
                     {{-- <div class="col-md-5 transactions mb-5">
                         <div class="container mt-3 ">
 
