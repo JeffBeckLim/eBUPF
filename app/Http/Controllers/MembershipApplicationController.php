@@ -6,6 +6,7 @@ use App\Models\Member;
 use App\Models\MembershipApplication;
 use Illuminate\Http\Request;
 use App\Mail\MembershipAccepted;
+use App\Mail\RejectMembership;
 use Illuminate\Support\Facades\Mail;
 
 class MembershipApplicationController extends Controller
@@ -74,6 +75,9 @@ class MembershipApplicationController extends Controller
             $member->membershipApplication->save();
         $member->verified_at = now();
             $member->save();
+
+        Mail::to($member->user->email)->send(new RejectMembership($member));
+
 
         // return with the name of the Member
         return redirect('/admin/membership-applications')->with('reject', 'Membership application of <strong>'.$member->firstname.'</strong> is rejected');

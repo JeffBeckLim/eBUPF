@@ -10,8 +10,10 @@
                 <p class="fw-bold">Successful Loan Application <br>
                     @if ($transaction->co_borrower->isNotEmpty())
                         @foreach ($transaction->co_borrower as $coBorrower)
-                            @if ($coBorrower->accept_request === 0 || $coBorrower->accept_request === null)
-                                <span style="color: rgb(136, 0, 0);" class="fw-normal fs-7">Wait for your co-borrower to approve your request</span>
+                            @if ($coBorrower->accept_request === null)
+                                <span style="color: rgb(0, 0, 0);" class="fw-normal fs-7">Wait for your co-borrower to approve your request</span>
+                            @elseif($coBorrower->accept_request === 0)
+                                <span style="color: rgb(136, 0, 0);" class="fw-normal fs-7">Your co-borrower has rejected your request</span>
                             @elseif ($coBorrower->accept_request === 1)
                                 <span style="color: rgb(0, 88, 0);" class="fw-normal fs-7">Your co-borrower has approved your request</span>
                             @endif

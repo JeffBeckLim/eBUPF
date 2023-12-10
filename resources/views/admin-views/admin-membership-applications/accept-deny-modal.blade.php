@@ -21,8 +21,10 @@
             </p>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Go back</button>
-        <a href="{{route('membership.accept', $memberApplication->member->id)}}"><button type="button" class="btn bu-orange text-light border-0">Yes, I approve</button></a>
+        <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Back</button>
+        <a href="{{ route('membership.accept', $memberApplication->member->id) }}">
+            <button type="button" id="approveButton" class="btn bu-orange text-light border-0">Approve</button>
+        </a>
         </div>
     </div>
     </div>
@@ -44,14 +46,36 @@
                {{$memberApplication->member->firstname}}
                 {{$memberApplication->member->lastname}}
                </strong>
-                membership in eBUPF?
+                membership in eBUPF? <br>
+                <span class="text-danger">
+                    This will automatically send an email to the applicant.
+                </span>
            </p>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Go back</button>
-        <a href="{{route('membership.reject', $memberApplication->member->id)}}"><button type="button" class="btn btn-danger">Reject Membership</button></a>
+        <button type="button" class="btn btn-light border" data-bs-dismiss="modal">Back</button>
+        <a href="{{route('membership.reject', $memberApplication->member->id)}}">
+            <button type="button" id="rejectApplication" class="btn btn-danger">Reject</button>
+        </a>
         </div>
     </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#approveButton').click(function() {
+            var $btn = $(this);
+            $btn.prop('disabled', true);
+            $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+        });
+    });
+
+    $(document).ready(function() {
+        $('#rejectApplication').click(function() {
+            var $btn = $(this);
+            $btn.prop('disabled', true);
+            $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+        });
+    });
+</script>

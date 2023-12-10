@@ -103,6 +103,8 @@
                                     <td>
                                         @if ($memberApplication->member->user->user_type == 'member' || $memberApplication->member->user->user_type == 'admin' )
                                             Already approved
+                                        @elseif($memberApplication->status == 2)
+                                            Denied
                                         @else
                                         <h5>
                                             <a href="#" style="color: #00D186" class="me-3"><i class="bi bi-check-circle-fill" data-bs-toggle="modal" data-bs-target="#approveModal{{$memberApplication->member->id}}"></i></a>

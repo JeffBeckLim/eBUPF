@@ -40,7 +40,7 @@
             @include('member-views.mpl-application-form.accordion-entity-definition')
         </div>
 
-        <form action="/member/loan-application/2" method="POST" onsubmit='disableButton()'>
+        <form action="/member/loan-application/2" method="POST" id="submitHLForm">
             @csrf
             <div id="loanForm">
 
@@ -136,11 +136,15 @@
         </form>
 
         <script>
-            function disableButton() {
-                var btn = document.getElementById('confirmRequest');
-                btn.disabled = true;
-                btn.innerText = 'Sending your request'
-            }
+            $(document).ready(function() {
+                $('#confirmRequest').click(function() {
+                    var $btn = $(this);
+                    $btn.prop('disabled', true);
+                    $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending Request...');
+
+                    $('#submitHLForm').submit();
+                });
+            });
         </script>
     </div>
   </div>
