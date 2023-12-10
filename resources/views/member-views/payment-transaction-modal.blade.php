@@ -35,7 +35,7 @@
                         <p class="">Principal</p>
                     </div>
                     <div class="col-6">
-                        <p class="fw-bold"> ₱ {{ number_format($transaction->principal, 2) }}</p>
+                        <p class="fw-bold"> Php {{ number_format($transaction->principal, 2) }}</p>
                     </div>
 
                     <div class="col-1">
@@ -45,7 +45,7 @@
                         Interest
                     </div>
                     <div class="col-6 fw-bold mb-3">
-                        ₱ {{ number_format($transaction->interest, 2) }}
+                        Php {{ number_format($transaction->interest, 2) }}
                     </div>
 
                 </div>
@@ -58,7 +58,7 @@
                         Total
                     </div>
                     <div class="col-6 fw-bold">
-                        ₱ {{ number_format($transaction->principal + $transaction->interest, 2) }}
+                        Php {{ number_format($transaction->principal + $transaction->interest, 2) }}
                     </div>
                 </div>
                 {{-- Back button --}}

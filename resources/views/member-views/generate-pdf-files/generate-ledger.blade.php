@@ -50,11 +50,15 @@
 <body>
 
     <div>
-        <div style="width: 100%; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 5px;">{{ $member->lastname }}, {{ $member->firstname }}</div>
+        <div style="width: 100%; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 5px;">{{ $member->lastname }}, {{ $member->firstname }}
+            @if($member->middlename)
+                {{ $member->middlename[0] }}.
+            @endif
+        </div>
         @if($loan->loanType->loan_type_name == 'MPL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Multi-Purpose Loan {{-- {{ $loan->id }} --}}</div>
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Multi-Purpose Loan</div>
         @elseif($loan->loanType->loan_type_name == 'HSL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Housing Loan {{-- {{ $loan->id }} --}}</div>
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Housing Loan</div>
         @endif
     </div>
     <table>
@@ -128,14 +132,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>
+                            <th style="border-right: 1px solid black;">
                                 @if($loan->loanCategory)
                                     <span style="color: #a01a1a; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>
                                 @else
                                     <div style="font-size: 12px">Loan type: <br>not specified.</div>
                                 @endif
-
-
                             </th>
 
                             @php
@@ -144,21 +146,21 @@
                             @endphp
 
                             @for ($x = $recordEnd; $x >= $recordStart; $x--)
-                                <th colspan="2" style="text-align: center;">{{{$x}}}</th>
+                                <th colspan="2" style="text-align: center; border-right: 1px solid black; border-bottom: 1px solid black;">{{{$x}}}</th>
                             @endfor
                         </tr>
                         <tr style="border-bottom: 1px solid black">
-                            <th>Month</th>
+                            <th style="border-right: 1px solid black;">Month</th>
                             @for ( $i=-1; $i < $loan->term_years; $i++)
                                 <th style="text-align: center;">Principal</th>
-                                <th style="text-align: center;">Interest</th>
+                                <th style="text-align: center; border-right: 1px solid black;">Interest</th>
                             @endfor
                         </tr>
                     </thead>
                     <tbody>
                         @for ($x = 0; $x < count($months); $x++)
-                            <tr>
-                                <td>{{$months[$x]}}</td>
+                            <tr style="border-bottom: 1px solid black;">
+                                <td style="border-right: 1px solid black;">{{$months[$x]}}</td>
                                 @for ($i = $recordEnd; $i >= $recordStart; $i--)
                                     @php
                                         $targetMonth = $months[$x];
@@ -178,24 +180,47 @@
 
                                     @if($paymentCount > 0)
                                         <td style="text-align: center;">{{ number_format($principal, 2, '.', ',') }}</td>
-                                        <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
+                                        <td style="text-align: center; border-right: 1px solid black;">{{ number_format($interest, 2, '.', ',') }}</td>
                                     @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
-                                        <td colspan="2" style="text-align: center; font-weight: bold;">Loan Granted</td>
-                                    @else
-                                        <td colspan="2"></td> {{-- Empty cell, No Payment--}}
+                                        <td colspan="2" style="text-align: center; font-weight: bold; border-right: 1px solid black;">Loan Granted</td>
+                                        @else
+                                        <td colspan="2" style="text-align: center; border-right: 1px solid black;">
+                                            @foreach ($loan->penalty as $penalty)
+                                                @php
+                                                    $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
+                                                @endphp
+                                                @if ($penalty->penalized_month == $x+1 &&
+                                                    $penalty->penalized_year == $i)
+
+                                                    @if($penalty->penalty_total > 0 && $penalty_payment_instance < $penalty->penalty_total)
+                                                        <div style="font-size: 12px; color: rgb(138, 0, 0); font-weight: bold;">No payment w/ penalty
+                                                        @if($penalty_payment_instance)
+                                                            @if($penalty_payment_instance > 0)
+                                                                ({{ number_format($penalty->penalty_total, 2, '.', ',') }}) Bal. {{ number_format($penalty->penalty_total - $penalty_payment_instance, 2, '.', ',') }}
+                                                            @else
+                                                                {{ number_format($penalty->penalty_total, 2, '.', ',') }}
+                                                            @endif
+                                                        @else
+                                                            {{ number_format($penalty->penalty_total, 2, '.', ',') }}
+                                                        @endif
+
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            @endforeach
+                                        </td>
                                     @endif
                                 @endfor
                             </tr>
                         @endfor
 
                         <tr>
-                            <td style="border-top: 2px solid black; font-weight: bold;">Total</td>
+                            <td style="border-top: 2px solid black; font-weight: bold; border-right: 1px solid black;">Total</td>
                             @for ($i = $recordEnd; $i >= $recordStart; $i--)
                                 @php
                                     $targetYear = $i;
                                     $principalTotal = 0;
                                     $interestTotal = 0;
-                                    //get the totals
                                     if(isset($filteredPayments[$targetYear])){
                                         foreach($filteredPayments[$targetYear] as $month){
                                             foreach($month as $payment){
@@ -210,7 +235,7 @@
                                     {{ number_format($principalTotal, 2,'.' , ',') }}
                                     @endif
                                 </td>
-                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center;">
+                                <td style="border-top: 2px solid black; font-weight: bold; text-align: center; border-right: 1px solid black;">
                                     @if ($interestTotal)
                                     {{ number_format($interestTotal, 2, '.' , ',') }}
                                     @endif
@@ -219,5 +244,6 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
 </body>
 </html>

@@ -40,7 +40,9 @@
                         <p class="">Principal Amount</p>
                     </div>
                     <div class="col-6">
-                        <p class="fw-bold">{{ $transaction->original_principal_amount}}</p>
+                        <p class="fw-bold">
+                            Php {{ number_format($transaction->original_principal_amount, 2) }}
+                        </p>
                     </div>
                     <div class="col-6">
                         <p class="">Term</p>
