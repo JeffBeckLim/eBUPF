@@ -74,7 +74,7 @@
 
         </div>
 
-        <div class="row mt-3 g-0 mx-3">
+        <div class="row mt-3 g-0 mx-3 border">
             <style>
                 .scale-1-active{
                     background-color: #e6f3ff !important;
@@ -99,20 +99,23 @@
         </div>
 
 
-        <div class="d-flex px-3 pt-4">
+        <div class="d-flex align-items-center px-3 pt-4 ">
 
-            @if ($loan_type == 'hsl')
-                <div class="d-flex membership-app-header1-mpl text-dark d-none d-md-block">
-                    <img src="{{asset('assets/HSL-mini.svg')}}" alt="" style="width: 50px;">
-                    <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 20px;">Housing Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
+            <div class=" membership-app-header1-mpl text-dark d-none d-md-block ">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="{{$loan_type == 'hsl'?  asset('assets/HSL-mini.svg') : asset('assets/MPL-mini.svg')}}" alt="" style="width: 50px;">
+                    </div>
+                    <div class="col">
+                        <h6 style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 20px;">{{$loan_type == 'hsl'?  'Housing Loan' : 'Multi-purpose Loan'}}</span> <span class="fw-bold fs-7">Tracking Applications</span></h6>
+                    </div>
                 </div>
-
-            @elseif ($loan_type == 'mpl')
-                <div class="d-flex membership-app-header1-mpl text-dark d-none d-md-block">
-                    <img src="{{asset('assets/MPL-mini.svg')}}" alt="" style="width: 50px;">
-                    <p style="padding-left: 10px; padding-top: 5px"><span class="fw-bold " style="font-size: 1.2rem; margin-right: 10px;">Multi-Purpose Loan</span> <span class="fw-bold fs-7">Tracking Applications</span></p>
-                </div>
-            @endif
+                
+                
+               
+                
+            </div>
+            
 
 
             <div class="membership-app-header2">

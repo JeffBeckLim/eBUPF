@@ -6,11 +6,18 @@
     <div class="row">
         <div class="col-12 mb-3">
             @if (session('passed'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{session('passed')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            @if (session('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{session('warning')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        @endif
             @error('penalty_total')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{$message}}
@@ -392,7 +399,8 @@
                                     @endforeach
 
                                 </td>
-                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
+                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}
+                                </td>
                             @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
                                 <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
                             @else
