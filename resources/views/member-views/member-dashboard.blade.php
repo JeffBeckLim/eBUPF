@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="mb-2 " style="min-height: 270px; max-height: 300px; overflow-y: auto;">
                                             @if ($loans->isEmpty())
-                                                <div class="text-center align-items-center pt-5 pb-5 mt-5 mb-5" style="font-size: 12px">
+                                                <div class="text-center align-items-center pt-5 pb-5 mt-5 mb-5" style="font-size: 16px">
                                                     You currently don't have active loans.
                                                 </div>
                                             @else

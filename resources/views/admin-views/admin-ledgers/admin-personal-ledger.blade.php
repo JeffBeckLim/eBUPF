@@ -77,12 +77,25 @@
         </div>
         <div class="col-md-6">
             <div class="d-flex justify-content-end">
-
                 @if ($loan->penalty)
+                    @php
+                    $sum = 0;
+                        foreach ($loan->penalty as $penalty) {
+                        $sum += $penalty->penalty_total;
+                        }
+                    @endphp
+                @endif
+
+                @if($sum - $sumPenaltyPayments != 0)
                     <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
                         <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
                     </a>
                 @endif
+               {{--  @if ($loan->penalty )
+                    <a href="#penalty-div" class="mx-2"  data-bs-toggle="tooltip" data-bs-title="This loan has penalty" >
+                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
+                    </a>
+                @endif --}}
                 {{-- <span class="badge rounded-pill  w-25 d-flex align-items-center justify-content-center" style="background-color: #dd5858; font-size: 12px;">Primary</span> --}}
 
                     @php
@@ -211,7 +224,7 @@
                     @php
                         // Parse the start and end dates as Carbon objects
                         $carbonStartDate = Carbon\Carbon::parse($loan->amortization->amort_start);
-                        
+
                         $carbonEndDate = Carbon\Carbon::parse($loan->amortization->amort_end);
 
                         $amortStartSubMonth = Carbon\Carbon::parse($carbonStartDate->subMonth());
@@ -352,7 +365,7 @@
                             @if($paymentCount > 0)
                                 <td style="text-align: center;">
                                     {{ number_format($principal, 2, '.', ',') }}
-                                
+
                                     @foreach ($loan->penalty as $penalty)
                                     @php
 
@@ -360,24 +373,24 @@
                                     @endphp
                                         @if ($penalty->penalized_month == $x+1 &&
                                             $penalty->penalized_year == $i)
-                                            <h6 style="font-size: 12px" class="{{$penalty_payment_instance >= $penalty->penalty_total ? 'd-none' : 'text-danger'}} text-start">Penalty 
-                                            
+                                            <h6 style="font-size: 12px" class="{{$penalty_payment_instance >= $penalty->penalty_total ? 'd-none' : 'text-danger'}} text-start">Penalty
+
                                             @if ($penalty_payment_instance >= $penalty->penalty_total)
                                                 (Paid)
                                             @else
                                                 ( {{$penalty->penalty_total}} )
                                                 {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
                                                 @if ($penalty_payment_instance > 0)
-                                                , Paid {{$penalty_payment_instance}}    
+                                                , Paid {{$penalty_payment_instance}}
                                                 @endif
                                             @endif
-                                               
-                                            
+
+
                                             </h6>
-                                            
+
                                         @endif
                                     @endforeach
-                                
+
                                 </td>
                                 <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
                             @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
@@ -391,21 +404,21 @@
                                     @endphp
                                         @if ($penalty->penalized_month == $x+1 &&
                                             $penalty->penalized_year == $i)
-                                            <h6 style="font-size: 12px" class="text-danger">No payment w/ penalty 
-                                            
+                                            <h6 style="font-size: 12px" class="text-danger">No payment w/ penalty
+
                                             @if ($penalty_payment_instance >= $penalty->penalty_total)
                                                 (Paid)
                                             @else
                                                 ( {{$penalty->penalty_total}} )
                                                 {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
                                                 @if ($penalty_payment_instance > 0)
-                                                , Paid {{$penalty_payment_instance}}    
+                                                , Paid {{$penalty_payment_instance}}
                                                 @endif
                                             @endif
-                                               
-                                            
+
+
                                             </h6>
-                                            
+
                                         @endif
                                     @endforeach
                                 </td> {{-- Empty cell, No Payment--}}

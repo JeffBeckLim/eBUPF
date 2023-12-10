@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-    <form action="{{ route('admin.import.data.execute') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+    <form action="{{ route('admin.import.data.execute') }}" method="POST" enctype="multipart/form-data" class="mt-4" id="importForm">
         @csrf
         <label for="csv_file" class="form-label fs-5 fw-bold">Choose a CSV file: </label>
         <div class="mb-3 d-flex">
             <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" style="width: 50%; min-width: 300px;" onchange="previewCSV(event)" required>
-            <button type="submit" class="btn btn-primary" style="margin-left: 15px;">Import</button>
+            <button type="button" class="btn btn-primary" id="importingData" style="margin-left: 15px;">Import</button>
         </div>
     </form>
     @if(session('success'))
@@ -59,6 +59,18 @@
     </div>
 
     <script>
+
+        $(document).ready(function() {
+            $('#importingData').click(function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Importing...');
+
+                // Submit the form
+                $('#importForm').submit();
+            });
+        });
+
         function previewCSV(event) {
             const file = event.target.files[0];
             const reader = new FileReader();

@@ -65,7 +65,7 @@ class LedgerController extends Controller
     public function showPersonalLedger($id){
         // add error catcher here to make sure that loang being retrieved is valid
         $loan = Loan::with('loanType' , 'amortization' , 'loanApplicationStatus' , 'payment', 'member.units' , 'loanCategory', 'penalty')->where('id' , $id)->first();
-        
+
         if($loan == null){
             abort('403');
         }
