@@ -33,7 +33,7 @@
                                     <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
                                 </div>
 
-                                <div class="col-12 " style=" scale: 0.9;">
+                                <div class="col-12 " style="scale: 0.9;">
                                     <div class="row">
                                         <div class="col-2">
                                             @if($loan->loan_type_id == 1)
@@ -63,35 +63,14 @@
                                                 Monthly Payable
                                                 <span class="fw-normal">
                                                     @if ($loan->amortization)
-                                                        Php {{ $loan->amortization->amort_principal + $loan->amortization->amort_interest }}
+                                                        Php {{ number_format($loan->amortization->amort_principal + $loan->amortization->amort_interest, 2, '.', ',') }}
                                                     @else
                                                         No amortization yet
                                                     @endif
                                                 </span>
                                             </p>
 
-                                            @if ($loan->penalty != null)
-                                                <h6 class="">
-                                                    <span style="font-size: 14px" class="text-danger">
-                                                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
-                                                            Penalty Balance:
-                                                    </span>
-                                                    <h6 class="text-danger fw-bold">
-                                                        @php
-                                                        $sum = 0;
-                                                            foreach ($loan->penalty as $penalty) {
-                                                               $sum += $penalty->penalty_total;
-                                                            }
-                                                        @endphp
-                                                        @if ($sum - $sumPenaltyPayments < 1)
-                                                            No Remaining Balance
-                                                        @else 
-                                                        {{number_format($sum - $sumPenaltyPayments, 2, '.',',')}} 
-                                                        @endif
-                                                        
-                                                    </h6>
-                                                </h6>
-                                            @endif
+
 
                                         </div>
                                         <div class="col-4">
@@ -106,6 +85,33 @@
                                                 )
                                             }}
                                             </p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-2">
+                                        </div>
+                                        <div class="col-10">
+                                            @if ($loan->penalty != null)
+                                                <h6>
+                                                    <span style="font-size: 14px" class="text-danger">
+                                                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
+                                                        Penalty Balance:
+                                                        @php
+                                                            $sum = 0;
+                                                                foreach ($loan->penalty as $penalty) {
+                                                                   $sum += $penalty->penalty_total;
+                                                                }
+                                                        @endphp
+                                                        <span class="text-danger fw-bold">
+                                                            @if ($sum - $sumPenaltyPayments < 1)
+                                                                Php 0.00
+                                                            @else
+                                                                Php {{number_format($sum - $sumPenaltyPayments, 2, '.',',')}}
+                                                            @endif
+                                                        </span>
+                                                    </span>
+                                                </h6>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -288,9 +294,9 @@
                                             <tr>
                                                 <td>{{ $payment->or_number }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('F j, Y') }}</td>
-                                                <td>{{ number_format($payment->principal, 2, '.', ',') }}</td>
-                                                <td>{{ number_format($payment->interest, 2, '.', ',') }}</td>
-                                                <td>{{ number_format($payment->principal + $payment->interest, 2, '.', ',') }}</td>
+                                                <td> <span class="text-muted">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}</td>
+                                                <td><span class="text-muted">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}</td>
+                                                <td><span class="text-muted">Php</span> {{ number_format($payment->principal + $payment->interest, 2, '.', ',') }}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>

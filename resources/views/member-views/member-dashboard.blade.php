@@ -79,7 +79,11 @@
                                                                                     <span class="text14-design">Housing Loan
                                                                                     </span>
                                                                                     @endif
-
+                                                                                    @if ($loan->penalty->count() != 0)
+                                                                                    <span style="font-size: 12px" class="text-danger" title="This loan has penalty">
+                                                                                        <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="Penalty Icon">
+                                                                                    </span>
+                                                                                @endif
                                                                                     <br>
                                                                                     @if($loan->amortization)
                                                                                         <span class="text13-design">
@@ -303,7 +307,7 @@
                                                             <p class="m-0" style="font-size: 10px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                         </div>
                                                         <div class="col-4 text-center my-1">
-                                                            <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
+                                                            <p class="fs-7 fw-bold m-0">Php {{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                         </div>
                                                         <div class="col-1 my-1">
                                                             <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction{{$transaction->id}}">
