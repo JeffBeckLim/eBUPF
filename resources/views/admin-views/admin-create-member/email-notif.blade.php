@@ -70,7 +70,7 @@
         </p>
         <div>
             <p>
-                Login using your <span style="font-weight: bold; color: #00638D;">BU email</span> and your temporary password is <span style="font-weight: bold; color: #00638D;">Ch@ngeMe123</span>. <br> <br>
+                Login using your <span style="font-weight: bold; color: #00638D;">BU email</span> and your temporary password is <span style="font-weight: bold; color: #00638D;">Ch@ngeMe123</span> <br> <br>
 
                 <span style="font-weight: bold; color: #FF6F19;">
                     We highly recommend that you change your password upon logging in.

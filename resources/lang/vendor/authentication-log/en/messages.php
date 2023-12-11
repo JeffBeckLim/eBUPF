@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'subject' => 'Login from a unknown device',
-    'content' => 'Your eBUPF account logged in from a new device.',
+    'subject' => 'Login from a new browser',
+    'content' => 'Your eBUPF account logged in from a new browser.',
 
 ];
