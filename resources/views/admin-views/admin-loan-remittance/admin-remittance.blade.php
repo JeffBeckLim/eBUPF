@@ -61,7 +61,7 @@
                 @endif
             </div>
 
-            <form method="POST" action="{{route('add.payment.remittance')}}">
+            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment">
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
@@ -212,6 +212,28 @@
 </script>
 
 <script>
+     $(document).ready(function() {
+            $('#addPaymentNow').click(function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+
+                // Submit the form
+                $('#formAddPayment').submit();
+            });
+        });
+
+        $(document).ready(function() {
+            $('#deletePaymentNow').click(function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...');
+
+                // Submit the form
+                $('#formDeletePayment').submit();
+            });
+        });
+
    $(document).ready(function() {
     //get the value of the form field
     var orNumberInput = $("#or_number_input");

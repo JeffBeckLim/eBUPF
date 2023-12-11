@@ -11,7 +11,7 @@
 
 <!-- login form  -->
 
-<form method="POST" action="{{ route('login') }}">
+<form method="POST" action="{{ route('login') }}" id="loginForm">
     @csrf
     <div class="mb-3">
         <label for="email" class="form-labeltext-dark">Email address</label>
@@ -62,7 +62,7 @@
     </div>
 
     <div class="text-center p-1 pt-5">
-        <button type="submit" class="btn rounded-pill w-75 fw-bold bu-orange text-light grow-on-hover">Log in</button>
+        <button type="submit" class="btn rounded-pill w-75 fw-bold bu-orange text-light grow-on-hover" id="loginBtn">Log in</button>
         <div class="mt-3 border-bottom border-1">
             <p class="fw-7"><a class="text-decoration-none bu-text-light-blue" href="{{ route('password.request') }}">Forgot Password?</a></p>
         </div>
@@ -72,4 +72,12 @@
 <div class=" text-center mt-4">
     <p class="fw-7">Don’t have an account? <span><a class="text-decoration-none fw-bold text-dark" href="/register" >Sign Up</a></span></p>
 </div>
+
+<script>
+     document.getElementById('loginForm').onsubmit = function() {
+        var loginBtn = document.getElementById('loginBtn');
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = 'Logging in...';
+    };
+</script>
 @endsection
