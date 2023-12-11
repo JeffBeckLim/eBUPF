@@ -49,7 +49,7 @@
       </div>
       <div class="modal-footer mb-2">
         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn bu-orange text-light">Confirm</button>
+        <button type="submit" class="btn bu-orange text-light" id="addPaymentNow">Confirm</button>
       </div>
     </div>
   </div>

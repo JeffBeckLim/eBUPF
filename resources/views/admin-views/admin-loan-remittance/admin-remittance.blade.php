@@ -47,14 +47,14 @@
                 Add New Payment
             </div>
             <div class="mt-3 d-flex align-items-end">
-               
-                <a href="{{route('import.csv.payment')}}" class="btn btn-outline-dark fw-bold rounded-4 " style="font-size: 14px">Batch Payment <i class="bi bi-filetype-csv"></i></a>  
-                
+
+                <a href="{{route('import.csv.payment')}}" class="btn btn-outline-dark fw-bold rounded-4 " style="font-size: 14px">Batch Payment <i class="bi bi-filetype-csv"></i></a>
+
                 <span style="font-size: 12px" class="text-secondary ms-2">
                     {{-- <i class="bi bi-info-circle"></i> --}}
                     Batch payment simplifies handling large groups of payments by allowing you to upload a CSV file to add multiple payments efficiently.
                 </span>
-            </div>  
+            </div>
             <div id="myAlert">
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show mt-3 border border-success" role="alert">
@@ -70,7 +70,7 @@
                 @endif
             </div>
 
-            <form method="POST" action="{{route('add.payment.remittance')}}" style="font-size: 14px">
+            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment" style="font-size: 14px">
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
@@ -222,6 +222,28 @@
 </script>
 
 <script>
+     $(document).ready(function() {
+            $('#addPaymentNow').click(function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...');
+
+                // Submit the form
+                $('#formAddPayment').submit();
+            });
+        });
+
+        $(document).ready(function() {
+            $('#deletePaymentNow').click(function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...');
+
+                // Submit the form
+                $('#formDeletePayment').submit();
+            });
+        });
+
    $(document).ready(function() {
     //get the value of the form field
     var orNumberInput = $("#or_number_input");

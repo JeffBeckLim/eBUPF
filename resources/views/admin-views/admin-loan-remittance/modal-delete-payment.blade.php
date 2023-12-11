@@ -27,12 +27,12 @@
             </div>
         </div>
         <div>
-            <form action="{{ route('delete.payment.remittance', ['id' => $payment->id]) }}" method="POST">
+            <form action="{{ route('delete.payment.remittance', ['id' => $payment->id]) }}" method="POST" id="formDeletePayment">
                 @csrf
                 @method('DELETE')
                 <div class="modal-footer border-0 mx-4">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn bu-orange text-light">Delete</button>
+                    <button type="submit" class="btn bu-orange text-light" id="deletePaymentNow">Delete</button>
                 </div>
             </form>
         </div>

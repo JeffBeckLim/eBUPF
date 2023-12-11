@@ -35,7 +35,7 @@ class AdminRemittanceController extends Controller
         if (count($years) == 0) {
             array_push($years, Carbon::now()->format('Y'));
         }
-        
+
         return view('admin-views.admin-loan-remittance.admin-remittance', [
             'payments' => $payments,
             'loans' => $loans,
@@ -80,9 +80,19 @@ class AdminRemittanceController extends Controller
         $totalLoanPayment = Payment::where('loan_id', $data['loan_id'])->sum('principal') + Payment::where('loan_id', $data['loan_id'])->sum('interest');
         $loanBalance = ($loan->principal_amount + $loan->interest) - $totalLoanPayment;
 
-        // Check if the payment exceeds the loan balance
+        // get the total payment for principal
+        $totalPrincipalPayment = Payment::where('loan_id', $data['loan_id'])->sum('principal');
+
+        // get the total payment for interest
+        $totalInterestPayment = Payment::where('loan_id', $data['loan_id'])->sum('interest');
+
+        // Check if the payment exceeds with the loan balance
         if($loanBalance - ($data['principal'] + $data['interest']) < 0){
             return redirect()->back()->with('error', 'Payment exceeds loan balance.');
+        }elseif($loan->principal_amount - ($totalPrincipalPayment + $data['principal']) < 0){
+            return redirect()->back()->with('error', 'Principal payment exceeds principal balance.');
+        }elseif($loan->interest - ($totalInterestPayment + $data['interest']) < 0){
+            return redirect()->back()->with('error', 'Interest payment exceeds interest balance.');
         }
 
         $principal_amount = $data['principal'];
