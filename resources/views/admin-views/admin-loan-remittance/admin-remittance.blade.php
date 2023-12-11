@@ -9,7 +9,7 @@
                     <p style="padding-left: 10px; padding-top: 5px;" class="d-flex justify-content-center align-items-center"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Loan Remittance</span></p>
                 </div>
             </div>
-            <div class="filter-group gap-3">
+            <div class="filter-group gap-3 d-flex align-items-center ">
                 <div class="row">
                     <div class="col-9">
 
@@ -36,15 +36,24 @@
                         <option value="HL">HL</option>
                     </select>
                 </div>
-                <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
-                <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
-                <div>
+                <button id="filter-button" class="btn btn-outline-dark fw-bold rounded-5 px-4 py-2" style="font-size: 12px">Apply Filter</button>
+                <button id="clear-filter-btn"  class="btn btn-outline-primary fw-bold rounded-5 px-4 py-2" style="font-size: 12px">Clear Filter</button>
+                {{-- <div>
                     <a href="{{route('import.csv.payment')}}" class="btn text-white rounded-4 bu-orange">Batch Payment</a>
-                </div>
+                </div> --}}
             </div>
 
-            <div class="text-add-payment">
+            <div class="text-add-payment ms-1 mt-3 pt-2 text-center border-top">
                 Add New Payment
+            </div>
+            <div class="mt-3 d-flex align-items-end">
+
+                <a href="{{route('import.csv.payment')}}" class="btn btn-outline-dark fw-bold rounded-4 " style="font-size: 14px">Batch Payment <i class="bi bi-filetype-csv"></i></a>
+
+                <span style="font-size: 12px" class="text-secondary ms-2">
+                    {{-- <i class="bi bi-info-circle"></i> --}}
+                    Batch payment simplifies handling large groups of payments by allowing you to upload a CSV file to add multiple payments efficiently.
+                </span>
             </div>
             <div id="myAlert">
                 @if (session('success'))
@@ -61,7 +70,7 @@
                 @endif
             </div>
 
-            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment">
+            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment" style="font-size: 14px">
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
@@ -100,7 +109,7 @@
                     </div>
 
                     <div class="col-md-2 d-flex justify-content-center align-items-center mt-2">
-                        <button id="apply-button" type="button" class="btn btn-primary rounded-4 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment" style="width: 100%;">Add Payment</button>
+                        <button id="apply-button" type="button" class="btn btn-primary rounded-3 fs-6" data-bs-toggle="modal" data-bs-target="#addPayment" style="width: 100%;">Add Payment</button>
                     </div>
                 </div>
                 @include('admin-views.admin-loan-remittance.modal-add-payment')
@@ -112,8 +121,8 @@
                 <span class="search-text" style="margin-right: 20px; padding-top: 2px;">Search:</span>
                 <input type="text" class="membership-application-search-input" id="search-input">
                 <div class="d-flex justify-content-end w-100">
-                    <a href="{{route('logs.remittance')}}" type="button" class="btn bu-orange rounded-4 fs-7 text-white fw-bold" style="width: auto; margin-right: 10px;">
-                        <img width="18" height="18" src="https://img.icons8.com/fluency-systems-filled/18/ffffff/delete-history.png" alt="delete-history"/>
+                    <a href="{{route('logs.remittance')}}" type="button" class="btn btn-outline-dark rounded-4 fs-7  fw-bold" style="width: auto; margin-right: 10px;">
+                        {{-- <img width="18" height="18" src="https://img.icons8.com/fluency-systems-filled/18/ffffff/delete-history.png" alt="delete-history"/> --}}
                         View Logs
                     </a>
 
@@ -169,7 +178,8 @@
                                 <td>
                                     <button type="button" class="btn p-2" data-bs-toggle="modal" data-bs-target="#editPayment{{$payment->id}}">
                                        {{--  <h5 class="m-0"><i style="color: #1d85d0" class="bi bi-pencil-square"></i></h5> --}}
-                                       <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/24/6D0000/trash--v1.png" alt="trash--v1"/>
+                                       {{-- <img width="24" height="24" src="https://img.icons8.com/fluency-systems-regular/24/6D0000/trash--v1.png" alt="trash--v1"/> --}}
+                                       <i class="text-danger bi bi-trash-fill"></i>
                                     </button>
                                 </td>
                             </tr>

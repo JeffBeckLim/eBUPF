@@ -27,7 +27,9 @@
                 
                 <a class="btn me-1 {{Route::is('session.logs')? 'fw-bold text-dark':''}}" href="{{route('session.logs')}}" style="font-size: 12px"><i class="bi bi-box-arrow-in-right"></i> Session Logs</a>
                 
-                <a class="btn me-1" href="{{route('logs.remittance')}}" style="font-size: 12px"><i class="bi bi-coin"></i> Remittance</a>
+                <a class="btn me-1" href="{{route('logs.remittance')}}" style="font-size: 12px"><i class="bi bi-sticky"></i> 
+                    
+                    Remittance</a>
             </div>
         </div>
         <div>

@@ -5,6 +5,9 @@
 <div class="container-fluid px-2" >
     <div class="row mt-2">
         <div class="container-fluid">
+            <div class="fs-7 py-2 ms-1" >
+                <a href="{{route('admin.ledgers')}}" class="text-decoration-none text-secondary fw-bold">Ledgers <i class="bi bi-chevron-right"></i></a> <span class="fw-bold">{{$member->firstname}} {{$member->lastname}} <span style="font-size: x-small">{{$member->units->unit_code}} | {{$member->units->campuses->campus_code}}</span>
+            </div>
             <div class="adminbox">
                 <div class="row mt-3 g-0 mx-3">
                     <style>
@@ -12,6 +15,7 @@
                             background-color: #e6f3ff !important;
                         }
                     </style>
+                    
                     <div class="col-6">
                         <a class="btn border rounded-end-0 w-100 h-100 bg-white
                         {{$loan_type == 'mpl' ? 'fw-bold shadow-sm scale-1-active' : ''}}
@@ -35,7 +39,7 @@
                             <img src="{{asset('assets/book.svg')}}" alt="" width="50px" height="58px">
                         </div> --}}
                         <div class="g-0 ps-2 my-auto">
-                            <div class="m-0 fw-bold fs-5" > <a class="text-dark text-decoration-none" href="{{route('admin.ledgers')}}">Ledgers</a> <i class="bi bi-chevron-compact-right"></i>{{$member->firstname}} {{$member->lastname}} <span style="font-size: x-small">{{$member->units->unit_code}} | {{$member->units->campuses->campus_code}}</span></div>
+                            <div class="m-0 fw-bold fs-5" >{{$member->firstname}} {{$member->lastname}} <span style="font-size: x-small">{{$member->units->unit_code}} | {{$member->units->campuses->campus_code}}</span></div>
                             <div style="font-size: small">Individual Member's Ledgers</div>
                         </div>
                 </div>

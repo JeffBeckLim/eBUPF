@@ -40,6 +40,16 @@ class PenaltyController extends Controller
         ]);
 
         $penalty = Penalty::where('id', $formFields['penalty_id'])->first();
+
+        $new_penalty_payments = PenaltyPayment::where('penalty_id' , $penalty->id)->sum('penalty_payment_amount');
+
+        $penalty_balance = $penalty->penalty_total - $new_penalty_payments;
+        
+        if($formFields['penalty_payment_amount'] > $penalty_balance){
+            return back()->with('warning', 'Cannot add payment greater than remaining balance');
+        }
+
+
         $loan = Loan::where('id',$penalty->loan_id)->first();
         if($penalty == null && $loan == null){
             abort(403);

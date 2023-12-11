@@ -219,7 +219,7 @@ yearSelect.addEventListener("change", function() {
     appendMonths(startMonth, 12);
   }
   else if (selectedOption.value == endYear) {
-    appendMonths(1, startMonth); 
+    appendMonths(1, endMonth); 
   }
   else {
     appendMonths(1, 12);

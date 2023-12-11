@@ -3,9 +3,10 @@
 @section('content')
 
 <div class="container m-2">
+    <div class="adminbox">
     <div class="row">
         <div class="col-8">
-            <h1 class="fs-3 fw-bold" style="color: #00638D;">Remittance Batch Data</h1>
+            <h5 class="fs-4 fw-bold text-dark">Batch Payment</h5>
         </div>
         <div class="col-4 text-end">
             <a href="{{ asset('storage/csv/BatchPayment_Format.csv') }}" id="downloadButton" download="Batch Payment - Format.csv" class="btn btn-primary"><i class="bi bi-download"></i> Download CSV Format</a>
@@ -134,6 +135,7 @@
             }
         });
     </script>
+</div>
 </div>
 
 @endsection
