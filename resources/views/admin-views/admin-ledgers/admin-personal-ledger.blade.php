@@ -6,11 +6,18 @@
     <div class="row">
         <div class="col-12 mb-3">
             @if (session('passed'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{session('passed')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            @if (session('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{session('warning')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        @endif
             @error('penalty_total')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{$message}}
@@ -31,12 +38,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @enderror
+            
 
             <div class="mb-2">
+                <div class="fs-7 py-2 ms-1" >
+                    <a href="{{route('admin.ledgers')}}" class="text-decoration-none text-secondary fw-bold">Ledgers 
+                        <i class="bi bi-chevron-right"></i>
+                    </a> 
+                    <span class="fw-bold">
+                        <a  class="text-decoration-none text-secondary fw-bold" href="/admin/ledgers/member/mpl/{{$loan->member->id}}">
+                            {{$loan->member->firstname}} {{$loan->member->lastname}} <span style="font-size: x-small">{{$loan->member->units->unit_code}} | {{$loan->member->units->campuses->campus_code}} 
+                        </a>
+                        <i class="bi bi-chevron-right"></i>
+                    </span>
+                    <span class="fw-bold">
+                        <a  class="text-decoration-none text-secondary fw-bold text-dark">
+                            {{$loan->loan_code}} 
+                        </a>
+                    </span>
+                </div>
 
-                <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
+                {{-- <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
                     <i class="bi bi-arrow-left-short"></i>Go back
-                </a>
+                </a> --}}
             </div>
             <div class="d-flex">
 
@@ -392,7 +416,8 @@
                                     @endforeach
 
                                 </td>
-                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}</td>
+                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}
+                                </td>
                             @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
                                 <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
                             @else

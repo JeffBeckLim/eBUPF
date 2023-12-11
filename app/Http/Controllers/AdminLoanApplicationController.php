@@ -442,6 +442,11 @@ class AdminLoanApplicationController extends Controller
         foreach($loan_app_status as $loan_status){
             array_push($statuses, $loan_status->loan_application_state_id );
         }
+
+        if(in_array(5,$statuses)){
+            return back()->with('status_danger', 'You cannot modify this status');
+        }
+
         if($request->loan_application_state_id == 2){
             if(!in_array(1,$statuses)){
                 return back()->with('status_danger', 'Add status 1 first before adding status 2.');
