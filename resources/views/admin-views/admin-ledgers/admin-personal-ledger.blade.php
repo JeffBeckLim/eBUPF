@@ -38,12 +38,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @enderror
+            
 
             <div class="mb-2">
+                <div class="fs-7 py-2 ms-1" >
+                    <a href="{{route('admin.ledgers')}}" class="text-decoration-none text-secondary fw-bold">Ledgers 
+                        <i class="bi bi-chevron-right"></i>
+                    </a> 
+                    <span class="fw-bold">
+                        <a  class="text-decoration-none text-secondary fw-bold" href="/admin/ledgers/member/mpl/{{$loan->member->id}}">
+                            {{$loan->member->firstname}} {{$loan->member->lastname}} <span style="font-size: x-small">{{$loan->member->units->unit_code}} | {{$loan->member->units->campuses->campus_code}} 
+                        </a>
+                        <i class="bi bi-chevron-right"></i>
+                    </span>
+                    <span class="fw-bold">
+                        <a  class="text-decoration-none text-secondary fw-bold text-dark">
+                            {{$loan->loan_code}} 
+                        </a>
+                    </span>
+                </div>
 
-                <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
+                {{-- <a class="btn text-decoration-none text-dark" href="/admin/ledgers/member/{{strtolower($loan->LoanType->loan_type_name)}}/{{$loan->member->id}}">
                     <i class="bi bi-arrow-left-short"></i>Go back
-                </a>
+                </a> --}}
             </div>
             <div class="d-flex">
 

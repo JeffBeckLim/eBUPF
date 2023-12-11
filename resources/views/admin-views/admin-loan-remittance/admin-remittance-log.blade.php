@@ -9,8 +9,10 @@
 <div class="adminbox" style="margin:10px 20px;">
     <div class="d-flex">
         <div class="d-flex align-items-center justify-content-center">
-            <img width="35" height="35" src="https://img.icons8.com/ios/35/6D0000/delete-file.png" alt="delete-file"/>
-            <p style="padding-left: 10px; padding-top: 15px;"><span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Remittance Logs</span></p>
+            {{-- <img width="35" height="35" src="https://img.icons8.com/ios/35/6D0000/delete-file.png" alt="delete-file"/> --}}
+            
+            <p style="padding-left: 10px; padding-top: 15px;"><i style="font-size: 20px" class="bi bi-sticky"></i>
+                <span class="fw-bold" style="font-size: 1.2rem; margin-right: 10px;">Remittance Logs</span></p>
         </div>
     </div>
     <div class="filter-group gap-3">
@@ -35,8 +37,8 @@
                 <option value="HSL">HSL</option>
             </select>
         </div>
-        <button id="filter-button" class="btn btn-outline-dark" style="margin: 0 0 20px 0">Apply Filter</button>
-        <button id="clear-filter-btn" class="btn btn-outline-primary" style="margin: 0 0 20px 0">Clear Filter</button>
+        <button id="filter-button"  class="btn btn-outline-dark fw-bold rounded-5 px-4 py-2" style="font-size: 12px">Apply Filter</button>
+        <button id="clear-filter-btn" class="btn btn-outline-primary fw-bold rounded-5 px-4 py-2" style="font-size: 12px">Clear Filter</button>
     </div>
 
     <div class="d-flex" style="margin-left: 15px; margin-top: 10px;">

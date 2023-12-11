@@ -60,8 +60,8 @@
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-outline-dark" name="applyFilterButton">Apply Filter</button>
-                                <button type="submit" class="btn btn-outline-primary" name="clearFilterButton">Clear Filter</button>
+                                <button type="submit" class="btn btn-outline-dark fw-bold rounded-5 px-4 py-2" style="font-size: 12px" name="applyFilterButton">Apply Filter</button>
+                                <button type="submit"class="btn btn-outline-primary fw-bold rounded-5 px-4 py-2" style="font-size: 12px" name="clearFilterButton">Clear Filter</button>
                             </div>
                         </form>
                     </div>
