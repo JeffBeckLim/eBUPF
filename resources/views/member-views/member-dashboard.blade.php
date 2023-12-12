@@ -16,7 +16,7 @@
                                 @endif
                                     <div class="card" style="border-radius: 10px; border: 0.50px #ACACAC solid;">
                                         <div style="position: relative;" class="mb-2">
-                                            <img class="w-100" style="height: 100px; border-radius: 10px;" src="assets/core-feature-bg.png" />
+                                            <img class="w-100" style="height: 100px; border-radius: 9px;" src="assets/core-feature-bg.png" />
                                             <p class="text-white text-center" style="width: 100%; position: absolute; top: 47%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9rem;">
                                                 <?php
                                                     $mplTotalAmount = 0;
@@ -46,7 +46,7 @@
                                             </p>
                                             <p class="text-white" style="position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%); font-size: 13px;">Total Outstanding Balance</p>
                                         </div>
-                                        <div class="mb-2 border" style="min-height: 270px; max-height: 300px; overflow-y: auto;">
+                                        <div class="mb-2" style="min-height: 270px; max-height: 300px; overflow-y: auto;">
                                             @if ($loans->isEmpty())
                                                 <div class="text-center align-items-center pt-5 pb-5 mt-5 mb-5" style="font-size: 16px">
                                                     You currently don't have active loans.
@@ -298,7 +298,7 @@
                     <div class="col-lg-4 transactions">
 
                         @if($transactions->isEmpty() == false)
-                            <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%;">
+                            <div class="shadow-sm" style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%;">
                                 <div class="container">
                                     <div class="mt-3">
                                         <span class="fw-bold fs-6">Transactions</span>
