@@ -29,6 +29,7 @@
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
+            scale: 0.8;
         }
 
         table {
@@ -179,7 +180,8 @@
                                     @endphp
 
                                     @if($paymentCount > 0)
-                                        <td style="text-align: center;">{{ number_format($principal, 2, '.', ',') }}</td>
+                                        <td style="text-align: center;">{{ number_format($principal, 2, '.', ',') }}
+                                        </td>
                                         <td style="text-align: center; border-right: 1px solid black;">{{ number_format($interest, 2, '.', ',') }}</td>
                                     @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
                                         <td colspan="2" style="text-align: center; font-weight: bold; border-right: 1px solid black;">Loan Granted</td>

@@ -3,9 +3,17 @@
 @section('content')
 
 <div class="container">
+    <div class="adminbox">
+        <div class="row">
+            <div class="col-8">
+                <h5 class="fs-4 fw-bold text-dark">Choose a CSV file:</h5>
+            </div>
+            <div class="col-4 text-end">
+                <a href="{{ asset('storage/csv/importMemberFormat.csv') }}" id="downloadButton" download="Import Existing Member - Format.csv" class="btn btn-primary"><i class="bi bi-download"></i> Download CSV Format</a>
+            </div>
+        </div>
     <form action="{{ route('admin.import.data.execute') }}" method="POST" enctype="multipart/form-data" class="mt-4" id="importForm">
         @csrf
-        <label for="csv_file" class="form-label fs-5 fw-bold">Choose a CSV file: </label>
         <div class="mb-3 d-flex">
             <input type="file" class="form-control" id="csv_file" name="csv_file" accept=".csv" style="width: 50%; min-width: 300px;" onchange="previewCSV(event)" required>
             <button type="button" class="btn btn-primary" id="importingData" style="margin-left: 15px;">Import</button>
@@ -57,8 +65,34 @@
         </table>
 
     </div>
-
+    <div class="modal fade" id="warningModal" tabindex="-1" aria-labelledby="warningModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="warningModalLabel">Warning!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Please do not remove or change the header in the CSV file.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="{{ asset('storage/csv/importMemberFormat.csv') }}" download="Import Existing Member - Format.csv" class="btn btn-primary">Proceed with Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
+        document.getElementById('downloadButton').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var myModal = new bootstrap.Modal(document.getElementById('warningModal'));
+            myModal.show();
+
+            document.getElementById('downloadLink').addEventListener('click', function() {
+                myModal.hide();
+            });
+        });
 
         $(document).ready(function() {
             $('#importingData').click(function() {
@@ -97,6 +131,8 @@
             reader.readAsText(file);
         }
     </script>
+        </div>
+
 </div>
 
 

@@ -79,7 +79,7 @@
 var is_editable = @json($member->is_editable);
 
 // validate phone number if editable
- if(is_editable == 1){ 
+ if(is_editable == 1){
   const contactNumberInput = document.getElementById('contact_num');
   contactNumberInput.addEventListener('input', function(event) {
   const newValue = event.target.value;

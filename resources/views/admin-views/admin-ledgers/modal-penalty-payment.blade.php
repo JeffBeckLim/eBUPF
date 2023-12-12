@@ -1,6 +1,6 @@
 <div class="modal fade" id="penaltyPaymentModal" tabindex="-1" aria-labelledby="penaltyPaymentleModalLabel" aria-hidden="true">
- 
-  
+
+
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header border-0">
@@ -9,13 +9,13 @@
         </div>
         <div class="modal-body">
 
-          <form action="{{route('admin.penalty.createPayment')}}" method="POST">
+          <form action="{{route('admin.penalty.createPayment')}}" method="POST" id="addPenaltyPaymentForm">
             @csrf
-            <label for="remarks">Date *</label>
+            <label for="remarks">Date <span class="text-danger fw-bold">*</span></label>
             <select name="penalty_id" id="penalty_id" class="form-control form-select">
               <option disabled value selected>Choose Penalty to pay</option>
               @foreach ($loan->penalty as $penalty)
-                    
+
               @php
 
                     $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
@@ -31,9 +31,9 @@
               @endforeach
             </select>
 
-            <label for="date" >Add Penalty Payment *</label>
+            <label for="date" >Add Penalty Payment <span class="text-danger fw-bold">*</span></label>
             <input  class="form-control" type="numeric" name="penalty_payment_amount" id="penalty_payment_amount" value="" required>
-            
+
             <label for="remarks">Payment Date</label>
             <input class="form-control" type="date" name="payment_date" id="payment_date" value="">
 
@@ -73,4 +73,15 @@ function toggleSubmitButtonState() {
     submitBtn.classList.add("disabled");
   }
 }
+
+    $(document).ready(function() {
+        $('#submit-pay').click(function() {
+            var $btn = $(this);
+            $btn.prop('disabled', true);
+            $btn.html('Loading...');
+
+            // Submit the form
+            $('#addPenaltyPaymentForm').submit();
+        });
+    });
 </script>
