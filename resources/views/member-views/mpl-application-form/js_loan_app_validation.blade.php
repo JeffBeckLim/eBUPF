@@ -1,5 +1,15 @@
+@php
+  $member_name = Auth::user()->member->firstname.Auth::user()->member->lastname;
+@endphp
 <script>
+    function preprocessString(str) {
+        // Remove white spaces and convert to lowercase
+        return str.replace(/\s/g, '').toLowerCase();
+    };
+
     function validateForm() {
+      const member_name = @json($member_name);
+
       const loanForm = document.getElementById('loanForm');
       const inputs = loanForm.querySelectorAll('input[required]');
 
@@ -10,9 +20,53 @@
       const witness1 = document.getElementById('myWitness1');
       const witness2 = document.getElementById('myWitness2');
       
-
       let isValid = true;
 
+      // validate witnesses same with witnesses
+      var key = document.getElementById('myCoBorrower').value;
+        $.ajax({
+            url: '/get/co-borrower?key=' + key,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var response_name = response;
+                var processedResponse = preprocessString(response_name);
+
+                var witness1 = document.getElementById('myWitness1');
+                var processedWitness1 = preprocessString(witness1.value);
+
+                var witness2 = document.getElementById('myWitness2');
+                var processedWitness2 = preprocessString(witness2.value);
+
+                console.log(processedWitness1,processedResponse);
+                if (processedWitness1 === processedResponse) {
+                    witness1.classList.remove('is-valid');
+                    witness1.blur();
+                    witness1.classList.add('is-invalid');
+                    witness1.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
+                    witness1.reportValidity();
+                }
+                if (processedWitness2 === processedResponse) {
+                    witness2.classList.remove('is-valid');
+                    witness2.blur();
+                    witness2.classList.add('is-invalid');
+                    witness2.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
+                    witness2.reportValidity();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+          });
+        
+        if(witness1.classList.contains('is-invalid')){
+          isValid = false;            
+        }
+        if(witness2.classList.contains('is-invalid')){
+          isValid = false;
+        }
+      
+        
       if(principal_amount.value != null 
           && principal_amount.value >= 50000 
           && principal_amount.value <= 200000){
@@ -81,23 +135,54 @@
       else{
         witness2.classList.remove('is-invalid');
       }
-    //   else{
-    //       witness1.classList.add('is-invalid');
-    //       isValid = false;
-          
-    //   }
 
-    //   var witness2Value = witness2.value; 
-    //   if(witness2.value != '' && witness2Value.length >= 2 &&  /^[a-zA-Z\s.-]+$/.test(witness2Value)){
-    //       witness2.classList.remove('is-invalid');
-    //   }
-    //   else{
-    //       witness2.classList.add('is-invalid');
-    //       isValid = false;
-          
-    //   }
+      // check if both witness name are the same
+      if(witness1.value != '' && witness2.value != ''){
+        if (preprocessString(witness1.value) == preprocessString(witness2.value)){
+              witness1.classList.remove('is-valid');
+              witness1.blur();
+              witness1.classList.add('is-invalid');
+              witness1.setCustomValidity('First and second witness can not be the same.');
+              witness1.reportValidity();
 
-      
+              witness2.classList.remove('is-valid');
+              witness2.blur();
+              witness2.classList.add('is-invalid');
+             
+              isValid = false;
+        }
+      }
+
+      if(witness1.value != '' && witness2.value != ''){
+        if(preprocessString(witness1.value) == preprocessString(witness2.value)){
+              witness1.classList.remove('is-valid');
+              witness1.blur();
+              witness1.classList.add('is-invalid');
+              witness1.setCustomValidity('First and second witness can not be the same.');
+              witness1.reportValidity();
+
+              witness2.classList.remove('is-valid');
+              witness2.blur();
+              witness2.classList.add('is-invalid');
+             
+              isValid = false;
+        }
+      }
+
+      // chcek if witness name is same with logged in
+      if(preprocessString(member_name) == preprocessString(witness1.value)){
+          witness1.classList.remove('is-valid');
+          witness1.blur();
+          witness1.classList.add('is-invalid');
+          isValid = false;
+        }
+      if(preprocessString(member_name) == preprocessString(witness2.value)){
+          witness2.classList.remove('is-valid');
+          witness2.blur();
+          witness2.classList.add('is-invalid');
+          isValid = false;
+        }
+          
       if (isValid) {
           showNextStep(); // Call your showNextStep function here
       }

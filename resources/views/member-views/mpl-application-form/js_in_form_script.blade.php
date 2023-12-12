@@ -2,6 +2,24 @@
 $user_email = Auth::user()->email;
 @endphp
 <script>
+  document.getElementById('myWitness1').addEventListener('input', function(event) {
+      var inputValue = event.target.value;
+      var pattern = /^[A-Za-z.\-\s]*$/; // Regular expression pattern
+
+      if (!pattern.test(inputValue)) {
+          event.target.value = inputValue.slice(0, -1); // Remove the last entered character
+      }
+  });
+  document.getElementById('myWitness2').addEventListener('input', function(event) {
+      var inputValue = event.target.value;
+      var pattern = /^[A-Za-z.\-\s]*$/; // Regular expression pattern
+
+      if (!pattern.test(inputValue)) {
+          event.target.value = inputValue.slice(0, -1); // Remove the last entered character
+      }
+  });
+</script>
+<script>
 
 // avoid decimal input
 document.getElementById('loanAmount').addEventListener('input', function() {
@@ -90,41 +108,35 @@ validateLoanAmount();
 
 
 // Validate Witness Name
-    document.getElementById('myWitness1').addEventListener('input', function() {
-      const nameValue = this.value.trim();
+    // document.getElementById('myWitness1').addEventListener('input', function() {
+    //   const nameValue = this.value.trim();
 
-      if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
+    //   if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
         
-        this.classList.add('is-valid')
-        this.classList.remove('is-invalid')
-      } else {
-        this.classList.remove('is-valid')
-        this.classList.add('is-invalid')
+    //     this.classList.add('is-valid')
+    //     this.classList.remove('is-invalid')
+    //   } else {
+    //     this.classList.remove('is-valid')
+    //     this.classList.add('is-invalid')
         
-      }
-    });
+    //   }
+    // });
     
 
 
-    document.getElementById('myWitness2').addEventListener('input', function() {
-      const nameValue = this.value.trim();
+    // document.getElementById('myWitness2').addEventListener('input', function() {
+    //   const nameValue = this.value.trim();
 
-      if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
+    //   if (nameValue.length >= 2 && /^[a-zA-Z\s.-]+$/.test(nameValue)) {
         
-        this.classList.add('is-valid')
-        this.classList.remove('is-invalid')
-      } else {
-        this.classList.remove('is-valid')
-        this.classList.add('is-invalid')
-      }
-    });
+    //     this.classList.add('is-valid')
+    //     this.classList.remove('is-invalid')
+    //   } else {
+    //     this.classList.remove('is-valid')
+    //     this.classList.add('is-invalid')
+    //   }
+    // });
     
-
-
-
-
-
-
 
 
 

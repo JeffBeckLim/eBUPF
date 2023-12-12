@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoanController extends Controller
 {
+
     public function show($loan_status){
 
         if($loan_status == 'performing'){
