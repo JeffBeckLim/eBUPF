@@ -486,6 +486,8 @@
 
 </div>
 @include('admin-views.admin-ledgers.modal-edit-penalty-payment')
+@include('admin-views.admin-ledgers.modal-delete-penalty-payment')
+
 
   <!-- Penalty Modal -->
 {{-- @include('admin-views.admin-ledgers.modal-penalty') --}}

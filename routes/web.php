@@ -109,8 +109,10 @@ use App\Models\SessionLog;
     Route::post('/admin/ledgers/personal-ledger-penalty-payment', [PenaltyController::class, 'createPenaltyPayment'])->name('admin.penalty.createPayment')->middleware('auth','admin.access');
         // updatePenaltyPayment
     Route::post('/admin/ledgers/personal-ledger-penalty-payment-update/{penaltyPayment_id}', [PenaltyController::class, 'updatePenaltyPayment'])->name('admin.penalty.updatePayment')->middleware('auth','admin.access');
-
-
+        // deletePenaltyPayment
+    Route::delete('/admin/ledgers/personal-ledger-penalty-payment-delete/{id}', [PenaltyController::class, 'deletePenaltyPayment'])->name('admin.penalty.deletePayment')->middleware('auth','admin.access');
+        // Penalty Payment Logs
+    Route::get('/admin/logs/penalty', [PenaltyController::class, 'showPenaltyPaymentLogs'])->name('admin.penalty.payment.logs')->middleware('auth','admin.access');
 
 
     // Import data (users) on database

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->integer('member_id_log')->nullable();
+            $table->foreignId('member_id')->constrained('members');
             $table->integer('penalty_id_log')->nullable();
 
             $table->decimal('penalty_payment_amount_log', 20, 2)->nullable();

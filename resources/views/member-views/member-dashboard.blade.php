@@ -285,7 +285,7 @@
                     <div class="col-lg-4 transactions">
 
                         @if($transactions->isEmpty() == false)
-                            <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%; ">
+                            <div style="border-radius: 10px; border: 1px solid #AAA; background: #FFF; height: 100%; width: 100%;">
                                 <div class="container">
                                     <div class="mt-3">
                                         <span class="fw-bold fs-6">Transactions</span>

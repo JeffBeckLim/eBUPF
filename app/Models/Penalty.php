@@ -15,7 +15,7 @@ class Penalty extends Model
         'penalized_month',
         'penalized_year',
 
-        'penalty_rate', 
+        'penalty_rate',
     ];
 
     // penalty belongs to a loan
