@@ -20,34 +20,33 @@
                 <a class="btn mx-1 {{Route::is('loan.logs')? 'fw-bold text-dark':''}}" href="{{route('loan.logs')}}" style="font-size: 12px"><i class="bi bi-bank"></i> Loan</a>
 
                 <a class="btn me-1 {{Route::is('adjustment.logs')? 'fw-bold text-dark':''}}" href="{{route('adjustment.logs')}}" style="font-size: 12px"><i class="bi bi-pen"></i> Adjustments</a>
-                
+
                 <a class="btn me-1 {{Route::is('amortization.logs')? 'fw-bold text-dark':''}}" href="{{route('amortization.logs')}}" style="font-size: 12px"><i class="bi bi-calendar-week"></i> Amortization</a>
 
                 {{-- <a class="btn me-1" href="" style="font-size: 12px"><i class="bi bi-envelope-paper"></i> Check</a> --}}
-                
+
                 <a class="btn me-1 {{Route::is('session.logs')? 'fw-bold text-dark':''}}" href="{{route('session.logs')}}" style="font-size: 12px"><i class="bi bi-box-arrow-in-right"></i> Session Logs</a>
-                
-                <a class="btn me-1" href="{{route('logs.remittance')}}" style="font-size: 12px"><i class="bi bi-sticky"></i> 
-                    
+
+                <a class="btn me-1" href="{{route('logs.remittance')}}" style="font-size: 12px"><i class="bi bi-sticky"></i>
+
                     Remittance</a>
+
+                <a class="btn me-1 {{Route::is('admin.penalty.payment.logs')? 'fw-bold text-dark':''}}" href="{{route('admin.penalty.payment.logs')}}" style="font-size: 12px"><i class="bi bi-archive"></i></i> Penalty Payment Logs</a>
+
             </div>
         </div>
         <div>
             @if (Route::is('loan.logs'))
                 @include('admin-views.admin-logs.loan_logs');
-
             @elseif (Route::is('adjustment.logs'))
-
                 @include('admin-views.admin-logs.adjustment_logs');
             @elseif (Route::is('amortization.logs'))
-
                 @include('admin-views.admin-logs.amortization_logs');
             @elseif (Route::is('session.logs'))
-
                 @include('admin-views.admin-logs.session_logs');
+            @elseif (Route::is('admin.penalty.payment.logs'))
+                @include('admin-views.admin-logs.penalty_payment_logs');
             @endif
-            
-        
 
         </div>
 
@@ -57,9 +56,9 @@
     var table = $('#logs-table').DataTable({
     //  info: false,
      ordering: false,
-     
+
     });
-  
+
  </script>
 @include('admin-components.admin-dataTables')
 @endsection
