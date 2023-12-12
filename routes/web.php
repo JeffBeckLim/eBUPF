@@ -130,6 +130,9 @@ use App\Models\SessionLog;
 
     //show loan application details
     Route::get('/member/view/loan-details/{id}', [LoanController::class, 'displayLoanDetails'])->name('loan.details')->middleware('auth','member.access', 'checkSessionTimeout');
+
+
+    Route::get('/get/co-borrower', [LoanApplicationController::class, 'getCoBorrower'])->name('get.coBorrower')->middleware('auth','member.access', 'checkSessionTimeout');
 // ======================== ** LOAN APPLICATION MPL and HSL **  ==================================
 //
 //
