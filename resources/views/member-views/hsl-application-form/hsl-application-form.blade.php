@@ -4,9 +4,19 @@
 
 <div class="row m-3 mx-2 d-flex justify-content-center">
     @if (session('message'))
-        <div class="alert alert-primary">
-            <i class="bi bi-hand-thumbs-up-fill"></i> {{ session('message') }}
-        </div>
+    <div class="alert alert-primary">
+        <i class="bi bi-hand-thumbs-up-fill"></i> {{ session('message') }}
+    </div>
+    @endif
+    @if (session('email_error'))
+    <div class="alert alert-danger">
+        <i class="bi bi-exclamation-circle"></i> {{ session('email_error') }}
+    </div>
+    @endif
+    @if (session('witness_error'))
+    <div class="alert alert-danger">
+        <i class="bi bi-exclamation-circle"></i> {{ session('witness_error') }}
+    </div>
     @endif
   <div class="card border p-4" style="width: 35rem">
     <div class="row d-flex">
@@ -17,28 +27,11 @@
             <img class="img-fluid" src="{{asset('assets/HSL-mini.svg')}}" alt="Mini Logo" style="height: 55px;">
         </div>
 
-         <!-- Tooltip -->
-{{--
-            <a style="color: #0092D1 !important; font-size: small" href="#" class=" text-decoration-none my-3" data-bs-toggle="tooltip" data-bs-title="More detials here..."><i class="bi bi-info-circle"></i> What is a Housing Loan?</a>
-
-        <script>
-            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-        </script> --}}
-         <!-- Tooltip -->
-
-
-         @if (session('email_error'))
-            <div class="alert alert-danger">
-                <i class="bi bi-exclamation-circle"></i> {{ session('email_error') }}
-            </div>
-        @endif
-
-        <p class="text1-design mt-2">Loan Details</p>
-
-        <div class="my-2">
+         <div class="my-2">
             @include('member-views.mpl-application-form.accordion-entity-definition')
         </div>
+
+        <p class="text1-design mt-2">Loan Details</p>
 
         <form action="/member/loan-application/2" method="POST" id="submitHLForm">
             @csrf
@@ -107,15 +100,24 @@
                 <p style="font-size: 12px">
                     Note: Names should be at least 2 characters long and contain no numbers.
                 </p>
+
                 <div class="form-group">
-                    <input type="text" class="form-control {{ $errors->has('witness_name_1') ? 'invalid' : '' }}" id="myWitness1" name="witness_name_1" placeholder="ex. Jeff Beck M. Lim" value="{{old('witness_name_1')}}">
+                    <input type="text" class="form-control  {{ $errors->has('witness_name_1') ? 'is-invalid' : '' }} {{ session('witness_error') ? 'is-invalid' : '' }}" id="myWitness1" name="witness_name_1" placeholder="ex. Jeff Beck M. Lim" value="{{old('witness_name_1')}}" />
                     @error('witness_name_1')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
-                    <input type="text" class="form-control mt-2 {{ $errors->has('witness_name_2') ? 'invalid' : '' }}" id="myWitness2" name="witness_name_2" placeholder="ex. Aaron B. Labini" value="{{old('witness_name_2')}}">
+                    <div id="validationMyWitness1FeedBack" class="invalid-feedback">
+                        Witnesses, co-borrowers, and principal borrower (you) must not be the same person. Please Double check the names entered.
+                      </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mt-2 {{ $errors->has('witness_name_2') ? 'is-invalid' : '' }} {{ session('witness_error') ? 'is-invalid' : '' }}" id="myWitness2" name="witness_name_2" placeholder="ex. Aaron B. Labini" value="{{old('witness_name_2')}}"  />
                     @error('witness_name_2')
                         <h6 class="text-danger">{{$message}}</h6>
                     @enderror
+                    <div id="validationMyWitness2FeedBack" class="invalid-feedback">
+                        Witnesses, co-borrowers, and principal borrower (you) must not be the same person. Please Double check the names entered.
+                      </div>
                 </div>
 
                 <div class="row d-flex align-items-center justify-content-center">

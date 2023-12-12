@@ -21,6 +21,15 @@ use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
 {
+    public function getCoBorrower(Request $request){
+        $key = $request->input('key');
+        $data_raw = User::where('email', $key)->with('member')->first(); // Fetch the user data
+        
+        $cb_name = $data_raw->member->firstname.$data_raw->member->lastname;
+        return response()->json($cb_name);
+    }
+    
+
 
     public function showLoanStatus($loan_id){
         $loan = Loan::with('loanType')->where('id',$loan_id)->first();
@@ -113,12 +122,18 @@ class LoanApplicationController extends Controller
             abort(403);
         }
 
-        $members = User::where('user_type', 'member')->get();
+        $members = User::where('user_type', 'member')->with('member')->get();
         $member_emails = [];
         foreach($members as $member){
             array_push($member_emails, $member->email);
         }
-    
+
+        $member_names = [];
+        foreach($members as $member){
+            array_push($member_names, $member->member->firstname.' '.$member->member->lastname);
+        }
+        
+
         return view('member-views.mpl-application-form.mpl-application-form', compact('member_emails'));
     }
 
@@ -197,6 +212,11 @@ class LoanApplicationController extends Controller
         foreach($members as $member){
             array_push($member_emails, $member->email);
         }
+
+        // $member_names = [];
+        // foreach($members as $member){
+        //     array_push($member_names, $member->member->firstname.' '.$member->member->lastname);
+        // }
 
         return view('member-views.hsl-application-form.hsl-application-form', compact('member_emails'));
     }
@@ -337,6 +357,7 @@ class LoanApplicationController extends Controller
             'witness_name_1'=>'nullable',
             'witness_name_2'=>'nullable',
         ]);
+        
 
         // check if co borrower email is the same with user logged in
         // COMMENT OUT FOR TESTING
@@ -354,6 +375,41 @@ class LoanApplicationController extends Controller
         ){
             return back()->with('email_error', 'Make sure that co-borrower email is a verified eBUPF member');
         }
+
+
+                // Remove any middle initial
+                $witness_1_temp = $formFields['witness_name_1'];
+                $witness_2_temp = $formFields['witness_name_2'];
+    
+                // $initial_index_1 =(strpos($formFields['witness_name_1'], '.'));
+                // $initial_index_2 =(strpos($formFields['witness_name_2'], '.'));
+                
+                // if($initial_index_1){
+                //     $witness_1_temp =   substr($formFields['witness_name_1'], 0,$initial_index_1-1) .substr($formFields['witness_name_1'], $initial_index_1+2, $initial_index_1-1);
+                // }
+                // if($initial_index_2){
+                //     $witness_2_temp =   substr($formFields['witness_name_2'], 0,$initial_index_2-1) .substr($formFields['witness_name_2'], $initial_index_2+2, $initial_index_2-1);
+                // }
+    
+            $same_names = false;
+            if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',$witness_2_temp))){
+                $same_names = true;
+            }
+            if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',$co_borrower->member->firstname.$co_borrower->member->lastname))){
+    
+                $same_names = true;
+            }
+        
+            if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',Auth::user()->member->firstname.Auth::user()->member->lastname))  ||  
+            strtolower(str_replace(' ', '',$witness_2_temp)) == strtolower(str_replace(' ', '',Auth::user()->member->firstname.Auth::user()->member->lastname))
+            ){
+                $same_names = true;
+            }
+            if($same_names){
+                return redirect()->back()->withInput()->with('witness_error', 'witnesses, co-borrowers and the borrower (you) must not have the same name');
+            }
+
+
 
         
         $loan = Loan::create([
