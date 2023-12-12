@@ -20,53 +20,8 @@
       const witness1 = document.getElementById('myWitness1');
       const witness2 = document.getElementById('myWitness2');
       
-      let isValid = true;
+      var isValid = true;
 
-      // validate witnesses same with witnesses
-      var key = document.getElementById('myCoBorrower').value;
-        $.ajax({
-            url: '/get/co-borrower?key=' + key,
-            method: 'GET',
-            dataType: 'json',
-            success: function(response) {
-                var response_name = response;
-                var processedResponse = preprocessString(response_name);
-
-                var witness1 = document.getElementById('myWitness1');
-                var processedWitness1 = preprocessString(witness1.value);
-
-                var witness2 = document.getElementById('myWitness2');
-                var processedWitness2 = preprocessString(witness2.value);
-
-                console.log(processedWitness1,processedResponse);
-                if (processedWitness1 === processedResponse) {
-                    witness1.classList.remove('is-valid');
-                    witness1.blur();
-                    witness1.classList.add('is-invalid');
-                    witness1.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
-                    witness1.reportValidity();
-                }
-                if (processedWitness2 === processedResponse) {
-                    witness2.classList.remove('is-valid');
-                    witness2.blur();
-                    witness2.classList.add('is-invalid');
-                    witness2.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
-                    witness2.reportValidity();
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-          });
-        
-        if(witness1.classList.contains('is-invalid')){
-          isValid = false;            
-        }
-        if(witness2.classList.contains('is-invalid')){
-          isValid = false;
-        }
-      
-        
       if(principal_amount.value != null 
           && principal_amount.value >= 50000 
           && principal_amount.value <= 200000){
@@ -182,12 +137,79 @@
           witness2.classList.add('is-invalid');
           isValid = false;
         }
+
+      // validate witnesses same with witnesses
+        var key = document.getElementById('myCoBorrower').value;
+      
+        $.ajax({
+            
+            url: '/get/co-borrower?key=' + key,
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+              console.log('1 '+isValid);
+                var response_name = response;
+                var processedResponse = preprocessString(response_name);
+
+                var witness1 = document.getElementById('myWitness1');
+                var processedWitness1 = preprocessString(witness1.value);
+
+                var witness2 = document.getElementById('myWitness2');
+                var processedWitness2 = preprocessString(witness2.value);
+                
+                if (processedWitness1 === processedResponse) {
+                    witness1.classList.remove('is-valid');
+                    witness1.blur();
+                    witness1.classList.add('is-invalid');
+                    witness1.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
+
+                    isValid = false;
+                }
+                if (processedWitness2 === processedResponse) {
+                    witness2.classList.remove('is-valid');
+                    witness2.blur();
+                    witness2.classList.add('is-invalid');
+                    witness2.setCustomValidity('The co-borrower and witness can not be the same person. Please choose different individuals for these roles.');
+                    witness2.reportValidity();
+
+                    isValid = false;
+                }
+                console.log('2 '+isValid);
+
+                handleResponse(isValid);
+           
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+           
+          }); 
+
+          console.log(isValid);
           
-      if (isValid) {
+  
+          // var witness1_fresh = document.getElementById('myWitness1');
+          // var witness2_fresh = document.getElementById('myWitness2');
+          
+          // if(witness1_fresh.classList.contains('is-invalid')){
+          //   isValid = false;            
+          // }
+          // if(witness2_fresh.classList.contains('is-invalid')){
+    
+          //   isValid = false;
+          // }
+          
+      // if (isValid) {
+      //     showNextStep(); // Call your showNextStep function here
+      // }
+  }
+  function handleResponse(isValid){
+    if (isValid) {
           showNextStep(); // Call your showNextStep function here
       }
   }
-  
+
+
   function showNextStep() {
       // Get form input values
       const loanAmount = document.getElementById('loanAmount').value;
