@@ -1,6 +1,7 @@
 @php
 $user_email = Auth::user()->email;
 @endphp
+{{-- limit input to letters dash and dot --}}
 <script>
   document.getElementById('myWitness1').addEventListener('input', function(event) {
       var inputValue = event.target.value;
