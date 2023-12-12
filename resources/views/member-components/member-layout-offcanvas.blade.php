@@ -70,7 +70,8 @@
                 <li class="nav-item  py-3 grow-on-hover {{ Route::is('member-dashboard') ? 'bg-selected fade-in  rounded-4':' '}} ">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img src="{{asset('assets/home.svg')}}" alt="">
+                            <i  style="font-size: 22px; color: #0091CF" class="fa-solid fa-house"></i>
+                            {{-- <img src="{{asset('assets/home.svg')}}" alt=""> --}}
                         </div>
                         <div class="col-9">
                             <span class="fw-bold fs-7 text-secondary">Home</span>
@@ -197,7 +198,8 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('member.transactions') ? 'bg-selected fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center ">
-                            <img class="mb-1" src="{{asset('assets/receipt.svg')}}" alt="">
+                            <i style="font-size: 22px; color: #00D186" class="fa-solid fa-receipt"></i>
+                            {{-- <img class="mb-1" src="{{asset('assets/receipt.svg')}}" alt=""> --}}
                         </div>
                         <div class="col-9  ">
                             <span class="fw-bold fs-7  text-secondary">Transactions</span>
@@ -210,7 +212,8 @@
                 <li class="nav-item  py-3 grow-on-hover {{Route::is('calculator') ? 'bg-selected fade-in fade-in rounded-4' : '' }}">
                     <div class="row g-0">
                         <div class="col-3 text-center  ">
-                            <img src="{{asset('assets/calculator.svg')}}" alt="">
+                            <i style="font-size: 22px; color: #C066DF" class="fa-solid fa-calculator"></i>
+                            {{-- <img src="{{asset('assets/calculator.svg')}}" alt=""> --}}
                         </div>
                         <div class="col-9  ">
                             <span class=" fw-bold fs-7 text-secondary">Calculator</span>
