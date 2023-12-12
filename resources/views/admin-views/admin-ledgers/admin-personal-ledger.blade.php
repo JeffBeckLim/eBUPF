@@ -38,22 +38,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @enderror
-            
+
 
             <div class="mb-2">
                 <div class="fs-7 py-2 ms-1" >
-                    <a href="{{route('admin.ledgers')}}" class="text-decoration-none text-secondary fw-bold">Ledgers 
+                    <a href="{{route('admin.ledgers')}}" class="text-decoration-none text-secondary fw-bold">Ledgers
                         <i class="bi bi-chevron-right"></i>
-                    </a> 
+                    </a>
                     <span class="fw-bold">
                         <a  class="text-decoration-none text-secondary fw-bold" href="/admin/ledgers/member/mpl/{{$loan->member->id}}">
-                            {{$loan->member->firstname}} {{$loan->member->lastname}} <span style="font-size: x-small">{{$loan->member->units->unit_code}} | {{$loan->member->units->campuses->campus_code}} 
+                            {{$loan->member->firstname}} {{$loan->member->lastname}} <span style="font-size: x-small">{{$loan->member->units->unit_code}} | {{$loan->member->units->campuses->campus_code}}
                         </a>
                         <i class="bi bi-chevron-right"></i>
                     </span>
                     <span class="fw-bold">
                         <a  class="text-decoration-none text-secondary fw-bold text-dark">
-                            {{$loan->loan_code}} 
+                            {{$loan->loan_code}}
                         </a>
                     </span>
                 </div>
@@ -387,7 +387,7 @@
                             @endphp
 
                             @if($paymentCount > 0)
-                                <td style="text-align: center;">
+                                <td>
                                     {{ number_format($principal, 2, '.', ',') }}
 
                                     @foreach ($loan->penalty as $penalty)
@@ -405,10 +405,9 @@
                                                 ( {{$penalty->penalty_total}} )
                                                 {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
                                                 @if ($penalty_payment_instance > 0)
-                                                , Paid {{$penalty_payment_instance}}
+                                                , Bal. {{ number_format($penalty->penalty_total - $penalty_payment_instance, 2, '.', ',') }}
                                                 @endif
                                             @endif
-
 
                                             </h6>
 
@@ -416,7 +415,7 @@
                                     @endforeach
 
                                 </td>
-                                <td style="text-align: center;">{{ number_format($interest, 2, '.', ',') }}
+                                <td>{{ number_format($interest, 2, '.', ',') }}
                                 </td>
                             @elseif($amortStartSubMonth->format('F') === $targetMonth && $amortStartSubMonth->year == $targetYear)
                                 <td colspan="2" style="text-align: center; font-weight: bold;" class="fs-6">Loan Granted</td>
@@ -424,26 +423,23 @@
                                 <td colspan="2">
                                     @foreach ($loan->penalty as $penalty)
                                     @php
-
-                                          $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
+                                        $penalty_payment_instance = App\Models\PenaltyPayment::where('penalty_id', $penalty->id)->sum('penalty_payment_amount');
                                     @endphp
                                         @if ($penalty->penalized_month == $x+1 &&
                                             $penalty->penalized_year == $i)
-                                            <h6 style="font-size: 12px" class="text-danger">No payment w/ penalty
-
-                                            @if ($penalty_payment_instance >= $penalty->penalty_total)
-                                                (Paid)
-                                            @else
-                                                ( {{$penalty->penalty_total}} )
-                                                {{-- CHECK IF PAYMENT NOT ZERO THE DONT DISPALY --}}
-                                                @if ($penalty_payment_instance > 0)
-                                                , Paid {{$penalty_payment_instance}}
-                                                @endif
+                                            @if($penalty->penalty_total > 0 && $penalty_payment_instance < $penalty->penalty_total)
+                                                <h6 style="font-size: 12px" class="text-danger">No payment w/ penalty
+                                                    @if($penalty_payment_instance)
+                                                         @if($penalty_payment_instance > 0)
+                                                            ({{ number_format($penalty->penalty_total, 2, '.', ',') }}) Bal. {{ number_format($penalty->penalty_total - $penalty_payment_instance, 2, '.', ',') }}
+                                                        @else
+                                                            {{ number_format($penalty->penalty_total, 2, '.', ',') }}
+                                                        @endif
+                                                    @else
+                                                        {{ number_format($penalty->penalty_total, 2, '.', ',') }}
+                                                    @endif
+                                                </h6>
                                             @endif
-
-
-                                            </h6>
-
                                         @endif
                                     @endforeach
                                 </td> {{-- Empty cell, No Payment--}}

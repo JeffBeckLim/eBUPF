@@ -136,8 +136,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-4">
             <div class="col-md-4 reveal fade-bottom">
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
@@ -151,6 +149,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row mb-4">
             <div class="col-md-4 reveal fade-bottom">
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
@@ -175,8 +175,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-4">
             <div class="col-md-4 reveal fade-bottom">
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
@@ -189,6 +187,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row mb-4">
             <div class="col-md-4 reveal fade-bottom">
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">
@@ -213,8 +213,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-4">
             <div class="col-md-4 reveal fade-bottom">
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="background-image: url('{{ asset('assets/organisation-blue-bg.svg') }}'); width: 220px; height: 339px;">

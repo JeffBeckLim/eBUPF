@@ -10,13 +10,13 @@
                 Update Penalty
             </a> --}}
 
-          
+
 
             {{-- Parse again to re initialize the --}}
             @php
                 // Parse the start and end dates as Carbon objects
                 $carbonStartDate = Carbon\Carbon::parse($loan->amortization->amort_start);
-                
+
                 $carbonEndDate = Carbon\Carbon::parse($loan->amortization->amort_end);
 
                 $startMonth = $carbonStartDate->month;
@@ -25,8 +25,8 @@
                 $endMonth = $carbonEndDate->month;
                 $endYear = $carbonEndDate->year;
             @endphp
-            
-            <form action="{{route('admin.penalty.updateOrCreate', $loan->id)}}" method="POST">
+
+            <form action="{{route('admin.penalty.updateOrCreate', $loan->id)}}" method="POST" id="addPenaltyForm">
                 @csrf
                 <div class="row">
                     <div class="col-lg-3 col-12">
@@ -34,37 +34,37 @@
                         <select class="form-select form-control" id="yearSelect" name="penalized_year">
                             <option selected disabled>Choose Year</option>
                             @for ($i = $startYear ;$i <= $endYear; $i++)
-                           
+
                                 <option value="{{$i}}">{{$i}}</option>
                             @endfor
                         </select>
                         @error('penalized_year')
-                            <h6 class="text-danger">{{$message}}</h6>    
+                            <h6 class="text-danger">{{$message}}</h6>
                         @enderror
-                        
+
                     </div>
-                    <div class="col-lg-3 col-12">                  
+                    <div class="col-lg-3 col-12">
                         <label for="">Month Penalized</label>
                         <select name="penalized_month" class="form-select form-control" id="monthSelect" disabled></select>
                         @error('penalized_month')
-                            <h6 class="text-danger">{{$message}}</h6>    
+                            <h6 class="text-danger">{{$message}}</h6>
                         @enderror
                     </div>
-                    <div class="col-lg-4 col-12">                   
+                    <div class="col-lg-4 col-12">
                         <label for="">Penalty amount for the Month</label>
                         <input type="number" class="form-control" id="penalty_amount_input" name="penalty_total" disabled></input>
                         @error('penalty_total')
-                            <h6 class="text-danger">{{$message}}</h6>    
+                            <h6 class="text-danger">{{$message}}</h6>
                         @enderror
                     </div>
-                    <div class="col  d-flex align-content-center mt-2">                   
+                    <div class="col  d-flex align-content-center mt-2">
                         <button class="btn btn-danger w-100 disabled" type="submit" id="submit-btn">
                             Add Penalty
                         </button>
                     </div>
                 </div>
-               
-                
+
+
             </form>
 
         </div>
@@ -96,7 +96,7 @@
                     }
                 @endphp
                 {{number_format($sum , 2, '.',',')}}
-                
+
             @endif
         </div>
 
@@ -115,7 +115,7 @@
                 <span class="text-danger fw-bold">{{number_format($sum  - $sumPenaltyPayments , 2,'.',',')}}</span>
             @endif
         </div>
-      
+
     </div>
 
     <div class="row">
@@ -128,7 +128,7 @@
             @endif
             <table class="table caption-top">
                 <caption class="ps-1 mt-3">Penalty Payments</caption>
-                
+
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
@@ -219,7 +219,7 @@ yearSelect.addEventListener("change", function() {
     appendMonths(startMonth, 12);
   }
   else if (selectedOption.value == endYear) {
-    appendMonths(1, endMonth); 
+    appendMonths(1, endMonth);
   }
   else {
     appendMonths(1, 12);
@@ -237,9 +237,19 @@ inputPenalty.addEventListener("input", function() {
     else{
         submitBtn.classList.remove('disabled');
     }
-    
+
 });
     // Example: Append months starting from March (index 3)
     // appendMonths(3);
-    
+
+    $(document).ready(function() {
+        $('#submit-btn').click(function() {
+            var $btn = $(this);
+            $btn.prop('disabled', true);
+            $btn.html('Adding Penalty...');
+
+            // Submit the form
+            $('#addPenaltyForm').submit();
+        });
+    });
 </script>
