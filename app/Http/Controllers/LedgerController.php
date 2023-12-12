@@ -78,7 +78,6 @@ class LedgerController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-        // dd($penalty_payments);
 
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
 

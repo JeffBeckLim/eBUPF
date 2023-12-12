@@ -9,12 +9,12 @@ class PenaltyPayment extends Model
 {
     use HasFactory;
 
-    
+
     protected $fillable = [
         'member_id',
         'penalty_id',
 
-        'penalty_payment_amount', 
+        'penalty_payment_amount',
         'payment_date',
 
         'or_number',
@@ -23,13 +23,13 @@ class PenaltyPayment extends Model
     // payment is for a penalty
     public function penalty()
     {
-        return $this->belongsTo(Penalty::class, 'id', 'penalty_id');
+        return $this->belongsTo(Penalty::class, 'penalty_id', 'id');
     }
 
     // belongs to a member
     public function member()
     {
-        return $this->belongsTo(Member::class, 'id' , 'member_id');
+        return $this->belongsTo(Member::class, 'member_id' , 'id');
     }
-    
+
 }

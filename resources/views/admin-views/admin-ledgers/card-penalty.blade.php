@@ -121,11 +121,31 @@
     <div class="row">
         <div class="table-responsive border mt-3">
             @if ($loan->penalty != null)
-                <a class="btn btn-outline-dark mt-2" href="#" data-bs-toggle="modal" data-bs-target="#penaltyPaymentModal">
-                    <i class="bi bi-plus"></i>
-                    Add Penalty Payment
-                </a>
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-outline-dark mt-2" href="#" data-bs-toggle="modal" data-bs-target="#penaltyPaymentModal">
+                            <i class="bi bi-plus"></i>
+                            Add Penalty Payment
+                        </a>
+                    </div>
+                    <div class="col-6 text-end">
+                        <a href="{{route('admin.penalty.payment.logs')}}" type="button" class="btn btn-outline-dark rounded-4 fs-7 fw-bold  mt-2" style="width: auto; margin-right: 10px;">
+                            View Logs
+                        </a>
+                    </div>
+                </div>
+
+
             @endif
+            <div class="mt-4">
+                @if (session('passedDelete'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{session('passedDelete')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            </div>
+
             <table class="table caption-top">
                 <caption class="ps-1 mt-3">Penalty Payments</caption>
 
@@ -133,8 +153,10 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Payment Amount</th>
+                    <th scope="col">Penalty Date</th>
                     <th scope="col">Payment Date</th>
                     <th scope="col">OR Number</th>
+                    <th scope="col">Action</th>
                     {{-- <th scope="col">. . .</th> --}}
                   </tr>
                 </thead>
@@ -142,10 +164,37 @@
                  @if (count($penalty_payments) != null)
                     @foreach ($penalty_payments as $payments)
                     <tr>
+                        @php
+                            if($payments->payment_date != null){
+                                $paymentDate = \Carbon\Carbon::createFromFormat('Y-m-d', $payments->payment_date)->format('F d, Y');
+                            }
+                        @endphp
                         <td>{{$payments->id}}</td>
                         <td>{{$payments->penalty_payment_amount}}</td>
-                        <td>{{$payments->payment_date}}</td>
-                        <td>{{$payments->or_number}}</td>
+                        <td>
+                            {{ date('F', mktime(0, 0, 0, $payments->penalty->penalized_month, 1)) }}
+                            {{$payments->penalty->penalized_year}}
+                        </td>
+                        <td>
+                            @if ($payments->payment_date != null)
+                                {{$paymentDate}}
+                            @else
+                                <span class="text-danger">N/A</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($payments->or_number != null)
+                                {{$payments->or_number}}
+                            @else
+                                <span class="text-danger">N/A</span>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#penaltyPaymentDeleteModal{{$payments->id}}" class="btn btn-link text-danger">
+                                <i class="bi bi-trash-fill"></i>
+                            </a>
+                        </td>
+
                         {{-- <td class="text-center">
 
                             <button type="button" class="btn btn-link disa" data-bs-toggle="modal" data-bs-target="#editPaymentModal{{$payments->id}}">
@@ -159,7 +208,7 @@
 
                 @else
                     <tr>
-                        <td colspan="5" class="text-center">
+                        <td colspan="6" class="text-center">
                             No Penalty Payments exist.
                         </td>
                     </tr>
@@ -171,7 +220,6 @@
           </div>
     </div>
 </div>
-
 <script>
 var startMonth = @json($startMonth);
 var startYear = @json($startYear);

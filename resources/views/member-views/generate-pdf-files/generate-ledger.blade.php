@@ -35,40 +35,43 @@
         table {
             border-collapse: collapse;
             width: 100%;
+            font-size: 11px;
             border: 1px solid rgb(130, 130, 130);
         }
 
         th, td {
             text-align: left;
             padding: 5px;
+            font-size: 11px;
         }
 
         .to-bold{
             font-weight: bold;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
 
     <div>
-        <div style="width: 100%; text-align: center; font-size: 18px; font-weight: bold; margin-bottom: 5px;">{{ $member->lastname }}, {{ $member->firstname }}
+        <div style="width: 100%; text-align: center; font-size: 14px; font-weight: bold; margin-bottom: 5px;">{{ $member->lastname }}, {{ $member->firstname }}
             @if($member->middlename)
                 {{ $member->middlename[0] }}.
             @endif
         </div>
         @if($loan->loanType->loan_type_name == 'MPL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Multi-Purpose Loan</div>
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 11px; margin-bottom: 15px;">Multi-Purpose Loan</div>
         @elseif($loan->loanType->loan_type_name == 'HSL')
-            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 13px; margin-bottom: 15px;">Housing Loan</div>
+            <div style="width: 100%; text-align: center; font-weight: normal; font-size: 11px; margin-bottom: 15px;">Housing Loan</div>
         @endif
     </div>
     <table>
         <thead>
             <tr>
-                <th colspan="2" style="text-align: center;">LOAN DETAILS</th>
-                <th colspan="2" style="text-align: center;">OTHER DETAILS</th>
-                <th colspan="2" style="text-align: center;">PAYMENT DETAILS</th>
-                <th colspan="2" style="text-align: center;">OTHER PAYMENT DETAILS</th>
+                <th colspan="2" style="text-align: center; font-size: 11px;">LOAN DETAILS</th>
+                <th colspan="2" style="text-align: center; font-size: 11px;">OTHER DETAILS</th>
+                <th colspan="2" style="text-align: center; font-size: 11px;">PAYMENT DETAILS</th>
+                <th colspan="2" style="text-align: center; font-size: 11px;">OTHER PAYMENT DETAILS</th>
             </tr>
         </thead>
         <tbody>
@@ -137,7 +140,7 @@
                                 @if($loan->loanCategory)
                                     <span style="color: #a01a1a; letter-spacing: 2px">{{strtoupper($loan->loanCategory->loan_category_name)}}</span>
                                 @else
-                                    <div style="font-size: 12px">Loan type: <br>not specified.</div>
+                                    <div style="font-size: 11px">Loan type: <br>not specified.</div>
                                 @endif
                             </th>
 
@@ -195,7 +198,7 @@
                                                     $penalty->penalized_year == $i)
 
                                                     @if($penalty->penalty_total > 0 && $penalty_payment_instance < $penalty->penalty_total)
-                                                        <div style="font-size: 12px; color: rgb(138, 0, 0); font-weight: bold;">No payment w/ penalty
+                                                        <div style="font-size: 11px; color: rgb(138, 0, 0); font-weight: bold;">No payment w/ penalty
                                                         @if($penalty_payment_instance)
                                                             @if($penalty_payment_instance > 0)
                                                                 ({{ number_format($penalty->penalty_total, 2, '.', ',') }}) Bal. {{ number_format($penalty->penalty_total - $penalty_payment_instance, 2, '.', ',') }}

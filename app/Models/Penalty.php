@@ -15,13 +15,15 @@ class Penalty extends Model
         'penalized_month',
         'penalized_year',
 
-        'penalty_rate', 
+        'penalty_rate',
     ];
 
     // penalty belongs to a loan
     public function loan(){
-        return $this->belongsTo(Loan::class, 'id', 'loan_id');
+        return $this->belongsTo(Loan::class, 'loan_id', 'id');
     }
+
+
 
     // penalty has many penalty payments
     public function penalty_payment(){

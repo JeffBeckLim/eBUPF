@@ -122,10 +122,8 @@
                 <input type="text" class="membership-application-search-input" id="search-input">
                 <div class="d-flex justify-content-end w-100">
                     <a href="{{route('logs.remittance')}}" type="button" class="btn btn-outline-dark rounded-4 fs-7  fw-bold" style="width: auto; margin-right: 10px;">
-                        {{-- <img width="18" height="18" src="https://img.icons8.com/fluency-systems-filled/18/ffffff/delete-history.png" alt="delete-history"/> --}}
                         View Logs
                     </a>
-
                 </div>
             </div>
             <div class="text-remit-table-head">

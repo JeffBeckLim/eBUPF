@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\AddPenalty;
 use App\Mail\AddPenaltyPayment;
 use Illuminate\Http\Request;
+use App\Models\PenaltyPaymentLog;
 
 class PenaltyController extends Controller
 {
@@ -122,5 +123,48 @@ class PenaltyController extends Controller
         }else{
             abort(404);
         }
+    }
+
+    public function deletePenaltyPayment($penaltyPayment_id){
+        $penaltyPayment = PenaltyPayment::findOrFail($penaltyPayment_id);
+
+        if($penaltyPayment->payment_date == null){
+            $paymentDateLog = $penaltyPayment->created_at;
+        }
+        else{
+            $paymentDateLog = $penaltyPayment->payment_date;
+        }
+
+        if($penaltyPayment != null){
+
+            $log_id =  PenaltyPaymentLog::create([
+                'member_id' => $penaltyPayment->member_id,
+                'penalty_id_log' => $penaltyPayment->penalty_id,
+                'penalty_payment_amount_log' => $penaltyPayment->penalty_payment_amount,
+                'payment_date_log' => $paymentDateLog,
+                'or_number_log' => $penaltyPayment->or_number,
+            ]);
+
+            $query_log = PenaltyPaymentLog::findOrFail($log_id->id);
+
+            if($query_log){
+
+                // Delete the payment record from the original table
+                $penaltyPayment->delete();
+
+                return redirect()->back()->with('success', 'Penalty Payment Successfully Deleted');
+            }else{
+                return redirect()->back()->with('error', 'Payment not deleted.');
+            }
+        }else{
+            abort(404);
+        }
+    }
+
+    public function showPenaltyPaymentLogs(){
+        $penaltyPaymentLogs = PenaltyPaymentLog::with('member', 'penalty')->get();
+        //d($penaltyPaymentLogs->penalty);
+        //dd($penaltyPaymentLogs);
+        return view('admin-views.admin-logs.admin_loan_logs', compact('penaltyPaymentLogs'));
     }
 }
