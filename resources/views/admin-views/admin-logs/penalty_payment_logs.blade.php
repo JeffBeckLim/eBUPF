@@ -23,14 +23,16 @@
                             <td>{{$penaltyPaymentLog->id}}</td>
                             <td>{{$penaltyPaymentLog->updated_at->format('M-d-Y (h:i:s A)')}}</td>
                             <td>
-                                @php
-                                    dd($penaltyPaymentLog->penalty->member)
-                                @endphp
+                                {{$penaltyPaymentLog->penalty->loan->member->firstname}}
+                                @if($penaltyPaymentLog->penalty->loan->member->middlename != null)
+                                    {{$penaltyPaymentLog->penalty->loan->member->middlename}}
+                                @endif
+                                {{$penaltyPaymentLog->penalty->loan->member->lastname}}
                             </td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>d</td>
-                            <td>d</td>
+                            <td>{{$penaltyPaymentLog->penalty->loan->id}}</td>
+                            <td>Php {{ number_format($penaltyPaymentLog->penalty_payment_amount_log, 2) }}</td>
+                            <td>{{$penaltyPaymentLog->payment_date_log}}</td>
+                            <td>{{$penaltyPaymentLog->or_number_log}}</td>
                         </tr>
                     @endforeach
                 @else
