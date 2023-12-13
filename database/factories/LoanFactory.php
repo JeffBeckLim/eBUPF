@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Loan;
+use App\Models\LoanType;
 use Faker\Provider\Base;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Loan>
@@ -16,23 +19,43 @@ class LoanFactory extends Factory
      * @return array<string, mixed>
      */
     
+
+     public function generateId($loanTypeId){
+        $loanType = LoanType::find($loanTypeId);
+        do {
+            $currentDateTime = now();
+            // Format date and time to create a string
+            $dateTimeString = $currentDateTime->format('Y-j-');
+            $randomString = strtoupper(Str::random(3));
+            $randomString1 = strtoupper(Str::random(3));
+            // Combine the formatted date/time and the random string to create a unique ID
+            $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $randomString . "-" . $randomString1;
+        } while (Loan::where('loan_code', $uniqueId)->exists());
+
+        return($uniqueId);
+    }
+     
     public function definition(): array
     {
         $member_ids_seeded = [1, 2, 3, 4, 5, 6];
         $loanType_ids_seeded = [1, 2];
         
+        $random_loan_type_id = $loanType_ids_seeded[array_rand($loanType_ids_seeded)];
+        $code =  $this->generateId($random_loan_type_id);
+
         $principal_amount= [];
         for($i=50000; $i != 200000; $i+=10000){
             array_push($principal_amount, $i);
         }
         return [
-            'loan_code' => $this->faker->unique()->uuid,
-
-
+            // 'loan_code' => $this->faker->unique()->uuid,
+            
             'member_id'=>$member_ids_seeded[array_rand($member_ids_seeded)],
 
             
-            'loan_type_id'=>$loanType_ids_seeded[array_rand($loanType_ids_seeded)],
+            'loan_type_id'=>$random_loan_type_id,
+
+            'loan_code' => $code,
 
             // 'amortization_id')->nullable()->constrained('amortizations');
             // 'adjustment_id')->nullable()->constrained('adjustments');
