@@ -1,6 +1,6 @@
 @extends('home-components.login-register-card')
 @section('form')
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" id="signUpForm">
         @csrf
             <div class="row" style="margin-top: -30px;">
                 <div class="col-6 ">
@@ -91,11 +91,11 @@
                     .requirement-list li.valid span {
                         color: #999;
                     }
-                    input[type=password]::-ms-reveal,
+                 /*    input[type=password]::-ms-reveal,
                     input[type=password]::-ms-clear
                     {
                         display: none;
-                    }
+                    } */
 
                 </style>
 
@@ -210,7 +210,7 @@
                 }
             </style>
             <div class="col-12 borders d-flex justify-content-center pt-3">
-                <button type="submit" class="btn btn-outline rounded-pill w-100 fw-bold signUpButton" disabled>Sign Up</button>
+                <button type="submit" class="btn btn-outline rounded-pill w-100 fw-bold signUpButton" id="signUpBtn" disabled>Sign Up</button>
             </div>
 
         </div>
@@ -289,6 +289,12 @@
             event.target.value = trimmedValue;
         });
     });
+
+    document.getElementById('signUpForm').onsubmit = function() {
+        var loginBtn = document.getElementById('signUpBtn');
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = 'Signing up...';
+    };
     </script>
 
 @endsection
