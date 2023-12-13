@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('ip_address')->nullable();
+            $table->string('operating_system')->nullable();
+            $table->string('browser_used')->nullable();
             $table->string('user_agent')->nullable();
             $table->timestamps();
         });
