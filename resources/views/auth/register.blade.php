@@ -91,6 +91,12 @@
                     .requirement-list li.valid span {
                         color: #999;
                     }
+                    input[type=password]::-ms-reveal,
+                    input[type=password]::-ms-clear
+                    {
+                        display: none;
+                    }
+
                 </style>
 
                 <script>
@@ -168,8 +174,6 @@
                       });
                   </script>
 
-
-
                 <div class="col-12">
                     <label for="password_confirmation" class="form-label text-dark">Confirm Password</label>
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
@@ -180,8 +184,8 @@
 
                 <div class="col-12 d-flex justify-content-center mt-4">
                     <div class="row  d-block">
-                        <div class="form-check ">
-                            <input class="form-check-input" style="color: black; border: 1px solid black" type="checkbox" value="1" id="agreeToTermsCheckbox" name="agree_to_terms" @if(old('agree_to_terms')==1) checked @endif>
+                        <div class="form-check">
+                            <input class="form-check-input" style="color: black; border: 1px solid black" type="checkbox" value="1" id="agreeToTermsCheckbox" name="agree_to_terms" @if(old('agree_to_terms') == 1) checked @endif>
                             <label class="form-check-label" for="flexCheckDefault">
                                 <span> Agree to <a class="text-decoration-none fw-bold bu-text-light-blue" href="{{ route('terms-and-conditions') }}">Terms and Conditions</a>  of BUPF </span>
                             </label>
@@ -215,11 +219,76 @@
         document.addEventListener('DOMContentLoaded', function() {
             const agreeToTermsCheckbox = document.getElementById('agreeToTermsCheckbox');
             const signUpButton = document.querySelector('.signUpButton');
+            const firstNameInput = document.getElementById('firstname');
+            const lastNameInput = document.getElementById('lastname');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('password_confirmation');
+            const middleNameInput = document.getElementById('middlename');
+            const requirementList = document.querySelectorAll(".requirement-list li");
 
-            agreeToTermsCheckbox.addEventListener('change', function() {
-                signUpButton.disabled = !this.checked;
+            function checkInputs() {
+                const requiredInputs = [firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput];
+
+                const anyEmpty = requiredInputs.some(input => {
+                    return input.value.trim() === '';
+                });
+
+                const passwordValid = checkPassword();
+
+                signUpButton.disabled = anyEmpty || !agreeToTermsCheckbox.checked || !passwordValid;
+            }
+
+            function checkPassword() {
+                const requirements = [
+                    { regex: /.{8,}/ }, // Minimum of 8 characters
+                    { regex: /[0-9]/ }, // At least one number
+                    { regex: /[a-z]/ }, // At least one lowercase letter
+                    { regex: /[^A-Za-z0-9]/ }, // At least one special character
+                    { regex: /[A-Z]/ }, // At least one uppercase letter
+                ];
+
+                let isValid = true;
+
+                requirements.forEach((item, index) => {
+                    const requirementItem = requirementList[index];
+                    const isRequirementValid = item.regex.test(passwordInput.value);
+
+                    if (!isRequirementValid) {
+                        isValid = false;
+                        requirementItem.classList.remove("valid");
+                        requirementItem.firstElementChild.className = "fa-solid fa-circle";
+                    } else {
+                        requirementItem.classList.add("valid");
+                        requirementItem.firstElementChild.className = "fa-solid fa-check";
+                    }
+                });
+
+                return isValid;
+            }
+
+            checkInputs();
+
+            agreeToTermsCheckbox.addEventListener('change', checkInputs);
+
+            [firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput, middleNameInput].forEach(input => {
+                input.addEventListener('input', checkInputs);
+            });
+
+            passwordInput.addEventListener('input', function() {
+                checkInputs();
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const passwordField = document.getElementById('password');
+
+        passwordField.addEventListener('input', function(event) {
+            // Prevent spaces from being entered or pasted
+            const trimmedValue = event.target.value.replace(/\s/g, '');
+            event.target.value = trimmedValue;
+        });
+    });
     </script>
 
 @endsection

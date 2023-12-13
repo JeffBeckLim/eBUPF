@@ -162,6 +162,7 @@
                         <a class="dropdown-item" href="#">Housing loan 1</a>
                         <a class="dropdown-item" href="#">Multi-Purpose 1</a> --}}
                     </div>
+                    <a href="{{route('generateLedger', ['id' => $loan->id])}}"><button class="btn bu-orange text-white rounded-pill">Download Ledger</button></a>
                 </div>
             </div>
         </div>
