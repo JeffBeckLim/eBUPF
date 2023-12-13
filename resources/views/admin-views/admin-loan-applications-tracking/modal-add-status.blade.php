@@ -13,7 +13,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="row g-0 mx-3">
-        
+
         <div class="col-12 mb-3 border px-2 pb-3 rounded bg-light" style="font-size: small">
           <div class="row  g-0">
             <div class="col-12 pt-1" >
@@ -36,14 +36,14 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
         @if (in_array(6, $array))
         {{-- if loan is denied --}}
            <i>This loan is denied. Delete the declined status to add other status.</i>
-        @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
+        @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array))
          {{-- check if loan is approced then disable those selected and "Denied " loans--}}
            <i>This loan is approved. Delete the "approved by executive director" status to enable 'decline' status.</i>
         @endif
       </div>
       </div>
       <div class="accordion accordion-flush px-3 mt-3 border-bottom" id="accordionFlushExample">
-      
+
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed p-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
@@ -56,15 +56,15 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
                 @if (count($loan->loan->LoanApplicationStatus)==0)
 
                   <p class="mx-auto">No Status Yet</p>
-                
-                @else 
+
+                @else
                   @foreach ($loan->loan->LoanApplicationStatus->sort(function($a, $b) {
                     return $b->LoanApplicationState->id <=> $a->LoanApplicationState->id;
                       }) as $status)
                           <div class="col-12 d-flex gap-1 mb-2">
                               <a class="btn border text-danger grow-on-hover" href="
                               {{route('delete.status', $status->id)}}" onclick="return confirm('Are you sure you want to delete this item?')">
-                              
+
                               <i class="bi bi-trash-fill"></i></a>
                               <p class="ps-1 border w-100 h-100 rounded d-flex align-items-center">
                                   {{$status->LoanApplicationState->id}}    {{$status->LoanApplicationState->state_name}}
@@ -76,7 +76,7 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
           </div>
         </div>
       </div>
-  
+
       <div class="modal-body">
         <form id="addStatusForm" method="POST" action="{{route('create.status',$loan->loan->id)}}" >
           @csrf
@@ -84,49 +84,61 @@ foreach ($loan->loan->LoanApplicationStatus as $status) {
             <label for="statusDropdown" class="col-form-label">Select Status</label>
             <select name="loan_application_state_id" id="statusDropdown" class="form-select form-control" required>
              <option value="" selected disabled>...</option>
-             @if (in_array(6, $array)) 
+             @if (in_array(6, $array))
 
              {{-- if loan is denied --}}
                  <option value="" disabled> This Loan is already been declined</option>
-             @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array)) 
+             @elseif(in_array(3, $array) || in_array(4, $array) || in_array(5, $array))
               {{-- check if loan is approved then disable those selected and "Denied " loans--}}
                   @foreach ($loan_app_states as $state)
                   <option value="{{$state->id}}" {{in_array($state->id, $array) || ($state->id == 6)? 'disabled' : ''}}>
-                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
-                      
-                  </option>    
-                  @endforeach   
+                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}
+
+                  </option>
+                  @endforeach
              @else
                   @foreach ($loan_app_states as $state)
                   <option value="{{$state->id}}" {{in_array($state->id, $array)? 'disabled' : ''}}>
-                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}  
-                      
-                  </option>    
+                      {{$state->id}} . {!!in_array($state->id, $array)? '✔️' : ' '!!} {{$state->state_name}}
+
+                  </option>
                   @endforeach
              @endif
-             
+
             </select>
           </div>
           <div class="mb-2">
             <label for="date_evaluated" class="col-form-label">Date</label>
             <input name="date_evaluated" type="date" class="form-control" id="date_evaluated">
           </div>
-          
+
           <div class="mb-2">
             <label for="message-text" class="col-form-label">Remarks</label>
             <textarea name="remarks" class="form-control" id="remarks"></textarea>
           </div>
-        
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn bu-orange text-light">Add Status</button>
+            <button type="submit" class="btn bu-orange text-light" id="addStatusBtn">Add Status</button>
 
           </div>
       </form>
     </div>
   </div>
 </div>
+<script>
+    $(document).ready(function() {
+        $('#addStatusBtn').click(function() {
+            var $btn = $(this);
+            $btn.prop('disabled', true);
+            $btn.html('Loading...');
+
+            // Submit the form
+            $('#addStatusForm').submit();
+        });
+    });
+</script>
 {{-- <script>
   document.getElementById('addStatusForm').addEventListener('submit', function(event) {
     const inputDate = document.getElementById('date_evaluated').value;

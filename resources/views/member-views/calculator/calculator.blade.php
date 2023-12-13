@@ -4,7 +4,7 @@
 
     <div class="bg-white rounded px-3 pt-2 pb-4 mt-3 ms-2 border">
         <h6 class="fs-5 text-center fw-bold p-3">Loan Calculator</h6>
-        
+
         <div class="row mx-lg-4 mx-2" style="font-size: 12px">
             Choose loan type, enter your principal amount, and loan term to calculate your monthly amortization. Get clear and quick insights into your payments.
          </div>
@@ -49,8 +49,7 @@
 
                                 <h6 style="font-size: 12px" class="text-secondary">Loan Term</h6>
                                 <select name="term" id="term" class="form-control" required>
-                                    <option value="" disabled selected>0</option>
-                                    <option value="1">1</option>
+                                    <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
