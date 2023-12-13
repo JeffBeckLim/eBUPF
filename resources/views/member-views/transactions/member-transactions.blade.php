@@ -19,16 +19,9 @@
 
                         <div class="col-12 pt-4">
                             <span class=" d-flex justify-content-center align-items-center">
-                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7" data-filter="all" style="color: grey;">
-                                    All Activity
-                                </a>
-                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7" data-filter="mpl" style="color: grey;">
-                                   MPL
-                                </a>
-                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7" data-filter="housing" style="color: grey;">
-                                    Housing
-                                </a>
-
+                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7 myFilter" data-filter="all" style="color: grey;">All Activity</a>
+                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7 myFilter" data-filter="mpl" style="color: grey;">MPL</a>
+                                <a href="#" class="px-3 text-decoration-none fw-bold fs-7 myFilter" data-filter="housing" style="color: grey;">Housing</a>
                             </span>
                         </div>
                         @if (count($transactions) == 0)
@@ -42,36 +35,56 @@
                                     @if($transaction instanceof \App\Models\Payment)
                                         <div class="col-12 border-bottom border-top" >
                                             <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-8 my-1">
+                                                <div class="col-7 my-1">
                                                     <p class="fs-7 fw-bold m-0">Loan Payment</p>
                                                     <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                 </div>
-                                                <div class="col-4 text-center my-1">
+                                                <div class="col-4 my-1">
                                                     <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                 </div>
-                                                {{-- <div class="col-1 my-1">
-                                                    <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                </div> --}}
+                                                <div class="col-1 my-1">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction{{$transaction->id}}">
+                                                        <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-
+                                    @elseif($transaction instanceof \App\Models\PenaltyPayment)
+                                        <div class="col-12 border-bottom border-top">
+                                            <div class="row" style="padding: 0 30px 0 10px;">
+                                                <div class="col-7 my-1">
+                                                    <p class="fs-7 fw-bold m-0">Loan Penalty Payment</p>
+                                                    <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                </div>
+                                                <div class="col-4 my-1">
+                                                    <p class="fs-7 fw-bold m-0">Php
+                                                        {{ number_format($transaction->penalty_payment_amount, 2) }}
+                                                    </p>
+                                                </div>
+                                                <div class="col-1 my-1">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#paymentPenaltyModal{{$transaction->id}}">
+                                                        <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @elseif($transaction instanceof \App\Models\Loan)
-                                    @php
-                                        $loanTypes = [
-                                            'Multi-purpose Loan' => 'mpl',
-                                            'Housing Loan' => 'housing',
-                                        ];
+                                        @php
+                                            $loanTypes = [
+                                                'Multi-purpose Loan' => 'mpl',
+                                                'Housing Loan' => 'housing',
+                                            ];
 
-                                        $loanCode = $loanTypes[$transaction->loanType->loan_type_description];
+                                            $loanCode = $loanTypes[$transaction->loanType->loan_type_description];
                                         @endphp
 
-                                        <div class="col-12 border-bottom border-top" style="pointer-events: none;" data-filter="{{ $loanCode }}">
+                                        <div class="col-12 border-bottom border-top" data-filter="{{ $loanCode }}">
                                             <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-8 my-1">
+                                                <div class="col-7 my-1">
                                                     <p class="fs-7 fw-bold m-0">Applied a loan</p>
                                                     <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                 </div>
-                                                <div class="col-4 text-center my-1">
+                                                <div class="col-4 my-1">
                                                     <p class="fs-7 fw-bold m-0">
                                                         @if($transaction->loanType->loan_type_description == 'Multi-purpose Loan')
                                                             MPL
@@ -80,9 +93,11 @@
                                                         @endif
                                                     </p>
                                                 </div>
-                                                {{-- <div class="col-1 my-1">
-                                                    <a href="#"><i class="bi bi-info-circle-fill" style="color: #00638D"></i></a>
-                                                </div> --}}
+                                                <div class="col-1 my-1">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loanTransaction{{$transaction->id}}" class="info-icon">
+                                                        <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     @endif
@@ -98,12 +113,39 @@
                     </div>
                 </div>
             </div>
+            @foreach($transactions as $transaction)
+                        @include('member-views.payment-transaction-modal')
+                    @endforeach
 
+                    {{-- foreach transaction on loan --}}
+                    @foreach ($transactions as $transaction)
+                        @if($transaction instanceof \App\Models\Loan)
+                            @if($transaction->co_borrower)
+                                @foreach ($transaction->co_borrower as $co_borrower)
+                                    @include('member-views.loan-transaction-modal')
+                                @endforeach
+                            @endif
+                        @endif
+                    @endforeach
+
+                    @foreach ($transactions as $transaction)
+                        @if($transaction instanceof \App\Models\PenaltyPayment)
+
+                            @include('member-views.loan-penalty-payment-modal')
+
+                        @endif
+                    @endforeach
         </div>
 
     </div>
 </div>
 <script>
+    $(document).ready(function() {
+        $('.info-icon').click(function(e) {
+            e.stopPropagation();
+        });
+    });
+
     $(document).ready(function() {
     // Initially, show all transactions
     $('.transaction-container .col-12').show();
