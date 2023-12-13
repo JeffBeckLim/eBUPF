@@ -162,7 +162,8 @@
                         <a class="dropdown-item" href="#">Housing loan 1</a>
                         <a class="dropdown-item" href="#">Multi-Purpose 1</a> --}}
                     </div>
-                    <a href="{{route('generateLedger', ['id' => $loan->id])}}"><button class="btn bu-orange text-white rounded-pill">Download Ledger</button></a>
+                
+                    <a class="h-100 {{$filteredPayments == null ? 'disabled' : ''}}  btn btn-outline-dark rounded-pill" href="{{route('generateLedger', ['id' => $loan->id])}}"><h6 style="font-size: 14px" class="pt-1 m-0"><i class="bi bi-file-pdf-fill"></i> Download</h6></a>
                 </div>
             </div>
         </div>

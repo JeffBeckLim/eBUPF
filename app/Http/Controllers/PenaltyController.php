@@ -3,20 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loan;
+use App\Models\LoanLog;
 use App\Models\Penalty;
+use App\Mail\AddPenalty;
+use Illuminate\Http\Request;
 use App\Models\PenaltyPayment;
 use GuzzleHttp\Promise\Create;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\AddPenalty;
 use App\Mail\AddPenaltyPayment;
-use Illuminate\Http\Request;
 use App\Models\PenaltyPaymentLog;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class PenaltyController extends Controller
 {
     public function updatePenalty(Request $request, $id){
 
-        $loan = Loan::findOrFail($id);
+        $loan = Loan::where('id',$id)->with('loanType', 'loanCategory')->first();
 
         $formFields = $request->validate([
             'penalty_total'=> 'required|numeric|min:1',
@@ -37,12 +39,26 @@ class PenaltyController extends Controller
         $penaltyMonth = date('F', mktime(0, 0, 0, $penalizedMonth, 10));
 
         Mail::to($loan->member->user->email)->send(new AddPenalty($member, $totalPenalty, $penaltyMonth, $penalizedYear, $loanType, $loan));
-
+        
+        
         $mandatory = Penalty::create([
             'loan_id'=>$loan->id,
             'penalty_total' => $formFields['penalty_total'],
             'penalized_month' => $formFields['penalized_month'],
             'penalized_year' => $formFields['penalized_year']
+        ]);
+
+        LoanLog::create([
+            'loan_id_log'=>$loan->loan_id,
+            'loan_code_log'=>$loan->loan_code,
+            'loan_type_log'=>$loan->loanType->loan_type_name,
+            'principal_amount_log'=>$loan->principal_amount,
+            'interest_log'=>$loan->interest,
+            'is_active_log'=>$loan->is_active,
+            'term_years_log'=>$loan->term_years,
+            'deleted_at_log'=>$loan->deleted_at,
+            'create_update_or_delete'=>"Penalized, "."Php ".$mandatory->penalty_total.", M-".$mandatory->penalized_month.", Y- ".$mandatory->penalized_year,
+            'updated_by'=>Auth::user()->member->id,
         ]);
 
         return back()->with('passed', 'Penalty successfully added! ');
