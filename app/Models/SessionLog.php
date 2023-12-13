@@ -9,10 +9,12 @@ class SessionLog extends Model
 {
     use HasFactory;
 
-    
+
     protected $fillable = [
-        'user_id', 
+        'user_id',
         'ip_address',
-        'user_agent' 
+        'user_agent',
+        'operating_system',
+        'browser_used',
     ];
 }

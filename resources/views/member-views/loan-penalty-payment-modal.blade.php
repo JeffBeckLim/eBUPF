@@ -27,7 +27,7 @@
                         @if($transaction->payment_date == null)
                             <p class="fw-bold">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                         @else
-                            <p class="fw-bold">{{ $transaction->payment_date->format('F d, Y, h:i A') }}</p>
+                            <p class="fw-bold">{{ $transaction->payment_date->format('F d, Y') }}</p>
                         @endif
                     </div>
                 </div>
