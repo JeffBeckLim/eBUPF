@@ -195,6 +195,22 @@ class AdminImportData extends Controller
                         if($payment['principal'] + $payment['interest'] > $loanBalance){
                             return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The payment is greater than the loan balance.');
                         }
+
+                        //Calculate the total loan payment made using the loan_id and the principal and interest
+                        // get the total payment for principal
+                        $totalPrincipalPayment = Payment::where('loan_id', $payment['loan_id'])->sum('principal');
+
+                        // get the total payment for interest
+                        $totalInterestPayment = Payment::where('loan_id', $payment['loan_id'])->sum('interest');
+
+                        // Check if the payment exceeds with the loan balance
+                        if($loanBalance - ($payment['principal'] + $payment['interest']) < 0){
+                            return redirect()->back()->with('error', 'On line '.$lineNumber.', The payment exceeds loan balance.');
+                        }elseif($loan->principal_amount - ($totalPrincipalPayment + $payment['principal']) < 0){
+                            return redirect()->back()->with('error', 'On line '.$lineNumber.', the Principal payment exceeds principal balance.');
+                        }elseif($loan->interest - ($totalInterestPayment + $payment['interest']) < 0){
+                            return redirect()->back()->with('error', 'On line '.$lineNumber.', the interest payment exceeds interest balance.');
+                        }
                     }
                 }
                 else{

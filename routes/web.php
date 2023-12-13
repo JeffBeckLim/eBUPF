@@ -161,7 +161,7 @@ use App\Models\SessionLog;
     // Verify email
     Route::get('/verify/email', function(){
         return view('auth.verify');
-    });
+    })->middleware('auth', 'verified.access');
 
 // ======================== ** LOAN APPLICATION REQUESTS **  ====================================
 //
@@ -290,7 +290,7 @@ use App\Models\SessionLog;
     Route::get('/member/membership-form', [MemberController::class,'membershipForm'])->middleware('verified');
 
     //Show Membership Download or Edit
-    Route::get('/member/membership-form/edit-download', [MemberController::class,'membershipFormEditDownload'])->middleware('verified');
+    Route::get('/member/membership-form/edit-download', [MemberController::class,'membershipFormEditDownload'])->middleware('verified', 'verified.access');
 
     //Show Membership Form for Editing
     Route::get('/member/membership-form/edit', [MemberController::class,'membershipFormEdit'])->middleware('verified');
