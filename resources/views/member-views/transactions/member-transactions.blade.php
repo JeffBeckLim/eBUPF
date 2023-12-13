@@ -35,14 +35,15 @@
                                     @if($transaction instanceof \App\Models\Payment)
                                         <div class="col-12 border-bottom border-top" >
                                             <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-7 my-1">
+                                                <div class="col-6 my-1">
                                                     <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                    <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                    <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ \Carbon\Carbon::createFromFormat('Y-m-d', $transaction->payment_date)->format('F d, Y') }}
+                                                    </p>
                                                 </div>
                                                 <div class="col-4 my-1">
                                                     <p class="fs-7 fw-bold m-0">{{ number_format($transaction->principal + $transaction->interest, 2) }}</p>
                                                 </div>
-                                                <div class="col-1 my-1">
+                                                <div class="col-2 my-1 text-end">
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction{{$transaction->id}}">
                                                         <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
                                                     </a>
@@ -52,7 +53,7 @@
                                     @elseif($transaction instanceof \App\Models\PenaltyPayment)
                                         <div class="col-12 border-bottom border-top">
                                             <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-7 my-1">
+                                                <div class="col-6 my-1">
                                                     <p class="fs-7 fw-bold m-0">Loan Penalty Payment</p>
                                                     <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                 </div>
@@ -61,7 +62,7 @@
                                                         {{ number_format($transaction->penalty_payment_amount, 2) }}
                                                     </p>
                                                 </div>
-                                                <div class="col-1 my-1">
+                                                <div class="col-2 my-1 text-end">
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#paymentPenaltyModal{{$transaction->id}}">
                                                         <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
                                                     </a>
@@ -78,9 +79,9 @@
                                             $loanCode = $loanTypes[$transaction->loanType->loan_type_description];
                                         @endphp
 
-                                        <div class="col-12 border-bottom border-top" data-filter="{{ $loanCode }}">
+                                        <div class="col-12 border-bottom border-top" style="pointer-events: none;" data-filter="{{ $loanCode }}">
                                             <div class="row" style="padding: 0 30px 0 10px;">
-                                                <div class="col-7 my-1">
+                                                <div class="col-6 my-1">
                                                     <p class="fs-7 fw-bold m-0">Applied a loan</p>
                                                     <p class="m-0" style="font-size: 12px;"><i class="bi bi-clock-history"></i> {{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                                                 </div>
@@ -93,8 +94,8 @@
                                                         @endif
                                                     </p>
                                                 </div>
-                                                <div class="col-1 my-1">
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loanTransaction{{$transaction->id}}" class="info-icon">
+                                                <div class="col-2 my-1 text-end">
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#loanTransaction{{$transaction->id}}" class="info-icon" style="pointer-events: auto;">
                                                         <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
                                                     </a>
                                                 </div>

@@ -21,10 +21,12 @@
                         <p class="fw-bold">{{$transaction->or_number}}</p>
                     </div>
                     <div class="col-6">
-                        <p class="">Date and Time</p>
+                        <p class="">Payment Date</p>
                     </div>
                     <div class="col-6">
-                        <p class="fw-bold">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                        <p>
+                            {{date('F d, Y', strtotime($transaction->payment_date));}}
+                        </p>
                     </div>
                 </div>
 

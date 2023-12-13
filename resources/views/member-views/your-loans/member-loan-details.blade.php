@@ -91,11 +91,11 @@
                                         <div class="col-2">
                                         </div>
                                         <div class="col-10">
-                                            @if ($loan->penalty != null)
+                                            @if ($loan->penalty->count() != 0)
                                                 <h6>
                                                     <span style="font-size: 14px" class="text-danger">
                                                         <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="">
-                                                        Penalty Balance:
+                                                            Penalty Balance:
                                                         @php
                                                             $sum = 0;
                                                                 foreach ($loan->penalty as $penalty) {
