@@ -91,7 +91,14 @@
                                                                                         <span class="text14-design">Housing Loan
                                                                                         </span>
                                                                                         @endif
-                                                                                        @if ($loan->penalty->count() != 0)
+                                                                                        @php
+                                                                                            $sum = 0;
+                                                                                                foreach ($loan->penalty as $penalty) {
+                                                                                                $sum += $penalty->penalty_total;
+                                                                                                }
+                                                                                        @endphp
+
+                                                                                        @if ($loan->penalty->count() != 0 && ($sum - $sumPenaltyPayments) != 0)
                                                                                         <span style="font-size: 12px" class="text-danger" title="This loan has penalty">
                                                                                             <img style="height: 30px ;" src="{{asset('assets/penalty.svg')}}" alt="Penalty Icon">
                                                                                         </span>
@@ -110,7 +117,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-4 text-end">
-                                                                            <p style="font-size: 13px" class=" m-0 text3-1-design ">Outstanding Balance</p>
+                                                                            <p style="font-size: 13px" class=" m-0 text3-1-design">Outstanding Balance</p>
                                                                             <p style="font-size: 14px" class=" m-0 text-dark fw-bold"><span> Php </span>
                                                                             @if(isset($totalPaymentMPL) && isset($totalPaymentMPL[$loan->id]))
                                                                             {{ number_format(($loan->principal_amount + $loan->interest) - $totalPaymentMPL[$loan->id], 2) }}
@@ -317,7 +324,7 @@
                                                     <div class="row" style="padding: 0 30px 0 10px;">
                                                         <div class="col-7 my-1">
                                                             <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                            <p class="m-0" style="font-size: 11px;">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
+                                                            <p class="m-0" style="font-size: 11px;">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $transaction->payment_date)->format('F d, Y') }}</p>
                                                         </div>
                                                         <div class="col-4 my-1">
                                                             <p class="fs-7 fw-bold m-0">Php {{ number_format($transaction->principal + $transaction->interest, 2) }}</p>

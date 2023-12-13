@@ -171,6 +171,13 @@ class MemberController extends Controller
         $mplDisabled = !empty($inActiveLoan) || !$allMPLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 2 && $additionalLoan != 3);
         $hslDisabled = !empty($inActiveLoan) || !$allHSLPaid50Percent && ($additionalLoan == 0 || $additionalLoan == null || $additionalLoan == 1 && $additionalLoan != 3);
 
+         // get sum of penalty payment
+         $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
+         ->orderBy('created_at', 'desc')
+         ->get();
+
+         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
+
         return view('member-views.member-dashboard', [
             'additionalLoan' => $additionalLoan,
             'mplLoans' => $mplLoans,
@@ -184,6 +191,7 @@ class MemberController extends Controller
             'totalPaymentHSL' => $totalPaymentsHSL,
             'mplDisabled' => $mplDisabled,
             'hslDisabled' => $hslDisabled,
+            'sumPenaltyPayments' => $sumPenaltyPayments,
         ]);
     }
 
