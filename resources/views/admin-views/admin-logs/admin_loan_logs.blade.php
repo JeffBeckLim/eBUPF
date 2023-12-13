@@ -37,19 +37,17 @@
         </div>
         <div>
             @if (Route::is('loan.logs'))
-                @include('admin-views.admin-logs.loan_logs');
+                @include('admin-views.admin-logs.loan_logs')
             @elseif (Route::is('adjustment.logs'))
-                @include('admin-views.admin-logs.adjustment_logs');
+                @include('admin-views.admin-logs.adjustment_logs')
             @elseif (Route::is('amortization.logs'))
-                @include('admin-views.admin-logs.amortization_logs');
+                @include('admin-views.admin-logs.amortization_logs')
             @elseif (Route::is('session.logs'))
-                @include('admin-views.admin-logs.session_logs');
+                @include('admin-views.admin-logs.session_logs')
             @elseif (Route::is('admin.penalty.payment.logs'))
-                @include('admin-views.admin-logs.penalty_payment_logs');
+                @include('admin-views.admin-logs.penalty_payment_logs')
             @endif
-
         </div>
-
     </div>
 </div>
 <script>
