@@ -13,7 +13,7 @@
                         <div class="col-12">
                             <label class="fw-bold fs-6" for="unit_id">College/Unit & Campus</label>
                             <select name="unitSelect" class="form-select form-control">
-                                <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }}>Choose Unit</option>
+                                <option value="All" {{ $selectedUnit == 'All' ? 'selected' : '' }} disabled>Choose Unit</option>
                                 @foreach ($units as $unit)
                                     <option value="{{ $unit->unit_code }}" {{ $selectedUnit == $unit->unit_code ? 'selected' : '' }}>
                                         {{ $unit->unit_code }}
