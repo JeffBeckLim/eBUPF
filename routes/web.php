@@ -35,6 +35,7 @@ use App\Http\Controllers\LoanApplicationTrackingFilterController;
 use App\Http\Controllers\LoanLogController;
 use App\Http\Controllers\AdminImportData;
 use App\Http\Controllers\SessionLogController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\Penalty;
 use App\Models\SessionLog;
 
@@ -286,6 +287,9 @@ use App\Models\SessionLog;
     // Change Password
     Route::post('/member/profile/change-password/{id}', [MemberController::class, 'changePassword'])->middleware('auth','member.access', 'checkSessionTimeout')->name('member.change.password');
 
+    // Create Password
+    Route::post('/member/profile/create-password/{id}', [MemberController::class, 'createPassword'])->middleware('auth','member.access', 'checkSessionTimeout')->name('member.create.password');
+
     //Show Membership Form
     Route::get('/member/membership-form', [MemberController::class,'membershipForm'])->middleware('verified');
 
@@ -336,6 +340,10 @@ Route::get('/logout', function(){
     Auth::logout();
     return Redirect::to('/');
 });
+
+// Login using Google
+Route::get('/auth/google', [LoginController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback']);
 
 Auth::routes(['verify' => true]);
 

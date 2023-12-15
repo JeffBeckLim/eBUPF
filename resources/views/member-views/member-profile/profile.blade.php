@@ -173,9 +173,15 @@
                         <p><span>{{$member->civil_status}}</span></p>
                     </div>
                     <div class="col-lg-5 col-12">
-                        <a href="#edit" class="btn d-flex justify-content-center align-items-center fs-7 text-white" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
-                            <span style="border-radius: 5px;background: #0092D1; padding: 8px 15px; width: 100%; font-weight: bold;">Change password</span>
-                        </a>
+                        @if(Auth::user()->password == null)
+                            <a href="#edit" class="btn d-flex justify-content-center align-items-center fs-7 text-white" data-bs-toggle="modal" data-bs-target="#createPasswordModal">
+                                <span style="border-radius: 5px;background: #0092D1; padding: 8px 15px; width: 100%; font-weight: bold;">Create password</span>
+                            </a>
+                        @else
+                            <a href="#edit" class="btn d-flex justify-content-center align-items-center fs-7 text-white" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                <span style="border-radius: 5px;background: #0092D1; padding: 8px 15px; width: 100%; font-weight: bold;">Change password</span>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -183,6 +189,7 @@
     </div>
     {{-- Contains the Modal for editing the Profile --}}
     @include('member-views.member-profile.profile-updateModal')
+    @include('member-views.member-profile.create-passwordModal')
     @include('member-views.member-profile.change-passwordModal')
 
 </main>

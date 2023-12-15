@@ -52,7 +52,7 @@
                   Sign In to <span class="bu-text-orange">e</span>BUPF!
                 </h4>
                 <p style="font-size: small">
-                  or create an account to access our Membership forms and learn more about BUPF
+                  or create an account to access our Membership forms and learn more about eBUPF
                 </p>
               </div>
 
@@ -62,7 +62,7 @@
                   Sign Up for <span class="bu-text-orange">e</span>BUPF!
                 </h4>
                 <p style="font-size: small">
-                  Create an account to access our Membership forms and learn more about BUPF
+                  Create an account to access our Membership forms and learn more about eBUPF
                 </p>
               </div>
               @endif

@@ -629,23 +629,38 @@ class MemberController extends Controller
 
    public function changePassword(Request $request, $member_id){
 
-    $request->validate([
-        'old_password' => 'required',
-        // 'password'=>'required',
-        'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
-    ]);
+        $request->validate([
+            'old_password' => 'required',
+            // 'password'=>'required',
+            'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+        ]);
 
-    $user = Auth::user();
-    if (!Hash::check($request->old_password, $user->password)) {
-        return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');
+        $user = Auth::user();
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->route('member.profile')->with('fail', 'The old password is incorrect.');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('member.profile')->with('message', 'Password changed successfully.');
+
     }
 
-    $user->password = Hash::make($request->password);
-    $user->save();
+    public function createPassword(Request $request, $member_id){
 
-    return redirect()->route('member.profile')->with('message', 'Password changed successfully.');
+        $request->validate([
+            'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d\s])[A-Za-z\d\S]+$/'],
+        ]);
 
-}
+        $user = Auth::user();
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('member.profile')->with('message', 'Password created successfully.');
+
+    }
 
 
 }// last tag
