@@ -124,6 +124,47 @@ class PDFController extends Controller{
         $middlename = $member->middlename;
         $middle_initial = substr($middlename, 0, 1);
         $initial = strtoupper($middle_initial);
+/*
+        $interestRate = 0.06;
+        $amount = intval($loan->original_principal_amount);
+        $termYears = $loan->term_years;
+
+         // Calculate yearly principal balance
+         $yearlyPrincipalBalance = $amount / $termYears;
+         $yearlyBalance = $amount;
+         $totalInterest = 0;
+
+         // Initialize an array to store the yearly balances
+         $yearlyBalances = [];
+
+        for ($year = 0; $year < $termYears; $year++) {
+            $yearlyInterest = $yearlyBalance * $interestRate;
+            $totalInterest += $yearlyInterest;
+
+            $yearlyBalances[$year] = [
+                'yearlyBalance' => $yearlyBalance,
+                'yearlyInterest' => $yearlyInterest,
+            ];
+            $yearlyBalance -= $yearlyPrincipalBalance;
+        }
+
+        //dd($yearlyBalances);
+
+        $totalInterestAndPrincipal = $amount + $totalInterest;
+
+        //monthly amortization
+        $monthlyAmort = $totalInterestAndPrincipal / ($termYears * 12);
+
+        //monthly principal amortization without interest
+        $monthlyPrincipalAmort = $amount / ($termYears * 12);
+
+        //monthly principal Interest amortization
+        $monthlyInterestAmort = $totalInterest / $termYears / 12;
+
+        //total months
+        $totalMonths = $termYears * 12;
+
+        dd($yearlyBalances[0]); */
 
         $data = [
             'currentdate' => date('Y-m-d'),

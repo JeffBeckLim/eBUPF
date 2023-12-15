@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-6">
                         <p>
-                            {{date('F d, Y', strtotime($transaction->payment_date));}}
+                            {{ date('M Y', strtotime($transaction->payment_date)) }}
                         </p>
                     </div>
                 </div>

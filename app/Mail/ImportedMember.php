@@ -15,13 +15,15 @@ class ImportedMember extends Mailable
 
     public $member;
     public $user;
+    public $password;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($member, $user)
+    public function __construct($member, $user, $password)
     {
         $this->member = $member;
+        $this->password = $password;
         $this->user = $user;
     }
 

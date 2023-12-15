@@ -115,29 +115,7 @@
 <div class=" text-center mt-4">
     <p class="fw-7">Don’t have an account? <span><a class="text-decoration-none fw-bold text-dark" href="/register" >Sign Up</a></span></p>
 </div>
-<script>
-    function onSuccess(googleUser) {
-        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        // Customize actions on successful login
-    }
 
-    function onFailure(error) {
-        console.log(error);
-        // Handle failure here
-    }
-
-    function renderGoogleSignInButton() {
-        gapi.signin2.render('google-signin-button', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-</script>
 <script>
      document.getElementById('loginForm').onsubmit = function() {
         var loginBtn = document.getElementById('loginBtn');
