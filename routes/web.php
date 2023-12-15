@@ -145,6 +145,10 @@ use App\Models\SessionLog;
     Route::get('/member/coBorrower/requests/', [CoBorrowerController::class, 'show'])->name('incoming.request')->middleware('auth','member.access', 'checkSessionTimeout');
      //Show auth users request
     Route::get('/member/Your/coBorrower/requests/', [CoBorrowerController::class, 'showYourRequest'])->name('outgoing.request')->middleware('auth','member.access', 'checkSessionTimeout');
+
+    Route::get('/member/Your/coBorrower/change/{loan_id}', [CoBorrowerController::class, 'changeCb'])->name('change.coBorrower')->middleware('auth','member.access', 'checkSessionTimeout');
+
+    Route::post('/member/Your/coBorrower/change-update/{loan_id}', [CoBorrowerController::class, 'changeCbUpdate'])->name('change.coBorrower.update')->middleware('auth','member.access', 'checkSessionTimeout');
     // -----------------------------------------------------------------------------------
     // show loan application details of the principal borrower
     Route::get('/member/loan-application-details/{id}', [CoBorrowerController::class, 'showLoan'])->middleware('auth','member.access', 'checkSessionTimeout');

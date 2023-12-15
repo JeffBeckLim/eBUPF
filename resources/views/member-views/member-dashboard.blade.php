@@ -141,9 +141,30 @@
                                                                             </span>
                                                                         </div>
                                                                         <div class="col-6  text-end" style="line-height: 90%">
-                                                                            <span class="text11-design fw-bold p-0">{{$loan->remainingMonths}}</span>  <span class="text12-design p-0">months to pay</span>
+                                                                            @php
+                                                                                $years = $loan->remainingMonths / 12;
+                                                                                
+                                                                                $months = $loan->remainingMonths%12
+                                                                            @endphp 
+                                                                            
+                                                                            @if ($years < 1)
+                                                                                <span class="text11-design fw-bold p-0">
+                                                                                {{$loan->remainingMonths}}
+                                                                                </span>  
+                                                                                <span class="text12-design p-0">months to pay</span>
+                                                                            @elseif ($years > 1)
+                                                                                <span class="text11-design fw-bold p-0">
+                                                                                {{(int)$years}}
+                                                                                <span class="fw-light text12-design p-0">year &</span>
+                                                                                {{$months}} <span class="text12-design p-0 fw-light">months to pay</span>
+                                                                                </span>  
+                                                                                
+                                                                            @endif
+
+                                                                           
+                                                                           
                                                                         </div>
-                                                                        <div class="col-12  mt-1 text-end text-secondary" style="font-size: 12px">
+                                                                        <div class="col-12  mt-1 text-end text-secondary" style="font-size: 11px">
                                                                             Code: <span class="fw-bold">{{$loan->loan_code}}</span>
                                                                         </div>
                                                                     </div>

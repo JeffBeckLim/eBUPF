@@ -27,6 +27,13 @@
                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                      </div>    
                     @endif
+
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{session('success')}}
+                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                     </div>    
+                    @endif
                     
 
                     <div class="row my-3 g-0 p-3 text-center">
@@ -143,19 +150,36 @@
                                         @elseif ($cb_withLoan->accept_request == '')
                                              <p style="font-size: 12px">Pending</p>
                                              <div class="dropdown mt-2 ">
-                                                <button class="btn  rounded-5 w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                <button class="btn  rounded-2 " type="button" data-bs-toggle="dropdown" aria-expanded="false"
                                                 >
-                                                    <i class="bi bi-three-dots"></i>
+                                                    <i style="font-size: 20px" class="bi bi-three-dots"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
+                                                <li>
+                                                    <a class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
                                                     Cancel Application</a>
                                                 </li>
 
                                                 </ul>
                                             </div>
                                         @elseif ($cb_withLoan->accept_request == 0)
-                                            <p style="font-size: 12px">Declined by Co-borrower.</p>
+                                            <div class="dropdown mt-2 ">
+                                                <button class="btn  rounded-2 " type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                >   
+                                                    <i style="font-size: 20px" class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item  {{count($pending_loans) != null ? 'disabled tex-secondary' : 'text-primary'}}" href="{{route('change.coBorrower', $cb_withLoan->loan->id)}}">
+                                                        Change Co-borrower</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
+                                                        Cancel Application</a>
+                                                    </li>
+                                                  
+                                                </ul>
+                                            </div>
                                         @elseif ($cb_withLoan->accept_request == 1)
                                             {{-- Display print if co borrower accepts --}}
                                             @if ($cb_withLoan->loan->loanType->loan_type_name == "MPL")
@@ -192,8 +216,6 @@
                                    
                                 </tr>
                                 @include('member-views.your-request.modal-cancel-request')
-
-
                                 @endforeach
                             </tbody>
                         </table>
@@ -234,4 +256,35 @@
  } );
 </script>
 
+<script>$(document).ready(function() {
+    // Loop through each modal form and apply validation
+    $('[id^=form]').each(function() {
+        $(this).validate({
+            rules: {
+                inputField: {
+                    required: true,
+                    // Add more validation rules if needed
+                },
+                // Define rules for other form elements
+            },
+            messages: {
+                inputField: {
+                    required: "This field is required",
+                    // Custom messages for validation errors
+                },
+                // Define messages for other form elements
+            },
+            submitHandler: function(form) {
+                // Handle form submission
+                // For example, you can use AJAX to submit the form data
+                // $(form).serialize() can be used to get form data
+            },
+            errorPlacement: function(error, element) {
+                // Display error messages
+                error.insertAfter(element);
+            }
+        });
+    });
+});
+</script>
 @endsection

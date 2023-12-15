@@ -2,16 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Campus;
 use App\Models\Loan;
-use App\Models\CoBorrower;
+use App\Models\User;
+use App\Models\Campus;
 use App\Models\Member;
 use App\Models\Witness;
+use App\Models\CoBorrower;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CoBorrowerController extends Controller
 {
+    public function changeCbUpdate(Request $request, $id){
+        $loan = Loan::findOrFail($id);
+
+        // check if sakniyang loan
+        if(Auth::user()->member->id != $loan->member_id){
+            abort(404);
+        }
+        // check for active loans
+        $coBorrower = CoBorrower::where('loan_id', $id)->with('member.user')->first();
+
+        $validatedData = $request->validate([
+            'email_co_borrower' => 'required|email',
+        ]);
+        $co_borrower_new = User::where('email',$validatedData['email_co_borrower'])->with('member')->first();
+
+        // check if same cb parin na enter
+        if($co_borrower_new==null){
+            return back()->with('error', 'Does not exist');
+        }
+        else if($coBorrower->member->user->email == $validatedData['email_co_borrower']){
+            return back()->with('error', 'You cannot enter the same co-borrower');
+        }
+        //check if member si CB
+        else if($co_borrower_new->user_type != 'member'){
+            return back()->with('error', 'Not a member email');
+        }
+
+        $coBorrower->member_id = $co_borrower_new->member->id;
+        $coBorrower->accept_request = null;
+        $coBorrower->save();
+        
+        $loan->is_active = null;
+        $loan->save();
+
+        return redirect(route('outgoing.request'))->with('success', 'Co-borrower changed');
+
+    }
+
+    public function changeCb($id){
+
+        $loan = Loan::findOrFail($id);
+        if(Auth::user()->member->id != $loan->member_id){
+            abort(404);
+        }
+        $pending_loans = Loan::whereNull('is_active')->where('member_id',Auth::user()->member->id)->get();
+
+        if(count($pending_loans) != 0){
+            abort(404);
+        }
+
+        $coBorrower = CoBorrower::where('loan_id', $id)->with('member.user')->first();
+        $currentCbEmail = $coBorrower->member->user->email;
+
+        $members = User::where('user_type', 'member')->get();
+        $member_emails = [];
+        foreach($members as $member){
+            array_push($member_emails, $member->email);
+        }
+
+        $user_email = Auth::user()->email;
+        return view('member-views.your-request.change-cb' , compact('member_emails','user_email','loan', 'currentCbEmail'));
+        
+    }
+
+
     public function showYourRequest(){
 
         // $load=CoBorrower::with('Loan.Member')->where('Loan.Member.id', Auth::user()->member->id)->get();
@@ -22,7 +88,10 @@ class CoBorrowerController extends Controller
             ->get();
         
         $cb_withLoans = collect($cb_withLoans)->sortByDesc('created_at')->values()->all();    
-        return view('member-views.your-request.your-request', compact('cb_withLoans'));
+
+        $pending_loans = Loan::whereNull('is_active')->where('member_id',Auth::user()->member->id)->get();
+
+        return view('member-views.your-request.your-request', compact('cb_withLoans','pending_loans'));
 
     }   
 
@@ -48,7 +117,9 @@ class CoBorrowerController extends Controller
         }
         // SORT LOANS FROM THE LATEST TO THE OLDEST
         $loans = collect($loans)->sortByDesc('created_at')->values()->all();
+
       
+
         return view('member-views.co-borrower-request.coborrower-requests', compact('loans'));
     }
 
