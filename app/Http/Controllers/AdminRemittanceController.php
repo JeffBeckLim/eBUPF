@@ -45,6 +45,7 @@ class AdminRemittanceController extends Controller
     }
 
     public function addPaymentRemittance(Request $request){
+
         $data = $request->validate([
             'or_number' => 'required',
             'payment_date' => 'required|date',

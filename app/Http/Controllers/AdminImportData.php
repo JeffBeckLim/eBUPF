@@ -8,6 +8,7 @@ use App\Models\Member;
 use App\Models\Payment;
 use App\Models\Loan;
 use App\Models\User;
+use Illuminate\Support\Str;
 use SplFileObject;
 use App\Mail\ImportedMember;
 use Illuminate\Support\Facades\Mail;
@@ -19,6 +20,21 @@ class AdminImportData extends Controller
 {
     public function importData(){
         return view('admin-views.import-data');
+    }
+
+    function generatePassword() {
+        $length = 12;
+        $uppercase = Str::upper(Str::random(1));
+        $lowercase = Str::lower(Str::random(1));
+        $number = Str::random(1, '1234567890');
+        $special = Str::random(3, '!@#$%^&*()-_=+[]{};:,.<>?');
+
+        $characters = Str::random($length - 6, 'abcdefghijklmnopqrstuvwxyz');
+
+        $password = $uppercase . $lowercase . $number . $special . $characters;
+        $password = str_shuffle($password); // Shuffle the password characters
+
+        return $password;
     }
 
     public function executeImportData(Request $request){
@@ -53,16 +69,20 @@ class AdminImportData extends Controller
                 // Process each row and format data accordingly
                 if(!$existingUser){
 
+                    $password = $this->generatePassword();
+
                     $userData = [
                         'email' => $row[0] ?? null,
                         'email_verified_at' => now(),
-                        'password' => bcrypt('Ch@ngeMe123'), // default password for all users
+                        'password' => bcrypt($password), // default password for all users
                         'user_type' => 'member', // all users are members
                         'created_at' => now(),
                         'updated_at' => now(),
                     ];
+
                     $user = User::create($userData);
                     $user->markEmailAsVerified();
+
                     $memberData = [
                         'created_at' => now(),
                         'updated_at' => now(),
@@ -92,9 +112,10 @@ class AdminImportData extends Controller
                         'additional_loan' => null,
                         'is_editable' => '1',
                     ];
+
                     $member = Member::create($memberData);
 
-                    Mail::to($user->email)->send(new ImportedMember($member, $user));
+                    Mail::to($user->email)->send(new ImportedMember($member, $user, $password));
                     $userTable[] = $userData;
                     $memberTable[] = $memberData;
                 }

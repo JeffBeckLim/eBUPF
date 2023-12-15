@@ -105,9 +105,9 @@
                                                                                     @endif
                                                                                         <br>
                                                                                         @if($loan->amortization)
-                                                                                            <span class="text13-design">
-                                                                                                {{date("F Y", strtotime($loan->amortization->amort_start))}}
-                                                                                                -  {{date("F Y", strtotime($loan->amortization->amort_end))}}
+                                                                                            <span class="text13-design" style="font-size: 12px !important;">
+                                                                                                {{date("M Y", strtotime($loan->amortization->amort_start))}}
+                                                                                                -  {{date("M Y", strtotime($loan->amortization->amort_end))}}
                                                                                             </span>
                                                                                         @else
                                                                                             <span class="text13-design">No amortization period yet</span>
@@ -324,7 +324,8 @@
                                                     <div class="row" style="padding: 0 30px 0 10px;">
                                                         <div class="col-7 my-1">
                                                             <p class="fs-7 fw-bold m-0">Loan Payment</p>
-                                                            <p class="m-0" style="font-size: 11px;">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $transaction->payment_date)->format('F d, Y') }}</p>
+                                                            <p class="m-0" style="font-size: 11px;"> {{ date('M Y', strtotime($transaction->payment_date)) }}
+                                                            </p>
                                                         </div>
                                                         <div class="col-4 my-1">
                                                             <p class="fs-7 fw-bold m-0">Php {{ number_format($transaction->principal + $transaction->interest, 2) }}</p>

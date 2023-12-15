@@ -50,16 +50,16 @@
                                                 Housing Loan
                                             @endif
                                             </p>
-                                            <p class="m-0 fs-7">
+                                            <p class="m-0" style="font-size: 14px !important;">
                                                 @if($loan->amortization)
-                                                {{date("F Y", strtotime($loan->amortization->amort_start))}}
+                                                    {{date("M Y", strtotime($loan->amortization->amort_start))}}
                                                 <span>
-                                                    -  {{date("F Y", strtotime($loan->amortization->amort_end))}} </span>
+                                                    -  {{date("M Y", strtotime($loan->amortization->amort_end))}} </span>
                                                 @else
                                                     No amortization period yet
                                                 @endif
                                             </p>
-                                            <p class="m-0 fw-bold mt-4 fs-7">
+                                            <p class="m-0 fw-bold mt-4" style="font-size: 14px;">
                                                 Monthly Payable
                                                 <span class="fw-normal">
                                                     @if ($loan->amortization)
@@ -287,16 +287,32 @@
                                                 <th scope="col">Principal</th>
                                                 <th scope="col">Interest</th>
                                                 <th scope="col">Total</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($payments->sortByDesc('created_at') as $payment)
                                             <tr>
-                                                <td>{{ $payment->or_number }}</td>
-                                                <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('F j, Y') }}</td>
-                                                <td> <span class="text-muted">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}</td>
-                                                <td><span class="text-muted">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}</td>
-                                                <td><span class="text-muted">Php</span> {{ number_format($payment->principal + $payment->interest, 2, '.', ',') }}</td>
+                                                <td>
+                                                    {{ $payment->or_number }}
+                                                </td>
+                                                <td>
+                                                    {{ date('M Y', strtotime($payment->payment_date)) }}
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}
+                                                </td>
+                                                <td>
+                                                    <span class="text-muted">Php</span> {{ number_format($payment->principal + $payment->interest, 2, '.', ',') }}
+                                                </td>
+                                                <td>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction">
+                                                        <i class="bi bi-info-circle-fill fs-6" style="color: #00638D"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

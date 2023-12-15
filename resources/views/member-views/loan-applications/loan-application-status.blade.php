@@ -2,15 +2,15 @@
 
 @section('content')
 
-<main >      
+<main >
     <div class="container-fluid">
         <div class="row">
-            
+
             @if (session('message'))
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{session('message')}}
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-             </div>    
+             </div>
             @endif
             <div class="col mt-3 mb-5">
                 <div class="d-flex flex-column align-items-center justify-content-center ">
@@ -21,7 +21,10 @@
                             <div class="row g-0">
                                 <div class="col-6 ">
                                     <div class="lh-sm">
-                                        <p class="fs-7">Request <br> <span class="fs-6">Php</span> <span class="fs-6 fw-bold">{{$loan->principal_amount}}</span></p>
+                                        <p class="fs-7">Request <br>
+                                            <span class="fs-6">Php</span>
+                                            <span class="fs-6 fw-bold">{{ number_format($loan->principal_amount, 2) }}</span>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -42,7 +45,7 @@
                             </div>
                             @endif
                         @if (count($loan_status) != 0)
-                                
+
                             {{-- =================================================================== --}}
                             @foreach ($loan_status as $status)
                                 @if ($status->loan_application_state_id == 6)
@@ -54,12 +57,12 @@
                                         <p class="fw-bold text-white fs-7 pb-3">Your Loan Application was Declined. </p>
                                     </div>
                                 </div>
-                                @endif    
+                                @endif
                             @endforeach
-                            
+
                             @foreach ($loan_status as $status)
                                 @if ($status->loan_application_state_id == 6)
-                                    
+
                                 @else
                                 <div class="status-box border shadow-sm mb-3">
                                     <div class="row p-3">
@@ -74,7 +77,7 @@
                                                 <div class="fs-7 border-top">
                                                     <p class="mt-2 fw-bold">Remarks</p>
                                                     {{$status->remarks}}
-                                                </div>    
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
@@ -88,7 +91,7 @@
                             <p style="font-size: 12px">Submit your loan applictions at eBUPF to move forward your loan in the the application process.</p>
                         </div>
                         @endif
-                            
+
 
                         </div>
                     </div>
