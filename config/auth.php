@@ -65,6 +65,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'google' => [
+            'driver' => 'google',
+            'model' => App\Models\User::class,
+        ],
+
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -96,10 +101,10 @@ return [
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
-            
+
         ],
 
-    
+
     ],
 
     /*
