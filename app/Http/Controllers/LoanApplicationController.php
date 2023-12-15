@@ -127,11 +127,6 @@ class LoanApplicationController extends Controller
         foreach($members as $member){
             array_push($member_emails, $member->email);
         }
-
-        $member_names = [];
-        foreach($members as $member){
-            array_push($member_names, $member->member->firstname.' '.$member->member->lastname);
-        }
         
 
         return view('member-views.mpl-application-form.mpl-application-form', compact('member_emails'));
@@ -305,17 +300,19 @@ class LoanApplicationController extends Controller
     }
 
     // generate unique loan ID
-    public function generateId($loanTypeId){
+    public function generateId($loanTypeId,$id){
         $loanType = LoanType::find($loanTypeId);
-        do {
+        // do {
             $currentDateTime = now();
             // Format date and time to create a string
-            $dateTimeString = $currentDateTime->format('Y-j-');
-            $randomString = strtoupper(Str::random(3));
-            $randomString1 = strtoupper(Str::random(3));
+            $dateTimeString = $currentDateTime->format('Y-');
+            // $randomString = strtoupper(Str::random(3));
+            // $randomString1 = strtoupper(Str::random(3));
             // Combine the formatted date/time and the random string to create a unique ID
-            $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $randomString . "-" . $randomString1;
-        } while (Loan::where('loan_code', $uniqueId)->exists());
+            // $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $randomString . "-" . $randomString1;
+            $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $id;
+        
+        // } while (Loan::where('loan_code', $uniqueId)->exists());
 
         return($uniqueId);
     }
@@ -413,7 +410,7 @@ class LoanApplicationController extends Controller
 
         
         $loan = Loan::create([
-            'loan_code'=> $this->generateId($loanTypeId),
+            // 'loan_code'=> 'temp_code',
             'member_id'=>Auth::user()->id,
             'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
@@ -421,6 +418,8 @@ class LoanApplicationController extends Controller
             'term_years'=>$formFields['term_years'],
         ]);
 
+        $loan->loan_code = $this->generateId($loanTypeId, $loan->id);
+        $loan->save();
         // create log
         $loan_type = LoanType::find($loanTypeId);
         LoanLog::create([

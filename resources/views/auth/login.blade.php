@@ -14,7 +14,7 @@
 <form method="POST" action="{{ route('login') }}" id="loginForm">
     @csrf
     <div class="mb-3">
-        <label for="email" class="form-labeltext-dark">Email address</label>
+        <label for="email" class="form-labeltext-dark">Bicol University Email</label>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
         @error('email')
@@ -27,7 +27,7 @@
     <label for="password" class="form-label text-dark">Password</label>
     <div class="mb-3 input-group">
 
-        <input id="password" type="password" class="form-control  @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
         <span class="input-group-text border-start-0" style="background-color: rgba(255, 0, 0, 0) !important"><button type="button" id="password-toggle" class="btn btn-link p-0 text-dark"><i class="bi bi-eye-slash-fill"></i></button></span>
         @error('password')
             <span class="invalid-feedback" role="alert">
