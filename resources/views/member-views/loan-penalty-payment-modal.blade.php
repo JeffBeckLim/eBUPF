@@ -27,7 +27,8 @@
                         @if($transaction->payment_date == null)
                             <p class="fw-bold">{{ $transaction->created_at->format('F d, Y, h:i A') }}</p>
                         @else
-                            <p class="fw-bold">{{date('F d, Y', strtotime($transaction->payment_date));}}
+                            <p class="fw-bold">
+                                {{ date('M Y', strtotime($transaction->payment_date)) }}
                             </p>
                         @endif
                     </div>

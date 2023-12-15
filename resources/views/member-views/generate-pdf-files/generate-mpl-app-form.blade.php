@@ -521,7 +521,7 @@
 
         </div>
         <div style="display: table-cell; width: 40%; font-size: 14px; font-weight: bold;">
-        Princiapl Loan Granted
+        Principal Loan Granted
         </div>
         <div style="display: table-cell; width: 20%; font-weight: bold;">
             ------------------------
@@ -1141,13 +1141,17 @@
 
     <div style="display: table; width: 100%; font-size: 14px; margin-top: 15px;">
         <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
-            {{ $witnesses[0] }}
+            @if(isset($witnesses[0]) && $witnesses[0] != null)
+                {{ $witnesses[0] }}
+            @endif
         </div>
         <div style="display: table-cell; width: 20%;">
 
         </div>
         <div style="display: table-cell; width: 40%; border-bottom: 1px solid black; font-size: 14px; text-align: center; text-transform: uppercase;">
-            {{ $witnesses[1] }}
+            @if(isset($witnesses[1]) && $witnesses[1] != null)
+                {{ $witnesses[1] }}
+            @endif
         </div>
     </div>
 
