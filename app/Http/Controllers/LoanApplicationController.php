@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Loan;
 use App\Models\User;
+use App\Models\LoanLog;
 use App\Models\Payment;
+use App\Models\Penalty;
 use App\Models\Witness;
+use App\Models\LoanType;
+use App\Models\Adjustment;
 use App\Models\CoBorrower;
 use GuzzleHttp\Psr7\Query;
+
 use Illuminate\Support\Str;
+use App\Models\Amortization;
 use Illuminate\Http\Request;
+use App\Models\PenaltyPayment;
 use App\Models\LoanApplicationState;
+
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\LoanApplicationStatus;
-use App\Models\LoanLog;
-use App\Models\LoanType;
-
 use function PHPUnit\Framework\isNull;
 
 class LoanApplicationController extends Controller
@@ -354,7 +359,114 @@ class LoanApplicationController extends Controller
             'witness_name_1'=>'nullable',
             'witness_name_2'=>'nullable',
         ]);
+
+        $previous_loan_balance = 0;
+        $remaining_penalty = 0;
+        $remaining_penalty = 0;
+        $service_fee = 0;
+        // OTHER CALCULATIONS ============================================
+        if($loanTypeId == 1){
+            $interestRate = 0.06;
+        }elseif($loanTypeId == 2){
+            $interestRate = 0.09;
+        }
+
+         // Calculate yearly principal balance
+         $yearlyPrincipalBalance = $formFields['principal_amount'] / $formFields['term_years'];
+         $yearlyBalance = $formFields['principal_amount'];
+        // ****************************
+         $totalInterest = 0;
+ 
+         // Calculate and store the yearly balances in the array
+         for ($year = 0; $year < $formFields['term_years']; $year++) {
+             $yearlyInterest = $yearlyBalance * $interestRate;
+             $totalInterest += $yearlyInterest;
+             $yearlyBalance -= $yearlyPrincipalBalance;
+         }
+        //  ***************************
+         $mri = $formFields['principal_amount']/1000*0.62*($formFields['term_years']*12);
+
+        //  get loans of member
+         $loans = Loan::where('loan_type_id',$loanTypeId)
+                    ->where('member_id', Auth::user()->member->id)
+                    ->with('loanApplicationStatus')
+                    ->get();
+        // loans with check picked up
+        $loans_picked_up = [];
+        foreach($loans as $loan){
+            $statuses = [];
+            foreach($loan->LoanApplicationStatus as $status){
+                array_push($statuses, $status->loan_application_state_id);
+            }
+            if(in_array(5,$statuses)){
+                array_push($loans_picked_up, $loan);
+            }
+        }
+        // get ids of loans picked up
+         $loans_picked_up_ids = [];
+         foreach($loans_picked_up as $loan_picked_up){
+            array_push($loans_picked_up_ids, $loan_picked_up->id);
+         }
         
+         $payments = Payment::where('member_id', Auth::user()->member->id)->get();
+         $payments_included = [];
+         foreach($payments as $payment){
+            if(in_array($payment->loan_id,$loans_picked_up_ids)){
+                array_push($payments_included,$payment);
+            }
+         }
+
+        //  ALL INTEREST AND PRINCIPAL
+         $all_amount_granted = 0;
+         foreach($loans_picked_up as $loan_picked){
+            $temp = $loan_picked->principal_amount + $loan_picked->interest;
+            $all_amount_granted += $temp;
+         }
+        // ALL PAYMENTS FILTERED INTESTEST AND PRINCIPAL
+        $all_amount_paid = 0;
+         foreach($payments_included as $pay){
+            $temp_pay = $pay->principal + $pay->interest;
+            $all_amount_paid += $temp_pay;
+         }
+
+        //  *****************
+         $previous_loan_balance = $all_amount_granted - $all_amount_paid;
+
+        //  ************************
+        if($loanTypeId == 2){
+         $service_fee = 0.01 * $formFields['principal_amount'];
+        }
+
+         $penalties = Penalty::all();
+         $penalties_filtered = [];
+        //  get only penalties associated with picked up loans
+        $penalty_total = 0;
+         foreach($penalties as $penalty){
+            if(in_array($penalty->loan_id,$loans_picked_up_ids)){
+                array_push($penalties_filtered,$penalty);
+                $penalty_total += $penalty->penalty_total;
+            }
+         }
+         $penalties_filtered_ids = [];
+         foreach($penalties_filtered as $penalty_filtered){
+            array_push($penalties_filtered_ids, $penalty_filtered->id);
+         }
+         $penalty_payments = PenaltyPayment::all();
+         $penalty_payments_total = 0;
+         foreach($penalty_payments as $penalty_pay){
+            if(in_array($penalty_pay->id,$penalties_filtered_ids)){
+                $penalty_payments_total += $penalty_pay->penalty_payment_amount;
+                // array_push($penalty_payments_filtered, $penalty_pay);
+
+            }
+         }
+        //  ************************************
+         $remaining_penalty = $penalty_total-$penalty_payments_total;
+
+         
+         // OTHER CALCULATIONS END LINE ============================================
+
+
 
         // check if co borrower email is the same with user logged in
         // COMMENT OUT FOR TESTING
@@ -378,16 +490,6 @@ class LoanApplicationController extends Controller
                 $witness_1_temp = $formFields['witness_name_1'];
                 $witness_2_temp = $formFields['witness_name_2'];
     
-                // $initial_index_1 =(strpos($formFields['witness_name_1'], '.'));
-                // $initial_index_2 =(strpos($formFields['witness_name_2'], '.'));
-                
-                // if($initial_index_1){
-                //     $witness_1_temp =   substr($formFields['witness_name_1'], 0,$initial_index_1-1) .substr($formFields['witness_name_1'], $initial_index_1+2, $initial_index_1-1);
-                // }
-                // if($initial_index_2){
-                //     $witness_2_temp =   substr($formFields['witness_name_2'], 0,$initial_index_2-1) .substr($formFields['witness_name_2'], $initial_index_2+2, $initial_index_2-1);
-                // }
-    
             $same_names = false;
             if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',$witness_2_temp))){
                 $same_names = true;
@@ -405,20 +507,40 @@ class LoanApplicationController extends Controller
             if($same_names){
                 return redirect()->back()->withInput()->with('witness_error', 'witnesses, co-borrowers and the borrower (you) must not have the same name');
             }
-
-
-
+        $adjustment = Adjustment::create([
+            'mri'=>$mri,
+            'previous_loan_balance'=>$previous_loan_balance,
+            'housing_service_fee'=>$service_fee,
+            'previous_penalty'=>$remaining_penalty,
+        ]); 
         
         $loan = Loan::create([
             // 'loan_code'=> 'temp_code',
             'member_id'=>Auth::user()->id,
             'loan_type_id'=>$loanTypeId,
             'principal_amount'=>$formFields['principal_amount'],
+            'interest'=> $totalInterest,
             'original_principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
+            'adjustment_id'=>$adjustment['id'],
         ]);
+        
+        $parsedDate = Carbon::parse($loan->created_at);
+        $parsedDate2 = Carbon::parse($loan->created_at);
+        $start_date  = $parsedDate->addMonth();
+            $months = $loan->term_years * 12;
+            $newEndDate = $parsedDate2->addMonths($months);
+
+            $amortization = Amortization::create([
+                'amort_principal' => $loan->principal_amount/($loan->term_years*12), 
+                'amort_interest' => $loan->interest/($loan->term_years*12), 
+                'amort_start' => $start_date, 
+                'amort_end' => $newEndDate,
+
+            ]);
 
         $loan->loan_code = $this->generateId($loanTypeId, $loan->id);
+        $loan->amortization_id = $amortization->id;
         $loan->save();
         // create log
         $loan_type = LoanType::find($loanTypeId);
