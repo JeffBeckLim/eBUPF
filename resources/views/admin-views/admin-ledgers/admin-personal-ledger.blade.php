@@ -479,6 +479,7 @@
                             </td>
                         @endfor
                     </tr>
+                    
                 </tbody>
         </table>
     </div>
