@@ -121,11 +121,8 @@
 
                     <!-- LOAN MORE INFO -->
                     <div class="card mt-2 shadow-sm" style="border-radius: 15px 15px 0 0">
-                        <div class="bg-success-bu" style="border-radius: 14px 14px 0 0">
-                            <p class="fw-bold m-1 text-center">Loan Details</p>
-                        </div>
                         <div class="card-body mx-4">
-                            <div class="row fs-7">
+                            <div class="row fs-7 mt-2">
                                 <div class="col-6 mb-3 ">
                                     <p class="fw-bold m-0">
                                         Loan ID
@@ -264,19 +261,14 @@
                 </div>
                 {{-- History Card --}}
                 <div class="col-lg-6 col-sm-12  ">
-                    <div class="card shadow-sm h-100" style="border-radius: 15px">
-                        {{-- <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
-                            <p class="fw-bold m-1 text-center fs-5">Payment History</p>
-                        </div> --}}
-                        <div class="d-flex">
-                            <!-- Content preceding the dropdown -->
+                    <div class="card shadow-sm h-100 rounded-bottom-0" style="border-radius: 15px">
+                        <div class="d-flex mt-2">
                             <div>
                                 <div style="margin: 15px 0 0 15px;">
                                     <p class="fw-bold m-1 text-center fs-5">Payment History</p>
                                 </div>
                             </div>
 
-                            <!-- This div holds the dropdown and is positioned at the end -->
                             <div class="ms-auto" style="margin: 10px 20px 0 0;">
                                 @if(!empty($years))
                                     <form action="{{ route('loan.details', ['id' => $loan->id]) }}" method="GET">
@@ -291,11 +283,6 @@
                                     </form>
                                 @endif
                             </div>
-
-
-                    <div class="card shadow-sm h-100 rounded-bottom-0" style="border-radius: 15px">
-                        <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
-                            <p class="fw-bold m-1 text-center">Payment History</p>
                         </div>
 
                         <div class="mt-1 mx-2">
@@ -314,10 +301,10 @@
                                             <tr>
                                                 <th scope="col">OR No.</th>
                                                 <th scope="col">Date</th>
-                                                <th scope="col">Beg. Bal.</th>
+                                                <th scope="col">Beginning Bal.</th>
                                                 <th scope="col">Principal</th>
                                                 <th scope="col">Interest</th>
-                                                <th scope="col">End. Bal.</th>
+                                                <th scope="col">Ending Bal.</th>
                                             </tr>
                                         </thead>
                                         <tbody>

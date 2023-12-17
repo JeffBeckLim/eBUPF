@@ -89,7 +89,15 @@ class LoanController extends Controller
         $selectedYear = request('year');
 
         $loan = Loan::where('id', $id)->with('penalty')->first();
-
+        if ($selectedYear == null) {
+            // Check if amort_start is not empty and convert it to a Carbon date object
+            if (!empty($loan->amortization->amort_start)) {
+                $selectedYear = Carbon::parse($loan->amortization->amort_start)->format('Y');
+            } else {
+                // Default to current year if amort_start is empty
+                $selectedYear = Carbon::now()->format('Y');
+            }
+        }
         if($loan == null){
             abort(403);
         }
@@ -106,16 +114,21 @@ class LoanController extends Controller
         }
 
         $payments = $loan->payment;
+        $amortizationStart = $loan->amortization->amort_start;
+        $amortizationEnd = $loan->amortization->amort_end;
+
         $years = [];
-        foreach ($payments as $payment) {
-            $year = Carbon::parse($payment->payment_date)->format('Y');
-            if (!in_array($year, $years)) {
-                array_push($years, $year);
-            }
+        if ($amortizationStart && $amortizationEnd) {
+            $startYear = Carbon::parse($amortizationStart)->format('Y');
+            $endYear = Carbon::parse($amortizationEnd)->format('Y');
+
+            $years = range($startYear, $endYear);
         }
-        if (count($years) == 0) {
-            array_push($years, Carbon::now()->format('Y'));
+
+        if (empty($years)) {
+            $years[] = Carbon::now()->format('Y');
         }
+
 
         $payments = $loan->payment();
         if ($selectedYear) {
@@ -143,7 +156,7 @@ class LoanController extends Controller
 
     public function displayLoanLedger($id){
         $loan = Loan::where('id', $id)->with('penalty')->first();
-        
+
         if($loan == null){
             abort(403);
         }
@@ -159,23 +172,23 @@ class LoanController extends Controller
          if($loan == null){
              abort('403');
          }
- 
+
          // $penalty_payments = PenaltyPayment::where('penalty_id' , $loan->penalty_id)
          // ->orderBy('created_at', 'desc')
          // ->get();
- 
+
          $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
          ->orderBy('created_at', 'desc')
          ->get();
- 
- 
+
+
          $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
- 
+
          // if loan has missing amortization
          if($loan->amortization == null){
              return abort(401, 'Oops! This loan has some field missing.');
          }
- 
+
          if($loan->amortization != null){
              if($loan->amortization->amort_start == null || $loan->amortization->amort_end == null ){
                  return abort(403, 'Oops! This loan has some field missing in amortization period.');
@@ -185,64 +198,64 @@ class LoanController extends Controller
          $principal_paid = 0;
          $interest_paid = 0;
          $payment_ids = [];
- 
+
          // get total payments
          foreach($loan->payment as $payment){
              $principal_paid += $payment->principal;
              $interest_paid += $payment->interest;
- 
+
              array_push($payment_ids, $payment->id);
          }
- 
+
           // Get all payments
           $paymentsMade = Payment::where('loan_id', $loan->id)->get();
- 
- 
+
+
          // Get unique year and month combinations to get the total number of payments
          $uniquePayments = [];
- 
+
          foreach ($paymentsMade as $payment) {
              $paymentDate = Carbon::parse($payment->payment_date);
              $yearMonth = $paymentDate->format('Y-m'); // Get year and month format
- 
+
              // Check if the year and month combination already exists
              if (!isset($uniquePayments[$yearMonth])) {
                  $uniquePayments[$yearMonth] = true; // Add if it doesn't exist
              }
          }
- 
+
          $totalUniquePayments = count($uniquePayments);
- 
+
          //Filter the payments by year and month
           $filteredPayments = [];
           foreach($paymentsMade as $payment){
               $paymentDate = Carbon::parse($payment->payment_date);
               $filteredPayments[$paymentDate->format('Y')][$paymentDate->format('F')][] = $payment;
           }
- 
+
          // check if has any payments if none, no latest payment returned
          if(count($payment_ids) != null){
              $latest_payment = Payment::find(max($payment_ids));
          }else{
              $latest_payment = null;
          }
- 
+
          $amort_start_parsed = Carbon::parse($loan->amortization->amort_start);
          for ($x = $loan->term_years; $x != 0; $x--){
- 
+
              $targetMonth = 1;
              $targetYear = $amort_start_parsed->copy()->addMonths($x * 12)->format('Y');
- 
- 
+
+
              $filteredPaymentModes = Payment::whereYear('payment_date', $targetYear)
              ->whereMonth('payment_date', $targetMonth)
              ->get();
          }
- 
+
          $raw_loans = Loan::where('member_id' , $loan->member_id)->where('loan_type_id' , $loan->loan_type_id)->with('loanCategory' , 'loanType' , 'loanApplicationStatus' , 'amortization')->whereHas('amortization')
          ->orderBy('created_at', 'desc')
          ->get();
- 
+
          // get the loans of the member for the dropdown
          $memberLoans = [];
          foreach($raw_loans as $raw_loan){
@@ -254,13 +267,13 @@ class LoanController extends Controller
                      array_push($memberLoans, $raw_loan);
                  }
              }
- 
+
              $months = [
                  'January', 'February', 'March', 'April', 'May', 'June',
                  'July', 'August', 'September', 'October', 'November', 'December'
              ];
- 
- 
+
+
          return view('member-views.your-loans.member-ledger-view',
          compact(
              'loan' ,
@@ -274,7 +287,7 @@ class LoanController extends Controller
              'filteredPayments',
              'totalUniquePayments'
          ));
-        
+
         // return view('member-views.your-loans.member-ledger-view');
     }
 }
