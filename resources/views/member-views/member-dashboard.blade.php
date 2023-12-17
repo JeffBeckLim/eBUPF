@@ -147,23 +147,27 @@
                                                                                 $months = $loan->remainingMonths%12
                                                                             @endphp 
                                                                             
-                                                                            @if ($years < 1)
+                                                                            @if ($years <= 1)
                                                                                 <span class="text11-design fw-bold p-0">
                                                                                 {{$loan->remainingMonths}}
                                                                                 </span>  
-                                                                                <span class="text12-design p-0">months to pay</span>
+                                                                                <span class="text12-design p-0">month{{$loan->remainingMonths > 1? 's' : ''}} to pay</span>
                                                                             @elseif ($years > 1)
                                                                                 <span class="text11-design fw-bold p-0">
                                                                                 {{(int)$years}}
-                                                                                <span class="fw-light text12-design p-0">year{{$years>1? 's' : ''}} 
-                                                                                    
+                                                                                <span class="fw-light text12-design p-0">years 
+                                                                                   
+                                                                                
                                                                                 </span>
                                                                                 @if ($months >= 1)
-                                                                                    &
-                                                                                    {{$months}} 
-                                                                                    <span class="text12-design p-0 fw-light">months to pay</span>
-                                                                                    </span>      
+                                                                                &
+                                                                                {{$months}} 
+                                                                                <span class="text12-design p-0 fw-light">month{{$months > 1? 's' : ''}} to pay</span>
+                                                                                </span>      
                                                                                 @endif
+                                                                                
+                                                                                
+                                                                                
                                                                             @endif
 
                                                                            
