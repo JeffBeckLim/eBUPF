@@ -155,10 +155,15 @@
                                                                             @elseif ($years > 1)
                                                                                 <span class="text11-design fw-bold p-0">
                                                                                 {{(int)$years}}
-                                                                                <span class="fw-light text12-design p-0">year &</span>
-                                                                                {{$months}} <span class="text12-design p-0 fw-light">months to pay</span>
-                                                                                </span>  
-                                                                                
+                                                                                <span class="fw-light text12-design p-0">year{{$years>1? 's' : ''}} 
+                                                                                    
+                                                                                </span>
+                                                                                @if ($months >= 1)
+                                                                                    &
+                                                                                    {{$months}} 
+                                                                                    <span class="text12-design p-0 fw-light">months to pay</span>
+                                                                                    </span>      
+                                                                                @endif
                                                                             @endif
 
                                                                            

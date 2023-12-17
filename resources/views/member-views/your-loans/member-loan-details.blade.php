@@ -23,11 +23,11 @@
                                             <div class="fs-5 fw-bolder m-0 lh-1">Loan Details</div>
                                         </div>
                                         <div class="col-6 text-end pe-3">
-                                            <a href="{{route('generateLedger', ['id' => $loan->id])}}" class="btn download-ledger rounded-3" style="border: 1px solid #008f77; color:#005e4e; @if ($payments->isEmpty())
+                                            <a href="{{route('generateLedger', ['id' => $loan->id])}}" class="btn download-ledger rounded-3" style="color:#005e4e; @if ($payments->isEmpty())
                                                 pointer-events: none; color: grey; border: 1px solid grey;
                                              @endif font-size: 14px"
 
-                                            >Download Ledger <i class="bi bi-download"></i></a>
+                                            >Download Ledger <i class="bi bi-file-pdf-fill"></i></a>
                                         </div>
                                     </div>
                                     <label style="color: #878787;"  class="fs-7 fw-bold">Last Updated <span>{{$loan->updated_at->format('F j, Y - h:i A')}}</span></label>
@@ -69,12 +69,9 @@
                                                     @endif
                                                 </span>
                                             </p>
-
-
-
                                         </div>
                                         <div class="col-4">
-                                            <p  class="fs-7 fw-bold m-0" style="color: #00638D;">Outstanding Balance</p>
+                                            <p  class="fs-7 m-0" style="color: #00638D;">Outstanding Balance</p>
                                             <p class="fs-5 fw-bold"><span class="fw-light" style="font-size: small;">Php</span> {{
                                                 number_format(
                                                     $loan->principal_amount + $loan->interest -
@@ -85,6 +82,9 @@
                                                 )
                                             }}
                                             </p>
+                                            <a href="{{route('member.loan.ledger', $loan->id)}}" class="btn btn-outline-dark w-100 fw-bold">
+                                                View Ledger <i class="bi bi-arrow-right"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
@@ -264,7 +264,7 @@
                 </div>
                 {{-- History Card --}}
                 <div class="col-lg-6 col-sm-12  ">
-                    <div class="card shadow-sm h-100" style="border-radius: 15px">
+                    <div class="card shadow-sm h-100 rounded-bottom-0" style="border-radius: 15px">
                         <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
                             <p class="fw-bold m-1 text-center">Payment History</p>
                         </div>
