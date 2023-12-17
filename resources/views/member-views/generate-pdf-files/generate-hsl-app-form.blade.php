@@ -131,7 +131,7 @@
             <span class="toBold" style="padding-left: 12px; font-size: 12px; "> </span>
         </div>
         <div style="display: table-cell; width: 40%;font-size: 15px;">
-            <span class="toBold">Preferred payment period: </span> {{$payment_period}}
+            <span class="toBold">Preferred payment period: </span> {{$payment_period}} @if($payment_period > 1) years @else year @endif
         </div>
     </div>
 
@@ -205,7 +205,7 @@
             <span class="toBold" style="padding-left: 12px; font-size: 12px; "> </span>
         </div>
         <div style="display: table-cell; width: 40%;font-size: 15px;">
-            <span class="toBold">Preferred payment period: </span> {{$co_payment_period}}
+            <span class="toBold">Preferred payment period: </span> {{$co_payment_period}} @if($payment_period > 1) years @else year @endif
         </div>
     </div>
 
@@ -424,7 +424,7 @@
         <div style="display: table-cell; width: 15%; font-weight: bold;">
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($loanAmountGranted, 2, '.', ',')}}</div>
         </div>
     </div>
 
@@ -470,7 +470,9 @@
             </div>
 
             <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                    {{number_format($serviceFee, 2, '.', ',')}}
+                </div>
             </div>
             <div style="display: table-cell; width: 38%;">
 
@@ -485,7 +487,9 @@
             </div>
 
             <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                    {{number_format($mri, 2, '.', ',')}}
+                </div>
             </div>
             <div style="display: table-cell; width: 38%;">
 
@@ -501,7 +505,9 @@
             </div>
 
             <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+                 <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                    {{number_format($prevLoanBalance, 2, '.', ',')}}
+                </div>
             </div>
             <div style="display: table-cell; width: 38%;">
 
@@ -517,22 +523,26 @@
         </div>
 
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
+                {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}
+            @endif
+            </div>
         </div>
         <div style="display: table-cell; width: 38%;">
         </div>
     </div>
-
-    <div style="display: table; width: 100%; margin-top: 15px;">
+    <div style="display: table; width: 100%; margin-top: 5px;">
         <div style="display: table-cell; width: 50%; font-size: 14px; font-weight: bold;">
             NET LOAN PROCEEDS
         </div>
         <div style="display: table-cell; width: 15%; font-weight: bold;">
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold;">
-            Php =======================
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($netProceeds, 2, '.', ',')}}</div>
         </div>
     </div>
+
 
     <div style="font-size: 14px; margin-top: 15px;" class="toBold">
         MONTHLY AMORTIZATION:
@@ -547,7 +557,9 @@
         </div>
 
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-            Php<div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+            Php<div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                {{number_format($monthlyPrincipalAmort, 2, '.', ',')}}
+            </div>
         </div>
         <div style="display: table-cell; width: 38%;">
         </div>
@@ -562,12 +574,15 @@
         </div>
 
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;"></div>
+            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                {{number_format($monthlyInterestAmort, 2, '.', ',')}}
+            </div>
         </div>
         <div style="display: table-cell; width: 38%;">
         </div>
     </div>
-    <div style="display: table; width: 100%; margin-top: 23px;">
+
+    <div style="display: table; width: 100%; margin-top: 8px;">
         <div style="display: table-cell; width: 7%; font-size: 14px; font-weight: bold;">
 
         </div>
@@ -576,14 +591,16 @@
         </div>
 
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-            Php &nbsp;&nbsp;&nbsp;&nbsp; ====================
+            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 18px;">
+                {{number_format($monthlyAmort, 2, '.', ',')}}
+            </div>
         </div>
         <div style="display: table-cell; width: 38%;">
         </div>
     </div>
 
     <div style="font-size: 14px; margin-top: 20px;" class="toBold">
-        AMORTIZATION PERIOD: ______________________________________________________
+        AMORTIZATION PERIOD: <span style="width: 100%; border-bottom: 1px solid black;">{{ $amortStart }} - {{ $amortEnd }}</span>
     </div>
 
     <div style="border-bottom: 2px solid black; margin-top: 20px; margin-bottom: 20px;"></div>
@@ -718,7 +735,7 @@ bottom: 0;">
 
     <div style="display: table; width: 100%; margin-top: 5px; font-size: 15px">
         <div style="display: table-cell; width: 35%;">
-            Php: {{$amount_requested}}
+            Php: {{number_format($amount_requested, 2, '.',',')}}
         </div>
         <div style="display: table-cell; width: 35%;">
 
@@ -733,7 +750,22 @@ bottom: 0;">
             @if($middle_initial != null)
             {{$middle_initial}}.
             @endif
-            {{$lastname}}</u>, an employee of Bicol University and a member of the BU Provident Fund, promise to pay to the BUPF the sum of _____________________________________________________ (Php ______________________) in monthly installments of Php ________________ each starting on ____________________ and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of _______% per annum until fully paid, subject to the terms and conditions prescribed by the BUPF.
+            {{$lastname}}</u>, an employee of Bicol University and a member of the BU Provident Fund, promise to pay to the BUPF the sum of
+            <span style="border-bottom: 1px solid black">
+                {{$loanAmountWord}}
+            </span> (Php
+            <span style="border-bottom:1px solid black;">
+                {{number_format($loan->principal_amount + $loan->interest, 2, '.',',')}}
+            </span> ) in monthly installments of Php
+            <span style="border-bottom: 1px solid black;">
+                {{number_format($monthlyAmort, 2, '.',',')}}
+            </span> each starting on
+            <span style="border-bottom: 1px solid black;">
+                {{$amortStart}}
+            </span> and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of
+            <span style="border-bottom: 1px solid black">
+                9%
+            </span> per annum until fully paid, subject to the terms and conditions prescribed by the BUPF.
     </div>
 
     <div style="margin-top: 10px; font-size: 14px;text-align: justify;">
