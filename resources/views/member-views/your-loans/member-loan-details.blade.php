@@ -265,10 +265,37 @@
                 {{-- History Card --}}
                 <div class="col-lg-6 col-sm-12  ">
                     <div class="card shadow-sm h-100" style="border-radius: 15px">
-                        <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
-                            <p class="fw-bold m-1 text-center">Payment History</p>
+                        {{-- <div style="border-radius: 14px 14px 0 0; background-color: #A2ABFF;">
+                            <p class="fw-bold m-1 text-center fs-5">Payment History</p>
+                        </div> --}}
+                        <div class="d-flex">
+                            <!-- Content preceding the dropdown -->
+                            <div>
+                                <div style="margin: 15px 0 0 15px;">
+                                    <p class="fw-bold m-1 text-center fs-5">Payment History</p>
+                                </div>
+                            </div>
+
+                            <!-- This div holds the dropdown and is positioned at the end -->
+                            <div class="ms-auto" style="margin: 10px 20px 0 0;">
+                                @if(!empty($years))
+                                    <form action="{{ route('loan.details', ['id' => $loan->id]) }}" method="GET">
+                                        <select class="form-select" name="year" id="year" style="width: 150px;" onchange="this.form.submit()">
+                                            <option value="" disabled>Year</option>
+                                            @foreach($years as $year)
+                                                <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>
+                                                    {{ $year }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </form>
+                                @endif
+                            </div>
+
+
                         </div>
-                        <div class="mt-1 mx-4">
+
+                        <div class="mt-1 mx-2">
                             @if ($payments->isEmpty())
                             <div style="height: 660px;">
                                 <div class="d-flex justify-content-center align-content-center">
@@ -277,21 +304,25 @@
                                 <p class="text-center">No transaction</p>
                             </div>
                             @else
-                            <div style=" overflow-y: auto;">
-                                <div class="table-responsive">
+                            <div style="overflow-y: auto;">
+                                <div class="table-responsive mt-3">
                                     <table class="table fs-7">
                                         <thead>
                                             <tr>
                                                 <th scope="col">OR No.</th>
                                                 <th scope="col">Date</th>
+                                                <th scope="col">Beg. Bal.</th>
                                                 <th scope="col">Principal</th>
                                                 <th scope="col">Interest</th>
-                                                <th scope="col">Total</th>
-                                                <th></th>
+                                                <th scope="col">End. Bal.</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($payments->sortByDesc('created_at') as $payment)
+                                            @php
+                                                $runningBalance = $loan->principal_amount + $loan->interest;
+                                            @endphp
+                                            @foreach ($payments->sortByDesc('created_at')->reverse() as $payment)
+
                                             <tr>
                                                 <td>
                                                     {{ $payment->or_number }}
@@ -300,20 +331,25 @@
                                                     {{ date('M Y', strtotime($payment->payment_date)) }}
                                                 </td>
                                                 <td>
-                                                    <span class="text-muted">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}
+                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($runningBalance, 2, '.', ',') }}
                                                 </td>
                                                 <td>
-                                                    <span class="text-muted">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}
+                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}
                                                 </td>
                                                 <td>
-                                                    <span class="text-muted">Php</span> {{ number_format($payment->principal + $payment->interest, 2, '.', ',') }}
+                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}
                                                 </td>
-                                                <td>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#paymentTransaction">
+                                                @php
+                                                    $runningBalance -= ($payment->principal + $payment->interest);
+                                                @endphp
+                                                <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($runningBalance, 2, '.', ',') }}</td>
+                                                {{-- <td>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#payment{{$payment->id}}">
                                                         <i class="bi bi-info-circle-fill fs-6" style="color: #00638D"></i>
                                                     </a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
+                                            @include('member-views.your-loans.payment-details-modal')
                                         @endforeach
                                         </tbody>
                                     </table>
