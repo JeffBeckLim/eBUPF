@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use App\Models\PenaltyPayment;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class LoanController extends Controller
 {
@@ -24,7 +25,7 @@ class LoanController extends Controller
         }
 
         $memberID = Auth::user()->member->id;
-    
+
         // Get all loans of the member with related data
         $loans = Loan::where('member_id', $memberID)
         ->with('loanType', 'payment', 'amortization', 'loanApplicationStatus' , 'penalty')
@@ -85,8 +86,10 @@ class LoanController extends Controller
     }
 
     public function displayLoanDetails($id){
+        $selectedYear = request('year');
+
         $loan = Loan::where('id', $id)->with('penalty')->first();
-        
+
         if($loan == null){
             abort(403);
         }
@@ -103,20 +106,39 @@ class LoanController extends Controller
         }
 
         $payments = $loan->payment;
+        $years = [];
+        foreach ($payments as $payment) {
+            $year = Carbon::parse($payment->payment_date)->format('Y');
+            if (!in_array($year, $years)) {
+                array_push($years, $year);
+            }
+        }
+        if (count($years) == 0) {
+            array_push($years, Carbon::now()->format('Y'));
+        }
+
+        $payments = $loan->payment();
+        if ($selectedYear) {
+            $payments->whereYear('payment_date', $selectedYear);
+        }
+        $payments = $payments->get();
 
         // get sum of penalty payment
         $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
         ->orderBy('created_at', 'desc')
         ->get();
-        
+
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
-        
+
 
         return view('member-views.your-loans.member-loan-details',
             compact(
                 'loan',
                 'payments',
-                'sumPenaltyPayments'
+                'sumPenaltyPayments',
+                'years'
             ));
     }
+
+
 }
