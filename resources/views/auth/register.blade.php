@@ -28,7 +28,7 @@
                 @enderror
 
                 <div class="col-12">
-                    <label for="email" class="form-label text-dark">Email</label>
+                    <label for="email" class="form-label text-dark">Bicol University Email</label>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     <span id="emailDomainValidation" class="invalid-feedback" style="display: none;">
                         <strong>Please use the domain @bicol-u.edu.ph</strong>

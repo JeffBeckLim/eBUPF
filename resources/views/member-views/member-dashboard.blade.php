@@ -151,7 +151,7 @@
                                                                                 <span class="text11-design fw-bold p-0">
                                                                                 {{$loan->remainingMonths}}
                                                                                 </span>  
-                                                                                <span class="text12-design p-0">months to pay</span>
+                                                                                <span class="text12-design p-0">month{{$loan->remainingMonths>1? 's': ''}} to pay</span>
                                                                             @elseif ($years > 1)
                                                                                 <span class="text11-design fw-bold p-0">
                                                                                 {{(int)$years}}
