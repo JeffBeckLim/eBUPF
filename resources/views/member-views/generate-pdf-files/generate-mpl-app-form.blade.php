@@ -527,7 +527,7 @@
             ------------------------
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($loanAmountGranted, 2, '.', ',')}}</div>
         </div>
     </div>
 
@@ -566,7 +566,7 @@
             <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($mri, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -587,7 +587,7 @@
             <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($prevLoanBalance, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -608,7 +608,7 @@
             <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($serviceFee, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -629,7 +629,11 @@
             <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">
+                @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
+                    {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}
+                @endif
+            </div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -647,7 +651,7 @@
             ------------------------------------------------
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($netProceeds, 2, '.', ',')}}</div>
         </div>
     </div>
 
@@ -665,13 +669,13 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
-            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($monthlyPrincipalAmort, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold; font-size: 14px;">
-            Start <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Start <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ $amortStart }}</div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -683,13 +687,13 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
-            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($monthlyInterestAmort, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold; font-size: 14px;">
-            End <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            End <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ $amortEnd }}</div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -701,7 +705,7 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-size: 14px; font-weight: bold;">
-            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($monthlyAmort, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -738,13 +742,17 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[0]['yearlyBalance']) ? number_format($yearlyBalances[0]['yearlyBalance'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[1]['yearlyBalance']) ? number_format($yearlyBalances[1]['yearlyBalance'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
         </div>
@@ -755,13 +763,17 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[0]['yearlyInterest']) ? number_format($yearlyBalances[0]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[1]['yearlyInterest']) ? number_format($yearlyBalances[1]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
         </div>
@@ -771,13 +783,17 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[0]['yearlyBalance']) ? number_format($yearlyBalances[0]['yearlyBalance'] + $yearlyBalances[0]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[1]['yearlyBalance']) ? number_format($yearlyBalances[1]['yearlyBalance'] + $yearlyBalances[1]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 15%; font-size: 14px; font-weight: bold;">
         </div>
@@ -799,7 +815,9 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Principal <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[3]['yearlyBalance']) ? number_format($yearlyBalances[3]['yearlyBalance'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -815,7 +833,9 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Interest <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[3]['yearlyInterest']) ? number_format($yearlyBalances[3]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -831,7 +851,9 @@
 
         </div>
         <div style="display: table-cell; width: 30%; font-size: 14px; font-weight: bold;">
-            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Total <div style="width: 70%; border-bottom: 1px solid black;float: right; height: 20px;">
+                {{ isset($yearlyBalances[2]['yearlyBalance']) ? number_format($yearlyBalances[2]['yearlyBalance'] + $yearlyBalances[2]['yearlyInterest'], 2, '.', ',') : ' ' }}
+            </div>
         </div>
         <div style="display: table-cell; width: 10%; font-weight: bold;">
 
@@ -984,7 +1006,20 @@
     </div>
 
     <div style="margin-top: 10px; font-size: 13px;text-align: justify; line-height: 1.2; text-indent: 2rem;">
-        For value received, I <u>{{$firstname}} {{$middle_initial}}. {{$lastname}}</u> (the "Principal Borrower"), an employee of Bicol University (the "University") and a member of the BU Provident Fund, Inc. (the "BUPFI"), promise to pay to the BU PFI the sum of the Philippine PESOS: __________________________________ (Php ______________________) in monthly installments of Php ________________ each starting on ____________________ and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of _______% per annum until fully paid, subject to the terms and conditions prescribed by the BU PFI.
+        For value received, I <u>{{$firstname}} {{$middle_initial}}. {{$lastname}}</u> (the "Principal Borrower"), an employee of Bicol University (the "University") and a member of the BU Provident Fund, Inc. (the "BUPFI"), promise to pay to the BU PFI the sum of the Philippine PESOS:
+        <span style="border-bottom: 1px solid black">
+            {{$loanAmountWord}}
+        </span> (Php
+        <span style="border-bottom:1px solid black;">
+            {{number_format($loan->principal_amount + $loan->interest, 2, '.',',')}}
+        </span>
+        ) in monthly installments of Php <span style="border-bottom: 1px solid black;">
+            {{number_format($monthlyAmort, 2, '.',',')}}
+        </span> each starting on <span style="border-bottom: 1px solid black;">
+            {{$amortStart}}
+        </span> and thereafter on every corresponding date of the succeeding agreed installment period with interest thereon of <span style="border-bottom: 1px solid black">
+            6%
+        </span> per annum until fully paid, subject to the terms and conditions prescribed by the BU PFI.
     </div>
 
     <div style="margin-top: 7px; font-size: 13px;text-align: justify; line-height: 1.2; text-indent: 2rem;">

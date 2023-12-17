@@ -124,7 +124,7 @@ class PDFController extends Controller{
         $middlename = $member->middlename;
         $middle_initial = substr($middlename, 0, 1);
         $initial = strtoupper($middle_initial);
-/*
+
         $interestRate = 0.06;
         $amount = intval($loan->original_principal_amount);
         $termYears = $loan->term_years;
@@ -164,7 +164,23 @@ class PDFController extends Controller{
         //total months
         $totalMonths = $termYears * 12;
 
-        dd($yearlyBalances[0]); */
+        // Call for 1 to 3 years yearly Balance
+   // dd($yearlyBalances[0]);
+
+        $mri = $loan->adjustment->mri;
+        $prevLoanBalance = $loan->adjustment->previous_loan_balance;
+        $serviceFee = 0.00;
+
+        $netProceeds =
+            $loan->principal_amount -
+            $loan->adjustment->interest_first_yr-$loan->adjustment->housing_service_fee-$loan->adjustment->mri -
+            $loan->adjustment->previous_loan_balance +
+            $loan->adjustment->interest_rebate -
+            $loan->adjustment->previous_penalty;
+
+        $amortStart = Carbon::parse($loan->amortization->amort_start)->format('M Y');
+        $amortEnd = Carbon::parse($loan->amortization->amort_end)->format('M Y');
+        $loanAmountWord = $this->numberToWord($loan->principal_amount + $loan->interest);
 
         $data = [
             'currentdate' => date('Y-m-d'),
@@ -196,6 +212,20 @@ class PDFController extends Controller{
 
             'witnesses' => $witnessNames,
 
+            // Loan computation
+            'loanAmountGranted' => $loan->principal_amount,
+            'mri' => $mri,
+            'prevLoanBalance' => $prevLoanBalance,
+            'serviceFee' => $serviceFee,
+            'netProceeds' => $netProceeds,
+            'monthlyAmort' => $monthlyAmort,
+            'monthlyPrincipalAmort' => $monthlyPrincipalAmort,
+            'monthlyInterestAmort' => $monthlyInterestAmort,
+            'amortStart' => $amortStart,
+            'amortEnd' => $amortEnd,
+            'yearlyBalances' => $yearlyBalances,
+            'loan' => $loan,
+            'loanAmountWord' => $loanAmountWord,
         ];
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-mpl-app-form', $data)->setPaper('legal', 'portrait');
@@ -248,6 +278,65 @@ class PDFController extends Controller{
         $middle_initial = substr($middlename, 0, 1);
         $initial = strtoupper($middle_initial);
 
+        $interestRate = 0.09;
+        $amount = intval($loan->original_principal_amount);
+        $termYears = $loan->term_years;
+
+         // Calculate yearly principal balance
+         $yearlyPrincipalBalance = $amount / $termYears;
+         $yearlyBalance = $amount;
+         $totalInterest = 0;
+
+         // Initialize an array to store the yearly balances
+         $yearlyBalances = [];
+
+        for ($year = 0; $year < $termYears; $year++) {
+            $yearlyInterest = $yearlyBalance * $interestRate;
+            $totalInterest += $yearlyInterest;
+
+            $yearlyBalances[$year] = [
+                'yearlyBalance' => $yearlyBalance,
+                'yearlyInterest' => $yearlyInterest,
+            ];
+            $yearlyBalance -= $yearlyPrincipalBalance;
+        }
+
+        //dd($yearlyBalances);
+
+        $totalInterestAndPrincipal = $amount + $totalInterest;
+
+        //monthly amortization
+        $monthlyAmort = $totalInterestAndPrincipal / ($termYears * 12);
+
+        //monthly principal amortization without interest
+        $monthlyPrincipalAmort = $amount / ($termYears * 12);
+
+        //monthly principal Interest amortization
+        $monthlyInterestAmort = $totalInterest / $termYears / 12;
+
+        //total months
+        $totalMonths = $termYears * 12;
+
+        // Call for 1 to 3 years yearly Balance
+   // dd($yearlyBalances[0]);
+
+        $mri = $loan->adjustment->mri;
+        $prevLoanBalance = $loan->adjustment->previous_loan_balance;
+        //Service fee is 1% of the principal amount
+        $serviceFee =$loan->principal_amount * 0.01;
+
+        $netProceeds =
+            $loan->principal_amount -
+            $loan->adjustment->interest_first_yr-$loan->adjustment->housing_service_fee-$loan->adjustment->mri -
+            $loan->adjustment->previous_loan_balance +
+            $loan->adjustment->interest_rebate -
+            $loan->adjustment->previous_penalty;
+
+        $amortStart = Carbon::parse($loan->amortization->amort_start)->format('M Y');
+        $amortEnd = Carbon::parse($loan->amortization->amort_end)->format('M Y');
+
+        $loanAmountWord = $this->numberToWord($loan->principal_amount + $loan->interest);
+
         $data = [
             'currentdate' => date('Y-m-d'),
             'lastname' => $member->lastname,
@@ -280,12 +369,98 @@ class PDFController extends Controller{
 
             'witnesses' => $witnessNames,
 
+            // Loan computation
+            'loanAmountGranted' => $loan->principal_amount,
+            'mri' => $mri,
+            'prevLoanBalance' => $prevLoanBalance,
+            'serviceFee' => $serviceFee,
+            'netProceeds' => $netProceeds,
+            'monthlyAmort' => $monthlyAmort,
+            'monthlyPrincipalAmort' => $monthlyPrincipalAmort,
+            'monthlyInterestAmort' => $monthlyInterestAmort,
+            'amortStart' => $amortStart,
+            'amortEnd' => $amortEnd,
+            'yearlyBalances' => $yearlyBalances,
+            'loan' => $loan,
+            'loanAmountWord' => $loanAmountWord,
+
         ];
 
         $pdf = PDF::loadView('member-views.generate-pdf-files.generate-hsl-app-form', $data)->setPaper('legal', 'portrait');
 
         $fileName = "{$member->lastname} HL Application Form.pdf";
         return $pdf->download($fileName);
+    }
+
+    public function numberToWord($num = '')
+    {
+        $num    = (string) ((int) $num);
+
+        if ((int) ($num) && ctype_digit($num)) {
+            $words  = array();
+
+            $num    = str_replace(array(',', ' '), '', trim($num));
+
+            $list1  = array(
+                '', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+                'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+                'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+            );
+
+            $list2  = array(
+                '', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty',
+                'seventy', 'eighty', 'ninety', 'hundred'
+            );
+
+            $list3  = array(
+                '', 'thousand', 'million', 'billion', 'trillion',
+                'quadrillion', 'quintillion', 'sextillion', 'septillion',
+                'octillion', 'nonillion', 'decillion', 'undecillion',
+                'duodecillion', 'tredecillion', 'quattuordecillion',
+                'quindecillion', 'sexdecillion', 'septendecillion',
+                'octodecillion', 'novemdecillion', 'vigintillion'
+            );
+
+            $num_length = strlen($num);
+            $levels = (int) (($num_length + 2) / 3);
+            $max_length = $levels * 3;
+            $num    = substr('00' . $num, -$max_length);
+            $num_levels = str_split($num, 3);
+
+            foreach ($num_levels as $num_part) {
+                $levels--;
+                $hundreds   = (int) ($num_part / 100);
+                $hundreds   = ($hundreds ? '' . $list1[$hundreds] . ' Hundred ' . ($hundreds == 1 ? ' ' : '') . '' : '');
+                $tens       = (int) ($num_part % 100);
+                $singles    = ' ';
+
+                if ($tens < 20) {
+                    $tens = ($tens ? '' . $list1[$tens] . '' : '');
+                } else {
+                    $tens = (int) ($tens / 10);
+                    $tens = '' . $list2[$tens] . ' ';
+                    $singles = (int) ($num_part % 10);
+                    $singles = ' ' . $list1[$singles] . ' ';
+                }
+                $words[] = $hundreds . $tens . $singles . (($levels && (int) ($num_part)) ? ' ' . $list3[$levels] . ' ' : '');
+            }
+            $commas = count($words);
+            if ($commas > 1) {
+                $commas = $commas - 1;
+            }
+
+            $words  = implode(', ', $words);
+
+            $words  = trim(str_replace(' ,', ',', ucwords($words)), ', ');
+            if ($commas) {
+                $words  = str_replace(',', ' and', $words);
+            }
+
+            return $words;
+        } else if (!((int) $num)) {
+            return 'Zero';
+        }
+        return '';
     }
 
     public function generateInsuranceForm(){
