@@ -284,8 +284,6 @@
                             @else
                                 <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6>
                             @endif
-    
-    
                         </th>
     
                         @php
