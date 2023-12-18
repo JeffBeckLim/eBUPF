@@ -549,7 +549,15 @@ class AdminLoanApplicationController extends Controller
          ]);
     }
 
+    public function showPaySlip($id){
+        if(Auth::user()->user_type != 'admin'){
+            abort(404);
+        }
 
+        // $loan = Loan::where('payslip', $payslip)->first();
+        $loan = Loan::findOrFail($id);
 
+        return view('admin-views.admin-loan-applications-tracking.payslip-view', compact('loan'));
+    }
 
 }

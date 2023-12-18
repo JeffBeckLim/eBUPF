@@ -358,6 +358,10 @@ class LoanApplicationController extends Controller
             'term_years'=> ['required', 'numeric', 'min:1', 'max:5'],
             'witness_name_1'=>'nullable',
             'witness_name_2'=>'nullable',
+
+            'payslip'=>'nullable|image|mimes:jpeg,png|max:2048',
+            'basic_salary'=> ['required', 'numeric', 'min:1'],
+
         ]);
 
         $previous_loan_balance = 0;
@@ -523,6 +527,9 @@ class LoanApplicationController extends Controller
             'original_principal_amount'=>$formFields['principal_amount'],
             'term_years'=>$formFields['term_years'],
             'adjustment_id'=>$adjustment['id'],
+
+            'basic_salary'=>$formFields['basic_salary'],
+            // 'payslip'=>$formFields['payslip'],
         ]);
         
         $parsedDate = Carbon::parse($loan->created_at);
@@ -580,6 +587,14 @@ class LoanApplicationController extends Controller
             $user->member->additional_loan = 0;
             $user->member->save();
         }
+
+        if($request->hasFile('payslip')) {
+            $formFields['payslip'] = $request->file('payslip')->store('payslip', 'public');
+                    
+            $loan->payslip = $formFields['payslip'];
+            $loan->save();
+        }
+
 
         return view('member-views.mpl-application-form.confirmation');
     }

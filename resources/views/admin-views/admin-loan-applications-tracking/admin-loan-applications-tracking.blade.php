@@ -361,12 +361,23 @@
                                 </button>
                             </td>
                             <td class="text-center">
-
+                                {{-- <img src="{{asset('storage/'.$loan->loan->payslip)}}" alt=""> --}}
                                 <button class="btn grow-on-hover" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{$loan->loan->deleted_at ? 'disabled' : ''}}>
                                     <i class="bi bi-three-dots fs-4 icon"></i>
                                   </button>
                                   <ul class="dropdown-menu">
                                     {{-- SEE INCLUDED MODALS BELOW --}}
+                                    <li>
+                                        @if ($loan->loan->payslip == null)
+                                        <a type="button" href="#" class="dropdown-item disabled">
+                                            No Payslip Included  
+                                        </a>                
+                                        @else 
+                                            <a type="button" href="{{route('admin.loan.applications.tracking.payslip', $loan->loan->id)}}" class="dropdown-item" target="_blank">
+                                                View Pay Slip
+                                            </a>
+                                        @endif
+                                    </li>
                                     <li>
                                         <a type="button" data-bs-toggle="modal" data-bs-target="#stateModal{{$loan->loan->id}}" class="dropdown-item">
                                             Edit State

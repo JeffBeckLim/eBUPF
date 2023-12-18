@@ -33,7 +33,7 @@
 
         <p class="text1-design mt-2">Loan Details</p>
 
-        <form action="/member/loan-application/2" method="POST" id="submitHLForm">
+        <form action="/member/loan-application/2" method="POST" id="submitHLForm" enctype="multipart/form-data">
             @csrf
             <div id="loanForm">
 
@@ -118,6 +118,29 @@
                     <div id="validationMyWitness2FeedBack" class="invalid-feedback">
                         Witnesses, co-borrowers, and principal borrower (you) must not be the same person. Please Double check the names entered.
                       </div>
+                </div>
+
+
+                <p class="text1-design pt-4">Other requirements</p>
+                <div class="form-group">
+                    <label for="basic_salary">Basic Salary</label>
+                    <input type="number" class="form-control mt-2 {{ $errors->has('witness_name_1') ? 'is-invalid' : '' }}" id="basic_salary" name="basic_salary" placeholder="Pleases refer to your latest payslip" value="{{old('basic_salary')}}" />
+                    @error('basic_salary')
+                        <h6 class="text-danger">{{$message}}</h6>
+                    @enderror
+                    <div id="validationBasicSalaryFeedBack" class="invalid-feedback">
+                        This field is required, please provide a valid value.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="payslip">A Clear Photo of your Recent Payslip</label>
+                    <input type="file" class="from-upload form-control mt-2" id="payslip" name="payslip"  accept=".png, .jpg, .jpeg" />
+                    @error('payslip')
+                        <h6 class="text-danger">{{$message}}</h6>
+                    @enderror
+                    <div id="validationBasicSalaryFeedBack" class="invalid-feedback">
+                        This field is required, please provide a valid value.
+                    </div>
                 </div>
 
                 <div class="row d-flex align-items-center justify-content-center">

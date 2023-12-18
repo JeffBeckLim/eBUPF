@@ -284,6 +284,8 @@
                             @else
                                 <h6 style="font-size: 12px" class="m-0">Loan type: <br>not specified.</h6>
                             @endif
+    
+    
                         </th>
     
                         @php
@@ -514,37 +516,5 @@ toggleButton.addEventListener('click', function() {
    
   }
 });
-
-
-
-
-
-
-
-
-function hideLastColumns(tableId, numOfColumnsToHide) {
-  const table = document.getElementById(tableId);
-  if (!table) {
-    console.error('Table not found');
-    return;
-  }
-
-  const rows = table.rows;
-  const totalColumns = rows[0].cells.length;
-
-  // Loop through the rows and hide columns starting from the last
-  for (let i = 0; i < rows.length; i++) {
-    for (let j = totalColumns - 1; j >= totalColumns - numOfColumnsToHide; j--) {
-      if (rows[i].cells[j]) {
-        rows[i].cells[j].style.display = 'none';
-      }
-    }
-  }
-}
-
-// Usage: Call the function with table ID and number of columns to hide
-const tableId = 'myTable'; // Change this to your table ID
-const numOfColumnsToHide = 2; // Change this to the number of columns you want to hide
-hideLastColumns(tableId, numOfColumnsToHide);
 </script>
 @endsection

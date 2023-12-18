@@ -206,6 +206,7 @@ use App\Models\SessionLog;
 
     Route::get('/admin/loan-applications-tracking/{loan_type}/filter', [LoanApplicationTrackingFilterController::class, 'show'])->name('admin.loan.applications.tracking.filter')->middleware('auth','admin.access');
 
+    Route::get('show/payslip/{payslip_id}',[AdminLoanApplicationController::class, 'showPaySlip'])->name('admin.loan.applications.tracking.payslip')->middleware('auth','admin.access');
 
     // add status in regards to the application process
     Route::post('admin/loan-application/status/{loan_id}', [AdminLoanApplicationController::class, 'createLoanApplicationStatus'])->name('create.status')->middleware('auth','admin.access');

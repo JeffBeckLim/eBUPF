@@ -31,8 +31,11 @@ class Loan extends Model
         // 'penalty_id',
         'deleted_at',
         'last_edited_by',
+        
+        'reason_for_cancel',
 
-        'reason_for_cancel'
+        'payslip',
+        'basic_salary'
     ];
     //belongs to one member
     public function member()
