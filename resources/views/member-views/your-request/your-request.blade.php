@@ -5,12 +5,12 @@
 <main>
 
     <div class="container-fluid">
-        
+
         <div class="row  d-flex justify-content-center">
 
             <div class="col-lg-8 ms-2">
 
-                
+
 
                 <div class="bg-white rounded border mt-2 p-2">
 
@@ -18,23 +18,23 @@
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         {{session('fail')}}
                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                     </div>    
+                     </div>
                     @endif
 
                     @if (session('passed'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{session('passed')}}
                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                     </div>    
+                     </div>
                     @endif
 
                     @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{session('success')}}
                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                     </div>    
+                     </div>
                     @endif
-                    
+
 
                     <div class="row my-3 g-0 p-3 text-center">
                         <p class="fs-5 fw-bold">Outgoing Requests</p>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="row g-0 table-responsive ">
                         @if (count($cb_withLoans) != 0)
-                        
+
                         <table id="outgoing-request-table" class="table table-borderless">
                             <thead>
                                 <tr style="font-size: 14px">
@@ -78,7 +78,7 @@
                                     <th scope="col">Co-Borrower (CB)</th>
                                     <th scope="col">CB Status</th>
                                     <th></th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,18 +89,18 @@
                                             <i class="bi bi-info-circle-fill" style="color: #00638D"></i>
                                         </a>
                                     </td>
-                                    
+
                                     <td class="align-middle" style="width: 25%">
                                         <div class="p-1" >
                                             <p class=" fw-bold mb-0" style="font-size: 12px">{{$cb_withLoan->loan->loanType->loan_type_name}}</p>
                                             <p class=" mb-1" style="font-size: 12px">Code: <span class="fw-bold">{{$cb_withLoan->loan->loan_code}}</span></p>
                                             <p class="fs-7 mb-0"> Php {{number_format($cb_withLoan->loan->principal_amount, 2, '.',',')}}</p>
                                             @php
-                                            
+
                                             $time = \Carbon\Carbon::parse($cb_withLoan->loan->created_at);
                                             $now = \Carbon\Carbon::now();
-                                            $diff = $now->shortAbsoluteDiffForHumans($time); 
-                                                                                        
+                                            $diff = $now->shortAbsoluteDiffForHumans($time);
+
                                             @endphp
                                             <p class="fw-bold" style="color: #00638D; font-size: 12px;">{{$diff}} ago</p>
                                             {{-- <p class="fs-7">{{date('F d, Y - h:i:s A', strtotime($cb_withLoan->loan->created_at))}}</p> --}}
@@ -110,7 +110,7 @@
                                         <div class="d-flex align-items-center">
                                             <div class="row  w-100 m-0 p-0">
                                                 <div class="col-lg-3  m-0 p-0 text-center">
-                                                    <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture"  style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle img-fluid"> 
+                                                    <img src="{{ asset(($cb_withLoan->member->profile_picture ? 'storage/'.$cb_withLoan->member->profile_picture : 'assets/no_profile_picture.jpg')) }}" alt="default picture"  style="height: 40px; width: 40px; object-fit: cover;"  class="rounded-circle img-fluid">
                                                 </div>
                                                 <div class="col-lg-9 ps-lg-2  m-0 p-0">
                                                     <p class="mb-0 fs-7 fw-bold">{{$cb_withLoan->member->firstname}} {{$cb_withLoan->member->lastname}}</p>
@@ -118,7 +118,7 @@
                                                     {{-- <p class="fs-7">ID: {{$cb_withLoan->member->id}}</p> --}}
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </td>
                                     <td class="align-middle" style="width: 15%">
@@ -133,8 +133,8 @@
                                         @endif
                                         {{-- =============================================================== --}}
                                         @if ($cb_withLoan->loan->is_viewed != null)
-                                        <p class="text-secondary m-0" style="font-size: x-small"><i class="bi bi-eye"></i> 
-                                        
+                                        <p class="text-secondary m-0" style="font-size: x-small"><i class="bi bi-eye"></i>
+
                                             {{ Carbon\Carbon::parse($cb_withLoan->loan->is_viewed)->format('F j, Y g:i A') }}
                                         </p>
                                         @endif
@@ -144,7 +144,7 @@
                                         @php
                                             $statuses_confirm = App\Models\LoanApplicationStatus::where('loan_id',$cb_withLoan->loan->id)->get();
                                         @endphp
-                                        
+
                                         @if($cb_withLoan->loan->deleted_at != null)
                                              <p style="font-size: 12px">Loan Application Cancelled.</p>
                                         @elseif ($cb_withLoan->accept_request == '')
@@ -165,7 +165,7 @@
                                         @elseif ($cb_withLoan->accept_request == 0)
                                             <div class="dropdown mt-2 ">
                                                 <button class="btn  rounded-2 " type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                                >   
+                                                >
                                                     <i style="font-size: 20px" class="bi bi-three-dots"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
@@ -177,7 +177,7 @@
                                                         <a class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}">
                                                         Cancel Application</a>
                                                     </li>
-                                                  
+
                                                 </ul>
                                             </div>
                                         @elseif ($cb_withLoan->accept_request == 1)
@@ -202,24 +202,24 @@
 
                                                     </ul>
                                                 </div>
-                                            @else 
+                                            @else
                                                 <h6 class="mt-2" style=" font-size: 11px">Loan Submitted</h6>
                                             @endif
-                                            
-                                        @else 
+
+                                        @else
                                             <a style="font-size: 14px" data-bs-toggle="modal" data-bs-target="#cancelModal{{$cb_withLoan->loan->id}}" href="" type="button" class="btn w-100 btn-outline-bu2 fw-bold rounded-4 mt-2 {{ $cb_withLoan->accept_request == '1' ? 'disabled' : '' }}">
                                                 Cancel
                                             </a>
                                         @endif
-                                        
+
                                     </td>
-                                   
+
                                 </tr>
                                 @include('member-views.your-request.modal-cancel-request')
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
 
                         @else
                         <div class="border text-center p-5 mt-3  text-secondary">
@@ -249,7 +249,7 @@
     ordering: false,
     paging: false
    });
- 
+
  // #myInput is a <input type="text"> element
  $('#myInput').on( 'keyup', function () {
      table.search( this.value ).draw();

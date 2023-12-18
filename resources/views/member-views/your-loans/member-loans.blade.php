@@ -2,7 +2,7 @@
 
 @section('content')
 
-<main class=" ms-2">
+<main class="ms-2">
     <div class="container-fluid">
         <div class="row mt-2">
             <div class="col p-0">

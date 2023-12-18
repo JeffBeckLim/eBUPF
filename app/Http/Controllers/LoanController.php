@@ -89,15 +89,18 @@ class LoanController extends Controller
         $selectedYear = request('year');
 
         $loan = Loan::where('id', $id)->with('penalty')->first();
+
         if ($selectedYear == null) {
-            // Check if amort_start is not empty and convert it to a Carbon date object
-            if (!empty($loan->amortization->amort_start)) {
-                $selectedYear = Carbon::parse($loan->amortization->amort_start)->format('Y');
+            $latestPayment = $loan->payment()->latest('payment_date')->first();
+
+            // Check if $latestPayment is not null before accessing its properties
+            if ($latestPayment) {
+                $selectedYear = Carbon::parse($latestPayment->payment_date)->format('Y');
             } else {
-                // Default to current year if amort_start is empty
-                $selectedYear = Carbon::now()->format('Y');
+                $selectedYear = Carbon::parse($loan->amortization->amort_start)->format('Y');
             }
         }
+
         if($loan == null){
             abort(403);
         }
@@ -130,11 +133,6 @@ class LoanController extends Controller
         }
 
 
-        $payments = $loan->payment();
-        if ($selectedYear) {
-            $payments->whereYear('payment_date', $selectedYear);
-        }
-        $payments = $payments->get();
 
         // get sum of penalty payment
         $penalty_payments = PenaltyPayment::whereIn('penalty_id', $loan->penalty->pluck('id'))
@@ -143,13 +141,50 @@ class LoanController extends Controller
 
         $sumPenaltyPayments = $penalty_payments->sum('penalty_payment_amount');
 
+        $payments = $loan->payment;
+
+        $beginningBalance = [];
+        $endingBalance = [];
+
+        $cumulativePrincipal = $loan->principal_amount;
+        $cumulativeInterest = $loan->interest;
+
+        // Loop through payments to calculate balances
+        foreach ($payments as $index => $payment) {
+            $paymentYear = date('Y', strtotime($payment->payment_date));
+
+            // Calculate balances based on the payment year
+            $beginningBalance[$paymentYear] = $cumulativePrincipal + $cumulativeInterest;
+            $endingBalance[$paymentYear] = $beginningBalance[$paymentYear] - ($payment->principal + $payment->interest);
+
+            // Update cumulative balances
+            $cumulativePrincipal -= $payment->principal;
+            $cumulativeInterest -= $payment->interest;
+
+            // Assign balances
+            $payment->year = $paymentYear;
+            $payment->selected_year_beginning_balance = $beginningBalance[$paymentYear];
+            $payment->selected_year_ending_balance = $endingBalance[$paymentYear];
+        }
+
+        // Store balances for all years
+        $allYearBalances = [];
+        foreach ($payments as $payment) {
+            $allYearBalances[] = [
+                'year' => $payment->year,
+                'beginning_balance' => $payment->selected_year_beginning_balance,
+                'ending_balance' => $payment->selected_year_ending_balance,
+            ];
+        }
 
         return view('member-views.your-loans.member-loan-details',
             compact(
                 'loan',
                 'payments',
                 'sumPenaltyPayments',
-                'years'
+                'years',
+                'selectedYear',
+                'allYearBalances'
             ));
     }
 

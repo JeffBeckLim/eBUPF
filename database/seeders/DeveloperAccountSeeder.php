@@ -29,7 +29,7 @@ class DeveloperAccountSeeder extends Seeder
             'firstname'=> 'Harry',
             'lastname'=> 'Potter',
 
-            'date_of_birth'=> now(),
+            'date_of_birth' => '1995-01-01',
 
             'agree_to_terms'=> '1',
 
@@ -37,22 +37,22 @@ class DeveloperAccountSeeder extends Seeder
 
             'contact_num'=> '+639123456780',
 
-            'address'=> 'BUCS / IT DEPT., LEGAZPI, ALBAY, PH',
+            'address'=> 'West Washington Drive, Oas, Albay',
             'verified_at'=>now(),
             // 'campus_id',
 
-            'tin_num' =>  1111,
-            'position' => 'Developer',
-            'employee_num' => 1111,
+            'tin_num' =>  '123-123-123',
+            'position' => 'Professor V',
+            'employee_num' => '2005-123-9',
             'bu_appointment_date'=>now(),
 
-            'place_of_birth'=>'BUCS - LEGAZPI, ALBAY, PH',
+            'place_of_birth'=>'West Washington Drive',
             'civil_status' => 'single',
             'spouse'=>'',
             'sex'=>'male',
-            'monthly_salary'=> 1111,
+            'monthly_salary'=> 80000,
             'monthly_contribution'=> 300,
-            'appointment_status'=> 'regular',
+            'appointment_status'=> 'Permanent',
             'profile_picture'=>'',
             'agree_to_certify' => 1,
             'agree_to_authorize' => 1,

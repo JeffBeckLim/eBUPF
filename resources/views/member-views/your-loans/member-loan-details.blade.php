@@ -10,7 +10,7 @@
 </style>
 <main >
     <div class="container-fluid">
-        <div class="col pt-1 m-2">
+        <div class="col pt-1 mt-2">
             <div class="row px-lg-1">
                 <div class="col-lg-6 ">
                     <!-- LOAN DETAILS CARD -->
@@ -275,7 +275,7 @@
                                         <select class="form-select" name="year" id="year" style="width: 150px;" onchange="this.form.submit()">
                                             <option value="" disabled>Year</option>
                                             @foreach($years as $year)
-                                                <option value="{{ $year }}" {{ request('year') == $year ? 'selected' : '' }}>
+                                                <option value="{{ $year }}" {{ (request('year') == $year || (empty(request('year')) && $selectedYear == $year)) ? 'selected' : '' }}>
                                                     {{ $year }}
                                                 </option>
                                             @endforeach
@@ -283,6 +283,7 @@
                                     </form>
                                 @endif
                             </div>
+
                         </div>
 
                         <div class="mt-1 mx-2">
@@ -308,40 +309,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $runningBalance = $loan->principal_amount + $loan->interest;
-                                            @endphp
                                             @foreach ($payments->sortByDesc('created_at')->reverse() as $payment)
-
-                                            <tr>
-                                                <td>
-                                                    {{ $payment->or_number }}
-                                                </td>
-                                                <td>
-                                                    {{ date('M Y', strtotime($payment->payment_date)) }}
-                                                </td>
-                                                <td>
-                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($runningBalance, 2, '.', ',') }}
-                                                </td>
-                                                <td>
-                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}
-                                                </td>
-                                                <td>
-                                                    <span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}
-                                                </td>
                                                 @php
-                                                    $runningBalance -= ($payment->principal + $payment->interest);
+                                                    $paymentYear = date('Y', strtotime($payment->payment_date));
                                                 @endphp
-                                                <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($runningBalance, 2, '.', ',') }}</td>
-                                                {{-- <td>
-                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#payment{{$payment->id}}">
-                                                        <i class="bi bi-info-circle-fill fs-6" style="color: #00638D"></i>
-                                                    </a>
-                                                </td> --}}
-                                            </tr>
-                                            @include('member-views.your-loans.payment-details-modal')
-                                        @endforeach
+
+                                                @if($paymentYear == $selectedYear)
+                                                    <tr>
+                                                        <td>{{ $payment->or_number }}</td>
+                                                        <td>{{ date('M Y', strtotime($payment->payment_date)) }}</td>
+                                                        <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->selected_year_beginning_balance, 2, '.', ',') }}</td>
+                                                        <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->principal, 2, '.', ',') }}</td>
+                                                        <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->interest, 2, '.', ',') }}</td>
+                                                        <td><span class="text-muted" style="font-size: 11px;">Php</span> {{ number_format($payment->selected_year_ending_balance, 2, '.', ',') }}</td>
+                                                        {{-- <td>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#payment{{$payment->id}}">
+                                                                <i class="bi bi-info-circle-fill fs-6" style="color: #00638D"></i>
+                                                            </a>
+                                                        </td> --}}
+                                                    </tr>
+                                                    @include('member-views.your-loans.payment-details-modal')
+                                                @endif
+                                            @endforeach
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>

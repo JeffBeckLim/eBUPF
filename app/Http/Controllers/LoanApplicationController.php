@@ -29,11 +29,11 @@ class LoanApplicationController extends Controller
     public function getCoBorrower(Request $request){
         $key = $request->input('key');
         $data_raw = User::where('email', $key)->with('member')->first(); // Fetch the user data
-        
+
         $cb_name = $data_raw->member->firstname.$data_raw->member->lastname;
         return response()->json($cb_name);
     }
-    
+
 
 
     public function showLoanStatus($loan_id){
@@ -46,7 +46,7 @@ class LoanApplicationController extends Controller
         }elseif ($loan->member_id != Auth::user()->member->id) {
             abort(403);
         }
-      
+
 
         $loan_status=LoanApplicationStatus::with('LoanApplicationState')
         ->where('loan_id', $loan_id)
@@ -132,7 +132,7 @@ class LoanApplicationController extends Controller
         foreach($members as $member){
             array_push($member_emails, $member->email);
         }
-        
+
 
         return view('member-views.mpl-application-form.mpl-application-form', compact('member_emails'));
     }
@@ -315,8 +315,12 @@ class LoanApplicationController extends Controller
             // $randomString1 = strtoupper(Str::random(3));
             // Combine the formatted date/time and the random string to create a unique ID
             // $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $randomString . "-" . $randomString1;
-            $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $id;
-        
+            if($loanType->loan_type_name == 'HSL'){
+                $uniqueId = "HL-". $dateTimeString . $id;
+            }else{
+                $uniqueId = $loanType->loan_type_name."-". $dateTimeString . $id;
+            }
+
         // } while (Loan::where('loan_code', $uniqueId)->exists());
 
         return($uniqueId);
@@ -380,7 +384,7 @@ class LoanApplicationController extends Controller
          $yearlyBalance = $formFields['principal_amount'];
         // ****************************
          $totalInterest = 0;
- 
+
          // Calculate and store the yearly balances in the array
          for ($year = 0; $year < $formFields['term_years']; $year++) {
              $yearlyInterest = $yearlyBalance * $interestRate;
@@ -411,7 +415,7 @@ class LoanApplicationController extends Controller
          foreach($loans_picked_up as $loan_picked_up){
             array_push($loans_picked_up_ids, $loan_picked_up->id);
          }
-        
+
          $payments = Payment::where('member_id', Auth::user()->member->id)->get();
          $payments_included = [];
          foreach($payments as $payment){
@@ -467,7 +471,7 @@ class LoanApplicationController extends Controller
         //  ************************************
          $remaining_penalty = $penalty_total-$penalty_payments_total;
 
-         
+
          // OTHER CALCULATIONS END LINE ============================================
 
 
@@ -493,17 +497,17 @@ class LoanApplicationController extends Controller
                 // Remove any middle initial
                 $witness_1_temp = $formFields['witness_name_1'];
                 $witness_2_temp = $formFields['witness_name_2'];
-    
+
             $same_names = false;
             if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',$witness_2_temp))){
                 $same_names = true;
             }
             if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',$co_borrower->member->firstname.$co_borrower->member->lastname))){
-    
+
                 $same_names = true;
             }
-        
-            if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',Auth::user()->member->firstname.Auth::user()->member->lastname))  ||  
+
+            if( strtolower(str_replace(' ', '',$witness_1_temp)) == strtolower(str_replace(' ', '',Auth::user()->member->firstname.Auth::user()->member->lastname))  ||
             strtolower(str_replace(' ', '',$witness_2_temp)) == strtolower(str_replace(' ', '',Auth::user()->member->firstname.Auth::user()->member->lastname))
             ){
                 $same_names = true;
@@ -516,8 +520,8 @@ class LoanApplicationController extends Controller
             'previous_loan_balance'=>$previous_loan_balance,
             'housing_service_fee'=>$service_fee,
             'previous_penalty'=>$remaining_penalty,
-        ]); 
-        
+        ]);
+
         $loan = Loan::create([
             // 'loan_code'=> 'temp_code',
             'member_id'=>Auth::user()->id,
@@ -531,7 +535,7 @@ class LoanApplicationController extends Controller
             'basic_salary'=>$formFields['basic_salary'],
             // 'payslip'=>$formFields['payslip'],
         ]);
-        
+
         $parsedDate = Carbon::parse($loan->created_at);
         $parsedDate2 = Carbon::parse($loan->created_at);
         $start_date  = $parsedDate->addMonth();
@@ -539,9 +543,9 @@ class LoanApplicationController extends Controller
             $newEndDate = $parsedDate2->addMonths($months);
 
             $amortization = Amortization::create([
-                'amort_principal' => $loan->principal_amount/($loan->term_years*12), 
-                'amort_interest' => $loan->interest/($loan->term_years*12), 
-                'amort_start' => $start_date, 
+                'amort_principal' => $loan->principal_amount/($loan->term_years*12),
+                'amort_interest' => $loan->interest/($loan->term_years*12),
+                'amort_start' => $start_date,
                 'amort_end' => $newEndDate,
 
             ]);
@@ -569,13 +573,13 @@ class LoanApplicationController extends Controller
             'loan_id'=>$loan->id,
         ]);
 
-        if($formFields['witness_name_1'] != ''){        
+        if($formFields['witness_name_1'] != ''){
             Witness::create([
                 'witness_name'=>$formFields['witness_name_1'],
                 'loan_id'=>$loan->id,
             ]);
         }
-        if($formFields['witness_name_2'] != ''){      
+        if($formFields['witness_name_2'] != ''){
             Witness::create([
                 'witness_name'=>$formFields['witness_name_2'],
                 'loan_id'=>$loan->id,
@@ -590,7 +594,7 @@ class LoanApplicationController extends Controller
 
         if($request->hasFile('payslip')) {
             $formFields['payslip'] = $request->file('payslip')->store('payslip', 'public');
-                    
+
             $loan->payslip = $formFields['payslip'];
             $loan->save();
         }
@@ -602,13 +606,13 @@ class LoanApplicationController extends Controller
 
     public function cancelApplication($id){
         $co_borrower = CoBorrower::where('loan_id',$id)->with('loan')->first();
-        
+
         // abort cancel if loan has status (submitted)
         $statuses_confirm = LoanApplicationStatus::where('loan_id',$co_borrower->loan->id)->get();
         if (count($statuses_confirm) != null) {
             abort(404);
         }
-    
+
         if($co_borrower == null){
             abort(404);
         }else{

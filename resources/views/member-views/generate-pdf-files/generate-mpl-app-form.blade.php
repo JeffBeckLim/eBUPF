@@ -214,7 +214,11 @@
     </div>
 
     <div class="solo">
-        <span class="toBold">Name:</span> <span>{{$lastname}}, {{$firstname}} {{$middle_initial}}.</span>
+        <span class="toBold">Name:</span> <span>{{$lastname}}, {{$firstname}}
+            @if ($middle_initial != null)
+                {{$middle_initial}}.
+            @endif
+        </span>
     </div>
 
     <div class="trio">
@@ -248,10 +252,14 @@
 
     <div class="duo">
         <div class="duo-one">
-            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>{{$monthly_net_pay}}</span>
+            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>
+                {{number_format($monthly_net_pay, 2, '.', ',')}}
+            </span>
         </div>
         <div class="duo-two">
-            <span class="toBold">Amount Requested:</span> <span>{{$amount_requested}}</span>
+            <span class="toBold">Amount Requested:</span> <span>
+                {{number_format($amount_requested, 2, '.', ',')}}
+            </span>
         </div>
     </div>
 
@@ -262,7 +270,7 @@
         <div style="text-align: center; display: table-cell; width: 40%; text-transform: uppercase;">
             {{$firstname}}
             @if($middle_initial != null)
-            {{$middle_initial}}.
+                {{$middle_initial}}.
             @endif
             {{$lastname}}
         </div>
@@ -281,7 +289,11 @@
         CO-BORROWER
     </div>
     <div class="solo">
-        <span class="toBold">Name:</span> <span>{{$co_lastname}}, {{$co_firstname}} {{$co_middle_initial}}.</span>
+        <span class="toBold">Name:</span> <span>{{$co_lastname}}, {{$co_firstname}}
+            @if($co_middle_initial != null)
+                {{$co_middle_initial}}.
+            @endif
+        </span>
     </div>
 
     <div class="trio">
@@ -315,10 +327,14 @@
 
     <div class="duo">
         <div class="duo-one">
-            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>{{$co_monthly_net_pay}}</span>
+            <span class="toBold">Monthly Net Pay (Including ACA & PERA):</span> <span>
+                {{number_format($co_monthly_net_pay, 2, '.', ',')}}
+            </span>
         </div>
         <div class="duo-two">
-            <span class="toBold">Amount Requested:</span> <span>{{$co_amount_requested}}</span>
+            <span class="toBold">Amount Requested:</span> <span>
+                {{number_format($co_amount_requested, 2, '.', ',')}}
+            </span>
         </div>
     </div>
 
@@ -461,7 +477,7 @@
             ------------------------
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ number_format($loan->basic_salary + 2000, 2, '.', ',') }}</div>
         </div>
     </div>
 
@@ -489,7 +505,7 @@
             ------------------------
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ number_format(($loan->basic_salary + 2000) * 3, 2, '.', ',') }}</div>
         </div>
     </div>
 
@@ -508,7 +524,7 @@
             ------------------------
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($loanAmountGranted, 2, '.', ',')}}</div>
         </div>
     </div>
 
@@ -542,7 +558,7 @@
             Interest
         </div>
         <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
-            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 20px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
             Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
@@ -563,10 +579,10 @@
             MRI
         </div>
         <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
-            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 20px;">{{number_format($mri, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($mri, 2, '.', ',')}}</div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($loanAmountGranted - $mri, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -584,10 +600,14 @@
             Loan Balance
         </div>
         <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
-            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 20px;">{{number_format($prevLoanBalance, 2, '.', ',')}}</div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($prevLoanBalance, 2, '.', ',')}}</div>
+            <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">
+            @if($prevLoanBalance > 0)
+                {{number_format($loanAmountGranted - $mri - $prevLoanBalance, 2, '.', ',')}}
+            @endif
+            </div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -605,10 +625,10 @@
             Service fee
         </div>
         <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
-            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 20px;"></div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
-             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($serviceFee, 2, '.', ',')}}</div>
+             <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
         </div>
         <div style="display: table-cell; width: 10%;">
 
@@ -626,12 +646,16 @@
             Others
         </div>
         <div style="display: table-cell; width: 25%; font-weight: bold;font-size: 14px; ">
-            <div style="width: 80%;  border-bottom: 1px solid black;height: 13px;"></div>
+            <div style="width: 80%;  border-bottom: 1px solid black;height: 20px;">
+                @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
+                    {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}
+                @endif
+            </div>
         </div>
         <div style="display: table-cell; width: 30%; font-weight: bold; font-size: 14px;">
              <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">
-                @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null)
-                    {{number_format($loan->adjustment->previous_penalty, 2, '.',',')}}
+                @if ($loan->adjustment != null && $loan->adjustment->previous_penalty != null && $loan->adjustment->previous_penalty > 0)
+                    {{number_format($loanAmountGranted - $mri - $prevLoanBalance + $loan->adjustment->previous_penalty, 2, '.',',')}}
                 @endif
             </div>
         </div>
@@ -953,7 +977,7 @@
             <div style="display: table-cell; width: 40%; text-align: center; border-bottom: 1px solid black; height: 20px; text-transform: uppercase;">
                 {{$co_firstname}}
                 @if($co_middle_initial != null)
-                {{$co_middle_initial}}.
+                    {{$co_middle_initial}}.
                 @endif
                 {{$co_lastname}}
             </div>

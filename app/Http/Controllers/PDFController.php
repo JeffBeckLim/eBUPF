@@ -125,6 +125,10 @@ class PDFController extends Controller{
         $middle_initial = substr($middlename, 0, 1);
         $initial = strtoupper($middle_initial);
 
+        $co_middlename = $co_borrower_details->middlename;
+        $co_middle_initial = substr($co_middlename, 0, 1);
+        $co_initial = strtoupper($co_middle_initial);
+
         $interestRate = 0.06;
         $amount = intval($loan->original_principal_amount);
         $termYears = $loan->term_years;
@@ -199,7 +203,7 @@ class PDFController extends Controller{
 
             'co_lastname' => $co_borrower_details->lastname,
             'co_firstname' => $co_borrower_details->firstname,
-            'co_middle_initial' => $co_borrower_details->middle_initial,
+            'co_middle_initial' => $co_initial,
             'co_date_of_birth' => $co_borrower_details->date_of_birth,
             'co_age' => $co_borrower_age,
             'co_tin' => $co_borrower_details->tin_num,
@@ -263,6 +267,10 @@ class PDFController extends Controller{
         $co_borrower_unit = Unit::where('id', $co_borrower_details->first()->unit_id)->first();
         //co-borrower campus
         $co_borrower_campus = Campus::where('id', $co_borrower_unit->campus_id)->first();
+
+        $co_middlename = $co_borrower_details->middlename;
+        $co_middle_initial = substr($co_middlename, 0, 1);
+        $co_initial = strtoupper($co_middle_initial);
 
         // get the witness
         $witnesses = $loan->witness;
@@ -355,7 +363,7 @@ class PDFController extends Controller{
 
             'co_lastname' => $co_borrower_details->lastname,
             'co_firstname' => $co_borrower_details->firstname,
-            'co_middle_initial' => $co_borrower_details->middle_initial,
+            'co_middle_initial' => $co_initial,
             'co_date_of_birth' => $co_borrower_details->date_of_birth,
             'co_age' => $co_borrower_age,
             'co_tin' => $co_borrower_details->tin_num,
