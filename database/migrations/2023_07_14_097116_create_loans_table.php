@@ -50,6 +50,8 @@ return new class extends Migration
 
             $table->string('reason_for_cancel')->nullable();
 
+            $table->string('payslip')->nullable();
+            $table->decimal('basic_salary', 20, 2)->nullable();
             // campus_id_index not added 
             // units_id_index not added 
         });
