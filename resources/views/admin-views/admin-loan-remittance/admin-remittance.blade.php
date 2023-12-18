@@ -70,7 +70,7 @@
                 @endif
             </div>
 
-            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment" style="font-size: 14px">
+            <form method="POST" action="{{route('add.payment.remittance')}}" id="formAddPayment" style="font-size: 16px">
                 @csrf
                 <div class="row g-0 mt-3" style="margin-left: 1px;">
                     <div class="col-md-2 pe-1">
@@ -83,15 +83,14 @@
                     </div>
 
                     <div class="col-md-2 pe-1">
-                        <label for="loan_id" class="fw-bold">Loan ID <span class="fw-bold text-danger">*</span></label>
+                        <label for="loan_id" class="fw-bold">Loan Code <span class="fw-bold text-danger">*</span></label>
                         <select name="loan_id" id="loan_id" class="form-control" value="{{ old('loan_id') }}" style="background: #D9E4E9;border-radius: 10px; color:rgb(77, 77, 77); width: 100%;" required>
-                            <option value="" disabled selected>Select a Loan ID</option>
+                            <option value="" disabled selected>Select a Loan Code</option>
                             @foreach ($loans as $loan)
                                 <option value="{{ $loan->id }}">
-                                    ID: {{$loan->id}} -
-                                    {{$loan->loanType->loan_type_name}} -
-                                    {{ substr($loan->member->firstname, 0, 1) }}. {{ $loan->member->lastname }} -
-                                    {{ $loan->member->units->unit_code }}
+                                    {{$loan->loan_code}}
+                                    {{-- {{ substr($loan->member->firstname, 0, 1) }}. {{ $loan->member->lastname }} -
+                                    {{ $loan->member->units->unit_code }} --}}
                                 </option>
                             @endforeach
                         </select>
@@ -187,7 +186,7 @@
                                 $(document).ready(function() {
                                      // Initialize Select2 on the dropdown
                                      $('#loan_id{{$payment->id}}').select2({
-                                         placeholder: 'Select a Loan ID',
+                                         placeholder: 'Select a Loan Code',
                                          width: '100%',
                                          allowClear: true,
                                          dropdownParent: $("#loan_id{{$payment->id}}").parent()
