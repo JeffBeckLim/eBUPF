@@ -30,17 +30,28 @@
          <div class="my-2">
             @include('member-views.mpl-application-form.accordion-entity-definition')
         </div>
+        <div class="py-3 border border-primary-subtle rounded col" id="message-div">
+            <h6 class="fw-bold">
+                Hello, {{Auth::user()->member->firstname}}!
+            </h6>
+            Your loan request requires a minimum monthly take-home pay of Php 50,000 for approval.Ensure your take-home pay meets this criterion to proceed with your loan application. Please refer to your most recent pay slip.
+            
+            <div class="text-end">
+                <a class="btn btn-link" onclick="hide()">hide</a>
+            </div>
+        </div>
        
         <p class="text1-design mt-2">Loan Details</p>
         
         <form action="/member/loan-application/1" method="POST" id="submitMPLForm" enctype="multipart/form-data">
             @csrf
+            
             <div id="loanForm">
 
                 <div class="form-group">
                     <label for="loanAmount" class="">Amount Requested</label>
 
-                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}" min="50000" max="200000">
+                    <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}" min="50000" max="200000" >
 
                     <div id="validationLoanAmountFeedBack" class="invalid-feedback">
                         Loan amount must be at least 50,000 Php or max value of 200,000 Php
@@ -57,8 +68,8 @@
                     {{--
                     <input type="number" class="form-control" id="loanTerm" name="term_years" > --}}
                     <label for="loanTerm" class="">Years to Pay</label>
-                    <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
-                        {{-- <option value="" selected disabled>Choose loan term: 1-5 years</option> --}}
+                    <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}" >
+                        {{-- <option value="" selected >Choose loan term: 1-5 years</option> --}}
                         @for ($years = 1; $years < 6; $years++)
                             @if ($years == 1)
                                 <option value="{{$years}}" {{old('term_years') == $years ? 'selected' : '' }}>{{$years}} year</option>
@@ -81,7 +92,7 @@
                 <p class="text1-design pt-4">Co-Borrower</p>
                 <div class="form-group">
                     <label for="myCoBorrower" style="font-size: 12px">Please enter the BU email of your Co-Borrower. Your co-borrower must be a registered member of BUPF Online</label>
-                    <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. juanjose.delacruz@bicol-u.edu.ph">
+                    <input type="text" class="form-control {{ $errors->has('email_co_borrower') ? 'invalid' : '' }}" id="myCoBorrower" name="email_co_borrower" value="{{old('email_co_borrower')}}" placeholder="ex. juanjose.delacruz@bicol-u.edu.ph" >
 
 
                     <div style="font-size: 12px" class="ms-1 mt-2" id="result"></div>
@@ -174,3 +185,9 @@
 @include('member-views.mpl-application-form.js_in_form_script')
 
 @endsection
+<script>
+    function hide() { 
+        const message_div = document.getElementById('message-div');
+        message_div.classList.add('d-none');
+     }
+</script>
