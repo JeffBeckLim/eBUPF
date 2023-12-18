@@ -33,12 +33,12 @@
        
         <p class="text1-design mt-2">Loan Details</p>
         
-        <form action="/member/loan-application/1" method="POST" id="submitMPLForm">
+        <form action="/member/loan-application/1" method="POST" id="submitMPLForm" enctype="multipart/form-data">
             @csrf
             <div id="loanForm">
 
                 <div class="form-group">
-                    <label for="loanAmount" class="text2-design">Amount Requested</label>
+                    <label for="loanAmount" class="">Amount Requested</label>
 
                     <input type="number" class="form-control comma-input {{$errors->has('principal_amount') ? 'invalid' : '' }}" id="loanAmount" name="principal_amount" placeholder="Loanable amount: ₱50,000.00 to ₱200,000.00" value="{{old('principal_amount')}}" min="50000" max="200000">
 
@@ -56,7 +56,7 @@
                 <div class="form-group">
                     {{--
                     <input type="number" class="form-control" id="loanTerm" name="term_years" > --}}
-                    <label for="loanTerm" class="text2-design">Years to Pay</label>
+                    <label for="loanTerm" class="">Years to Pay</label>
                     <select class="form-control form-select mt-2 {{ $errors->has('term_years') ? 'invalid' : '' }}" aria-label="Default select example" id="loanTerm" name="term_years" value="{{old('term_years')}}">
                         {{-- <option value="" selected disabled>Choose loan term: 1-5 years</option> --}}
                         @for ($years = 1; $years < 6; $years++)
@@ -115,7 +115,29 @@
                         Witnesses, co-borrowers, and principal borrower (you) must not be the same person. Please Double check the names entered.
                       </div>
                 </div>
-
+                
+                <p class="text1-design pt-4">Other requirements</p>
+                <div class="form-group">
+                    <label for="basic_salary">Basic Salary</label>
+                    <input type="number" class="form-control mt-2 {{ $errors->has('witness_name_1') ? 'is-invalid' : '' }}" id="basic_salary" name="basic_salary" placeholder="Pleases refer to your latest payslip" value="{{old('basic_salary')}}" />
+                    @error('basic_salary')
+                        <h6 class="text-danger">{{$message}}</h6>
+                    @enderror
+                    <div id="validationBasicSalaryFeedBack" class="invalid-feedback">
+                        This field is required, please provide a valid value.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="payslip">A Clear Photo of your Recent Payslip</label>
+                    <input type="file" class="from-upload form-control mt-2" id="payslip" name="payslip"  accept=".png, .jpg, .jpeg" />
+                    @error('payslip')
+                        <h6 class="text-danger">{{$message}}</h6>
+                    @enderror
+                    <div id="validationBasicSalaryFeedBack" class="invalid-feedback">
+                        This field is required, please provide a valid value.
+                    </div>
+                </div>
+                
                 <div class="row d-flex align-items-center justify-content-center">
                     <p class="warning">Based on the information you have provided in your profile, we will use that as your personal details such as your name, age, and other relevant information.</p>
                 </div>

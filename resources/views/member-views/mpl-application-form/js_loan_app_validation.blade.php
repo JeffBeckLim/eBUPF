@@ -19,6 +19,8 @@
 
       const witness1 = document.getElementById('myWitness1');
       const witness2 = document.getElementById('myWitness2');
+
+      const basic_salary = document.getElementById('basic_salary');
       
       var isValid = true;
 
@@ -30,6 +32,17 @@
       }
       else{
           principal_amount.classList.add('is-invalid');
+          isValid = false;
+          
+      }
+
+      if(basic_salary.value != null 
+          && basic_salary.value >= 1 ){
+          
+            basic_salary.classList.remove('is-invalid');
+      }
+      else{
+          basic_salary.classList.add('is-invalid');
           isValid = false;
           
       }
@@ -137,6 +150,40 @@
           witness2.classList.add('is-invalid');
           isValid = false;
         }
+
+
+        const fileInput = document.getElementById('payslip');
+            const file = fileInput.files[0]; // Get the selected file
+            if(file != undefined){
+                if (!file) {
+                    alert('Please select an image.');
+                    fileInput.classList.add('is-invalid');
+                    isValid = false;  
+                    return;
+                }
+
+                // Check file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select an image file.');
+                    fileInput.classList.add('is-invalid');
+                    isValid = false;  
+                    return;
+                }
+
+                // Check file size (in bytes)
+                const maxSize = 2 * 1024 * 1024; // 5MB in bytes
+                if (file.size > maxSize) {
+                    alert('Image size exceeds 2MB.');
+                    fileInput.classList.add('is-invalid');
+                    isValid = false;  
+                    return;
+                }
+                else{
+                    fileInput.classList.remove('is-invalid');
+                }
+            }
+
+
 
       // validate witnesses same with witnesses
         var key = document.getElementById('myCoBorrower').value;

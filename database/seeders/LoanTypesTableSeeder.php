@@ -19,7 +19,7 @@ class LoanTypesTableSeeder extends Seeder
         ]);
 
         LoanType::create([
-            'loan_type_name' => 'HSL',
+            'loan_type_name' => 'HL',
             'loan_type_description' =>'Housing Loan',
         ]);
     }
