@@ -160,7 +160,7 @@
         $(document).ready(function() {
             // Initialize Select2 on the dropdown
             $('#loan_id').select2({
-                placeholder: 'Select a Loan ID',
+                placeholder: 'Select a Loan Code',
                 allowClear: true,
             });
             $('.select2-selection--single').css('background-color', '#D9E4E9');

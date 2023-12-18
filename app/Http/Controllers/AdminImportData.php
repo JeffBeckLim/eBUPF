@@ -181,7 +181,7 @@ class AdminImportData extends Controller
             foreach ($csv as $row) {
                 if (!$headerSkipped) {
                     $headerSkipped = true;
-                    continue; // Skip the header row
+                    continue;
                 }
 
                 if($row[0] == null){
@@ -189,8 +189,9 @@ class AdminImportData extends Controller
                 }
                 $lineNumber++;
 
-                $loanID = $row[1];
-                $loan = Loan::find($loanID);
+                $loanCode = $row[1];
+
+                $loan = Loan::where('loan_code', $loanCode)->first();
 
                 if($loan){
                     $memberID = $loan->member_id;
@@ -200,11 +201,12 @@ class AdminImportData extends Controller
                         'updated_at' => now(),
                         'member_id' => $memberID,
                         'or_number' => $row[0],
-                        'loan_id' => $row[1],
+                        'loan_id' => $loan->id,
                         'principal' => $row[2],
                         'interest' => $row[3],
                         'payment_date' => $row[4],
                     ];
+
                     //save payment to an array
                     $paymentTable[] = $payment;
 
@@ -235,7 +237,7 @@ class AdminImportData extends Controller
                     }
                 }
                 else{
-                    return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The loan ID does not exist.');
+                    return redirect()->back()->with('error', 'Please check on line '.$lineNumber.' in the CSV file. The loan Code does not exist.');
                 }
             }
 
