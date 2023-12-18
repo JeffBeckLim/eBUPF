@@ -204,6 +204,8 @@
                             <th>Unit</th>
                             <th>Date Requested</th>
                             <th>Amt. Requested</th>
+                            <th>Basic Salary</th>
+                            <th>Basic Salary * 3</th>
                             <th class="text-secondary"><i class="bi bi-1-circle"></i> Staff</th>
                             <th class="text-secondary"><i class="bi bi-2-circle"></i> Loan Analyst</th>
                             <th class="text-secondary"><i class="bi bi-3-circle"></i> Exe. Director</th>
@@ -279,6 +281,12 @@
                             <td class="fw-bold">
                                 <a class="{{$loan->loan->deleted_at ? 'disabled' : ''}}" type="button" data-bs-toggle="modal" data-bs-target="#adjustModal{{$loan->loan->id}}"   style="color: #9f9f9f;" href=""><i class="bi bi-pencil"></i></a>
                                 {{number_format($loan->loan->principal_amount, 2, '.',',')}}
+                            </td>
+                            <td>
+                                {{number_format($loan->loan->basic_salary, 2, '.',',')}}
+                            </td>
+                            <td>
+                                {{number_format($loan->loan->basic_salary*3, 2, '.',',')}}
                             </td>
                             <td class="text-center border-start" >
                                 @foreach ($loan->loan->LoanApplicationStatus as $status)
