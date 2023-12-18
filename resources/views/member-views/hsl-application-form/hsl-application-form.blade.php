@@ -34,8 +34,8 @@
             <h6 class="fw-bold">
                 Hello, {{Auth::user()->member->firstname}}!
             </h6>
-            Your loan request requires a minimum monthly take-home pay of Php 50,000 for approval.Ensure your take-home pay meets this criterion to proceed with your loan application. Please refer to your most recent pay slip.
-            
+            Your loan request requires a minimum monthly take-home pay of Php 5,000 for approval. Ensure your take-home pay meets this criterion to proceed with your loan application. Please refer to your most recent pay slip.
+
             <div class="text-end">
                 <a class="btn btn-link" onclick="hide()">hide</a>
             </div>
@@ -189,7 +189,7 @@
 
 @endsection
 <script>
-    function hide() { 
+    function hide() {
         const message_div = document.getElementById('message-div');
         message_div.classList.add('d-none');
      }

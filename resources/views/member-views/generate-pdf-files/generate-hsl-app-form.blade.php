@@ -119,10 +119,10 @@
 
     <div style="display: table; width: 100%; font-size: 15px; ">
         <div style="display: table-cell; width: 60%;">
-            <span class="toBold">Net Take Home Pay: </span> {{ $monthly_net_pay }} <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
+            <span class="toBold">Net Take Home Pay: </span> {{number_format($monthly_net_pay, 2, '.', ',')}} <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
         </div>
         <div style="display: table-cell; width: 40%; 8px;">
-            <span class="toBold">Amount Requested: </span> {{$amount_requested}}
+            <span class="toBold">Amount Requested: </span> {{number_format($amount_requested, 2, '.', ',')}}
         </div>
     </div>
 
@@ -158,7 +158,7 @@
     <div style="width: 100%; font-size: 15px; line-height: ">
         <span class="toBold">Name: </span> {{$co_lastname}}, {{$co_firstname}}
         @if($co_middle_initial != null)
-        {{$co_middle_initial}}.
+            {{$co_middle_initial}}.
         @endif
     </div>
 
@@ -193,10 +193,13 @@
 
     <div style="display: table; width: 100%; font-size: 15px; ">
         <div style="display: table-cell; width: 60%;">
-            <span class="toBold">Net Take Home Pay: </span> {{ $co_monthly_net_pay }} <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
+            <span class="toBold">Net Take Home Pay: </span>
+            {{number_format($co_monthly_net_pay, 2, '.', ',')}}
+            <br>  <span style="font-size: 12px; font-weight: bold; padding-left: 12px;">(inclusive of PERA)</span>
         </div>
         <div style="display: table-cell; width: 40%; 8px;">
-            <span class="toBold">Amount Requested: </span> {{$co_amount_requested}}
+            <span class="toBold">Amount Requested: </span> {{number_format($co_amount_requested, 2, '.', ',')}}
+
         </div>
     </div>
 
@@ -369,7 +372,7 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ number_format($loan->basic_salary + 2000, 2, '.', ',') }}</div>
         </div>
     </div>
 
@@ -397,7 +400,7 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{ number_format(($loan->basic_salary + 2000) * 3, 2, '.', ',') }}</div>
         </div>
     </div>
 
@@ -409,7 +412,7 @@
 
         </div>
         <div style="display: table-cell; width: 35%; font-weight: bold;">
-            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;"></div>
+            Php <div style="width: 80%; border-bottom: 1px solid black;float: right; height: 20px;">{{number_format($loanAmountGranted, 2, '.', ',')}}</div>
         </div>
     </div>
 

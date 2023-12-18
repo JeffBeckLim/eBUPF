@@ -34,18 +34,18 @@
             <h6 class="fw-bold">
                 Hello, {{Auth::user()->member->firstname}}!
             </h6>
-            Your loan request requires a minimum monthly take-home pay of Php 50,000 for approval.Ensure your take-home pay meets this criterion to proceed with your loan application. Please refer to your most recent pay slip.
-            
+            Your loan request requires a minimum monthly take-home pay of Php 5,000 for approval. Ensure your take-home pay meets this criterion to proceed with your loan application. Please refer to your most recent pay slip.
+
             <div class="text-end">
                 <a class="btn btn-link" onclick="hide()">hide</a>
             </div>
         </div>
-       
+
         <p class="text1-design mt-2">Loan Details</p>
-        
+
         <form action="/member/loan-application/1" method="POST" id="submitMPLForm" enctype="multipart/form-data">
             @csrf
-            
+
             <div id="loanForm">
 
                 <div class="form-group">
@@ -88,7 +88,7 @@
                       @enderror
                     {{--  min="1" max="5" --}}
                 </div>
-                
+
                 <p class="text1-design pt-4">Co-Borrower</p>
                 <div class="form-group">
                     <label for="myCoBorrower" style="font-size: 12px">Please enter the BU email of your Co-Borrower. Your co-borrower must be a registered member of BUPF Online</label>
@@ -126,7 +126,7 @@
                         Witnesses, co-borrowers, and principal borrower (you) must not be the same person. Please Double check the names entered.
                       </div>
                 </div>
-                
+
                 <p class="text1-design pt-4">Other requirements</p>
                 <div class="form-group">
                     <label for="basic_salary">Basic Salary</label>
@@ -148,7 +148,7 @@
                         This field is required, please provide a valid value.
                     </div>
                 </div>
-                
+
                 <div class="row d-flex align-items-center justify-content-center">
                     <p class="warning">Based on the information you have provided in your profile, we will use that as your personal details such as your name, age, and other relevant information.</p>
                 </div>
@@ -186,7 +186,7 @@
 
 @endsection
 <script>
-    function hide() { 
+    function hide() {
         const message_div = document.getElementById('message-div');
         message_div.classList.add('d-none');
      }

@@ -86,11 +86,12 @@ class AdminRemittanceController extends Controller
 
         // get the total payment for interest
         $totalInterestPayment = Payment::where('loan_id', $data['loan_id'])->sum('interest');
-
         // Check if the payment exceeds with the loan balance
-        if($loanBalance - ($data['principal'] + $data['interest']) < 0){
+        //dd($loanBalance, $data['principal'], $data['interest'], $data['principal'] + $data['interest'], $loanBalance - ($data['principal'] + $data['interest']));
+
+       /*  if(($loanBalance - ($data['principal'] + $data['interest'])) < 0){
             return redirect()->back()->with('error', 'Payment exceeds loan balance.');
-        }elseif($loan->principal_amount - ($totalPrincipalPayment + $data['principal']) < 0){
+        }else */if($loan->principal_amount - ($totalPrincipalPayment + $data['principal']) < 0){
             return redirect()->back()->with('error', 'Principal payment exceeds principal balance.');
         }elseif($loan->interest - ($totalInterestPayment + $data['interest']) < 0){
             return redirect()->back()->with('error', 'Interest payment exceeds interest balance.');

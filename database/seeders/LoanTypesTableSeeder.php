@@ -15,11 +15,11 @@ class LoanTypesTableSeeder extends Seeder
     {
         LoanType::create([
             'loan_type_name' => 'MPL',
-            'loan_type_description' =>'Multi-purpose Loan',
+            'loan_type_description' =>'Multi-Purpose Loan',
         ]);
 
         LoanType::create([
-            'loan_type_name' => 'HL',
+            'loan_type_name' => 'HSL',
             'loan_type_description' =>'Housing Loan',
         ]);
     }
