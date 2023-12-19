@@ -77,7 +77,7 @@
                                     @elseif($transaction instanceof \App\Models\Loan)
                                         @php
                                             $loanTypes = [
-                                                'Multi-purpose Loan' => 'mpl',
+                                                'Multi-Purpose Loan' => 'mpl',
                                                 'Housing Loan' => 'housing',
                                             ];
 
