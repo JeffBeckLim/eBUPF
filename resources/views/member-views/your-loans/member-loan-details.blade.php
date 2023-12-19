@@ -309,12 +309,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $hasTransactions = false;
+                                            @endphp
                                             @foreach ($payments->sortByDesc('created_at')->reverse() as $payment)
                                                 @php
                                                     $paymentYear = date('Y', strtotime($payment->payment_date));
                                                 @endphp
 
                                                 @if($paymentYear == $selectedYear)
+                                                    @php
+                                                        $hasTransactions = true;
+                                                    @endphp
                                                     <tr>
                                                         <td>{{ $payment->or_number }}</td>
                                                         <td>{{ date('M Y', strtotime($payment->payment_date)) }}</td>
@@ -331,6 +337,19 @@
                                                     @include('member-views.your-loans.payment-details-modal')
                                                 @endif
                                             @endforeach
+                                            @if(!$hasTransactions)
+                                                <tr>
+                                                    <!-- Display "No Transaction" image -->
+                                                    <td colspan="6" class="text-center bg-white" style="border: none;">
+                                                        <div style="height: 100%;">
+                                                            <div class="d-flex justify-content-center align-content-center">
+                                                                <img src="{{ asset('assets/no-transaction.svg') }}" alt="no transaction icon" width="150px" style="margin-top: 80px;">
+                                                            </div>
+                                                            <p class="text-center">No transaction</p>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </tbody>
 
                                     </table>
