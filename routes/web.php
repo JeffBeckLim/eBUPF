@@ -34,6 +34,7 @@ use App\Http\Controllers\LoanApplicationsFilterController;
 use App\Http\Controllers\LoanApplicationTrackingFilterController;
 use App\Http\Controllers\LoanLogController;
 use App\Http\Controllers\AdminImportData;
+use App\Http\Controllers\AJAXAdminTrackingController;
 use App\Http\Controllers\SessionLogController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Penalty;
@@ -50,7 +51,7 @@ use App\Models\SessionLog;
 |
 */
 
-
+Route::get('admin/loan-applications-tracking-get/{loan_type}', [AJAXAdminTrackingController::class, 'get']);
 //🛠️TESTING ===================================================================================================
     //Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 

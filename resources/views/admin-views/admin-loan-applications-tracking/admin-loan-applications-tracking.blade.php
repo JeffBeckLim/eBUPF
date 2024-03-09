@@ -418,11 +418,92 @@
                     </tbody>
                 </table>
             {{-- </div> --}}
-
         </div>
     </div>
+
+      {{-- AJAX TABLE --}}
+      <div class="table-responsive border m-3 rounded">
+        <table class="table admin-table table-striped table-hover" id="myTable">
+            <thead style="border-bottom: 2px solid black">
+                <style>
+                    th, td{
+                        font-size: 11px !important;
+                    }
+                </style>
+                <tr>
+                    <th>Loan ID</th>
+                    <th>State</th>
+
+                    <th >LOAN CODE</th>
+                    <th>Loan Type</th>
+                    <th>Principal Borrower</th>
+                    <th>Unit</th>
+                    <th>Date Requested</th>
+                    <th>Amt. Requested</th>
+                    <th>Basic Salary</th>
+                    <th>Basic Salary * 3</th>
+                    <th class="text-secondary"><i class="bi bi-1-circle"></i> Staff</th>
+                    <th class="text-secondary"><i class="bi bi-2-circle"></i> Loan Analyst</th>
+                    <th class="text-secondary"><i class="bi bi-3-circle"></i> Exe. Director</th>
+                    <th class="text-secondary"><i class="bi bi-4-circle"></i> Check</th>
+                    <th class="text-secondary"><i class="bi bi-5-circle"></i> Chk. Picked Up</th>
+                    <th>Final</th>
+                    <th>Edit Standing</th>
+                    <th>More..</th>
+                </tr>
+            </thead>
+            <tbody id="ajax-table">
+                
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
 <script>
+// AJAX -----
+$(document).ready(function(){
+
+fetchLoans();
+
+function fetchLoans()
+    {
+        $.ajax({
+            url: '/admin/loan-applications-tracking-get/mpl',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                $('#ajax-table').html("");
+                $.each(response.loans, function(key, loan) {
+                    $('#ajax-table').append(
+                    '<tr>\
+                            <td>'+loan.loan['id']+'</td>\
+                            <td>'+loan.loan['is_active']+'</td>\
+                            <td>'+loan.loan['loan_code']+'</td>\
+                            <td>'+loan.loan['loan_categroy_id']+'</td>\
+                            <td>'+loan.loan['member']['firstname']+" "+loan.loan['member']['lastname']+'</td>\
+                            <td>'+loan.loan['member']['units']['unit_code']+'</td>\
+                            <td>'+loan.loan['created_at']+'</td>\
+                            <td>'+loan.loan['principal_amount']+'</td>\
+                            <td>'+loan.loan['basic_salary']+'</td>\
+                            <td>'+loan.loan['basic_salary']*3+'</td>\
+                            <td>'+(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? 'yes' : 'no' )+'</td>\
+                        </tr>\
+                    '
+                    );
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+})
+
+
+
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)

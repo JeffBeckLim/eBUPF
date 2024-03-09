@@ -71,7 +71,6 @@ class CoBorrowerController extends Controller
         foreach($members as $member){
             array_push($member_emails, $member->email);
         }
-
         $user_email = Auth::user()->email;
         return view('member-views.your-request.change-cb' , compact('member_emails','user_email','loan', 'currentCbEmail'));
         
