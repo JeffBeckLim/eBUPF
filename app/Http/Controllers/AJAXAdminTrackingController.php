@@ -15,11 +15,18 @@ class AJAXAdminTrackingController extends Controller
 {
     // for modal
     public function getTrackModal($id){
-        $loan = Loan::find($id);
-        $status = LoanApplicationStatus::where('loan_id', $id)->with('loanApplicationState')->get();
+        $loan = Loan::where('id',$id)->with('member')->first();
+        $status = LoanApplicationStatus::where('loan_id', $id)
+            ->with('loanApplicationState')
+            ->orderBy('loan_application_state_id', 'desc')
+            ->get();
+        
+        $states = LoanApplicationState::all();
+
         return response()->json([
             'loan' => $loan,
             'status'=> $status,
+            'states'=> $states,
         ]);
     }
 

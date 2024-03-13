@@ -462,17 +462,38 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tracking Status</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div id="status">
+            <div id="status">
+            </div>
+            
 
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+            <form id="addStatusForm" method="POST" action="{{route('create.status',$loan->loan->id)}}" >
+                @csrf
+                <div class="mb-3">
+                  <label for="statusSelect" class="col-form-label">Select Status</label>
+                  <select name="loan_application_state_id" id="statusSelect" class="form-select form-control" required>
+                    {{-- OPTIONS ARE ADDED BELOW in AJAX --}}
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="date_evaluated" class="col-form-label">Date</label>
+                  <input name="date_evaluated" type="date" class="form-control" id="date_evaluated">
+                </div>
+      
+                <div class="mb-2">
+                  <label for="message-text" class="col-form-label">Remarks</label>
+                  <textarea name="remarks" class="form-control" id="remarks"></textarea>
+                </div>
+      
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn bu-orange text-light" id="addStatusBtn">Add Status</button>
+                </div>
+            </form>
         </div>
       </div>
     </div>
@@ -507,12 +528,12 @@ function fetchLoans()
                             <td>${loan.loan['principal_amount']}</td>
                             <td>${loan.loan['basic_salary']}</td>
                             <td>${loan.loan['basic_salary']*3}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? 'yes' : 'no' )}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 2)? 'yes' : 'no' )}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 3)? 'yes' : 'no' )}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 4)? 'yes' : 'no' )}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 5)? 'yes' : 'no' )}</td>
-                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 6)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 2)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 3)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 4)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 5)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 6)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
                             <td>
                                 <button id='trackingModal' value="${loan.loan['id']}" type="button" class="btn btn-link"><i class="bi bi-pencil-square"></i></button>
                             </td>
@@ -545,16 +566,35 @@ $(document).on('click', '#trackingModal', function (e){
                 $('#status').html("");
                 $('#status').append(
                     `
-                    <p>${response.loan['id']}</p>
+                        <h6> Loan ID: ${response.loan['id']}</h6>
+                        <h6 class="fs-7">Amount: ${response.loan['principal_amount']}</h6>
+                        <h6 class="fs-7">${response.loan.member['firstname']} ${response.loan.member['lastname']}</h6>
+                        <ul class="list-group" id="statusList"></ul>
                     `
                 )
                 $.each(response.status, function(key, status) {
-                    $('#status').prepend(
+                    $('#statusList').append(
                         `
-                        <p>${status.id} ${status.loan_application_state['state_name']}</p>
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                              ${status.loan_application_state['state_name']}
+                        </li> 
+                        
                         `
                     );
                 });
+                $('#statusSelect').prepend(
+                    `<option value="" selected disabled>...</option>`
+                )
+                $.each(response.states, function(key, state) {
+                    
+                    $('#statusSelect').append(
+                        `
+                        <option value="${state.id}">${state.state_name}</option>
+                        `
+                    )
+                });
+                
                 $('#exampleModal').modal('show'); // Show the modal
 
             },
