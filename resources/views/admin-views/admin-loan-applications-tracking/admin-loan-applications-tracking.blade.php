@@ -447,7 +447,7 @@
                     <th class="text-secondary"><i class="bi bi-3-circle"></i> Exe. Director</th>
                     <th class="text-secondary"><i class="bi bi-4-circle"></i> Check</th>
                     <th class="text-secondary"><i class="bi bi-5-circle"></i> Chk. Picked Up</th>
-                    <th>Final</th>
+                    <th>Denied</th>
                     <th>Edit Standing</th>
                     <th>More..</th>
                 </tr>
@@ -456,9 +456,27 @@
                 
             </tbody>
         </table>
+    </div>  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="status">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
-
-
+  </div>
 
 </div>
 <script>
@@ -477,21 +495,33 @@ function fetchLoans()
                 console.log(response);
                 $('#ajax-table').html("");
                 $.each(response.loans, function(key, loan) {
-                    $('#ajax-table').append(
-                    '<tr>\
-                            <td>'+loan.loan['id']+'</td>\
-                            <td>'+loan.loan['is_active']+'</td>\
-                            <td>'+loan.loan['loan_code']+'</td>\
-                            <td>'+loan.loan['loan_categroy_id']+'</td>\
-                            <td>'+loan.loan['member']['firstname']+" "+loan.loan['member']['lastname']+'</td>\
-                            <td>'+loan.loan['member']['units']['unit_code']+'</td>\
-                            <td>'+loan.loan['created_at']+'</td>\
-                            <td>'+loan.loan['principal_amount']+'</td>\
-                            <td>'+loan.loan['basic_salary']+'</td>\
-                            <td>'+loan.loan['basic_salary']*3+'</td>\
-                            <td>'+(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? 'yes' : 'no' )+'</td>\
-                        </tr>\
-                    '
+                    $('#ajax-table').prepend(
+                    `<tr>
+                            <td>${loan.loan['id']}</td>
+                            <td>${loan.loan['is_active']}</td>
+                            <td>${loan.loan['loan_code']}</td>
+                            <td>${loan.loan['loan_categroy_id']}</td>
+                            <td>${loan.loan['member']['firstname']+" "+loan.loan['member']['lastname']}</td>
+                            <td>${loan.loan['member']['units']['unit_code']}</td>
+                            <td>${loan.loan['created_at']}</td>
+                            <td>${loan.loan['principal_amount']}</td>
+                            <td>${loan.loan['basic_salary']}</td>
+                            <td>${loan.loan['basic_salary']*3}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 2)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 3)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 4)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 5)? 'yes' : 'no' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 6)? 'yes' : 'no' )}</td>
+                            <td>
+                                <button id='trackingModal' value="${loan.loan['id']}" type="button" class="btn btn-link"><i class="bi bi-pencil-square"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn"><i class="bi bi-three-dots fs-4 icon"></i></button>
+                            </td>
+                      
+                        </tr>`
+                    
                     );
                 });
             },
@@ -502,6 +532,37 @@ function fetchLoans()
     }
 })
 
+$(document).on('click', '#trackingModal', function (e){
+    e.preventDefault();
+    var id = $(this).val();
+    $.ajax({
+            url: '/admin/loan-applications-tracking-get/modal/'+id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                
+                $('#status').html("");
+                $('#status').append(
+                    `
+                    <p>${response.loan['id']}</p>
+                    `
+                )
+                $.each(response.status, function(key, status) {
+                    $('#status').prepend(
+                        `
+                        <p>${status.id} ${status.loan_application_state['state_name']}</p>
+                        `
+                    );
+                });
+                $('#exampleModal').modal('show'); // Show the modal
+
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+});
 
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

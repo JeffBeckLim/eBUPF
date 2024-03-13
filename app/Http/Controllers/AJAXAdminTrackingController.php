@@ -3,14 +3,27 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Loan;
 use App\Models\Unit;
 use App\Models\CoBorrower;
 use App\Models\LoanCategory;
 use Illuminate\Http\Request;
 use App\Models\LoanApplicationState;
+use App\Models\LoanApplicationStatus;
 
 class AJAXAdminTrackingController extends Controller
 {
+    // for modal
+    public function getTrackModal($id){
+        $loan = Loan::find($id);
+        $status = LoanApplicationStatus::where('loan_id', $id)->with('loanApplicationState')->get();
+        return response()->json([
+            'loan' => $loan,
+            'status'=> $status,
+        ]);
+    }
+
+
     public function get($loan_type){
         $loan_type = 'mpl';
         if($loan_type == 'mpl'){
@@ -51,31 +64,12 @@ class AJAXAdminTrackingController extends Controller
             }
         }
         $years = array_unique($years);
-
         $units = Unit::all();
-
-
-        // dd($years);
         // initialize months for select filter
         $months = [
             'January', 'February', 'March', 'April', 'May', 'June',
             'July', 'August', 'September', 'October', 'November', 'December'
         ];
-
-        // return view('admin-views.admin-loan-applications-tracking.admin-loan-applications-tracking', compact(
-        //     'loans',
-        //     'loan_app_states',
-        //     'loan_categories',
-        //     'approved' ,
-        //     'denied',
-        //     'pending' ,
-        //     'loan_type',
-        //     'months',
-        //     'years',
-        //     'units',
-        //     'loan_type'
-        // ));
-
         return response()->json([
             'loans' => $loans,
             'loan_app_states' => $loan_app_states,
