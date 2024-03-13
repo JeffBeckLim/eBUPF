@@ -447,7 +447,7 @@
                     <th class="text-secondary"><i class="bi bi-3-circle"></i> Exe. Director</th>
                     <th class="text-secondary"><i class="bi bi-4-circle"></i> Check</th>
                     <th class="text-secondary"><i class="bi bi-5-circle"></i> Chk. Picked Up</th>
-                    <th>Final</th>
+                    <th>Denied</th>
                     <th>Edit Standing</th>
                     <th>More..</th>
                 </tr>
@@ -456,9 +456,48 @@
                 
             </tbody>
         </table>
+    </div>  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Tracking Status</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="status">
+            </div>
+            
+
+            <form id="addStatusForm" method="POST" action="{{route('create.status',$loan->loan->id)}}" >
+                @csrf
+                <div class="mb-3">
+                  <label for="statusSelect" class="col-form-label">Select Status</label>
+                  <select name="loan_application_state_id" id="statusSelect" class="form-select form-control" required>
+                    {{-- OPTIONS ARE ADDED BELOW in AJAX --}}
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="date_evaluated" class="col-form-label">Date</label>
+                  <input name="date_evaluated" type="date" class="form-control" id="date_evaluated">
+                </div>
+      
+                <div class="mb-2">
+                  <label for="message-text" class="col-form-label">Remarks</label>
+                  <textarea name="remarks" class="form-control" id="remarks"></textarea>
+                </div>
+      
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn bu-orange text-light" id="addStatusBtn">Add Status</button>
+                </div>
+            </form>
+        </div>
+      </div>
     </div>
-
-
+  </div>
 
 </div>
 <script>
@@ -477,21 +516,33 @@ function fetchLoans()
                 console.log(response);
                 $('#ajax-table').html("");
                 $.each(response.loans, function(key, loan) {
-                    $('#ajax-table').append(
-                    '<tr>\
-                            <td>'+loan.loan['id']+'</td>\
-                            <td>'+loan.loan['is_active']+'</td>\
-                            <td>'+loan.loan['loan_code']+'</td>\
-                            <td>'+loan.loan['loan_categroy_id']+'</td>\
-                            <td>'+loan.loan['member']['firstname']+" "+loan.loan['member']['lastname']+'</td>\
-                            <td>'+loan.loan['member']['units']['unit_code']+'</td>\
-                            <td>'+loan.loan['created_at']+'</td>\
-                            <td>'+loan.loan['principal_amount']+'</td>\
-                            <td>'+loan.loan['basic_salary']+'</td>\
-                            <td>'+loan.loan['basic_salary']*3+'</td>\
-                            <td>'+(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? 'yes' : 'no' )+'</td>\
-                        </tr>\
-                    '
+                    $('#ajax-table').prepend(
+                    `<tr>
+                            <td>${loan.loan['id']}</td>
+                            <td>${loan.loan['is_active']}</td>
+                            <td>${loan.loan['loan_code']}</td>
+                            <td>${loan.loan['loan_categroy_id']}</td>
+                            <td>${loan.loan['member']['firstname']+" "+loan.loan['member']['lastname']}</td>
+                            <td>${loan.loan['member']['units']['unit_code']}</td>
+                            <td>${loan.loan['created_at']}</td>
+                            <td>${loan.loan['principal_amount']}</td>
+                            <td>${loan.loan['basic_salary']}</td>
+                            <td>${loan.loan['basic_salary']*3}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 1)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 2)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 3)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 4)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 5)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>${(loan.loan['loan_application_status'].find(status => status.loan_application_state_id === 6)? '<i class="bi bi-check-circle-fill text-primary"></i>' : ' ' )}</td>
+                            <td>
+                                <button id='trackingModal' value="${loan.loan['id']}" type="button" class="btn btn-link"><i class="bi bi-pencil-square"></i></button>
+                            </td>
+                            <td>
+                                <button class="btn"><i class="bi bi-three-dots fs-4 icon"></i></button>
+                            </td>
+                      
+                        </tr>`
+                    
                     );
                 });
             },
@@ -502,6 +553,56 @@ function fetchLoans()
     }
 })
 
+$(document).on('click', '#trackingModal', function (e){
+    e.preventDefault();
+    var id = $(this).val();
+    $.ajax({
+            url: '/admin/loan-applications-tracking-get/modal/'+id,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                
+                $('#status').html("");
+                $('#status').append(
+                    `
+                        <h6> Loan ID: ${response.loan['id']}</h6>
+                        <h6 class="fs-7">Amount: ${response.loan['principal_amount']}</h6>
+                        <h6 class="fs-7">${response.loan.member['firstname']} ${response.loan.member['lastname']}</h6>
+                        <ul class="list-group" id="statusList"></ul>
+                    `
+                )
+                $.each(response.status, function(key, status) {
+                    $('#statusList').append(
+                        `
+                        <li class="list-group-item">
+                            <i class="bi bi-check-circle-fill text-primary"></i>
+                              ${status.loan_application_state['state_name']}
+                        </li> 
+                        
+                        `
+                    );
+                });
+                $('#statusSelect').prepend(
+                    `<option value="" selected disabled>...</option>`
+                )
+                $.each(response.states, function(key, state) {
+                    
+                    $('#statusSelect').append(
+                        `
+                        <option value="${state.id}">${state.state_name}</option>
+                        `
+                    )
+                });
+                
+                $('#exampleModal').modal('show'); // Show the modal
+
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+});
 
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

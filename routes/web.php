@@ -52,6 +52,7 @@ use App\Models\SessionLog;
 */
 
 Route::get('admin/loan-applications-tracking-get/{loan_type}', [AJAXAdminTrackingController::class, 'get']);
+Route::get('/admin/loan-applications-tracking-get/modal/{id}', [AJAXAdminTrackingController::class, 'getTrackModal']); 
 //🛠️TESTING ===================================================================================================
     //Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
 
