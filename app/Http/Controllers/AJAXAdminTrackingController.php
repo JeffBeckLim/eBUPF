@@ -6,13 +6,45 @@ use Carbon\Carbon;
 use App\Models\Loan;
 use App\Models\Unit;
 use App\Models\CoBorrower;
+use App\Models\Amortization;
 use App\Models\LoanCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\LoanApplicationState;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LoanApplicationApproved;
 use App\Models\LoanApplicationStatus;
 
 class AJAXAdminTrackingController extends Controller
 {
+    public function store(Request $request, $loan_id){
+
+        $loan_app_status = LoanApplicationStatus::where('loan_id', $loan_id)->get();
+    
+        $status = LoanApplicationStatus::where('loan_id', $loan_id)
+            ->where('loan_application_state_id', $request['status'])
+            ->first();
+
+        if($status != null){
+            return response()->json([
+                'message'=>'status already exist',
+                'color'=>'warning'
+            ]);
+        }
+
+
+        // create state
+        LoanApplicationStatus::create([
+            'loan_id' => $loan_id,
+            'loan_application_state_id' => $request['status'],
+            'date_evaluated'=>$request['date_evaluated'],
+            'remarks'=>$request['remarks'],
+        ]);
+        return response()->json([
+            'message'=>'status added',
+            'color'=>'success'
+        ]);
+    }
     // for modal
     public function getTrackModal($id){
         $loan = Loan::where('id',$id)->with('member')->first();
