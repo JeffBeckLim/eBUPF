@@ -466,12 +466,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div id="status">
-            </div>
-            
 
-            <form id="addStatusForm" method="POST" action="{{route('create.status',$loan->loan->id)}}" >
-                @csrf
+            <div id="saveForm_errorList"></div>
+            <div id="status"></div>
+            
+            {{-- action="{{route('create.status',$loan->loan->id)}}"  --}}
+            <form id="addStatusForm" method="POST">
                 <div class="mb-3">
                   <label for="statusSelect" class="col-form-label">Select Status</label>
                   <select name="loan_application_state_id" id="statusSelect" class="form-select form-control" required>
@@ -479,19 +479,19 @@
                   </select>
                 </div>
                 <div class="mb-2">
-                  <label for="date_evaluated" class="col-form-label">Date</label>
-                  <input name="date_evaluated" type="date" class="form-control" id="date_evaluated">
+                    <label for="date_evaluated" class="col-form-label">Date</label>
+                    <input name="date_evaluated" type="date" class="form-control" id="date_evaluatedAJAX">
                 </div>
       
                 <div class="mb-2">
                   <label for="message-text" class="col-form-label">Remarks</label>
-                  <textarea name="remarks" class="form-control" id="remarks"></textarea>
+                  <textarea name="remarks" class="form-control" id="remarksAJAX"></textarea>
                 </div>
       
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn bu-orange text-light" id="addStatusBtn">Add Status</button>
+                  <button type="button" class="btn bu-orange text-light" id="storeStatus">Add Status</button>
                 </div>
             </form>
         </div>
@@ -513,7 +513,6 @@ function fetchLoans()
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-                console.log(response);
                 $('#ajax-table').html("");
                 $.each(response.loans, function(key, loan) {
                     $('#ajax-table').prepend(
@@ -551,19 +550,17 @@ function fetchLoans()
             }
         });
     }
-})
-
-$(document).on('click', '#trackingModal', function (e){
-    e.preventDefault();
-    var id = $(this).val();
+function fetchStatus(id){
+    $('#status').html("");
+    $('#status').html('<div class="d-flex justify-content-center align-items-center text-secondary"> <div class="spinner-border spinner-border-sm text-secondary" role="status"><span class="sr-only"></span></div> <span class="ps-2">Loading</span> </div>');
     $.ajax({
             url: '/admin/loan-applications-tracking-get/modal/'+id,
             type: 'GET',
             dataType: 'json',
             success: function(response) {
-                console.log(response);
-                
                 $('#status').html("");
+                $('#storeStatus').val(response.loan['id']);
+                $('#status', 'statusList','#statusSelect').html("");
                 $('#status').append(
                     `
                         <h6> Loan ID: ${response.loan['id']}</h6>
@@ -583,29 +580,84 @@ $(document).on('click', '#trackingModal', function (e){
                         `
                     );
                 });
+                $('#statusSelect').html("");
                 $('#statusSelect').prepend(
                     `<option value="" selected disabled>...</option>`
                 )
                 $.each(response.states, function(key, state) {
-                    
+                    let checked = false;
+                    response.status.find(element =>element.loan_application_state_id === state.id? checked = true: '')
                     $('#statusSelect').append(
                         `
-                        <option value="${state.id}">${state.state_name}</option>
+                        <option ${(checked === true? 'disabled' : '')} 
+                        value="${state.id}">
+                            ${(checked === true? '✔️' : '')}
+                            ${state.state_name}
+                        </option>
                         `
                     )
                 });
+
                 
-                $('#exampleModal').modal('show'); // Show the modal
+                
 
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
             }
         });
+}
+
+$(document).on('click', '#trackingModal', function(e){
+    e.preventDefault();
+    var id = $(this).val();
+    fetchStatus(id);
+    $('#exampleModal').modal('show'); // Show the modal
+});
+$(document).on('click', '#storeStatus', function(e){
+    e.preventDefault();
+    
+    var id = $('#storeStatus').val();
+
+    var data  = {
+        'status' : $('#statusSelect').val(),
+        'date' : $('#date_evaluatedAJAX').val(),
+        'remarks' : $('#remarksAJAX').val(),
+    }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({  
+        type: 'POST',
+        url: '/store-status/'+id,
+        data: data,
+        dataType: "json",
+        success: function (response){
+            // console.log(response);
+            if(response.status == 400)
+            {
+                $('#saveForm_errorList').html("");
+                $.each(response.errors, function(key, error_values)
+                {
+                    $('#saveForm_errorList').append('<div class="alert alert-danger alert-dismissible fade show">'+error_values+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">'+'</div>');
+                });
+            }
+            else{
+                console.log(response.message);
+                $('#saveForm_errorList').append('<div class="alert alert-'+response.color+' alert-dismissible fade show">'+response.message+'<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">'+'</div>');
+                fetchLoans();
+                fetchStatus(id);
+            }
+        }
+    });
 });
 
-
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+})
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })

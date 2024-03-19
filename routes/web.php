@@ -51,7 +51,8 @@ use App\Models\SessionLog;
 |
 */
 
-Route::get('admin/loan-applications-tracking-get/{loan_type}', [AJAXAdminTrackingController::class, 'get']);
+Route::post('/store-status/{id}', [AJAXAdminTrackingController::class, 'store']);
+Route::get('/admin/loan-applications-tracking-get/{loan_type}', [AJAXAdminTrackingController::class, 'get']);
 Route::get('/admin/loan-applications-tracking-get/modal/{id}', [AJAXAdminTrackingController::class, 'getTrackModal']); 
 //🛠️TESTING ===================================================================================================
     //Route::get('/testRoute/{id}', [UserController::class, 'testRoute']);
@@ -77,7 +78,7 @@ Route::get('/admin/loan-applications-tracking-get/modal/{id}', [AJAXAdminTrackin
     Route::post('/member/calculate', [CalculatorController::class, 'calculate'])->name('calculate')->middleware('auth','member.access', 'checkSessionTimeout');
 
     // Toggle Additional Loan
-    Route::post('/admin/additional-loans/allow/{id},' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan')->middleware('auth','admin.access');
+    Route::post('/admin/additional-loans/allow/{id}' , [AdminController::class, 'allowAdditional'])->name('allow.additional.loan')->middleware('auth','admin.access');
 
     // Update Check details
     Route::post('/admin/check/update/{id}' , [CheckController::class, 'updateCheck'])->name('loan.check.update')->middleware('auth','admin.access');
